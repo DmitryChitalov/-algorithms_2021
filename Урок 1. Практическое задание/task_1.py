@@ -28,9 +28,8 @@ def check_1(lst_obj):
 
     Сложность: O(n).
     """
-    lst_to_set = set(lst_obj)  # O(n), где n=len(lst_obj)
+    lst_to_set = set(lst_obj)  # O(N), где n=len(lst_obj)
     return lst_to_set  # O(1)
-
 
 #############################################################################################
 def check_2(lst_obj):
@@ -41,12 +40,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(N).
     """
-    for j in range(len(lst_obj)):          # O(n), где n=len(lst_obj). Берем максимальный, т.к. len(lst_obj) имеет O(1)
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(N), где n=len(lst_obj). Берем максимальный, т.к. len(lst_obj) имеет O(1)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(N), сложность in совпадает со сложностью получения среза
+            return False                   # O(1)
+    return True                            # O(1)
 
 
 #############################################################################################
