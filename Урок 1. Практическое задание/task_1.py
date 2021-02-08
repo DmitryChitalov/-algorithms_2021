@@ -42,12 +42,16 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(N) * O(N) + O(1) + O(1) = O(N^2)
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(N)
+        if lst_obj[j] in lst_obj[j+1:]:    # взятие индекса j = O(1) + 
+                                            # оператор in = O(N) + 
+                                            # инкремент j =  O(1) + 
+                                            # срез = O(N) 
+                                            # итоговая сложность O(N)
+            return False                   # O(1)
+    return True                            # O(1)
 
 
 #############################################################################################
