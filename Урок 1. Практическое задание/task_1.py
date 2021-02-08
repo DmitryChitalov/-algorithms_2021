@@ -18,7 +18,6 @@
 """
 
 import random
-с = 1
 
 #############################################################################################
 def check_1(lst_obj):
@@ -27,10 +26,10 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(n).
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(n), где n=len(lst_obj)
+    return lst_to_set  # O(1)
 
 
 #############################################################################################
@@ -44,7 +43,7 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # !!!
+    for j in range(len(lst_obj)):          # O(n), где n=len(lst_obj). Берем максимальный, т.к. len(lst_obj) имеет O(1)
         if lst_obj[j] in lst_obj[j+1:]:    # !!!
             return False                   # !!!
     return True                            # !!!
