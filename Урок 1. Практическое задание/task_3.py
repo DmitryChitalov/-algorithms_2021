@@ -62,3 +62,5 @@ def find_richest_company2(companies, count=3):
 print(companies)
 print(find_richest_company1(companies))
 print(find_richest_company2(companies))
+
+# первый вариант круче, т.к. имеет сложность N log N и при увеличении количества N будет выполняться гораздо быстрее
