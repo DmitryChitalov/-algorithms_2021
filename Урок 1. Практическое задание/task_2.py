@@ -19,3 +19,43 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+import random
+
+
+def find_min1(l_obj):
+    """
+    функция ищет минимум в списке чисел, сложность O(N**2)
+    :param l_obj: список чисел
+    :return: минимальное число из списка
+    """
+    for i in range(len(l_obj)):      # O(N)
+        is_min = True                # O(1)
+        for j in range(len(l_obj)):  # O(N)
+            if l_obj[j] < l_obj[i]:  # O(1)
+                is_min = False       # O(1)
+                break
+        if is_min:                   # O(1)
+            return l_obj[i]          # O(1)
+
+
+def find_min2(l_obj):
+    """
+    Поиск перебором, итоговая сложность O(N)
+    :param l_obj: список чисел
+    :return: минимальное число из списка
+    """
+    if len(l_obj) > 0:          # O(1)
+        min_obj = l_obj[0]      # O(1)
+        for elem in l_obj:      # O(N)
+            if elem < min_obj:  # O(1)
+                min_obj = elem  # O(1)
+        return min_obj          # O(1)
+
+
+my_lst = [random.randint(1, 910) for n in range(1, 10)]
+print(my_lst)
+
+print(find_min1(my_lst))
+print(find_min2(my_lst))
+
