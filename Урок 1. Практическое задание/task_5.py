@@ -23,3 +23,57 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class ClassDishes:
+    total_stacs = 0
+    len_stack = 2
+
+    def __init__(self):
+        self.dishes = []
+        ClassDishes.total_stacs += 1
+
+    def is_empty(self):
+        return self.dishes == []
+
+    def push_in(self, dish='dish'):
+        if len(globals().get(f'a_{ClassDishes.total_stacs}').dishes) == ClassDishes.len_stack:
+            self.new_elem()
+            globals().get(f'a_{ClassDishes.total_stacs}').push_in()
+        else:
+            globals().get(f'a_{ClassDishes.total_stacs}').dishes.append(dish)
+
+    def pop_out(self):
+        try:
+            globals().get(f'a_{ClassDishes.total_stacs}').dishes.pop()
+        except IndexError:
+            print('ОШИБКА!!! Стэк уже пустой')
+        if len(globals().get(f'a_{ClassDishes.total_stacs}').dishes) == 0 and \
+                globals().get(f'a_{ClassDishes.total_stacs}') != self:
+            del globals()[f'a_{ClassDishes.total_stacs}']
+            ClassDishes.total_stacs -= 1
+
+    def stack_size(self):
+        return (ClassDishes.total_stacs - 1) * ClassDishes.len_stack + \
+               len(globals().get(f'a_{ClassDishes.total_stacs}').dishes)
+
+    def new_elem(self):
+        # Создает новый элемент в окрружении глобал, так скорее всего не совсем коректно и по уму
+        # но я по другому пока не придумал
+        globals()[f'a_{ClassDishes.total_stacs}'] = ClassDishes()
+
+# Создадим обьект класса
+a_1 = ClassDishes()
+# Теперь будем в него добовлять значения. Так как у нас тарелки то и дефолтное значение у нас dish
+for i in range(10):
+    a_1.push_in()  # После добовления должны создаться обьекты класса после переполнения стэка
+    # их можно увидеть в отладчике
+print(a_3.dishes)  # Или вызвать их
+# Теперь будем уберать из стэка значения
+for i in range(5):
+    a_1.pop_out()  # Так же когда обьект класса будет пуст он удалится из памяти
+# print(a_5.dishes)  # Если раскоментить то будет ошибка так как обект удален из памяти
+# При попытке удалить из пустого стека выведет сообщение что стэк пустой
+# Это не самая лучшая реализация так как при создании обьекта другого имени или двух обьектов этого класса разных имен
+# то будет конфликт с названиями которые создает класс
+# да и думаю что не хорошая практика использование glibals() функции как у меня но пока это все что я смог реализовать
