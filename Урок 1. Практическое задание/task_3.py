@@ -45,15 +45,15 @@ def find_richest_company2(companies, count=3):
     Сложность: O(N ** 3)
     """
     top_companies = []
-    for companie in companies:                           # O(N)
-        profit = companie['profit']                      # O(1)
-        if len(top_companies) < count:                   # O(1)
-            top_companies.append(companie)               # O(1)
+    for companie in companies:  # O(N)
+        profit = companie['profit']  # O(1)
+        if len(top_companies) < count:  # O(1)
+            top_companies.append(companie)  # O(1)
         else:
-            for top_companie in top_companies:           # O(N)
-                if profit > top_companie['profit']:      # O(1)
-                    top_companies.remove(top_companie)   # O(N)
-                    top_companies.append(companie)       # O(1)
+            for top_companie in top_companies:  # O(N)
+                if profit > top_companie['profit']:  # O(1)
+                    top_companies.remove(top_companie)  # O(N)
+                    top_companies.append(companie)  # O(1)
                     break
 
     return top_companies

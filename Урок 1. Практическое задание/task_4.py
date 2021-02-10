@@ -27,7 +27,6 @@
 который вы придумаете, например, реализовать словарь.
 """
 
-
 # сохраним все в структуру вида {login:[password, is_activated]}
 
 users = {'login1': ['password1', True],
@@ -41,11 +40,11 @@ def auth1(login, password):
     """
     Пройдемся циклом. Сложность O(N)
     """
-    for k, v in users.items():             # O(N)
-        if k == login:                     # O(1)
+    for k, v in users.items():  # O(N)
+        if k == login:  # O(1)
             if v[0] == password and v[1]:  # O(1)
-                return True                # O(1)
-    return False                           # O(1)
+                return True  # O(1)
+    return False  # O(1)
 
 
 print(auth1('login341', 'passwod1'))
@@ -55,8 +54,8 @@ def auth2(login, password):
     """
     Решим через линейную сложность, не зря же мы сделали хранение в словаре
     """
-    if users.get(login):                                        #O(1)
-        return users[login][1] and users[login][0] == password  #O(1)
+    if users.get(login):  # O(1)
+        return users[login][1] and users[login][0] == password  # O(1)
 
     return False
 
