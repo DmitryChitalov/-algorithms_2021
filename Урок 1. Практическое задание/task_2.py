@@ -19,3 +19,30 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+# Сложность такого алгоритма: O(n^2) - квадратичная.
+def find_min_2(lst):
+    min = lst[0]
+    for el_1 in lst:
+        for el_2 in lst:
+            if el_1 > el_2:
+                if el_2 < min:
+                    min = el_2
+    return min
+
+
+# Сложность такого алгоритма: O(n) - линейная.
+def find_min_1(lst):
+    min = lst[0]
+    for i in range(1, len(lst)):
+        if min > lst[i]:
+            min = lst[i]
+    return min
+
+
+lst = [randint(0, 100) for i in range(10)]
+print(lst)
+print(find_min_1(lst))
+print(find_min_2(lst))
