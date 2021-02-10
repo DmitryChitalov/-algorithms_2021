@@ -26,3 +26,50 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+list_of_users = [{'login': 'user1', 'password': 'password', 'auth': False},
+                 {'login': 'user2', 'password': 'password', 'auth': True},
+                 {'login': 'user3', 'password': 'password', 'auth': False}]
+
+
+def user_auth_1(login):
+    for n in list_of_users:
+        if login == n['login']:
+            if n['auth']:
+                return "Access Granted"
+            else:
+                if input('Enter password\n') == n['password']:
+                    n['auth'] = 'True'
+                    return f"Access Granted\n{n}"
+                else:
+                    return "Password incorrect"
+    return "User not found"
+
+
+# Второй вариант реализовал двумя функциями
+
+
+def search_user(login):
+    for user in list_of_users:
+        if user['login'] == login:
+            return user
+
+
+def user_auth_2(login):
+    user = search_user(login)
+    if user:
+        if user['auth']:
+            return "Access Granted"
+        else:
+            if input('Enter password\n') == user['password']:
+                user['auth'] = 'True'
+                return f"Access Granted\n{user}"
+            else:
+                return "Password incorrect"
+    return "User not found"
+
+
+print(user_auth_2('user1'))
+"""У каждого алгоритма одинаковая сложность O(n). Первый делает перебор по всему списку, второй делает перебор, 
+пока не найдёт нужного пользователя. В остальном - они работают одинаково. Даже не знаю, какой оптимальнее, 
+по мне - так второй """
