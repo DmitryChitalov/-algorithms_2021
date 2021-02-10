@@ -23,3 +23,47 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class StackClass:
+    def __init__(self, count):
+        self.elems = []
+        self.count = count
+
+    def push_in(self, el):
+        if len(self.elems) == 0:  # Добавляем в стек первую стопку
+            self.elems.append([])
+        if len(self.elems[-1]) != self.count:  # Добавляем элементы в стопку до достижения значения count
+            self.elems[-1].append(el)
+        else:
+            self.elems.append([])  # Добавляем новую пустую стопку, кладём в неё элемент
+            self.elems[-1].append(el)
+
+    def pop_out(self):
+        if len(self.elems) != 0:  # Если последняя стопка не пуста, убираем с неё элемент
+            self.elems[-1].pop()
+            if len(self.elems[-1]) == 0:  # Убираем стопку, если она пуста
+                self.elems.pop()
+        else:
+            return print("Stack is empty")  # Если стек пустой, возвращаем аллерт
+
+    def get_val(self):
+        return self.elems
+
+
+a = StackClass(3)
+a.push_in('plate1')
+a.push_in('plate2')
+a.push_in('plate3')
+a.push_in('plate4')
+a.push_in('plate5')
+a.push_in('plate6')
+a.push_in('plate7')
+a.push_in('plate8')
+a.pop_out()
+a.pop_out()
+a.pop_out()
+a.pop_out()
+a.pop_out()
+a.pop_out()
+print(a.get_val())

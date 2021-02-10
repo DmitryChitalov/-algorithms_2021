@@ -19,3 +19,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+# Я так понимаю, мы тут не можем использовать функцию min? Она тоже даст линейную сложность.
+
+import random
+
+my_list = [random.randint(1, 100) for n in range(10)]
+print(my_list)
+
+
+# Линейная
+def min_linear(lst):
+    minimal = lst[0]  # O(1)
+    for n in lst:  # O(n)
+        if n < minimal:  # O(1)
+            minimal = n  # O(1)
+    return minimal  # O(1)
+
+
+# Квадратичная
+def min_square(lst):
+    minimal = lst[0]  # O(1)
+    for n in lst:  # O(n)
+        for m in lst:  # O(n)
+            if n < m and n < minimal:  # O(1)
+                minimal = n  # O(1)
+    return minimal  # O(1)
+
+
+print(min_linear(my_list))
+print(min_square(my_list))
