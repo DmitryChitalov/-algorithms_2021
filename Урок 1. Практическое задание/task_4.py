@@ -27,15 +27,18 @@
 который вы придумаете, например, реализовать словарь.
 """
 class User:
+    ''' Класс пользователя '''
     def __init__(self,login,password):
         self.login = login
         self.password = password
         self.is_active = False
     
     def get_active(self):
+        ''' проверка активности '''
         return self.is_active
 
     def set_active(self,is_active):
+        ''' установка активности '''
         self.is_active = is_active
 
     def __eq__(self, o: object) -> bool:
@@ -48,11 +51,13 @@ class User:
         return f"login: {self.login}, psw: {self.password}, activ: {self.is_active}"
     
 class algDB:
+    ''' класс хранилища данных пользователей '''
     user_table = []
     def __init__(self):
         pass
 
     def insert(self,user):
+        ''' вставка нового пользователя '''
         if not self.verify_user(user):
             self.user_table.append(user)
     
