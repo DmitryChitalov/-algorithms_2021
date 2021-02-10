@@ -24,7 +24,6 @@
 # 2) lst = [[], [], [], [],....]
 """
 
-
 """Пример создания стека через ООП"""
 
 
@@ -41,59 +40,59 @@ class StackClass:
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
         stack = self.get_last_stack()
-        if stack.is_full():
+        if stack is None:
+            stack = StackClass()
+            StackClass.stacks.append(stack)
+        elif self.is_full(stack):
             stack = StackClass()
             StackClass.stacks.append(stack)
         stack.elems.append(el)
 
     def pop_out(self):
         stack = self.get_last_stack()
-        return stack.elems.pop()
+        if stack is None:
+            raise TypeError
+        last_elem = stack.elems.pop()
+        if len(stack.elems) == 0:
+            StackClass.stacks.remove(stack)
+        return last_elem
 
     def get_val(self):
         stack = self.get_last_stack()
         return stack.elems[len(self.elems) - 1]
 
-    def stack_size(self):
-        return len(self.elems)
+    def stacks_count(self):
+        return len(StackClass.stacks)
 
     def get_last_stack(self):
         if len(StackClass.stacks) == 0:
-            return StackClass()
+            return None
         return StackClass.stacks[-1]
 
     def is_full(self, stack):
-        return len(stack.elems) == self.max_elem_count
+        return len(stack.elems) == self.__max_elem_count
 
 
 if __name__ == '__main__':
 
     SC_OBJ = StackClass()
-
-    print(SC_OBJ.is_empty())  # -> стек пустой
-
     # наполняем стек
     SC_OBJ.push_in(10)
     SC_OBJ.push_in('code')
     SC_OBJ.push_in(False)
     SC_OBJ.push_in(5.5)
+    SC_OBJ.push_in(52)
+    SC_OBJ.push_in(1)
+    SC_OBJ.push_in(1)
+    print(f'count={SC_OBJ.stacks_count()}')
 
-    # получаем значение первого элемента с вершины стека, но не удаляем сам элемент из стека
-    print(SC_OBJ.get_val())  # -> 5.5
+    # посмотрим что хранится в стеках
+    for s in SC_OBJ.stacks:
+        print(s.elems)
 
-    # узнаем размер стека
-    print(SC_OBJ.stack_size())  # -> 4
-
-    print(SC_OBJ.is_empty())  # -> стек уже непустой
-
-    # кладем еще один элемент в стек
-    SC_OBJ.push_in(4.4)
-
-    # убираем элемент с вершины стека и возвращаем его значение
-    print(SC_OBJ.pop_out())  # -> 4.4
-
-    # снова убираем элемент с вершины стека и возвращаем его значение
-    print(SC_OBJ.pop_out())  # -> 5.5
-
-    # вновь узнаем размер стека
-    print(SC_OBJ.stack_size())  # -> 3
+    # поудаляем элементы и поглядим что остается
+    print(SC_OBJ.pop_out())
+    print(f'count={SC_OBJ.stacks_count()}')
+    print(SC_OBJ.pop_out())
+    for s in SC_OBJ.stacks:
+        print(s.elems)
