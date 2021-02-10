@@ -21,3 +21,37 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def comp_1(val: dict):  # O(N^2)
+    ls = []
+    for item in val.values():  # O(N)
+        ls.append(item)  # O(1)
+    ls.sort(reverse=True)  # O(N log N)
+    comp = []
+    for el in val:  # O(N)
+        if val.get(el) in ls[:3]:  # O(N)
+            comp.append(el)  # O(1)
+    return comp
+
+
+def comp_2(val: dict):  # O(N^2 log N)
+    val_sorted = [k for k in sorted(val, key=val.get, reverse=True)]  # O(N^2 log N)
+    return val_sorted[:3]  # O(3)
+
+
+def comp_3(val: dict):  # O(3*N)
+    """Данное решение наиболее эффективное, используется наименьшее количество операций"""
+    max_dict = []
+    res_dict = []
+    for _ in range(3):  # O(3)
+        max_dist = list(max(val.items(), key=lambda f: f[1]))  # O(N)
+        res_dict.append(str(max_dist[0]))  # O(1)
+        del val[max_dist[0]]  # O(1)
+    return res_dict
+
+
+company_list = {"МТС": 51000, "Ростелеком": 34000, "Билайн": 42000, "Мегафон": 65000, "Теле-2": 18000}
+print(comp_1(company_list))
+print(comp_2(company_list))
+print(comp_3(company_list))

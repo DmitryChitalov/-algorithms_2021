@@ -19,3 +19,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def search_min_2(val):  # O(N^2)
+    min_val = val[0]
+    for i in range(len(val) - 1):
+        for j in val[i + 1:]:
+            if j < min_val:
+                min_val = j
+    return min_val
+
+
+def search_min_1(val):  # O(N)
+    min_val = val[0]
+    for item in val:
+        if item < min_val:
+            min_val = item
+    return min_val
+
+
+ls = [-2, 3, 4, 2, 10, -5, 6, 1, 0]
+print(search_min_1(ls))
+print(search_min_2(ls))
