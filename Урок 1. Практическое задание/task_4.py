@@ -26,3 +26,75 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Вариант 1 - O(N)
+def autentification(log_pas):
+    login = input('Введите логин: ')
+    if login in log_pas.keys():
+        password = input('Введите пароль: ')
+        while log_pas[login][0] != password:
+            print('Пароль неверный!')
+            password = input('Введите пароль: ')
+        print('Авторизация прошла успешно!')
+        log_pas[login][1] = 1
+    else:
+        print('Логин не найден. Зарегистрируйтесь в системе!')
+        user_login = input('Введите логин: ')
+        user_password = input('Введите пароль: ')
+        log_pas[user_login] = [user_password, 1]
+
+
+passwords = {
+    'login': ['password', 0],
+    'log': ['123', 0],
+    'a': ['1', 0]
+}
+
+
+# Вариант 2 - O(NlogN)
+def binary_search(lst, number):  # O(log n)
+    start = 0
+    end = len(lst) - 1
+
+    while start <= end:
+        mid = int((start + end) / 2)
+        if lst[mid] == number:
+            return True
+        elif lst[mid] < number:
+            start = mid + 1
+        else:
+            end = mid - 1
+    return False
+
+
+def autentification2(log_pas):
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+
+    log_pas2 = sorted(log_pas.keys())  # O(NlogN)
+    if binary_search(log_pas2, login):
+        while log_pas[login][0] != password:
+            print('Пароль неверный!')
+            password = input('Введите пароль: ')
+    else:
+        print('Логин не найден. Зарегистрируйтесь в системе!')
+        user_login = input('Введите логин: ')
+        user_password = input('Введите пароль: ')
+        log_pas[user_login] = [user_password, 0]
+    print('Авторизация прошла успешно!')
+    log_pas[login][1] = 1
+
+
+autentification(passwords)
+for key, value in passwords.items():  # проверяем, как отработала функция
+    print(key, ': ', value)
+
+autentification2(passwords)
+for key, value in passwords.items():
+    print(key, ': ', value)
+
+
+# Вывод: во втором случае мы ускорили поиск за счет применения бинарного поиска, но для его реализации пришлось
+# предварительно отсортировать логины. И делать это придется при каждом добавлении нового логина. Поэтому в итоге
+# второй алгоритм работает дольше из-за сортировки.
