@@ -79,8 +79,8 @@ class Plate:
         return f"plate #{self._id}"
 
 # TEST 
-plates_amount = 101 # общее колличество тарелок
-plates_count = 7 # кол-во тарелок с одной стопке
+plates_amount = 11 # общее колличество тарелок
+plates_count = 3 # кол-во тарелок с одной стопке
 
 all_plates_stack = My_stack(plates_amount) # создать стек под все тарелки
 
