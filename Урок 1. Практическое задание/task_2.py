@@ -26,11 +26,11 @@ num_list = [randint(0, 500) for i in range(10)]  # создадим наш сп�
 print(num_list)  # Выведем чтобы видеть правильно ли в итоге работает алгоритм
 
 
-# Этот алгоритм сложности O(n^2)
+# Этот алгоритм сложности O(n)
 def min_n2(lst):
     min_res = lst[0]  # O(1)
     for i in range(len(lst) - 1):  # O(n)
-        if lst[i] < lst[i + 1] and lst[i] < min_res:  # O(n)
+        if lst[i] < lst[i + 1] and lst[i] < min_res:  # O(!)
             min_res = lst[i]  # O(1)
     return min_res  # O(1)
 

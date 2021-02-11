@@ -26,52 +26,64 @@
 
 
 class ClassDishes:
-    total_stacs = 0
-    len_stack = 2
+    total_stacks = 0
 
-    def __init__(self):
+    def __init__(self, len_stack):
+        self.len_stack = len_stack
         self.dishes = []
-        ClassDishes.total_stacs += 1
+        ClassDishes.total_stacks += 1
 
     def is_empty(self):
         return self.dishes == []
 
     def push_in(self, dish='dish'):
-        if len(globals().get(f'a_{ClassDishes.total_stacs}').dishes) == ClassDishes.len_stack:
+        if len(globals().get(f'a_{ClassDishes.total_stacks}').dishes) == self.len_stack:
             self.new_elem()
-            globals().get(f'a_{ClassDishes.total_stacs}').push_in()
+            globals().get(f'a_{ClassDishes.total_stacks}').push_in()
         else:
-            globals().get(f'a_{ClassDishes.total_stacs}').dishes.append(dish)
+            globals().get(f'a_{ClassDishes.total_stacks}').dishes.append(dish)
 
     def pop_out(self):
         try:
-            globals().get(f'a_{ClassDishes.total_stacs}').dishes.pop()
+            globals().get(f'a_{ClassDishes.total_stacks}').dishes.pop()
         except IndexError:
             print('ОШИБКА!!! Стэк уже пустой')
-        if len(globals().get(f'a_{ClassDishes.total_stacs}').dishes) == 0 and \
-                globals().get(f'a_{ClassDishes.total_stacs}') != self:
-            del globals()[f'a_{ClassDishes.total_stacs}']
-            ClassDishes.total_stacs -= 1
+        if len(globals().get(f'a_{ClassDishes.total_stacks}').dishes) == 0 and \
+                globals().get(f'a_{ClassDishes.total_stacks}') != self:
+            del globals()[f'a_{ClassDishes.total_stacks}']
+            ClassDishes.total_stacks -= 1
 
     def stack_size(self):
-        return (ClassDishes.total_stacs - 1) * ClassDishes.len_stack + \
-               len(globals().get(f'a_{ClassDishes.total_stacs}').dishes)
+        return (ClassDishes.total_stacks - 1) * self.len_stack + \
+               len(globals().get(f'a_{ClassDishes.total_stacks}').dishes)
+
+    @staticmethod
+    def view_elem():
+        glob = globals()
+        elem = []
+        for i in glob:
+            if i.startswith('a_'):
+                elem.append((i, globals().get(i).dishes))
+        return elem
 
     def new_elem(self):
         # Создает новый элемент в окрружении глобал, так скорее всего не совсем коректно и по уму
         # но я по другому пока не придумал
-        globals()[f'a_{ClassDishes.total_stacs}'] = ClassDishes()
+        globals()[f'a_{ClassDishes.total_stacks}'] = ClassDishes(self.len_stack)
+
 
 # Создадим обьект класса
-a_1 = ClassDishes()
+a_1 = ClassDishes(3)
 # Теперь будем в него добовлять значения. Так как у нас тарелки то и дефолтное значение у нас dish
 for i in range(10):
     a_1.push_in()  # После добовления должны создаться обьекты класса после переполнения стэка
     # их можно увидеть в отладчике
 print(a_3.dishes)  # Или вызвать их
+print(a_1.view_elem())
 # Теперь будем уберать из стэка значения
 for i in range(5):
     a_1.pop_out()  # Так же когда обьект класса будет пуст он удалится из памяти
+print(a_1.view_elem())
 # print(a_5.dishes)  # Если раскоментить то будет ошибка так как обект удален из памяти
 # При попытке удалить из пустого стека выведет сообщение что стэк пустой
 # Это не самая лучшая реализация так как при создании обьекта другого имени или двух обьектов этого класса разных имен

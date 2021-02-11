@@ -32,28 +32,29 @@ users = {'Batman': ('I am the night', False),
          'Ania_95': ('123123', True)}
 
 
-# O(n)
+# O(1)
 def login_check(login, password):
-    if login in users.keys() and users.get(login)[0] == password:  # O(n) + O(1)
-        if not users.get(login)[1]:  # O(1)
-            user_activation = input(
-                'Ваша учетная запись не активирована введите ваш пороль сново для активации: ')  # O(1)
-            if users.get(login)[0] == user_activation:  # O(1)
-                users.update({login: [password, True]})  # O(1)
-                print('Активация успешно завершена')
-            elif users.get(login)[0] != user_activation:  # O(1)
-                print('Не верно указан пороль доступ запрещен')
+    if users.get(login):  # O(1)
+        if users.get(login)[0] == password:  # O(1)
+            if not users.get(login)[1]:  # O(1)
+                user_activation = input(
+                    'Ваша учетная запись не активирована введите ваш пороль сново для активации: ')  # O(1)
+                if users.get(login)[0] == user_activation:  # O(1)
+                    users.update({login: [password, True]})  # O(1)
+                    print('Активация успешно завершена\nДоступ разрешен')
+                elif users.get(login)[0] != user_activation:  # O(1)
+                    print('Не верно указан пороль доступ запрещен')
             else:
                 print('Доступ разрешен')
-    elif login not in users.keys():  # O(n)
+        elif users.get(login)[0] != password:  # O(1)
+            print('Пороль не верный!')
+    else:
         print('Пользователь не найден')
-    elif users.get(login)[0] != password:  # O(1)
-        print('Пороль не верный!')
 
 
 login_check('Batman', 'I am the night')
 print(users)
-login_check('Ania_95', '123456')
+login_check('Ania_95', '123123')
 login_check('Valera3', '32435')
 
 users_2 = [['Batman', 'I am the night', False],
