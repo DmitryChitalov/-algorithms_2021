@@ -29,7 +29,7 @@ def test_time_perform(fnc):
     ''' Декоратор '''
     def wrp(*args,**kwargs):
         time_in = time.perf_counter()
-        min = fnc(*args,**kwargs)
+        min_val = fnc(*args,**kwargs)
         time_out = time.perf_counter()
         print(f"performance {fnc.__name__}: {(time_out - time_in):0.6f}")
         print(f"{fnc.__name__} min: {min_val}")
