@@ -132,7 +132,7 @@ test_input2 = [ # тестовые данные
     ["Nikola","ni45ko3la"],
     ["Anton","an3thOn"]
 ]
-test_input = [[i.__str__(),(i+i).__str__()] for i in range(1,100000)]
+test_input = [[i.__str__(),(i+i).__str__()] for i in range(1,1000000)]
 average_time = 0
 is_inf = False # выводить на консоль
 
@@ -169,6 +169,7 @@ print(f"iter {i}. time = {average_time:0.8f} avg_time: {average_time/len(test_in
 Самым медленным является алгоритм номер 3 , т.к унего самая большая сложность O(N^2)
 Алгоритмы 1 в два раза медленее 2-го
 
+
 результаты на 1000 иттераций:
 1.
     1.time = 0.00128860
@@ -196,6 +197,20 @@ print(f"iter {i}. time = {average_time:0.8f} avg_time: {average_time/len(test_in
     1.time = 0.02339660 
     2.time = 0.02501400
     3.time = 0.02286050
+
+результаты на 1 000 000 иттераций:
+1.
+    1.time = 0.67110340
+    2.time = 1.32945820
+    3.time = 1.35367570
+2.
+    1.time = 0.67110340
+    2.time = 0.66212780
+    3.time = 0.65232440
+3.
+    1.time = 2.33364370
+    2.time = 2.25254320
+    3.time = 2.36256960
 '''
 
 
