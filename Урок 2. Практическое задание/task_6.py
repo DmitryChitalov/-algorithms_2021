@@ -11,3 +11,21 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+from random import randint
+
+
+def guess_the_number(tries=10, rand_num=str(randint(1, 100))):
+    user_num = input('Угадайте целое число от 0 до 100: ')
+    if tries <= 1:
+        return f'Поражение, загаданное число: {rand_num}'
+    elif user_num == rand_num:
+        return f'Победа, загаданное число: {rand_num}'
+    elif rand_num < user_num:
+        print('Ваше число больше загаданного')
+        return guess_the_number(tries - 1, rand_num)
+    elif user_num < rand_num:
+        print('Ваше число меньше загаданного')
+        return guess_the_number(tries - 1, rand_num)
+
+
+print(guess_the_number())
