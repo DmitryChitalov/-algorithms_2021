@@ -72,7 +72,7 @@ def aut_f_2(list_of_users, user_id):
         id_ += 1
     for el in list_of_users:
         if bin_look_for(el, user_id):
-            quantity_find = 1
+            quantity_find += 1
             if el[3] == 0:
                 return 'Подтвердите вашу учетную запись'
             login = (input('Введите логин : '))

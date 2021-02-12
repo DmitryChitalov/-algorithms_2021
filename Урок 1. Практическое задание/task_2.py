@@ -49,4 +49,3 @@ def min_num_2(num_list):           # Сложность O(n)
 
 
 print(min_num_2(list_1))
-
