@@ -12,3 +12,15 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_of_row(n, current_number=1.0):
+    if n > 1:
+        n -= 1
+        return current_number + sum_of_row(n, current_number / -2)
+    else:
+        return current_number
+
+
+print(sum_of_row(100))
+

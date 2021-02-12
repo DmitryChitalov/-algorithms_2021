@@ -15,3 +15,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# Не совсем понял задание
+
+
+def my_func(n, current_n=2, left='1'):
+    if not left or int(left[-1]) != n:
+        left = f'{left}+{current_n}'
+        current_n += 1
+        my_func(n, current_n, left)
+    else:
+        right = f'{n}({n}+1)/2'
+        print(f'{left} = {right}')
+        print(f'{eval(left)} = {n*(n+1)/2}')
+        if eval(left) == n*(n+1)/2:
+            print('Равенство верное')
+        return
+
+
+my_func(5)
