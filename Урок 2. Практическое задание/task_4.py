@@ -12,3 +12,13 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def strange_sum(n, start_num=1.0):
+    if n == 0:
+        return 0
+    else:
+        return start_num + strange_sum(n - 1, start_num / (-2))
+
+
+print(strange_sum(4))
