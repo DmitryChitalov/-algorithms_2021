@@ -22,3 +22,19 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def num_reverse(num):
+    # Базовый случай, если число оканчивается нулями
+    if len(str(num)) > 1 and str(num)[1] == '0':
+        return '0' * str(num).count('0') + str(num)[0]
+    # Базовый случай, если число без нулей
+    elif num == 0:
+        return ''
+    else:
+        tens = 10 ** (len(str(num)) - 1)
+        return num_reverse(num % tens) + str(num // tens)
+
+
+print(num_reverse(987654321000))
+print(num_reverse(123456789))

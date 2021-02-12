@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculate():
+    operator = input('Введите знак операции (+, -, /, * или 0 для выхода): ')
+    if operator == '0':
+        return 'Вы завершили программу'
+    elif operator in ['+', '-', '/', '*']:
+        try:
+            num_1 = float(input('Введите первое число: '))
+            num_2 = float(input('Введите второе число: '))
+            if operator == '+':
+                print(num_1 + num_2)
+            elif operator == '-':
+                print(num_1 - num_2)
+            elif operator == '/':
+                try:
+                    print(round((num_1 / num_2), 2))
+                except ZeroDivisionError:
+                    print('На ноль делить нельзя!\nПопробуйте еще раз')
+                    return calculate()
+            elif operator == '*':
+                print(num_1 * num_2)
+        except ValueError:
+            print('Вы ввели не число!\nПопробуйте еще раз.')
+            return calculate()
+        return calculate()
+
+    else:
+        print('Вы ввели неверный оператор, попробуйте еще раз.')
+        return calculate()
+
+
+print(calculate())
+# Вроде все верно, но код выглядит как один большой костыль

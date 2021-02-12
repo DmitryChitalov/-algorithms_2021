@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ord_tbl(start=32, end=127):
+    if start == end:
+        return f'{start} - {chr(start)}'
+    elif start % 10 == end % 10:
+        return ord_tbl(start, end - 1) + f'\n{end} - {chr(end)} '
+    else:
+        return ord_tbl(start, end - 1) + f'{end} - {chr(end)} '
+
+
+print(ord_tbl())
