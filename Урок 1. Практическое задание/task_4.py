@@ -26,3 +26,33 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Сложность O(n)
+
+
+def authentication_activate(user, user_name='', password=0):
+    for key, value in user.items():
+        if key == user_name:
+            if value['password'] == password and value['active']:
+                return "Добро пожаловать"
+            elif value['password'] == password and not value['active']:
+                return "Активируйте аккаунт"
+            elif value['password'] != password:
+                return "Введите  пароль"
+
+    return "Создайте учетную запись"
+
+
+# Сложность O(1) Лучше этот, так как константа
+def authentication_activate2(user_name, user_list):
+    if user_list[0] == user_name:
+        if user_list[1] != 0 and user_list[2] == 'activate':
+            return "Добро пожаловать"
+        elif user_list[1] != 0 and user_list[2] != 'activate':
+            return "Авторизируйтесь"
+        elif user_list[1] == 0:
+            return "Неправильный пароль"
+    return "Сделайте аккаунт"
+
+
+
