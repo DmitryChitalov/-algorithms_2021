@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_func(number, right, sum_numb=0):
+    sum_numb += number
+    if number == 1:
+        return print(f'Для n = {right}\nСумма чисел от 1 до {right} = формуле {right}({right}+1)/2\n'
+                     f'{sum_numb} = {int(right * (right + 1) / 2)}')
+    my_func(number - 1, right, sum_numb)
+
+
+my_func(7, 7)

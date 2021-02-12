@@ -28,3 +28,57 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+# Проверка на корректность вводимого оператора
+def valid_operator(operator):
+    if operator not in '+,-,*,/,0' or operator == '':
+        print(f'Неизвестный оператор {operator}')
+        operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        valid_operator(operator)
+    else:
+        return operator
+
+
+# Валидация на числа
+def valid_number(number):
+    try:
+        number = float(number)
+    except ValueError:
+        print(f'ValueError Вы ввели не число {number}')
+        number = valid_number(input('Введите корректное число: '))
+    return number
+
+
+# Функция для более красивого вывода int или float чисел
+def int_float(numb):
+    int_numb = int(numb)
+    if int_numb == numb:
+        return int_numb
+    else:
+        return round(numb, 4)
+
+
+def calk(operator, numb_1=0, numb_2=0):
+    if operator == '+':
+        print(int_float(numb_1 + numb_2))
+    elif operator == '-':
+        print(int_float(numb_1 - numb_2))
+    elif operator == '*':
+        print(int_float(numb_1 * numb_2))
+    elif operator == '/':
+        try:
+            print(int_float(numb_1 / numb_2))
+        except ZeroDivisionError:
+            print('Ошибка деление на 0')
+
+    operator = valid_operator(input('Введите операцию (+, -, *, / или 0 для выхода) : '))
+    if operator == '0':
+        return
+    numb_1 = valid_number(input('Введите первое число: '))
+    numb_2 = valid_number(input('Введите второе число: '))
+
+    calk(operator, numb_1, numb_2)
+
+
+calk('+')

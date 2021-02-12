@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_table(numb=32, iterate=1):
+    if numb == 127:
+        return f'{numb}-{chr(numb)} '
+
+    if iterate % 10 == 0:
+        return f'{numb}-{chr(numb)} \n' + f'{ascii_table(numb + 1, iterate + 1)}'
+    elif numb < 100:
+        return f'{numb}-{chr(numb)}  ' + f'{ascii_table(numb + 1, iterate + 1)}'
+    else:
+        return f'{numb}-{chr(numb)} ' + f'{ascii_table(numb + 1, iterate + 1)}'
+
+
+print(ascii_table())
