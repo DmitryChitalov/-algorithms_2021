@@ -15,3 +15,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+num = int(input('Любое число: '))
+
+right = (num * (num + 1)) / 2
+
+
+def theorem(num, summa=0):
+    if num == 0:
+        return summa
+    else:
+        return theorem(num=num - 1, summa=summa + num)
+
+
+def compare(left=theorem(num), right=right):
+    if left == right:
+        return f'Доказано'
+    return 'Что-то пошло не так'
+
+print(compare())
