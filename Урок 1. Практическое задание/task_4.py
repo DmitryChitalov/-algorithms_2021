@@ -26,3 +26,82 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_list = [['alex_123', 1234, 0], ['nik_555', 435235, 1], ['bomber_111', 342, 1]]
+
+# Функция 1  Сложность О(n)
+
+
+def aut_f_1(list_of_users):
+    user_login = input('Введите логин : ')
+    found_status = 0
+    for el in list_of_users:
+        if el[0] == user_login:
+            found_status += 1
+            if el[2] == 1:
+                return 'Допуск разрешен'
+            else:
+                return'Подтвердите активацию пожалуйста'
+    if found_status == 0:
+        return'Пользователя с данным логином не существует'
+
+# Функция бинарного поиска
+
+
+def bin_look_for(list_, user_id):
+    begin = 0
+    end = len(list_)
+    while begin < end:
+        mid_num = round((begin + end) / 2)
+        if list_[mid_num] == user_id:
+            return True
+        elif list_[mid_num] < user_id:
+            begin = mid_num + 1
+        else:
+            end = mid_num - 1
+    return False
+
+# Функция 2 Сложность O(n log n)
+
+
+def aut_f_2(list_of_users, user_id):
+    id_ = 1
+    quantity_find = 0
+    for el in list_of_users:
+        el.insert(0, id_)
+        id_ += 1
+    for el in list_of_users:
+        if bin_look_for(el, user_id):
+            quantity_find = 1
+            if el[3] == 0:
+                return 'Подтвердите вашу учетную запись'
+            login = (input('Введите логин : '))
+            if login == el[1]:
+                password = input('Введите пароль : ')
+                if password == str(el[2]):
+                    return 'доступ разрешен'
+                else:
+                    return 'Неправильно введен логин или пароль'
+
+
+print(aut_f_2(users_list, 3))
+
+
+# aut_f_1 эфективнее т.к. там линейная сложность и нет вложенных циклов.
+
+# Самая эфективная функция, сложность О(1)
+users_dict = {'alex_123': {'password': '1234', 'is_active': 1}, 'nikita': {'password': '24425', 'is_active': 0},
+              'woolf': {'password': '345353', 'is_active': 0}}
+
+
+def aut_f_3(dict_of_users, login, password):
+    if dict_of_users.get(login):
+        if dict_of_users[login]['password'] == password and dict_of_users[login]['is_active'] == 1:
+            return 'Доступ разрешен'
+        elif dict_of_users[login]['is_active'] == 0:
+            return 'Пожалуйста, пройдите активацию аккаунта'
+        elif dict_of_users[login]['password'] != password:
+            return 'Введен неверный пароль'
+
+
+print(aut_f_3(users_dict, 'alex_123', '1234'))
