@@ -28,3 +28,30 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculate():
+    operator = input("Input +, -, *, / or 0 for exit")
+    if operator not in ("+", "-", "*", "/", "0"):
+        print("Bad operator")
+        return calculate()
+    if operator == "0":
+        return print("Exiting...")
+    try:
+        first_num = int(input("Input first number"))
+        second_num = int(input("Input second number"))
+    except ValueError:
+        print("It is not a number")
+        return calculate()
+    if operator == "+":
+        print(f"{first_num} {operator} {second_num} = {first_num + second_num}")
+    if operator == "-":
+        print(f"{first_num} {operator} {second_num} = {first_num - second_num}")
+    if operator == "*":
+        print(f"{first_num} {operator} {second_num} = {first_num * second_num}")
+    if operator == "/":
+        print(f"{first_num} {operator} {second_num} = {first_num / second_num}")
+    calculate()
+
+
+calculate()

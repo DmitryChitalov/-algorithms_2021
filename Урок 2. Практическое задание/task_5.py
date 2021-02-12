@@ -23,3 +23,15 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_convert(i=32, count=1):
+    print(f"{i} - {chr(i)}", end=' ')
+    if count % 10 == 0:
+        print("")
+    if i == 127:
+        return
+    count += 1
+    ascii_convert(i+1, count)
+
+
+ascii_convert()
