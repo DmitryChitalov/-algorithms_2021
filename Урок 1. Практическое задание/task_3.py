@@ -15,7 +15,7 @@ company_dict = {'company_1': 1000,
                 'company_5': 5000
                 }
 
-# Сложность решения O(3n)
+# Сложность решения O(3n) Лучше использовать этот, так как 3n < n log n
 
 
 def search_max(my_company_dict):
