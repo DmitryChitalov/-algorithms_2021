@@ -25,7 +25,7 @@
 
 company_profit = {'comp1': 500, 'comp2': 2000, 'comp3': 100, 'comp4': 1000, 'comp5': 300, 'comp6': 3000}
 
-# O(n)
+# первый O(n)
 
 
 def max3_company(input_base):
@@ -40,8 +40,10 @@ def max3_company(input_base):
 
 print(max3_company(company_profit))
 
-# O(N*logN)
+# второй O(N*logN)
 list_for_sort = list(company_profit.items())
 list_for_sort.sort(key=lambda s: s[1], reverse=True)
 for i in range(3):
     print(list_for_sort[i][0], ':', list_for_sort[i][1])
+
+# первый O(n) лучше и быстрее чем второй O(N*logN)
