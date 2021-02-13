@@ -6,10 +6,34 @@
 Первый, в виде функции, должен обеспечивать поиск минимального значения для списка.
 В основе алгоритма должно быть сравнение каждого числа со всеми другими элементами списка.
 Сложность такого алгоритма: O(n^2) - квадратичная.
+"""
 
+
+def search_min(new_list):  # Сложность o(n^2)
+    for elem in new_list:
+        flag = True
+        for element in new_list:
+            if elem > element:
+                flag = False
+        if flag:
+            return elem
+
+
+"""
 Второй, в виде функции, должен обеспечивать поиск минимального значения для списка.
 Сложность такого алгоритма: O(n) - линейная.
+"""
 
+
+def search_minimal(new_list):  # Сложность o(n)
+    min_elem = new_list[0]
+    for elem in new_list:
+        if elem < min_elem:
+            min_elem = elem
+    return min_elem
+
+
+"""
 Не забудьте указать где какая сложность.
 
 Примечание:
