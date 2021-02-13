@@ -46,7 +46,7 @@ def division(num1, num2):
     return num1 / num2
 
 
-class Calculator():
+class Calculator:
     available_operation = {'+': addition,
                            '-': subtraction,
                            '*': multiplication,
