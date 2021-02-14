@@ -15,3 +15,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def proof(number_proof):        # Функция для получения суммы чисел, от 1 до указанного конечного.
+    if number_proof == 0:
+        return number_proof
+    if number_proof != 0:
+        return number_proof + proof(number_proof - 1)
+
+
+number = 6              # Вариант 1, простое сравнение
+print(proof(number) == number*(number+1)/2)
+
+
+def proof_1(proof_num=proof(6), number_1=6):                # Вариант 2 сравнение, с использованием функции
+    return proof_num == number_1*(number_1+1)/2
+
+
+print(proof_1())

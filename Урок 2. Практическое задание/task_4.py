@@ -12,3 +12,13 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def amount(quantity_el):
+    if quantity_el == 0:
+        return quantity_el
+    else:
+        return 0.5 ** (quantity_el-1) - amount(quantity_el-1)
+
+
+print(amount(3))
