@@ -21,3 +21,56 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# Сложность: O(n)
+
+
+def company_profit_1(company_dict):
+    k = 0                                                   # O(1)
+    clone_dict = company_dict.copy()                        # O(n)
+    while k < 3:                                            # O(1)
+        company_max = list(clone_dict.items())[0][1]        # O(n)
+        company_name = ""                                   # O(1)
+        for i in clone_dict:                                # O(n)
+            if company_max < clone_dict[i]:                 # O(1)
+                company_max = clone_dict[i]                 # O(1)
+                company_name = i                            # O(1)
+        print(company_name, clone_dict.pop(company_name))   # O(1)
+        k += 1                                              # O(1)
+
+
+# Сложность: O(n**2)
+
+
+def company_profit_2(company_dict):
+    k = 0                                           # O(1)
+    clone_dict = company_dict.copy()                # O(n)
+    while k < 3:                                    # O(1)
+        for i in clone_dict:                        # O(n)
+            status_max = True                       # O(1)
+            for j in clone_dict:                    # O(n)
+                if clone_dict[i] < clone_dict[j]:   # O(1)
+                    status_max = False              # O(1)
+            if status_max:                          # O(1)
+                print(i, clone_dict.pop(i))         # O(1)
+                break                               # O(1)
+        k += 1                                      # O(1)
+
+
+profit_company = {"VW": 900,
+                  "Mercedes": 9510,
+                  "Audi": 690,
+                  "Skoda": 1199,
+                  "Mitsubishi": 8811,
+                  "Ford": 1200}
+company_profit_1(profit_company)
+print()
+company_profit_2(profit_company)
+
+
+"""
+Вывод:
+Первый вариант предпочтительней для выполнения, так как исходя из О-нотации, он является линейным
+и в нем меньше шагов для выполнения алгоритма. Соответственно будет использовано меньше ресурсов.
+Во втором варианте присутствует лишний перебор словаря, что делает алгоритм квадратичным по О-нотации.
+"""

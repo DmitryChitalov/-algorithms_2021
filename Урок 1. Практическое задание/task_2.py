@@ -19,3 +19,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+import random
+
+# O(n^2)
+
+
+def find_min_el_1(lst):
+    for i in lst:
+        status_min = True
+        for j in lst:
+            if i > j:
+                status_min = False
+        if status_min:
+            return i
+
+
+# O(n)
+
+
+def find_min_el_2(lst):
+    return min(lst)
+
+
+lst_obj = random.sample(range(-100000, 100000), 10)
+print(lst_obj)
+print()
+print(find_min_el_1(lst_obj))
+print()
+print(find_min_el_2(lst_obj))
