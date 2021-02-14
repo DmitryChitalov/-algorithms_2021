@@ -18,3 +18,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+test_int = int(input("Введите число: "))
+
+
+def func1(test_int, odd=0, even=0):
+    if len(str(test_int)) == 1:
+        if test_int % 2 == 0:
+            even += 1
+            return f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})"
+        else:
+            odd += 1
+            return f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})"
+    if test_int % 2 == 0:
+        even += 1
+        return func1(test_int//10, odd, even)
+    else:
+        odd +=1
+        return func1(test_int//10, odd, even)
+
+
+print(func1(test_int))

@@ -22,3 +22,16 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+test_int = int(input("Введите число, которое требуется перевернуть: "))
+
+def func1(test_int, rev_int = ""):
+    if len(str(test_int)) == 1:
+        rem = test_int % 10
+        rev_int += str(rem)
+        return rev_int
+    rem = test_int % 10
+    rev_int += str(rem)
+    return func1(test_int//10, rev_int)
+
+
+print(func1(test_int))
