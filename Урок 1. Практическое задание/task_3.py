@@ -21,3 +21,33 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+info = {"Company1":5000, "Company2":1000, "Company3":10000, "Company4":15000, "Company5":5001}
+
+# O (n log n)
+def func1(data):
+    list1 = [] #O(l)
+    for i, j in data.items(): #O(l)
+        list1.append(j) #O(l)
+    list1.sort(reverse=True) #O(n log n)
+    while len(list1) > 3: #O (l)
+        list1.pop() #O (l)
+    return list1
+
+#
+def func2(data):
+    list1 = []  # O(1)
+    data_keys = list(data.keys())  # O(n)
+    data_values = list(data.values())  # O(n)
+    i = 0
+    while i < 3:  # O(1)
+        max_index = data_values.index(max(data_values))  # O(n)
+        list1.append(data_values[max_index])  # O(1)
+        data_values.pop(max_index)  # O(1)
+        data_keys.pop(max_index)  # O(1)
+        i += 1
+    return list1
+
+print(func1(info))
+print(func2(info))
+
+
