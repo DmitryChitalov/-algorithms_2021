@@ -22,3 +22,19 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def rev_numbers(number):
+    if len(str(number)) == 1:
+        return str(number)
+    else:
+        try:
+            el = number % 10
+        except TypeError:
+            return 'Данная функция выполняется только над целыми положительными числами!'
+        else:
+            number = number // 10
+            return str(el) + rev_numbers(number)
+
+
+print(rev_numbers(1230))
