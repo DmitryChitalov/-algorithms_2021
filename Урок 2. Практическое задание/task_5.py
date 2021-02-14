@@ -23,3 +23,15 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def symbols_ascii(first_num, last_num, step=None):
+    if not step:
+        step = first_num % 10 - 1
+    if first_num >= last_num:
+        print()
+    else:
+        print(f'{first_num} - {chr(first_num)}', end=('\n' if (first_num - step) % 10 == 0 else ' '))
+        symbols_ascii(first_num + 1, last_num, step)
+
+
+symbols_ascii(32, 128)
