@@ -11,3 +11,28 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def guess_numb(numb, cnt=10):
+    if cnt == 10:
+        numb = random.randint(0, 100)
+
+    if cnt <= 0:
+        print(f"Вы не угадали ! Было загадано число : {numb}")
+        return
+
+    user_num = float(input(f"Осталось #{cnt} попыток: "))
+    if (user_num - numb) == 0:
+        print("Вы Угадали! )")
+        return
+    elif (user_num - numb) > 0:
+        print("Меньше !")
+    else:
+        print("Больше !")
+
+    guess_numb(numb, cnt=cnt - 1)
+
+
+# Test
+guess_numb(0)

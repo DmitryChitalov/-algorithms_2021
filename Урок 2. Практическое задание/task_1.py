@@ -28,3 +28,76 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+# DATA
+ops = {
+    '''
+        Словарь операций
+    '''
+    '+': lambda x, y: x + y,
+    '-': lambda x, y: x - y,
+    '*': lambda x, y: x * y,
+    '/': lambda x, y: x / y,
+
+}
+str_lst = [
+    '''
+    Список предложений
+    '''
+    "+,-,*,/ or 0 - escape: \n",
+    "input operand 1: \n",
+    "input operand 1: \n"
+]
+clc_lst = [
+    '''
+    Список введённых пользователем данных
+    '''
+]
+
+
+# FUNCS
+
+def calc(lst):
+    '''
+    функция калькуляции
+    '''
+    res = ops[lst[0]](float(lst[1]), float(lst[2]))
+    return res
+
+
+def user_input(op_inx):
+    '''
+    Функция получения данных от пользователя
+    '''
+    op = input(str_lst[op_inx])
+    return op
+
+
+# ALGORITHM
+def inf_calc(op_inx):
+    op = user_input(op_inx)
+
+    if op == '0' and op_inx == 0: # если введен 0 - выйти из прогрраммы
+        print("exit calc")
+        exit()
+    elif not ops.get(op) and op_inx == 0: # если такой операции нет сообщить об ошибке и перезапустить
+        print("ERROR: re type operator")
+        inf_calc(op_inx)
+    else:
+        clc_lst.append(op)
+
+    if op_inx >= len(str_lst) - 1:
+        print("Result Calculation :")
+        res = calc(clc_lst)
+        print(f"{clc_lst[1]} {clc_lst[0]} {clc_lst[2]} = {res}")
+        print("Next Calc")
+        op_inx = 0
+        clc_lst.clear()
+        inf_calc(op_inx)
+
+    op_inx += 1
+    inf_calc(op_inx)
+
+
+# TEST
+inf_calc(0)
