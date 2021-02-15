@@ -12,3 +12,14 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+def rec_met(i, numb, n_count, com_sum ):
+    if i == n_count:
+        print(f"Элементов : {n_count} , Сумма: {com_sum }")
+    elif i < n_count:
+        return rec_met(i+1,numb / 2 * -1, n_count , com_sum + numb)
+
+try:
+    N_COUNT = int(input("Введите элементы : "))
+    rec_met(0, 1, N_COUNT, 0)
+except ValueError:
+    print("Введите число,а не строку")

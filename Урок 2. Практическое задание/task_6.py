@@ -11,3 +11,20 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+def num_ran(count , number):
+    print(f"Попытка № {count}")
+    answer = int(input("Введите число от 1 до 100 : "))
+    if count == 10 or number == answer:
+        if number == answer:
+            print("Верно")
+        print(f"Загаданное число : {number}")
+    else:
+        if answer > number:
+            print(f"Число меньше чем {answer} ")
+        if answer < number:
+            print(f"Число больше чем {answer} ")
+        num_ran(count + 1, number)
+
+num_ran(1, random.randint(0,100))
