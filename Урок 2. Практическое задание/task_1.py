@@ -43,14 +43,19 @@ def calculate():
     except ValueError:
         print("It is not a number")
         return calculate()
-    if operator == "+":
-        print(f"{first_num} {operator} {second_num} = {first_num + second_num}")
-    if operator == "-":
-        print(f"{first_num} {operator} {second_num} = {first_num - second_num}")
-    if operator == "*":
-        print(f"{first_num} {operator} {second_num} = {first_num * second_num}")
-    if operator == "/":
-        print(f"{first_num} {operator} {second_num} = {first_num / second_num}")
+    try:
+        if operator == "+":
+            print(f"{first_num} {operator} {second_num} = {first_num + second_num}")
+        if operator == "-":
+            print(f"{first_num} {operator} {second_num} = {first_num - second_num}")
+        if operator == "*":
+            print(f"{first_num} {operator} {second_num} = {first_num * second_num}")
+        if operator == "/":
+            print(f"{first_num} {operator} {second_num} = {first_num / second_num}")
+    except ZeroDivisionError:
+        print("Divided by zero is not allowed")
+        return calculate()
+
     calculate()
 
 
