@@ -22,4 +22,13 @@
 Допускается исп-е встроенных ф-ций
 и допускается комб-е - цикл и рекурсия
 """
+def ascii(first=32, last=127):
+    if first == last:
+        return f'{first} - {chr(first)}'
+    elif first % 10 == last % 10:
+        return ascii(first, last - 1) + f'\n{last} - {chr(last)} '
+    else:
+        return ascii(first, last - 1) + f'{last} - {chr(last)} '
 
+
+print(ascii())
