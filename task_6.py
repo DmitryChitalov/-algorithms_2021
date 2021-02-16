@@ -1,47 +1,55 @@
 """
-Задание 6.
-Задание на закрепление навыков работы с очередью
+6.	В программе генерируется случайное целое число от 0 до 100.
+Пользователь должен его отгадать не более чем за 10 попыток. После каждой
+неудачной попытки должно сообщаться больше или меньше введенное пользователем
+число, чем то, что загадано. Если за 10 попыток число не отгадано,
+то вывести загаданное число.
 
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
+Решите через рекурсию. Решение через цикл не принимается.
+Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 
-Реализуйте структуру "доска задач".
-
-Структура должна предусматривать наличие несольких очередей задач, например
-1) базовой, откуда задачи берутся, решаются и отправляются в список решенных
-2) очередь на доработку, когда нерешенные задачи из первой очереди отправляются
-на корректировку решения
-
-После реализации структуры, проверьте ее работу на различных сценариях
+Подсказка:
+Базовый случай здесь - угадали число или закончились попытки
 """
 
+import random
 
-class MyDesk:
 
-    def __init__(self, taskname):
-        number_tasks = ++ 1
-        self.id_task = number_tasks
-        self.name = taskname
-        self.status = 'watching'
-        watching_queue.append(self.name)
-        print('Create new task ' + self.name)
-
-    def change_status(self, userstatus):
-        if userstatus == 'complete':
-            watching_queue.remove(self.name)
-            complete_stack.append(self.name)
-        elif userstatus == 'resolve':
-            watching_queue.remove(self.name)
-            resolve_stack.append(self.name)
-        elif userstatus == 'in_work']:
-            self.status = userstatus
-            print(self.name + ' status changed to ' + userstatus);
+def checkinput():
+    user_input = input('Ведите целое число от 1 до 100: ')
+    try:
+        int(user_input)
+    except ValueError:
+        print('Вы ошибочно ввели строку. Попробуйте ещё раз')
+        return checkinput()
+    else:
+        if int(user_input) in range(1, 100):
+            return int(user_input)
         else:
-            print('status incorrect');
+            print('Вы ошибочно ввели число не входящее в заданный диапазон. Попробуйте ещё раз')
+            return checkinput()
 
 
-task1 = MyDesk('task1')
-task2 = MyDesk('task2')
-task1.change_status('complete')
-print(getattr(task1, 'status'), getattr(task1, 'id_task'))
-print(getattr(task2, 'status'), getattr(task2, 'id_task'))
+def ugadaika(number, counter):
+    user_number = checkinput()
+    if counter < 10:
+        if number != user_number:
+            if number < user_number:
+                print("Вы указали большое число")
+                counter += 1
+                ugadaika(number, counter)
+            else:
+                print("Вы указали маленькое число")
+                counter += 1
+                ugadaika(number, counter)
+        else:
+            print(f"Поздравляем! Вы угадали число за {counter} попыток.")
+    else:
+        print("Вы проиграли")
+        return
+
+
+number = random.randint(1, 100)
+print("Здравствуйте! Компьютер загадал число")
+counter = 0
+ugadaika(number, counter)
