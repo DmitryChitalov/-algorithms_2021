@@ -23,42 +23,60 @@ def time_stamp(func):
         start = time.time()
         return_value = func(*args, **kwargs)
         end = time.time()
-        print('[*] Время выполнения: {} секунд.'.format(end - start))
+        print(f'Время выполнения функции {func.__name__}: {end - start} секунд.')
         return return_value
 
     return wrapper
 
 
 @time_stamp
-def get_list():
-    return [i for i in range(9999999)]
+def get_list(elem_count):
+    return [i for i in range(elem_count)]
 
 
 @time_stamp
-def get_dict():
-    return {i: i for i in range(9999999)}
+def get_dict(elem_count):
+    return {i: i for i in range(elem_count)}
 
 
-my_list = get_list()
-my_dict = get_dict()
+big_list = get_list(9999999)
+big_dict = get_dict(9999999)
+
+small_list = get_list(90000)
+small_dict = get_dict(90000)
 
 """
+Время выполнения функции get_list: 0.44780445098876953 секунд.
+Время выполнения функции get_dict: 0.7280566692352295 секунд.
+
+Время выполнения функции get_list: 0.0029916763305664062 секунд.
+Время выполнения функции get_dict: 0.006983518600463867 секунд.
+
+Сложность выполнения одинаковая, зависит от длины (O(N)), но т.к. 
+cловари требуют больше памяти, то на создание словаря уходит больше времени.
+
+Далнейшие вычисления будем проводить на больших данных
 """
 
 
 @time_stamp
 def get_item_from_list(items_list):
-    return items_list[10000]
+    return items_list[9999]
 
 
 @time_stamp
 def get_item_from_dict(dict_of_items):
-    return dict_of_items[10000]
+    return dict_of_items[9999]
 
 
-get_item_from_list(my_list)
-get_item_from_dict(my_dict)
+get_item_from_list(big_list)
+get_item_from_dict(big_dict)
 """
+Время выполнения функции get_item_from_list: 0.0 секунд.
+Время выполнения функции get_item_from_dict: 0.0 секунд.
+Обе функции выполняются почти что мгновенно
+
+Проверим вставку элементов
 """
 
 
@@ -72,10 +90,10 @@ def add_item_to_dict(dict_of_items, item):
     dict_of_items[item] = item
 
 
-add_item_to_list(my_list, 1111111111111)
-add_item_to_dict(my_dict, 1111111111111)
+add_item_to_list(big_list, 1111111111111)
+add_item_to_dict(big_dict, 1111111111111)
 
-
+'''
 @time_stamp
 def remove_from_list(items_list, item):
     items_list.remove(item)
@@ -88,3 +106,4 @@ def remove_from_dict(dict_of_items, item):
 
 remove_from_list(my_list, 1111111111111)
 remove_from_dict(my_dict, 1111111111111)
+'''
