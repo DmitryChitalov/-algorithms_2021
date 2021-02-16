@@ -16,4 +16,16 @@
 а
 """
 
+hash_set = set()
+
 # hash?
+s = input("Enter string")
+
+for j in range(1, len(s)):
+    for i in range(len(s)):
+        if i + j <= len(s):
+            elem = s[i: i + j]
+            h = hash(elem)
+            hash_set.add(h)
+
+print("len=", len(hash_set))
