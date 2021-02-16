@@ -18,3 +18,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_number_1(num, not_even=0, even=0):
+    if num == 0:
+        return f'Нечетных: {not_even}\nЧетных: {even}'
+    else:
+        num_1 = num % 10
+        num = num // 10
+        if num_1 % 2 == 0:
+            even += 1
+        if num_1 % 2 == 1:
+            not_even += 1
+        return check_number_1(num, not_even, even)
+
+
+print(check_number_1(123))

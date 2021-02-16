@@ -11,3 +11,18 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def guess(number, count):
+    user_number = input('Введите число')
+    if user_number == number:
+        return f'Вы молодец, правильный ответ : {number} '
+    if count == 10:
+        return 'Вы не угадали, правильный ответ' + str(number)
+    if user_number != number:
+        print('Ответ не верный, попробуйте ещё раз')
+        return guess(number, count + 1)
+
+
+print(guess(str(random.randrange(1, 100)), 0))
