@@ -28,3 +28,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    command = input('Введите операцию (+, -, *, /) или exit чтоб выйти: ')
+
+    if command == 'exit':
+        return print('Калькулятор выключен')
+    else:
+        if command == '+' or command == '-' or command == '*' or command == '/':
+            try:
+                a = int(input('Введите первое число: '))
+                b = int(input('Введите второе число: '))
+
+                if command == '+':
+                    print('Сумма чисел - {}'.format((a + b)))
+                    return calculator()
+
+                elif command == '-':
+                    print('Разность чисел - {}'.format((a - b)))
+                    return calculator()
+
+                elif command == '*':
+                    print('Произведение чисел - {}'.format((a * b)))
+                    return calculator()
+
+                elif command == '/':
+                    print('Частное чисел - {}'.format((a / b)))
+                    return calculator()
+
+            except ValueError:
+                print('Вместо числа введена строка!')
+                return calculator()
+
+        else:
+            print('Неверная команда, повторите ввод!')
+            return calculator()
+
+
+calculator()

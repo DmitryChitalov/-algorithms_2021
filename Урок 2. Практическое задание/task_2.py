@@ -18,3 +18,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_num(num_1, even=0, odd=0):
+    if num_1 == 0:
+        return even, odd
+    else:
+        num_2 = num_1 % 10
+        num_1 = num_1 // 10
+        if num_2 % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return count_num(num_1, even, odd)
+
+
+number = input('Введите число: ')
+if number.isdigit():
+    print(f'Колличество чётных цифр в числе {count_num(int(number))[0]}')
+    print(f'Колличество нечётных цифр в числе {count_num(int(number))[1]}')
+else:
+    print('Вы ввели строку вместо числа!')
