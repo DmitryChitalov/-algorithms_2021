@@ -16,6 +16,8 @@ from random import randint
 
 
 def num(number=randint(0, 101), count=1):
+    if count > 10:
+        return print("attempts ended")
     answer = int(input("Input your number: "))
     if answer > number:
         print("Your answer is greater")
@@ -23,8 +25,6 @@ def num(number=randint(0, 101), count=1):
         print("Your answer is less")
     else:
         return print("Victory")
-    if count == 10:
-        return print("attempts ended")
     num(count=count+1)
 
 
