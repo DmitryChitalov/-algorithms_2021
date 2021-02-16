@@ -18,3 +18,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_recur(num, even=0, odd=0):
+    if num % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    num = num // 10
+    if num == 0:
+        return print(f"evens {even}\nodds {odd}")
+    count_recur(num, even, odd)
+
+
+count_recur(35608909)

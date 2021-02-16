@@ -11,3 +11,21 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+from random import randint
+
+
+def num(number=randint(0, 101), count=1):
+    if count > 10:
+        return print("attempts ended")
+    answer = int(input("Input your number: "))
+    if answer > number:
+        print("Your answer is greater")
+    elif answer < number:
+        print("Your answer is less")
+    else:
+        return print("Victory")
+    num(count=count+1)
+
+
+num()

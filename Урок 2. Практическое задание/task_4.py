@@ -12,3 +12,13 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def summ_row(i, elem=1, summ=0):
+    summ += elem
+    if i == 1:
+        return print(summ)
+    summ_row(i-1, elem / -2, summ)
+
+
+summ_row(3)

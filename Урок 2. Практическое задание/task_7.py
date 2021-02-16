@@ -15,3 +15,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_recur(left_i, right_i, summ=0):
+    summ += left_i
+    if left_i == 1:
+        return print(f"{summ} = {right_i * (right_i + 1) / 2}")
+    count_recur(left_i - 1, right_i, summ)
+
+
+count_recur(6, 6)
