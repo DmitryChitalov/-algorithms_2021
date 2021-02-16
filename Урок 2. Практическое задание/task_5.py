@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_func(value=32):
+    if value == 128:
+        return True
+    print(f'{value} - {chr(value)}', end=' ')
+    if (value - 31) % 10 == 0:
+        print('\n')
+    ascii_func(value + 1)
+
+
+ascii_func()
