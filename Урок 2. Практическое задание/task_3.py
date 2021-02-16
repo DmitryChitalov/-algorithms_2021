@@ -24,12 +24,12 @@
 """
 
 
-def reverse_number(numb, num_string=''):
-    if numb == 0:
-        return num_string
+def reverse_number(number, revers=''):
+    if number == 0:
+        return revers
     else:
-        num_string += str(numb % 10)
-        return num_string + reverse_number(numb // 10)
+        revers += str(number % 10)
+        return revers + reverse_number(number // 10)
 
 
 print(reverse_number(1234567890))
