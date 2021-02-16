@@ -30,44 +30,40 @@
 """
 
 
-def math_operation(sign, num_1, num_2):
-
-    try:
-        if sign == '0':
-            return 'Конец'
-
-        if sign == '/':
-            return 'Ваш результат : ' + str(num_1 / num_2), \
-                   math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-                                  int(input('Введите первое число : ')),
-                                  int(input('Введите второе число : ')))
-        if sign == '*':
-            return 'Ваш результат : ' + str(num_1 * num_2), \
-                   math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-                                  int(input('Введите первое число : ')),
-                                  int(input('Введите второе число : ')))
-        if sign == '+':
-            return 'Ваш результат :' + str(num_1 + num_2), \
-                   math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-                                  int(input('Введите первое число : ')),
-                                  int(input('Введите второе число : ')))
-        if sign == '-':
-            return 'Ваш результат : ' + str(num_1 - num_2), \
-                   math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-                                  int(input('Введите первое число : ')),
-                                  int(input('Введите второе число : ')))
-    except ValueError:
-        return 'Вы ошиблись при введении цифры, повторите попытку', \
-               math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-                              int(input('Введите первое число : ')),
-                              int(input('Введите второе число : ')))
-    except ZeroDivisionError:
-        return 'На ноль делить нельзя', \
-               math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-                              int(input('Введите первое число : ')),
-                              int(input('Введите второе число : ')))
+def math_operation():
+    sign = input('Введите знак, для прекращения операции введите 0 : ')
+    if sign == '0':
+        return 'Конец'
+    else:
+        if sign in '+-*/':
+            try:
+                num_1 = int(input('Введите первое число : '))
+                num_2 = int(input('Введите второе число : '))
+                if sign == '/':
+                    result = str(num_1 / num_2)
+                    print('Ваш результат : ' + result)
+                    return math_operation()
+                elif sign == '*':
+                    result = str(num_1 * num_2)
+                    print('Ваш результат : ' + result)
+                    return math_operation()
+                elif sign == '+':
+                    result = str(num_1 + num_2)
+                    print('Ваш результат : ' + result)
+                    return math_operation()
+                elif sign == '-':
+                    result = str(num_1 - num_2)
+                    print('Ваш результат : ' + result)
+                    return math_operation()
+            except ValueError:
+                print('Вы ошиблись при введении цифры, повторите попытку')
+                return math_operation()
+            except ZeroDivisionError:
+                print('На ноль делить нельзя')
+                return math_operation()
+        else:
+            print('Такие символы не предусмотрены нами, введите что то из этого : +-*/')
+            return math_operation()
 
 
-print(math_operation(input('Введите знак, для прекращения операции введите 0 : '),
-      int(input('Введите первое число : ')),
-      int(input('Введите второе число : '))))
+print(math_operation())

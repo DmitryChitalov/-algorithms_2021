@@ -19,34 +19,18 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
-# Не совсем рабочий вариант
-
-
-def check_number(num_list):
-    num_list = str(num_list)
-    if len(num_list) == 1:
-        return int(num_list) % 2
-    if len(num_list) == 2:
-        return int(num_list) // 10 % 2 + (check_number(int(num_list) % 10))
-    if len(num_list) > 1:
-        return 'Нечётных чисел : ' + str(int(num_list) // 10**(len(num_list) - 1) % 2
-                                         + (check_number(int(num_list) % 10**(len(num_list) - 1)))),\
-               'Чётных чисел : ' + str(len(num_list) - (int(num_list) // 10**(len(num_list) - 1) % 2
-                                       + check_number(int(num_list) % 10**(len(num_list) - 1))))
-
-
-print(check_number('1099'))
-
-# Рабочий вариант
-
 
 def check_number_1(num, not_even=0, even=0):
     if num == 0:
         return f'Нечетных: {not_even}\nЧетных: {even}'
-    if num % 2 == 0:
-        return check_number_1(num // 10, not_even, even+1)
     else:
-        return check_number_1(num // 10, not_even+1, even)
+        num_1 = num % 10
+        num = num // 10
+        if num_1 % 2 == 0:
+            even += 1
+        if num_1 % 2 == 1:
+            not_even += 1
+        return check_number_1(num, not_even, even)
 
 
-print(check_number_1(987123456))
+print(check_number_1(123))
