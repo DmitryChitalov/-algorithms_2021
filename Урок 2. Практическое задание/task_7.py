@@ -15,3 +15,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def Proof(n, sum_right, sum_left=0):
+    sum_left += n
+    if n == 1:
+        return print(sum_left == sum_right * (sum_right + 1) / 2)
+    Proof(n - 1, sum_right, sum_left)
+
+
+Proof(7, 7)

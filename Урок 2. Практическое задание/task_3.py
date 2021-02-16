@@ -22,3 +22,16 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def Reverse(val, obj=""):
+    if val != 0:
+        obj += str(val % 10)
+        val = val // 10
+        return Reverse(val, obj)
+    else:
+        return obj
+
+
+print(Reverse(12345))
+print(Reverse(1230))

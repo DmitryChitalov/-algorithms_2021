@@ -28,3 +28,44 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+operation = {"+": (lambda x, y: x + y),
+             "-": (lambda x, y: x - y),
+             "*": (lambda x, y: x * y),
+             "/": (lambda x, y: x / y)}
+
+
+class User_raise(Exception):
+    def __init__(self, text):
+        self.text = text
+
+
+def calculator():
+    try:
+        op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+        if op not in ["+", "-", "*", "/", "0"]:
+            raise User_raise("Вы ввели неправильную операцию!")
+    except User_raise as err:
+        print(err)
+        return calculator()
+    else:
+        if op != "0":
+            try:
+                val_1 = int(input("Введите первое трехзначное число: "))
+                val_2 = int(input("Введите второе трехзначное число: "))
+                if op == "/" and val_2 == 0:
+                    raise User_raise("Делить на 0 нельзя!")
+            except User_raise as err:
+                print(err)
+                return calculator()
+            except ValueError:
+                print("Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+                return calculator()
+            else:
+                print(f"Ваш результат: {operation[op](val_1, val_2)}")
+                return calculator()
+        else:
+            return "Пока!"
+
+
+print(calculator())
