@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_func(n, i=1, summa=0):
+    if i == n + 1:
+        return summa == n * (n + 1) / 2
+    else:
+        summa += i
+    return check_func(n, i + 1, summa)
+
+
+print(check_func(2))
