@@ -26,4 +26,4 @@ def sum_of_elements(amount_of_numbers, result=0.0, number=1.0):
     return sum_of_elements(amount_of_numbers - 1, result, number)
 
 
-print(sum_of_elements(4))
+print(sum_of_elements(7))
