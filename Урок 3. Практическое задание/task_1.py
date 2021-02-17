@@ -22,24 +22,65 @@ def wrapper(func):
         start = time.time()
         result = func(*args, **kwargs)
         print(f'Время выполнения функции {func.__name__} = {time.time()-start}')
+
         return result
     return tags
 
 # Генерируем список
 @wrapper
 def my_list():
-    sample =  [i for i in range(1000000)]
+    return  [i for i in range(10000000)]
+
 
 # Генерируем словарь
 @wrapper
 def my_dict():
-    sample = {i: f'{i}' for i in range(1000000)}
+    return {i: f'{i}' for i in range(10000000)}
 
-my_list()
-my_dict()
+
+my_dict = my_dict()
+my_list = my_list()
 
 """
 Вывод: Запись нового элемента в словарь всегда будет медленней, чем запись в список. Для добавления нового элемента в 
 спиок достаточно записать несколько байт в заранее выделенную память. В случае со словарем, вначале он считает хэш и 
 только потом кладет в память.
+"""
+@wrapper
+def change_dict(my_dict):
+    for i in my_dict:
+        if i % 2 == 0:
+            my_dict[i] = 'слово'
+    return my_dict
+
+@wrapper
+def change_list(my_list):
+    for i in range(len(my_list)):
+        if i % 2 == 0:
+            my_list[i] = 'слово'
+    return my_list
+
+change_dict(my_dict)
+change_dict(my_list)
+
+"""
+Вывод: Замена элемента по времени проходит примерно одинаково O(n) т.к. нужно пробегать по всем элементам в поиске 
+условия % 2 == 0. Если элемент известен, то словарь справится за O(1), а спиок так и будет обходить всего себя O(n)
+"""
+
+@wrapper
+def delete_elem_dict(my_dict):
+    num = 1000000
+    del my_dict[num]
+
+@wrapper
+def delete_elem_list(my_list):
+    num = 1000000
+    del my_list[num]
+
+print(delete_elem_dict(my_dict))
+print(delete_elem_list(my_list))
+
+"""
+Вывод: Удаление N элемента в словаре происходит за O(1). Из зсписка удаление происходит за O(n) .
 """
