@@ -12,3 +12,18 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_of_elements(amount_of_numbers, result=0.0, number=1.0):
+    if amount_of_numbers == 0:
+        return result
+    result = result + number
+    if amount_of_numbers % 2 == 0:
+        number = (-1 ** (amount_of_numbers + 1) * number) / 2
+    else:
+        number = (-1 ** amount_of_numbers * number) / 2
+
+    return sum_of_elements(amount_of_numbers - 1, result, number)
+
+
+print(sum_of_elements(4))
