@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def asc(num=32, sym_str="", i=0):
+    if num == 128:
+        return print(sym_str)
+    sym_str += f"{num} - {chr(num)} "
+    i += 1
+    if i // 10 == 1:
+        sym_str += "\n"
+        i = 0
+    num += 1
+    asc(num, sym_str, i)
+
+
+asc()
