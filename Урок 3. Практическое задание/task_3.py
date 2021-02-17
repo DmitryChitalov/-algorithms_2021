@@ -29,7 +29,7 @@ def unique(word):  # функция получилось очень сложно
                 continue
             elif count == 0 and i+1 == len(word):
                 continue
-            string_hash.append(word[count:i+1])
+            string_hash.append(hash(word[count:i+1]))
         count += 1
 
     return f'{word} - количество уникальных подстрок: {len(set(string_hash))}'
