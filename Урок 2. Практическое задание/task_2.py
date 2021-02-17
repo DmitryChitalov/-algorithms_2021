@@ -25,7 +25,7 @@ sys.setrecursionlimit(10000)
 
 def even_and_odd_numbers(number,  sum_even_numbers=0, sum_odd_numbers=0):
     if number == 0:
-        return f'({sum_even_numbers},{sum_odd_numbers})'
+        return f'Количество четных и нечетных цифр в числе равно: ({sum_even_numbers},{sum_odd_numbers})'
     new_number = number % 10
     if new_number % 2 == 0:
         sum_even_numbers += 1
