@@ -17,7 +17,7 @@
 """
 
 # hash?
-str = "papa"
+str = input("Введите строку: ")
 str_initial_length = len(str)
 set_ = set()
 for i in range(0, len(str)):

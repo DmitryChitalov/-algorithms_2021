@@ -13,7 +13,14 @@ import hashlib
 
 
 class Cache:
-    """кэширование урлов"""
+    """кэширование урлов
+    Предполагается следующий воркфло:
+    Пользователь запрашивает урл. Ищем его в кэше.
+    Если по урлу хеш найден, то запрашиваем по данному хешу контент страницы в БД или в другом хранилище.
+    Извлекаем контент сранички.
+    Если по заданному урлу не найден хеш в кэше, тогда загружаем страничку из сети и сохраняем хеш
+    контента в кэш как {url:hash} и в БД сохраняется {hash: контент стр}
+    """
 
     def __init__(self):
         self._cache_dict = dict()
@@ -24,26 +31,32 @@ class Cache:
 
     def _add_url(self, url):
         """запись хешированного УРЛа в кэш"""
-        self._cache_dict.update({self._get_hash(url): url})
+        self._cache_dict.update({url: self._get_hash(url)})
 
     def open_url(self, url):
-        """возвращает урл есле он есть в кеше, в противном случае - возвращает УРЛ
+        """возвращает урл если он есть в кэше, в противном случае - возвращает УРЛ
         (в реальных условиях выполнялась бы загрузга странички)
         """
-        record = self._cache_dict.get(self._get_hash(url))
-        if record:
-            print(f"Возвращаем запись из кэша: {record}\nхеш записи: "
-                  f"{self._get_hash(self._get_hash(url))}")
+        hash_ = self._cache_dict.get(url)
+        if hash_:
+            print(f"Возвращаем запись из кэша: {url}\nхеш записи: "
+                  f"{hash_}")
         else:
             self._add_url(url)
-            print(f"Новая запись добавлена в кэш: {url}")
+            print(f"Новая запись добавлена в кэш: {url} : {self._cache_dict.get(url)}")
 
 
 cache = Cache()
-cache.open_url("https:\\\\vk.com")
-cache.open_url("https:\\\\vk.com")
-cache.open_url("https:\\\\mail.ru")
-cache.open_url("https:\\\\vk.com")
-cache.open_url("https:\\\\mail.ru")
-cache.open_url("https:\\\\mail.ru")
-cache.open_url("https:\\\\google.com")
+cache.open_url("https://vk.com")
+print("-" * 100)
+cache.open_url("https://vk.com")
+print("-" * 100)
+cache.open_url("https://mail.ru")
+print("-" * 100)
+cache.open_url("https://vk.com")
+print("-" * 100)
+cache.open_url("https://mail.ru")
+print("-" * 100)
+cache.open_url("https://mail.ru")
+print("-" * 100)
+cache.open_url("https://google.com")
