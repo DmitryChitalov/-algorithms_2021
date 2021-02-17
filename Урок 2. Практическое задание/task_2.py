@@ -1,3 +1,4 @@
+import sys
 """
 2.	Посчитать четные и нечетные цифры введенного натурального числа.
 Например, если введено число 34560, то у него 3 четные цифры
@@ -18,3 +19,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+sys.setrecursionlimit(10000)
+
+
+def even_and_odd_numbers(number,  sum_even_numbers=0, sum_odd_numbers=0):
+    if number == 0:
+        return f'({sum_even_numbers},{sum_odd_numbers})'
+    new_number = number % 10
+    if new_number % 2 == 0:
+        sum_even_numbers += 1
+    else:
+        sum_odd_numbers += 1
+    return even_and_odd_numbers(number // 10, sum_even_numbers, sum_odd_numbers)
+
+
+print(even_and_odd_numbers(1232234))
+
