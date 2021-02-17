@@ -26,7 +26,7 @@ def hash_url(url):
         print(f)
 
 while True:
-    i = input("Введите url страницы: ")
+    i = input("https://www.")
     if i == 'q':
         break
     hash_url(i)
