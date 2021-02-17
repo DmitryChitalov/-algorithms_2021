@@ -17,3 +17,22 @@
 """
 
 # hash?
+
+
+def unique(word):  # функция получилось очень сложной потому что я пытался ее сделать для любого слова а не только papa
+    """Функция высчитывает уникальные подстроки для любоко слова"""
+    string_hash = []
+    count = 0
+    while count < len(word):
+        for i in range(1, len(word)):
+            if count > i:
+                continue
+            elif count == 0 and i+1 == len(word):
+                continue
+            string_hash.append(word[count:i+1])
+        count += 1
+
+    return f'{word} - количество уникальных подстрок: {len(set(string_hash))}'
+
+
+print(unique('papa'))
