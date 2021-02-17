@@ -1,3 +1,4 @@
+import random
 """
 6.	В программе генерируется случайное целое число от 0 до 100.
 Пользователь должен его отгадать не более чем за 10 попыток. После каждой
@@ -11,3 +12,19 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+
+def game_random_number(number_of_chance=9, number=random.randint(0, 100)):
+    your_number = int(input("Введите число:"))
+    if your_number == number:
+        return "Вы победили"
+    elif number_of_chance == 0:
+        return number
+    if your_number > number:
+        print("Ваше число больше, чем загаданное")
+    elif your_number < number:
+        print("Ваше число меньше, чем загаданное")
+    return game_random_number(number_of_chance - 1)
+
+
+print(game_random_number())
