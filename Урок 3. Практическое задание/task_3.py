@@ -17,3 +17,12 @@
 """
 
 # hash?
+str = "papa"
+str_initial_length = len(str)
+set_ = set()
+for i in range(0, len(str)):
+    for j in range(1, len(str) + 1):
+        if str_initial_length != len(str[:j]):
+            set_.add(hash(str[:j]))
+    str = str[1:]
+print(f"Количество уникальных подстрок: {len(set_)}")
