@@ -40,6 +40,11 @@ class Todo:
         self.rewrite = []
         self.completed = []
     
+    def get_position(self, lst, idn):
+      for task in lst:
+        if task['id'] == idn:
+          return lst.index(task)
+
     def get_lists(self, lst):
       print("\nЗадания:")
       for task in lst:
@@ -51,10 +56,10 @@ class Todo:
         'task': content
       })
     
-    def to_next_step(self, from_state, to_state, id):
+    def to_next_step(self, from_state, to_state, idn):
       for task in from_state:
-        if task['id'] == id:
-          to_state.append(from_state.pop(id-1))
+        if task['id'] == idn:
+          to_state.append(from_state.pop(self.get_position(from_state ,idn)))
 
 
 
@@ -63,7 +68,9 @@ sess.get_lists(sess.tasks)
 sess.add_task('Проверка')
 sess.to_next_step(sess.tasks, sess.check_tasks, 3)
 sess.to_next_step(sess.tasks, sess.check_tasks, 1)
-# sess.to_next_step(sess.check_tasks, sess.completed, 3)
-# sess.to_next_step(sess.tasks, sess.check_tasks)
+sess.to_next_step(sess.check_tasks, sess.completed, 3)
+sess.to_next_step(sess.tasks, sess.check_tasks, 2)
+print('\n*******************************************************')
 sess.get_lists(sess.tasks)
 sess.get_lists(sess.check_tasks)
+sess.get_lists(sess.completed)
