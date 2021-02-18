@@ -69,3 +69,5 @@ def validate_alternative(lgn, pwd, lst):
 
 validate(input('Login: '), input('Password: '), account)
 validate_alternative(input('Login: '), input('Password: '), accounts)
+
+# В данном случае сложность алгоритмов одинакова - O(1), но 2 вариант выглядит более приятно
