@@ -17,4 +17,49 @@
 
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
-# sqlite, postgres, db_api, orm
+import sqlite3
+from hashlib import sha256
+from  random import choice
+from string import ascii_uppercase
+
+conn = sqlite3.connect("lesson3_task2.db")
+cur = conn.cursor()
+cur.execute("DROP TABLE IF EXISTS users")
+cur.execute("""CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                    pass TEXT NOT NULL, 
+                                                    salt TEXT NOT NULL);""")
+conn.commit()
+##################################################################################
+
+def heshed_str(input_str,salt):
+    ''' Возвращает хеш строки'''
+    return sha256(input_str.encode() + salt.encode()).hexdigest()
+
+def salt_gen(salt_len):
+        ''' Генерация соли для новых URL'''        
+        return ''.join(choice(ascii_uppercase) for i in range(salt_len))
+
+def verify_pass(input_str):
+    db_cash_list = (cur.execute("SELECT * FROM users;")).fetchall()
+    for row in db_cash_list:
+        salt = row[2]
+        pass_hash = sha256(user_input_str.encode() + salt.encode()).hexdigest()
+        if pass_hash == row[1]:
+            return f"Пароль верен !"
+    else:
+        return f"Ошибка ввода !"
+#############################################################################
+user_input_str = input("Введите пароль:").strip(' ')
+
+salt = salt_gen(12)
+hash_psw = heshed_str(user_input_str,salt)
+
+db_row = (hash_psw,salt)
+cur.execute("INSERT INTO users (pass,salt) VALUES(?,?);", db_row)
+conn.commit()
+##############################################################################
+user_input_str = input("Повторите пароль:").strip(' ')
+
+res = verify_pass(user_input_str)
+print(res)
+
