@@ -26,3 +26,46 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+account = {
+    'login': "Gandalf",
+    'password': "Middle-Earth",
+    'is_active': False
+}
+
+
+def validate(lgn, pwd, lst):
+    print('Первый вариант')
+    if lgn == lst['login'] and pwd == lst['password']:
+        if lst['is_active'] == True:
+            print(f'Добро пожаловать, {lst["login"]}!')
+        else:
+            print('Пользователь заблокирован')
+    elif lgn != lst['login'] or pwd != lst['password']:
+        print("Логин или пароль введены неверно.")
+    else:
+        print('Такого пользователя не существует')
+
+
+# Создано под второе решение
+accounts = {
+    'Gandalf': ['Middle-Earth', 1],
+    'Frodo': ['My darling', 0]
+}
+
+
+def validate_alternative(lgn, pwd, lst):
+    print('Второй вариант')
+    if lgn in lst:
+        if lst.get(lgn)[0] == pwd:
+            if lst.get(lgn)[1] == 1:
+                print(f'Добро пожаловать в Шир, {lgn}')
+            else:
+                print('Пользователь деактивирован')
+        else:
+            print('Пароль указан неверно')
+    else:
+        print('Пользователь с таким аккаунтов не найден')
+
+
+validate(input('Login: '), input('Password: '), account)
+validate_alternative(input('Login: '), input('Password: '), accounts)

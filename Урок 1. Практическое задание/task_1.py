@@ -42,7 +42,7 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: O(N).
+    Сложность: O(N^2).
     """
     for j in range(len(lst_obj)):          # O(N)
         if lst_obj[j] in lst_obj[j+1:]:    # O(N)
@@ -58,19 +58,19 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(NlogN).
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(N)
+    lst_copy.sort()                          # O(NlogN)
+    for i in range(len(lst_obj) - 1):        # O(N)
+        if lst_copy[i] == lst_copy[i+1]:     # O(N)
+            return False                     # O(1)
+    return True                              # O(1)
 
 #############################################################################################
 
 
-for j in (50, 500, 1000, 5000, 1000):
+for j in (50, 500, 1000, 5000, 10000):
     # Из 100000 чисел возьмем 'j' случайно выбранных
     # Всего 10 тыс. чисел
     lst = random.sample(range(-100000, 100000), j)
