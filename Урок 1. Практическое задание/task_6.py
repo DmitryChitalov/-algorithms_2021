@@ -19,120 +19,51 @@
 class Todo:
     def __init__(self):
         self.tasks = [
-            {1: 'Сделать задачу'},
-            {2: 'Добавить задачу'},
-            {3: 'Разобраться с проблемой'}
+            {
+              'id': 1,
+              'task': 'Создать класс'
+            },
+            {
+              'id': 2,
+              'task': 'Описать класс'
+            },
+            {
+              'id': 3,
+              'task': 'Создать методы'
+            },
+            {
+              'id': 4,
+              'task': 'Сделать оптимальную хрень'
+            },
         ]
         self.check_tasks = []
         self.rewrite = []
         self.completed = []
-
-    @staticmethod
-    def get_position(idn, lst):
-        if isinstance(lst, dict):
-            for dct in lst:
-                if dct.get(idn) is not None:
-                    return dct
-
-    def get_tasks(self):
-        """
-        Метод который выводит задачи
-        """
-        print('\nЗадачи для работы:')
-        if len(self.tasks) == 0:
-            print('\tЗадач нет')
-        for task in self.tasks:
-            for idn, content in task.items():
-                print(f'\t {idn}. {content}')
-
-    def get_check_tasks(self):
-        """
-        Метод для вывода задач на проверке
-        """
-        print('\nЗадачи на проверку:')
-        if len(self.check_tasks) == 0:
-            print('\tНет задач на проверку')
-        for task in self.check_tasks:
-            print(task)
-            for idn, content in task.items():
-                print(f'\t {idn}. {content}')
-
-    def get_rewrite(self):
-        """
-        Метод для вывода задач на доработку
-        """
-        print('\nЗадачи на доработку:')
-        if len(self.rewrite) == 0:
-            print('\tНет задач на доработку')
-        for task in self.rewrite:
-            for idn, content in task.items():
-                print(f'\t {idn}. {content}')
-
-    def get_complete(self):
-        """
-        Метод для вывода выполненных задач
-        """
-        print('\nВыполненные задачи:')
-        if len(self.completed) == 0:
-            print('\tНет выполненных задач')
-        for task in self.completed:
-            for idn, content in task.items():
-                print(f'\t {idn}. {content}')
+    
+    def get_lists(self, lst):
+      print("\nЗадания:")
+      for task in lst:
+        print(f"\t {task['id']}. {task['task']}")
 
     def add_task(self, content):
-        """
-        Метод для добавления новой задачи
-        """
-        for idn in self.tasks[-1].keys():
-            self.tasks.append({idn + 1: content})
+      self.tasks.append({
+        'id': self.tasks[-1]['id']+1,
+        'task': content
+      })
+    
+    def to_next_step(self, from_state, to_state, id):
+      for task in from_state:
+        if task['id'] == id:
+          to_state.append(from_state.pop(id-1))
 
-    def add_to_check(self, idn):
-        """
-        Метод для перенаправления задачи на проверку
-        """
-        if len(self.tasks) == 0:
-            print("Нет задач на проверку")
-        if len(self.tasks) >= 1:
-            self.check_tasks.append(self.get_position(idn, self.tasks))
-            self.tasks.pop()
-
-    def add_to_complete(self, idn):
-        """
-        Метод для перенаправления проверенной задачи на выполнение
-        """
-        if len(self.check_tasks) == 0:
-            print("Нет задач на выполнение")
-        if len(self.check_tasks) >= 1:
-            self.completed.append(self.get_position(idn, self.check_tasks))
-
-    def add_to_rewrite(self, idn):
-        """
-        Метод для перенаправления задач с проверки на доработку
-        """
-        if len(self.check_tasks) == 0:
-            print("Нет задач на выполнение")
-        if len(self.check_tasks) >= 1:
-            self.rewrite.append(self.get_position(idn, self.check_tasks))
 
 
 sess = Todo()
-
-sess.get_tasks()
-sess.get_check_tasks()
-sess.get_complete()
-sess.get_rewrite()
-print("\n****************************")
-sess.add_task('Проверка и доработка')
-sess.add_task('Заполнение')
-sess.add_task('Последняя проверка')
-sess.add_to_check(1)
-sess.add_to_check(2)
-sess.add_to_check(3)
-sess.add_to_check(5)
-sess.add_to_complete(1)
-sess.add_to_rewrite(2)
-print("\n****************************")
-sess.get_tasks()
-sess.get_check_tasks()
-sess.get_complete()
-sess.get_rewrite()
+sess.get_lists(sess.tasks)
+sess.add_task('Проверка')
+sess.to_next_step(sess.tasks, sess.check_tasks, 3)
+sess.to_next_step(sess.tasks, sess.check_tasks, 1)
+# sess.to_next_step(sess.check_tasks, sess.completed, 3)
+# sess.to_next_step(sess.tasks, sess.check_tasks)
+sess.get_lists(sess.tasks)
+sess.get_lists(sess.check_tasks)
