@@ -18,3 +18,31 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+import hashlib
+
+
+def func():
+    f = open("my_file.txt", "w+")
+    if res == res_2:
+        print('Данные верны и внесены в отдельный файл')
+        return (f.write(str(res)))
+    else:
+        return "Ошибка ввода данных!"
+
+
+login_salt = input('Создайте логин ')
+password = input('Созадйте пароль ')
+hash_obj = hashlib.sha256(b'password')
+
+res = hashlib.sha256(login_salt.encode() + password.encode()).hexdigest()
+print(f'Cоль - {login_salt} + хэш {password}')
+print(res)
+
+login_salt_2 = input('Введите логин ')
+password_2 = input('Введите пароль ')
+hash_obj_2 = hashlib.sha256(b'password')
+res_2 = hashlib.sha256(login_salt_2.encode() + password_2.encode()).hexdigest()
+print(f'Cоль_2 - {login_salt_2} + хэш_2 {password_2}')
+print(res_2)
+
+print(func())
