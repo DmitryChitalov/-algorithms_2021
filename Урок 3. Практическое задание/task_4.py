@@ -27,6 +27,7 @@ def base_url(url):
     else:
         return f"Website {url} available in the cache"
 
+
 while True:
     usr_url = input("Enter website. To exit, type 'flugergehaimer': ")
     if usr_url == "flugergehaimer":
