@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -80,3 +80,31 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+@memoize
+def reverse(number):
+    number = str(number)
+    rev_num = number[::-1]
+    return rev_num
+
+
+print('Оптимизированная функция reverse')
+print(
+    timeit(
+        'reverse(num_100)',
+        setup='from __main__ import reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse(num_1000)',
+        setup='from __main__ import reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse(num_10000)',
+        setup='from __main__ import reverse, num_10000',
+        number=10000))
+print(reverse(num_100))
+print(num_100)
+# Мемоизация в функциях нужна т.к. здесь присутствуют вызовы функций с повторяющимися значениями.

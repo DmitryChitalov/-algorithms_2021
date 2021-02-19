@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым
 """
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -40,4 +41,23 @@ def func_2():
 
 
 print(func_1())
+print('func_1', timeit.timeit('func_1', globals=globals()))
 print(func_2())
+print('func_2', timeit.timeit('func_2', globals=globals()))
+
+
+def func_3():
+    max_num = 0
+    result = dict((i, array.count(i)) for i in array)
+    for item in result.keys():
+        if result[item] > max_num:
+            max_num = result[item]
+        return f'Чаще всего встречается число {item}, ' \
+               f'оно появилось в массиве {max_num} раз(а)'
+
+
+print(func_3())
+print('func_3', timeit.timeit('func_3', globals=globals()))
+
+# Два первых варианта медленные т.к. в них используются списк и массив, а в моём(третьем варианте) используется словарь
+# скорость которого на чтение выше, чем у первых двух.
