@@ -16,6 +16,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснвование рез-ам
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -38,5 +39,45 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def sieve(n):
+    a = [i for i in range(n + 1)]
+    a[1] = 0
+    i = 2
+    while i <= n:  # O(N)
+        if a[i] != 0:
+            j = i + i
+            while j <= n:
+                a[j] = 0
+                j = j + i  # O(log N)
+        i += 1
+
+    a = set(a)
+
+    a.remove(0)
+    return sorted(list(a))
+
+
+def find_num(n):
+    a = sieve(n * 100)
+    return a[n-1]
+
+
+#  i = int(input('Введите порядковый номер искомого простого числа: '))
+print('Порядковый номер 10:')
+print('Решето: ')
+print(timeit('find_num(10)', 'from __main__ import find_num', number=1000))
+print('Перебор: ')
+print(timeit('simple(10)', 'from __main__ import simple', number=1000))
+print('Порядковый номер 100:')
+print('Решето: ')
+print(timeit('find_num(100)', 'from __main__ import find_num', number=100))
+print('Перебор: ')
+print(timeit('simple(100)', 'from __main__ import simple', number=100))
+print('Порядковый номер 1000:')
+print('Решето: ')
+print(timeit('find_num(1000)', 'from __main__ import find_num', number=10))
+print('Перебор: ')
+print(timeit('simple(1000)', 'from __main__ import simple', number=10))
+
+# Сложность наивного алгоритма O(n**2), а сложность решета Эратосфена O(NlogN), следовательно эффективность решета
+# растет с увеличением искомого порядкового номера
