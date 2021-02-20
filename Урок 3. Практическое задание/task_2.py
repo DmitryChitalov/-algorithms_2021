@@ -18,3 +18,35 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+import hashlib
+from uuid import uuid4
+
+pass_hash_list = []
+salt = uuid4().hex
+
+def sign_up():
+    password = input("Введите пароль для добавления в ДБ ")
+    return password
+
+def pass_hash():
+    password = sign_up()
+    pass_hash = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+    print(pass_hash)
+    pass_hash_list.append(pass_hash)
+
+def login():
+    password = input("Введите пароль ")
+    return password
+
+def pass_hash_check():
+    password = login()
+    pass_hash = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+    print(pass_hash)
+    if pass_hash in pass_hash_list:
+        print("Вы авторизовались")
+    else:
+        print("Неверный пароль")
+
+pass_hash()
+pass_hash_check()
