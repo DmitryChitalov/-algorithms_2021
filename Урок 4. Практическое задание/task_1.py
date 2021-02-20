@@ -39,5 +39,4 @@ print(timeit.timeit('func_1(nums)', 'from __main__ import func_1, nums', number=
 print(timeit.timeit('func_2(nums)', 'from __main__ import func_2, nums', number=10000))
 print(timeit.timeit('func_3(nums)', 'from __main__ import func_3, nums', number=10000))
 
-# func_2 выполняется быстрее всего так как в нем используются списковые включения
-# Списковые включения - синтаксический сахар, в некоторых случаях позволяют повысить читаемость и скорость выполния кода
+# func_2 выполняется быстрее всего так как в нем используются списковые включения и отсутствует метод append
