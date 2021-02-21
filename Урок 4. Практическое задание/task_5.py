@@ -64,25 +64,24 @@ def sieve(q):  # O(n)
     return ps[q - 1]
 
 
-def my_func(c):  # O(n)
-    """Этот придумал я но он не сказать чтобы был оптимальный, но я смог его сделать быстрее остольных"""
+def my_func(c):  # O(n**3)
+    """Этот придумал я но он не сказать чтобы был оптимальный"""
     result = [2]
-    end = 20
+    counter = 0
+    list_numb = [i for i in range(1, c * c // 3, 2)]  # O(n)
     while len(result) < c:  # O(1)
-        counter = 0
-        list_numb = [i for i in range(1, end, 2)]  # O(n)
         list_numb[0] = 0
-        while counter < end // 2:  # O(1)
+        while True:
             cur_numb = list_numb[counter]  # O(n)
-            if cur_numb and cur_numb not in result:  # O(n)
+            if cur_numb:
                 result.append(cur_numb)
+                if len(result) == c:
+                    break
                 for f in range(counter + 1, len(list_numb)):  # O(n)
                     if list_numb[f] % cur_numb == 0:  # O(n)
                         list_numb[f] = False
             counter += 1
-            if len(result) == c:
-                break
-        end += c
+
     return result[-1]
 
 
@@ -97,6 +96,8 @@ print('Время выполнения решето функции для 1000:'
 print('Время выполнения перебора функции для 1000:', timeit('simple(1000)', globals=globals(), number=100))
 
 '''
-Алгоритм эростофера быстрее обычного перебора но на малых значениях перебор может быть быстрее
+Алгоритм Эростофера быстрее обычного перебора но на малых значениях перебор может быть быстрее
+Моя функция не удавшеяся и очень долгая 
+поскольку я не знаю какой велечины масив создовать и у меня не оптимальный его размер
 '''
 
