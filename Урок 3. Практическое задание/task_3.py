@@ -16,7 +16,7 @@
 а
 """
 
-# hash?
+
 line = input("Введите строку :")
 list_strings = set()
 
