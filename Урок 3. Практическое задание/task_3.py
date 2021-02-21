@@ -17,3 +17,18 @@
 """
 
 # hash?
+line = input("Введите строку :")
+list_strings = set()
+
+
+res_set = set()
+for el in range(len(line)):
+    last_str = line[el:]
+    for length in range(1, len(last_str) + 1):
+        sub_str = line[el:el + length]
+        if line != sub_str:
+            hash_sub_str = hash(sub_str)
+            res_set.add(hash_sub_str)
+
+print(len(res_set))
+print(f"Количество подстрок в строке {line} равно {len(list_strings)}")
