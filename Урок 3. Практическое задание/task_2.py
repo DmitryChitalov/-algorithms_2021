@@ -1,3 +1,5 @@
+import hashlib
+from binascii import hexlify
 """
 Задание 2.
 Ваша программа должна запрашивать пароль
@@ -18,3 +20,28 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+
+def make_hash(login, n_pass):
+    hash_password = hashlib.pbkdf2_hmac(hash_name='sha256',
+                                        salt=login.encode(),
+                                        iterations=100,
+                                        password=n_pass.encode())
+    hash_password = hexlify(hash_password)
+    return hash_password
+
+
+def password():
+    your_password = input("Введите пароль:")
+    your_login = input("Введите логин:")
+    your_hash = make_hash(your_login, your_password)
+    print(f'В базе данных хранится строка: {your_hash}')
+    your_password = input("Введите пароль:")
+    your_new_hash = make_hash(your_login, your_password)
+    if your_hash == your_new_hash:
+        return "Вы ввели правильный пароль"
+    else:
+        return "Вы ввели неправильный пароль"
+
+
+print(password())
