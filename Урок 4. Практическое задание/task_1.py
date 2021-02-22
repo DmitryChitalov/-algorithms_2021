@@ -25,22 +25,18 @@ def func_1(nums):
 
 
 def func_2(nums):
-    new_arr = []
-    while len(nums) > 0:
-        last = nums.pop(0)
-        if last % 2 == 0:
-            new_arr.append(last)
-    return new_arr
+    yield {i for i in nums if i % 2 == 0}
 
 
 nums = [1, 2, 3, 4]
 
-print(timeit("func_1(nums)", "from __main__ import func_1, nums"))
-print(timeit("func_2(nums)", "from __main__ import func_2, nums"))
+print(timeit("func_1(nums[:])", "from __main__ import func_1, nums"))
+
+print(timeit("func_2(nums[:])", "from __main__ import func_2, nums"))
 
 
 """
-В func_1 я исправил (добавлялся индекс, а не элемент массива).
-Заменил цикл for (O(n)) и поставил pop (O(1)). 
-Функция работает быстрей.
+Хорошим решением тут подойдет списковое вклчюение, но проблема, что это может привести к перегрузке памяти.
+Можно создать генератор. который не тратит лишней памяти, и работает быстрей
+
 """
