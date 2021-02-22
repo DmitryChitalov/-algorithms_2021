@@ -18,3 +18,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def sub(num, chet=0, nechet=0):
+    sub_num = num % 10
+    num = num // 10
+    if sub_num % 2 == 0:
+        chet += 1
+    elif sub_num % 2 == 1:
+        nechet += 1
+    if num != 1:
+        sub(num, chet, nechet)
+    else:
+        print(chet, nechet)
+
+
+sub(2236)
