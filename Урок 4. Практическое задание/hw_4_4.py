@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,26 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+# array = [1, 3, 1, 3, 4, 5, 1]
+def func_3():
+    keys = set(array)
+    max_3 = 0
+    elem = 0
+    for key in keys:
+        count = array.count(key)
+        if count > max_3:
+            max_3 = count
+            elem = key
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(timeit('func_1()', globals=globals()))
+print(timeit('func_2()', globals=globals()))
+print(timeit('func_3()', globals=globals()))
+
+# получилось ускорить за счет того, что колличество повторений рассчитывалось недля каждой цифры в списке, а для каждой
+# цифры в множестве, что уменьшило количество операций
