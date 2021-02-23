@@ -13,7 +13,6 @@
 Без аналитики задание считается не принятым
 """
 
-
 import timeit
 
 
@@ -36,7 +35,6 @@ print("func_1 work time", t1.timeit(number=1000), "milliseconds")
 
 t2 = timeit.Timer('func_2(my_list)', 'from __main__ import func_2', globals=globals())
 print("func_2 work time", t2.timeit(number=1000), "milliseconds")
-
 
 """
 func_1 work time 78.61617981101153 milliseconds
