@@ -80,3 +80,24 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+Особого смысла в таком изменении не вижу, так как это можно реализовать через обычный цикл и встроенные функции.
+В мемоизации создается кэш и меньше работы в рекурсии, что улучшает время, но возрастает сложность кода.
+Поэтому я предалагаю несколько вариантов, которые упростят код, но немного больше займут времени.
+Мемоизация была бы лучшим вариантом, если бы были повторяющиеся данные.
+"""
+
+
+def simple_var(number):
+    return str(number)[::-1]
+
+
+def simple_var_1(number):
+    return reversed(str(number))
+
+
+# print(simple_var(1230))
+print(timeit("simple_var(1230)", globals=globals()))
+print(timeit("simple_var_1(1230)", globals=globals()))
