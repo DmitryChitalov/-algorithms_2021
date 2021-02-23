@@ -63,3 +63,4 @@ my_number = 321
 # Мой вариант, используется встроенная функция, что ускоряет код, но это не лучший вариант.
 
 print("simple_var_1:", timeit("simple_var_1(my_number)", globals=globals()))
+
