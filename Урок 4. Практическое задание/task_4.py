@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,41 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_count = 0
+    num = None
+    for i in set(array):
+        count = array.count(i)
+        if count > max_count:
+            max_count = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {max_count} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(
+    timeit(
+        "func_1()",
+        setup='from __main__ import func_1',
+        number=100000))
+
+print(
+    timeit(
+        "func_2()",
+        setup='from __main__ import func_2',
+        number=100000))
+
+print(
+    timeit(
+        "func_3()",
+        setup='from __main__ import func_3',
+        number=100000))
+
+
+"""Вариант 1: count считается для каждого элемента в списке - из приведённых - он оптимальный
+Вариант 2: count считается для каждого элемента в списке и добавлен метод append - время увеличивается
+Вариант 3(мой): преобразуем во множество, тем самым уменьшаем количество элементов(убираем повторяющиеся)"""

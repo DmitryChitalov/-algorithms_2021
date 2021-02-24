@@ -12,6 +12,7 @@
 Добавьте аналитику: что вы сделали и почему!!!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
 
 
 def func_1(nums):
@@ -20,3 +21,28 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = []
+    count = 0
+    for i in nums:
+        if not i % 2:
+            new_arr.append(count)
+        count += 1
+    return new_arr
+
+
+def func_3(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+test_list = list(range(100))
+
+print(timeit("func_1(test_list)", globals=globals()))
+print(timeit("func_2(test_list)", globals=globals()))
+print(timeit("func_3(test_list)", globals=globals()))
+
+"""В алгоритме 2 Убрал поиск элемента по индексу. Индекс заменил переменной, которая нарищивается при проходе списка. 
+Алгоритм стал работать немного быстрее. В алгоритме 3 избавился от метода append """
