@@ -15,3 +15,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equal(num):
+    if num != 0:
+        return num + equal(num - 1)
+    else:
+        return 0
+
+
+def mult_equal(num):
+    return num * (num + 1) / 2
+
+
+n = int(input('Введите цифру: '))
+if equal(n) == mult_equal(n):
+    print(f'{equal(n)} = {mult_equal(n)}')
+else:
+    print("Что-то пошло не так")

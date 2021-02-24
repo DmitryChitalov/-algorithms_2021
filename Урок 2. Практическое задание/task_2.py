@@ -20,17 +20,14 @@
 """
 
 
-def sub(num, chet=0, nechet=0):
-    sub_num = num % 10
-    num = num // 10
-    if sub_num % 2 == 0:
-        chet += 1
-    elif sub_num % 2 == 1:
-        nechet += 1
-    if num != 1:
-        sub(num, chet, nechet)
-    else:
-        print(chet, nechet)
+def evodd(number, even=0, odd=0):
+    if number == 0:
+        return f"Четных: {even}, цифр: {odd}"
+    elif (number % 10) % 2 == 0:
+        even += 1
+    elif (number % 10) % 2 == 1:
+        odd += 1
+    return evodd(number // 10, even, odd)
 
 
-sub(2236)
+print(evodd(int(input('>> '))))

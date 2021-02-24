@@ -23,3 +23,19 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii(start=32, count=1):
+    finish = 128
+    if start >= finish:
+        return ''
+    else:
+        if count % 10 == 0:
+            print(f'{ord(chr(start))} - {chr(start)}\n', end='')
+            count = 1
+        else:
+            print(f'{ord(chr(start))} - {chr(start)}', end=' ')
+            count += 1
+        return ascii(start+1, count)
+
+
+print(ascii())
