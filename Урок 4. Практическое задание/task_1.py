@@ -13,6 +13,8 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +22,19 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+    return new_arr
+
+
+n = [i for i in range(20)]
+print(timeit("func_1(n)", globals=globals()))
+print(timeit("func_2(n)", globals=globals()))
+'''
+В примере на уроке выяснили, что списковое включение отрабатывает быстрей чем итератор с методом append,
+соответственно оптимизировал код функции используя списковое включение. После оптимизации код фнукции отрабатывает
+в 1,6 раз быстрее.
+'''
+
