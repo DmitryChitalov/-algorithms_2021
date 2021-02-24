@@ -12,6 +12,8 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +41,33 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    elem = max(zip((array.count(i) for i in set(array)), set(array)))
+    return f'Чаще всего встречается число {elem[1]}, ' \
+           f'оно появилось в массиве {elem[0]} раз(а)'
+
+
+t_1 = timeit('func_1', setup='from __main__ import func_1', number=1000000)
+print('func_1 meter often number', t_1, 'msec')
+print()
+t_2 = timeit('func_2', setup='from __main__ import func_2', number=1000000)
+print('func_2 meter often number', t_2, 'msec')
+print()
+t_3 = timeit('func_3', setup='from __main__ import func_3', number=1000000)
+print('func_3 meter often number', t_3, 'msec')
+
+
+"""
+Результаты теста на моём пк:
+func_1 meter often number 0.022395121999579715 msec
+func_2 meter often number 0.014730562001204817 msec
+func_3 meter often number 0.011786991002736613 msec
+
+Как мы видим что оптимизация кода и ускорение работы удалось.
+Первое место по скорости func_3 так как использование встроенных функций это
+наиболее быстрый выбор.
+Второе место по скорости func_2 так как используется функция append она будет
+всегда среднем по скорости решением для списков.
+Третье место func_1 так как в цикле for используется ещё и выполнение условия,
+а это повышает сложность и время выполнения алгоритма.
+"""
