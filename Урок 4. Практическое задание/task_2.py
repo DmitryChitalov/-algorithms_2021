@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,12 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def my_reverse_num(num):
+    return str(num)[::-1]
+
+
+"""Мемоизация не имеет смысла, т.к. в фунцию передаётся каждый раз новое значение и результат сооств - новый. А а 
+данном примере она работает быстее, т.к. мы одно и тоже делаем 10000 раз. Если мы будем запускать 1 раз, 
+то с мемоизацией будет дольше. Данный пример легко реализуется без рекурсии """
