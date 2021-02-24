@@ -59,32 +59,22 @@ print(timeit("func_2()", setup='from __main__ import func_2', number=100000))
 второй алгоритм работает дольше за счет того, что дополнительно вычсиляется максимум в массиве, на больших данных
 будет значимтельно увеличиваться время
 
-улучшим первый алгоритм за счет мемоизации:
+улучшим первый алгоритм за счет кеша:
 """
 
 
-def memorize(f):
-    cache = {}
-
-    def decorate(*args):
-        if args in cache:
-            return cache[args]
-        else:
-            cache[args] = f(*args)
-            return cache[args]
-
-    return decorate
-
-
-@memorize
 def func_3():
     m = 0
     num = 0
+    cache = {}
     for i in array:
-        count = array.count(i)
-        if count > m:
-            m = count
-            num = i
+        if i not in cache:
+            count = array.count(i)
+            cache[i] = count
+
+            if count > m:
+                m = count
+                num = i
     return f'Чаще всего встречается число {num}, ' \
            f'оно появилось в массиве {m} раз(а)'
 
