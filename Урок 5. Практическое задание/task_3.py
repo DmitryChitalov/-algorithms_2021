@@ -15,3 +15,62 @@ deque – это обобщение стеков и очередей.
 
 И добавить аналитику, так ли это или нет.!
 """
+from timeit import timeit
+from random import randint
+from collections import deque
+
+my_list = [randint(1, 100) for i in range(1000)]
+my_deque = deque(my_list)
+
+
+def list_insert_left(my_l):
+    my_l.insert(0, 1)
+    return my_l
+
+
+def deque_insert_left(my_deq):
+    my_deq.appendleft(1)
+    return my_deq
+
+
+def list_pop_left(my_l):
+    my_l.pop(0)
+    return my_l
+
+
+def deque_pop_left(my_deq):
+    my_deq.popleft()
+    return my_deq
+
+
+def list_get(my_l):
+    return my_l[777777]
+
+
+def deque_get(my_deq):
+    return my_deq[777777]
+
+
+print(timeit('list_insert_left(my_list)',
+             'from __main__ import list_insert_left, my_list', number=100000))
+
+print(timeit('deque_insert_left(my_deque)',
+             'from __main__ import deque_insert_left, my_deque', number=100000))
+
+print(timeit('list_pop_left(my_list)',
+             'from __main__ import list_pop_left, my_list', number=100000))
+
+print(timeit('deque_pop_left(my_deque)',
+             'from __main__ import deque_pop_left, my_deque', number=100000))
+
+my_list = [randint(1, 100) for i in range(1000000)]
+my_deque = deque(my_list)
+
+print(timeit('list_get(my_list)',
+             'from __main__ import list_get, my_list', number=100000))
+
+print(timeit('deque_get(my_deque)',
+             'from __main__ import deque_get, my_deque', number=100000))
+
+#  Проведенные замеры полностью подтверждают информацию в документации
+# Добавление элементов проискодит быстрее в деке, а доступ к элементу в листе
