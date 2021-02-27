@@ -23,3 +23,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+import collections
+
+
+def collect_companies_data():
+    companies = []
+    companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
+    for i in range(companies_number):
+        comp_name = input("Введите название предприятия: ")
+        profits = input("через пробел введите прибыль данного предприятия "
+                        "за каждый квартал(Всего 4 квартала): ")
+        try:
+            company_profit = collections.namedtuple(comp_name, "q_1_profit q_2_profit q_3_profit q_4_profit")
+            companies.append(company_profit(*[int(elem) for elem in profits.split(' ')]))
+        except ValueError:
+            print("Прибыли должны быть числовыми значениями и введены через пробел")
+
+    return companies
+
+
+def avg_company_profit(company_profit):
+    pass
+
+
+data = collect_companies_data()
+print(*data)
