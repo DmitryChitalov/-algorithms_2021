@@ -23,3 +23,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+COMP = namedtuple('company', 'name q_1 q_2 q_3 q_4')
+comp_d = {}
+try:
+    numb_firm = int(input('Введите количесивр фирм: '))
+
+    for i in range(numb_firm):
+        company = COMP(
+            name=input('Введите название компании: '),
+            q_1=int(input('Введите прибыль за первый квартл: ')),
+            q_2=int(input('Введите прибыль за второй квартл: ')),
+            q_3=int(input('Введите прибыль за трейтий квартл: ')),
+            q_4=int(input('Введите прибыль за четвертый квартл: '))
+        )
+        comp_d[company.name] = (company.q_1 + company.q_2 + company.q_3 + company.q_4) / 4
+except ValueError:
+    print('Ошибка ввода данных')
+
+average = sum(comp_d.values()) / numb_firm
+more_aver = [k for k in comp_d if comp_d[k] > average]
+les_aver = [k for k in comp_d if comp_d[k] < average]
+print(f'Средняя годовая прибыль всех предприятий: {average:.2f}\n'
+      f'Предприятия, с прибылью выше среднего значения: {", ".join(more_aver)}\n\n'
+      f'Предприятия, с прибылью ниже среднего значения: {", ".join(les_aver)}')
