@@ -31,7 +31,7 @@ def substring_finder(input_string,count):
 
 
 ###################################################################
-res = substring_finder('papapa',1)
+res = substring_finder('papa',1)
 print(res)
 for i in substring_set:
     print(i)
