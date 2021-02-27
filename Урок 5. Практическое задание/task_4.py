@@ -58,7 +58,6 @@ fill_dict work time 6.940686220000089 milliseconds
 fill_ordered_dict work time 20.39261167099994 milliseconds
 """
 
-
 t1 = timeit.Timer('dict_get(simple_dict)', 'from __main__ import dict_get, simple_dict', globals=globals())
 print("dict_get work time", t1.timeit(number=1000), "milliseconds")
 
@@ -79,7 +78,6 @@ t2 = timeit.Timer('ordered_dict_pop(ordered_dict)', 'from __main__ import ordere
                   globals=globals())
 print("ordered_dict_pop work time", t2.timeit(number=1), "milliseconds")
 
-
 """
 удаление документов тоже в обычном словаре работает быстрее
 dict_pop work time 0.00713484600009906 milliseconds
@@ -90,4 +88,3 @@ ordered_dict_pop work time 0.01312002799977563 milliseconds
 Итого, смысла использовать упорядоченный словарь нет, т.е. в Python 3.6 и более поздних версиях словарь итак помнит 
 порядок добавления элементов
 """
-
