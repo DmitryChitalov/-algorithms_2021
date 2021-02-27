@@ -28,23 +28,38 @@ import collections
 
 def collect_companies_data():
     companies = []
-    companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
-    for i in range(companies_number):
-        comp_name = input("Введите название предприятия: ")
-        profits = input("через пробел введите прибыль данного предприятия "
-                        "за каждый квартал(Всего 4 квартала): ")
-        try:
-            company_profit = collections.namedtuple(comp_name, "q_1_profit q_2_profit q_3_profit q_4_profit")
-            companies.append(company_profit(*[int(elem) for elem in profits.split(' ')]))
-        except ValueError:
-            print("Прибыли должны быть числовыми значениями и введены через пробел")
+    try:
+        companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
+        for i in range(companies_number):
+            comp_name = input("Введите название предприятия: ")
+            profits = input("через пробел введите прибыль данного предприятия "
+                            "за каждый квартал(Всего 4 квартала): ")
+
+            company_profit = collections.namedtuple("company",
+                                                    "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
+            companies.append(company_profit(comp_name, *[int(elem) for elem in profits.split(' ')]))
+    except (ValueError, TypeError):
+        print("Неверный ввод!!!")
 
     return companies
 
 
 def avg_company_profit(company_profit):
-    pass
+    return (company_profit.q_1_profit + company_profit.q_2_profit
+            + company_profit.q_3_profit + company_profit.q_4_profit) / 4
+
+
+def all_companies_avg_profit(companies):
+    total_profit = 0
+    for company in companies:
+        total_profit += avg_company_profit(company)
+    return total_profit / len(companies) if len(companies) > 0 else "Не было введено ни одной компании"
 
 
 data = collect_companies_data()
-print(*data)
+total_avg_prof = all_companies_avg_profit(data)
+print(f"Средняя прибыль компаний: {total_avg_prof}")
+print("Компании с прибылью выше среднего:")
+print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) > total_avg_prof], sep=', ')
+print("Компании со средней прибылью или ниже среднего:")
+print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) <= total_avg_prof], sep=', ')
