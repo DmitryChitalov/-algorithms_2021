@@ -12,6 +12,8 @@
 И можете предложить еще свой вариант решения!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers_1(enter_num, revers_num=0):
@@ -36,3 +38,33 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def main():
+    num = 1234567
+    revers_1(num)
+    revers_2(num)
+    revers_3(num)
+
+
+my_num = 1234567
+
+print('Профилировка через "timeit":')
+print(timeit("revers_1(my_num)", globals=globals()))
+print(timeit("revers_2(my_num)", globals=globals()))
+print(timeit("revers_3(my_num)", globals=globals()))
+print()
+
+"""
+Самой эффективной здесь является третья реализация, так как в ней не тратится время 
+ни на какие вычисления - их просто нет, а только берется срез.
+"""
+
+
+print('Профилировка через "cProfile":')
+run('main()')
+
+"""
+Профилировка показала, что зедсь функция revers_1 вызывает сама себя (len(num) + 1) раз.
+В остальном слабых мест нет.
+"""

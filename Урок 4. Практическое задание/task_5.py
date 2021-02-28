@@ -16,9 +16,10 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснвование рез-ам
 """
+from timeit import timeit
 
 
-def simple(i):
+def simple(i):  # O(n**2)
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
@@ -38,5 +39,34 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
+def eratosphen(i):  # O(NlogN)
+    simple = [2]
+    number = 2
+    count = 1
+    while count < i:  # O(N)
+        is_simple = True
+        number += 1
+        for el in simple:  # O(logN) - потому что на каждом шаге уменьшается число значений
+            if number % el == 0:  # O(1)
+                is_simple = False
+                break
+        if is_simple:  # O()
+            simple.append(number)  # O(1)
+            count += 1  # O(1)
+        number += 1  # O(1)
+    return simple[i-1]  # O(1)
+
+
+# i = int(input('Введите порядковый номер искомого простого числа: '))
+i = 220
 print(simple(i))
+print(eratosphen(i))
+
+num = 10
+print('Обычный алгоритм:', timeit("simple(num)", setup="from __main__ import simple, num", number=1000))
+print('Решето Эратосфена:', timeit("eratosphen(num)", setup="from __main__ import eratosphen, num", number=1000))
+
+"""
+Алгоритм Эратосфена работает гораздо быстрее, потому что в данном алгоритме на каждом последующем шаге 
+значительно уменьшается число элементов, с которыми мы сравниваем исходное число
+"""

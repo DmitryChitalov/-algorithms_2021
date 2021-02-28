@@ -33,3 +33,43 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+# Вариант 1
+from collections import defaultdict
+
+
+def hexnum(num1, num2):
+    d = defaultdict(list)
+    d[num1] = list(num1)
+    d[num2] = list(num2)
+    d['summa'] = list(hex(int(num1, 16) + int(num2, 16))[2:])
+    d['mult'] = list(hex(int(num1, 16) * int(num2, 16))[2:])
+    return f"Введены числа {num1} и {num2}.\nИх сумма равна {d['summa']}\nИх произведение равно {d['mult']}."
+
+
+print(hexnum('a2', 'c4f'))
+print()
+
+
+# Вариант 2
+class HexNumber:
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, other):
+        result = hex(int(self.number, 16) + int(other.number, 16))
+        return list(result[2:])
+
+    def __mul__(self, other):
+        result = hex(int(self.number, 16) * int(other.number, 16))
+        return list(result[2:])
+
+    def __str__(self):
+        return f'Полученное число: {list(self.number)}'
+
+
+hx1 = HexNumber('a2')
+print(hx1)
+
+hx2 = HexNumber('c4f')
+print('Сумма чисел:', hx1 + hx2)
+print('Произведение чисел:', hx1 * hx2)
