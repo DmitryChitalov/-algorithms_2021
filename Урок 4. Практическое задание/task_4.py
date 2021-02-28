@@ -12,6 +12,10 @@
 Без аналитики задание считается не принятым
 """
 
+
+from timeit import timeit
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +43,26 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    new_array = [array.count(el) for el in array]
+
+    max_2 = max(new_array)
+    elem = array[new_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print("func_1:", timeit("func_1()", globals=globals()))
+print("func_2:", timeit("func_2()", globals=globals()))
+print("func_3:", timeit("func_3()", globals=globals()))
+
+
+"""
+Аналитика.
+func_1 - Самый быстрый вариант, так как перебираем список и далее выполняем простые инструкции.
+func_2 - Самый долгий вариант, так как используется дополнительный список и его наполнение. 
+func_3 - Вариант немного быстрее предыдущего, так как используется списковое включение.
+"""

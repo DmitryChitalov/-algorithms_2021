@@ -18,7 +18,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''  # Исправил. Было 'str(number % 10)'. Из за этого появлялся лишний 0 на конце.
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -80,3 +80,11 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+Аналитика.
+Мемоизация в данном случае не нужна. Она выполняется быстрее не оптимизированной функции лишь, потому, что за первый
+проход реверс числа записывается в кэш и остальные 9999 раз число берется сразу из кэша без вычисления.
+Получается в данном случае показания не timeit не достоверны и нужно не забывать про логику работы кода.
+"""
