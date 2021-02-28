@@ -116,5 +116,41 @@ print(f"List: {timeit('list_extend(my_lst, extend_lst)', globals=globals(), numb
 print(f"Deque: {timeit('deque_extend(my_dq, extend_lst)', globals=globals(), number=100000)}")
 
 print("Расширение с начала: ")
-print(f"List: {timeit('list_extend_left(my_lst, extend_lst)', globals=globals(), number=100000)}")
-print(f"Deque: {timeit('deque_extend_left(my_dq, extend_lst)', globals=globals(), number=100000)}")
+print(f"List: {timeit('list_extend_left(my_lst, extend_lst)', globals=globals(), number=10)}")
+print(f"Deque: {timeit('deque_extend_left(my_dq, extend_lst)', globals=globals(), number=10)}")
+"""
+Вставка в середину:
+List: 1.0082881
+Deque: 3.8739946
+
+Вставка в начало:
+List: 6.1400277999999995
+Deque: 0.011353800000000192
+
+Вставка в конец:
+List: 0.012458099999999916
+Deque: 0.01294919999999955
+
+Удаление с головы: 
+List: 22.519617600000004
+Deque: 0.009743799999995417
+
+Удаление с схвоста: 
+List: 0.010173000000001764
+Deque: 0.010135399999995798
+
+Расширение: 
+List: 0.02537230000000079
+Deque: 0.026473000000002855
+
+Расширение с начала: 
+List: 0.08777660000000509
+Deque: 1.2677875999999983
+
+Вывод:
+Операции добавления и удаления в конец отрабатываею одинаково быстро для списка и дэки.
+Операции добавления элементов в начало для списка выполняются значительно медленнее, чем для дэки. 
+Вставака в середину выполняется быстрее для списка.
+расширение списка работает одинаково быстро в обе стороны. А расширение дэки слева
+выполняется значительно медленнее. 
+"""
