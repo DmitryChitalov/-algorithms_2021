@@ -33,3 +33,21 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+class HexNumbers:
+    def __init__(self, hex_number):
+        self.hex_number = hex_number
+
+    def __add__(self, other):
+        return list(hex(int(self.hex_number, 16) + int(other.hex_number, 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(self.hex_number, 16) * int(other.hex_number, 16)))[2:]
+
+
+first_num = HexNumbers('A2')
+second_num = HexNumbers('C4F')
+
+print(f"Сумма чисел равна: {first_num + second_num}")
+print(f"произведение чисел равно: {first_num * second_num}")
