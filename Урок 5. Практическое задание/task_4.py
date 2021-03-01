@@ -34,10 +34,23 @@ def pop_item_ord_dict(dict_):
     dict_.popitem()
 
 
+def get_dict_element(dict_):
+    dict_.get('500')
+
+
+def get_ordered_dict_element(dict_):
+    dict_.get('500')
+
+
 my_dict = {str(i): i for i in range(10000)}
 my_o_dict = OrderedDict([(str(i), i) for i in range(10001)])
 
 elem_ = {'15': 15}
+
+print('Поиск элемента: ')
+print(f"обычный словарь: {timeit('get_dict_element(my_dict)', globals=globals(), number=100000)}")
+print(f"упорядоченный словарь: {timeit('get_ordered_dict_element(my_o_dict)', globals=globals(), number=100000)}")
+
 print('Добавление элемента')
 print(f"обычный словарь: {timeit('add_elem_dict(my_dict, elem_)', globals=globals(), number=100000)}")
 print(f"упорядоченный словарь: {timeit('add_elem_ord_dict(my_o_dict, elem_)', globals=globals(), number=100000)}")
