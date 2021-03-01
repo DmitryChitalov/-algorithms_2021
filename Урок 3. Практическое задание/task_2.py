@@ -19,4 +19,53 @@
 """
 # sqlite, postgres, db_api, orm
 
-# begin
+from hashlib import pbkdf2_hmac
+import sqlite3
+
+connection = sqlite3.connect('users.db')
+cursor = connection.cursor()
+cursor.execute("""CREATE TABLE IF NOT EXISTS users(
+                    userid INTEGER primary key autoincrement,
+                    login varchar(20),
+                    password varchar(100)
+                );""")
+connection.commit()
+
+
+def get_hash(usr, pwd):
+    usr_hash = pbkdf2_hmac('sha256', pwd.encode(), usr.encode(), 100000)
+    return usr_hash.hex()
+
+
+def registration():
+    login = input("Логин: ")
+    cursor.execute(f"""SELECT userid FROM users WHERE login = '{login}';""")
+    result = cursor.fetchone()
+    if result == None:
+        password = input("Пароль: ")
+        cursor.execute(f"""INSERT INTO users(login, password) VALUES
+                    ('{login}', '{get_hash(login, password)}');""")
+        connection.commit()
+    else:
+        print('Такой пользователь уже создан')
+        registration()
+
+
+def validation(login=input("Логин: "), err=0):
+    cursor.execute(f"""SELECT password FROM users WHERE login = '{login}';""")
+    result = cursor.fetchone()
+    if result == None:
+        print('Такого пользователя не существует')
+        validation(input("Логин: "))
+    elif result[0] == get_hash(login, input('Введите пароль: ')):
+        print(f"Добро пожаловать, {login}")
+    else:
+        if err != 3:
+            print('Неверно указаны Пользователь/Пароль.')
+            validation(login, err+1)
+        else:
+            print('Попытки закончились')
+
+
+# registration()
+validation()

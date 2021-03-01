@@ -15,5 +15,89 @@ b) выполните набор операций и со списком, и с�
 И примените ее к своим функциям!
 """
 
+from random import randrange
+from string import ascii_letters
+from time import time
 
-# begin
+
+lst = []
+dct = {}
+
+
+def timer(func):
+    def wrapper(*arg):
+        start = time()
+        func(*arg)
+        end = time()
+        print(f'Время выполнения {end - start}')
+    return wrapper
+
+
+def letter_generator(length=5):
+    letter = ''
+    for i in range(length):
+        letter += ascii_letters[randrange(0, 52)]
+    return letter
+
+
+@timer
+def list_comp_gen(length):
+    fill_list = [letter_generator() for i in range(length)]
+    # print(fill_list)
+
+
+@timer
+def dict_comp_gen(length):
+    fill_dict = {randrange(0, 100): letter_generator() for _ in range(length)}
+    # print(fill_dict)
+
+
+@timer
+def fill_empty_list(length):
+    for i in range(length):
+        lst.append(i)
+    return lst
+
+
+@timer
+def fill_empty_dict(length):
+    for i in range(length):
+        dct[i] = i*2
+
+
+@timer
+def list_mult():
+    for i in range(len(lst)):
+        lst[i] *= 5
+
+
+@timer
+def list_pop():
+    for i in range(len(lst)):
+        lst.pop()
+
+
+@timer
+def dict_mult():
+    for k, v in dct.items():
+        dct[k] = v * 5
+
+
+@timer
+def dict_pop():
+    for i in range(len(dct)):
+        dct.pop(i)
+
+
+# Генерация list comprehension и dictionary comprehension
+# list_comp_gen(1000000)
+# dict_comp_gen(1000000)
+# Генерация списка и словаря циклом
+fill_empty_list(1000000)
+fill_empty_dict(1000000)
+# Операции над списком
+list_mult()
+list_pop()
+# Операции над словарем
+dict_mult()
+dict_pop()
