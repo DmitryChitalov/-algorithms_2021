@@ -38,7 +38,6 @@ def deque_insert_into_start(dq, elem):
     dq.appendleft(elem)
 
 
-# list append - deque append
 def list_append(lst, elem):
     lst.append(elem)
 
@@ -56,16 +55,12 @@ def deque_pop_from_start(dq):
     dq.popleft()
 
 
-# list - pop() - deque pop
 def list_pop_from_end(lst):
     lst.pop()
 
 
 def deque_pop_from_end(dq):
     dq.pop()
-
-
-# extend, extend
 
 
 def list_extend(lst, ext_lst):
@@ -75,8 +70,6 @@ def list_extend(lst, ext_lst):
 def deque_extend(dq, ext_lst):
     dq.extend(ext_lst)
 
-
-# extend left
 
 def list_extend_left(lst, ext_lst):
     ext_lst.extend(lst)
