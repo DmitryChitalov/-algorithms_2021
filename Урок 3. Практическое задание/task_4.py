@@ -11,34 +11,37 @@
 """
 
 from hashlib import pbkdf2_hmac
-from re import findall
 
-urls = {}
-url = 'https//developer.org/test'
-if findall(r'^(https?://)([\w.]+)\.([a-z]{2,6})(/[\w/]+)?$', url):
-    print(True)
 
-#
-# def hash_url(url):
-#     if findall(r'https?://(?:[-\w.]|(?:%[\da-fA-F]))+', url):
-#         salt = url.split('.')
-#         url_h = sha256(salt[-2].encode() + url.encode()).hexdigest()
-#         if not url_h in table_url.values():
-#             if len(table_url) == 0:
-#                 table_url[1] = url_h
-#                 return f'Хеш добавлен - {url_h}'
-#             else:
-#                 key = max(table_url.keys()) + 1
-#                 table_url[key] = url_h
-#                 return f'Хеш добавлен - {url_h}'
-#         else:
-#             return f'{url} - url-адрес уже есть в хеш-таблице!'
-#     else:
-#         return f'{url} - неверный url адрес!'
-#
-#
-# print(hash_url('https://www.chipdip.ru/'))
-# print(hash_url('https://www.arduino.cc/'))
-# print(hash_url('https://amperka.ru/'))
-# print(hash_url('https://www.chipdip.ru/'))
-# print(hash_url('https/amperka.ru/'))
+class Cache:
+    def __init__(self):
+        self.cahce_dict = {}
+
+    def get_hash(self, url):
+        revers = ''.join([url[-i] for i in range(1, len(url) + 1)])
+        return pbkdf2_hmac('sha256', url.encode(), revers.encode(), 100000).hex()
+
+    def add_url(self, url):
+        try:
+            if url not in self.cahce_dict:
+                self.cahce_dict.update({url: self.get_hash(url)})
+                return f'URL успешно записан.'
+            else:
+                return f'Данный URL ранее был записан. {url}: {self.cahce_dict[url]}'
+        except:
+            return f'Произошла ошибка во время записи.'
+
+    def show_cache(self):
+        print('\nЗаписанные адреса:')
+        print('-' * 86)
+        for k, v in self.cahce_dict.items():
+            print(f'| {k} | {v} |')
+        print('-' * 86)
+        return f'Конец записей.'
+
+
+hurl = Cache()
+print(hurl.add_url('https://yeap.com'))
+print(hurl.add_url('https://pean.don'))
+print(hurl.add_url('https://yeap.com'))
+print(hurl.show_cache())
