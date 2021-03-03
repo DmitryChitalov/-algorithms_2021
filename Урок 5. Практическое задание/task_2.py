@@ -32,4 +32,27 @@ class HexNumber:
 
 hx = HexNumber
 hx + hx
-"""
+""" #Сделал только через классы
+class HexNumber():
+    def __init__(self, number):
+        self.number = number
+
+    def __mul__(self, other):
+        try:
+            return hex(int(self.number, 16) * int(other.number, 16)).upper()[2:]
+        except ValueError:
+            print('Ошибка')
+            return
+    def __add__(self, other):
+        try:
+            return hex(int(self.number, 16) * int(other.number, 16)).upper()[2:]
+        except ValueError:
+            print('Ошибка')
+            return
+
+a = HexNumber(input('Введите первое число '))
+b = HexNumber(input('Введите второе число '))
+
+
+print('Умножение',  a * b)
+print('Сложение',  a + b)
