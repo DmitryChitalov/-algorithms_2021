@@ -23,3 +23,30 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def profit_calc():
+    BUSINESS = namedtuple('saler', 'firm_name profit_1 profit_2 profit_3 profit_4')
+    quantity_firms = int(input('Введите количество фирм'))
+    year_profit = {}
+    for el in range(quantity_firms):
+        info = BUSINESS(
+            firm_name=input('Введите название предприятия: '),
+            profit_1=int(input('Введите прибыль за первую четверть')),
+            profit_2=int(input('Введите прибыль за вторую четверть')),
+            profit_3=int(input('Введите прибыль за третью четверть')),
+            profit_4=int(input('Введите прибыль за четвертую четверть')))
+        year_profit[info.firm_name] = info.profit_1 + info.profit_2 + info.profit_3 + info.profit_4
+    mid_profit = sum(year_profit.values())/len(year_profit)
+    print(f'Средняя прибыль всех предприятий: {mid_profit}')
+    for key, value in year_profit.items():
+        if value > mid_profit:
+            print(f'Прибыль предприятия {key} выше среднего значения')
+        if value < mid_profit:
+            print(f'Прибыль предприятия {key} ниже среднего значения')
+        if value == mid_profit:
+            print(f'Прибыль предприятия {key} равна среднему значению')
+
+
+profit_calc()
