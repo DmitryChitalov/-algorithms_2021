@@ -33,3 +33,21 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+class HexNum:
+    def __init__(self, numb):
+        self.numb = "".join(numb)
+
+    def __add__(self, other):
+        return list(f"{(int(self.numb, 16) + int(other.numb, 16)):X}")
+
+    def __mul__(self, other):
+        return list(f"{(int(self.numb, 16) * int(other.numb, 16)):X}")
+
+
+num_1 = HexNum(list(input("Введите первое число 16 - ричной системы: ")))
+num_2 = HexNum(list(input("Введите второе число 16 - ричной системы: ")))
+
+print("Сложение:", num_1 + num_2)
+print("Умножение:", num_1 * num_2)
