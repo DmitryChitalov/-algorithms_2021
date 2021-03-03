@@ -21,3 +21,40 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+
+"""
+1) Реализуем сложение двух матриц стандартными средствами и средствами numpy
+В качестве матриц используем список списков
+"""
+
+
+class Matrix:
+    def __init__(self, data):
+        self.m = data
+
+    def __add__(self, other):
+        if len(self.m) < len(other.m):
+            max_count = len(self.m)
+            smaller_matrix = self
+        else:
+            max_count = len(other.m)
+            smaller_matrix = other
+
+        m = []
+        for line_index in range(max_count):
+            for elem_index in range(len(smaller_matrix.m[line_index])):
+                m.append(self.m[line_index][elem_index] + other.m[line_index][elem_index])
+        return m
+
+
+list2 = [[1, 1, 1], [2, 2, 2]]
+list1 = [[4, 4, 4], [5, 5, 50], [5, 5, 50]]
+
+m1 = Matrix(list1)
+print(m1)
+m2 = Matrix(list2)
+print(m2)
+
+m3 = m1 + m2
+print(m3)
