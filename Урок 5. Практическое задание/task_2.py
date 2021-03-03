@@ -1,3 +1,5 @@
+from collections import defaultdict
+from functools import reduce
 """
 2.*	Написать программу сложения и умножения двух шестнадцатиричных чисел.
 При этом каждое число представляется как массив, элементы которого это цифры числа.
@@ -33,3 +35,18 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+def calculator():
+    nums = defaultdict(list)
+    for number in range(1, 3):
+        numbs = input('Введите шестнадцатиричное число:')
+        nums[f'{number}-{numbs}'] = list(numbs)
+    print(nums)
+    summer = sum([int(''.join(i), 16) for i in nums.values()])
+    print(summer)
+    multer = reduce(lambda x, y: x * y, [int(''.join(i), 16) for i in nums.values()])
+    print(multer)
+
+
+calculator()
