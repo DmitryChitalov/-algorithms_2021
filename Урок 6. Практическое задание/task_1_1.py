@@ -1,4 +1,3 @@
-from random import randint
 import memory_profiler
 import timeit
 from pympler.asizeof import asizeof
@@ -44,7 +43,7 @@ def find_profitable_companies_1(company_profits):
 @profiler
 def find_profitable_companies_2(company_profits_json):
     """
-    Функция принимает на вход json словаря, производит десериализацию
+    Функция принимает на вход json словарь, производит десериализацию
     """
     company_profits = json.loads(company_profits_json)
     most_profitable = dict()  # O(1)
@@ -66,3 +65,10 @@ json_dict = json.dumps(my_dict)
 print(find_profitable_companies_1(my_dict))
 print(f"размер словаря сериализованного: {asizeof(json_dict)}")
 print(find_profitable_companies_2(json_dict))
+
+"""
+Вывод: 
+Использование сериализации\десериализации значительно сокращает затраты памяти.
+размер словаря до сериализации: 124952
+размер словаря сериализованного: 11832
+"""
