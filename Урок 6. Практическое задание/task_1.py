@@ -46,20 +46,10 @@ def profiler(func):
 
 def collect_companies_data():
     companies = []
-    try:
-        companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
-        for i in range(companies_number):
-            comp_name = input("Введите название предприятия: ")
-            profits = input("через пробел введите прибыль данного предприятия "
-                            "за каждый квартал(Всего 4 квартала): ")
-
-            company_profit = collections.namedtuple("company",
-                                                    "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
-            companies.append(company_profit(comp_name, *[int(elem) for elem in profits.split(' ')]))
-
-    except (ValueError, TypeError):
-        print("Неверный ввод!!!")
-
+    company_profit = collections.namedtuple("company",
+                                            "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
+    for i in range(1000):
+        companies.append(company_profit(str(i * 10), i, i, i, i))
     return companies
 
 
@@ -77,58 +67,10 @@ def all_companies_avg_profit(companies):
 
 def collect_companies_data_recordclass():
     companies = []
-    try:
-        companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
-        for i in range(companies_number):
-            comp_name = input("Введите название предприятия: ")
-            profits = input("через пробел введите прибыль данного предприятия "
-                            "за каждый квартал(Всего 4 квартала): ")
-
-            company_profit = recordclass.recordclass("company",
-                                                     "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
-            companies.append(company_profit(comp_name, *map(int, profits.split(' '))))
-
-    except (ValueError, TypeError):
-        print("Неверный ввод!!!")
-
-    return companies
-
-
-def collect_companies_data_1():
-    companies = []
-    try:
-        companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
-        for i in range(companies_number):
-            comp_name = input("Введите название предприятия: ")
-            profits = input("через пробел введите прибыль данного предприятия "
-                            "за каждый квартал(Всего 4 квартала): ")
-
-            company_profit = collections.namedtuple("company",
-                                                    "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
-            companies.append(company_profit(comp_name, *map(int, profits.split(' '))))
-
-    except (ValueError, TypeError):
-        print("Неверный ввод!!!")
-
-    return companies
-
-
-def collect_companies_data_recordclass_2():
-    companies = []
-    try:
-        companies_number = int(input("Введите количество предприятий для расчета прибыли: "))
-        for i in range(companies_number):
-            comp_name = input("Введите название предприятия: ")
-            profits = input("через пробел введите прибыль данного предприятия "
-                            "за каждый квартал(Всего 4 квартала): ")
-
-            company_profit = recordclass.recordclass("company",
-                                                     "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
-            companies.append(company_profit(comp_name, *[int(elem) for elem in profits.split(' ')]))
-
-    except (ValueError, TypeError):
-        print("Неверный ввод!!!")
-
+    company_profit = recordclass.recordclass("company",
+                                             "company_name q_1_profit q_2_profit q_3_profit q_4_profit")
+    for i in range(1000):
+        companies.append(company_profit(str(i * 10), i, i, i, i))
     return companies
 
 
@@ -138,10 +80,6 @@ def original_calculation():
     print(f"размер списка компаний namedtuple: {asizeof.asizeof(data)}")
     total_avg_prof = all_companies_avg_profit(data)
     print(f"Средняя прибыль компаний: {total_avg_prof}")
-    print("Компании с прибылью выше среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) > total_avg_prof], sep=', ')
-    print("Компании со средней прибылью или ниже среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) <= total_avg_prof], sep=', ')
 
 
 @profiler
@@ -150,48 +88,21 @@ def improved_calculation():
     print(f"размер списка компаний recordclass: {asizeof.asizeof(data)}")
     total_avg_prof = all_companies_avg_profit(data)
     print(f"Средняя прибыль компаний: {total_avg_prof}")
-    print("Компании с прибылью выше среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) > total_avg_prof], sep=', ')
-    print("Компании со средней прибылью или ниже среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) <= total_avg_prof], sep=', ')
-
-
-@profiler
-def improved_calculation_2():
-    data = collect_companies_data_recordclass_2()
-    print(f"размер списка компаний recordclass: {asizeof.asizeof(data)}")
-    total_avg_prof = all_companies_avg_profit(data)
-    print(f"Средняя прибыль компаний: {total_avg_prof}")
-    print("Компании с прибылью выше среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) > total_avg_prof], sep=', ')
-    print("Компании со средней прибылью или ниже среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) <= total_avg_prof], sep=', ')
-
-
-@profiler
-def original_calculation_map():
-    data = collect_companies_data_1()
-    print(f"размер списка компаний recordclass: {asizeof.asizeof(data)}")
-    total_avg_prof = all_companies_avg_profit(data)
-    print(f"Средняя прибыль компаний: {total_avg_prof}")
-    print("Компании с прибылью выше среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) > total_avg_prof], sep=', ')
-    print("Компании со средней прибылью или ниже среднего:")
-    print(*[data[i].company_name for i in range(len(data)) if avg_company_profit(data[i]) <= total_avg_prof], sep=', ')
 
 
 original_calculation()
 print("-" * 150)
-original_calculation_map()
-print("-" * 150)
 improved_calculation()
-print("-" * 150)
-improved_calculation_2()
+
 """
 Вывод:
 В функции improved_calculation() структура данных namedtuple заменена на recordclass,
-из-за чего ее размер увеличился(для одинаковых входных данных):
-размер списка компаний namedtuple: 480
-размер списка компаний recordclass: 1168
-Так же увеличилось количество используемой памяти с 0.0 MiB до 0.29296875 MiB
+из-за чего ее размер уменьшился(для одинаковых входных данных):
+размер списка компаний namedtuple: 176848
+размер списка компаний recordclass: 73776
+Так же уменьшилось количество используемой памяти с 0.6796875 MiB до 0.02734375 MiB
+Время выполнения функций сравнимо на при однократном запуске:
+Функция original_calculation выполнялась 0.11952869999999999 сек
+Функция improved_calculation выполнялась 0.12076930000000002 сек
+Использование recordclass более предпочтительно по сравнению с namedtuple.
 """
