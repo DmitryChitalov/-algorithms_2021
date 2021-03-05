@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 """
 1.	Пользователь вводит данные о количестве предприятий, их наименования и прибыль
 за 4 квартала (т.е. 4 отдельных числа) для каждого предприятия.
@@ -23,3 +25,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+def income():
+    high_list = []
+    low_list = []
+    sum_of_income = 0
+    amount_of_company = int(input('Введите количество предприятий для расчета прибыли'))
+    company_list = []
+    company = namedtuple('company', 'name income')
+    for elem in range(amount_of_company):
+        company_list.append(company(
+            name=input('Введите название предприятия:'),
+            income=sum(map(int, input('через пробел введите прибыль данного предприятия:').split())))
+        )
+        sum_of_income += company_list[elem].income
+    for elements in range(len(company_list)):
+        if company_list[elements].income < sum_of_income / len(company_list):
+            low_list.append(company_list[elements].name)
+        else:
+            high_list.append(company_list[elements].name)
+    return f'Предприятия, с прибылью выше среднего значения: {high_list},' \
+           f'Предприятия, с прибылью ниже среднего значения:{low_list}'
+
+
+print(income())
