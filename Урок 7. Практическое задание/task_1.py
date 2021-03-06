@@ -20,7 +20,8 @@
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
 
-import random, timeit
+import random
+import timeit
 
 count = 1000
 
