@@ -44,6 +44,9 @@ Write an algorithm that will identify valid IPv4 addresses in dot-decimal format
 IPs should be considered valid if they consist of four octets, with values between 0 and 255, inclusive.
 Input to the function is guaranteed to be a single string.
 Мой первый вариант рещения
+
+Затраченное время: 5.9367152
+Затраченная память: 0.078125
 """
 
 def is_valid_IP(string):
@@ -64,6 +67,9 @@ def is_valid_IP(string):
 
 """
 Уход от цикла переход и спискового включению к решению в одну строку через регулярку
+
+Затраченное время: 0.31754250000000006
+Затраченная память: 0.0546875
 """
 def is_valid_IP1(string):
     return bool(re.match(r'^((\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])(\.(?!$)|$)){4}(?=$)', string))
@@ -74,6 +80,9 @@ Format a string of names like 'Bart, Lisa & Maggie'.
 Return: a string formatted as a list of names separated
 by commas except for the last two names, which should be separated by an ampersand.
 Мой вариант рещения
+
+Затраченное время: 12.235746600000002
+Затраченная память: 0.019054
 """
 
 def namelist(names):
@@ -88,6 +97,9 @@ def namelist(names):
 
 """
 Решение в одну строку, также переход к генератору от спискового включения
+
+Затраченное время: 10.875553499999999
+Затраченная память: 0.0
 """
 def namelist1(names):
     return '{} & {}'.format(', '.join(name['name'] for name in names[:-1]), names[-1]['name'])
@@ -98,6 +110,9 @@ Create Phone Number
 Write a function that accepts an array of 10 integers (between 0 and 9),
 that returns a string of those numbers in the form of a phone number.
 Мой вариант рещения
+
+Затраченное время: 37.8203474
+Затраченная память: 0.05078125
 """
 
 def create_phone_number(n):
@@ -116,7 +131,10 @@ def create_phone_number(n):
     return d
 
 """
-Ушли от цикла и срезов к прямой распоковке через format 
+Ушли от цикла и срезов к прямой распоковке через format
+
+Затраченное время: 12.174407499999994
+Затраченная память: 0.0 
 """
 def create_phone_number1(n):
     return "({}{}{}) {}{}{}-{}{}{}{}".format(*n)
@@ -127,11 +145,11 @@ def loop(func, arg, n):
         func(arg)
 
 
-# print(loop(is_valid_IP, "123.234.210.243", 100000))
-# print(loop(is_valid_IP1, "123.234.210.243", 100000))
+print(loop(is_valid_IP, "123.234.210.243", 100000))
+print(loop(is_valid_IP1, "123.234.210.243", 100000))
 
-# print(loop(namelist, [{'name': 'Bart'}, {'name': 'Lisa'}, {'name': 'Maggie'}], 10000000))
-# print(loop(namelist1, [{'name': 'Bart'}, {'name': 'Lisa'}, {'name': 'Maggie'}], 10000000))
+print(loop(namelist, [{'name': 'Bart'}, {'name': 'Lisa'}, {'name': 'Maggie'}], 10000000))
+print(loop(namelist1, [{'name': 'Bart'}, {'name': 'Lisa'}, {'name': 'Maggie'}], 10000000))
 
 print(loop(create_phone_number, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 10000000))
 print(loop(create_phone_number1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 10000000))
