@@ -21,3 +21,88 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+from memory_profiler import memory_usage
+from timeit import default_timer
+import json
+
+print(f"Память при запуске: {memory_usage()} MiB\n")
+
+
+def my_dec(func):
+    def wrapper(*args, **kwargs):
+        mem = memory_usage()
+        time = default_timer()
+        res = func(*args, **kwargs)
+        print(f"Функция {func.__name__}\nВремя: {default_timer() - time}\nПамять: {memory_usage()[0] - mem[0]} MiB\n")
+        return res
+
+    return wrapper
+
+
+@my_dec
+def create_lst(num):
+    arr = []
+    for i in range(num):
+        arr.append(i)
+    return arr
+
+
+@my_dec
+def create_lst_gen(num):
+    return (i for i in range(num))
+
+
+create_lst(50000)
+create_lst_gen(50000)
+print(f"Память после первых примеров: {memory_usage()} MiB\n")
+
+"""
+Аналитика:
+Генератор сильно экономит ресурсы, так как вычисления в нем выполняются только при его вызове.
+"""
+
+
+@my_dec
+def convert_data():
+    arr = [i for i in range(50000)]
+    return [str(i) for i in arr]
+
+
+@my_dec
+def convert_data_map():
+    arr = [i for i in range(50000)]
+    return map(str, arr)
+
+
+convert_data()
+convert_data_map()
+
+print(f"Память после вторых примеров: {memory_usage()} MiB\n")
+
+"""
+Аналитика:
+map позволяет значительно снизить затраты ресурсов.
+"""
+
+
+@my_dec
+def create_dict():
+    return {i: i for i in range(50000)}
+
+
+@my_dec
+def create_dict_json():
+    return json.dumps({i: i for i in range(50000)})
+
+
+create_dict()
+create_dict_json()
+
+print(f"Память после третьих примеров: {memory_usage()} MiB")
+
+"""
+Аналитика:
+JSON является хорошим способом хранения коллекций.
+Но стоит помнить, что сериализация также занимает время. 
+"""
