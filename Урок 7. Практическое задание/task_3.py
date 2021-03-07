@@ -45,3 +45,52 @@ for i in
 
 
 """
+from random import randint
+from statistics import median
+
+
+# Первый вариант с сортировкой при помощи алгоритма Шелла
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+# Вариант с созданием списков
+def my_func(lst):
+    left = []
+    right = []
+    for i in lst:
+        for j in lst:
+            if i > j:
+                left.append(j)
+            elif i < j:
+                right.append(j)
+
+        if len(left) == len(right):
+            return i
+        left.clear()
+        right.clear()
+
+
+# Вариант с удалением максимального числа
+def max_del(lst):
+    for i in range(len(lst) // 2):
+        lst.remove(max(lst))
+    return max(lst)
+
+
+user_input = int(input('Введите натуральное число: '))
+massive_len = (2 * user_input + 1)
+a = [randint(0, 500) for _ in range(massive_len)]
+print(a)
+print('Медиана для сгенерированого отсортировоного  списка', shell(a[:])[user_input])
+print('Медиана для сгенерированого не отсортировоного списка при помощи моей функции', my_func(a[:]))
+print('Медиана при помощи удаления максимального числа', max_del(a[:]))
+print('Медиана при помощи встроенной функции для проверки правильности', median(a))
