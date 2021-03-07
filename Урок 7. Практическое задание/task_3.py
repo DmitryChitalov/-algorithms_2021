@@ -45,3 +45,41 @@ for i in
 
 
 """
+import random
+from statistics import median
+
+
+def gnome(data):
+    i = 1
+    size = len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+def find_median_var1(some_list):
+    lst = some_list[:]
+    for i in range(len(some_list)//2):
+        lst.remove(max(lst))
+    return max(lst)
+
+
+def find_median_var2(some_list):
+    lst = gnome(some_list[:])
+    return lst[len(lst) // 2]  # можно передавать сюда переменную num, чтоб сэкономить память
+
+
+# num = int(input('Введите натуральное число: '))
+num = 3
+my_list = [random.randint(0, 50) for _ in range(2 * num + 1)]
+print('Исходный массив:', my_list)
+
+print('Первая реализация:', find_median_var1(my_list))
+print('Вторая реализация, с гномьей сортировкой:', find_median_var2(my_list))
+
+print('Для проверки найдем медиану встроенной функцией:', median(my_list))
