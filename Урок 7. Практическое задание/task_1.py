@@ -19,3 +19,82 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+
+from timeit import timeit
+import random
+
+
+def chek_time(f):
+    return timeit(f"{f}", globals=globals(), number=10000)
+
+
+def create_lst(length):
+    return [random.randint(-100, 100) for _ in range(length)]
+
+
+def bubble_sort_reverse(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i + 1], lst_obj[i] = lst_obj[i], lst_obj[i + 1]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_reverse_optimization(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        counter = 0
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i + 1], lst_obj[i] = lst_obj[i], lst_obj[i + 1]
+                counter += 1
+        if counter == 0:
+            break
+        n += 1
+    return lst_obj
+
+
+orig_list_10 = create_lst(10)
+orig_list_100 = create_lst(100)
+orig_list_1000 = create_lst(1000)
+print(f"Исходный список:\n{orig_list_10}")
+print(f"Отсортированный:\n{bubble_sort_reverse(orig_list_10)}")
+print(f"Отсортированный с оптимизатором:\n{bubble_sort_reverse_optimization(orig_list_10)}")
+
+print(f"Затрачено времени на сортировку 10 элементов:"
+      f"\n{chek_time('bubble_sort_reverse(orig_list_10[:])')}")
+print(f"Затрачено времени на сортировку 10 элементов с оптимизатором:"
+      f"\n{chek_time('bubble_sort_reverse_optimization(orig_list_10[:])')}")
+print(f"Затрачено времени на сортировку 100 элементов:"
+      f"\n{chek_time('bubble_sort_reverse(orig_list_100[:])')}")
+print(f"Затрачено времени на сортировку 100 элементов с оптимизатором:"
+      f"\n{chek_time('bubble_sort_reverse_optimization(orig_list_100[:])')}")
+print(f"Затрачено времени на сортировку 1000 элементов:"
+      f"\n{chek_time('bubble_sort_reverse(orig_list_1000[:])')}")
+print(f"Затрачено времени на сортировку 1000 элементов с оптимизатором:"
+      f"\n{chek_time('bubble_sort_reverse_optimization(orig_list_1000[:])')}")
+
+"""
+Аналитика:
+Мой вариант оптимизатора реализован с помощью счетчика, срабатывает при прохождении каждого круга.
+Если счетчик не сработал, то вызывается break.
+Значительный прирост от такой оптимизации можно получить только если ему давать ужу отсортированные списки.
+В противном случае такая оптимизация бесполезна.
+
+Замеры:
+Затрачено времени на сортировку 10 элементов:
+0.0035587999999999974
+Затрачено времени на сортировку 10 элементов с оптимизатором:
+0.0006489000000000009
+Затрачено времени на сортировку 100 элементов:
+0.37144629999999995
+Затрачено времени на сортировку 100 элементов с оптимизатором:
+0.39969699999999997
+Затрачено времени на сортировку 1000 элементов:
+44.0864033
+Затрачено времени на сортировку 1000 элементов с оптимизатором:
+47.919409200000004
+"""
