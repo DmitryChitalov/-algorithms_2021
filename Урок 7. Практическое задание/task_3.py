@@ -45,3 +45,32 @@ for i in
 
 
 """
+import statistics
+from random import randint
+
+"""
+Для решения использую сортировку Шелла, затем выбиру элемент находящийся в середине.
+Сортировка Шелла сравнивает не рядом стоящие элементы, а находящиеся на расстоянии.
+Сначала это элементы, индексы которых отличаются на половину длинны списка,
+а затем этот промежуток уменьшается в 2 раза.
+Завершающий проход сортировки происходит когда сравниваются ряжом стоящие элементы.
+"""
+
+
+def shell(lst):
+    inc = len(lst) // 2
+    while inc:
+        for i, el in enumerate(lst):
+            while i >= inc and lst[i - inc] > el:
+                lst[i] = lst[i - inc]
+                i -= inc
+            lst[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+
+
+my_lst = [randint(0, 10) for _ in range(11)]
+
+print(my_lst)
+print(f"Медиана массива, полученая функцией из модуля statistics: {statistics.median(my_lst)}")
+shell(my_lst)
+print(f"Медиана массива, в отсортированном массиве: {my_lst[len(my_lst) // 2]}")
