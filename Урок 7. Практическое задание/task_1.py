@@ -19,3 +19,46 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import timeit
+from random import randint
+
+
+def bubble(my_list):
+    for num in range(len(my_list) - 1, 0, -1):
+        for i in range(num):
+            if my_list[i] < my_list[i + 1]:
+                my_list[i], my_list[i + 1] = my_list[i + 1], my_list[i]
+    return my_list
+
+
+def bubble_opt(my_list):
+    for num in range(len(my_list) - 1, 0, -1):
+        flag = False
+        for i in range(num):
+            if my_list[i] < my_list[i + 1]:
+                my_list[i], my_list[i + 1] = my_list[i + 1], my_list[i]
+                flag = True
+        if not flag:
+            break
+    return my_list
+
+
+ls = [randint(-100, 100) for x in range(100)]
+print(
+    timeit.timeit(
+        "bubble(ls[:])",
+        globals=globals(),
+        number=1000))
+
+
+print(
+    timeit.timeit(
+        "bubble_opt(ls[:])",
+        globals=globals(),
+        number=1000))
+
+print(f"{ls}\n{bubble(ls)}")
+
+"""Оптимизация заключается в том, что если, массив полностью отсортирован, т.е. при проходе массива не выполнилось 
+перестановки. Данная оптитмизация не имеет смысла, т.к. шанс, что массив окажется осортированыым до конца работы 
+алгоритма - ничтожно мал. """

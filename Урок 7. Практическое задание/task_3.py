@@ -45,3 +45,23 @@ for i in
 
 
 """
+from random import randint
+
+
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+m = int(input("Input m: "))
+
+ls = [randint(1, 100) for i in range(2 * m + 1)]
+print(f"{ls}\n{shell(ls)}\nm = {shell(ls)[m]}")
+
