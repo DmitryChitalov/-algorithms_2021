@@ -22,7 +22,6 @@ import random
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
 '''Сортировка выбором'''
-unsorted_list = [3, 4, 2, 5, 7, 3, 9]
 unsorted_list_1 = [random.randint(-100, 100) for _ in range(10)]
 sort_st = input('Ввдите тип сортировки, который вам нужен: <(обратная) или >(обычная) ')
 
@@ -48,7 +47,7 @@ def bubble_sort_1_opt(lst_obj):  # Оптимизиированный вариа
 
 
 def funct():
-    return timeit('bubble_sort_1_opt(unsorted_list[:])', globals=globals(), number=10000)
+    return timeit('bubble_sort_1_opt(unsorted_list_1[:])', globals=globals(), number=10000)
 
 
 def bubble_sort_2(lst_obj):
@@ -62,14 +61,14 @@ def bubble_sort_2(lst_obj):
 
 
 def funct_1():
-    return timeit('bubble_sort_2(unsorted_list[:])', globals=globals(), number=10000)
+    return timeit('bubble_sort_2(unsorted_list_1[:])', globals=globals(), number=10000)
 
 
 print(funct())
 print(funct_1())
-print(bubble_sort_1_opt(unsorted_list[:]))
-print(bubble_sort_2(unsorted_list[:]))
-'''Я оптимизировал сортировку пузырьком, теперь там есть статус отсортированности, и если он равен False то цикл 
-завершается и мы получаем на два прохода меньше. Время выполнения алгоритма тоже стало меньше'''
-'''При обратной сортировке действий больше => время выполнения тоже возрастает. 
-При использовании рандомных чисел результаты не объективны, поэтому я взял список с постоянными числами.'''
+print(bubble_sort_1_opt(unsorted_list_1[:]))
+print(bubble_sort_2(unsorted_list_1[:]))
+'''Оптимизация заключается в том, что при обычной сортировке пузырьком нет разницы, отсортирован ли список хоть как нибудь, 
+цикл в любом случае будет проходить весь список и выполняться за время O(n^2), а оптимизированная сортировка работает 
+быстрее, чем стандартный вариант т.к. цикл итерируется только тогда, когда в списке есть изменения,если их нет, 
+то после крайней итерации переменная changes принимает значение false, это означает, что скрипт отсортирован. '''
