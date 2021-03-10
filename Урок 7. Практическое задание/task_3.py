@@ -45,3 +45,29 @@ for i in
 
 
 """
+'''Использование гномьей сортировки'''
+from random import randint
+
+
+def gnome_sort(lst, size):
+    i = 1
+    while i < size:
+        if (lst[i - 1] <= lst[i]):
+            i += 1
+        else:
+            tmp = lst[i]
+            lst[i] = lst[i - 1]
+            lst[i - 1] = tmp
+            i -= 1
+            if (i == 0):
+                i = 1
+    return lst
+
+
+m = int(input("Введите целое значение m: "))
+lists = [randint(0, 100) for i in range(2 * m + 1)]
+print('Сгенерировано:', lists)
+newlists = gnome_sort(lists, len(lists))
+print('Отсортировано:', newlists)
+
+print(f"Медиана: {newlists[m]}")
