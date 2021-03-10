@@ -49,30 +49,28 @@ def new_bubble_sort(lst, flag=False):
 
 
 """
-Улучшение кода состоит в том, чтобы прерывать цикл, если массив отсортирован.
-Он прерывается так как flag срабатывает, если нет прохода по сортировке.
-Новая реализация сделала сортировку быстрее, но эффективности нет, так как есть более быстрые сортировки
-и уменьшение времени очень малое.
+Улучшение кода состоит в том, чтобы цикл не работал еще раз,если массив отсортирован.
+Эффективности это не принесло, время уменьшилось совсем на немного. Доработка не помогла.
+
 """
 
 if __name__ == "__main__":
     my_lst = [randint(-100, 100) for x in range(100)]
     print(my_lst)
-    print(bubble_sort(my_lst))
+    print(bubble_sort(my_lst[:]))
     print(
         timeit(
             "bubble_sort(my_lst[:])",
             globals=globals(),
-            number=1000000
+            number=10000
         )
     )
-    my_lst = [randint(-100, 100) for x in range(100)]
     print(my_lst)
-    print(new_bubble_sort(my_lst))
+    print(new_bubble_sort(my_lst[:]))
     print(
         timeit(
             "new_bubble_sort(my_lst[:])",
             globals=globals(),
-            number=1000000
+            number=10000
         )
     )
