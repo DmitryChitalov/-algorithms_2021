@@ -45,3 +45,35 @@ for i in
 
 
 """
+import statistics
+from random import randint
+
+# Генерируем список 2m + 1
+m = int(input('Введите m: '))
+ls = [randint(1, 30) for i in range(2 * m + 1)]
+
+
+# 1 вариант с отсортированным списком
+
+def gnome_sort(list):
+    i, size = 1, len(list)
+    while i < size:
+        if list[i - 1] <= list[i]:
+            i += 1
+        else:
+            list[i - 1], list[i] = list[i], list[i - 1]
+            if i > 1:
+                i -= 1
+    return f'{list = }\nmediana = {list[m]}'
+
+
+print(f'Исходный список = {ls}\n')
+
+print(f'Вариант с отсортированным списком (гномья)')
+print(gnome_sort(ls))
+print()
+print(f'Вариант со statistics.median')
+print(f'{statistics.median(ls) = }')
+
+
+
