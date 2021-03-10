@@ -17,3 +17,17 @@
 """
 
 # hash?
+# Задание не смог выполнить. Код из примера преподавателя.
+
+string = input('>> ')
+sub_strings = set()
+
+for sub in range(len(string)):
+    last_str = string[sub:]
+    for length in range(1, len(last_str) + 1):
+        sub_str = string[sub:sub + length]
+        if string != sub_str:
+            hash_sub_str = sub_str.encode().hex()
+            sub_strings.add(hash_sub_str)
+
+print(len(sub_strings), sub_strings)
