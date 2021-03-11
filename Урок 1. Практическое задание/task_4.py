@@ -26,3 +26,51 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Эффективнее решение 1, т.к. в нем осуществляется меньшее количество действий, поэтому
+# оно должно отрабатывать быстрее (по времени)
+
+def auth_version_1(log, passw):
+
+    # Сложность О(N)
+
+    if log in storage.keys():                                   # O(N)
+        if passw == str(storage[log][0]):                       # O(1)
+            if not storage[log][1]:                             # O(1)
+                print('Необходимо пройти аутентификацию!')      # O(1)
+            else:
+                print('Добро пожаловать!')                      # O(1)
+        else:
+            print('Вы ввели неверный пароль!')                  # O(1)
+    else:
+        print('Вы ввели неверный логин!')                       # O(1)
+
+
+def auth_version_2(log, passw):
+
+    # Сложность О(N)
+
+    flag = False                                                # O(1)
+    for stor_log, stor_params in storage.items():               # O(N)
+        if log == stor_log:                                     # O(1)
+            flag = True                                         # O(1)
+            if passw == str(stor_params[0]):                    # O(1)
+                if stor_params[1]:                              # O(1)
+                    print('Добро пожаловать!')                  # O(1)
+                else:
+                    print('Необходимо пройти аутентификацию!')  # O(1)
+            else:
+                print('Вы ввели неверный пароль!')              # O(1)
+
+    if not flag:                                                # O(1)
+        print('Вы ввели неверный логин!')                       # O(1)
+
+
+storage = {'Vasya': (123456, True), 'Petya': ('qwerty', True), 'Alice': ('ycs523gdas', False),
+           'Bob': ('nbcmnxzbc', True), 'Eve': ('bczv27632cs', False)}
+
+login = input('Введите логин: ')
+password = input('Введите пароль: ')
+
+auth_version_1(login, password)
+auth_version_2(login, password)
