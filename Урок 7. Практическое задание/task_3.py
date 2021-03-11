@@ -1,3 +1,4 @@
+from random import randint
 """
 3. Массив размером 2m + 1, где m – натуральное число, заполнен случайным образом.
 Найдите в массиве медиану. Медианой называется элемент ряда, делящий его на
@@ -45,3 +46,24 @@ for i in
 
 
 """
+
+
+def find_median(lst):
+    left_hand = []
+    right_hand = []
+    for elems in lst:
+        median = elems
+        for elements in lst:
+            if (elements < median) and (elements != median):
+                left_hand.append(elements)
+            elif (elements > median) and (elements != median):
+                right_hand.append(elements)
+        if len(left_hand) == len(right_hand):
+            return median
+        left_hand.clear()
+        right_hand.clear()
+
+
+my_lst = [randint(-100, 100) for x in range(5)]
+print(my_lst)
+print(find_median(my_lst))
