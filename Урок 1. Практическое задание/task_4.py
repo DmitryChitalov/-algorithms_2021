@@ -26,3 +26,59 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+def gen_user():
+    auth = {}
+    for i in range(2):
+        name = f'Имя_{i}'
+        password = f'password_{i}'
+        if i % 3 == 0:
+            active = True
+        else:
+            active = False
+        auth[name] = {'Имя': name, 'пароль': password, 'Активирован': active}
+    return auth
+
+users = gen_user()
+print(users)
+
+log = "Имя_0"
+passw = "password_0"
+
+
+def auth_1(log, passw):
+
+        # Сложность О(N)
+
+        if log in users.keys():  # O(N)
+            if passw == users[log]["пароль"]:  # O(1)
+                if users[log]['Активирован'] == True: # O(1)
+                    print("Добро пожаловать") # O(1)
+                else:
+                    print("Активируйте учетку") # O(1)
+            else:
+                print("Wrong password") # O(1)
+        else:
+            print("No user found") # O(1)
+
+
+def auth_2(log, passw):
+    # Сложность О(N**2)
+ i = 0
+ while(i in range(len(users))): # O(N)
+    if log in users.keys():  # O(N)
+        if passw == users[log]["пароль"]:  # O(1)
+            if users[log]['Активирован'] == True:  # O(1)
+                print("Добро пожаловать")  # O(1)
+                break # O(1)
+            else:
+                print("Активируйте учетку")  # O(1)
+        else:
+            print("Wrong password")  # O(1)
+    else:
+        print("No user found")  # O(1)
+    i += 1 # O(1)
+
+auth_1(log, passw)
+auth_2(log, passw)
+"""второй способ по скорости равен или больше первого. При варианте, что будет заходить пользователь, который хранится в
+сисетме под user_0, скорость рабооты двух способов должна быть равной. В остальных случаях, второй способ проигрывает"""
