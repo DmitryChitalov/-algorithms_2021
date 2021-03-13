@@ -26,3 +26,66 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Сложность: # O(1)
+def user_auth_var_1(users):
+    print('Добро пожаловать!\nНеобходимо авторизироваться!\n')  # O(1)
+    user_login = input('Введите логин: ').lower()  # O(1)
+    user_password = input('Введите пароль: ')
+    if users.get(user_login):  # O(1)
+        if users[user_login]['Password'] == user_password:
+            if users[user_login]['Status']:  # O(1)
+                print('=' * 50, '\nДобро пожаловать!')  # O(1)
+            else:
+                print('=' * 50, '\nУчетная запись не активирована!')  # O(1)
+                status = input('Хотите активировать у/з? (yes, no): ').lower()  # O(1)
+                if status == 'yes':
+                    users[user_login]['Status'] = True  # O(1)
+                    print('=' * 50, '\nУчетная запись активирована!')  # O(1)
+                if status == 'no':
+                    print('=' * 50, '\nОк, мы ничего не делаем!')  # O(1)
+        else:
+            print('=' * 50, '\nВведен неверный пароль!')  # O(1)
+    else:
+        print('=' * 50, '\nПользватель с такими учетными данными не найден!\n'
+                        'Пройдите регистрацию или проверьте корректность ввода!')  # O(1)
+
+
+# Сложность: # O(n)
+def user_auth_var_2(users):
+    print('Добро пожаловать!\nНеобходимо авторизироваться!\n')  # O(1)
+    user_login = input('Введите логин: ').lower()  # O(1)
+    user_password = input('Введите пароль: ')  # O(1)
+    search_status = False  # O(1)
+    for user in users:  # O(n)
+        if user == user_login:  # O(1)
+            if users[user]['Password'] == user_password:  # O(1)
+                if users[user_login]['Status']:  # O(1)
+                    print('=' * 50, '\nДобро пожаловать!')  # O(1)
+                else:
+                    print('=' * 50, '\nУчетная запись не активирована!')  # O(1)
+                    status = input('Хотите активировать у/з? (yes, no): ').lower()  # O(1)
+                    if status == 'yes':  # O(1)
+                        users[user]['Status'] = True  # O(1)
+                        print('=' * 50, '\nУчетная запись активирована!')  # O(1)
+                    if status == 'no':  # O(1)
+                        print('=' * 50, '\nОк, мы ничего не делаем!')  # O(1)
+            else:
+                print('=' * 50, '\nВведен неверный пароль!')  # O(1)
+            search_status = True  # O(1)
+    if not search_status:  # O(1)
+        print('=' * 50, '\nПользватель с такими учетными данными не найден!\n'
+                        'Пройдите регистрацию или проверьте корректность ввода!')  # O(1)
+
+
+users_bd = {'vadim_123': {'Status': True, 'Password': 'my_cool_password'},
+            'nikola': {'Status': False, 'Password': 'my_cool_666'},
+            'grayMan': {'Status': True, 'Password': 'very_333'},
+            'spider_man': {'Status': True, 'Password': 'spider!@#qwerty'},
+            'batman': {'Status': False, 'Password': 'M@rt@'},
+            'test_1': {'Status': True, 'Password': 'Qwerty.1'},
+            'test_2': {'Status': False, 'Password': 'Qwerty.1'}, }
+
+user_auth_var_1(users_bd)
+# Первая функция будет эффективней и быстрей т.к. имеет O(1) константную сложнсоть и задействуют меньше ресурсов
