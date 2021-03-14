@@ -14,43 +14,48 @@ import collections
 
 
 class Node:
-    def __init__(self, root=None, frequency=None, letter=None, left=None, right=None, weight=0):
-        self.root = root
-        self.frequency = frequency
-        self.letter = letter
+    """Класс 'Узел' для построения бинарного дерева Хаффмана"""
+
+    def __init__(self, frequency=None, letter=None, left=None, right=None):
+        self.frequency = frequency  # частота символа в тексте
+        self.letter = letter  # символ
         self.left = left
         self.right = right
-        self.weight = weight
 
     def add_left(self, new_node):
+        """Добавление левого ребенка"""
         self.left = new_node
 
     def add_right(self, new_node):
+        """Добавление правого ребенка"""
         self.right = new_node
 
     def is_leaf(self):
+        """Проверка, является лиузел листом, не имеет потомков """
         return (not self.right) & (not self.left)
 
 
-def nodes_deque(str_):
+def build_nodes_deque(str_):
+    """Функция строит сортированную деку из строки,
+    элементами которой являются объекты класса Node.
+    Сортриовка по возрастанию частоты вхождения симовла в строку"""
     freq_table = collections.Counter(str_)
     return collections.deque(
         sorted([Node(frequency=elem[1], letter=elem[0])
                 for elem in freq_table.items()], key=lambda item: item.frequency))
 
 
-print(*[(elem.frequency, elem.letter) for elem in nodes_deque('beer bear bear')])
-
-
 def build_haffman_tree(deque_):
+    """Функция строит дерево Хаффмана, из входящей деки.
+    возвращает дерево Хафмана
+    """
     if len(deque_) != 1:
         while len(deque_) > 1:
             new_node = Node()
             elem = deque_.popleft()
             new_node.add_left(Node(frequency=elem.frequency, letter=elem.letter, left=elem.left, right=elem.right))
             elem = deque_.popleft()
-            new_node.add_right(Node(frequency=elem.frequency, letter=elem.letter, left=elem.left, right=elem.right,
-                                    weight=1))
+            new_node.add_right(Node(frequency=elem.frequency, letter=elem.letter, left=elem.left, right=elem.right))
             new_node.frequency = new_node.left.frequency + new_node.right.frequency
             for i in range(len(deque_)):
                 if deque_[i].frequency < new_node.frequency:
@@ -59,28 +64,35 @@ def build_haffman_tree(deque_):
                     deque_.insert(i, new_node)
                     break
             else:
-                new_node.weight = None
                 deque_.append(new_node)
 
     return deque_[0]
 
 
-code = dict()
+code = dict() # Словарь в который будем складывать таблицу кодирования символов
 
 
-def haffman_code(haffman_tree, path=''):
+def build_haffman_code(haffman_tree, letter_code=''):
+    """заполняем словарь кодирования. Он будет иметь вид:
+    {'cимвол' : код символа, ...}
+    Рекурсивно обходим дерево, елси идем по левой ветви, добавляем к коду "0",
+    иначе - "1"
+    """
     if haffman_tree.is_leaf():
-        code.update({haffman_tree.letter: path})
+        code.update({haffman_tree.letter: letter_code}) # Если дошли до листа, добавляем элемент в словарь
     else:
-        haffman_code(haffman_tree.left, path=path + '0')
-        haffman_code(haffman_tree.right, path=path + '1')
+        # Рекурсивные вызовы:
+        build_haffman_code(haffman_tree.left, letter_code=letter_code + '0')
+        build_haffman_code(haffman_tree.right, letter_code=letter_code + '1')
     return code
 
 
 s = "beep boop beer!"
-ht = build_haffman_tree(nodes_deque(s))
-hc = haffman_code(ht)
-print(ht)
-print(haffman_code(ht))
+print(f"Кодируем текст: '{s}'")
+print("Частота символов в тексе: ")
+print(*[(elem.frequency, elem.letter) for elem in build_nodes_deque(s)])
+haffman_tree = build_haffman_tree(build_nodes_deque(s))
+haffman_code = build_haffman_code(haffman_tree)
+print(build_haffman_code(haffman_tree))
 for i in s:
-    print(hc[i], end=' ')
+    print(haffman_code[i], end=' ')
