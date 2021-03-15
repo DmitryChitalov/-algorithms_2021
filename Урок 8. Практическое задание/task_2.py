@@ -9,6 +9,10 @@
 
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
+class BTExept(Exception):
+    def __init__(self, msg):
+        self.err_msg = msg
+
 
 class BinaryTree:
     def __init__(self, root_obj):
@@ -23,10 +27,17 @@ class BinaryTree:
     def insert_left(self, new_node):
         # если у узла нет левого потомка
         if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+                # тогда узел просто вставляется в дерево
+                # формируется новое поддерево
+            try:
+                if new_node > self.root:
+                    raise BTExept('Left value error')
+            except BTExept as bte:
+                print(bte)
+                
+            if self.left_child is None:
+                self.left_child = BinaryTree(new_node)
+            # если у узла есть левый потомок
         else:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
@@ -40,7 +51,13 @@ class BinaryTree:
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
+            try:
+                if new_node < self.root:
+                    raise BTExept('Right value error')
+            except BTExept as bte:
+                print(bte)
+            if self.right_child is None:
+                self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
         else:
             # тогда вставляем новый узел
@@ -52,10 +69,24 @@ class BinaryTree:
     # метод доступа к правому потомку
     def get_right_child(self):
         return self.right_child
+        try:
+            if self.right_child is None:
+                raise BTExept('Right child error')
+            else:
+                return self.right_child
+        except BTExept as bte:
+            print(bte)
 
     # метод доступа к левому потомку
     def get_left_child(self):
         return self.left_child
+        try:
+            if self.left_child is None:
+                raise BTExept('Left child error')
+            else:
+                return self.left_child
+        except BTExept as bte:
+            print(bte)
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -71,9 +102,17 @@ print(r.get_root_val())
 print(r.get_left_child())
 r.insert_left(40)
 print(r.get_left_child())
+r = BinaryTree(200)
+r.insert_right(201)
+r.insert_left(500)
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
+r.get_right_child().set_root_val(300)
 print(r.get_right_child().get_root_val())
+r.get_left_child().set_root_val(100)
+print(r.get_left_child().get_root_val())
+r.get_left_child().insert_right(1100)
+print(r.get_left_child().get_right_child().get_root_val())
