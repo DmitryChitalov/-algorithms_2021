@@ -26,3 +26,72 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_list = [
+    {'login': 'user1',
+     'password': 'password1',
+     'status': True},
+    {'login': 'user2',
+     'password': 'password2',
+     'status': True},
+    {'login': 'user3',
+     'password': 'password3',
+     'status': False}
+]
+
+
+# O(N)
+def authorization1(login_name, entered_password):
+    if login_name in [item['login'] for item in users_list]:                # O(N)
+        for item in users_list:                                             # O(N)
+            if item['login'] == login_name:                                 # O(1)
+                if item['status']:                                          # O(1)
+                    if item['password'] == entered_password:                # O(1)
+                        return True, 'Login OK'                             # O(1)
+                    else:
+                        return False, 'Incorrect password'                  # O(1)
+                else:
+                    return False, 'Account is not active, please activate'  # O(1)
+    else:
+        return False, 'Login name not found'                                # O(1)
+
+
+# O(N)
+def authorization2(login_name, entered_password):
+    account_active = False                                                  # O(1)
+    user_exists = False                                                     # O(1)
+    password_matches = False                                                # O(1)
+    for user in users_list:                                                 # O(N)
+        if user['login'] == login_name:                                     # O(1)
+            user_exists = True                                              # O(1)
+        else:
+            continue
+        if user['status']:                                                  # O(1)
+            account_active = True                                           # O(1)
+        else:
+            continue
+        if user['password'] == entered_password:                            # O(1)
+            password_matches = True                                         # O(1)
+        else:
+            continue
+    if not user_exists:                                                     # O(1)
+        return False, 'Login name not found'                                # O(1)
+    elif not account_active:                                                # O(1)
+        return False, 'Account is not active, please activate'              # O(1)
+    elif not password_matches:                                              # O(1)
+        return False, 'Incorrect password'                                  # O(1)
+    else:
+        return True, 'Login OK'                                             # O(1)
+
+
+print(authorization1('user1', 'password1'))
+print(authorization1('user2', 'password'))
+print(authorization1('user3', 'password3'))
+print(authorization1('user4', 'password3'))
+
+print(authorization2('user1', 'password1'))
+print(authorization2('user2', 'password'))
+print(authorization2('user3', 'password3'))
+print(authorization2('user4', 'password3'))
+
+# authorization2 мне кажется более эффетивно, потому что в нем только один O(N)
