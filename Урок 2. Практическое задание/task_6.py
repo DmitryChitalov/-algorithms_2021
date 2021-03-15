@@ -4,10 +4,41 @@
 неудачной попытки должно сообщаться больше или меньше введенное пользователем
 число, чем то, что загадано. Если за 10 попыток число не отгадано,
 то вывести загаданное число.
-
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
-
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+from random import randint
+
+def guess_number(right_number, guess_count):
+    if guess_count == 0:
+        print(f'У Вас кончиличсь попытки! Правильный ответ: {right_number}')
+        return
+
+    while True:
+        try:
+            number = int(input('Введите Ваш вариант числа: '))
+            if number < 0 or number > 100:
+                raise ValueError
+            break
+        except ValueError:
+            print('Вводить можно лишь натуральные числа от 1 до 100 и 0! Попробуйте еще раз.')
+
+    if number == right_number:
+        print(f'Вы угадали!')
+        return
+
+    guess_count -= 1
+    print(f'Неверно! Поробуйте еще раз. Количество оставшихся попыток: {guess_count}')
+    if number < right_number:
+        print('Загаданное число больше Вашего!')
+    else:
+        print('Загаданное число меньше Вашего!')
+
+    guess_number(right_number, guess_count)
+
+
+answer = randint(0, 100)
+guess_number(answer, 10)
