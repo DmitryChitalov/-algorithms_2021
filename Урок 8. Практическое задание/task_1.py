@@ -16,11 +16,11 @@ import collections
 class Node:
     """Класс 'Узел' для построения бинарного дерева Хаффмана"""
 
-    def __init__(self, frequency=None, letter=None, left=None, right=None):
+    def __init__(self, frequency=None, letter=None):
         self.frequency = frequency  # частота символа в тексте
         self.letter = letter  # символ
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
 
     def add_left(self, new_node):
         """Добавление левого ребенка"""
@@ -31,7 +31,7 @@ class Node:
         self.right = new_node
 
     def is_leaf(self):
-        """Проверка, является лиузел листом, не имеет потомков """
+        """Проверка, является ли узел листом, т.е. не имеет потомков """
         return (not self.right) & (not self.left)
 
 
@@ -53,9 +53,9 @@ def build_haffman_tree(deque_):
         while len(deque_) > 1:
             new_node = Node()
             elem = deque_.popleft()
-            new_node.add_left(Node(frequency=elem.frequency, letter=elem.letter, left=elem.left, right=elem.right))
+            new_node.add_left(elem)
             elem = deque_.popleft()
-            new_node.add_right(Node(frequency=elem.frequency, letter=elem.letter, left=elem.left, right=elem.right))
+            new_node.add_right(elem)
             new_node.frequency = new_node.left.frequency + new_node.right.frequency
             for i in range(len(deque_)):
                 if deque_[i].frequency < new_node.frequency:
@@ -69,7 +69,7 @@ def build_haffman_tree(deque_):
     return deque_[0]
 
 
-code = dict() # Словарь в который будем складывать таблицу кодирования символов
+code = dict()  # Словарь в который будем складывать таблицу кодирования символов
 
 
 def build_haffman_code(haffman_tree, letter_code=''):
@@ -79,7 +79,7 @@ def build_haffman_code(haffman_tree, letter_code=''):
     иначе - "1"
     """
     if haffman_tree.is_leaf():
-        code.update({haffman_tree.letter: letter_code}) # Если дошли до листа, добавляем элемент в словарь
+        code.update({haffman_tree.letter: letter_code})  # Если дошли до листа, добавляем элемент в словарь
     else:
         # Рекурсивные вызовы:
         build_haffman_code(haffman_tree.left, letter_code=letter_code + '0')
@@ -88,11 +88,14 @@ def build_haffman_code(haffman_tree, letter_code=''):
 
 
 s = "beep boop beer!"
+
 print(f"Кодируем текст: '{s}'")
 print("Частота символов в тексе: ")
 print(*[(elem.frequency, elem.letter) for elem in build_nodes_deque(s)])
 haffman_tree = build_haffman_tree(build_nodes_deque(s))
 haffman_code = build_haffman_code(haffman_tree)
-print(build_haffman_code(haffman_tree))
+print("Таблица кодирования: ")
+print(haffman_code)
+print("Закодированная строка: ")
 for i in s:
     print(haffman_code[i], end=' ')
