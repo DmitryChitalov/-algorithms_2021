@@ -10,7 +10,9 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
+
     def __init__(self, root_obj):
         # корень
         self.root = root_obj
@@ -22,6 +24,10 @@ class BinaryTree:
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
+        if not self:
+            raise Exception("Уз")
+        if new_node > self.get_root_val():
+            raise Exception(f"Ошибка вставки!!! Нельзя вставить число {new_node} больше корня {self.get_root_val()}")
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -37,6 +43,9 @@ class BinaryTree:
     # добавить правого потомка
     def insert_right(self, new_node):
         # если у узла нет правого потомка
+        if new_node < self.get_root_val():
+            raise Exception(f"Ошибка вставки!!! Нельзя вставить число {new_node} меньше корня {self.get_root_val()}")
+
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -65,15 +74,29 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    def find_noode(self,node, numb):
+        if not node:
+            return node
+        if node.root < numb:
+            return self.find_noode(node.right_child,numb)
+        elif node.root > numb:
+            return self.find_noode(node.left_child,numb)
+        elif node.root == numb:
+            return node
 
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+r.insert_left(4)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
-r.insert_right(12)
+r.insert_right(9)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print(r.get_right_child())
+a = r.get_right_child().root
+r.get_left_child().insert_right(5)
+r.left_child.right_child.insert_right(17)
+r.left_child.right_child.insert_right(3)
