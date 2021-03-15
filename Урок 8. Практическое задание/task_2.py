@@ -21,6 +21,10 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if not self:
+            raise Exception("")
+        if new_node > self.get_root_val():
+            raise Exception(f'Ошибка! Число больше корня {self.get_root_val()}')        
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -36,6 +40,8 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node < self.get_root_val():
+            raise Exception(f'Ошибка! Число меньше корня {self.get_root_val()}')                
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -64,7 +70,16 @@ class BinaryTree:
     # метод доступа к корню
     def get_root_val(self):
         return self.root
-
+    
+    def my_func(self, node, number):
+        if not node:
+            return node
+        if node.root < number:
+            return self.my_func(node.right_child, number)
+        elif node.root > number:
+            return self.my_func(node.left_child, number)
+        elif node.root == number:
+            return node
 
 r = BinaryTree(8)
 print(r.get_root_val())
