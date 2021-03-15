@@ -15,3 +15,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equality(number):
+    def equality_left(num):
+        if num != 0:
+            return num + equality_left(num - 1)
+        else:
+            return 0
+
+    def equality_right(num):
+        return num * (num + 1) / 2
+
+    try:
+        number = int(number)
+        if equality_left(number) == equality_right(number):
+            print(f'{equality_left(number)} = {equality_right(number)}')
+        else:
+            print('Доказательство пошло не по плану')
+    except ValueError:
+        print('Ошибка, введите корректное число!')
+        return equality(input('Введите число: '))
+
+
+equality(input('Введите число: '))

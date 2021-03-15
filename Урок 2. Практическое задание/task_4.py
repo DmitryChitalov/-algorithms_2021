@@ -12,3 +12,19 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_collection(n, number):
+    if n != 0:
+        try:
+            """print(f'Шаг: {n} Число {float(number)} + ({float(number) / (-2)}) = '
+                  f'{float(number) + float(number) / (-2)}')"""
+            return float(number) + sum_collection(int(n) - 1, float(number) / (-2))
+        except ValueError:
+            print(f'Ошибка, ввода чисел')
+            return sum_collection(input('Введите количество элементов (n): '), input('Введите элемент старта: '))
+    else:
+        return 0
+
+
+print(sum_collection(input('Введите количество элементов (n): '), input('Введите элемент старта: ')))
