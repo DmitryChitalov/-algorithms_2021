@@ -19,3 +19,27 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+lst = random.sample(range(1, 1000), 25)
+
+# Алгоритм №1 (сложность O(n^2) - квадратичная):
+def low_in_list_1(lst):
+    low = lst[0]
+    for i in range (0, len(lst)):
+        for j in range(1, (len(lst)-1)):
+            if (lst[i] < lst[j]) and (lst[i] < low):
+                low = lst[i]
+    return low
+
+# Алгоритм №2 (сложность O(n) - линейная):
+def low_in_list_2(lst):
+    low = lst[0]
+    for i in lst:
+        if i < low:
+            low = i
+    return low
+
+print(f'Исходный список: {lst}')
+print(f'Результат работы алгоритма №1: {low_in_list_1(lst)}')
+print(f'Результат работы алгоритма №2: {low_in_list_2(lst)}')
