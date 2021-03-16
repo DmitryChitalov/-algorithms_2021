@@ -12,3 +12,26 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+numb = int(input("Введите число: "))
+
+
+def get_sum_number(n, sum=None, sign=True):
+    if sum is None:
+        n = n - 1
+        sum = 1
+    else:
+        if sign:
+            sign = False
+            sum = sum - sum / 2
+        else:
+            sign = True
+            sum = sum + sum / 2
+
+    if n == 0:
+        return sum
+    else:
+        return get_sum_number(n - 1, sum, sign)
+
+
+print(get_sum_number(numb))

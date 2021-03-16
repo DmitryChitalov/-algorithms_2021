@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def compare_func(n):
+    if n == 0:
+        return n
+    else:
+        return n + compare_func(n - 1)
+
+
+try:
+    numb = int(input("Введите число: "))
+    if compare_func(numb) == numb * (numb + 1) / 2:
+        print("Равенство верно")
+    else:
+        print("Равенство не верно")
+except ValueError:
+    print("Вы ввели не сичло!")
