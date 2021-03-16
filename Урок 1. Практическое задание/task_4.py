@@ -26,3 +26,25 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Решение №1. Сложность O(n^2) - квадратичная.
+def user_check():
+    user_pass = {'mrFrog':'1234', 'uncle_J':'abcd'}
+    user_status = {'mrFrog':True, 'uncle_J':False}
+
+    while True:
+        user = input("Введите имя: ")
+        password = input("Введите пароль: ")
+        if user not in user:
+            print("Введите имя нового пользователя: ")
+            continue
+        if password == user_pass.get(user) and user_status.get(user) == True:
+            print(f'Добро пожаловать, {user}. Ваша учетная запись активна')
+        elif password == user_pass.get(user) and user_status.get(user) == False:
+            print(f'Добро пожаловать, {user}. Ваша учетная заморожена\nОбратитесь к администратору')
+        else:
+            print("Неверный пароль, попробуйте еще раз")
+
+user_check()
+
+# Решение №2. Не выполнено.

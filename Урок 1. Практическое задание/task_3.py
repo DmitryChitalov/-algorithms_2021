@@ -21,3 +21,31 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+rating = {'Cisco':843,
+          'Google':5874,
+          'HTC': 560,
+          'Yandex':1260,
+          'IBM':5420,
+          'Rambler': 321}
+
+# Решение №1. Сложность O(n log n) - линейно-логарифмическая.
+# Предпочтительное решение.
+
+values_list = sorted(rating, key=rating.get, reverse=True)[:3] #O(n log n) - линейно-логарифмическая
+for el in values_list: #O(n) - линейная
+    print(el, ":", rating[el]);
+
+# Решение №2. Сложность O(n^2) - квадратичная.
+# Более сложное по О-нотации, и при этом неизящное решение
+
+sorted_values = sorted(rating.values(), reverse=True) #O(n log n) - линейно-логарифмическая
+sorted_rating = {}
+iterator = 0
+for i in sorted_values: #O(n) - линейная
+    for k in rating.keys(): #O(n) - линейная
+        if rating[k] == i and iterator < 3:
+            sorted_rating[k] = rating[k]
+            iterator += 1
+            break
+print (sorted_rating)
