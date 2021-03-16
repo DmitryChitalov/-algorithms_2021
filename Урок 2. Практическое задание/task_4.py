@@ -12,3 +12,38 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_half(num, sum_sequence=0):
+    """Функция возвращает сумму элементов ряда чисел: 1 / 2 ** num * 1(-1)"""
+
+    if num % 10 % 2 != 0:
+        sign = -1
+    else:
+        sign = 1
+
+    if num < 0:
+        return sum_sequence
+
+    sum_sequence += (1 / 2 ** num) * sign
+    return sum_half(num - 1, sum_sequence)
+
+
+# ---------------------------- main --------------------------
+while True:
+    print('-' * 50, '\nДля выхода введите => 0')
+    number = input('Введите количество элементов: ')
+
+    if number == '0':
+        print('Выход')
+        break
+
+    try:
+        number = int(number)
+    except ValueError:
+        print('Не введено натуральное число!!!')
+        continue
+
+    print(f'Сумма элементов = {sum_half(number - 1)}')
+
+
