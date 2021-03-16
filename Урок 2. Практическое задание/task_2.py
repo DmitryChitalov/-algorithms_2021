@@ -18,3 +18,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_count(usr_num, even=0, odd=0):
+    if usr_num == 0:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    else:
+        operand = usr_num % 10
+        if operand % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        even_odd_count(usr_num // 10, even, odd)
+
+
+even_odd_count(int(input('Введите число:')))

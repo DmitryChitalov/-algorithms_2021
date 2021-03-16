@@ -28,3 +28,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operator == '0':
+        print('Завершено')
+    elif operator not in ['+', '-', '*', '/']:
+        print('Вы ввели неверную операцию.')
+        calc()
+    else:
+        try:
+            first_num = int(input('Введите первое число: '))
+            second_num = int(input('Введите второе число: '))
+            if operator == "+":
+                res = first_num + second_num
+            elif operator == "-":
+                res = first_num - second_num
+            elif operator == "*":
+                res = first_num * second_num
+            elif operator == "/":
+                res = first_num / second_num
+            print(f'Ваш результат: {res}')
+            return calc()
+        except ZeroDivisionError:
+            print("Делить на ноль нехорошо")
+            return calc()
+        except ValueError:
+            print("Вы ввели не число. Попробуйте еще раз.")
+            return calc()
+
+
+calc()
