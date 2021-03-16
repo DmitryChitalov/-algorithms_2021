@@ -18,3 +18,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_odd_number(user_number, even_num = 0, odd_num = 0):
+    """
+    :param user_number: передаваемое пользователем число
+    :param even_num: количество четных цифр в числе
+    :param odd_num: количество нечетных цифр в числе
+    :return: возвращается список
+    """
+    if user_number == 0:
+        return odd_num, even_num
+    else:
+        if user_number % 2 == 1:
+            even_num += 1
+        else:
+            odd_num += 1
+        return even_odd_number(user_number // 10, even_num, odd_num)
+
+try:
+    user_number = int(input('Введите число: '))
+    print(f'Количество четных и нечетных цифр в числе равно: {even_odd_number(user_number)}')
+except ValueError as err:
+    print(f'Вы ввели не число! {err}')

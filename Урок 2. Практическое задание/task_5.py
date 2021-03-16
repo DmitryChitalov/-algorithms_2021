@@ -23,3 +23,20 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+START_CHAR = 32
+FINISH_CHAR = 128
+COLUMNS = 10
+
+def char_ascii(i, char):
+    if char == FINISH_CHAR:
+        return 'exit'
+    print(f'{char}\t- {chr(char)}', end=' \t')
+
+    if i == COLUMNS:
+        i = 0
+        print('')
+
+    char_ascii(i + 1, char + 1)
+
+
+char_ascii(1, START_CHAR)
