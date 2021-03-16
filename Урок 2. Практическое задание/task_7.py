@@ -20,6 +20,11 @@
 def equality_check(num, el=1, sum=0):
     try:
         num = int(num)
+    except ValueError:
+        print("Вы ввели не число. Попробуйте еще раз:")
+        num = input("Введите число: ")
+        equality_check(num)
+    else:
         if num == el:
             sum += el
             result = sum == num * (num + 1) / 2
@@ -27,10 +32,6 @@ def equality_check(num, el=1, sum=0):
         else:
             sum += el
             equality_check(num, el + 1, sum)
-    except ValueError:
-        print("Вы ввели не число. Попробуйте еще раз:")
-        num = input("Введите число: ")
-        equality_check(num)
 
 
 user_num = input("Введите число: ")

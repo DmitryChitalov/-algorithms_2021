@@ -21,6 +21,10 @@ def guess_the_number(hidden_num, attempts=10):
         print(f'Осталось попыток: {attempts}')
         try:
             user_num = int(input('Попробуйте угадать число:'))
+        except ValueError:
+            print("Вы ввели не число. Попытка не считается, попробуйте еще раз. ")
+            guess_the_number(hidden_num, attempts)
+        else:
             if user_num == hidden_num:
                 print(f'Победа!!! Вы отгадали число!!!')
             elif user_num < hidden_num:
@@ -29,9 +33,6 @@ def guess_the_number(hidden_num, attempts=10):
             else:
                 print(f'Неправильно, загаданное число меньше.')
                 guess_the_number(hidden_num, attempts - 1)
-        except ValueError:
-            print("Вы ввели не число. Попытка не считается, попробуйте еще раз. ")
-            guess_the_number(hidden_num, attempts)
 
 
 hidden_num = randint(0, 100)

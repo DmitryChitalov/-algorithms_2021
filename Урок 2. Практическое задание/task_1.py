@@ -41,6 +41,13 @@ def calc():
         try:
             first_num = int(input('Введите первое число: '))
             second_num = int(input('Введите второе число: '))
+        except ZeroDivisionError:
+            print("Делить на ноль нехорошо")
+            return calc()
+        except ValueError:
+            print("Вы ввели не число. Попробуйте еще раз.")
+            return calc()
+        else:
             if operator == "+":
                 res = first_num + second_num
             elif operator == "-":
@@ -50,12 +57,6 @@ def calc():
             elif operator == "/":
                 res = first_num / second_num
             print(f'Ваш результат: {res}')
-            return calc()
-        except ZeroDivisionError:
-            print("Делить на ноль нехорошо")
-            return calc()
-        except ValueError:
-            print("Вы ввели не число. Попробуйте еще раз.")
             return calc()
 
 
