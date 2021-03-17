@@ -11,3 +11,22 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def lucky_num(num: int, i=0):
+    i += 1
+    if i > 10:
+        print(f'Game Over!\nЧисло: {num}')
+        return
+    else:
+        answer = int(input(f'Попытка #{i}\nОтгадайте число от 0 до 100: '))
+        if answer == num:
+            print('Угадали!')
+            return
+        else:
+            print('Загаданное число больше!\n' if answer < num else 'Загаданное число меньше!\n')
+            lucky_num(num, i)
+
+
+lucky_num(random.randint(0, 100))

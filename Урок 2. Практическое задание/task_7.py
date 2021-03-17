@@ -15,3 +15,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_equality(n, res=0, i=0):
+    if n == i:
+        return res
+    else:
+        i += 1
+        res += i
+        return check_equality(n, res, i)
+
+
+num = int(input('Введите N: '))
+print(f"{check_equality(num)} = {num * (num + 1) // 2}? {check_equality(num) == num * (num + 1) // 2}")

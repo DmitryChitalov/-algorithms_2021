@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def get_ascii(sym=32):
+    for row in range(sym, sym + 10):
+        print(f"{row} - {chr(row)}", end=' ')
+        if row == 127:
+            return
+    print('\n')
+    get_ascii(sym + 10)
+
+
+get_ascii()
