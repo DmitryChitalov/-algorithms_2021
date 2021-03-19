@@ -28,3 +28,41 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operations():
+    operators = '+-*/'
+    user_input = input('Введите тип операции или 0 для выхода: ')
+
+    if user_input == '0':
+        return None
+    elif user_input not in "+-*/":
+        print('Вы ввели некорректный тип операции, повторите сначала.')
+        return operations()
+    else:
+        try:
+            operand_left = int(input('Введите первое число: '))
+        except ValueError as Error:
+            print('Вы ввели некорректное первое число, повторите сначала.')
+            return operations()
+        try:
+            operand_right = int(input('Введите второе число: '))
+        except ValueError as Error:
+            print('Вы ввели некорректное второе число, повторите сначала.')
+            return operations()
+
+        if user_input == '*':
+            result = operand_left * operand_right
+        elif user_input == '+':
+            result = operand_left + operand_right
+        elif user_input == '-':
+            result = operand_left - operand_right
+        elif user_input == '/':
+            if operand_right != 0:
+                result = operand_left / operand_right
+            else:
+                result = 'None - Деление на 0 недопустимо.'
+        print(f"Результат вычисления равен {result}")
+        return operations()
+
+operations()

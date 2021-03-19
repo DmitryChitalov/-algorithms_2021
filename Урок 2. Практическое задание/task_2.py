@@ -18,3 +18,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_calculation(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        digit = number % 10
+        if digit // 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        number = number // 10
+        return even_odd_calculation(number, even, odd)
+
+
+print(even_odd_calculation(123))
