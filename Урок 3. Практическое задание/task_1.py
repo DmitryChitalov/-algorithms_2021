@@ -21,17 +21,10 @@ def create_obj_time_decorator(create_func_to_measure_time):
         return obj
     return time_measure
 
-def get_elem_time_decorator(get_func_to_measure_time):
-    def time_measure(obj, value):
+def get_numbers_list_elem_in_circle_decorator(get_func_to_measure_time):
+    def time_measure(numbers_list):
         start = time.time()
-        get_func_to_measure_time(obj, value)
-        print(f'Время выполнения функции {get_func_to_measure_time}: {time.time() - start} c.')
-    return time_measure
-
-def get_list_elem_in_circle_decorator(get_func_to_measure_time):
-    def time_measure(list):
-        start = time.time()
-        get_func_to_measure_time(list)
+        get_func_to_measure_time(numbers_list)
         print(f'Время выполнения функции {get_func_to_measure_time}: {time.time() - start} c.')
     return time_measure
 
@@ -44,25 +37,17 @@ def get_dict_elem_in_circle_decorator(get_func_to_measure_time):
 
 
 @create_obj_time_decorator
-def fill_list():
+def fill_numbers_list():
     return [i + 1 for i in range(100000)]
 
 @create_obj_time_decorator
 def fill_dict():
     return {f'{value + 1}':value + 1 for value in range(100000)}
 
-@get_elem_time_decorator
-def get_list_elem(list, number):
-    return list[number]
-
-@get_elem_time_decorator
-def get_dict_value(dictionary, value):
-    return dictionary[value]
-
-@get_list_elem_in_circle_decorator
-def get_list_elem_in_circle(list):
+@get_numbers_list_elem_in_circle_decorator
+def get_numbers_list_elem_in_circle(numbers_list):
     for i in range(100):
-        list[i]
+        numbers_list[i]
 
 @get_dict_elem_in_circle_decorator
 def get_dict_elem_in_circle(dictionary, keys):
@@ -75,18 +60,16 @@ def another_get_dict_elem_in_circle(dictionary, keys):
         dictionary.get(key)
 
 
-list = fill_list()          # быстрее выполняется заполение списка (0.006 с), т.к. при заполнении словаря (0.032 с)
-                            # происходит вычисление хеш-значений для каждого ключа
+list_of_numbers = fill_numbers_list()   # быстрее выполняется заполение списка (0.013 с),
+                                        # т.к. при заполнении словаря (0.051 с)
+                                        # происходит вычисление хеш-значений для каждого ключа
 dictionary = fill_dict()
 
-get_list_elem(list, 57)              # по результатам замеров, получение одного элемента в обоих случаях занимает
-get_dict_value(dictionary, '57')     # 0.0 с, однако теоретическая сложность для словаря О(1), для списка - О(n),
-                                     # где n - len(list)
-
-get_list_elem_in_circle(list)               # по результатам замеров, get_list_elem_in_circle выполняется за 0.0 с,
-                                            # get_dict_elem_in_circle - за 0.011 с. Это связано с тем, что в функцию
-keys = [f'{i + 1}' for i in range(100000)]  # get_dict_elem_in_circle передается большее число аргументов
+get_numbers_list_elem_in_circle(list_of_numbers)   # по результатам замеров, get_numbers_list_elem_in_circle выполняется
+                                                   # за 0.0 с, get_dict_elem_in_circle - за 0.017 с. Это связано с тем,
+                                                   # что в функцию get_dict_elem_in_circle передается большее число
+keys = [f'{i + 1}' for i in range(100000)]         # аргументов
 get_dict_elem_in_circle(dictionary, keys)
 
-another_get_dict_elem_in_circle(dictionary, keys)   # выполняется за 0.01 с, ускорение за счет применения встроенной
+another_get_dict_elem_in_circle(dictionary, keys)   # выполняется за 0.015 с, ускорение за счет применения встроенной
                                                     # функции dict.get()
