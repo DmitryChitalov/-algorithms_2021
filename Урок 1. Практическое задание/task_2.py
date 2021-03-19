@@ -19,3 +19,39 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def o_n2(arr):
+    '''
+    Сложность - квадратичная, сравнение выполняется len(arr)^2 раз  (81n)
+    :param arr:
+    :return:
+    '''
+    i = 0
+    z = 0
+    min = arr[i]
+    for i in arr:
+        for z in arr:
+            if i < z and i < min:
+                min = i
+
+    return min
+
+
+def o_n(arr):
+    '''
+    Сложность - линейная, сравнение выполняется len(arr) раз (9n)
+    :param arr:
+    :return:
+    '''
+    i = 0
+    min = arr[i]
+    while i < len(arr):
+        if arr[i] < min:
+            min = arr[i]
+        i += 1
+    return min
+
+
+arr = [46, 46, 23, 12, 5, 5, 27, 6, 56]
+print(f'Функция О(n) = {o_n(arr)}')
+print(f'Функция О(n^2) = {o_n2(arr)}')
