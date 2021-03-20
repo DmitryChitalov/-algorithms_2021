@@ -26,3 +26,31 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+
+# сложность 0(1)
+def authorization(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return 'your account is active, welcome'
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return 'your account is not active, asctivation equired'
+        elif users[user_name]['password'] != user_password:
+            return 'wrong password'
+    else:
+        return 'this user does not exist'
+
+
+# сложность 0(n)
+
+def authorization1(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return 'your account is active, welcome'
+            elif value['password'] == user_password and not value['activation']:
+                return 'your account is not active, asctivation equired'
+            elif value['password'] == user_password:
+                return 'wrong password'
+    return 'this user does not exist'

@@ -21,3 +21,31 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+firm = {
+'cars': 2000,
+'flowers': 300,
+'drums': 550,
+'adiddas': 4000,
+'restore': 5000,
+'petshop': 400
+}
+
+#Сложность этой функции О(n)
+
+def max_revenue(inp):
+    max_rev = {}
+    list_dict = dict(inp)
+    for i in range(3):
+        maximum = max(list_dict.items(), key=lambda k_v: k_v[1])
+        del list_dict[maximum[0]]
+        max_rev[maximum[0]] = maximum[1]
+    return max_rev
+
+print(max_revenue(firm))
+
+#Сложность этой функции О(logn)
+
+lst_from_dict = list(firm.items())
+lst_from_dict.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+    print(lst_from_dict[i][0], ';')
