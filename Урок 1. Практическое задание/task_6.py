@@ -14,3 +14,41 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+class TaskQueue:
+    def __init__(self):
+        self.base_queue = []
+        self.revision_queue = []
+        self.completed_tasks = []
+
+    def __str__(self):
+        base = list(map(str, self.base_queue))
+        revision = list(map(str, self.revision_queue))
+        completed = list(map(str, self.completed_tasks))
+        return f'Базовая очередь :{base} \nОчередь на доработку: {revision} \nВыполненные задачи: {completed}'
+
+    def add_task(self, name):
+        self.base_queue.append(name)
+
+    def task_to_revision(self):
+        self.revision_queue.append(self.base_queue.pop(0))
+
+    def task_back_to_base(self):
+        self.base_queue.append(self.revision_queue.pop(0))
+
+    def complete_task(self):
+        self.completed_tasks.append(self.base_queue.pop(0))
+
+
+tasks = TaskQueue()
+
+tasks.add_task('задача1')
+tasks.add_task('задача2')
+tasks.add_task('задача3')
+tasks.add_task('задача4')
+tasks.add_task('задача5')
+
+tasks.complete_task()
+tasks.complete_task()
+tasks.task_to_revision()
+print(tasks)
