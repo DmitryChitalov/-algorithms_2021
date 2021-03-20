@@ -54,5 +54,5 @@ for company in companies:
 
 
 print(companies_dict)
-print(algorithm_1(companies_dict))
+print(algorithm_1(companies_dict))  
 print(algorithm_2(companies_dict))

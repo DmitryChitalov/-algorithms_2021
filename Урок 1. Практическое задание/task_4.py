@@ -45,7 +45,7 @@ class users_db():
     def activate_user(self, username):  # O(1)
         self.users_activations[username] = 1
     
-    def authenticate_user(self,username,password):  # O(1)
+    def authenticate_user(self,username,password):  # O(1)  Самый быстрвй алогоритм, выполняется константное время
         if password == self.users_passwords[username] and self.users_activations[username] == 1:
             return "Access Granted"
         elif password == self.users_passwords[username]: # в условии нет проверки активированности учетки
@@ -53,7 +53,7 @@ class users_db():
         else:
             return "Access Denied"
             
-    def authenticate_user_worse_algorithm(self,username,password):  # O(N**2)
+    def authenticate_user_worse_algorithm(self,username,password):  # O(N**2)   Медленный алгоритм, так как содерджит в себе цикл в цикле
         for self.user_name,self.user_password in self.users_passwords.items():
             if self.user_name == username:
                 if self.user_password == password:
@@ -73,6 +73,8 @@ new_users_db.add_new_user("Pavel","qwe")
 print(new_users_db.dump())
 new_users_db.activate_user("Pavel")
 print(new_users_db.dump())
+
+# Проверка учетной записи быстрым алгоритмом
 print(new_users_db.authenticate_user("Dmitry","123"))   # Account not activated
 print(new_users_db.authenticate_user("Pavel","asd"))    # Wrong password
 print(new_users_db.authenticate_user("Pavel","qwe"))    # Right credentials - Access granted
