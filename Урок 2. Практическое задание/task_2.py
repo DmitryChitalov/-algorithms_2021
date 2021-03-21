@@ -18,3 +18,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def ev_odd_num(number, even=0, odd=0):
+    if number == 0:
+        print(f"Sum of even numbers: {even}\n"
+              f"Sum of odd numbers: {odd}")
+        return
+    elif (number % 10) % 2 == 0:
+        even += 1
+    elif (number % 10) % 2 == 1:
+        odd += 1
+    return ev_odd_num(number // 10, even, odd)
+
+
+try:
+    ev_odd_num(int(input("Enter a natural number: ")))
+except ValueError:
+    print("Invalid number")

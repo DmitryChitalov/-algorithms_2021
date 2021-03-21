@@ -22,3 +22,16 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def flip(number, flip_number=""):
+    if number == 0:
+        return print(flip_number)
+    flip_number += str(number % 10)
+    flip(number // 10, flip_number)
+
+
+try:
+    flip(int(input("Enter a natural number: ")))
+except ValueError:
+    print("Invalid number")

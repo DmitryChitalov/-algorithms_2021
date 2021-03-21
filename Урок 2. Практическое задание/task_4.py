@@ -12,3 +12,18 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_el(n, answer=1, i=1):
+    if n == 1 or n == 0:
+        return print(answer)
+    i /= -2
+    answer = answer + i
+    n -= 1
+    sum_el(n, answer, i)
+
+
+try:
+    sum_el(int(input("Enter a natural number: ")))
+except ValueError:
+    print("Invalid number")
