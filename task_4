@@ -1,0 +1,18 @@
+"""elem = int(input("Введите кол-во элементов: "))
+number = 1
+amount = 0
+for i in range(elem):
+    amount += number
+    number /= -2
+print(amount)"""
+
+
+def sum_elem(elem, number, amount, i):
+    if i == elem:
+        print(f"Сумма элементов равна: {amount}")
+    elif i < elem:
+        return sum_elem(elem, number / -2, amount + number, i + 1)
+
+
+elem = int(input("Введите кол-во элементов: "))
+sum_elem(elem, 1, 0, 0)

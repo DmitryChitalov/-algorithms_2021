@@ -1,0 +1,30 @@
+""" структура через цикл
+a = int(input("Введите число: "))
+even = 0
+odd = 0
+
+while a > 0:
+    if a % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    a = a // 10
+
+print(f"Even:{even}, odd: {odd}")"""
+
+
+def even_odd(a, even=0, odd=0):
+    if a == 0:
+        return even, odd
+    else:
+        b = a % 10  # над этим выражением пришлось призадуматься
+        a = a // 10
+        if b % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd(a, even, odd)
+
+
+number = int(input("Введите число: "))
+print(f"Количество четных и не четных чисел {even_odd(number)}")
