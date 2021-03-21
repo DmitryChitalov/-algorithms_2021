@@ -26,3 +26,22 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+users = {'user1': {'login': 'u1', 'passwor': 'qwe1', 'staus': 1},
+         'user2': {'login': 'u2', 'passwor': 'qwe2', 'staus': 0},
+         'user3': {'login': 'u3', 'passwor': 'qwe3', 'staus': 1},
+         'user4': {'login': 'u4', 'passwor': 'qwe4', 'staus': 0},
+         'user5': {'login': 'u5', 'passwor': 'qwe5', 'staus': 1}}
+
+
+while True:
+    user = input('Введите имя пользователя: ')
+    if user in users.keys():
+        # print('True')
+        break
+    else:
+        print('Пользователя не существует')
+
+print(user)
+
+for key, value in users[user].items():
+    print(key,'-' ,value)

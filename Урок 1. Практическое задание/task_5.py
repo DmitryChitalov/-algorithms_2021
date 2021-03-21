@@ -1,3 +1,5 @@
+import random
+
 """
 Задание 5.
 Задание на закрепление навыков работы со стеком
@@ -23,3 +25,56 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+"""работал над вариантом где каждый элемент падает в конец списка"""
+
+
+class StackClass:
+    def __init__(self, count):
+        self.elems = [[]]  # сразу задаю вложенный список
+        self.count = count  # добавил параметр для счетчика элементов в стеке
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        # self.elems.append(el)
+        if len(self.elems[-1]) + 1 <= self.count:
+            self.elems[-1].append(el)
+        else:
+            self.elems.append([el])
+
+    def pop_out(self):
+        return self.elems[-1].pop()  # удаление последнего элемента
+
+    def get_val(self):
+        """модифицировал метод, последний элемент, всего элементов"""
+        if len(self.elems[-1]) == 0:
+            self.elems.pop()  # проверка на пустой полседний стек списка
+        return f'последний элемент: {self.elems[-1][-1]}\n' \
+               f'всего элементов {sum([len(i) for i in self.elems])}'
+
+    def stack_size(self):
+        """модифицировал метод, теперь выводит все стеки, последний стек"""
+        if len(self.elems[-1]) == 0:
+            self.elems.pop()  # проверка на пустой полседний стек списка
+        return f'все стеки: {self.elems}\n' \
+               f'последний стек: {self.elems[-1]}'
+
+
+sid = random.randint(1, 10)  # генерация случайного размера стека
+el = StackClass(sid)
+
+for s in [random.randint(1, 15) for r in range(19)]:
+    el.push_in(s)  # генерация случайных элементов
+
+print(f'max колличество элементов в стеке - {sid}')
+print(el.stack_size())
+print(el.get_val())
+print(f'{el.pop_out()} - удален ', '\n\n')
+print(el.stack_size())
+print(el.get_val())
+print(f'{el.pop_out()} - удален ', '\n\n')
+print(el.stack_size())
+print(el.get_val())
