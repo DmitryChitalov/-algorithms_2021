@@ -1,0 +1,22 @@
+""" Структура через цикл
+
+for i in range(32, 128):
+    print(f" {i} - {chr(i)}", end='')
+    if (i - 1) % 10 == 0:
+        print()
+
+print()"""
+
+
+def asc(i, last):
+    if i == last:
+        return True
+    print(f" {i} - {chr(i)}", end='')
+    if (i - 1) % 10 == 0:
+        print()
+    asc(i + 1, last)
+
+
+i = int(input("Введите начальное число интервала таблицы: "))
+last = int(input("Введите конечное число таблицы: ")) + 1
+asc(i, last)

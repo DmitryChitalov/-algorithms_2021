@@ -1,0 +1,23 @@
+""" Структура через цикл
+a = int(input("Введите число: "))
+b = 0
+
+while a > 0:
+    digit = a % 10
+    a = a // 10
+    b = (b * 10) + digit
+
+print(f"Result {b}")"""
+
+
+def reverse_order(a, b=0):
+    if a == 0:
+        return b
+    else:
+        b = (b * 10) + a % 10
+        return reverse_order(a // 10, b)
+
+
+a = int(input("Введите число: "))
+
+print(f"Обратное число равно: {reverse_order(a)}")
