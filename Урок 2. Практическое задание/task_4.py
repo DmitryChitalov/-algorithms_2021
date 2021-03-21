@@ -12,3 +12,13 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def strange_function(n):
+    if n == 1:
+        return 1
+    else:
+        return (-1)**((n-1) % 2)*1/2**(n-1) + strange_function(n-1)
+
+
+print(strange_function(3))

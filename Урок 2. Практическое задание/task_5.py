@@ -23,3 +23,19 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_chr(start_number, end_number, n=1):
+    if start_number == end_number:
+        print(f'{start_number} - {chr(start_number)}')
+        return None
+    else:
+        print(f'{start_number} - {chr(start_number)}', end='')
+        if n % 10 == 0:
+            print('\n', end='')
+        n += 1
+        start_number += 1
+        return ascii_chr(start_number, end_number, n)
+
+
+ascii_chr(32, 127)
+ascii_chr(126, 127)

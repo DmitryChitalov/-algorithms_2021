@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_number(n):
+    if n == 1:
+        return n
+    else:
+        return n + count_number(n-1)
+
+
+try:
+    user_input = int(input('Введите число: '))
+    if count_number(user_input) == user_input*(user_input+1)/2:
+        print('Утверждение доказано.')
+    else:
+        print('Утверждение ложно.')
+except ValueError:
+    print('Вы ввели не число.')
