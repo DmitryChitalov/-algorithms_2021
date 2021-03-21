@@ -28,3 +28,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+propper_operators = ["+","-","*","/"]
+
+def calculate():
+    operation = input("Input operation: ") 
+    if operation == "0":
+        return
+    elif not operation in propper_operators:
+        print("Operator not found")
+        calculate()
+    else:
+        first_operand = int(input("Input first operand: "))
+        second_operand = int(input("Input second operand: ")) 
+        if second_operand == 0 and operation == "/":
+            print("Division by zero")
+            calculate()
+        else:
+            if operation == "+":
+                result = first_operand+second_operand
+            elif operation == "-":
+                result = first_operand-second_operand
+            elif operation == "*":
+                result = first_operand*second_operand
+            elif operation == "/":
+                result = first_operand/second_operand
+            print(result)
+            calculate()
+        
+
+calculate()

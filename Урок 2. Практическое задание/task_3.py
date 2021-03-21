@@ -22,3 +22,17 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def reverse_number(number):
+    incoming_number = number
+    if len(incoming_number) == 1:
+            return incoming_number
+    else:
+        current_number = int(incoming_number)%10
+        incoming_number = int(incoming_number)//10
+        return str(current_number) + reverse_number(str(incoming_number))
+            
+
+string_to_process = input("Input number: ")
+print(reverse_number(string_to_process))
