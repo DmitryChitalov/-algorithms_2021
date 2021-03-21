@@ -19,3 +19,14 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+list = [1,4,5,6,7,7,8,8]
+min_number = min(list)     #O(n)
+
+
+minimum = list[0]
+for i in range(1, len(list)):      #O(n**2)
+    if list[i] < minimum:
+        minimum = list[i]
+
+

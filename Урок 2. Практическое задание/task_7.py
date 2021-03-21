@@ -15,3 +15,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def rec_met(numb):
+    if numb == 1:
+        return numb
+    else:
+        return rec_met(numb - 1) + numb
+
+try:
+    NUMB = int(input("Введите число : "))
+    if rec_met(NUMB) == NUMB * (NUMB + 1) / 2:
+        print("Верно")
+except ValueError:
+    print("Введите число,а не строку")

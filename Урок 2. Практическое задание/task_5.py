@@ -23,3 +23,13 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+def ch(num = 32):
+    if num == 128:
+        return True
+    print(f"{num}-{chr(num)}", end=' ')
+    if (num - 31) % 10 == 0:
+        print('/n')
+
+    ch(num + 1)
+
+ch()
