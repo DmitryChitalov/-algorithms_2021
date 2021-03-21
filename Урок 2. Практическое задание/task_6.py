@@ -11,3 +11,25 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+def guess_number(number_to_guessed, curent_attempt = 1):
+    if curent_attempt > 10:
+        print("No more attempts left")
+        return
+    else:
+        number_to_try = int(input("Guess number (0-100): "))
+        if number_to_guessed == number_to_try:
+            print("You won")
+            return
+        else:
+            if number_to_try > number_to_guessed:
+                print("Less!")
+            else:
+                print("Greater!")
+            curent_attempt += 1
+            guess_number(number_to_guessed,curent_attempt)
+
+chosen_number = random.choice(range(0, 100))
+# print("Chosen number:",chosen_number)
+guess_number(chosen_number)
