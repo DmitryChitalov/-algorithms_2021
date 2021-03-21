@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc(sum=0):
+    print("Ваш результат: {}".format(sum))
+
+    meth = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if meth == '0':
+        return "Выход!"
+    elif meth != "+" and meth != "*" and meth != "-" and meth != "/":
+        print("Вы ввели {}. Введите операцию (+, -, *, / или 0 для выхода):".format(meth))
+        return calc(0)
+
+    try:
+        numb_1 = int(input("Введите первое число: "))
+        numb_2 = int(input("Введите второе число: "))
+    except ValueError:
+        print("Вы ввели не число. Исправтесь! ")
+        return calc(0)
+
+    if meth == "/":
+        if numb_2 == 0:
+            print("Деление на ноль не возможно!")
+            return calc(0)
+        else:
+            return calc((numb_1 / numb_2))
+    elif meth == "+":
+        return calc(numb_1 + numb_2)
+    elif meth == "-":
+        return calc(numb_1 - numb_2)
+    elif meth == "*":
+        return calc(numb_1 * numb_2)
+
+
+print(calc())
