@@ -18,3 +18,51 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+import sqlite3
+import hashlib
+
+conn = sqlite3.connect(r'db/users.db')
+cur = conn.cursor()
+
+cur.execute("""DROP TABLE IF EXISTS users;""")
+cur.execute("""CREATE TABLE IF NOT EXISTS users(
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   login TEXT NOT NULL UNIQUE,
+   pass TEXT);
+""")
+conn.commit()
+
+print("#" * 100)
+print("Регистрация пользователя")
+user = input("Введите логин: ")
+pass_log = input("Введите пароль: ")
+res = hashlib.sha256(user.encode() + pass_log.encode()).hexdigest()
+log_pass = (user, res)
+print("пароль {}, хэш пароля {}".format(pass_log, res))
+cur.execute("INSERT INTO users(login,pass) VALUES(?, ?);", log_pass)
+
+print("#" * 100)
+print("Вход в систему")
+user = input("Введите логин: ")
+pass_log = input("Введите пароль: ")
+
+cur.execute("SELECT pass FROM users WHERE login = ?;", (user,))
+res_bd = cur.fetchone()
+
+if res_bd is None:
+    print("Не верный логин!")
+else:
+    res_bd = "".join(res_bd)
+    if res_bd == hashlib.sha256(user.encode() + pass_log.encode()).hexdigest():
+        print("#" * 100)
+        print("Пароль в базе {}".format(res_bd))
+        print("Введенный Пароль {}".format(hashlib.sha256(user.encode() + pass_log.encode()).hexdigest()))
+        print("#" * 100)
+        print("Вы вошли в сисему!")
+    else:
+        print("#" * 100)
+        print("Пароль в базе {}".format(res_bd))
+        print("Введенный Пароль {}".format(hashlib.sha256(user.encode() + pass_log.encode()).hexdigest()))
+        print("#" * 100)
+        print("Пароли не совпадают")

@@ -9,3 +9,34 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+
+import hashlib
+
+cache = {}
+
+
+def url_cache(url, cashe):
+    flag = False
+    res = ""
+    if not len(cashe):
+        salt = "key0"
+        res = hashlib.sha256(url.encode() + salt.encode()).hexdigest()
+        cache[res] = url
+
+    for i in range(len(cashe)):
+        salt = "key" + str(i)
+        res = hashlib.sha256(url.encode() + salt.encode()).hexdigest()
+        if cashe.get(res):
+            break
+        else:
+            flag = True
+    if flag:
+        cache[res] = url
+
+
+url_cache("geek.ru", cache)
+url_cache("yandex.ru", cache)
+url_cache("geek.ru", cache)
+url_cache("yandex.ru", cache)
+url_cache("mail.ru", cache)
+print(cache)
