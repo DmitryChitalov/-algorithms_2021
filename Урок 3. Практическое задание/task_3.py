@@ -17,3 +17,19 @@
 """
 
 # hash?
+
+def unique(s, str_hash=[]):
+    """
+    Подсчет уникальных подстрок в передаваемой строке
+    :param s: передаваемая строка
+    :param str_hash: хэши уникальных подстрок
+    :return: количество уникальных подстрок
+    """
+    print(s, end='')
+    for k in range(2, len(s) + 1):
+        str_hash.append(hash(s[1:k]))
+        str_hash.append(hash(s[:k - 1]))
+
+    return f' - уникальных подстрок: {len(set(str_hash))}'
+
+print(unique('papa'))
