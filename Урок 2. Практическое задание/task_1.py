@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc():
+    """
+    ничего не передается. Данные принимаются в теле функции
+    :return: служит для рекурсии
+    """
+    command = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    operations = {
+        '+': (lambda x, y: x + y),
+        '-': (lambda x, y: x - y),
+        '*': (lambda x, y: x * y),
+        '/': (lambda x, y: x / y),
+        '0': '',
+    }
+
+    if command not in operations.keys():
+        print(f'команда "{command}" не распознана')
+        return calc()
+    elif command == '0':
+        return ('Работа программы завершена')
+    else:
+        try:
+            x = int(input('Введите первое число: '))
+            y = int(input('Введите второе число: '))
+            print (f'{x} {command} {y} = {operations[command](x, y)}')
+            return calc()
+        except ValueError:
+            print(f'Вы вместо числа ввели строку (((. Исправьтесь')
+            return calc()
+        except ZeroDivisionError:
+            print(f'Деление на ноль запрещено!')
+            return calc()
+
+print(calc())

@@ -11,3 +11,27 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+from random import randint
+
+START_NUMBER = 0
+END_NUMBER = 100
+COUNTER = 10
+
+def guess_number(number, i=0):
+    user_answer = int(input('Введите число: '))
+    if i == COUNTER - 1:
+        return 'Вы проиграли!'
+    elif user_answer == number:
+        return f'Вы угадали затратив {i} попыток'
+    else:
+
+        if user_answer > number:
+            print(f'Вы ввели слишком большое число. Осталось попыток: {COUNTER - i - 1}')
+            return guess_number(number, i + 1)
+        else:
+            print(f'Вы ввели слишком маленькое число. Осталось попыток: {COUNTER - i - 1}')
+            return guess_number(number, i + 1)
+
+
+print(guess_number(randint(START_NUMBER, END_NUMBER)))

@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_equal(number):
+    if number <= 1:
+        return number
+    else:
+        return check_equal(number - 1) + number
+
+
+number = input('Введите число: ')
+
+try:
+    if check_equal(int(number)) == int(number) * (int(number) + 1) / 2:
+        print('Равенство выполняется')
+except ValueError as err:
+    print(f'Вы ввели не число! {err}')

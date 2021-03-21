@@ -22,3 +22,21 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+def reverse_num(user_number, reverse_number = ''):
+    """
+    :param user_number: передаваемое пользователем число
+    :param reverse_number: инициализация возвращаемой переменной
+    :return: возвращается string чтоб не потерять нули в начале
+    """
+    reverse_number += str(user_number % 10)
+    if user_number < 10:
+        return reverse_number
+    else:
+        return reverse_number + reverse_num(user_number // 10)
+
+try:
+    user_number = int(input('Введите число, которое требуется перевернуть: '))
+    print(f'Перевернутое число: {reverse_num(user_number)}')
+except ValueError as err:
+    print(f'Вы ввели не число! {err}')
