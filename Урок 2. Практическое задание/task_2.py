@@ -18,3 +18,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def parser(number: int, result=None):
+    if result is None:
+        result = [0, 0]
+
+    if number == 0:
+        return tuple(result)
+    else:
+        if (number % 10) % 2 == 0:
+            result[0] += 1
+        else:
+            result[1] += 1
+        return parser(number // 10, result)
+
+
+print(parser(1239))

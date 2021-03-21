@@ -12,3 +12,16 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def get_sum_test(cycles: int, n=1.0, res=1):
+    if cycles == 1:
+        return res
+    else:
+        n = n / -2
+        cycles -= 1
+        res += n
+        return get_sum_test(cycles, n, res)
+
+
+print(get_sum_test(int(input('Количество стэков вызова: '))))

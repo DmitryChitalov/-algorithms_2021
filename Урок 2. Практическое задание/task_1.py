@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+PERM_OP = ('+', '-', '*', '/')
+
+
+def rec_calc(result=None):
+    if result:
+        print(f"Результат вычислений: {int(result) if result % 1 == 0 else result}")
+    op = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if op in PERM_OP:
+        try:
+            first_n, second_n = float(input('Введите первое число: ')), float(input('Введите второе число: '))
+        except ValueError:
+            print('Необходимо вводить только числа!')
+            rec_calc()
+        else:
+            if op == '+':
+                rec_calc(first_n + second_n)
+            elif op == '-':
+                rec_calc(first_n - second_n)
+            elif op == '*':
+                rec_calc(first_n * second_n)
+            elif op == '/':
+                try:
+                    rec_calc(first_n / second_n)
+                except ZeroDivisionError:
+                    print('Делить на ноль нельзя!')
+                rec_calc()
+    elif op == '0':
+        print('Программа завершена!')
+    else:
+        rec_calc()
+
+
+rec_calc()
