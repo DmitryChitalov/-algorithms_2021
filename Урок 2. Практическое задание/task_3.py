@@ -22,3 +22,15 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def num_reverser(usr_num, reversed_num=''):
+    if usr_num == 0:
+        print(f'Перевернутое число: {reversed_num}')
+    else:
+        operand = usr_num % 10
+        reversed_num += str(operand)
+        num_reverser(usr_num // 10, reversed_num)
+
+
+num_reverser(int(input('Введите число:')))

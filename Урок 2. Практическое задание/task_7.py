@@ -15,3 +15,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equality_check(num, el=1, sum=0):
+    try:
+        num = int(num)
+    except ValueError:
+        print("Вы ввели не число. Попробуйте еще раз:")
+        num = input("Введите число: ")
+        equality_check(num)
+    else:
+        if num == el:
+            sum += el
+            result = sum == num * (num + 1) / 2
+            print(result)
+        else:
+            sum += el
+            equality_check(num, el + 1, sum)
+
+
+user_num = input("Введите число: ")
+
+equality_check(user_num)

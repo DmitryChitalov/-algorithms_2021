@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_table(symb_counter=32, len_counter=0):
+    if symb_counter <= 127:
+        if len_counter == 10:
+            print('')
+            len_counter = 0
+        print(f'{symb_counter} - {chr(symb_counter)}', end=' ')
+        ascii_table(symb_counter + 1, len_counter + 1)
+
+
+ascii_table()
