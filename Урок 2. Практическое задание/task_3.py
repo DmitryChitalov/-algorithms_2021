@@ -27,7 +27,7 @@
 def reverse_number(number):
     incoming_number = number
     if len(incoming_number) == 1:
-            return incoming_number
+        return incoming_number
     else:
         current_number = int(incoming_number)%10
         incoming_number = int(incoming_number)//10
