@@ -23,3 +23,18 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_print(number=32, counter=1):
+    if number > 128:
+        return ''
+    else:
+        if counter % 10 == 0:
+            print(f'{ord(chr(number))} - {chr(number)}')
+            counter = 1
+        else:
+            print(f'{ord(chr(number))} - {chr(number)}', end='  ')
+            counter += 1
+        return ascii_print(number + 1, counter)
+
+
+print(ascii_print())
