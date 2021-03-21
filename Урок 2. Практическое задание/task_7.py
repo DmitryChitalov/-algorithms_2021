@@ -15,3 +15,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+"""
+Не совсем понял посказку. Надеюсь такое решение тоже подходит
+"""
+
+def left_side(number_for_left_side):    # Рекурсивный подсчет суммы элементов
+    if number_for_left_side == 0:
+        return 0
+    else:
+        return number_for_left_side + left_side(number_for_left_side - 1)
+
+def right_side(number_for_right_side):  # Подсчет суммы элементов по формуле
+    return number_for_right_side*(number_for_right_side + 1)/2
+
+
+def check_statement(number_to_check):   # Функция проверки утверждения
+    if left_side(number_to_check) == right_side(number_to_check):
+        print("Statement is true")
+    else:
+        print("Statement is false")
+
+
+
+check_statement(154)
+
+
