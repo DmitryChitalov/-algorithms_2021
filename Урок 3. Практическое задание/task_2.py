@@ -18,3 +18,22 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+import hashlib
+import uuid
+
+passwd = input('Введите пароль: ')
+user_uuid = uuid.uuid4().hex
+
+passwd_hash = hashlib.sha256(passwd.encode('utf-8')+user_uuid.encode('utf-8')).hexdigest()
+
+print(f"В базе данных хранится строка: {passwd_hash}")
+
+passwd_repeat = input('Введите пароль еще раз для проверки: ')
+
+password_hash_repeat = hashlib.sha256(passwd_repeat.encode('utf-8')+user_uuid.encode('utf-8')).hexdigest()
+
+if password_hash_repeat == passwd_hash:
+    print('Вы ввели правильный пароль.')
+else:
+    print('Вы ввели НЕ правильный пароль.')

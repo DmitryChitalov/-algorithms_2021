@@ -9,3 +9,21 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+
+import hashlib
+
+url_cash = dict()
+
+
+def cash_in(url: str):
+    if url_cash.get(url):
+        print(f"{url} присутствует в кэше")
+    else:
+        url_cash[url] = hashlib.sha256(url.encode('utf-8') + url.split('.')[-2].encode('utf-8')).hexdigest()
+
+
+cash_in('https://yandex.ru')
+cash_in('https://www.linux.org')
+cash_in('https://yandex.ru')
+
+print(url_cash)
