@@ -22,3 +22,31 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def change_num(num, change=''):
+    """Функция формирует обратную последовательность введеного числа"""
+
+    if num == 0:
+        return change
+    else:
+        change += str(num % 10)
+        return change_num(num // 10, change)
+
+
+# ---------------------------- main --------------------------
+while True:
+    print('-' * 50, '\nДля выхода введите => 0')
+    number = input('Введите натуральное число: ')
+
+    if number == '0':
+        print('Выход')
+        break
+
+    try:
+        number = int(number)
+    except ValueError:
+        print('Не введено натуральное число!!!')
+        continue
+
+    print(f'Перевертыш: {change_num(number)}')

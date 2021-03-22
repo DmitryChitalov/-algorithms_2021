@@ -15,3 +15,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_form(num, check, sum=0):
+    print(num, check, sum)
+    if num == 0 and check == sum:
+        return f'Равенство << 1+2+...+n = n(n+1)/2 >> ВЕРНО\n' \
+               f'{check} = {sum}'
+    sum += num
+    return check_form(num - 1, check, sum)
+
+
+# ---------------------------- main --------------------------
+while True:
+    print('-' * 50, '\nДля выхода введите => 0')
+    number = input('Введите значение: ')
+
+    if number == '0':
+        print('Выход')
+        break
+
+    try:
+        number = int(number)
+    except ValueError:
+        print('Не введено натуральное число!!!')
+        continue
+
+    control = number * (number + 1) / 2
+    print(check_form(number, control))
+

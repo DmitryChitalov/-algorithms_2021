@@ -18,3 +18,40 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd(num, even=0, odd=0):
+    """Функция определяет количество четных (even) и нечетных (odd) чисел"""
+
+
+    if num == 0:
+        return even, odd
+    else:
+        if num % 10 % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd(num // 10, even, odd)
+
+
+# ---------------------------- main --------------------------
+while True:
+    print('-' * 50, '\nДля выхода введите => 0')
+    number = input('Введите натуральное число: ')
+
+    if number == '0':
+        print('Выход')
+        break
+
+    try:
+        number = int(number)
+    except ValueError:
+        print('Не введено натуральное число!!!')
+        continue
+
+    answer = even_odd(number)
+    print(f'Четных: {answer[0]}\n'
+          f'Нечетных: {answer[1]}')
+
+
+

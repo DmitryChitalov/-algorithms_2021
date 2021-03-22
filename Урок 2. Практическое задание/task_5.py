@@ -23,3 +23,22 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_vision(start, end, count=1):
+    """Функция принимает значения начала и конца по кодировке ascii
+       выводит соответствующие символы по десять в строке"""
+    if start == end + 1:
+        return ''
+
+    if count % 10 == 0:
+        arg_end = '\n'
+    else:
+        arg_end = ' '
+
+    print(f'{start} - {chr(start)}', end=arg_end)
+
+    return ascii_vision(start + 1, end, count + 1)
+
+
+# ---------------------------- main --------------------------
+print(ascii_vision(32, 127))
