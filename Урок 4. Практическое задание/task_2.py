@@ -31,17 +31,19 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=100000))
+
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=100000))
+
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=100000))
 
 
 def memoize(f):
@@ -69,14 +71,76 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=100000))
+
+
+'''
+Если делать вывод, то можно сказать, что нет смысла реализовывать эту функцию через мемоизацию,
+так как, так или иначе, мемоизация просто кэширует данные из функции, то есть, при повторном вызове
+данные берутся не из рекурсии, а из кэша. Это, конечно, ускоряет работу функции при очередном вызове,
+но, по сути, сложность ее от этого не меняется.
+Поэтому рассмотрим еще варианты, которые способны оптимизировать работу этой функции, такие как
+цикл или более простые механизмы реверса:
+'''
+
+
+def simple_rev(num):
+    return str(num)[::-1]
+
+
+print('Оптимизированная функция simple_rev')
+print(
+    timeit(
+        'simple_rev(num_100)',
+        setup='from __main__ import simple_rev, num_100',
+        number=100000))
+print(
+    timeit(
+        'simple_rev(num_1000)',
+        setup='from __main__ import simple_rev, num_1000',
+        number=100000))
+print(
+    timeit(
+        'simple_rev(num_10000)',
+        setup='from __main__ import simple_rev, num_10000',
+        number=100000))
+
+
+def another_simple_rev(num):
+    rev_num = ''
+    for el in reversed(str(num)):
+        rev_num.join(el)
+    return rev_num
+
+
+print('Оптимизированная функция another_simple_rev')
+print(
+    timeit(
+        'another_simple_rev(num_100)',
+        setup='from __main__ import another_simple_rev, num_100',
+        number=100000))
+print(
+    timeit(
+        'another_simple_rev(num_1000)',
+        setup='from __main__ import another_simple_rev, num_1000',
+        number=100000))
+print(
+    timeit(
+        'another_simple_rev(num_10000)',
+        setup='from __main__ import another_simple_rev, num_10000',
+        number=100000))
+
+
+'''
+Видим, что самый действенный и быстрый механизм выполнения реверса - через срез
+'''
