@@ -12,3 +12,16 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+def function(n, summa=[], el=1):
+    if len(summa) == n:
+        return sum(summa)
+    else:
+        if len(summa) % 2:
+            summa.append(el * (-1))
+        else:
+            summa.append(el * (1))
+        el /= 2
+        return function(n, summa, el=el)
+
+
+print(function(3))
