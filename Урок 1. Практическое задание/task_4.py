@@ -26,3 +26,62 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'Batman': ('I am the night', False),
+         'Valera': ('32435', False),
+         'Ania_95': ('123123', True)}
+
+
+# O(1)
+def login_check(login, password):
+    if users.get(login):  # O(1)
+        if users.get(login)[0] == password:  # O(1)
+            if not users.get(login)[1]:  # O(1)
+                user_activation = input(
+                    'Ваша учетная запись не активирована введите ваш пороль сново для активации: ')  # O(1)
+                if users.get(login)[0] == user_activation:  # O(1)
+                    users.update({login: [password, True]})  # O(1)
+                    print('Активация успешно завершена\nДоступ разрешен')
+                elif users.get(login)[0] != user_activation:  # O(1)
+                    print('Не верно указан пороль доступ запрещен')
+            else:
+                print('Доступ разрешен')
+        elif users.get(login)[0] != password:  # O(1)
+            print('Пороль не верный!')
+    else:
+        print('Пользователь не найден')
+
+
+login_check('Batman', 'I am the night')
+print(users)
+login_check('Ania_95', '123123')
+login_check('Valera3', '32435')
+
+users_2 = [['Batman', 'I am the night', False],
+           ['Valera', '32435', False],
+           ['Ania_95', '123123', True]]
+
+
+# Не уверен но вроде это O(n^2)
+def login_check2(login, password):
+    for i in range(len(users_2)):  # O(n)
+        if users_2[i][0] == login and users_2[i][1] == password:  # O(n)
+            if not users_2[i][2]:  # O(1)
+                user_activation = input('Ваша учетная запись не активирована введите ваш пороль сново для активации: ')
+                if user_activation == users_2[i][1]:  # O(1)
+                    users_2[i].pop()  # O(n)
+                    users_2[i].append(True)  # O(1)
+                elif user_activation != users_2[i][1]:  # O(1)
+                    print('Не верный пароль!')
+                    break
+                else:
+                    print('Доступ разрешен')
+                    break
+
+
+login_check2('Batman', 'I am the night')
+print(users_2)
+login_check2('Ania_95', '123456')
+login_check2('Valera3', '32435')
+# По сути это две одинаковые реализации просто я хотел попробовать с помощью разных колекций реализовать
+# Как видим с помощью словаря это делается как быстрее так и локоничнее, плюс чуть легче в реализвции

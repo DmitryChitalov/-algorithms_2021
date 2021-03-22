@@ -21,3 +21,33 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+comp_dict = {'Company_1': 4552, 'Company_2': 7788, 'Company_3': 4512,
+             'Company_4': 52, 'Company_5': 85854}
+
+
+# Сложность O(n log n)
+def max_val(dict_comp):
+    # dict O(n) sorted O(n log n) dict.items O(n) срез O(1) вроде
+    return dict(sorted(dict_comp.items(), key=lambda item: item[1], reverse=True)[:3])
+
+
+# Сложность O(n^2)
+def max_val_for(dict_comp):
+    result = []  # O(1)
+    dict_copy = dict_comp.copy()  # O(n)
+    while len(result) < 3:  # O(1) и O(1)
+        for k, v in dict_copy.items():  # O(n)
+            if v == max(dict_comp.values()):  # O(n)
+                result += [(k, v)]  # O(1)
+                dict_comp.pop(k)  # O (1)
+                break
+    return dict(result)  # O(n)
+
+
+print(max_val(comp_dict))
+print(max_val_for(comp_dict))
+
+# Лучше первое решение так как оно более быcтрее и локоничнее чем второе
+# да и во втором обьем действий увеличивается в квадрате хотя я не совсем уверен в точности определения сложности
+
