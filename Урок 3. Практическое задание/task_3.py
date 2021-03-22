@@ -16,4 +16,19 @@
 а
 """
 
-# hash?
+
+def unique(word):
+    bd_hash = {}
+    for i in range(len(word)):
+        for j in range(i, len(word)):
+            upd = word[i:j+1]
+            bd_hash[hash(upd)] = upd
+    bd_hash.pop(hash(word))
+    return bd_hash
+
+
+in_word = 'papa'
+split_word = unique(in_word)
+print(f'{in_word} - {len(split_word)} уникальных подстрок:\n')
+for key in split_word:
+    print(split_word[key])
