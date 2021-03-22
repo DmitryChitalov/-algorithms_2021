@@ -10,3 +10,20 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+def check_text(text):
+    clear_text = ''
+    for i in text:
+        if i.isalpha():
+            clear_text += i
+    return clear_text
+
+def polindrom(text):
+    for i in range(len(text)//2):
+        if text[i] != text[-i-1]:
+            return f'не полиндром'
+    return f'полиндром'
+
+print(polindrom(check_text('шалаш')))
+
+

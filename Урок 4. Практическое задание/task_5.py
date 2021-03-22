@@ -16,6 +16,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснвование рез-ам
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -38,5 +39,77 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def eratosthenes_sieve(num):
+    end = 10
+    while True:
+        a = []
+        for i in range(end + 1):
+            a.append(i)
+        a[1] = 0
+        i = 2
+        while i <= end:
+            if a[i] != 0:
+                j = i + i
+                while j <= end:
+                    a[j] = 0
+                    j = j + i
+            i += 1
+        end = end + end
+        a = list(set(a))
+        a.remove(0)
+        if len(a) > num:
+            break
+    return a[num]
+
+
+
+i_10 = 10
+i_100 = 100
+i_1000 = 1000
+
+print(f'simple(i_10)= {timeit("simple(i_10)", "from __main__ import simple, i_10", number=100)}')
+print(f'eratosthenes_sieve(i_10)= {timeit("eratosthenes_sieve(i_10)", "from __main__ import eratosthenes_sieve, i_10", number=100)}')
+print(f'simple(i_100)= {timeit("simple(i_100)", "from __main__ import simple, i_100", number=100)}')
+print(f'eratosthenes_sieve(i_100)= {timeit("eratosthenes_sieve(i_100)", "from __main__ import eratosthenes_sieve, i_100", number=100)}')
+print(f'simple(i_1000)= {timeit("simple(i_1000)", "from __main__ import simple, i_1000", number=100)}')
+print(f'eratosthenes_sieve(i_1000)= {timeit("eratosthenes_sieve(i_1000)", "from __main__ import eratosthenes_sieve, i_1000", number=100)}')
+
+
+"""
+Резюмируя:
+Очевидно Решето Эратосфена превосходит наивный алгоритм по мере увеличения индекса простого числа.
+Сложность функции:
+    simple O(n**2)
+    eratosthenes_sieve O(n)
+
+simple(i_10)=                   0.004424821000000023
+eratosthenes_sieve(i_10)=       0.004405107000000019
+
+simple(i_100)=                  0.48599090500000003
+eratosthenes_sieve(i_100)=      0.087730894
+
+simple(i_1000)=                 82.282387626
+eratosthenes_sieve(i_1000)=     1.6972288559999953
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
