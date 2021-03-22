@@ -17,3 +17,23 @@
 """
 
 # hash?
+
+string = input('Введите набор строчных латинских букв: ')
+
+hash_set = set()
+
+for i in range(len(string)):
+    for j in range(len(string[i:])):
+        hash_set.add(hash(string[i:][:j+1]))
+        print(string[i:][:j+1])
+
+hash_set.remove(hash(string))
+
+print(len(hash_set))
+
+print(hash_set)
+
+
+
+
+
