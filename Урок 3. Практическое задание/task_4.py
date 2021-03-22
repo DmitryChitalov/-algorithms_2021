@@ -9,3 +9,24 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+import hashlib
+
+hash_dict = {}
+
+
+def hash_url(url):
+    salt = 'salt_to_hash'
+    hash_code = hashlib.md5(url.encode() + salt.encode()).hexdigest()
+    f = hash_dict.get(hash_code)
+    if f is None:
+        hash_dict[hash_code] = url
+        print('URL добалена в кэш')
+    else:
+        print('URL есть в хэше')
+        print(f)
+
+while True:
+    i = input("https://www.")
+    if i == 'q':
+        break
+    hash_url(i)
