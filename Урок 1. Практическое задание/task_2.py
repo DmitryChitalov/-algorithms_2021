@@ -19,3 +19,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+max_list = []
+list_1 = [random.randint(1, 100) for x in range(15)]
+print(list_1)
+
+
+def min_num_1(num_list):         # Сложность O(n^2)
+    max_list.append(num_list[0])
+    for el in num_list:
+        for el_1 in max_list:
+            if el < el_1:
+                max_list.pop()
+                max_list.append(el)
+    return max_list[0]
+
+
+print(min_num_1(list_1))
+
+
+def min_num_2(num_list):           # Сложность O(n)
+    num_list = list(set(num_list))   # O(n)
+    min_number = num_list[0]
+    for el in num_list:
+        if min_number > el:
+            min_number = el
+    return min_number
+
+
+print(min_num_2(list_1))
