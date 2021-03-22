@@ -11,3 +11,28 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+
+def guess_num(min=0, max=100, trys=10):
+    num = 15
+    n = int(input(f'Угадайте число от {min} до {max}, осталось {trys} попыток: \n>> '))
+    if trys == 0:
+        return "Попытки закончились, к сожалению у вас не получилось угадать."
+    else:
+        if n == num:
+            return "Поздравляю, вы угадали!"
+        elif num < n:
+            if n > 100 or n > max:
+                max = max
+            else:
+                max = n
+            guess_num(min, max, trys - 1)
+        elif num > n:
+            if n < 0 or n < min:
+                min = min
+            else:
+                min = n
+            guess_num(min, max, trys - 1)
+
+
+print(guess_num())

@@ -18,3 +18,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def evodd(number, even=0, odd=0):
+    if number == 0:
+        return f"Четных: {even}, цифр: {odd}"
+    elif (number % 10) % 2 == 0:
+        even += 1
+    elif (number % 10) % 2 == 1:
+        odd += 1
+    return evodd(number // 10, even, odd)
+
+
+print(evodd(int(input('>> '))))
