@@ -26,3 +26,60 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+def gen_user():
+    auth = {}
+    for i in range(1000000):
+        name = f'name_{i}'
+        password = f'password_{i}'
+        if i % 3 == 0:
+            active = True
+        else:
+            active = False
+        auth[name] = {'name': name, 'password': password, 'active': active}
+    return auth
+
+users = gen_user()
+
+
+# first option
+# Сложность O(n)
+def check(users: dict, user):
+    for u in range(len(users)):                                                                       # O(n)
+        if users[user]['active'] == True:                                                   # O(1)
+            return f'пользователь допущен к ресурсу'                                        # O(1)
+        else:
+            while users[user]['active'] != True:
+                print('Учетная запись не активирована. Доступ к ресурсу запрещен!')
+                answer = input(f'Активировать учетную запись {users[user]["name"]} (yes/no):')  # O(1)
+                if answer.lower() == 'yes' or 'нуы':                                            # O(1)
+                    users[user]['active'] = True                                                # O(1)
+                    cnt = 3                                                                     # O(1)
+                    while cnt > 0:                                                              # O(n)
+                        password = input(f'Введите пароль(попыток {cnt}): ')                    # O(1)
+                        if password == users[user]['password']:                                 # O(1)
+                            return f'Учетная запись активирована. Доступ разрешен!'             # O(1)
+                        else:
+                            cnt -= 1                                                            # O(1)
+                if answer.lower() == 'no' or 'тщ':                                              # O(1)
+                    return f'Доступ закрыт'                                                     # O(1)
+
+
+
+# second option
+# Сложность O(1)
+def check2(users: dict, user):
+    while users[user]:
+        if users[user]['active'] == True:
+            return f'Добро пожаловать'
+        if len(input('Учетная запись не активирована.\nДля активации введите любой символ: ')) > 0:
+            users[user]['active'] = True
+
+
+
+
+print(check(users, 'name_100000'))
+
+print(check2(users, 'name_100000'))
+
+

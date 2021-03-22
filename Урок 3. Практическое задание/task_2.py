@@ -18,3 +18,41 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+
+import sqlite3
+import hashlib
+
+
+def entrance():
+    salt = 'unique_user_login'
+    my_pass_name = input('Введите пароль: ')
+    my_pass = hashlib.sha256(salt.encode() + my_pass_name.encode()).hexdigest()
+    print(f'В базе данных хранится строка: {my_pass}')
+    conn = sqlite3.connect("algorithm_pass.db")
+    cursor = conn.cursor()
+    cursor.execute("""drop table if exists passwords""")
+    cursor.execute("""CREATE TABLE if not exists passwords
+                          (
+                          id integer NOT NULL PRIMARY KEY autoincrement,
+                          passw blob unique 
+                          )
+                   """)
+    try:
+        cursor.execute("insert into passwords(passw) values ('{}')".format(my_pass))
+        conn.commit()
+        cursor.execute("Select passw from passwords")
+    except sqlite3.IntegrityError:
+        cursor.execute("Select passw from passwords")
+    db = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    pass_again = input('Введите пароль еще раз для проверки: ')
+    check_pass = hashlib.sha256(salt.encode() + pass_again.encode()).hexdigest()
+    for i in db:
+        if i[0] == check_pass:
+            return f'Вы ввели правильный пароль'
+    return f'Вы ввели неправильный пароль'
+
+
+print(entrance())
