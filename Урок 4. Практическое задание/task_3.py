@@ -37,10 +37,25 @@ def revers_3(enter_num):
     return revers_num
 
 
-def reverses_number(enter_num):
-    revers_1(enter_num)
-    revers_2(enter_num)
-    revers_3(enter_num)
+# не стал писать отдельный декоратор для замера времени с помощью cProfile, чтобы правиьно замерить время выполнения
+# функций reverse_1, reverse_2, reverse_3
+def reverse_1_cProfile():
+    enter_num = 12345678912345678912345678912345678912345678900000000000000000000065463234253256572123415225353643
+    for i in range(10000):
+        revers_1(enter_num)
+
+
+def reverse_2_cProfile():
+    enter_num = 12345678912345678912345678912345678912345678900000000000000000000065463234253256572123415225353643
+    for i in range(10000):
+        revers_2(enter_num)
+
+
+def reverse_3_cProfile():
+    enter_num = 12345678912345678912345678912345678912345678900000000000000000000065463234253256572123415225353643
+    for i in range(10000):
+        revers_3(enter_num)
+
 
 # собственный вариант решения, похожий на функцию revers_2
 def own_reverse_number(enter_number):
@@ -54,6 +69,13 @@ def own_reverse_number(enter_number):
 
     return new_number
 
+
+def own_reverse_number_cProfile():
+    enter_number = 12345678912345678912345678912345678912345678900000000000000000000065463234253256572123415225353643
+    for i in range(10000):
+        own_reverse_number(enter_number)
+
+
 number = 12345678912345678912345678912345678912345678900000000000000000000065463234253256572123415225353643
 
 # revers_1 - рекурсивная функция, также в реализации присутствует много операций вычисления и присваивания =>
@@ -61,15 +83,18 @@ number = 12345678912345678912345678912345678912345678900000000000000000000065463
 # revers_2 - итеративное решение, которое по времени выполнения выигрывает перед рекурсивной реализацией
 # revers_3 - в решении используется встроенная функция str(), а также срез в обратном порядке всего массива, полностью
 # отстутвуют вычислительные операции => данная функция будет отрабатывать быстрее, чем reverse_2
-print(timeit.timeit('revers_1(number)', number=10000, globals=globals()))  # результат: 0.63 с
-print(timeit.timeit('revers_2(number)', number=10000, globals=globals()))  # результат 0.41 с
-print(timeit.timeit('revers_3(number)', number=10000, globals=globals()))  # результат 0.01 с
+print(timeit.timeit('revers_1(number)', number=10000, globals=globals()))  # результат: 0.81 с
+print(timeit.timeit('revers_2(number)', number=10000, globals=globals()))  # результат 0.48 с
+print(timeit.timeit('revers_3(number)', number=10000, globals=globals()))  # результат 0.021 с
 
-# в выводе получаем, что все значения в столбце cumtime для каждой из функций revers_1, revers_2 и revers_3 равны 0.000
-run('reverses_number(number)')
+# в выводе получаем, что все значения в столбце cumtime для каждой из функций revers_1, revers_2 и revers_3 несколько
+# отличаются от значений, полученных с помощью timeit
+run('reverse_1_cProfile()') # результат 1.046 с
+run('reverse_2_cProfile()') # результат 0.479 с
+run('reverse_3_cProfile()') # результат 0.017 с
 
-# для собственной функции результат выполнения 0.43 с => оптимизация не удалась, результат близкий к reverse_2
+# для собственной функции результат выполнения 0.483 с => оптимизация не удалась, результат близкий к reverse_2
 print(timeit.timeit('own_reverse_number(number)', number=10000, globals=globals()))
 
-# cumtime = 0.000
-run('own_reverse_number(number)')
+# cumtime = 0.568
+run('own_reverse_number_cProfile()')
