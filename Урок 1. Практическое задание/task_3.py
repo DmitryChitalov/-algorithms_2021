@@ -21,3 +21,45 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def find_profitable_companies_1(company_profits):
+    """
+    Функция получает на вход словарь {company_profit : company_name}.
+    Находит максимальный профит, перебирая и сравнивая значения всех ключей,
+    затем удаляет найденый максимальный элемент и
+    добавляет его в словарь с результатами
+    Сложность данного алгоритма: 2*n + 18 (линейная)
+    """
+    most_profitable = dict()  # O(1)
+    for i in range(3):  # O(1)
+        dict_items = list(company_profits.items())  # O(n)
+        max_profit = dict_items[0][1]  # O(1) + O(1) + O(1)
+        for j in range(1, len(dict_items)):  # O(n) + O(1)
+            if max_profit < dict_items[j][1]:  # O(1) + O(1) + O(1)
+                max_profit = dict_items[j][1]  # O(1) + O(1) + O(1)
+                company_name = dict_items[j][0]  # O(1) + O(1) + O(1)
+        most_profitable.update({company_name: company_profits.pop(company_name)})  # O(1) + O(1)
+    return most_profitable  # O(1)
+
+
+def find_profitable_companies_2(company_profits):
+    """
+    Функциця сортирует входящий словарь по значениям и выводит последний 3 элемента,
+    которые имеею максимальной значение.
+    Сложность данного алгоритма: n * log n + 3 * n (линейно - логарифмическая)
+    """
+    lst = list(company_profits.items())  # O(n)
+    lst.sort(key=lambda i: i[1])  # O(n log n) + O(n)
+    return lst[-3:len(lst)]  # O(n)
+
+
+my_dict = {'ASUS': 1, 'MSI': 2, 'BMV': 3, 'AUDI': 4, 'LADA': 5}
+print(find_profitable_companies_2(my_dict))
+print(find_profitable_companies_1(my_dict))
+"""
+Вывод: необходимо использовать первый алгоритм решения задачи, т.к.
+уже при наличае 100 элементов в исходных данных
+алгоритм линейно логарифмический примерно в 6 раз менее эффективен,
+чем линейный, который используется в функции  find_profitable_companies_1()
+"""
