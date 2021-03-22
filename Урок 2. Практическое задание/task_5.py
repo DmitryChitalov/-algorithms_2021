@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def Asc_func(n=32):
+    if n == 128:
+        return None
+    print(f"{n:5} - {chr(n)}", end=" ")
+    if (n - 31) % 10 == 0:
+        print(f'{n:5} - {chr(n)}')
+    Asc_func(n + 1)
+
+
+Asc_func()
