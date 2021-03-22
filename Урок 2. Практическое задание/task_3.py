@@ -22,3 +22,15 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+def reverse_num(num):
+    """Простая рекурсия"""
+    # базовый случай!!!
+    if len(str(num)) == 1:
+        return str(num)
+    else:
+        # шаг рекурсии
+        return str(num % 10) + reverse_num(num // 10)
+
+print(reverse_num(123))
+print(reverse_num(1230))

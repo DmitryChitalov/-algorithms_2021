@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def simple_calc():
+    type_op = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if type_op == '0':          # Базовый случай
+        return
+    if type_op not in ('0', '+', '-', '*', '/'):
+        print('Введена неверная операция!')
+    else:
+        str = input('Введите первое число: ')
+        if not str.isdigit():
+            print('Вместо числа, Вы  ввели: ', str)
+        else:
+            num_1 = int(str)
+            str = input('Введите второе число: ')
+            if not str.isdigit():
+                print('Вместо числа, Вы  ввели: ', str)
+            else:
+                num_2 = int(str)
+                if type_op == '/' and num_2 == 0:
+                    print('На ноль делить нельзя!')
+                else:
+                    if type_op == '+':
+                        res = num_1 + num_2
+                    elif type_op == '-':
+                        res = num_1 - num_2
+                    elif type_op == '*':
+                        res = num_1 * num_2
+                    elif type_op == '/':
+                        res = num_1 / num_2
+                    print('Ваш результат: ', res)
+    simple_calc()
+
+
+simple_calc()
