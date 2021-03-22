@@ -23,3 +23,19 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+def print_ascii(first_ascii=32, last_ascii = 127, pairs_in_row = 10, cur_pair_in_row=1):
+    """Простая рекурсия"""
+    cur_pair = str(first_ascii) + ' - ' + chr(first_ascii) + ' '
+    # базовый случай!!!
+    if first_ascii == last_ascii:
+        return cur_pair
+    else:
+        # шаг рекурсии
+        if cur_pair_in_row == pairs_in_row:
+            cur_pair_in_row = 0
+            cur_pair += '\n'
+        return cur_pair + print_ascii(first_ascii+1, last_ascii, pairs_in_row, cur_pair_in_row+1)
+
+print(print_ascii())            # Вызов функции с параметрами "по умолчанию"
+print('\n')
+print(print_ascii(41,100,15))   # Вызов функции с произвольными параметрами (с чего начать, чем завершить, сколько пар в строке)

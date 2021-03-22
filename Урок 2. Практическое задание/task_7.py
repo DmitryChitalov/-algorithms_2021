@@ -15,3 +15,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def difference_sum_and_result(num, result):
+    """Простая рекурсия"""
+    # базовый случай!!!
+    if num < 1:
+        return result
+    else:
+        # шаг рекурсии
+        return difference_sum_and_result(num-1, result-num)
+
+def is_equal_sum_and_result(num, result):
+    """Простая рекурсия"""
+    # базовый случай!!!
+    if num < 1:
+        return (result == 0)
+    else:
+        # шаг рекурсии
+        return is_equal_sum_and_result(num-1, result-num)
+
+
+#print(difference_sum_and_result(5, 5*(5+1)/2))
+
+if is_equal_sum_and_result(5, 15):
+    print('Сумма ряда соответствует результату вычисления (1+2+...+n = n(n+1)/2)')
+
+if difference_sum_and_result(5, 15) == 0:
+    print('Сумма ряда соответствует результату вычисления (1+2+...+n = n(n+1)/2)')

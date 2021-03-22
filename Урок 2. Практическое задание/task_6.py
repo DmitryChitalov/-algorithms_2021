@@ -11,3 +11,24 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+import random
+
+def guess_num(amount_try=10, num=random.randint(0,100), current_try=1):
+    """Простая рекурсия"""
+    if current_try > amount_try:        # базовый случай!!!
+        return 'Вы проиграли (попытки закончились)'
+    else:
+        # шаг рекурсии
+        num_try = int(input('Введите число (попытка №'+str(current_try)+' из '+str(amount_try)+'): '))
+        if num_try == num:
+            return 'Вы выиграли!!!'
+        else:
+            if num > num_try:
+                print('Загадано большее число.')
+            else:
+                print('Загадано меньшее число.')
+            return guess_num(amount_try, num, current_try+1)
+
+print(guess_num())
+print(guess_num(5, 55))          # Параметрический вызов (5 попыток, загадано число 55)
