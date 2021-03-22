@@ -11,3 +11,24 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+import random
+
+
+def play_func(count, number):
+    print(f"Попытка №{count}")
+    answer = int(input("Введите число от 0 до 100: "))
+    if count == 10 or answer == number:
+        if answer == number:
+            print("Верно!")
+            print(f"Загаданное число: {number}")
+        return
+    else:
+        if answer > number:
+            print(f"Загаданное число меньше чем {answer}")
+        else:
+            print(f"Загаданное число больше чем {answer}")
+    play_func(count + 1, number)
+
+
+play_func(1, random.randint(0, 100))
