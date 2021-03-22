@@ -26,3 +26,56 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Сложность: O(1)
+
+
+def user_logon_1(user_dict):
+    user_login = input("Insert Your login: ").lower()
+    if user_dict.get(user_login) and user_dict[user_login][0] == 1:
+        user_pass = input("Insert Your password: ")
+        if user_dict[user_login][1] == user_pass:
+            print("Welcome!")
+        else:
+            print("Invalid password!")
+    elif user_dict.get(user_login) and user_dict[user_login][0] == 0:
+        print("Your account is disabled!")
+    else:
+        print("User not found!")
+
+
+# Сложность: O(n)
+
+
+def user_logon_2(user_dict):
+    user_login = input("Insert Your login: ").lower()
+    user_not_found = True
+    for i in user_dict:
+        if i == user_login and user_dict[user_login][0] == 1:
+            user_not_found = False
+            user_pass = input("Insert Your password: ")
+            if user_dict[user_login][1] == user_pass:
+                print("Welcome!")
+            else:
+                print("Invalid password!")
+        elif i == user_login and user_dict[user_login][0] == 0:
+            user_not_found = False
+            print("Your account is disabled!")
+    if user_not_found:
+        print("User not found!")
+
+
+db_user = {"alex": [1, "12345678"],
+           "sam": [0, "qwerty1"],
+           "terminator": [1, "Qld@8v%bne"]}
+
+user_logon_1(db_user)
+print()
+user_logon_2(db_user)
+
+"""
+Вывод:
+Первый вариант является предпочтительным, так как он является константным в О-нотации.
+Его скорость не будет зависеть от размерность входных данных.
+Во втором варианте присутствует цикл for с переменной, который подразумевает линейность в О-нотации.
+"""
