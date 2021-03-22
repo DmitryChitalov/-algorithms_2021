@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def char_asc(i, char):
+    
+    if char == 128:
+        return 'exit'
+    print('{} - {}'.format(char, chr(char)), end=' ')
+    if i == 10:
+        i = 0
+        print('\n')
+
+    char_asc(i + 1, char + 1)
+    
+    
+char_asc(1, 32)

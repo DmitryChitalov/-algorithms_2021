@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def proof_n(num):
+    
+    if num <= 1:
+        return num
+    else:
+        return proof_n(num - 1) + num
+
+
+number = input('Введи число для проверки: ')
+if number.isdigit():
+    if proof_n(int(number)) == int(number) * (int(number) + 1) / 2:
+        print('Равенство выполняется')
+else:
+    print('Вы ввели строку вместо числа!')

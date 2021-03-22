@@ -11,3 +11,25 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+from random import randint
+
+
+def guess_num(i, num):
+    
+    print('Попытка - ', i)
+    number_user = int(input('Введите цифру от 0 до 120: '))
+    if number_user == num:
+        print('Вы угадали цифру -', num)
+    elif i == 10:
+        print('Попытки кончились, вы проиграли =(')
+        print('Загаданная цифра -', num)
+    else:
+        if number_user > num:
+            print('Загаданная цифра <', number_user)
+        else:
+            print('Загаданная цифра >', number_user)
+        guess_num(i + 1, num)
+
+
+guess_num(1, randint(0, 120))
