@@ -26,3 +26,32 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def check_pass(dic_obj, login_obj, pass_obj):
+    """
+    Сложность: О(1) - константная
+    :param dic_obj:
+    :param login_obj:
+    :param pass_obj:
+    :return:
+    """
+    if login_obj in dic_obj.keys():
+        if dic_obj[login_obj][0] == pass_obj and dic_obj[login_obj][1]:
+            return "Доступ разрешен"
+        elif dic_obj[login_obj][0] == pass_obj and not dic_obj[login_obj][1]:
+            return "Учетная запись не активирована!"
+        elif dic_obj[login_obj][0] != pass_obj:
+            return "Ошибка имени или пароля"
+    else:
+        return "Ошибка имени или пароля"
+
+
+my_dict = {
+    'user1': ['pass1', True],
+    'user2': ['pass2', False]
+}
+
+login = input('Введите имя: ')
+password = input('Введите пароль: ')
+print(check_pass(my_dict, login, password))

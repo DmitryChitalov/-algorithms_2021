@@ -19,3 +19,38 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+from random import randint
+
+
+def find_min_alg1(lst_obj):
+    """
+    Поиск минимального значения для списка.
+    Алгоритм 1. Сложность: O(n) - линейная.
+    """
+    min_def = lst_obj[0]
+    for i in lst_obj:
+        if min_def > i:
+            min_def = i
+    return min_def
+
+
+def find_min_alg2(lst_obj):
+    """
+    Поиск минимального значения для списка,
+    используется сортировка методом пузырька.
+    Ответ: первое значение отсортированного списка.
+    Алгоритм 2. Сложность: O(n^2) - квадратичная.
+    """
+    len_lst = len(lst_obj)
+    for i in range(len_lst - 1):
+        for j in range(len_lst - i - 1):
+            if lst_obj[j] > lst_obj[j + 1]:
+                lst_obj[j], lst_obj[j + 1] = lst_obj[j + 1], lst_obj[j]
+    return lst_obj[0]
+
+
+lst = [randint(1, 1000) for i in range(10)]
+print(f'Список: {lst}')
+print(f'Минимум по алгоритму 1: {find_min_alg1(lst)}')
+print(f'Минимум по алгоритму 2: {find_min_alg2(lst)}')
