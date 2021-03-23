@@ -19,3 +19,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+from random import randint
+# Линейная O(n)
+
+
+def min_func_1(lst):
+    minimal_1 = lst[0]  # O(1)
+    for el in lst:  # O(n)
+        if el < minimal_1:  # O(1)
+            minimal_1 = el  # O(1)
+    return minimal_1  # O(1)
+
+# Квадратичная O(n^2)
+
+
+def min_func_2(lst):
+    minimal_2 = lst[0]
+    for el in lst:
+        for elem in lst:
+            if el > elem:
+                if elem < minimal_2:
+                    minimal_2 = elem
+    return minimal_2
+
+
+lst = [randint(0, 100) for i in range(9)]
+print(lst)
+print(min_func_1(lst))
+print(min_func_2(lst))

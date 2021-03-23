@@ -26,3 +26,44 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# 1) Линейная сложность O(n)
+def users_auth_1(users, user_login, user_pass):
+    pass_lst = []
+    is_active_lst = []
+    for el in list(users.values()):
+        pass_lst.append(el[0])
+        is_active_lst.append(el[1])
+    if user_login not in list(users.keys()) or user_pass not in pass_lst:
+        return 'Неверный логин или пароль'
+    elif users[user_login][1]:
+        return 'Вы вошли'
+    else:
+        return 'Пройдите регистрацию'
+
+
+# 2) Константная сложность O(1)
+def users_auth_2(users, user_login, user_pass):
+    if users.get(user_login):
+        if users.get(user_login)[0] != user_pass:
+            return 'Неверный пароль'
+        elif users.get(user_login)[0] == user_pass and users.get(user_login)[1]:
+            return 'Вы вошли'
+        else:
+            return 'Пройдите регистрацию'
+    else:
+        return 'Неверный логин'
+
+
+users = {'1': ['12345', True],
+         '2': ['54321', False],
+         '3': ['11111', False]
+         }
+
+user_login = input('Введите логин: ')
+user_password = input('Введите пароль: ')
+print(users_auth_1(users, user_login, user_password))
+print(users_auth_2(users, user_login, user_password))
+
+# Второе решение более эффективное, потому что имеет константную сложность O(n) -> быстрее отработает
