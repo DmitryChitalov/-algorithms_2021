@@ -21,3 +21,41 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = {
+    "BMW": 11282,
+    "Audi": 8912,
+    "KIA": 5291,
+    "Opel": 3254,
+    "Mercedes": 10242
+}
+
+# Сложность данной функции: O(1) - Константа
+def max_profit_1(company):
+    lst = list(company.items())
+    for i in range(3):
+        c = max(companies, key=companies.get)
+        print(c, companies.pop(c))
+
+
+companies_2 = {
+    "Volvo": 1221,
+    "Lada": 5123,
+    "Subaru": 3245,
+    "Opel": 2385,
+    "Suzuki": 8215
+}
+
+# Сложность данной функции: O(n log n) - Линейно-логарифмическая
+
+def max_profit_2 (company):
+    lst = list(company.items())
+    lst.sort(key=lambda i: i[-1])
+    return lst[2:len(lst)]
+
+
+
+print(max_profit_1(companies))
+print(max_profit_2(companies_2))
+
+# Целесообразно использовать первую функции, так как она менее сложная.
