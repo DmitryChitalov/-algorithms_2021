@@ -12,7 +12,11 @@
 Без аналитики задание считается не принятым
 """
 
+import random
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
+array1 = [random.randint(1, 10) for i in range(1000)]
 
 
 def func_1():
@@ -41,3 +45,41 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+print(timeit("func_1()", setup='from __main__ import func_1', number=100000))
+print(timeit("func_2()", setup='from __main__ import func_2', number=100000))
+
+"""
+Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+0.10597874701488763
+0.1286234069848433
+
+
+второй алгоритм работает дольше за счет того, что дополнительно вычсиляется максимум в массиве, на больших данных
+будет значимтельно увеличиваться время
+
+улучшим первый алгоритм за счет кеша:
+"""
+
+
+def func_3():
+    m = 0
+    num = 0
+    cache = {}
+    for i in array:
+        if i not in cache:
+            count = array.count(i)
+            cache[i] = count
+
+            if count > m:
+                m = count
+                num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+print(timeit("func_3()", setup='from __main__ import func_3', number=100000))
+"""
+время выполнения 0.008754862996283919, что значительно быстрее предыдущих вариантов
+"""

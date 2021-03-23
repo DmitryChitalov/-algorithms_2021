@@ -23,3 +23,19 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def my_func(first_index, last_index):
+    str_for_print = ''
+    line_len = first_index + 10
+    while first_index < line_len and first_index < last_index:
+        str_for_print += f'{first_index} - {chr(first_index)}  '
+        first_index += 1
+
+    print(f'{str_for_print} \n')
+    if first_index == last_index:
+        return
+    else:
+        return my_func(first_index, last_index)
+
+
+my_func(32, 128)
