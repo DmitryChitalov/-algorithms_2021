@@ -15,5 +15,27 @@
 р
 а
 """
+import hashlib
 
-# hash?
+'''
+рара
+рар
+ра
+ар
+ара
+р
+а
+'''
+
+s = input('ведите строку')
+r = set()
+N = len(s)
+for i in range(N):
+    if i == 0:
+        N = len(s) - 1
+    else:
+        N = len(s)
+    for j in range(N, i, -1):
+        r.add(hashlib.sha1(s[i:j].encode('utf-8')).hexdigest())
+
+print(f"кол-во посдтроек в строке {s} = {len(r)}")

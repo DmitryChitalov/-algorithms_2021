@@ -21,3 +21,37 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company = {
+    'car': 100,
+    'house': 2000,
+    'cat': 10000,
+    'potato': 500,
+    'adnroid': 123,
+    'ribok': 15432,
+    'andresol': 53123,
+    'dog': 12312543
+
+}
+
+# o (n log n)
+
+list_from_dictionary = list(company.items())
+list_from_dictionary.sort(key=lambda i: i[1], reverse=True)
+for i in range(5):
+    print(list_from_dictionary[i][0], ';')
+
+
+# o(n) - оно проще и быстрее
+
+def three_max(list_input):
+    input_max = {}
+    list_d = dict(list_input)
+    for i in range(5):
+        maximum = max(list_d.items(), key=lambda k_v: k_v[1])
+        del list_d[maximum[0]]
+        input_max[maximum[0]] = maximum[1]
+    return input_max
+
+
+print(three_max(company))
