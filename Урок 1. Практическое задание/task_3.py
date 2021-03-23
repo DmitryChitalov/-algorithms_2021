@@ -21,3 +21,36 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+array = [{'badcompany': 16707}, {'Jameson': 86266}, {'Jacobson': 34467}, {'Marycey': 64137}]
+
+
+sorted_pairs = sorted(((k, v) for d in array for k, v in d.items()),
+                     key=lambda pair: pair[1], reverse=True)
+
+from collections import OrderedDict
+
+output = OrderedDict()
+for k, v in sorted_pairs:
+    if k not in output:
+        output[k] = v
+        if len(output) == 3:
+            break
+print (output)
+# O(n**3)
+
+
+
+
+output = {k: d[k] for e, d in enumerate(sorted(
+    array, key=lambda d: next(d[k] for k in d), reverse=True)) for k in d if e < 3}
+print(output)
+#O(nlogn)
+
+#2 вариант решения эффективнее,так как минимальная сложность.
+
+
+
+
+
+
+
