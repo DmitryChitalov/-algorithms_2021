@@ -19,3 +19,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# Вариант 1. Линейная сложность
+def min_line(some_list):
+    min_elem = some_list[1]
+    for i in some_list:
+        if i < min_elem:
+            min_elem = i
+    return min_elem
+
+
+# Вариант 2. Квадратичная сложность: здесь в худшем случае сравнивается каждый элемент с каждым
+def min_of_all(elem, some_list):
+    for el in some_list:
+        if elem > el:
+            return False
+    return True
+
+
+def min_square(some_list):
+    for elem in some_list:
+        if min_of_all(elem, some_list):
+            return elem
+
+
+my_list = [1, 15, 3, 22, -5, 16, -5, 8]
+print(f'Минимальный элемент списка {my_list}: \nДля линейной сложности: {min_line(my_list)}'
+      f', \nДля квадратичной сложности: {min_square(my_list)}.')
