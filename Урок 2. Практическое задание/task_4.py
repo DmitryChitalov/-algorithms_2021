@@ -12,3 +12,13 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def summarize(n, total=0, el=1):
+    if n == 1:
+        return total + el
+    else:
+        return summarize(n - 1, total + el, el * -0.5)
+
+
+print(summarize(3))

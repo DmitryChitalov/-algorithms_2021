@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def compare(n):
+    if n == 0:
+        return n
+    else:
+        return n + compare(n - 1)
+
+
+n = 156
+
+if compare(n) == n * (n + 1) / 2:
+    print(True)
+else:
+    print(False)

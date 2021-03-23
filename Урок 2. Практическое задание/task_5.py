@@ -23,3 +23,15 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_print(start_num, end_num, n=1):
+    if start_num == end_num:  # Базовый случай
+        return print(f'{start_num} - {chr(start_num)}')
+    else:
+        print(f'{start_num} - {chr(start_num)}', end=', ')
+        if n % 10 == 0:
+            print('\n')
+        return ascii_print(start_num + 1, end_num, n + 1)
+
+
+ascii_print(32, 68)

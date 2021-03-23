@@ -28,3 +28,31 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculate():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':  # базовый случай, выход из рекурсии
+        return print('Вы вышли из калькулятора')
+    if operation not in ['-', '*', '+', '/', '0']:  # Проверка на ввод оператора
+        return print('Не верный оператор'), calculate()
+    try:  # Проверка на ввод числовых значений
+        value1 = int(input('Введите первое число: '))
+        value2 = int(input('Введите второе число: '))
+    except ValueError:
+        return print('Ошибка, необходимо ввести числа'), calculate()
+
+    if operation == '+':
+        return print(f'Ваш результат = {value1 + value2}'), calculate()
+    elif operation == '-':
+        return print(f'Ваш результат = {value1 - value2}'), calculate()
+    elif operation == '*':
+        return print(f'Ваш результат = {value1 * value2}'), calculate()
+    elif operation == '/':
+        try:  # Проверка деления на ноль
+            return print(f'Ваш результат = {value1 / value2}'), calculate()
+        except ZeroDivisionError:
+            return print('Ошибка, нельзя делить на ноль'), calculate()
+
+
+calculate()
