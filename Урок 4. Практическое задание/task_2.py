@@ -12,8 +12,8 @@
 Без аналитики задание считается не принятым
 """
 
-from timeit import timeit
 from random import randint
+from timeit import timeit
 
 
 def recursive_reverse(number):
@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,10 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+'''
+Проведя пару проверок с помощью дебагера, стало понятно, что мемоизация полезна, но редко когда функция будет
+работать с тем же набором данных.
+Первая функция выполняет вычисления каждый раз когда получает значение и так 10000 раз.
+Вторая же фукнция выполняет вычисления один раз, а в последующие разы это значение выбирается из кэша. 
+'''
