@@ -26,3 +26,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+accounts = {'ivan': ['password', 1],  # login: [password, is_active]
+            'fedor': ['qwerty123', 0],
+            'vasiliy': ['vasiliy', 1]}
+
+# a) Сложность константная
+
+
+def authentication1(login, password, data=accounts):
+    if data[login][0] != password:                          # O(1)
+        print('Login or password is incorrect')             # O(1)
+    elif not data[login][1]:                                # O(1)
+        print('Please activate your account')               # O(1)
+    elif data[login][0] == password and data[login][1]:     # O(1)
+        print('Success')                                    # O(1)
+
+
+authentication1('ivan', 'password')
+authentication1('fedor', 'qwerty123')
+authentication1('vasiliy', '12334')
+
+# b) Сложность линейная
+
+accounts2 = [['ivan', 'password', 1],
+             ['fedor', 'qwerty123', 0],
+             ['vasiliy', 'vasiliy', 1]]
+
+
+def authentication2(login, password, data=accounts2):
+    for line in data:                                                   # O(N)
+        if line[0] == login and line[1] == password and line[2]:        # O(1)
+            print('Success')                                            # O(1)
+            break
+        elif line[0] == login and line[1] == password and not line[2]:  # O(1)
+            print('Please activate your account')                       # O(1)
+            break
+    else:
+        print('Login or password is incorrect')                         # O(1)
+
+
+authentication2('ivan', 'password')
+authentication2('fedor', 'qwerty123')
+authentication2('vasiliy', '12334')
+
+""" Первое решение эффективнее, так как имеет константную сложность. Следовательно скорость выполнения не 
+ уменьшается с ростом количества элементов. """

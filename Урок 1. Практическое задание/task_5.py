@@ -19,7 +19,59 @@
 После реализации структуры, проверьте ее работу на различных сценариях
 
 Подсказка:
-Отдельне стопки можно реализовать через:
+Отдельные стопки можно реализовать через:
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class DishStack:
+    max_dishes = 10
+
+    def __init__(self, count=None):
+        self.stacks = [[]]
+        if count:
+            for i in range(count):
+                self.push_in()
+
+    def __str__(self):
+        result = list(map(str, self.stacks))
+        return '\n'.join(result)
+
+    def push_in(self):
+        if len(self.stacks[-1]) < self.max_dishes:
+            self.stacks[-1].append('dish')
+            if len(self.stacks[-1]) == self.max_dishes:
+                self.stacks.append([])
+
+    def push_count(self, count):
+        for i in range(count):
+            self.push_in()
+
+    def pop_out(self):
+        try:
+            if not self.stacks[0]:
+                raise ValueError('Stack is empty!')
+            self.stacks[-1].pop(-1)
+            if not self.stacks[-1] and len(self.stacks) > 1:
+                self.stacks.pop(-1)
+        except ValueError as er:
+            print(f'Error! {er}')
+
+    def pop_count(self, count):
+        for i in range(count):
+            self.pop_out()
+
+    def dish_number(self):
+        return self.max_dishes * len(self.stacks[:-1]) + len(self.stacks[-1])
+
+    def __add__(self, other):
+        return DishStack(self.dish_number() + other.dish_number())
+
+
+
+
+
+
+
+

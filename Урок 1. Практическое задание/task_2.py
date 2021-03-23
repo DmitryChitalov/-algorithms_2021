@@ -19,3 +19,34 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# Квадратичная сложность
+
+
+def quad_min_finder(list_obj):
+    for j in range(len(list_obj) - 1):
+        for elem in list_obj[:j] + (list_obj[j:]):
+            if elem < list_obj[j]:
+                break
+        else:
+            return list_obj[j]
+
+# Линейная сложность
+
+
+def linear_min_finder(list_obj):
+    minimum = list_obj[0]
+    for elem in list_obj:
+        if elem < minimum:
+            minimum = elem
+    return minimum
+
+# Линейно-логарифмическая сложность
+
+
+def linear_log_min_finder(list_obj):
+    list_obj.sort()
+    return list_obj[0]
+
+
+
