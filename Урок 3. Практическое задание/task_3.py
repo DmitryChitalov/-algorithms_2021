@@ -16,4 +16,18 @@
 а
 """
 
+
 # hash?
+def substrings(string):
+    my_set = set()
+    for i in range(len(string)):
+        if i == 0:
+            delta = 0
+        else:
+            delta = 1
+        for j in range(i + 1, len(string) + delta):
+            my_set.add(hash(string[i:j]))
+    return len(my_set)
+
+
+print(substrings('papa'))
