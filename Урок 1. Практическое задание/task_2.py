@@ -19,3 +19,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+# вариант 1 (список от 0 до 9) мин 0
+# O(n^2) - квадратичная.
+
+def list_min_v1(lst):
+    for i in lst:
+        min_v = True
+        for j in lst:
+            if i > j:
+                min_v = False
+        if min_v:
+            return i
+
+
+num_1 = list_min_v1(i for i in range(10))
+print(num_1)
+
+# вариант 2 (список от 2 до 9) мин 2
+#  O(n) - линейная
+
+def list_min_v2(lst):
+    min_v = lst[0]
+    for i in lst:
+        if i < min_v:
+            min_v = i
+    return min_v
+
+
+num_1 = list_min_v2([i for i in range(2, 10)])
+print(num_1)
