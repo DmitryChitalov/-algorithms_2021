@@ -1,3 +1,5 @@
+import random
+
 """
 Задание 2.
 
@@ -19,3 +21,36 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+rnd_list = [random.randint(0, 1000) for _ in range(10)]
+test = [6, 10, 2, 4, 15, 5, 6, 11, 1, 12, 22, 14]
+
+
+# print(rnd_list)
+
+# Вариант 1
+def sort_and_min(lst):
+    print(f'Массив до сортировки: {lst}')
+    for itr in range(len(lst)):
+        for i in range(len(lst) - 1):
+            if lst[i] > lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+
+    print(f'Массив после сортировки: {lst}')
+    return lst[0]
+
+
+print("Функция квадратичной сложности.\nРезультат:", sort_and_min(rnd_list))
+
+
+# Вариант 2
+
+
+def linear_func(lst):
+    minimum = lst[0]
+    for eq in lst:
+        if minimum > eq:
+            minimum = eq
+    return minimum
+
+# print("Функция линейной сложности.\nРезультат:", linear_func(rnd_list))

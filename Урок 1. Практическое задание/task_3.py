@@ -21,3 +21,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = {
+    "Company Z": 4052,
+    "Company Y": 2100,
+    "Company X": 7234,
+    "Company A": 3248,
+    "Company Q": 9487
+}
+
+# Вариант 1
+# Сложность: O(N)
+
+profitable = []                                                     # O(1)
+sorter = sorted(companies, key=companies.get, reverse=True)[:3]     # предположительно O(1)
+for key in sorter:                                                  # O(N)
+    profitable.append((key, companies.get(key)))                    # O(1)
+print(profitable)                                                   # O(1)
+
+# Вариант 2
+# Сложность: O(N^3)
+
+profit = [moneys for moneys in companies.values()]  # Предположительно O(N)
+profit.sort(reverse=True)                           # O(1)
+for al in profit[:3]:                               # O(N)
+    for name, money in companies.items():           # O(N)
+        if money == al:                             # O(N)
+            print(name, money)                      # O(1)
+
+# Сложно было придумать алгорит в целом, но выбираю первый вариант, он кратче, проще и приятный на глаз
