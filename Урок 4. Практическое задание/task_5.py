@@ -15,6 +15,7 @@
 
 import timeit
 
+# итоговая сложность алгоритма O(n**2)
 def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1                   # O(1)
@@ -34,48 +35,47 @@ def simple(i):
         n += 1  # O(1)
     return n # O(1)
 
-
-def hard(number_ord):
+# итоговая сложность всегоалгоритма O(N)
+def hard(number):
     '''С применением решета Эратосфена'''
 
     # специально герерируем список так, чтобы индексы совпадали со значениями чисел
-    numbers_list = [i for i in range(number_ord + 1)]   # O(n)
-    numbers_list[1] = 0     # 1- не простое и не составное  # O(1)
+    numbers_list = [i for i in range(number + 1)]  # O(N)
+    numbers_list[1] = 0
 
-    i = 2   # O(1)
-    while i <= number_ord:  # O(n)
-        if numbers_list[i] != 0:    # если значение в ячейке не 0, то 1е число, кратное данному, будет в 2 раза больше
-            j = i * 2               # него самого
-                                    # O(1)
+    # сложность алгоритма О(Nlog(logN)),
+    # строгое доказательство сложности алгоритма можно найти в книге
+    # Hardy и Wright «An Introduction to the Theory of Numbers»
+    for num in numbers_list:
+        if num != 0:
+            help_num = num ** 2
+            while help_num <= len(numbers_list) - 1:
+                numbers_list[help_num] = 0
+                help_num += num
 
-            while j <= number_ord:      # O(n)
-                numbers_list[j] = 0     # это уже составное число
-                j += i                  # следующее число, кратное i, больше еще на i
-                                        # O(1)
-
-        i += 1                          # O(1)
-
-    numbers_list = set(numbers_list)    # O(n)
-    numbers_list.remove(0)              # O(1)
-    numbers_list = list(numbers_list)   # O(n)
-    numbers_list.sort()                 # O(nlog(n))
-    return numbers_list[int(number_ord / 10) - 1]  # O(1)
+    numbers_list = set(numbers_list)  # O(N)
+    numbers_list = list(numbers_list)  # O(N)
+    numbers_list.sort()  # O(NlogN)
+    return numbers_list[number // 10]  # O(1)
 
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
 print(hard(i * 10))     # специально домножнаем на 10, чтобы правильно сформировать список чисел внутри функции
 
-print(timeit.timeit('simple(i)', number=1, globals=globals()))
-print(timeit.timeit('hard(i * 10)', number=1, globals=globals()))
-# итоговая сложность simple - O(n**2), hard - O(n**2)
-# для i = 10 результат: simple - 0.22 с, hard - 0.36 с при number = 10000
-# для i = 100 результат: simple - 4.21 с, hard - 0.642 с при number = 1000
-# для i = 1000 результат: simple - 44.39 с, hard - 0.39 с при number = 100
+print(timeit.timeit('simple(i)', number=10000, globals=globals()))
+print(timeit.timeit('hard(i * 10)', number=10000, globals=globals()))
+# итоговая сложность simple - O(n**2), hard - O(n)
+# для i = 10 результат: simple - 0.21 с, hard - 0.34 с при number = 10000
+# для i = 100 результат: simple - 1.83 с, hard - 0.31 с при number = 1000
+# для i = 1000 результат: simple - 44.24 с, hard - 0.43 с при number = 100
 # значения входного параметра number в функции timeit специально были выбраны, как указано выше, чтобы снизить время
 # ожидания выполнения временных замеров
 
-# Несмотря на одинаковую теоретическую сложность О(n**2) каждого из двух алгоритмов, результаты замеров времени
-# показывают, что решето Эратосфена выполняется быстрее. С ростом порядкового номера искомого числа simple алгоритм
-# выполняется в разы медленнее, чем hard алгоритм. Это связано с тем, что в алгоритме hard более эффективно отсеиваются
-# составные числа
+# Результаты замеров времени показывают, что решето Эратосфена выполняется быстрее на больших значениях входного
+# параметра i. С ростом порядкового номера искомого числа simple алгоритм выполняется в разы медленнее, чем hard
+# алгоритм. Это связано с тем, что в алгоритме hard более эффективно отсеиваются составные числа. Однако при малых 
+# значениях i simple алгоритм оказался эффективнее, чем hard алгоритм. Это связано с тем, что в конце hard алгоритма
+# необходимо делать преобразование из списка во множество, затем мн-ва обратно в список и выполнить сортировку вновь
+# полученного списка, после чего возможно вернуть требуемое число в качестве ответа. Данные операции повышают сложность
+# алгоритма hard с O(Nlog(logN)) до O(N).
