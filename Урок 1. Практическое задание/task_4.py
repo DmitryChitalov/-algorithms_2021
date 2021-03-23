@@ -26,3 +26,38 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+info = {"User1": ["password", True], "User2": ["password", True], "User3": ["password", False], "User4": ["password", False]}
+
+# O(n)
+def func1(data, login, password):
+    for i in data: #O(n)
+        if login == i and password == data[i][0]: #O(n)
+            if data[i][1] == False: #O(n)
+                return "Пройдите активацию учетной записи" # O(1)
+            else:
+                return "Пользователь авторизован" # O(1)
+
+
+
+
+# O(n)
+def func2(info, login, password):
+    passwords = []  # O(1)
+    activations = []  # O(1)
+    for i in list(info.values()):  # O(n)
+        passwords.append(i[0])  # O(1)
+        activations.append(i[1])  # O(1)
+    if login not in list(info.keys()) or password not in passwords:  # O(n)
+        return 'Неверный логин или пароль'  # O(1)
+    elif info[login][1]:
+        return 'Пользователь авторизован'  # O(1)
+    else:
+        return 'Пройдите активацию учетной записи'  # O(1)
+
+print(func1(info, "User1", 'password'))
+print(func1(info, "User4", 'password'))
+
+
+print(func2(info, "User1", 'password'))
+print(func2(info, "User4", 'password'))
+print(func2(info, "User5", 'password'))
