@@ -1,3 +1,5 @@
+from timeit import timeit
+import cProfile
 """
 Задание 4.
 
@@ -40,4 +42,29 @@ def func_2():
 
 
 print(func_1())
+print(timeit('func_1()', globals=globals(), number=10000))
 print(func_2())
+print(timeit('func_2()', globals=globals(), number=10000))
+
+cProfile.run('func_1()')
+cProfile.run('func_2()')
+
+
+def my_function():
+    maximum = 0
+    elem = 0
+    my_set = set(array)
+    for elems in my_set:
+        if array.count(elems) > maximum:
+            maximum = array.count(elems)
+            elem = elems
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {maximum} раз(а)'
+
+
+print(timeit('my_function', globals=globals(), number=10000))
+print(my_function())
+
+"""
+В моей функции мы используем множество, чтобы убрать проверку повтора в массиве из-за этого повышаем скорость.
+"""
