@@ -56,7 +56,8 @@ def median_func(lst_obj):
     return max(lst_obj)
 
 
-orig_list = [random.randint(0, 100) for _ in range(100)]
+m = int(input('Введите m: '))
+orig_list = [random.randint(0, 100) for _ in range(2*m+1)]
 print(orig_list)
 my_median = median_func(orig_list[:])
 in_median = median(orig_list)
