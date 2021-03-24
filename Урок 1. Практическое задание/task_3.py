@@ -21,3 +21,56 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+import random
+
+
+def find_max_alg1(dic_obj):
+    """
+    Алгоритм 1: Сложность: O(n^2) - квадратичная.
+
+    Поиск трех компаний с наибольшой прибылью.
+    Производится сортировка значений словаря по убыванию с созданием временного списка.
+    Создается новый словарь с тремя ключами соответсвующими наибольшим значениям.
+    :param dic_obj:
+    :return: sorted_dict
+    """
+    sorted_values = sorted(dic_obj.values())
+    sorted_values.reverse()
+    sorted_value_cut = sorted_values[0:3]
+    sorted_dict = {}
+    for i in sorted_value_cut:
+        for k in dic_obj.keys():
+            if dic_obj[k] == i:
+                sorted_dict[k] = dic_obj[k]
+    return sorted_dict
+
+
+def find_max_alg2(dic_obj):
+    """
+    "Алгоритм 2: Сложность: O(n) - линейная.
+
+    Поиск трех компаний с наибольшой прибылью.
+    Производится сортировка ключей словаря по убыванию.
+    Создается новый словарь с тремя ключами соответсвующими наибольшим значениям.
+    :param dic_obj:
+    :return: sorted_dict
+    """
+    sorted_dict = {}
+    sorted_keys = sorted(dic_obj, key=dic_obj.get)
+    sorted_keys.reverse()
+    sorted_keys_cut = sorted_keys[0:3]
+    for i in sorted_keys_cut:
+        sorted_dict[i] = dic_obj[i]
+    return sorted_dict
+
+
+dict_gen = {x: y for x, y in zip('QWERTYUIAP', random.sample(range(100, 1000), 10))}  # Генерация словаря
+print(f'Перечень компаний: {dict_gen}')
+print(f'Три компаний с наиб.доходом: {find_max_alg1(dict_gen)}')
+print(f'Три компаний с наиб.доходом: {find_max_alg2(dict_gen)}')
+
+"""
+Эффективнее решение с алгоритмом 2, т.к. алгоритм с О-нотацией "линейная" более эффективна по времени
+чем алгоритм с О-нотацией "квадратичная"
+"""
