@@ -10,3 +10,30 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+# Здесь происходит импорт файла, который был в примерах, он никак не изменен, так что на проверку отправлен только этот.
+# Не стала прикреплять тот, потмоу что изменен только этот (добавлена функция уборки пробелов).
+
+from task_16 import DequeClass
+
+
+def pal_checker(string):
+    dc_obj = DequeClass()
+
+    s = ''
+    for i in string:
+        if i != ' ':
+            s += i
+    print(s)
+    for el in s:
+        dc_obj.add_to_rear(el)
+
+    still_equal = True
+
+    while dc_obj.size() > 1 and still_equal:
+        first = dc_obj.remove_from_front()
+        last = dc_obj.remove_from_rear()
+        if first != last:
+            still_equal = False
+
+    return still_equal

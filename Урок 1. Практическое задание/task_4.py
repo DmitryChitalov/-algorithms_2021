@@ -26,3 +26,62 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Первое решение завязано на переборе элементов и их сравнения. Его сложность - О(N^3)
+
+import collections
+
+
+def registration():
+
+    login = input("Напишите логин")
+    password = input("Напишите пароль")
+    activate = input("Напишите 'ДА', если хотите активировать страницу (без кавычек):")
+    all_information = ("Yana", "123", "ДА")
+
+    new_lst = list()
+    new_lst.append(login)
+    new_lst.append(password)
+    new_lst.append(activate)
+
+    count = 0
+
+    for i in new_lst:
+        for j in all_information:
+            if i == j:
+                count += 1
+    if count == 3:
+        print("Вы успешно зашли в систему")
+    else:
+        print("Что-то пошло не так")
+
+
+print(registration())
+
+
+# Прототип этого решения я нашла в интернете, иузучила принцип работы Counter
+# (при надобности, могу позже описать его принцип). Сложность алгоритма - О(N)
+
+
+def second_registration():
+
+    second_login = input("Напишите логин")
+    second_password = input("Напишите пароль")
+    second_activate = input("Напишите 'ДА', если хотите активировать страницу (без кавычек):")
+    all_second_information = ("Yana", "123", "ДА")
+
+    new_second_lst = list()
+    new_second_lst.append(second_login)
+    new_second_lst.append(second_password)
+    new_second_lst.append(second_activate)
+
+    if collections.Counter(all_second_information) == collections.Counter(new_second_lst):
+
+        print("Вы успешно зашли в систему")
+
+    else:
+
+        print("Что-то пошло не так")
+
+
+print(second_registration())
