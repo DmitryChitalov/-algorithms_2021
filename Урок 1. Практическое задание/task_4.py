@@ -26,3 +26,56 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def auth_1(lgn, pwd, repo_dict):
+    if lgn.lower() in repo_dict:  # O(n)
+        if repo_dict.get(lgn)[0] == pwd:  # O(1)
+            if repo_dict.get(lgn)[1] == 1:  # O(1)
+                res = 'Аутентификация успешна'  # O(1)
+            else:
+                res = 'Учетная запись не активирована, для прохождения активации....'  # O(1)
+        else:
+            res = 'Пароль введен неверно'  # O(1)
+    else:
+        res = 'Логин введен неверно'  # O(1)
+    return res  # O(1)
+
+
+def auth_2(lgn, pwd, repo_dict):
+    lgn = lgn.lower()  # O(1)
+    if repo_dict.get(lgn) and repo_dict[lgn][1] == 1:  # O(1)
+        if repo_dict[lgn][0] == pwd:  # O(1)
+            res = 'Аутентификация успешна'  # O(1)
+        else:
+            res = 'Пароль введен неверно'  # O(1)
+    elif repo_dict.get(lgn) and repo_dict[lgn][1] == 0:  # O(1)
+        res = 'Учетная запись не активирована, для прохождения активации....'  # O(1)
+    else:
+        res = 'Логин введен неверно'  # O(1)
+    return res  # O(1)
+
+
+repository = {
+    'user1': ['pass1', 1],
+    'user2': ['pass2', 0],
+    'user3': ['pass3', 1],
+    'user5': ['pass5', 0],
+    'user4': ['pass4', 1]
+}
+
+
+print(auth_1('user1', 'pass1', repository))
+print(auth_1('user1', 'pass', repository))
+print(auth_1('user2', 'pass2', repository))
+print(auth_1('user', 'pass', repository))
+print('')
+print(auth_2('user1', 'pass1', repository))
+print(auth_2('user1', 'pass', repository))
+print(auth_2('user2', 'pass2', repository))
+print(auth_2('user', 'pass', repository))
+
+
+# Сложность первого алгоритма: O(n)
+# Сложность второго алгоритма: O(1)
+# Вывод: второй метод эффективнее
