@@ -22,3 +22,14 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def reverse_number(number, revers=''):
+    if number == 0:
+        return revers
+    else:
+        revers += str(number % 10)
+        return revers + reverse_number(number // 10)
+
+
+print(reverse_number(1234567890))

@@ -18,3 +18,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_number(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        if (number % 10) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return count_number(number // 10, even, odd)
+
+
+print(count_number(2225))

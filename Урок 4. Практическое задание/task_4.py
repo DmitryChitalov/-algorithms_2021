@@ -12,6 +12,8 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +41,21 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    elem = max(array, key=array.count)
+    max_3 = array.count(elem)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print("func_1:", timeit("func_1()", globals=globals()))
+print("func_2:", timeit("func_2()", globals=globals()))
+print("func_3:", timeit("func_3()", globals=globals()))
+
+'''
+func_1 и func_3 По скорости практически одинаковые. Идет перебор в цикле, используется встроенная функция max
+func_2 Самая медленная, тк создается новый список, и внем идет поиск 
+'''
