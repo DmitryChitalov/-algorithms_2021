@@ -12,3 +12,18 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+list1 = [1]
+
+
+def func1(n, base=1.00):
+    if n > 0:
+        new_base = -base / 2
+        list1.append(new_base)
+        n -= 1
+        return func1(n - 1, new_base)
+    else:
+        return sum(list1)
+
+
+print(func1(3))

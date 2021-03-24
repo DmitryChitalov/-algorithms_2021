@@ -28,3 +28,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+    operator = input("Какое действие нужно произвести: +, -, *, /\nИли введите '0' для выхода из программы: ")
+    if operator == '0':
+        return 'Выход'
+    elif operator in ['+', '-', '*', '/']:
+        try:
+            arg_1 = int(input('Введите первый аргумент: '))
+            arg_2 = int(input('Введите второй аргумент: '))
+            if operator == '+':
+                print(arg_1 + arg_2)
+            elif operator == '-':
+                print(arg_1 - arg_2)
+            elif operator == '*':
+                print(arg_1 * arg_2)
+            elif operator == '/':
+                try:
+                    print(round(arg_1 / arg_2, 5))
+                except ZeroDivisionError:
+                    print('На ноль делить нельзя!\nПопробуйте еще раз')
+                    return calculator()
+        except ValueError:
+            print('Необходимо ввести числа ')
+        return calculator()
+    else:
+        print('Не поддерживаемый опертор ')
+        return calculator()
+
+
+print(calculator())
