@@ -13,6 +13,8 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +22,27 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [k for k,x in enumerate(nums) if not x%2]
+    return new_arr
+
+
+numb = list(range(1000))
+
+
+print(timeit("func_1(numb)", number=100000, globals=globals()))
+print(timeit("func_2(numb)", number=100000, globals=globals()))
+
+"""
+func_1(numb) - 10.5752738
+func_2(numb) - 8.301555700000002
+
+Приведенная функция при заданных параметах массива в 1000 элементов 
+и число циклов измерений 100000 выполняется за 9.8290867
+Оптимизировав код использовал List comprehension при заданных параметах массива в 1000 элементов 
+и число циклов измерений 100000 выполняется за 7.523376500000001
+
+При оптимизации кода скорость выполнения функции увеличилась
+"""
