@@ -1,0 +1,42 @@
+# Сложность O(n^2)
+def log_1(user, password, d):
+    for k, v in d.items():
+        for i in v:
+            if i == user and k == 'active_acc':
+                if v[i] == password:
+                    return "Welcome"
+                if v[i] != password:
+                    return "Invalid password"
+            if i == user and k == 'not_active_acc':
+                return "Not active account, please activate"
+    return "This user is absent"
+
+
+# Сложность O(n)
+def log_2(user, password, d):
+    for k, v in d.items():
+        if user in v and k == 'active_acc':
+            if v[user] == password:
+                return "Welcome"
+            if v[user] != password:
+                return "Invalid password"
+        if user not in v and k == 'not_active_acc':
+            return "Not active account, please activate"
+    return "This user is absent"
+
+
+""" Второе решение эффективнеее так как мы избавились от вложенного цикла """
+
+d_2 = {'active_acc': {'Sam': 'qwerty', 'Den': 'qwert'},
+       'not_active_acc': {'Tom': 'werty', 'Mike': 'qwer', 'Alex': 'erty'}
+       }
+
+print(log_1('Sam', 'qwerty', d_2))
+print(log_1('am', 'qwerty', d_2))
+print(log_1('Sam', 'erty', d_2))
+print(log_1('Tom', 'werty', d_2))
+
+print(log_2('Sam', 'qwerty', d_2))
+print(log_2('am', 'qwerty', d_2))
+print(log_2('Sam', 'erty', d_2))
+print(log_2('Tom', 'werty', d_2))

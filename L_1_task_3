@@ -1,0 +1,35 @@
+from collections import Counter
+
+d = {
+    'Volkswagen': 275200,
+    'Toyota': 280500,
+    'Royal Dutch Shell': 311600,
+    'Apple': 265595,
+    'Wallmart': 524000,
+    'State Grid': 387000,
+    'Sinopic Group': 369200,
+    'Amazon.com': 232887
+}
+
+
+# Сложность O(n^2)
+def max_func(d):
+    sorted_values = sorted(d.values(), reverse=True)[:3]
+    sorted_dict = {}
+    for i in sorted_values:
+        for k in d.keys():
+            if d[k] == i:
+                sorted_dict[k] = d[k]
+                break
+    return sorted_dict
+
+
+# Сложность O(1)
+def func_max(d):
+    cnt = Counter(d).most_common(3)
+    return cnt
+
+
+"""Второе решение эффективнее так как в нем используется только встроенная функция """
+
+print(f"{max_func(d)} \n{func_max(d)}")
