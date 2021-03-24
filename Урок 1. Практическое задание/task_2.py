@@ -19,3 +19,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# my_min1 O(n^2)
+def my_min1(z):
+    for x in range(len(z)):         #O(n)
+        for a in range(len(z)):     #O(n)
+            if z[a] < z[x]:         #O(1)
+                s = z[a]            #O(1)
+    return print('myMin1:', s)      #O(1)
+
+# my_min2 O(n)
+def my_min2(z):
+    s = 0                           #O(1)
+    for x in range(len(z)):         #O(n)
+        if z[x] > s:                #O(1)
+            s = z[x]                #O(1)
+    for a in range(len(z)):         #O(n)
+        if z[a] < s:                #O(1)
+            s = z[a]                #O(1)
+    return print('myMin2:', s)      #O(1)
+
+#my_min3 0(n log n)
+def my_min3(f):
+    f.sort()                                #0(n log n)
+    return print('myMin3:', f.pop(0))       #O(1)
+
+
+z = [10, 2, 3, 700, 88, 1, 32, 4]  #O(1)
+my_min1(z) #O(1)
+my_min2(z) #O(1)
+my_min3(z) #O(1)

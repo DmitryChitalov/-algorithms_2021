@@ -26,3 +26,69 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# my_log1 O(n)
+def my_log1(n, login, password):
+    z = 0  # O(1)
+    for i in range(len(n)):  # O(n)
+        a = n[i]  # O(1)
+        if a["log"] == login:  # O(1)
+            if a["access"]:  # O(1)
+                if a["pas"] == password:  # O(1)
+                    print('вилкам')  # O(1)
+                    z = 1  # O(1)
+                    break
+                else:
+                    print('пароль не верен')  # O(1)
+                    z = 1  # O(1)
+                    break
+            else:
+                z = 1  # O(1)
+                print('у пользователя нет прав доступа')  # O(1)
+                break
+
+    if z == 0:  # O(1)
+        userInput = input('пользователь не найден. нажмите Y чтобы создать нового пользователя: ')  # O(1)
+        if userInput == 'y':  # O(1)
+            password = int(input('введите пароль: '))  # O(1)
+            n.append({"log": userLog, "pas": password, "access": True})  # O(1)
+    return print('вилкам ню юзер ', login)  # O(1)
+
+
+# my_log1 O(n) не уверен как правильно расчитать сложность для рекурсии но этот вариант хуже хотя бы тем что использует память
+def my_log2(n, login, password):
+    a = n[0]  # O(1)
+    if a["log"] == login:  # O(1)
+        if a["pas"] == password:  # O(1)
+            if a["access"]:  # O(1)
+                return print('welcome')
+            else:
+                return print('у пользователя нет прав доступа')
+    if len(n) == 1:  # O(1)
+        userInput = input('пользователь не найден. нажмите Y чтобы создать нового пользователя: ')  # O(1)
+        if userInput == 'y':  # O(1)
+            password = int(input('введите пароль: '))  # O(1)
+            print('вилкам ню юзер ', login)
+            return n.append({"log": userLog, "pas": password, "access": True})  # O(1)
+        else:
+            return print("досвидания")
+
+    if len(n) != 0: # O(1)
+        print(n)
+        n.pop(0)  # O(n)
+        return my_log2(n, login, password)
+
+
+account = [{"log": 1, "pas": 2, "access": True},
+           {"log": 3, "pas": 5, "access": True},
+           {"log": 3, "pas": 4, "access": False},
+           {"log": 8, "pas": 9, "access": True}]
+
+userLog = int(input('введите логин: '))
+userPass = int(input('введите пароль: '))
+
+# my_log1(account, userLog, userPass)
+my_log2(account, userLog, userPass)
+
+print(account)
