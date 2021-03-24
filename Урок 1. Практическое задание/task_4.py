@@ -26,3 +26,35 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# my_log1 O(n)
+def my_log1(n, login, password):
+    z = 0                                                  #O(1)
+    for i in range(len(n)):                                #O(n)
+        a = n[i]                                           #O(1)
+        if a["log"] == login:                              #O(1)
+            if a["access"]:                                #O(1)
+                if a["pas"] == password:                   #O(1)
+                    print('вилкам')                        #O(1)
+                    z = 1                                  #O(1)
+                    break
+                else:
+                    print('пароль не верен')               #O(1)
+                    z = 1                                  #O(1)
+                    break
+            else:
+                z = 1                                      #O(1)
+                print('у пользователя нет прав доступа')   #O(1)
+                break
+
+    if z == 0:                                             #O(1)
+        userInput = input('пользователь не найден. нажмите Y чтобы создать нового пользователя: ') #O(1)
+        if userInput == 'y':                                                                       #O(1)
+            password = int(input('введите пароль: '))                                              #O(1)
+            n.append({"log": userLog, "pas": password, "access": True})                            #O(1)
+            print('новый пользователь ', login, ' создан')                                                        #O(1)
+    return n
+
+
+my_log1(account, userLog, userPass)
+print(account)
