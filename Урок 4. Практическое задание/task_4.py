@@ -11,6 +11,8 @@
 
 Без аналитики задание считается не принятым
 """
+from collections import Counter
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +41,31 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    result = Counter(array).most_common()[0]
+    return f'Чаще всего встречается число {result[0]}, ' \
+           f'оно появилось в массиве {result[1]} раз(а)'
+
+
+def func_4():
+    result = max(array, key=array.count)
+    return f'Чаще всего встречается число {result}, ' \
+           f'оно появилось в массиве {array.count(result)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+print(timeit('func_1', globals=globals()))
+print(timeit('func_2', globals=globals()))
+print(timeit('func_3', globals=globals()))
+print(timeit('func_4', globals=globals()))
+
+
+"""
+Я попробовал два варианта, но, к сожалению, превзойти результат второй функции не смог.
+Вторая функция самая быстрая.
+
+P.S возможно с моей тачкой что-то не так т.к 4-я функция иногда бывает эффективнее остальных, а иногда третья или первая. Кажется, что на моей машине расчеты происходят некорректно.
+"""
