@@ -17,4 +17,27 @@
 
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
-# sqlite, postgres, db_api, orm
+import hashlib
+from uuid import uuid4
+
+
+def create_pass(username):
+    salt = uuid4().hex
+
+    user_pass = input("Введите пароль: ")
+    print(f"Пароль для пользователя {username} - {user_pass}")
+    hash_obj_1 = hashlib.sha256(salt.encode() + user_pass.encode()).hexdigest()
+    print(f"Хеш пароля пользователя {username} - {hash_obj_1}")
+
+    check_user_pass = input("Введите пароль еще раз: ")
+    print(f"Пароль для пользователя {username} - {check_user_pass}")
+    hash_obj_2 = hashlib.sha256(salt.encode() + check_user_pass.encode()).hexdigest()
+    print(f"Хеш пароля пользователя {username} - {hash_obj_2}")
+
+    if hash_obj_1 == hash_obj_2:
+        print("Вы ввели правильный пароль!")
+    else:
+        print("Вы ввели не правильный пароль!")
+
+
+create_pass('Alice')
