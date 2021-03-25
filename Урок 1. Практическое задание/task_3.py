@@ -1,49 +1,30 @@
-statusCode = {
-    100: "Ваша учетная запись не активна",
-    101: "Вы можете продолжить использовать ресурс",
-    200: "Не верно указан пароль",
-    300: "Учетная запись не найдена",
-    400: "Отсутсвует доступ к ресурсу"
+
+companies = {
+    'Роснефть': 708,
+    'Газпром': 1203,
+    'Лукойл': 640,
+    'Сбербанк России': 845,
+    'Российские железные дороги': 156,
+    'Ростех': 179
 }
+### Способ 1 #O^2
+companis_list = list(companies.items())
+values_list = list(companies.values())
+for i in range(len(values_list) - 1):
+  firstTree = 0
+  for j in range(len(values_list) - 1): 
+    if (values_list[i] < values_list[j]): # я посчитал сколько раз i элемент меньше остальных, если он меньше остальных 0 раз, то он самый большой, получается кто набрал 0,1,2 тот в ТОП 3
+      firstTree += 1
+  if(firstTree < 3):
+    print(companis_list[i])
 
-usersBD = [
-    {"login":"user_login", "password": "UserPassw0rd", "active": 1},
-    {"login":"user_login1", "password": "UserPassw0rd", "active": 0},
-    {"login":"user_login2", "password": "UserPassw0rd", "active": 0},
-    {"login":"user_login3", "password": "UserPassw0rd", "active": 0},
-  ]
+### Способ 2 # O(N)
+companis_list = list(companies.items())
+keys_list = list(companies.keys())
+revers_companies={}
+for i in range(len(values_list) - 1):             # O(N)
+  revers_companies[values_list[i]] = keys_list[i] # поменяем местами keys и values
+keys_companies = sorted(revers_companies, reverse=True)[:3] #O(NlogN)
+for company in keys_companies:                    # O(N)
+  print(revers_companies[company])
   
-# Способ 1. O(N)
-def check_auth(login, password):
-  for i in range(len(usersBD)):  #O(N)
-    if(login == usersBD[i]["login"]): #O(1)
-      if(password == usersBD[i]["password"]): #O(1)
-        if(usersBD[i]["active"] == 1): #O(1)
-          return 101 # Пусть это будет код который позволяет продолжать работать с приложением #O(1)
-        else:
-          return 100 # Пусть этот код показывает, что пользователь не активен  #O(1)
-      else:                                                   
-        if (i == len(usersBD)-1):                #O(1)
-          return 200 # Пароль не верен           #O(1)
-    else:                                        #O(1)
-      if (i == len(usersBD)-1):                  #O(1)
-        return 300 # логин не найден             #O(1)           
-
-print(statusCode[check_auth("user_login", "UserPassw0rd")])
-print(statusCode[check_auth("user_login1", "UserPassw0rd")])
-print(statusCode[check_auth("user_login3", "UserPassword")])
-print(statusCode[check_auth("user_dogin1", "UserPassw0rd")])
-
-
-# Способ 2. O(N)
-def check_auth2(login, password):  
-  for val in usersBD: #O(N)
-    if(val["login"] == login and val["password"] == password and val["active"] == 1): #O(1)
-      return 101             #O(1)
-    return 400               #O(1)
-
-print('___________________________________________________')
-print(statusCode[check_auth2("user_login", "UserPassw0rd")])
-print(statusCode[check_auth2("user_login1", "UserPassw0rd")])
-print(statusCode[check_auth2("user_login3", "UserPassword")])
-print(statusCode[check_auth2("user_dogin1", "UserPassw0rd")])
