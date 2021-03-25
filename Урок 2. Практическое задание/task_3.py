@@ -22,3 +22,16 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+""" print( *reversed( input('Введите число: ') ), sep = '\n' ) """
+
+
+def rev(string):
+    if len(string) == 0:
+        return string
+    else:
+        return rev(string[1:]) + string[0]
+
+
+a = str(input("Введите строку из чисел: "))
+print(rev(a))
