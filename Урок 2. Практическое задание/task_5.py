@@ -25,16 +25,15 @@
 
 
 def print_ten_elements(start_number=32, end_number=127):
-    extra_brake = ""
-    if start_number % 10 == 1:
-        extra_brake = "\r44\n"
-    if start_number == end_number:
-        return str(start_number) + " - " + chr(start_number) + extra_brake
-    else:
-        number_for_output = start_number
-        current_char = chr(start_number)
-        start_number += 1
-        return f"{number_for_output} - {current_char} {extra_brake} {print_ten_elements(start_number)}"
+    if start_number > end_number:
+        return True
+    number_for_output = start_number
+    current_char = chr(start_number)
+    start_number += 1
+    print(f"{number_for_output} - {current_char}", end=' ')
+    if start_number % 10 == 2:
+        print()
+    print_ten_elements(start_number)
 
 
-print(print_ten_elements())
+print_ten_elements()

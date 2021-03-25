@@ -30,7 +30,7 @@ def left_side(number_for_left_side):    # Рекурсивный подсчет 
 
 
 def right_side(number_for_right_side):  # Подсчет суммы элементов по формуле
-    return number_for_right_side*(number_for_right_side + 1)/2
+    return number_for_right_side * (number_for_right_side + 1) / 2
 
 
 def check_statement(number_to_check):   # Функция проверки утверждения

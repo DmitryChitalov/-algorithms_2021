@@ -14,22 +14,22 @@
 import random
 
 
-def guess_number(number_to_guessed, current_attempt=1):
+def guess_number(number_to_be_guessed, current_attempt=1):
     if current_attempt > 10:
         print("No more attempts left")
-        return
+        return True
     else:
         number_to_try = int(input("Guess number (0-100): "))
-        if number_to_guessed == number_to_try:
+        if number_to_be_guessed == number_to_try:
             print("You won")
-            return
+            return True
         else:
-            if number_to_try > number_to_guessed:
+            if number_to_try > number_to_be_guessed:
                 print("Less!")
             else:
                 print("Greater!")
             current_attempt += 1
-            guess_number(number_to_guessed, current_attempt)
+            guess_number(number_to_be_guessed, current_attempt)
 
 
 chosen_number = random.choice(range(0, 100))
