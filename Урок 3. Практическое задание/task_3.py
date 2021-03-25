@@ -17,3 +17,16 @@
 """
 
 # hash?
+papa = "papa"
+
+def func1(s):
+    set1 = set()
+    for i in range(len(s)):
+        for j in range(i + 1, len(s) + 1):
+            if s[i: j] != s:
+                set1.add(hash(s[i:j]))
+    return len(set1)
+
+
+print(func1(papa))
+
