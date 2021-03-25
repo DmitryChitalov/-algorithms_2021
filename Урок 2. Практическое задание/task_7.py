@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def get_result(n, total, sum):
+    print(n, total, sum)
+    if n == 0:
+        if sum == total:
+            return print ('Доказано !!!')
+        else:
+            return print('Не доказано !!!')
+    sum = sum + n
+    return get_result(n - 1, total, sum)
+
+
+
+n = int(input('Введите натуральное число: '))
+get_result(n, n*(n+1)/2 ,0)
