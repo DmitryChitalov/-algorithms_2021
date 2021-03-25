@@ -22,3 +22,13 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+def rec_func(numb):
+    res_num, numer = divmod(numb , 10)
+    if res_num == 0:
+        return str(numer)
+    else:
+        return str(numer)+str(rec_func(res_num))
+
+number = int(input('Введите число : '))
+print(f'Ваше перевернутое число : {rec_func(number)}')
