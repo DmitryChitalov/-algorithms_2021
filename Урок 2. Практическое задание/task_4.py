@@ -12,3 +12,20 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_n(count, elems, num, sum_nums):
+    
+    if count == elems:
+        return sum_nums
+    elif count < elems:
+        return sum_n(count + 1, elems, num / -2, sum_nums + num)
+
+
+try:
+    elements = int(input('Введите количество элементов: '))
+    number = int(input('Введите число: '))
+    print(f'Колличество элементов: {elements}')
+    print(f'Сумма элементов: {sum_n(0, elements, number, 0)}')
+except ValueError:
+    print('Вы ввели строку вместо числа!')
