@@ -21,11 +21,13 @@
 Не совсем понял посказку. Надеюсь такое решение тоже подходит
 """
 
+
 def left_side(number_for_left_side):    # Рекурсивный подсчет суммы элементов
     if number_for_left_side == 0:
         return 0
     else:
         return number_for_left_side + left_side(number_for_left_side - 1)
+
 
 def right_side(number_for_right_side):  # Подсчет суммы элементов по формуле
     return number_for_right_side*(number_for_right_side + 1)/2
@@ -38,7 +40,4 @@ def check_statement(number_to_check):   # Функция проверки утв
         print("Statement is false")
 
 
-
 check_statement(154)
-
-

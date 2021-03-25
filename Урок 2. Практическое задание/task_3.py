@@ -25,14 +25,16 @@
 
 
 def reverse_number(number):
-    incoming_number = number
-    if len(incoming_number) == 1:
-        return incoming_number
+    if number == 0:
+        return str(number)
     else:
-        current_number = int(incoming_number)%10
-        incoming_number = int(incoming_number)//10
-        return str(current_number) + reverse_number(str(incoming_number))
-            
+        current_number = number % 10
+        number = number // 10
+        return str(current_number) + reverse_number(number)
 
-string_to_process = input("Input number: ")
-print(reverse_number(string_to_process))
+
+try:
+    string_to_process = int(input("Input number: "))
+    print(reverse_number(string_to_process))
+except ValueError:
+    print("Only digits are allowed")

@@ -29,7 +29,8 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
-propper_operators = ["+","-","*","/"]
+propper_operators = ["+", "-", "*", "/"]
+
 
 def calculate():
     operation = input("Input operation: ") 
