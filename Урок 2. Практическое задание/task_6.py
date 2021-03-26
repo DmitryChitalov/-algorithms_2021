@@ -11,3 +11,39 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+from random import randint
+
+number = randint(0, 100)
+print(number)
+
+
+def game(numb=number, iterate=0):
+
+    if iterate == 0:
+        print('У вас 10 попыток чтобы отгодать число')
+    elif iterate <= 5:
+        print(f'У вас осталось {10 - iterate} попыток')
+    elif iterate < 9:
+        print(f'У вас осталось {10 - iterate} попытки')
+    else:
+        print(f'У вас осталось {10 - iterate} попытка')
+
+    answer = int(input('Угадайте число от 0 до 100: '))
+
+    if answer > numb:
+        print('Ваше число больше загадоного')
+    elif answer < numb:
+        print('Ваше число меньше загадоного')
+    else:
+        print('Верно вы выйграли')
+        return
+
+    iterate += 1
+
+    if iterate == 10:
+        print(f'Вы проиграли верный ответ {numb}')
+        return
+    game(numb, iterate)
+
+
+game()

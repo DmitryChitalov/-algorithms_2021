@@ -12,3 +12,13 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def my_func(numb_iter, numb=1.0, count=1):
+    if count == numb_iter:
+        return numb
+    count += 1
+    return numb + my_func(numb_iter, numb / -2, count)
+
+
+print(my_func(3))

@@ -18,3 +18,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def my_func(number):
+    res = [0, 0]  # в список будем сохнанять на первую позицию четные числа
+
+    if (number % 10) % 2 == 0:
+        res[0] += 1
+    else:
+        res[1] += 1
+
+    if number // 10 == 0:
+        return res
+    else:
+        return list(map(lambda x, y: x + y, res, my_func(number // 10)))
+
+
+user_input = my_func(int(input('Введите целое число: ')))
+print(f'В вашем числе четных чисел: {user_input[0]} и нечетных чисел: {user_input[1]}')
