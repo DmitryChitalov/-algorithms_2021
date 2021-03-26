@@ -26,3 +26,43 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# O(1)
+users = {'Maga': ['123', True],
+         'Baga': ['124', False]
+         }
+
+
+def user_auth_1(login, password):
+    if users.get(login):
+        return users[login][0] == password and users[login][1]
+
+    return False
+
+
+print(user_auth_1('Maga', '123'))
+print(user_auth_1('Baga', '124'))
+
+# ############################################################################################
+# O(n)
+users_2 = [{'Name': 'Vasya', 'Password': 123, 'Authorization': True},
+           {'Name': 'Dusya', 'Password': 123, 'Authorization': False}]
+
+
+def user_auth_2(Name):
+    for i in users_2:
+        if Name == i['Name']:
+            if i['Authorization']:
+                return "Вы вошли"
+            else:
+                if input('Введите пароль') == i['123']:
+                    i['Hello'] = 'True'
+                    return "Отлично"
+                else:
+                    return "Не верный пароль"
+    return "Необходимо зарегестрироваться"
+
+
+print(user_auth_2('Vasya'))
+print(user_auth_2('Dusya'))
+
+'''Первое решение является более эффективным так как сложность такого алгоритма константная, а значит быстрее'''
