@@ -10,70 +10,120 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
-class BinaryTree:
-    def __init__(self, root_obj):
-        # корень
-        self.root = root_obj
-        # левый потомок
-        self.left_child = None
-        # правый потомок
-        self.right_child = None
+
+# своё исключение для левого ребёнка
+class ErrorLeft(Exception):
+    def __init__(self, text):
+        self.text = text
+
+
+# своё исключение для правого ребёнка
+class ErrorRight(Exception):
+    def __init__(self, text):
+        self.text = text
+
+
+# создаём бинарное дерево
+class BinaryWood:
+    def __init__(self, base_ent):
+        self.base = base_ent  # корень
+        self.left_kid = 'empty'  # левый ребёнок
+        self.right_kid = 'empty'  # правый ребёнок
 
     # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+    def paste_left(self, new_knot):
+        if self.left_kid == 'empty':
+            if new_knot > self.base:
+                raise ErrorLeft('Левый ребёнок должен быть меньше корня!')
+            else:
+                self.left_kid = BinaryWood(new_knot)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            if new_knot > self.base:
+                raise ErrorLeft('Левый ребёнок должен быть меньше корня!')
+            else:
+                wood_ent = BinaryWood(new_knot)
+                wood_ent.left_kid = self.left_kid
+                self.left_kid = wood_ent
 
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
+    # добавить правого ребёнка
+    def paste_right(self, new_knot):
+        if self.right_kid == 'empty':
+            if new_knot < self.base:
+                raise ErrorRight('Правый ребёнок должен быть больше корня!')
+            else:
+                self.right_kid = BinaryWood(new_knot)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            if new_knot < self.base:
+                raise ErrorRight('Правый ребёнок должен быть больше корня!')
+            else:
+                wood_ent = BinaryWood(new_knot)
+                wood_ent.right_kid = self.right_kid
+                self.right_kid = wood_ent
 
     # метод доступа к правому потомку
-    def get_right_child(self):
-        return self.right_child
+    def take_right_kid(self):
+        return self.right_kid
 
-    # метод доступа к левому потомку
-    def get_left_child(self):
-        return self.left_child
+    # метод доступа к левому ребёнку
+    def take_left_kid(self):
+        return self.left_kid
 
     # метод установки корня
-    def set_root_val(self, obj):
-        self.root = obj
+    def install_base(self, ent):
+        self.base = ent
 
     # метод доступа к корню
-    def get_root_val(self):
-        return self.root
+    def take_base(self):
+        return self.base
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+w = BinaryWood(12)
+print(w.take_base())
+
+print(w.take_left_kid())
+w.paste_left(13)
+print(w.take_left_kid())
+print(w.take_left_kid().take_base())
+
+'''
+Манипуляции выше вызовут данную ошибку так как левый потомок должен быть меньше корня,
+а в данном случае он больше.
+
+raise Error_left('Левый ребёнок должен быть меньше корня!')
+__main__.Error_left: Левый ребёнок должен быть меньше корня!
+'''
+
+w.paste_right(11)
+print(w.take_right_kid())
+print(w.take_right_kid().take_base())
+
+'''
+Манипуляции выше вызовут данную ошибку так как правый потомок должен быть больше корня,
+а в данном случае он меньше.
+
+raise Error_right('Правый ребёнок должен быть больше корня!')
+__main__.Error_right: Правый ребёнок должен быть больше корня!
+'''
+
+print(w.take_left_kid())
+w.paste_left(8)
+print(w.take_left_kid())
+print(w.take_left_kid().take_base())
+w.paste_right(13)
+print(w.take_right_kid())
+print(w.take_right_kid().take_base())
+w.take_right_kid().install_base(26)
+print(w.take_right_kid().take_base())
+
+'''
+Манипуляции выше не вызовут исключений так как по условию потомки добавлялись
+верно.
+
+12
+empty
+<__main__.BinaryWood object at 0x7f9b9b6c0a60>
+8
+<__main__.BinaryWood object at 0x7f9b9b63f310>
+13
+26
+'''
