@@ -23,3 +23,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import namedtuple
+
+
+name_tuple = namedtuple("company", "name profit")
+company_dict = {}
+
+while True:
+    try:
+        company_sum = int(input("Введите количесивр фирм: "))
+        if company_sum <= 0:
+            raise ValueError
+        break
+    except ValueError:
+        print("Ошибка. Требуется указать целое число, больше 0. Попробуйте снова.")
+
+for i in range(1, company_sum + 1):
+    name = input(f"Введите название {i}-й компании: ")
+    while True:
+        try:
+            user_input_profit = input(f"Введите прибыль по кварталам через пробел: ").split()
+            if len(user_input_profit) != 4:
+                raise ValueError
+            profit = sum(int(i) for i in user_input_profit)
+            break
+        except ValueError:
+            print("Ошибка. Требуется указать 4 целых числа через пробел. Попробуйте снова.")
+    company = name_tuple(name=name, profit=profit)
+    company_dict[company.name] = profit / 4
+
+
+average = sum(company_dict.values()) / company_sum
+more_aver = [k for k in company_dict if company_dict[k] >= average]
+les_aver = [k for k in company_dict if company_dict[k] < average]
+print(f"Средняя годовая прибыль всех предприятий: {average:.2f}\n"
+      f"Предприятия, с прибылью выше среднего значения: {', '.join(more_aver)}\n"
+      f"Предприятия, с прибылью ниже среднего значения: {', '.join(les_aver)}")

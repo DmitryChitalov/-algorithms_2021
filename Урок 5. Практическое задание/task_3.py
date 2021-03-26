@@ -15,3 +15,29 @@ deque – это обобщение стеков и очередей.
 
 И добавить аналитику, так ли это или нет.!
 """
+
+from collections import deque
+from timeit import timeit
+
+
+def chek_time(f):
+    return timeit(f"{f}", globals=globals(), number=100000)
+
+
+t_lst = [i for i in range(10000)]
+t_dq = deque([i for i in range(10000)])
+
+print("Добавляем в конец list:", chek_time("t_lst.append(0)"))
+print("Добавляем в конец deque:", chek_time("t_dq.append(0)"))
+print("Добавляем в начало list:", chek_time("t_lst.insert(0,0)"))
+print("Добавляем в начало deque:", chek_time("t_dq.appendleft(0)"))
+print("Извлекаем из конца list:", chek_time("t_lst.pop()"))
+print("Извлекаем из конца deque:", chek_time("t_dq.pop()"))
+print("Извлекаем из начала list:", chek_time("t_lst.pop(0)"))
+print("Извлекаем из начала deque:", chek_time("t_dq.popleft()"))
+
+"""
+Аналитика:
+Deque выполяет быстрее операции, использующие начало коллекции.
+Различий в скорости работы операций с концом коллекции у Deque и List - нет. 
+"""
