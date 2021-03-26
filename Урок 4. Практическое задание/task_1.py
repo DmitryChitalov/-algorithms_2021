@@ -14,9 +14,45 @@
 """
 
 
+import timeit
+
+
 def func_1(nums):
+    """
+    Функция в цикле создает список индексов четных элементов введенного списка.
+    Сложность O(n) - линейная
+    """
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_opt(nums):
+    """
+    Функция при помощи list comprehension создает список индексов четных элементов введенного списка.
+    Сложность O(n) - линейная
+    """
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+if __name__ == '__main__':
+    task_array = list(range(1000))
+    print(f'{"=" * 20} Замеры {"=" * 20}')
+    for i in range(3):
+        number = 1000 * 10 ** i
+        print(f'Количество раз выполнения функций        : {number}')
+        print(f'Создание списка через цикл               : '
+              f'{timeit.timeit("func_1(task_array)", globals=globals(), number=number)}')
+        print(f'Создание списка с пом. list comprehension: '
+              f'{timeit.timeit("func_opt(task_array)", globals=globals(), number=number)}')
+        print('-' * 48)
+
+"""
+Обе функции имеют "линейную" сложность, но предоставление списков выполняется стабильно быстрее,
+чем цикл. При чем разница по времени выполнения увеличивается прапорционально увеличению количеств
+раз выполнения функций.
+
+"""
