@@ -18,3 +18,37 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# Надесь правильно реализовала структуру рекурсии.
+
+
+def number_type(number, odd=0, even=0):
+
+    if number == 0:
+
+        return even, odd
+
+    else:
+
+        new_number = number % 10
+        number = number // 10
+
+        if new_number % 2 == 0:
+
+            even += 1
+
+        else:
+
+            odd += 1
+
+    return number_type(number, odd, even)
+
+
+try:
+
+    input_number = int(input("Введите число: "))
+    print(f"Кол-во четных и нечетных цифр в числе: {number_type(input_number)}")
+
+except ValueError:
+
+    print("Что-то пошло не так (Вы написали не число). Исправляйтесь!!!")

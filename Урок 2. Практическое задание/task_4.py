@@ -12,3 +12,24 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def numbers_sum(i, number, count, final_sum):
+
+    if i == count:
+
+        print(f"Кол-во элементов - {count}, а их сумма - {final_sum}")
+
+    elif i < count:
+
+        return numbers_sum(i + 1, number / 2 * -1, count, final_sum + number)
+
+
+try:
+
+    user_count = int(input("Введите нужное кол-во элементов: "))
+    numbers_sum(0, 1, user_count, 0)
+
+except ValueError:
+
+    print("Вы ввыели вместо числа строку. Исправляйтесь!!!")

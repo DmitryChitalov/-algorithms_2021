@@ -28,3 +28,74 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+# У меня появилась идея позже доработать программу и добавить возможность ввода буквы  Q, в любом регистре.
+# Но планирую доделать потом, так как сейчас провожу финальную проверку кода.
+
+
+def calculator():
+
+    operation = input("Введите нужную Вам функцию (+, -, *, / или Q для выхода): ")
+
+    if operation == "Q":
+
+        print("До скорых встреч!")
+
+    else:
+
+        if operation in "+-*/":
+
+            try:
+
+                first_number = int(input("Введите 1ое число: "))
+                second_number = int(input("Введите 2ое число: "))
+
+                if operation == "+":
+
+                    result = first_number + second_number
+                    print(f"{result} - результат сложения.")
+
+                    return calculator()
+
+                elif operation == "-":
+
+                    result = first_number - second_number
+                    print(f"{result} - результат вычитания.")
+
+                    return calculator()
+
+                elif operation == "*":
+
+                    result = first_number * second_number
+                    print(f"{result} - результат умножения.")
+
+                    return calculator()
+
+                elif operation == "/":
+
+                    if second_number != 0:
+
+                        result = first_number / second_number
+                        print(f"{result} - результат деления.")
+
+                        return calculator()
+
+                    else:
+
+                        print("Деление на 0 недопустимо.")
+
+                        return calculator()
+
+            except ValueError:
+
+                print("Что-то пошло не так. Попробуйте исправить!!!")
+
+                return calculator()
+        else:
+
+            print("Введен не существующий оператор. Попробуйте исправить!!!")
+
+            return calculator()
+
+
+calculator()
