@@ -11,3 +11,25 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+from random import randint
+
+
+def guess(answer, tries_count):
+    """угадайте загаданное число"""
+    user_answer = int(input(f"Количество попыток: {tries_count}. Введите ваш ответ: "))
+    if user_answer == answer:
+        print(f"Вы угодали с {11 - tries_count} раза")
+        return
+    if tries_count == 1:
+        print(f"Вы не смогли угадать правильный ответ. Загаданное число: {answer}")
+        return
+    if user_answer > answer:
+        print("загаданное число меньше")
+    if user_answer < answer:
+        print("загаданное число больше")
+    guess(answer, tries_count - 1)
+
+
+print("Загадано число. Угадайте его!")
+num = randint(0, 100)
+guess(num, 10)

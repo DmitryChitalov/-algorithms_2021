@@ -28,3 +28,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def recur_calc():
+    """Функция производит простейшие арифметические операции"""
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation not in "+-*/0":
+        print("Введено неверное значение операции! Повторите ввод.")
+        recur_calc()
+    elif operation == '0':
+        print("Выполнение программы завершено!")
+    else:
+        try:
+            num_1 = int(input("Введите первое число: "))
+            num_2 = int(input("Введите второе число: "))
+        except ValueError:
+            print(
+                "Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+            recur_calc()
+        if operation == "+":
+            print(f"Ваш результат: {num_1 + num_2}")
+        elif operation == "-":
+            print(f"Ваш результат: {num_1 - num_2}")
+        elif operation == "*":
+            print(f"Ваш результат: {num_1 * num_2}")
+        elif operation == "/":
+            try:
+                print(f"Ваш результат: {round(num_1 / num_2, 2)}")
+            except ZeroDivisionError:
+                print("Делить на 0 нельзя!")
+        recur_calc()
+
+
+recur_calc()

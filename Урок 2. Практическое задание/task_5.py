@@ -23,3 +23,19 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def build_code_char_str(start, end):
+    """вывод одной строки кодов и символов"""
+    if start == end:
+        return ""
+    return f"{start} - {chr(start)} {build_code_char_str(start + 1, end)}"
+
+
+i = 32
+while i < 127:
+    start = i
+    i += 10
+    end = i
+    if end > 127:
+        end = 128
+    print(build_code_char_str(start, end))
