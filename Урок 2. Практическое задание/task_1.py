@@ -28,3 +28,25 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    try:
+        operation = input('Введите операцию (+, -, *, / или 0 для выхода): ').strip()
+        if operation not in '+-*/0':
+            raise Exception('OperationInputError')
+        elif operation == '0':
+            return
+        first_num = float(input('Введите первое число: ').strip())
+        second_num = float(input('Введите второе число: ').strip())
+        result = eval(f'{first_num} {operation} {second_num}')
+        print(f'Ваш результат: {result}')
+    except ZeroDivisionError as zderr:
+        print(f'Ошибка деления на ноль: {zderr}')
+    except Exception as ex:
+        print(f'Ошибка ввода, повторите ({ex})')
+    finally:
+        calc()
+
+
+calc()

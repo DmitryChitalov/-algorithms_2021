@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_row(start_num, end_num):
+    for i in range(10):
+        if start_num > end_num:
+            break
+        print(f'{start_num} - {chr(start_num)}', end=' ')
+        start_num += 1
+    else:
+        print('')
+    if start_num < end_num:
+        ascii_row(start_num, end_num)
+
+
+ascii_row(32, 127)

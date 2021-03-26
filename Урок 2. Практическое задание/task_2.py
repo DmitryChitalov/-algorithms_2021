@@ -18,3 +18,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_count(number, even=0, not_even=0):
+    if number % 2 == 1:
+        not_even += 1
+    else:
+        even += 1
+    if abs(number) > 9:
+        return even_count(abs(number)//10, even, not_even)
+    else:
+        print(f'Кол-во четных чисел: {even}, нечетных: {not_even}')
+        return
+
+
+even_count(-122341330)
