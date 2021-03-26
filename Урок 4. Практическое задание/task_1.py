@@ -13,6 +13,21 @@
 Без аналитики задание считается не принятым
 """
 
+import timeit
+
+
+"""
+2.	Во втором массиве сохранить индексы четных элементов первого массива.
+Например, если дан массив со значениями 8, 3, 15, 6, 4, 2, то во второй массив
+надо заполнить значениями 1, 4, 5, 6
+(или 0, 3, 4, 5 - если индексация начинается с нуля),
+т.к. именно в этих позициях первого массива стоят четные числа.
+"""
+
+
+from timeit import timeit
+from random import randint
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +35,19 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] %2 == 0]
+    return new_arr
+
+
+
+test_list = [randint(0, 10) for i in range(100)]
+
+print(f'func_1 : {timeit("func_1(test_list)", globals=globals())} sec')
+# 7.0696474 sec
+print(f'func_2 : {timeit("func_2(test_list)", globals=globals())} sec')
+# 5.746248199999999 sec
+
+
+# скорость второй функции будет выше, засчет использования LC
