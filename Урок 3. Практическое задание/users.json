@@ -1,0 +1,18 @@
+{
+    "kuznetsov": {
+        "password": "8fbefece3b4aaaa9220189ad0495231918b8984b6b01ce16673e0a095f3324bd",
+        "is_active": true
+    },
+    "petrov": {
+        "password": "c07d9e69d90a576c8a6690b35cc0912f48677cea2f560cf737058524744aff68",
+        "is_active": true
+    },
+    "sidorov": {
+        "password": "2bcb26e095ecf38c4787acba1b2a9f4b18da190689dd125d69db445486f5a069",
+        "is_active": true
+    },
+    "ivanov": {
+        "password": "ed51d888bbb2e7af1800b14a68bc2faf5e917f917522ab56fefee85bfd73426a",
+        "is_active": false
+    }
+}
