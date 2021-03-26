@@ -18,3 +18,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_uneven(number, even = 0, uneven = 0):
+    if number == 0:
+        return even, uneven
+    else:
+        digit = number % 10
+        number = number // 10
+        if digit % 2 == 0:
+            even += 1
+        else:
+            uneven += 1
+        return even_uneven(number, even, uneven)
+
+try:
+    number = int(input("Введите число:"))
+except ValueError:
+    print('Вы вместо числа ввели строку. Выходим' )
+
+print('Количество четных и нечетных цифр в числе равно:',even_uneven(number))

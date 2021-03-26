@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def check_formula(num, i = 1, formula = '', sum_numbers = 1):
+    if i == num:
+        return formula + f"{num} = {sum_numbers} = {num}({num}+1)/2 = {num * (num+1) / 2}"
+    else:
+        formula += str(i) + "+"
+        i += 1
+        sum_numbers += i
+        return check_formula(num, i, formula, sum_numbers)
+
+try:
+    number = int(input("Введите число:"))
+except ValueError:
+    print('Вы вместо числа ввели строку (((. Исправьтесь')
+
+print(f"Для {number} проверяем следующее равенство {check_formula(number)} ")
