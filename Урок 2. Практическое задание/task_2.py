@@ -18,3 +18,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+numb = 54213  # тестируемое число
+evens = []  # список для четных
+odds = []  # список для нечетных
+
+
+def calc(num):
+    print(num)
+    ost = num % 10
+
+    if num <= 0:
+        print(f"Result Calc for: {numb}")
+        print(f"evens {len(evens)}: {evens} ")
+        print(f"odds {len(odds)}: {odds}")
+        return
+    if ost % 2 == 0:
+        evens.append(ost)
+    else:
+        odds.append(ost)
+    calc(num // 10)
+
+
+# Test
+calc(numb)

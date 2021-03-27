@@ -22,4 +22,22 @@
 Допускается исп-е встроенных ф-ций
 и допускается комб-е - цикл и рекурсия
 """
+start_symb = 32
+end_symb = 127
 
+
+def table_cnv(start_s, strr="", inx=1):
+    strr += f"{start_s}-{chr(start_s)} "
+    if inx % 10 == 0:
+        print(strr)
+        strr = ""
+    next_s = start_s + 1
+    if next_s > end_symb:
+        print("end")
+        return
+    inx += 1
+    table_cnv(next_s, strr, inx)
+
+
+# Test
+table_cnv(32)

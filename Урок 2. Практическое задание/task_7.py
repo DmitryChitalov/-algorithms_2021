@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+indlst = []
+
+
+def math_induct(numb, ind):
+    if numb > 0:
+        ind.append(numb)
+        math_induct(numb - 1, ind)
+    else:
+        stri = ""
+        for i in ind:
+            stri += f"+{i}"
+        print(f"{stri} = {sum(ind)}")
+        indlst.clear()
+        return
+
+
+# Test для чисел от 0 до 10
+for num in range(10):
+    print(f"Для {num} сумма равна:")
+    math_induct(num, indlst)

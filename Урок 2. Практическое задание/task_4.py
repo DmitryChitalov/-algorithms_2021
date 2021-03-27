@@ -12,3 +12,19 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+steps = 15
+conv_lst = []
+
+
+def step_conv(step, num):
+    conv_lst.append(num)
+    if step == 0:
+        print("res")
+        print(conv_lst)
+        print(sum(conv_lst))
+        return
+    step_conv(step - 1, num / -2)
+
+
+# Test
+step_conv(steps, 1)
