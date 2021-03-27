@@ -21,3 +21,42 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+# Generate big_data
+def generate_data():
+    big_data = {}
+    for i in range(900000):
+        key = 'company' + str(i)
+        value = random.randint(100000, 1000000)
+        big_data[key] = value
+    return big_data
+
+# bid_data done
+company = generate_data()
+
+
+# first option
+# Сложность: O(n log n)
+def finder_1(my_dict: dict):
+    top_3 = []                      # O(1)
+    for i in my_dict.values():      # O(n)
+        top_3.append(i)             # O(1)
+    return sorted(top_3)[:3]        # O(n log n)
+
+
+# second option
+# Сложность: O(n)
+def finder_2(my_dict:dict):
+    top_3 = list(my_dict.values())  # O(n)
+    return sorted(top_3)[:3]        # O(1)
+
+
+"""
+Вывод. Решения с меньшим количеством циклов и условий работаю быстрее. А решения с циклами и вложенными в них циками 
+лучше избегать вовсе. Стремиться оптимизировать решение до O(log n) или в крайнем случае O(n)
+"""
+print(finder_1(company))
+
+print(finder_2(company))
+
