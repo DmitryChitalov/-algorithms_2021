@@ -33,3 +33,29 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+# я решила использовать deque, надеюсь, такой вид хранения соответствует условиям задачи
+
+from collections import deque
+
+first_num = deque(input('Введите первое число: '))
+second_num = deque(input('Введите второе число: '))
+
+str_first_num = ''
+str_second_num = ''
+
+while first_num:
+    str_first_num += first_num.popleft()
+
+while second_num:
+    str_second_num += second_num.popleft()
+
+
+hex_sum = hex(int(str_first_num, 16) + int(str_second_num, 16))
+
+list_sum = list(str(hex_sum)[2:].upper())
+
+print(f'Сумма чисел из примера: {list_sum}')
+
+hex_mul = hex(int(str_first_num, 16) * int(str_second_num, 16))
+list_mul = list(str(hex_mul)[2:].upper())
+print(f'Произведение - {list_mul}')
