@@ -36,8 +36,14 @@ def find_3_companies_with_max_income(companies):
             else:
                 break
         if max_incomes_index != -1:
-            max_incomes[max_incomes_index] = income
-            companies_with_max_income[max_incomes_index] = company
+            if max_incomes_index == len(max_incomes) - 1:
+                max_incomes.append(income)
+                max_incomes.pop(0)
+                companies_with_max_income.append(company)
+                companies_with_max_income.pop(0)
+            else:
+                max_incomes[max_incomes_index] = income
+                companies_with_max_income[max_incomes_index] = company
         print(max_incomes)
     return companies_with_max_income
 
