@@ -12,3 +12,15 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_series(n, summa=1, start=1.0):
+    if n == 1:
+        return summa
+    else:
+        start = - start / 2
+        summa += start
+        return sum_series(n - 1, summa, start)
+
+
+print(sum_series(3))
