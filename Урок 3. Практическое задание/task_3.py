@@ -17,3 +17,13 @@
 """
 
 # hash?
+s = "рара"
+my_set = set()
+for i in range(len(s)):
+    for j in range(len(s) - 1
+                   if i == 0
+                   else len(s), i, -1):
+        my_set.add(hash(s[i:j]))
+char_length = len(s)
+substrings_length = len(my_set)
+print(f"Строка: {s}\nХэш {my_set}\n{char_length} символа(ов) {substrings_length} подстрок")
