@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def code_ascii(code=32):
+    if code == 128:
+        return
+    print(f' {code} - {chr(code)}', end=' ')
+    if (code - 31) % 10 == 0:
+        print('\n')
+    code_ascii(code + 1)
+
+
+code_ascii()

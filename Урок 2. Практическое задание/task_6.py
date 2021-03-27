@@ -11,3 +11,25 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+
+from random import randint
+
+
+def guess_number(n, attempts=10):
+    if attempts == 0:
+        print(f'{"*" * 20}\nВы проиграли! Загаданное число {n}')
+        return
+    answer = int(input(f'Угадай число! \nПопытка № {attempts} . Введи число: '))
+    if answer == n:
+        print(f'{"*" * 20}\nВы выйграли!\nЗагаданное число {n}')
+        return
+    if answer > n:
+        print(f'Загаданное число меньше {answer}')
+    elif answer < n:
+        print(f'Загаданное число больше {answer}')
+    print('*' * 20)
+    guess_number(n, attempts - 1)
+
+
+guess_number(randint(0, 100))
