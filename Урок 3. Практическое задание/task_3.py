@@ -15,5 +15,18 @@
 р
 а
 """
-
 # hash?
+
+
+def substrings(string):
+    list_of_substrings = []
+    for i in range(len(string)):
+        for j in range(len(string) - i):
+            substring = string[i:len(string)-j]
+            list_of_substrings.append(hash(substring))
+    list_of_substrings.remove(hash(string))
+    result = set(list_of_substrings)
+    print(f'Количество уникальных подстрок строки "{string}": {len(result)}')
+
+
+substrings('papa')
