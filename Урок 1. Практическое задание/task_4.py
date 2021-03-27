@@ -26,3 +26,60 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+accounts_dict = {'activated': {'a': 1, 'b': 2, 'c': 3}, 'not_activated': {'d': 4, 'e': 5, 'f': 6}}
+
+"""
+O(n), тк все проверки со сложностью O(1), а перебор по словарю со сложностью O(n)
+"""
+def autentification_1(login, password, accounts_dict_1):
+    for key, value in accounts_dict_1.items():
+        if login in value and key == 'activated':
+            if value[login] == password:
+                print("You are able to use the service!")
+                break
+            if value[login] != password:
+                print("Incorrect password!")
+                break
+        if login not in value and key == 'not_activated':
+            print("Account not activated. You should activate it.")
+        print("No such user!")
+        break
+
+# проверка
+# autentification_1('a', 1, accounts_dict)
+# autentification_1('a', 2, accounts_dict)
+# autentification_1('t', 1, accounts_dict)
+
+
+
+"""
+O(n^2) потому что два цикла (вложенные), каждый O(n)
+"""
+
+def autentification_2(login, password, accounts_dict_2):
+    for key, value in accounts_dict_2.items():
+        for i in value:
+            if i == login and key == 'activated':
+                if value[i] == password:
+                    print("You are able to use the service!")
+                    break
+                if value[i] != password:
+                    print("Incorrect password!")
+                    break
+            if i == login and key == 'not_activated':
+                print("Account not activated. You should activate it.")
+                break
+        print("No such user!")
+        break
+# проверка
+# autentification_2('a', 1, accounts_dict)
+# autentification_2('a', 2, accounts_dict)
+# autentification_2('t', 1, accounts_dict)
+
+
+# 1) 2 решения сверху
+# 2) оценено над каждой из функций
+# 3) первое решение эффективнее, так как линейная функция возрастает медленнее, чем квадратичная (которая образуется
+#    во второй функции из-за вложенного цикла)
