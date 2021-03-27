@@ -11,3 +11,22 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+def guess_number(target_number, i=1):
+    answer = int(input("Введите число от 0 до 100: "))
+    while i < 10:
+        if (target_number < answer):
+            print(f"Меньше, осталось {10-i} попыток")
+        elif (target_number > answer):
+            print(f"Больше, осталось {10-i} попыток")
+        else:
+            print("Браво, начинаем новую игру")
+            guess_number(random.randint(0, 100))
+        i+=1
+        guess_number(target_number,i)
+    print(f"Поробуй ещё раз. Загадано число {target_number}")
+    guess_number(random.randint(0, 100))
+
+
+guess_number(random.randint(0, 100))
