@@ -12,3 +12,9 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+def sum_fuction(input_count, iter_sum, i=0, sum=0):
+    while i < input_count:
+        return sum_fuction(input_count, iter_sum / -2  ,i + 1, sum+iter_sum)
+    print (f"Количество элементов - {i}, их сумма - {sum}")
+sum_fuction(3,1)
+sum_fuction(2,1)
