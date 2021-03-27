@@ -12,3 +12,14 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+number = int(input('Введите количество эллементов:'))
+
+def function (num_el, i=1):
+    if num_el > 0:
+        num_el -= 1
+        return i + function(num_el, i / -2)
+    else:
+        return 0
+
+print(function(number))

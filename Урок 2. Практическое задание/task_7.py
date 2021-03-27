@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+user_num = int(input('Введите число:'))
+
+def check_fun(n, i=1, summ=0):
+    if i == n + 1:
+        return summ == n * (n + 1) / 2
+    else:
+        summ += i
+        return check_fun(n, i + 1, summ)
+
+print(check_fun(user_num))

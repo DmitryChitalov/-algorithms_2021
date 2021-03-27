@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_table(start=32, end=127):
+    for i in range(10):
+        if start > end:
+            break
+        print(f'{start} - {chr(start)}', end=' ')
+        start += 1
+    else:
+        print('')
+    if start < end:
+        ascii_table(start, end)
+
+
+print(ascii_table())
