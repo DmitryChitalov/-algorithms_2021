@@ -15,5 +15,42 @@
 р
 а
 """
-
 # hash?
+import hashlib
+"""
+Хеш всех подстрок записываем во множество. Длина множества даст колличество
+уникальных подстрок
+"""
+
+
+def hash_str(str_obj):
+    return hashlib.sha1(str_obj.encode())
+
+
+# Ввод строки и проверка на строчные латинские буквый
+
+ind = True
+while ind:
+    S = input('Введите строку из строчных латинских букв S: ').lower()
+    for i in range(len(S)):
+        if 97 <= ord(S[i]) <= 122:
+            ind = False
+        else:
+            print('Ошибка ввода.')
+            ind = True
+            break
+print(f'Введенная строка имеет длину: {len(S)}')
+
+# Перебор подстрок и запись во множество
+
+temp_set = set()
+for i in range(len(S)):
+    if i == 0:
+        for j in range(1, len(S)):
+            temp_set.add(hash_str(S[i:j]))
+            print(S[i:j], i, j)
+    elif i > 0:
+        for j in range(len(S), i, -1):
+            temp_set.add(hash_str(S[i:j]))
+            print(S[i:j], i, j)
+print(f'Количество различных подстрок в этой строке: {len(temp_set)}')
