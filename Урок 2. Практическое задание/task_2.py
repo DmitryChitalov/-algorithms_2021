@@ -18,3 +18,29 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_even_odd(int_obj):
+    global count_even, count_odd
+    if int_obj > 0:
+        if int_obj % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+        int_obj //= 10
+        return count_even_odd(int_obj)
+    else:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({count_even}, {count_odd})')
+
+
+ind = True
+count_even, count_odd = 0, 0
+
+while ind:
+    try:
+        number = int(input('Введите натуральное число: '))
+        ind = False
+    except ValueError:
+        print('Ошибка ввода числа!')
+
+count_even_odd(number)

@@ -28,3 +28,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc(numb_obj, sign_obg):
+    if sign_obg != '0':
+        if sign_obg in signs:
+            try:
+                number2 = float(input('Введите следующее число: '))
+            except ValueError:
+                print('Ошибка ввода числа!')
+                return calc(numb_obj, sign_obg)
+            if sign_obg == '+':
+                numb_obj += number2
+            elif sign_obg == '-':
+                numb_obj -= number2
+            elif sign_obg == '*':
+                numb_obj *= number2
+            elif sign_obg == '/':
+                try:
+                    numb_obj /= number2
+                except ZeroDivisionError:
+                    print('Ошибка! Деление на 0! Операция отменена')
+        else:
+            print('Неверно введен знак!')
+        print(f'Результат: {numb_obj}')
+        sign_obg = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        return calc(numb_obj, sign_obg)
+    else:
+        return print(f'Итоговый результат: {numb_obj}')
+
+
+signs = ['+', '-', '*', '/', '0']
+ind = True
+while ind:
+    try:
+        number = float(input('Введите первое число: '))
+        ind = False
+    except ValueError:
+        print('Ошибка ввода числа!')
+sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+calc(number, sign)
