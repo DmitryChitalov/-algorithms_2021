@@ -11,3 +11,23 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+from random import randint
+
+
+def guess_game(step, numb):
+    print("попытка: ", step, " из 10")
+    answer = int(input("введите число от 0 до 100: "))
+    if step == 10 or answer == numb:
+        if answer == numb:
+            print("вы угадали!\nэто было число ", numb)
+        else:
+            print("попытки закончились\nэто было число ", numb)
+    else:
+        if answer > numb:
+            print("попробуйте число меньше")
+        else:
+            print("попробуйте число больше")
+        guess_game(step + 1, numb)
+
+guess_game(1, randint(0, 100))
