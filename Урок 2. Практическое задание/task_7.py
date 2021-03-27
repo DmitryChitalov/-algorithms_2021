@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_series(number):
+    if number <= 1:
+        return number
+    else:
+        return number + sum_series(number - 1)
+
+
+def sum_formula(number):
+    return int(number * (number + 1) / 2)
+
+
+user_number = int(input('Введите натуральное число: '))
+if sum_formula(user_number) == sum_series(user_number):
+    print('Результаты тождественны')
+else:
+    print('Результаты неравны:')
+    print(sum_series(user_number))
+    print(sum_formula(user_number))

@@ -18,3 +18,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def digit_check(number):
+    even = 0
+    odd = 0
+    if number > 9:
+        digit = number % 10
+        even, odd = digit_check(number // 10)
+    else:
+        digit = number
+    if digit % 2:
+        odd += 1
+    else:
+        even += 1
+    return even, odd
+
+
+user_number = int(input('Введите число: '))
+print('Количество четных и нечетных цифр в числе равно:', digit_check(user_number))

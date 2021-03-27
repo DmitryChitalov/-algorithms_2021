@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operand_input(message):
+    input_not_finished = True
+    while input_not_finished:
+        # noinspection PyUnreachableCode
+        try:
+            return int(input(message))
+        except ValueError:
+            print('Вы ввели строку вместо числа. Исправьтесь.')
+        else:
+            input_not_finished = False
+
+
+def calculator():
+    message = 'Ваш результат:'
+
+    input_not_finished = True
+    while input_not_finished:
+        operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if operation == '0':
+            return
+        elif operation not in '+-*/':
+            print('Введёна неправильная операция')
+        else:
+            input_not_finished = False
+
+    operand_1 = operand_input('Введите первое число: ')
+    operand_2 = operand_input('Введите второе число: ')
+
+    # noinspection PyUnboundLocalVariable
+    if operation == '+':
+        print(message, operand_1 + operand_2)
+    elif operation == '-':
+        print(message, operand_1 - operand_2)
+    elif operation == '*':
+        print(message, operand_1 * operand_2)
+    else:
+        try:
+            print(message, operand_1 / operand_2)
+        except ZeroDivisionError:
+            print('На ноль делить нельзя.')
+
+    calculator()
+
+
+calculator()

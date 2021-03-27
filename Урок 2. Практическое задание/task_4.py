@@ -12,3 +12,19 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_series(number, element=1.0):
+    if number > 1:
+        return element + sum_series(number - 1, - element / 2)
+    elif number == 1:
+        return element
+    else:
+        return 0.0
+
+
+print(sum_series(0))
+print(sum_series(1))
+print(sum_series(2))
+print(sum_series(3))
+print(sum_series(30))  # ряд сходится к 2/3

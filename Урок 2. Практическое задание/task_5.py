@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def code_symbols(code=32, pos=0):
+    print('%3d - %s ' % (code, chr(code)), end='')
+    pos += 1
+    if pos > 9:
+        print('')
+        pos = 0
+    code += 1
+    if code > 127:
+        return
+    code_symbols(code, pos)
+
+
+code_symbols()

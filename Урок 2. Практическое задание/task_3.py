@@ -22,3 +22,23 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+# Возвращает результат в виде числа.
+# Без лидиоующего нуля
+def reverse_to_number(number, result=0):
+    if number > 0:
+        return reverse_to_number(number // 10, result * 10 + number % 10)
+    return result
+
+
+# Возвращает результат в виде строки
+def reverse_to_string(number):
+    if number > 0:
+        return str(number % 10) + reverse_to_string(number // 10)
+    return ''
+
+
+user_number = int(input('Введите число: '))
+print('Реверс в виде числа (без лидирующих нулей)', reverse_to_number(user_number))
+print('Реверс в виде строки', reverse_to_string(user_number))
