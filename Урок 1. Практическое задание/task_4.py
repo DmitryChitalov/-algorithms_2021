@@ -1,28 +1,49 @@
-"""
-Задание 4.
+statusCode = {
+    100: "Ваша учетная запись не активна",
+    101: "Вы можете продолжить использовать ресурс",
+    200: "Не верно указан пароль",
+    300: "Учетная запись не найдена",
+    400: "Отсутсвует доступ к ресурсу"
+}
 
-Для этой задачи:
-1) придумайте 2-3 решения (не менее двух)
-2) оцените сложность каждого решения в нотации О-большое
-3) сделайте вывод, какое решение эффективнее и почему
+usersBD = [
+    {"login":"user_login", "password": "UserPassw0rd", "active": 1},
+    {"login":"user_login1", "password": "UserPassw0rd", "active": 0},
+    {"login":"user_login2", "password": "UserPassw0rd", "active": 0},
+    {"login":"user_login3", "password": "UserPassw0rd", "active": 0},
+  ]
+  
+# Способ 1. O(N)
+def check_auth(login, password):
+  for i in range(len(usersBD)):  #O(N)
+    if(login == usersBD[i]["login"]): #O(1)
+      if(password == usersBD[i]["password"]): #O(1)
+        if(usersBD[i]["active"] == 1): #O(1)
+          return 101 # Пусть это будет код который позволяет продолжать работать с приложением #O(1)
+        else:
+          return 100 # Пусть этот код показывает, что пользователь не активен  #O(1)
+      else:                                                   
+        if (i == len(usersBD)-1):                #O(1)
+          return 200 # Пароль не верен           #O(1)
+    else:                                        #O(1)
+      if (i == len(usersBD)-1):                  #O(1)
+        return 300 # логин не найден             #O(1)           
 
-Примечание:
-Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
-через строки документации в самом коде.
-Если у вас возникают сложности, постарайтесь подумать как можно решить задачу,
-а не писать "мы это не проходили)".
-Алгоритмизатор должен развивать мышление, а это прежде всего практика.
-А без столкновения со сложностями его не развить.
+print(statusCode[check_auth("user_login", "UserPassw0rd")])
+print(statusCode[check_auth("user_login1", "UserPassw0rd")])
+print(statusCode[check_auth("user_login3", "UserPassword")])
+print(statusCode[check_auth("user_dogin1", "UserPassw0rd")])
 
-Сама задача:
-Пользователи веб-ресурса проходят аутентификацию.
-В системе хранятся логин, пароль и отметка об активации учетной записи.
 
-Нужно реализовать проверку, может ли пользователь быть допущен к ресурсу.
-При этом его учетка должна быть активирована.
-А если нет, то польз-лю нужно предложить ее пройти.
+# Способ 2. O(N)
+def check_auth2(login, password):  
+  for val in usersBD: #O(N)
+    if(val["login"] == login and val["password"] == password and val["active"] == 1): #O(1)
+      return 101             #O(1)
+    return 400               #O(1)
 
-Приложение должно давать ответы на эти вопросы и быть реализовано в виде функции.
-Для реализации хранилища можно применить любой подход,
-который вы придумаете, например, реализовать словарь.
-"""
+print('___________________________________________________')
+print(statusCode[check_auth2("user_login", "UserPassw0rd")])
+print(statusCode[check_auth2("user_login1", "UserPassw0rd")])
+print(statusCode[check_auth2("user_login3", "UserPassword")])
+print(statusCode[check_auth2("user_dogin1", "UserPassw0rd")])
