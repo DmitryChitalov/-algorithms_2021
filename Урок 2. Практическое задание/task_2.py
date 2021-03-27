@@ -18,3 +18,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+number = int(input('Введите число:'))
+
+def function (el, even=0, odd=0):
+    if el ==0:
+        return f'Количество четных и нечетных цифр в числе равно: {(even, odd)}'
+    if el % 2 == 0:
+        return function(el // 10, even + 1, odd)
+    else:
+        return function(el // 10, even, odd + 1)
+
+print(function(number))
+
+

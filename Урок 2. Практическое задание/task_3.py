@@ -22,3 +22,15 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+number = int(input('Введите число:'))
+
+def function(number, rev_num = ''):
+    if number <= 0:
+        return f'Перевернутое число: {rev_num}'
+    else:
+        last_num = number % 10
+        rev_num = rev_num + str(last_num)
+        number //= 10
+        return function(number, rev_num)
+
+print(function(number))
