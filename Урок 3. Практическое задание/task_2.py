@@ -45,7 +45,7 @@ def check_password(hash_pass, user_password, salt):
 
 
 # Загружаем в словарь data логины  с хешем паролей
-with open('data.pickle', 'rb') as f:
+with open('data.txt', 'rb') as f:
     data = pickle.load(f)
 
 # Ввод имени, пароля, хеширование пароля
@@ -59,7 +59,7 @@ if check_password(hashed_password, double_pass, login):
     print('Пароли совпадают')
     data[login] = hashed_password         # Сохранение кеша пароля в словаре
     print(f'Строка для сохранения в базе данных: {hashed_password}')
-    with open('data.pickle', 'wb') as f:  # Сохранение словаря в файле
+    with open('data.txt', 'wb') as f:  # Сохранение словаря в файле
         pickle.dump(data, f)
 else:
     print('Пароли не совпадают')

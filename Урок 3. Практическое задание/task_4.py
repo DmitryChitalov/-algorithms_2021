@@ -41,14 +41,14 @@ def get_article(url):
     hashed_url = hash_url(url)
     if hashed_url not in cache:
         cache[hashed_url] = get_article_from_server(url)
-        with open('cache.pickle', 'wb') as f:  # Сохранение словаря в файле
+        with open('cache.txt', 'wb') as f:  # Сохранение словаря в файле
             pickle.dump(cache, f)
     else:
         print('Получение из кэша...')
     return cache[hashed_url]
 
 
-with open('cache.pickle', 'rb') as f:
+with open('cache.txt', 'rb') as f:
     cache = pickle.load(f)
 url = input('Введите URL сайта: ')
 get_article('http://' + url)
