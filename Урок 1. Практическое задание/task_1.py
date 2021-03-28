@@ -62,8 +62,8 @@ def check_3(lst_obj):
     """
     lst_copy = list(lst_obj)                 # O(N) - линейная
     lst_copy.sort()                          # O(NlogN) - линейно-логарифмическая
-    for i in range(len(lst_obj) - 1):        # O(N-1) - линейная
-        if lst_copy[i] == lst_copy[i+1]:     # O(N-1) - линейная
+    for i in range(len(lst_obj) - 1):        # O(N) - линейная
+        if lst_copy[i] == lst_copy[i+1]:     # O(N) - линейная
             return False                     # O(1) - константная
     return True                              # O(1) - константная
 
