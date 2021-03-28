@@ -50,6 +50,13 @@ def get_item_from_list(list_to_process, item_to_find):
 
 
 @measure_function
+def get_item_from_list_loop(list_to_process, item_to_find):
+    for n in list_to_process:
+        if n == item_to_find:
+            return n
+
+
+@measure_function
 def get_item_from_dict(dict_to_process, item_to_find):
     return dict_to_process[item_to_find]
 
@@ -80,11 +87,15 @@ generated_dict = fill_dict(60000000)  # 5.415633678436279
 
 print("Get item from list by index...")
 result = get_item_from_list(generated_list, 50000000)  # 0.0
+print("Get item from list by index with loop...")
+result = get_item_from_list_loop(generated_list, 50000000)  # 1.1486029624938965
 print("Get item from dict by key...")
 result = get_item_from_dict(generated_dict, 50000000)  # 0.0
 
 """
-Извлечение значения по индексу/ключю из листа и из словаря имеют одинаковое время 
+Извлечение значения по индексу/ключю из листа и из словаря имеют одинаковое время, однако, при использолвании цикла для
+прохода по листу, время поиска в листе становится больше. 
+Словарь позволяет искать элемент по ключу быстрее
 """
 
 print("Getting item with certain value from list...")
