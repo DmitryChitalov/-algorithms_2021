@@ -59,7 +59,7 @@ else:
     existing_password_hash = received_credentials[1]  # получение хеша пароля учетки
     password = input("You already have an account... Enter your password: ")
     entered_password_key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), existing_salt, 100000)
-    if entered_password_key == existing_password_hash:
+    if entered_password_key == existing_password_hash:  # сверка хешей паролей.
         print("Access granted")
     else:
         print("Access denied")
