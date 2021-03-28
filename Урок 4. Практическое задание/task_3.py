@@ -13,6 +13,9 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+from cProfile import run
+
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -36,3 +39,25 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+number = 192837465192837465987654321
+
+result = dict()
+
+for i in ['revers_1(number)', 'revers_2(number)', 'revers_3(number)']:
+    t = timeit(i, globals=globals(), number=10000)
+    result[i] = t
+
+print(f"Самая быстрая функция ---> {sorted([(v,k) for k, v in result.items()])[0][1]}")
+
+for i in ['revers_1(number)', 'revers_2(number)', 'revers_3(number)']:
+    run(i)
+
+'''
+По результатам выполнения профайлеров видим что самая быстрая это функция revers_3.
+revers_1 медленная из за того что она рекурсивная
+revers_2 на втором месте, быстрее revers_1 потому что используется итеративный подход
+revers_3 самая быстрая потому что использует слайс, а он втроеный в python и соответственно оптимизирован под быстрое
+выполнение
+'''
