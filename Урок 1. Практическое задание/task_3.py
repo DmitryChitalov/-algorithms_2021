@@ -25,26 +25,7 @@ import math
 
 
 def find_3_companies_with_max_income(companies):
-    max_incomes = [-math.inf, -math.inf, -math.inf]
-    companies_with_max_income = [None, None, None]
-    for company in companies:
-        income = company['income']
-        max_incomes_index = -1
-        for i, max_income in enumerate(max_incomes):
-            if income > max_income:
-                max_incomes_index = i
-            else:
-                break
-        if max_incomes_index != -1:
-            if max_incomes_index == len(max_incomes) - 1:
-                max_incomes.append(income)
-                max_incomes.pop(0)
-                companies_with_max_income.append(company)
-                companies_with_max_income.pop(0)
-            else:
-                max_incomes[max_incomes_index] = income
-                companies_with_max_income[max_incomes_index] = company
-    return list(filter(lambda x: x is not None, companies_with_max_income))
+    return sorted(companies, key=lambda company: company['income'])[-3:]
 
 
 def find_3_companies_with_max_income_2(companies):
@@ -104,8 +85,8 @@ test_cases = [
         ],
         'result': [
             {
-                'name': 'google',
-                'income': 5,
+                'name': 'amazon',
+                'income': 9
             },
             {
                 'name': 'pepsi',
@@ -197,21 +178,20 @@ passed_tests = 0
 for test_case in test_cases:
     props = test_case["props"]
     expected_result = test_case["result"]
+    real_result = find_3_companies_with_max_income(props)
+    is_ok = real_result == expected_result
+    if is_ok:
+        passed_tests += 1
+    print(f'{is_ok} find_3_companies_with_max_income\n{props} => \n{real_result}')
+print(f'passed tests: {passed_tests}/{len(test_cases)}\n')
+
+passed_tests = 0
+for test_case in test_cases:
+    props = test_case["props"]
+    expected_result = test_case["result"]
     real_result = find_3_companies_with_max_income_2(props)
     is_ok = real_result == expected_result
     if is_ok:
         passed_tests += 1
     print(f'{is_ok} find_3_companies_with_max_income_2\n{props} => \n{real_result}')
 print(f'passed tests: {passed_tests}/{len(test_cases)}\n')
-#
-# passed_tests = 0
-# for test_case in test_cases:
-#     props = test_case["props"]
-#     expected_result = test_case["result"]
-#     real_result = find_min_n(props)
-#     is_ok = real_result == expected_result
-#     if is_ok:
-#         passed_tests += 1
-#     print(f'{is_ok} find_min_n({props}) => {real_result}')
-# print(f'passed tests: {passed_tests}/{len(test_cases)}\n')
-
