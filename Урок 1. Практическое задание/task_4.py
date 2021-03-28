@@ -26,3 +26,76 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Решение №1. Сложность O(n^2) - квадратичная.
+"""
+def user_check():
+    user_pass = {'mrFrog':'1234', 'uncle_J':'abcd'}
+    user_status = {'mrFrog':True, 'uncle_J':False}
+
+    while True:
+        user = input("Введите имя: ")
+        password = input("Введите пароль: ")
+        if user not in user:
+            print("Введите имя нового пользователя: ")
+            continue
+        if password == user_pass.get(user) and user_status.get(user) == True:
+            print(f'Добро пожаловать, {user}. Ваша учетная запись активна')
+        elif password == user_pass.get(user) and user_status.get(user) == False:
+            print(f'Добро пожаловать, {user}. Ваша учетная заморожена\nОбратитесь к администратору')
+        else:
+            print("Неверный пароль, попробуйте еще раз")
+
+user_check()
+"""
+
+users = {
+    'mrFrog1': ['1234', 1],
+    'mrFrog2': ['2345', 0],
+    'mrFrog3': ['3456', 1],
+    'mrFrog4': ['4567', 0],
+    'mrFrog5': ['5678', 1]
+}
+
+
+# Решение №2. Сложность О(n) - линейная
+def user_check_2(log, pas, users_dict):
+    if log in users_dict:
+        if users_dict.get(log)[0] == pas:
+            if users_dict.get(log)[1] == 1:
+                result = 'Добро пожаловать. Ваша учетная запись активна'
+            else:
+                result = 'Ваша учетная запись заморожена\nОбратитесь к администратору'
+        else:
+            result = 'Неверный пароль'
+    else:
+        result = 'Неверный логин'
+    return result
+
+print('Проверка аутентификации с линейной сложностью. Для выхода введите "q"')
+log = ''
+while log != 'q':
+    log = input('Введите логин: ')
+    pas = input('Введите пароль: ')
+    print(user_check_2(log, pas, users))
+
+
+# Решение №3. Сложность О(1) - константная
+def user_check_3(log, pas, users_dict):
+    if users_dict.get(log) and users_dict[log][1] == 1:
+        if users_dict[log][0] == pas:
+            result = 'Добро пожаловать. Ваша учетная запись активна'
+        else:
+            result = 'Неверный пароль'
+    elif users_dict.get(log) and users_dict[log][1] == 0:
+        result = 'Ваша учетная запись заморожена\nОбратитесь к администратору'
+    else:
+        result = 'Неверный логин'
+    return result
+
+print('Проверка аутентификации с константной сложностью. Для выхода введите "q"')
+log = ''
+while log != 'q':
+    log = input('Введите логин: ')
+    pas = input('Введите пароль: ')
+    print(user_check_3(log, pas, users))
