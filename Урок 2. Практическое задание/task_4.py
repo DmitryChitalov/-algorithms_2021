@@ -12,3 +12,17 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def number(count, sum, num, n):
+    if n == count:
+        return print(f'Количество элементов: {user_in}, их сумма: {sum}')
+    else:
+        sum = sum + num
+        num = num / -2
+        n += 1
+        return number(count, sum, num, n)
+
+
+user_in = int(input('Введите количество элементов: '))
+number(user_in, 0, 1, 0)
