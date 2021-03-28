@@ -10,3 +10,23 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+
+def reverse(word):
+	return word[::-1]
+
+
+def isPalindrome(word):
+	if word == reverse(word):
+		return True
+	return False
+
+
+word = 'молоко делили ледоколом'
+word = word.replace(' ', '')
+answer = isPalindrome(word)
+
+if answer == 1:
+	print("Это палиндром")
+else:
+	print("Это не палиндром")
