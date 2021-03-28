@@ -32,7 +32,6 @@ try:
 except sqlite3.OperationalError:
     print("Table already exists")
 
-
 login = input("Enter your login: ")
 query = "SELECT id, password_hash, salt FROM users WHERE username = ?"
 cursorObj.execute(query, [login])
