@@ -21,3 +21,30 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+# Решение 1, уровень сложности O(n log n)
+def top_company(comp_list):
+	top = sorted(comp_list, key = comp_list.get, reverse = True)[:3]
+	return top
+
+
+# Решение 2, уровень сложности O(n^2)
+def top_company_2(company_list, q_data):
+	top = []
+	max_list = []
+	for i in company_list.values():
+		top.append(i)
+	for x in range(q_data):
+		max_profit = max(top)
+		max_list.append(max_profit)
+		top.remove(max_profit)
+	return max_list
+
+
+company = {'BMW': 200100, 'AUDI': 7500, 'Sberbank': 50000, 'VTB': 222, 'Google': 921200, 'HH': 10}
+
+print(top_company(company))
+print(top_company_2(company, 3))
+
+# Решение 1 визуально выглядит лучше и по уровню сложности лучше, т.к. сложность O(n log n) меньше, чем O(n^)
