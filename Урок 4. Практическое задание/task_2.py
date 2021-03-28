@@ -80,3 +80,43 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Декоратор использовать не стоит, так как разница в цифрах объясняется аргуметом number в функции timeit.
+Timeit запускает функцию 10000 раз с одним и тем же аргументом и уже после первой итерации в кэше хранится ответ.
+Благодаря мемоизации после второй и последующие запуски сразу возвращают ответ и не используют рекурсию.
+
+Не стоит использовать, так как он добавляет лишние вычисления и использует дополнительную память.
+
+"""
+
+def built_in_reverse(number):
+    number = str(number)
+    return number[::-1]
+
+print('Еще одна функция разворота числа')
+print(
+    timeit(
+        'built_in_reverse(num_100)',
+        setup='from __main__ import built_in_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'built_in_reverse(num_1000)',
+        setup='from __main__ import built_in_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'built_in_reverse(num_10000)',
+        setup='from __main__ import built_in_reverse, num_10000',
+        number=10000))
+
+"""
+написал функцию built_in_reverse
+Данное решение намного быстрее рекурсивной функции без мемоизации, так как использует только встроенные функции.
+
+0.0062046000000000046
+0.006843600000000005
+0.007740799999999992
+
+"""
