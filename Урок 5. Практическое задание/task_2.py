@@ -33,3 +33,15 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+
+def version_one(val_1, val_2):
+    dt = defaultdict(list)
+    dt['val_1'], dt['val_2'] = list(val_1), list(val_2)
+    dt['+'] = list(hex(int(val_1, 16) + int(val_2, 16)).split('x')[-1].upper())
+    dt['*'] = list(hex(int(val_1, 16) * int(val_2, 16)).split('x')[-1].upper())
+    return dt['+'], dt['*']
+
+
+print(version_one('A2', 'C4F'))
