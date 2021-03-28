@@ -26,3 +26,38 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Решение 1. Уровень сложности O(1)
+def verify_1(l, p):
+	if l in log_data.values():
+		if log_data['password'] == p:
+			if log_data['true'] == '1':
+				print('Добро пожаловать!')
+				return
+			print('Ваша учетная запись заблокирована!')
+			return
+		print('Некорректный пароль!')
+		return
+	print('Некорректный логин!')
+	return
+
+
+# Решение 2. Уровень сложности O(len(n))
+def verify_2(l, p):
+	dict_1 = {'login': l, 'password': p}
+	if dict_1['login'] == log_data['login'] and dict_1['password'] == log_data['password']:
+		if log_data['true'] == '1':
+			print('Добро пожаловать!')
+			return
+		print('Ваша учетная запись заблокирована!')
+		return
+	print('Некоректный логин или пароль!')
+
+
+log_data = {'login': 'xxx', 'password': 'abc', 'true': '1'}
+
+verify_1('abc', 'xxx')
+verify_2('xxx', 'abc')
+
+# Вывод: первое решение имеет меньшую сложность
