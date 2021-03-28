@@ -18,3 +18,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def odd_even(number, odd=0, even=0):
+    if number == 0:  # базовый случай
+        print(f'Количество цифр в числе равно:\nнечетных-{odd}\nчетных-{even}')
+    else:  # шаг рекурсии
+        try:
+            if int(number) % 2 == 0:
+                even += 1
+            else:
+                odd += 1
+            number = number // 10
+            return odd_even(number, odd, even)
+        except:
+            print(f'Значение {number} не является натуральным числом!')
+
+odd_even(int(input('Введите число: ')))
+odd_even(135724689000)
+odd_even('string')
+odd_even([])
