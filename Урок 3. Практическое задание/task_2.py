@@ -1,3 +1,5 @@
+import hashlib, binascii, json
+
 """
 Задание 2.
 Ваша программа должна запрашивать пароль
@@ -17,4 +19,58 @@
 
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
-# sqlite, postgres, db_api, orm
+
+
+def hash_password(user, password):
+    '''Хэширует пароль'''
+    password_value = password.encode('utf-8')
+    salt_value = user.encode('utf-8')
+    obj = hashlib.pbkdf2_hmac(hash_name='sha256',
+                              password=password_value,
+                              salt=salt_value,
+                              iterations=100000)
+    result = binascii.hexlify(obj).decode()
+    print(f'Хэш пароля - {result}')
+    return result
+
+
+def user_to_file(user, password):
+    ''' создает json запись в файл - пользователь и пароль '''
+
+    data = {user: hash_password(user, password)}
+
+    with open('json_base.json', 'r') as f:
+        try:
+            user_base = json.load(f)
+        except:
+            user_base = {}  # Если файл изначально пустой, создаем словарь
+
+    with open('json_base.json', 'w') as f:
+        user_base.update(data)
+        json.dump(user_base, f)  # Перезаписываем обновленный json в файл
+
+    return
+
+
+def check_user(user, password):
+
+    with open('json_base.json', 'r') as f:
+        try:
+            user_base = json.load(f)
+        except:
+            print('База пуста')
+    if user_base[user] == hash_password(user, password):
+        return True
+    else:
+        return False
+
+
+user_enter = input('Введите пользователя: ')
+first_pass_enter = input('Введите пароль: ')
+user_to_file(user_enter, first_pass_enter)
+second_pass_enter = input('Введите пароль повторно: ')
+
+if check_user(user_enter, second_pass_enter):
+    print('Пароли совпадают')
+else:
+    print('Пароли не совпадают')
