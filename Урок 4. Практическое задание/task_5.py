@@ -17,26 +17,94 @@
 и сделайте обоснвование рез-ам
 """
 
+from timeit import timeit
 
+# Общая сложность: O(n^2)
 def simple(i):
     """Без использования «Решета Эратосфена»"""
-    count = 1
-    n = 2
-    while count <= i:
-        t = 1
-        is_simple = True
-        while t <= n:
-            if n % t == 0 and t != 1 and t != n:
-                is_simple = False
-                break
-            t += 1
-        if is_simple:
-            if count == i:
-                break
-            count += 1
-        n += 1
-    return n
+    count = 1               # !!! O(1)
+    n = 2                   # !!! O(1)
+    while count <= i:       # !!! O(n)
+        t = 1               # !!! O(1)
+        is_simple = True    # !!! O(1)
+        while t <= n:       # !!! O(n)  но вложенный в цикл!!! --> O(n^2)
+            if n % t == 0 and t != 1 and t != n:    # !!! O(1)
+                is_simple = False   # !!! O(1)
+                break               # !!! O(1)
+            t += 1                  # !!! O(1)
+        if is_simple:               # !!! O(1)
+            if count == i:          # !!! O(1)
+                break               # !!! O(1)
+            count += 1              # !!! O(1)
+        n += 1                      # !!! O(1)
+    return n                        # !!! O(1)
+
+def sieve_eratosthenes_1(n):
+    """c использованием «Решета Эратосфена»"""
+    primes = [2, 3]                             # !!! O(n)  Первые простые числа
+    last_crossed = [2, 3]                       # !!! O(n)  Вспомогательный массив из ранее найденых простых * на коэф.
+    while len(primes) < n:                      # !!! O(n)  Перебираем, пока не наберем нужное количество простых
+        candidate = primes[-1] + 2              # !!! O(n)  К максимальному сразу добавим
+        i = 0                                   # !!! O(1)
+        while i < len(primes):                  # !!! O(n)  Перебираем все ранее найденные простые с минимальных
+            while last_crossed[i] < candidate:  # !!! O(n)  Пока меньше кандидата
+                last_crossed[i] += primes[i]    # !!! O(n)  увеличиваем каждое ранее полученное простое на себя до >= кандидата
+            if last_crossed[i] == candidate:    # !!! O(n)  не подходит, состоит из ранее найденных простых
+                candidate += 2                  # !!! O(1)  Не рассматриваем четные (выборка в 2 раза меньше)
+                i = 0                           # !!! O(1)  начинаем заново с новым кандидатом
+            i += 1                              # !!! O(1)  Пробуем следующее, ранее полученное простое
+        primes.append(candidate)                # !!! O(1)  не нашли делитель, значит простое - добавляем в список
+        last_crossed.append(candidate)          # !!! O(1)  во вспомогательный тоже добавляем
+    return primes[-1]                           # !!! O(1)
+
+# O(n LOG n) - линейно-логарифмическая (но не уверен)
+def sieve_eratosthenes_2(n):
+    """c использованием «Решета Эратосфена»"""
+    primes = [2, 3]                             # !!! O(1)  Первые простые числа
+    candidate = 3                               # !!! O(1)  Кандидат на простое число (присвоим последнему из простых)
+    while len(primes) < n:                      # !!! O(n)  Перебираем, пока не наберем нужное количество простых
+        candidate += 2                          # !!! O(1)  Не учитываем все четные (ускорение пеербора в два раза)
+        is_simple = True                        # !!! O(1)
+        for el in primes:                       # !!! O(n)  Переберем все ранее найденные простые
+            if candidate % el == 0:             # !!! O(1)  Попробуем на них поделить
+                is_simple = False               # !!! O(1)  если делится, значит не простое
+                break                           # !!! O(1)
+        if is_simple:                           # !!! O(1)  если все перебрали и не нашли делитель
+            primes.append(candidate)            # !!! O(1)  значит, это простое - добавим в наш массив
+    return primes[-1]                           # !!! O(1)  вернуть последнее простое
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+# i = int(input('Введите порядковый номер искомого простого числа: '))
+# print(simple(i))
+# print(sieve_eratosthenes_1(i))
+# print(sieve_eratosthenes_2(i))
+
+list_param = [10, 100, 1000]
+for param in list_param:
+    func_list = ['simple', 'sieve_eratosthenes_1', 'sieve_eratosthenes_2']
+    print(f'Сравним варианты для порядкового номера ({param}):')
+    print(f'(элемент равен: {simple(param)})')
+    for el in func_list:
+        print(f'Функция {el}:', timeit(el+'(param)', number=100, globals=globals()))
+
+'''
+Сравним варианты для порядкового номера (10):
+(элемент равен: 29)
+Функция simple: 0.005760953999999985
+Функция sieve_eratosthenes_1: 0.002990358999999998
+Функция sieve_eratosthenes_2: 0.0008440379999999914
+Сравним варианты для порядкового номера (100):
+(элемент равен: 541)
+Функция simple: 0.42592175600000004
+Функция sieve_eratosthenes_1: 0.16336849799999997
+Функция sieve_eratosthenes_2: 0.04729391599999999
+Сравним варианты для порядкового номера (1000):
+(элемент равен: 7919)
+Функция simple: 61.2486707
+Функция sieve_eratosthenes_1: 15.789410036999996
+Функция sieve_eratosthenes_2: 4.5446956899999975
+
+Вывод:
+    Предложенный алгоритм sieve_eratosthenes_3 более эффективен, нежели simple.
+    Предполагаю, что его сложность приближается к линейной, но вложенный цикл указывает на линейно-логарифмический.
+'''
