@@ -22,3 +22,20 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def digital_mirror(number, reflexion=''):
+    if number == 0:  # базовый случай
+        return print(reflexion)
+    else:  # шаг рекурсии
+        try:
+            # reflexion.join(str(int(number) % 10))
+            reflexion += str(int(number) % 10)
+            return digital_mirror(number // 10, reflexion)
+        except:
+            print(f'Значение {number} не является натуральным числом!')
+
+
+digital_mirror(int(input('Введите число, которое нужно перевернуть: ')))
+digital_mirror(1234500)
+digital_mirror('string')

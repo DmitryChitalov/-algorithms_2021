@@ -23,3 +23,18 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_tab(number=32, i=1):
+    if number == 128: # базовый случай
+        return ' '
+    else: # шаг рекурсии
+        if i % 10 == 0:
+            print(f'{ord(chr(number))} - {chr(number)}')
+            i = 1
+        else:
+            print(f'{ord(chr(number))} - {chr(number)}', end=' | ')
+            i += 1
+        return ascii_tab(number + 1, i)
+
+
+print(ascii_tab())

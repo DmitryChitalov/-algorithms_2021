@@ -15,3 +15,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def proof(number):
+    def left_side(num):
+        if num == 0:  # базовый случай
+            return 0
+        else:  # шаг рекурсии
+            return num + left_side(num - 1)
+
+    def right_side(num):
+        return int(num * (num + 1) / 2)
+
+    try:
+        number = int(number)
+        if number == 0:
+            print(f'Очевидный случай равенства:\n'
+                  f'{number} = {number}')
+        elif left_side(number) == right_side(number):
+            print(f'Равенство множеств натуральных чисел\n'
+                  f'вида 1+2+...+{number} = {number}*({number}+1)/2\n'
+                  f'доказано:\n{left_side(number)} = {right_side(number)}')
+        else:
+            print('Равенство не доказано')
+    except ValueError:
+        print(f'Значение {number} не являтеся натуральным числом!')
+        return proof(input('Введите число: '))
+
+
+proof(input('Введите число: '))

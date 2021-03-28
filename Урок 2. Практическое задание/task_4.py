@@ -12,3 +12,17 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def el_sum(user_num, total=0, counter=0, actual_num=-2.0):
+    if user_num == 0:  # базовый случай
+        print('Количество элементов: 0, их сумма: 0')
+    elif counter == user_num:
+        print(f'Количество элементов: {user_num}, их сумма: {total}')
+    else:  # шаг рекурсии
+        actual_num = (actual_num / -2)
+        total += actual_num
+        el_sum(user_num, total, counter + 1, actual_num)
+
+
+el_sum(int(input('Введите количество элементов: ')))
