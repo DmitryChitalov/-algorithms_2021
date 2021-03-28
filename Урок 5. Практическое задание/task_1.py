@@ -23,3 +23,76 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import namedtuple
+
+
+def insert_data():
+    """
+    Функция получающая данные от пользователя для наполнения namedtuple
+    :return (namedtuple): данные о компании
+    """
+    name = input('Введите название компании: ')
+
+    while True:
+        qr_profit = input('Введите через пробел квартальную прибыль компании (4 квартала): ').split()
+
+        try:
+            qr_profit = [int(x) for x in qr_profit]
+            if len(qr_profit) != 4:
+                raise Exception('Введено неустановленное количество значений квартальной прибыли!!!')
+            break
+        except ValueError:
+            print('Введены данные несоответствующие установленным параметрам!!!')
+            continue
+        except Exception as e_len:
+            print(e_len)
+            continue
+
+    inform = comp_data(
+        name=name,
+        qr_profit_1=qr_profit[0],
+        qr_profit_2=qr_profit[1],
+        qr_profit_3=qr_profit[2],
+        qr_profit_4=qr_profit[3]
+    )
+    return inform
+
+
+if __name__ == '__main__':
+    while True:
+        comp_data = namedtuple('Company',
+                               'name qr_profit_1 qr_profit_2 qr_profit_3 qr_profit_4')
+        comp_list = []
+        over_profit = 0
+
+        print('=' * 50)
+        number = input('Для выхода введите "0"\n'
+                       'Введите количество компаний: ')
+        if number == "0":
+            print('Выход')
+            break
+
+        try:
+            number = int(number)
+        except ValueError:
+            print('Не введено численное значение!!!')
+            continue
+
+        for i in range(number):
+            comp_list.append(insert_data())
+            over_profit += sum(comp_list[i][1:])
+
+        comp_good = []
+        comp_bad = []
+        for i in range(number):
+            if sum(comp_list[i][1:]) >= over_profit / number:
+                comp_good.append(comp_list[i].name)
+            else:
+                comp_bad.append(comp_list[i].name)
+
+        print('-' * 50)
+        print(f'Средняя годовая прибыль всех компаний: {over_profit / number}')
+        print(f'Компании, с прибылью выше среднего значения: {", ".join(comp_good)}')
+        print(f'Компании, с прибылью ниже среднего значения: {", ".join(comp_bad)}')
