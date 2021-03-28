@@ -19,3 +19,43 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def min_1(lst_obj):
+    """Функция должна обеспечивать поиск минимального значения для списка.
+
+        Алгоритм 1:
+        В основе алгоритма сравнение соседних чисел.
+
+        Сложность: O(N) - линейная.
+    """
+    for i in range(0, len(lst_obj)):
+        min_value = lst_obj[i]
+        for j in range(1, len(lst_obj)):
+            if min_value > lst_obj[j]:
+                break
+        else:
+            return min_value
+
+
+def min_2(lst_obj):
+    """Функция должна обеспечивать поиск минимального значения для списка.
+
+            Алгоритм 1:
+            В основе алгоритма должно быть сравнение каждого числа со всеми другими элементами списка.
+
+            Сложность: O(N^2) - квадратичная.
+    """
+    min_value = lst_obj[0]
+    for i in range(1, len(lst_obj)):
+        if lst_obj[i] < min_value:
+            min_value = lst_obj[i]
+    return min_value
+
+
+if __name__ == '__main__':
+    lst = [random.randint(-100, 100) for _ in range(20)]
+    print(lst)
+    print(min_1(lst))
+    print(min_2(lst))

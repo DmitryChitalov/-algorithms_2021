@@ -21,3 +21,41 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def max_profit_1(dic_obj):
+    """Функция возвращает название трех компаний с максимальной прибылью.
+
+            Алгоритм 1:
+            В основе алгоритма сортировка словоря по значениям.
+
+            Сложность: O(NlogN) - линейнo-логарифмичесая.
+    """
+    return sorted(dic_obj, key=dic_obj.get, reverse=True)[:3]
+
+
+def max_profit_2(dic_obj):
+    """Функция возвращает название трех компаний с максимальной прибылью.
+
+                Алгоритм 2:
+                В основе поиск трех максимальных значений.
+
+                Сложность: O(N) - линейая.
+    """
+    result = []
+    for i in range(3):
+        max_value = 0
+        for key, value in dic_obj.items():
+            if value >= max_value:
+                max_value = value
+                key_max = key
+        result.append(key_max)
+        del dic_obj[key_max]
+    return result
+
+
+if __name__ == '__main__':
+    dict1 = {'company_1': 23000, 'company_2': 2300, 'company_3': 23000, 'company_4': 3000, 'company_5': 230000,
+             'company_6': 5000}
+    print(max_profit_1(dict1))
+    print(max_profit_2(dict1))
