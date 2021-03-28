@@ -16,4 +16,14 @@
 а
 """
 
-# hash?
+user_string = str(input("Введите строку: ")) # -> Получаем строку от пользователя
+
+def search_substr(string):
+    substring_set = set()
+    # Режем строку на подстроки
+    for i in range(len(string)):
+        for j in range(len(string) - 1 if i == 0 else len(string), i, -1):
+            substring_set.add(hash(string[i:j])) # -> добавляем хэшированную подстроку во множество
+    return f"Количество различных подстрок в этой строке: {len(substring_set)}"
+
+print(search_substr(user_string))

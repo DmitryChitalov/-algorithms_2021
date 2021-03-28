@@ -17,4 +17,27 @@
 
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
+import hashlib
+
+bd = {'pasw_hash': []}  # -> бд, где хранится список хэшей
+
+
+def session(bd):
+    print('Авторизация')
+
+    user_login = input('Enter your login: ').strip()
+    user_pass = input('Enter your password: ').encode(encoding="utf-8")
+    hash_passwd = hashlib.sha256(user_pass + user_login.encode(encoding="utf-8")).hexdigest()
+
+    if hash_passwd in bd['pasw_hash']:
+        return print('Авторизация прошла успешно')
+
+    print('Данные в базе не найдены. Регистрация успешна. Пройдите авторизацию повторно!')
+
+    bd['pasw_hash'].append(hash_passwd)
+
+    return session(bd)
+
+
+session(bd)
 # sqlite, postgres, db_api, orm
