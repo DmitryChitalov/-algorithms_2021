@@ -31,7 +31,7 @@ def generate_random_string(length):
 # s = 'papa'
 s = generate_random_string(6)
 print(f'Рандомная строка: {s}')
-hash_substrings = [s[i:j] for i in range(len(s)) for j in range(i + 1, len(s) + 1)]
+hash_substrings = [hash(s[i:j]) for i in range(len(s)) for j in range(i + 1, len(s) + 1)]
 
 print(set(hash_substrings))
 print(f'Уникальных подстрок: {len(set(hash_substrings)) - 1}')  # -1 значение, собственно сама строка
