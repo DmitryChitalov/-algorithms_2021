@@ -21,3 +21,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+data_company = {'company_1': 850000,
+                'company_2': 110000,
+                'company_3': 235999,
+                'company_4': 9000000,
+                'company_5': 1000,
+                }
+
+# 1 Вариант сложность O(n log n) Линейно-логарифмическая
+max_comp = sorted(data_company.items(), key=lambda para: para[1], reverse=True)[:3]  # O(n log N)
+for company in max_comp:                                                              # O(n)
+    print(f'{company[0]} : {company[1]}')
+
+
+# 2 Вариант сложность O(n) Линейная
+top_company = {}                                                                           # O(1)
+temp_dict = dict(data_company)                                                             # O(1)
+for i in range(3):  # проходим 3 раза, так нужны топ 3                                     # O(n)
+    top = max(temp_dict.items(), key=lambda val: val[1])  # получаю кортеж с макс. данными # O(n)
+    top_company[top[0]] = top[1]  # добавляю макс. в словарик                              # O(1)
+    del temp_dict[top[0]]  # удаляю взятый макс. что бы не было повтора                    # O(1)
+for company, profit in top_company.items():                                                # O(n)
+    print(f'{company} : {profit}')
+
+
+# Второй вариант подходит лучше, так как сложность линейная и соответственно с ростом данным,
+# время выполнения будет меньше чем у Линейно-логарифмической модели.
+

@@ -26,3 +26,44 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Вариант 1 быстрее, так это константа.
+
+# Вариант 1 O(1) Константная
+def login_1(profiles: dict, login: str, password: int):
+    if profiles.get(login.lower()):
+        if profiles.get(login.lower())[0] != password:
+            return 'Пароль НЕВЕРНЫЙ!!!'
+        elif profiles.get(login.lower())[0] == password and profiles.get(login.lower())[1]:
+            return 'Добро Пожаловать :)'
+        else:
+            return 'Нужно зарегистрироваться!'
+    else:
+        return 'Логин НЕВЕРНЫЙ!!!'
+
+
+# Вариант 2 O(n) Линейная
+def login_2(profiles: dict, login: str, password: int):
+    for key, val in profiles.items():
+        if key == login.lower():
+            if val[0] == password and val[1]:
+                return 'Добро Пожаловать :)'
+            elif val[0] != password:
+                return 'Пароль НЕВЕРНЫЙ!!!'
+            elif val[0] == password and not val[1]:
+                return 'Нужно зарегистрироваться!'
+    return 'Логин НЕВЕРНЫЙ!!!'
+
+
+user_profiles = {'max': [135, False],
+                 'dima': [586, True],
+                 'anna': [789, True]
+                 }
+
+input_login = input('Логин (a-z): ')
+input_password = int(input('Пароль (0-9): '))
+
+print(login_1(user_profiles, input_login, input_password))
+print(login_2(user_profiles, input_login, input_password))
+
