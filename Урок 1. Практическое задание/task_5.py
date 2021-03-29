@@ -23,3 +23,32 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class StackPlates:
+    def __init__(self, volume):
+        self.plat_list = []
+        self.new_plat_list = []
+        self.max_of_plates = volume  # макс. кол-во в стопке
+
+    def stack_size(self):
+        return len(self.plat_list)
+
+    def push_in(self, count):
+        self.plat_list.append(count)
+        while self.stack_size() > self.max_of_plates:
+            self.new_plat_list.append(self.plat_list[:self.max_of_plates])  # добавляю срез равный макс. кол-ву стопки
+            self.plat_list = self.plat_list[self.max_of_plates:]  # общая стопка равна макс. кол-ву стопки
+
+    def all_stack_size(self):
+        return self.new_plat_list + self.plat_list  # складываю обе стопки
+
+
+if __name__ == '__main__':
+
+    washing = StackPlates(5)
+
+    for i in range(1, 14):
+        washing.push_in(i)
+        print(washing.all_stack_size())
+

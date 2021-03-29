@@ -27,10 +27,10 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(n).
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(n) или O(len(...)) зависит от длины аргумента
+    return lst_to_set  # O(1)
 
 
 #############################################################################################
@@ -39,15 +39,15 @@ def check_2(lst_obj):
 
     Алгоритм 1:
     Проходимся по списку и для каждого элемента проверяем,
-    что такой элемент отстутствует
+    что такой элемент отсутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(n**2) или O(n^2).
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(N)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(N)
+            return False                   # O(1)
+    return True                            # O(1)
 
 
 #############################################################################################
@@ -58,14 +58,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(N log N)
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(N)
+    lst_copy.sort()                          # O(N log N)
+    for i in range(len(lst_obj) - 1):        # O(N)
+        if lst_copy[i] == lst_copy[i+1]:     # O(N)
+            return False                     # O(1)
+    return True                              # O(1)
 
 #############################################################################################
 
