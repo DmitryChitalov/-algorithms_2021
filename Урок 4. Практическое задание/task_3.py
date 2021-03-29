@@ -45,6 +45,7 @@ def revers_3(enter_num):
 def revers_4(enter_num):
     return ''.join(reversed(str(enter_num)))
 
+
 num = randint(100000000, 10000000000000)
 print(
     timeit(

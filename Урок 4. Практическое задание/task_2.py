@@ -94,6 +94,7 @@ def built_in_reverse(number):
     number = str(number)
     return number[::-1]
 
+
 print('Еще одна функция разворота числа')
 print(
     timeit(
