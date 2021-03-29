@@ -90,6 +90,7 @@ Timeit запускает функцию 10000 раз с одним и тем ж
 
 """
 
+
 def built_in_reverse(number):
     number = str(number)
     return number[::-1]
