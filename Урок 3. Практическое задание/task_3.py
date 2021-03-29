@@ -15,5 +15,23 @@
 р
 а
 """
+import hashlib
 
-# hash?
+substring_set = set()
+
+def substring_finder(input_string,count):
+    print("*"*25)
+    for i in range(len(input_string)-count+1):
+        subs = input_string[i:(i+count)]        
+        substring_set.add((hash(subs),subs))
+    if count < len(input_string)-1:
+        substring_finder(input_string,count+1)        
+    else:
+        print(f"\nНайдены {len(substring_set)} подстрок строки: '{input_string}'")
+
+
+###################################################################
+res = substring_finder('papapa',1)
+print(res)
+for i in substring_set:
+    print(i)
