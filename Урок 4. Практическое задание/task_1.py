@@ -12,11 +12,31 @@
 Добавьте аналитику: что вы сделали и почему!!!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
 
 
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
-            new_arr.append(i)
+            new_arr.append(nums[i])
     return new_arr
+
+
+
+def func_2(nums):
+    yield {i for i in nums if i % 2 == 0}
+
+
+nums = [1, 2, 3, 4]
+
+print(timeit("func_1(nums[:])", "from __main__ import func_1, nums"))
+
+print(timeit("func_2(nums[:])", "from __main__ import func_2, nums"))
+
+
+"""
+Хорошим решением тут подойдет списковое вклчюение, но проблема, что это может привести к перегрузке памяти.
+Можно создать генератор. который не тратит лишней памяти, и работает быстрей
+
+"""

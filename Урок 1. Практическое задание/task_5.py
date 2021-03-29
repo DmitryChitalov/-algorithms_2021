@@ -23,3 +23,32 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+# Сделал стек списка, кратное трем.
+
+from time import sleep
+
+
+class StackMe:
+    step = 3
+
+    def __init__(self):
+        self.list = []
+        self.new_list = []
+
+    def add_number(self, number):
+        self.list.append(number)
+        while len(self.list) > StackMe.step:
+            self.new_list.append(self.list[:StackMe.step])
+            self.list = self.list[StackMe.step:]
+
+    def get_list(self):
+        return self.new_list + self.list
+
+
+a = StackMe()
+# генерирую список. Добавляю и вывожу в цикле.
+for i in range(27):
+    a.add_number(i)
+    sleep(0.5)
+    print(a.get_list())
