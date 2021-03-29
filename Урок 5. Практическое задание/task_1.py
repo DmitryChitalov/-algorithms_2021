@@ -23,3 +23,33 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import ChainMap
+
+
+def company():
+    dict_comp = {}
+    name_comp = input("Введите название предприятия: ")
+    profit = input("Через пробел введите прибыль данного предприятия "
+                   "за каждый квартал(Всего 4 квартала): ")
+    profit = profit.split()
+    profit = [int(el) for el in profit]
+    dict_comp.update({name_comp: profit})
+    return dict_comp
+
+
+cnt = int(input("Введите количество предприятий для расчета прибыли: "))
+dict_company_all = ChainMap()
+for i in range(cnt):
+    dict_company_all.update(company())
+
+s = 0
+for el in dict_company_all.values():
+    s += sum(el)
+
+avg_profit = s / cnt
+print(f"Средняя годовая прибыль всех предприятий: {avg_profit}")
+print(f"Предприятия, с прибылью выше среднего значения: "
+      f"{', '.join([el for el in dict_company_all.keys() if sum(dict_company_all[el]) > avg_profit])}")
+print(f"Предприятия, с прибылью ниже среднего значения: "
+      f"{', '.join([el for el in dict_company_all.keys() if sum(dict_company_all[el]) < avg_profit])}")
