@@ -23,3 +23,39 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+import collections
+
+def func1(ntuple):
+    result = (ntuple.profit1 + ntuple.profit2 + ntuple.profit3 + ntuple.profit4) / 4
+    return result
+
+def func2():
+    company_list = []
+    n = int(input('Введите количество предприятий для расчета прибыли '))
+
+    for i in range(n):
+        name = input('Введите название предприятия ')
+        profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала) ')
+        company_list.append(ntuple1(name, *map(int, profit.split())))
+
+    average_profit = sum(map(func1, company_list)) / len(company_list)
+    print(f'Средняя годовая прибыль всех предприятий {average_profit}')
+
+    less = []
+    more = []
+
+    for elem in company_list:
+        if func1(elem) < average_profit:
+            less.append(elem.name)
+        elif func1(elem) > average_profit:
+            more.append(elem.name)
+
+    print(f'Предприятия, с прибылью выше среднего значения: {", ".join(more)}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {", ".join(less)}')
+
+
+ntuple1 = collections.namedtuple('company', ['name', 'profit1', 'profit2', 'profit3', 'profit4'])
+
+
+func2()
