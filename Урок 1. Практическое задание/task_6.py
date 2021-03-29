@@ -67,14 +67,14 @@ class Queue:
 
 task_board = TaskBoard()
 
-task_board.add_task('Собрать команду')
-task_board.add_task('Придумать план')
+task_board.add_task('собрать команду')
+task_board.add_task('придумать план')
 print(task_board)
 
 task_board.move_to_revision()
 print(task_board)
 
-task_board.add_task('Назначить встречу')
+task_board.add_task('назначить встречу')
 task_board.move_to_solved()
 print(task_board)
 
