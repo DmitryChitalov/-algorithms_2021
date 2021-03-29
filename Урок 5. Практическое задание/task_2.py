@@ -33,3 +33,19 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+from collections import defaultdict
+
+
+def calculation():
+    hex_digits = defaultdict(list)
+    for i in [1, 2]:
+        user_input = input(f"Введите {i}ое число: ")
+        hex_digits[i] = list(user_input)
+    digits_sum = int(''.join(hex_digits[1]), 16) + int(''.join(hex_digits[2]), 16)
+    digits_mul = int(''.join(hex_digits[1]), 16) * int(''.join(hex_digits[2]), 16)
+    print(f"Сумма - {list(hex(digits_sum))[2:]}")
+    print(f"Произведение - {list(hex(digits_mul))[2:]}")
+
+
+print(calculation())
