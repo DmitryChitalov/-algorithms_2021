@@ -10,3 +10,34 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+# палиндром
+from task_16 import DequeClass
+
+
+def pal_checker(string):
+    dc_obj = DequeClass()
+
+    string2 = string.replace(" ", "")
+    # на мой взгляд лшуче бы не вводить лишнюю переменную,
+    # и написать следующим образом
+    # for el in string.replace(" ", ""):
+    # но я не уверен будет ли вызываться данная функция
+    # на каждой итерации цикла, или будет использоваться
+    # только результат вычесленный 1 раз. В более сложных
+    # случаях это может сильно сказаться на производительности
+    for el in string2:
+        dc_obj.add_to_rear(el)
+
+    still_equal = True
+
+    while dc_obj.size() > 1 and still_equal:
+        first = dc_obj.remove_from_front()
+        last = dc_obj.remove_from_rear()
+        if first != last:
+            still_equal = False
+
+    return still_equal
+
+
+print(pal_checker("молоко делили ледоколом"))
