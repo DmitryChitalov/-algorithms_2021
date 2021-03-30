@@ -23,3 +23,33 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class PlateStackClass:
+    def __init__(self):
+        self.elems = [[]]
+        self.counter = 0
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push(self, el):
+        if not len(self.elems[self.counter]) < 1000:
+            self.counter += 1
+        self.elems[self.counter].append(el)
+
+    def pop(self):
+        return self.elems[self.counter].pop()
+
+    def size(self):
+        return self.counter * 1000 + len(self.elems[self.counter])
+
+    def new_method_not_from_class(self):
+        return "hello world"
+
+
+""" для реализации это структуры, добавьте новые методы (не рассмотренные в примере с урока)
+    какие именно? """
+
+
+
