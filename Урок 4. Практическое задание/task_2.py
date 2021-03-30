@@ -48,7 +48,6 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
@@ -80,3 +79,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация в данном случае не имеет смысла, если по факт запуск функции произойдет один раз. После первого запуска 
+число будет записано в хеш таблице, и со сложнотсть O(1) будет нам досаваться.
+
+"""
+
+def mine(number):
+    return str(number)[::-1]
+
+print('Новая оптимизированная функция mine ')
+print(
+    timeit(
+        'mine(num_100)',
+        setup='from __main__ import mine, num_100',
+        number=10000))
+print(
+    timeit(
+        'mine(num_1000)',
+        setup='from __main__ import mine, num_1000',
+        number=10000))
+print(
+    timeit(
+        'mine(num_10000)',
+        setup='from __main__ import mine, num_10000',
+        number=10000))
+
+"""
+Оптимальный вариант mine(и самый быстрый). Без стека. приводим число к строке и делаем чтение обратное 
+со сложностью алгоритма O(n)
+"""

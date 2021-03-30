@@ -33,3 +33,49 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+from collections import defaultdict
+
+
+def get_hex_defaultdict():
+    hex_dict = defaultdict(int)
+    for i in range(16):
+        hex_dict[hex(i)[2:].upper()] = i
+    return hex_dict
+
+
+class Calc:
+
+    def __init__(self, number):
+        self.number = list(number)
+        self.summa = 0
+        self.mult = 0
+        self.result = 0
+        self.hex_dict = get_hex_defaultdict()
+
+    def __add__(self, other):
+        for i in range(len(self.number)):
+            self.summa += self.hex_dict[self.number[-i - 1]] * 16 ** i
+        for j in range(len(other.number)):
+            self.summa += self.hex_dict[other.number[-j - 1]] * 16 ** j
+        self.result = list(hex(self.summa).upper())[2:]
+        return self.result
+
+    def __mul__(self, other):
+        for i in range(len(self.number)):
+            self.mult += self.hex_dict[self.number[-i - 1]] * 16 ** i
+        for j in range(len(other.number)):
+            other.mult += self.hex_dict[other.number[-j - 1]] * 16 ** j
+        self.result = list(hex(self.mult * other.mult).upper())[2:]
+        return self.result
+
+    def __str__(self):
+        return f'{self.number}'
+
+
+x = Calc('A2')
+y = Calc('C4F')
+
+print(f'{x} + {y} = {x + y}')
+print(f'{x} * {y} = {x * y}')

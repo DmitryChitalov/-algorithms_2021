@@ -12,3 +12,21 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+# n = int(input('Введите число: '))
+
+
+
+def delimetr(n, numbers=[], num=1):
+    if len(numbers) == n:
+        return sum(numbers)
+    else:
+        if len(numbers) % 2:
+            numbers.append(num * (-1))
+        else:
+            numbers.append(num * (1))
+        num /= 2
+        return delimetr(n, numbers, num=num)
+
+
+print(delimetr(int(input('Ведите количество чисел: '))))
