@@ -1,0 +1,68 @@
+from collections import OrderedDict
+from timeit import timeit
+
+my_dict = {}
+my_dict['AA'] = 11
+my_dict['BB'] = 22
+my_dict['CC'] = 33
+my_dict['DD'] = 44
+for item in my_dict.items():
+    print(item)
+print("-----------")
+
+my_ord_dict = OrderedDict()
+my_ord_dict['AA'] = 11
+my_ord_dict['BB'] = 22
+my_ord_dict['CC'] = 33
+my_ord_dict['DD'] = 44
+for item in my_ord_dict.items():
+    print(item)
+print()
+
+print(" Dict keys:", timeit("my_dict.keys()", globals=globals(), number=1000000))
+print("ODict keys:", timeit("my_ord_dict.keys()", globals=globals(), number=1000000))
+
+print("\n Dict copy:", timeit("my_dict.copy()", globals=globals(), number=1000000))
+print("ODict copy:", timeit("my_ord_dict.copy()", globals=globals(), number=1000000))
+
+print("\n Dict get:", timeit("my_dict.get('BB')", globals=globals(), number=1000000))
+print("ODict get:", timeit("my_ord_dict.get('BB')", globals=globals(), number=1000000))
+
+print("\n Dict get:", timeit("my_dict.get('BB')", globals=globals(), number=1000000))
+print("ODict get:", timeit("my_ord_dict.get('BB')", globals=globals(), number=1000000))
+
+print("\n Dict clear:", timeit("my_dict.clear()", globals=globals(), number=100000))
+print("ODict clear:", timeit("my_ord_dict.clear()", globals=globals(), number=100000))
+
+"""
+('AA', 11)
+('BB', 22)
+('CC', 33)
+('DD', 44)
+-----------
+('AA', 11)
+('BB', 22)
+('CC', 33)
+('DD', 44)
+
+ Dict keys: 0.047686400000000004
+ODict keys: 0.051445599999999994
+
+ Dict copy: 0.09133490000000001
+ODict copy: 0.21985790000000002
+
+ Dict get: 0.04533569999999998
+ODict get: 0.04397639999999997
+
+ Dict get: 0.049193799999999954
+ODict get: 0.04392699999999994
+
+ Dict clear: 0.003197700000000081
+ODict clear: 0.0034759999999999236
+
+Изначально преимуществом OrderedDict было упорядочивание словаря, но как мы видим упорядочивание было добавлено и в 
+более поздние версии в обычный словарь, однако не смотря на это если вы пишите программу которая должна 
+предусматривать упорядочивание словаря то не лишним может быть использование OrderedDict так как при запуске на более 
+старых версиях интерпритаторов эта возможность в обычном словаре не поддерживатеся и возможно в некоторых 
+интерпритаторах тоже. Из выше приведенных результатов можно видеть незначительную разницу в работе на уровне 
+погрешности за исключением метода copy который отрабатывает быстрее в обычном словаре."""

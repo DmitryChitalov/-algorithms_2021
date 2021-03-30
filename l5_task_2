@@ -1,0 +1,35 @@
+from collections import defaultdict
+from functools import reduce
+
+
+def calc(x, y):
+    dd = defaultdict(list)
+    dd.update({f'1-{x}': list(x)})
+    dd.update({f'2-{y}': list(y)})
+    sum_number = list(hex(sum([int(''.join(i), 16) for i in dd.values()]))[2:])
+    multi_number = list(hex(reduce(lambda a, b: a * b, [int(''.join(j), 16) for j in dd.values()]))[2:])
+    return f'{dd}\nСумма чисел: {sum_number}\nПроизведение: {multi_number}'
+
+
+class HexNumber:
+    def __init__(self, numb):
+        self.numb = list(str(numb))
+
+    def __add__(self, other):
+        x = int(''.join(self.numb), 16)
+        y = int(''.join(other.numb), 16)
+        return list(hex(x + y))[2:]
+
+    def __mul__(self, other):
+        x = int(''.join(self.numb), 16)
+        y = int(''.join(other.numb), 16)
+        return list(hex(x * y))[2:]
+
+
+x = "A2"
+y = "C4F"
+a = HexNumber(x)
+b = HexNumber(y)
+print(f"Сумма чисел: {a + b}")
+print(f"Произведение: {a * b}")
+print(calc(x, y))
