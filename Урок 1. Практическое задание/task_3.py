@@ -79,10 +79,10 @@ class Top3comp:
         }
 
 
-# O(n) + O(6)  =>  O(N)
+# O(n) + O(18)  =>  O(N)
 top3 = Top3comp()
 for k in comp_n:  # O(n)
-    top3.run(k, comp_n.get(k)) # O(18)
+    top3.run(k, comp_n.get(k))  # O(18)
 
 print("top 3:", top3.getTo3())
 
