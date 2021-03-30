@@ -17,3 +17,14 @@
 """
 
 # hash?
+
+s = str(input("Введите строку S: "))
+subs_set = set()
+
+for i in range(len(s)):
+    for j in range(len(s) - 1 if i == 0 else len(s), i, -1):
+        subs_set.add(hash(s[i:j]))
+
+print(f'Строка "{s}" имеет длину {len(s)} сиволов.')
+print("Количество различных подстрок в этой строке:", len(subs_set))
+
