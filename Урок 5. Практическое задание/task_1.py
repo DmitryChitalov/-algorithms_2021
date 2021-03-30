@@ -25,33 +25,34 @@
 """
 from collections import namedtuple
 
-def calc():
-    my_var = "Company"
-    n = int(input("Введите количество предприятий: "))
-    companies = namedtuple(
-        my_var,
-        " name period_1 period_2 period_3 period_4"
-    )
-    profit_aver = {}
 
-    for i in range(n):
-        company = companies(
-            name=input("Введите название предприятия: "), period_1=int(input("Введите прибыль за перввый квартал")),
-            period_2=int(input("Введите прибыль за второй квартал: ")), period_3=int(
-                input("Введите прибыль за третий квартал: ")), period_4=int(input(
-                "Введите прибыль за четвёртый квартал")))
+def func():
+    companies = namedtuple("Company", "name period1 period2 period3 period4")
+    num = int(input("Введите количество предприятий для расчёта прибыли: "))
+    info = {}
 
-        profit_aver[company.name] = (company.period_1 + company.period_2 + company.period_3 + company.period_4) / 4
+    for i in range(num):
+        firm = companies(name=input("Введите название фирмы:"),
+                         period1=int(input("Введите прибыль за первый квартал")),
+                         period2=int(input("Введите прибыль за второй квартал")),
+                         period3=int(input("Введите прибыль за третий квартал")),
+                         period4=int(input("Введите прибыль за четвёртый квартал")))
 
-    total_aver = 0
-    for value in profit_aver.values():
-        total_aver += value
-    total_aver = total_aver / n
+        info[firm.name] = (firm.period1 + firm.period2 + firm.period3 + firm.period4) / 4
 
-    for key, value in profit_aver.items():
-        if value > total_aver:
-            print(f"{key} - прибыль выше среднего")
-        elif value < total_aver:
-            print(f"{key} - прибыль ниже среднего")
+    total = 0
+    for i in info.values():
+        total += i
+    total /= num
+    print('Средняя годовая прибыль всех фирм - ', total)
+
+    for key, value in info.items():
+        if value > total:
+            print(key, " - фирма с повышенной прибылью")
+        elif value < total:
+            print(key, " - фирма с пониженной прибылью")
         else:
-            print(f"{key} - средняя прибыль")
+            print(key, " - фирма со сбалансированной прибылью")
+
+
+print(func())
