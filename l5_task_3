@@ -1,0 +1,47 @@
+from collections import deque
+from timeit import timeit
+
+l1 = [1, 2, 3, 'a', 'b', 'c']
+l2 = [1, 2, 3, 'a', 'b', 'c']
+obj = deque(l2)
+
+print("List count:", timeit("l1.count('a')", globals=globals(), number=100000))
+print("Deque count:", timeit("obj.count('a')", globals=globals(), number=100000))
+
+print("\nList copy:", timeit("l1.copy", globals=globals(), number=100000))
+print("Deque copy:", timeit("obj.copy", globals=globals(), number=100000))
+
+print("\nList reverse:", timeit("l1.reverse()", globals=globals(), number=100000))
+print("Deque reverse:", timeit("obj.reverse()", globals=globals(), number=100000))
+
+print("\nList insert:", timeit("l1.insert(0, 'd')", globals=globals(), number=100000))
+print("Deque appendleft:", timeit("obj.appendleft('d')", globals=globals(), number=100000))
+
+print("\nList pop(0):", timeit("l1.pop(0)", globals=globals(), number=100000))
+print("Deque popleft:", timeit("obj.popleft()", globals=globals(), number=100000))
+
+print("\nList clear:", timeit("l1.clear()", globals=globals(), number=100000))
+print("Deque clear:", timeit("obj.clear()", globals=globals(), number=100000))
+
+"""
+List count: 0.010850000000000002
+Deque count: 0.0110279
+
+List copy: 0.004024099999999996
+Deque copy: 0.004019799999999997
+
+List reverse: 0.003478000000000002
+Deque reverse: 0.004075599999999999
+
+List insert: 2.3555767000000003
+Deque appendleft: 0.003831599999999824
+
+List pop(0): 0.8210348000000001
+Deque popleft: 0.005581700000000023
+
+List clear: 0.006850999999999718
+Deque clear: 0.005536499999999833
+
+Согласно полученным результатам добавление и удаление элементов происходит быстрее с помощью дек, остальные методы 
+показывают разницу на ровне погрешности в ту или иную сторону.
+"""
