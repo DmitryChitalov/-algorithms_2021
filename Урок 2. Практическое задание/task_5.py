@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def print_ten_elements(start_number=32, end_number=127):
+    if start_number > end_number:
+        return True
+    number_for_output = start_number
+    current_char = chr(start_number)
+    start_number += 1
+    print(f"{number_for_output} - {current_char}", end=' ')
+    if start_number % 10 == 2:
+        print()
+    print_ten_elements(start_number)
+
+
+print_ten_elements()
