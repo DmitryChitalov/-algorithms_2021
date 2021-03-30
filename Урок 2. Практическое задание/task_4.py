@@ -15,12 +15,11 @@
 
 
 def get_special_sum(number, current_sum=1.0):
-    if number == 1:
+    if number <= 1:
         return current_sum
-    else:
-        number -= 1
-        current_sum = current_sum / 2 * -1
-        return get_special_sum(number, current_sum)
+    number -= 1
+    new_sum = current_sum / -2
+    return current_sum + get_special_sum(number, new_sum)
 
 
 try:
