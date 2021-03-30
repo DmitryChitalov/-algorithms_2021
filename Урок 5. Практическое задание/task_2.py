@@ -33,3 +33,39 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+"""
+сделаем только через ООП
+"""
+
+
+class HexNumber:
+    def __init__(self, num):
+        self.number = list(str(num))
+        print(self.number)
+
+    def __add__(self, other):
+        a = int(''.join(self.number), 16)
+        b = int(''.join(other.number), 16)
+        return list(hex(a + b))[2:]
+
+    def __mul__(self, other):
+        a = int(''.join(self.number), 16)
+        b = int(''.join(other.number), 16)
+        return list(hex(a * b))[2:]
+
+
+a = 'a2'
+b = 'c4f'
+
+# a = input("A=")
+# b = input("B=")
+
+h_n1 = HexNumber(a)
+h_n2 = HexNumber(b)
+
+print(h_n1 + h_n2)
+print(h_n1 * h_n2)
+
+a = list(input("A="))
+b = list(input("B="))

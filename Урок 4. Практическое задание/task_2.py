@@ -12,8 +12,8 @@
 Без аналитики задание считается не принятым
 """
 
-from timeit import timeit
 from random import randint
+from timeit import timeit
 
 
 def recursive_reverse(number):
@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,19 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.020390559977386147
+0.017883014981634915
+0.03232027095509693
+Оптимизированная функция recursive_reverse_mem
+0.0012563050258904696
+0.0012821659911423922
+0.0013453130377456546
+
+
+Как мы видим, оптимизированная функция работает во много раз быстрее, поэтому мемоизация оправдана
+Это означает, что вычисляется много повторяющихся значений, за счет хранения их в хеш таблице можно получить 
+хороший прирост в скорости 
+"""
