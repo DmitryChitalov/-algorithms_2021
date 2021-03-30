@@ -26,7 +26,7 @@
 
 def reverse_number(number):
     if number == 0:
-        return str(number)
+        return ""
     else:
         current_number = number % 10
         number = number // 10
