@@ -18,3 +18,33 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+import hashlib
+
+
+def get_hash(new_login, new_pass: str):
+    new_login.lower()
+    hash_obj = hashlib.sha256(new_pass.encode())
+    salt = hashlib.sha256(new_login.encode())
+    hex_pass = hash_obj.hexdigest()
+    hex_salt = salt.hexdigest()
+    return hex_pass + hex_salt
+
+
+
+def autorization(acc):
+    user_log = input('login: ')
+    user_pass = input('password: ')
+    hex_user_pass = get_hash(user_log, user_pass)
+    if hex_user_pass == acc.get(user_log):
+        print('welcome')
+    else:
+        print('nope')
+
+
+login = input('login: ')
+password = input('password: ')
+account = {}
+account[login] = get_hash(login, password)
+print(account)
+autorization(account)
