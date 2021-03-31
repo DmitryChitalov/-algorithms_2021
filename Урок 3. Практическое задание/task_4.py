@@ -9,3 +9,20 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+import uuid
+import hashlib
+
+salt = {}
+cache_obj = {}
+
+
+def get_page(url):
+    if cache_obj.get(url):
+        print(f'данный адрес: {url} присутствует в кэше')
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode().hexigest())
+        cache_obj[url] = res
+        print(cache_obj)
+
+
+print(get_page)
