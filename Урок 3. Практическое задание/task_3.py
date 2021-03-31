@@ -17,3 +17,14 @@
 """
 
 # hash?
+
+def number_of_str(str):
+    my_set = set()
+    for i in range(len(str)):
+        for j in range(i + 1, len(str) + 1):
+            if str[i: j] != str:
+                my_set.add(hash(str[i:j]))
+    return len(my_set)
+
+
+print(number_of_str('papa'))
