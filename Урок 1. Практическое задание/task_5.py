@@ -41,6 +41,8 @@ class PlateStackClass:
         self.elems[self.counter].append(el)
 
     def pop(self):
+        if self.is_empty():
+            return None
         res = self.elems[self.counter].pop()
         if len(self.elems[self.counter]) == 0 and self.counter > 0:
             self.counter -= 1
