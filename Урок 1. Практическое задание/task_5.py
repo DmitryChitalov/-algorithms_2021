@@ -29,27 +29,45 @@ class PlateStackClass:
     def __init__(self):
         self.elems = [[]]
         self.counter = 0
+        self.stek_size = 10
 
     def is_empty(self):
         return self.elems == [[]]
 
     def push(self, el):
-        if not len(self.elems[self.counter]) < 1000:
+        if not len(self.elems[self.counter]) < self.stek_size:
             self.counter += 1
+            self.elems.append([])
         self.elems[self.counter].append(el)
 
     def pop(self):
-        return self.elems[self.counter].pop()
+        res = self.elems[self.counter].pop()
+        if len(self.elems[self.counter]) == 0 and self.counter > 0:
+            self.counter -= 1
+            self.elems.pop()
+        return res
 
     def size(self):
-        return self.counter * 1000 + len(self.elems[self.counter])
+        return self.counter * self.stek_size + len(self.elems[self.counter])
 
     def new_method_not_from_class(self):
         return "hello world"
+
+    def toString(self):
+        print("PlateStackClass counter:", self.counter, "size:", self.size(), "content:", self.elems)
 
 
 """ для реализации это структуры, добавьте новые методы (не рассмотренные в примере с урока)
     какие именно? """
 
 
+psc = PlateStackClass()
+
+for i in range(32):
+    psc.push(i)
+    psc.toString()
+
+while not psc.is_empty():
+    psc.pop()
+    psc.toString()
 
