@@ -19,3 +19,40 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def get_min_val_1(lst_obj):
+    """Функция возвращает минимальное значение из списка
+
+    Сложность: O(n^2) - квадратичная
+    """
+    count = 0
+    for val_1 in lst_obj:
+        flag = True
+        for val_2 in lst_obj:
+            count += 1
+            if val_1 > val_2:
+                flag = False
+        if flag:
+            print(f'1 Count = {count}')
+            return val_1
+
+
+def get_min_val_2(lst_obj):
+    """Функция возвращает минимальное значение из списка
+
+    Сложность: O(n) - линейная
+    """
+    count = 0
+    min_val = lst_obj[0]
+    for cur_val in lst_obj:
+        count += 1
+        if cur_val < min_val:
+            min_val = cur_val
+    print(f'2 Count {count}')
+    return min_val
+
+
+lst = [-12, 123, 124, -343, 3242, 2, 3, -12, -2, -1000]
+print(get_min_val_1(lst))
+print(get_min_val_2(lst))
