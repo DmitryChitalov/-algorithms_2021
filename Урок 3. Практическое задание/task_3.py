@@ -16,4 +16,21 @@
 а
 """
 
-# hash?
+my_str = input("Введите строку: ")
+my_set = set()
+
+for i in range(len(my_str)):
+    s_str = my_str[i:]
+    if s_str != my_str:
+        if len(s_str) != 0:
+            my_set.add(hash(s_str))
+    for j in range(len(s_str)):
+        if s_str[:j] != my_str:
+            if len(s_str[:j]) != 0:
+                my_set.add(hash(s_str[:j]))
+        j += 1
+    i += 1
+
+print("---------------------------")
+print(f"{my_str} - {len(my_set)} уникальных подстрок")
+
