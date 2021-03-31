@@ -18,3 +18,31 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+import hashlib
+
+
+def hash_password(input_pass):
+    return hashlib.sha256(input_pass.encode() + salt.encode()).hexdigest()
+
+
+salt = "salt"
+user_input_pass = input("Введите пароль:")
+hash_paswd = hash_password(user_input_pass)
+print(hash_paswd)
+
+with open("password.txt", "w") as password:
+    password.write(hash_paswd)
+
+user_input_pass = input("Введите пароль:")
+hash_paswd = hash_password(user_input_pass)
+
+with open("password.txt") as password:
+    hash_password_from_file = password.read()
+
+print(hash_paswd)
+
+if hash_paswd == hash_password_from_file:
+    print("Введен верный пароль")
+else:
+    print("Введен неверный пароль!")
