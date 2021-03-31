@@ -39,6 +39,7 @@ user_list = {
 logged_in_user_list = []
 
 
+# complexity: unknown
 def hash_it(login_str, pass_str):
     res = hh.md5((login_str + pass_str).encode())
     res_hash = res.hexdigest()
@@ -55,23 +56,25 @@ def user_pass_gen():
 
 
 # get all logged in users
-# complexity:
+# complexity: O(len()) ?
 def getInUsers():
     return logged_in_user_list
 
 
 # if user is logged in
-# complexity:
+# complexity: O(n)
 def ifUserLoggedin(u_name):
     return u_name in logged_in_user_list
 
 
+# complexity: - not an option, infinite working time
 def loggin_function():
     flag = True
     while flag:
         u_login = input("Hello, who are you? (input your login): ")
         if u_login.lower() == "stop":
             flag = False
+        # complexity: O(n)
         elif u_login.lower() in logged_in_user_list:
             som_inp = input("You are already logged in the system, if you want out, type exit: ")
             if som_inp.lower() == "exit":

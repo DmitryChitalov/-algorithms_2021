@@ -52,7 +52,7 @@ class PlateStackClass:
     def size(self):
         return self.counter * self.stek_size + len(self.elems[self.counter])
 
-    def new_method_not_from_class(self):
+    def new_method_not_from_classes(self):
         return "hello world"
 
     def toString(self):
