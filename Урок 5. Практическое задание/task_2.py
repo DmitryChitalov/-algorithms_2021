@@ -33,3 +33,27 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+# 1 вариант - Велосипедный
+
+# first_operand_string = input("Введите первое значение: ")
+first_operand_string = "A2"
+first_operand = defaultdict(int)
+for i, k in enumerate(list(first_operand_string)):
+    first_operand[i] = k
+print(first_operand)
+
+# second_operand_string = input("Введите второе значение: ")
+second_operand_string = "C4F"
+second_operand = defaultdict(int)
+for i, k in enumerate(list(second_operand_string)):
+    second_operand[i] = k
+print(second_operand)
+
+
+max_elements = max(len(first_operand), len(second_operand))
+reversed_range = reversed(range(max_elements))
+for iterator in range(1, max_elements+1):
+    print(iterator)
+    print(f"{first_operand[len(first_operand) - iterator]} + {second_operand[len(second_operand) - iterator]}")
