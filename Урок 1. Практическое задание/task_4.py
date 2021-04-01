@@ -26,3 +26,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# 1 вариант
+"""Сложность: O(N) 
+Выбирать не могу, поскольку второй вариант не придумал."""
+users_data = [{'Login': 'qwerty123', 'Password': 'Qwerty123', 'Activation': 'qwerty@mail.ru'},
+              {'Login': 'qwerty12', 'Password': 'Qwerty12', 'Activation': ''}]
+
+
+def check_in(user_login, user_pass):
+    access = True                                                                               # O(1)
+    for el in users_data:                                                                       # O(N)
+        if user_login == el.get('Login'):                                                       # O(1)
+            if user_pass == el.get('Password'):                                                 # O(1)
+                if el.get('Activation') != '':                                                  # O(1)
+                    print('Добро пожаловать!')                                                  # O(1)
+                    access = False                                                              # O(1)
+                else:
+                    del el                                                                      # O(1)
+                    print('Вы не активировали учетную запись!')                                 # O(1)
+                    update_activation = {'Login': user_login,
+                                         'Password': user_pass,
+                                         'Activation': input('Введите элетронную почту!\n')}    # O(1)
+                    users_data.append(update_activation)                                        # O(1)
+                    access = False                                                              # O(1)
+                    print(f'Поздравляем с активацией')                                          # O(1)
+            else:
+                print('Вы ввели неправильный пароль')                                           # O(1)
+                access = False                                                                  # O(1)
+
+    while access:
+        user_answer = (input('Данный пользователь не существует! Предлагаем вам зарегестрироваться.\n' #
+                             'Введите Y если хотите продолжить:\n')).lower()                     # O(1)
+        if user_answer == 'y':                                                                   # O(1)
+            new_users = {'Login': input('Введите новый логин!\n'),
+                         'Password': input('Введите новый пароль!\n'),
+                         'Activation': input('Введите элетронную почту!\n')}                      # O(1)
+            users_data.append(new_users)                                                          # O(1)
+            print('Поздравляем с регистрацией!')                                                  # O(1)
+            access = False                                                                        # O(1)
+        else:
+            access = False                                                                        # O(1)
+
+
+check_in(input('Введите логин:\n'), input('Введите пароль!\n'))
+
+
