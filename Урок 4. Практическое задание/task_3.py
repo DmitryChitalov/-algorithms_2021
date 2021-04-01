@@ -12,7 +12,8 @@
 И можете предложить еще свой вариант решения!
 Без аналитики задание считается не принятым
 """
-
+from timeit import timeit
+from cProfile import run
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -23,6 +24,8 @@ def revers_1(enter_num, revers_num=0):
         enter_num //= 10
         return revers_1(enter_num, revers_num)
 
+############################################################################
+numb = 121212121212
 
 def revers_2(enter_num, revers_num=0):
     while enter_num != 0:
@@ -36,3 +39,25 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def all_reverse():
+    numb = 12121212121212121212
+    revers_1(numb)
+    revers_2(numb)
+    revers_3(numb)
+
+#################################################################################
+print(revers_1(numb))
+print(revers_2(numb))
+print(revers_3(numb))
+print(timeit('revers_1(numb)', 'from __main__ import revers_1, numb'))
+print(timeit('revers_2(numb)', 'from __main__ import revers_2, numb'))
+print(timeit('revers_3(numb)', 'from __main__ import revers_3, numb'))
+
+run('all_reverse()')
+
+###################################################################################
+
+'''
+Функция переворота числа через срез строки выполняется быстрее рекурсивных функций
+'''
