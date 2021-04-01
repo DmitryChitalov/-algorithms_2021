@@ -19,3 +19,29 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# O(n^2)
+
+def get_min1(sequence):
+    m = sequence[0]
+    for i in sequence:
+        if i < m:
+            m = i
+    return m
+
+
+# O(n)
+def get_min2(sequence):
+    i = 0
+    x = sequence[0]
+    while i < len(sequence):
+        if x > sequence[i]:
+            x = sequence[i]
+        i += 1
+
+    return x
+
+l= [4,2,4,566,2,44,5,0,5,1]
+print(get_min1(l))
+print(get_min2(l))

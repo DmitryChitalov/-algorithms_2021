@@ -26,3 +26,39 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# 1
+user_data = [{'login': 'admin', 'password': '1', 'state': 0}, {'login': 'admin1', 'password': '1', 'state': 1}]
+
+
+def check_ath(login, password):
+    res = [user['login'] for user in user_data if user['login'] == login and user['state'] == 0]
+    if len(res) > 0:
+        return 0
+    else:
+        res = [user['login'] for user in user_data if user['login'] == login and user['password'] == password]
+        if len(res) > 0:
+            return 1
+        else:
+            return -1
+
+def active_user(login, new_password):
+    for i, value in enumerate(user_data):
+        print(value['login'])
+        if value['login'] == login:
+            user_data[i]['state'] = 1
+            user_data[i]['password'] = new_password
+
+
+while True:
+    login = input("Enter login:")
+    password = input("Enter Password:")
+    if check_ath(login, password) == 0:
+        new_password = input("Enter new password:")
+        active_user(login, new_password)
+    if check_ath(login, password) == 1:
+        print ('login success')
+        break
+    if check_ath(login, password) == -1:
+        print('Login/password wrong')
+        print('Repeat enter login and password ')
