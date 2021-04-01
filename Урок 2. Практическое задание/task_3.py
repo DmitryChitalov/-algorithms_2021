@@ -22,3 +22,17 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def my_func(num, inverted_number):
+    remainder = num % 10
+    whole_part = num // 10
+    if whole_part == 0:
+        inverted_number.append(remainder)
+        return "".join(str(e) for e in inverted_number)
+    else:
+        inverted_number.append(remainder)
+        return my_func(whole_part, inverted_number)
+
+
+print(my_func(1230, []))
