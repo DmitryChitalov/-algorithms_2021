@@ -21,3 +21,31 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+companies = {'First': 200000, 'Second': 500000, 'Third': 138000, 'Company': 301000, 'NewComp': 74000}
+
+
+# 1 решение, Сложность О(NlogN) - линейно-логарифмическая
+sorted_values = sorted(companies.values(), reverse=True)[:3]    # О(NlogN) - линейно-логарифмическая
+sorted_comp = {}                                                # О(1) - константная
+for i in sorted_values:                                         # О(N) - линейная
+    for key in companies.keys():                                # О(N) - линейная
+        if companies[key] == i:                                 # О(1) - константная
+            sorted_comp[key] = companies[key]                   # О(1) - константная
+            break
+
+print(sorted_comp)
+
+
+# 2 решение, Сложность О(N^2) - квадратичная.
+sorted_companies = {}                                       # О(1) - константная
+temp = companies                                            # О(1) - константная
+for i in range(3):                                          # О(N) - линейная
+    temp_comp = max(temp.items(), key=lambda val: val[1])   # О(N) - линейная
+    sorted_companies[temp_comp[0]] = temp_comp[1]           # О(1) - константная
+    del temp[temp_comp[0]]                                  # О(1) - константная
+
+print(sorted_companies)
+
+# Первый вариант эффективнее, т.к. линейно-логарифмическая функция быстрее, чем квадратичная
