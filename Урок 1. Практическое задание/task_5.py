@@ -28,7 +28,7 @@
 class StackClass:
     def __init__(self):
         self.elems = [[]]
-        self.max_size = 4
+        self.max_size = 6
 
     def is_empty(self):
         return self.get_stack() == []
@@ -48,6 +48,9 @@ class StackClass:
 
     def stack_size(self):
         return len(self.get_stack())
+
+    def stacks_count(self):
+        return len(self.elems)
 
     def get_stack(self):
         return self.elems[len(self.elems) - 1]
@@ -70,27 +73,21 @@ SC_OBJ.push_in('plate_09')
 SC_OBJ.push_in('plate_10')
 
 
-# получаем значение первого элемента с вершины стека, но не удаляем сам элемент из стека
-print('first plate: ', SC_OBJ.get_val())  # -> plate 11
+print('Верхняя тарелка: ', SC_OBJ.get_val())
 
-# получаем значение первого элемента с вершины стека, но не удаляем сам элемент из стека
-print(SC_OBJ.get_val())  # -> plate 101
+print(f'Размер последней стопки: {SC_OBJ.stack_size()}')
 
-# узнаем размер стека
-print(f'stack size: {SC_OBJ.stack_size()}')  # -> 3
-
-print(SC_OBJ.is_empty())  # -> стек уже непустой
-
-# кладем еще один элемент в стек
+# кладем еще одну тарелку в стопку
 SC_OBJ.push_in('plate_11')
 
-# убираем элемент с вершины стека и возвращаем его значение
+# убираем последнюю тарелку со стопки
 print(SC_OBJ.pop_out())  # -> 'plate_11'
 
-# снова убираем элемент с вершины стека и возвращаем его значение
+# убираем еще одну тарелку
 print(SC_OBJ.pop_out())  # -> 'plate_10'
 
-# вновь узнаем размер стека
-print(SC_OBJ.stack_size())  # -> 3
+print(f'Размер последней стопки {SC_OBJ.stack_size()}')
 
-print(SC_OBJ.get_stack())
+print(f'Последняя стопка {SC_OBJ.get_stack()}')
+
+print(f'количество стопок с тарелками {SC_OBJ.stacks_count()}')
