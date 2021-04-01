@@ -26,3 +26,51 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'user_1': {'password': 'wkf21nk', 'activation': True},
+         'user_2': {'password': 'polkqq567', 'activation': True},
+         'user_3': {'password': 'AWFxvmz', 'activation': False},
+         'user_4': {'password': '1000zxc', 'activation': False},
+         'user_5': {'password': 'qwerty1', 'activation': True}}
+
+users_2 = {'user_1': ['wkf21nk', True],
+           'user_2': ['polkqq567', True],
+           'user_3': ['AWFxvmz', False]}
+
+
+# 1 решение, Сложность: О(N) - линейная
+def auth_1(dict, user_name, user_password):
+    for key, value in dict.items():  # О(N) - линейная
+        if key == user_name:  # О(1) - константная
+            if value['password'] == user_password and value['activation']:  # О(1) - константная
+                return "Добро пожаловать"  # О(1) - константная
+            elif value['password'] == user_password and not value['activation']:  # О(1) - константная
+                return "Пройдите активацию"  # О(1) - константная
+            elif value['password'] != user_password:  # О(1) - константная
+                return "Пароль неверный"  # О(1) - константная
+    return "Пользователь не найден"  # О(1) - константная
+
+
+print(auth_1(users, 'user_1', 'wkf21nk'))
+print(auth_1(users, 'user_2', 'qwerty'))
+print(auth_1(users, 'user_3', 'AWFxvmz'))
+
+
+# 2 решение, Сложность: О(1) - константная
+def auth_2(dict):
+    login = input("Login: ")                        # О(1) - константная
+    if dict.get(login) and dict[login][1] == 1:     # О(1) - константная
+        passw = input("Password: ")                 # О(1) - константная
+        if dict[login][0] == passw:
+            print("Добро пожаловать")               # О(1) - константная
+        else:
+            print("Пароль неверный")                # О(1) - константная
+    elif dict.get(login) and dict[login][1] == 0:   # О(1) - константная
+        print("Пройдите активацию")                 # О(1) - константная
+    else:
+        print("Пользователь не найден")             # О(1) - константная
+
+
+print(auth_2(users_2))
+
+# Второй вариант эффективнее, т.к. константная функция быстрее, чем линейная
