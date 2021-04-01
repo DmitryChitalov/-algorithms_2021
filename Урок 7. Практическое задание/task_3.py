@@ -45,3 +45,38 @@ for i in
 
 
 """
+from statistics import median as med
+from random import choice, shuffle, randint
+
+
+def median(array, k=None):
+    if len(array) == 1:
+        return array[0]
+    if k is None:
+        k = ((len(array) - 1) / 2)
+    chosen = choice(array)
+    left = [x for x in array if x < chosen]
+    right = [x for x in array if x > chosen]
+    chosens = [x for x in array if x == chosen]
+    if len(left) > k:
+        return median(left, k)
+    elif k < len(left) + len(chosens):
+        return chosen
+    else:
+        return median(right, k - len(left) - len(chosens))
+
+
+m = 100
+my_list = list(range(2 * m + 1))
+shuffle(my_list)
+print(median(my_list))
+print(med(my_list))
+
+# Проверка:
+
+for i in range(1000):
+    some_list = [randint(-100, 100) for x in range(2 * m + 1)]
+    assert median(some_list) == med(some_list)
+else:
+    print("Проверка выполнена успешно")
+
