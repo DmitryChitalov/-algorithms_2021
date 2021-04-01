@@ -19,3 +19,43 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# import random        O(n^2)
+#
+#
+# def min_el(my_list):
+#     print(my_list)
+#     last_item = len(my_list) - 1
+#     for z in range(0, last_item):
+#         for x in range(0, last_item):
+#             if my_list[x] > my_list[x+1]:
+#                 my_list[x], my_list[x+1] = my_list[x+1], my_list[x]
+#
+#     print(my_list)
+#     print(my_list[0])
+#
+#
+# lst = [random.randint(-5, 5) for i in range(10)]
+# min_el(lst)
+
+
+
+
+
+# import random     #  O(n)
+#
+#
+# def min_el(my_list):
+#     print(my_list)
+#     mini = my_list[0]
+#     for i in range(len(my_list)):
+#         if my_list[i] < mini:
+#             mini = my_list[i]
+#     print(mini)
+#
+#
+# lst = [random.randint(-5, 5) for i in range(10)]
+# min_el(lst)
+#
+
+
