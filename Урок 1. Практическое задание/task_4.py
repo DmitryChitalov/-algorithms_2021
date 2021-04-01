@@ -26,3 +26,38 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+
+#Общая сложность - линейная - O(n) судя по dictionary comprehension
+# user_database = {'Bob': '12345', 'Valera': '54321', 'Frank': '111222333', 'Peter': '333222'}  ## O(1)
+# username, password = input("enter username:"), input("enter password:") ### O(1)
+# userinfo = username, password  ## O(1)
+#
+# access_granted = {k:v for k, v in user_database.items() if k == username and v == password}   ### O(n)
+#
+# if access_granted:                 ### O(1)
+#     print('access granted')
+# else:
+#     print("access denied")
+#
+#
+
+
+
+
+
+
+
+
+## этот вариант лучше так как нет лишнего, но по моему тут тоже O(N), но он быстрее. Может даже O(1)
+# user_database = {'Bob': '12345', 'Valera': '54321', 'Frank': '111222333', 'Peter': '333222'}  ##O(1)
+# username, password = input("enter username:"), input("enter password:")  ##O(1)
+# userinfo = username, password ##O(1)
+#
+
+# if userinfo in user_database.items(): ##O(1)
+#     print("access granted")
+# else:
+#     print("access denied")
+#

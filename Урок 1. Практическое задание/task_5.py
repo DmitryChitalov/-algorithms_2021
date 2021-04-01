@@ -23,3 +23,42 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+def plates_stack(number_of_plates):
+    stack_obj = StackClass()
+
+    while number_of_plates > 0:
+        number_of_stacks = number_of_plates / 5     # пусть будет 5 тарелок в одном стеке
+        stack_obj.push_in(number_of_stacks)
+
+
+    plates = ""
+    while not stack_obj.is_empty():
+        plates = plates + str(stack_obj.pop_out())
+
+    return plates
+
+
+print(plates_stack(15))
