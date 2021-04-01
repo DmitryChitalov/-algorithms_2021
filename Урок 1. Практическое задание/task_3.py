@@ -21,3 +21,43 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def the_most_rich1(dict, lim):
+    lst = list(dict.values())
+    for i in range(len(lst)-1):
+        for j in range(len(lst)-1):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+
+    top = {}
+    for el in lst:
+        for i, k in dict.items():
+            if k == el:
+                top.update({i: k})
+    j = 1
+    for i, k in top.items():
+        print(f'On the {j} place is {i} and their income is {k}')
+        if j < lim:
+            j += 1
+        else:
+            return
+
+
+def the_most_rich2(lst, lim):
+    for i in range(len(lst)-1):
+        for j in range(len(lst)-1):
+            if lst[j][1] < lst[j + 1][1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    j = 1
+    for i, k in lst:
+        print(f'On the {j} place is {i} and their income is {k}')
+        if j < lim:
+            j += 1
+        else:
+            return
+
+
+the_most_rich1({'a': 1000, 'b': 3000, 'c': 5000, 'd': 10000, 'e': 1000}, 3)
+
+the_most_rich2([('a', 1000), ('b', 3000), ('c', 5000), ('d', 10000), ('e', 1000)], 3)
