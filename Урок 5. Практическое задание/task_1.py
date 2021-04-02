@@ -1,5 +1,5 @@
 """
-1.	Пользователь вводит данные о количестве предприятий, их наименования и прибыль
+1.  Пользователь вводит данные о количестве предприятий, их наименования и прибыль
 за 4 квартала (т.е. 4 отдельных числа) для каждого предприятия.
 Программа должна определить среднюю прибыль (за год для всех предприятий)
 и вывести наименования предприятий, чья прибыль выше среднего и отдельно
@@ -23,3 +23,38 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+count_company = int(input('Введите количество предприятий для расчета прибыли: '))
+i = 1
+arr = []
+while i <= count_company:  # в цикле заполняем namedtuple, добавляем в массив
+    com = namedtuple('Company', 'name quarter')
+    i += 1
+    company_name = input('Введите название предприятия: ')
+    company_profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+    arr.append(com(
+        name=company_name,
+        quarter=company_profit.split()
+    ))
+
+
+sum_profit = 0
+for comp in arr:  # перебираем все компании, суммируем выручку
+    sum_profit += sum([int(n) for n in comp.quarter])
+
+big_profit = []
+low_profit = []
+
+for comp in arr:  # перебираем компании сравниваем выручку со средней по всем компаниям
+    if sum([int(n) for n in comp.quarter]) < sum_profit / count_company:
+        low_profit.append(comp.name)
+    else:
+        big_profit.append(comp.name)
+
+print(f'Средняя годовая прибыль всех предприятий: {sum_profit / count_company}')
+
+comma = ', '
+print(f'Предприятия, с прибылью ниже среднего значения: {comma.join(low_profit)}')
+print(f'Предприятия, с прибылью выше среднего значения: {comma.join(big_profit)}')

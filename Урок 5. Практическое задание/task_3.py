@@ -15,3 +15,75 @@ deque – это обобщение стеков и очередей.
 
 И добавить аналитику, так ли это или нет.!
 """
+
+from collections import deque
+from timeit import timeit
+from random import randint
+
+# Генерируем одинаковое наполнение для листа и дека:
+my_list = [i for i in range(100, 10000)]
+my_deque = deque(my_list)
+# Случайное число для поиска:
+rand = randint(100, 10000)
+
+# print(my_list)
+# print(my_deque)
+# my_list.insert(0, 'string')
+# my_deque.appendleft('string')
+# my_list.pop()
+# my_deque.popleft()
+
+
+
+print('Время добавления элемента в начало списка:')
+print(timeit(stmt="""my_list.insert(0, 'string')""",
+             globals=globals(), number=100000))
+print('Время добавления элемента в конец списка:')
+print(timeit(stmt="""my_list.append('string_end')""",
+             globals=globals(), number=100000))
+print('Время удаления 1-го элемента из листа')
+print(timeit(stmt="""my_list.pop(0)""",
+             globals=globals(), number=100000))
+print('Время поиска элемента в листе')
+print(timeit(stmt="""my_list[rand]""",
+             globals=globals(), number=100000))
+print('/*/*/*/*/*/*/*/*/*/*/*/*/*/\n')
+print('Время добавления элемента в начало дека:')
+print(timeit(stmt="""my_deque.appendleft('string')""",
+             globals=globals(), number=100000))
+print('Время добавления элемента в конец дека:')
+print(timeit(stmt="""my_deque.append('string_end')""",
+             globals=globals(), number=100000))
+print('Время выполнения удаления 1-го элемента из дека:')
+print(timeit(stmt="""my_deque.popleft()""",
+             globals=globals(), number=100000))
+print('Время поиска элемента в деке')
+print(timeit(stmt="""my_deque[rand]""",
+             globals=globals(), number=100000))
+
+
+
+"""
+Время добавления элемента в начало списка:
+2.523074196
+Время добавления элемента в конец списка:
+0.010200895000000099
+Время удаления 1-го элемента из листа
+4.246290431
+Время поиска элемента в листе
+0.00508465700000027
+/*/*/*/*/*/*/*/*/*/*/*/*/*/
+
+Время добавления элемента в начало дека:
+0.006240942000000693
+Время добавления элемента в конец дека:
+0.006000526000000228
+Время выполнения удаления 1-го элемента из дека:
+0.004934248999999724
+Время поиска элемента в деке
+0.014382708999999494
+
+По результатам хорошо видно что добавление\удаление элементов гораздо быстрее происходит в деке,
+особенно хорошо видна разница на добавление в левую сторону списка\дека, время поиска по индексу быстрее в листе.
+
+"""
