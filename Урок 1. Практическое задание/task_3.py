@@ -21,3 +21,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+
+def base():
+    data = {}
+    for i in range(1, 10):
+        key = 'Компания' + str(i)
+        value = random.randint(100, 10000)
+        data[key] = value
+    return data
+
+#1ый вариант
+def top3(data):
+    my_list = sorted(company.values())[-3:]  # O(n log n)
+    return my_list  # O(1)
+
+
+#2ой вариант
+def top3_2(data):
+    my_list = [] # O(1)
+    for val in company.values(): # O(n)
+        my_list.append(val)  # O(1)
+    my_list.sort()       # O(n log n)
+    return my_list[-3:] # O(1)
+
+
+company = base()   # O(1)
+print(top3(company))
+print(top3_2(company))
+""" Меньше циклов - быстрее
+"""

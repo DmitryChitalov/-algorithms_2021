@@ -23,3 +23,28 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+class Stack:
+    step = 5
+
+    def __init__(self):
+        self.list = []
+        self.new_list = []
+
+    def add_number(self, number):
+        self.list.append(number)
+        while len(self.list) >= Stack.step:
+            self.new_list.append(self.list)
+            self.list = self.list[Stack.step:]
+
+
+    def get_list(self):
+
+        return self.new_list + self.list
+
+
+a = Stack()
+
+for i in range(10, 20):
+    a.add_number(i)
+    print(a.get_list())

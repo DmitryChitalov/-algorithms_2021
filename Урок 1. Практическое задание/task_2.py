@@ -19,3 +19,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+my_list = [random.randint(1, 10) for n in range(10)]
+print(my_list)
+
+
+# O(n)
+def min_value(spisok):
+    minimal = spisok[1]  # O(1)
+    for i in spisok:  # O(n)
+        if i < minimal:  # O(1)
+            minimal = i  # O(1)
+    return minimal  # O(1)
+
+
+# O(n**2)
+def min_value2(spisok):
+    minimal = spisok[1]  # O(1)
+    for i in spisok:  # O(n)
+        for j in spisok:  # O(n)
+            if i < j and i < minimal:  # O(1)
+                minimal = i  # O(1)
+    return minimal  # O(1)
+
+
+print(min_value(my_list))
+print(min_value2(my_list))
+""" Линейная будет быстрее (меньше операций)"""
