@@ -13,6 +13,9 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+from cProfile import run
+
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -36,3 +39,31 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    enter_num = list(str(enter_num))
+    enter_num.reverse()
+    return ''.join(enter_num)
+
+
+# cProfile
+def main():
+    num = 123456789123456789123456789
+    revers_1(num)
+    revers_2(num)
+    revers_3(num)
+    revers_4(num)
+
+
+run('main()')
+num = 123456789123456789123456789
+
+# timeit
+print(timeit('revers_1(num)', 'from __main__ import revers_1, num'))
+print(timeit('revers_2(num)', 'from __main__ import revers_2, num'))
+print(timeit('revers_3(num)', 'from __main__ import revers_3, num'))
+print(timeit('revers_4(num)', 'from __main__ import revers_4, num'))
+
+
+# revers_3 выполняется быстрее. срез быстрее чем цикл или рекурсия

@@ -80,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# Мемоизация тут не нужна. Если входные параметры будут повторяться, то мемеоизация ускорит выполнение.
