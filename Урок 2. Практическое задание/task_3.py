@@ -22,3 +22,23 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def revers_numbers_1(number, list_revers=[]):
+    if number == 0:
+        print(list_revers)
+    else:
+        list_revers.append(number % 10)
+        revers_numbers_1(number // 10, list_revers)
+
+
+def revers_numbers_2(number):
+    if number == 0:
+        return ''
+    else:
+        return str(number % 10) + revers_numbers_2(number // 10)
+
+
+if __name__ == '__main__':
+    revers_numbers_1(123040)
+    print(revers_numbers_2(123040))
