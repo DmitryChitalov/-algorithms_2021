@@ -33,3 +33,47 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import deque
+
+# Обычное решение
+
+first_num = deque(input('Введите первое число, например A2: ').strip())
+second_num = deque(input('Введите второе число, например С2F: ').strip())
+
+hex_sum = deque(hex(int(''.join(first_num), 16) + int(''.join(second_num), 16)))
+hex_sum.popleft()
+hex_sum.popleft()
+print(f'Сумма числа {list(first_num)} и {list(second_num)} равна {list(hex_sum)}')
+
+hex_mul = deque(hex(int(''.join(first_num), 16) * int(''.join(second_num), 16)))
+hex_mul.popleft()
+hex_mul.popleft()
+print(f'Произведение числа {list(first_num)} и {list(second_num)} равно {list(hex_mul)}')
+
+
+# Решение через ООП
+
+class HexNumber():
+
+    def __init__(self, number):
+        self.number = deque(number)
+
+    def __add__(self, other):
+        obj_sum = deque(hex(int(''.join(self.number), 16) + int(''.join(other.number), 16)))
+        obj_sum.popleft()
+        obj_sum.popleft()
+        return HexNumber(obj_sum)
+
+    def __mul__(self, other):
+        obj_mul = deque(hex(int(''.join(self.number), 16) * int(''.join(other.number), 16)))
+        obj_mul.popleft()
+        obj_mul.popleft()
+        return HexNumber(obj_mul)
+
+
+a1 = HexNumber(first_num)
+a2 = HexNumber(second_num)
+a3 = a1 + a2
+a4 = a1 * a2
+print(a3.number)
+print(a4.number)
