@@ -45,3 +45,38 @@ for i in
 
 
 """
+
+import random
+import statistics
+
+
+def my_median(lst, n):
+    lst = lst.copy()
+    max_val = False
+    while len(lst) > 1:
+        lst_var = []
+        i = 0
+        retry = False
+        if max_val:
+            i = min(lst)
+            max_val = False
+        else:
+            i = max(lst)
+            max_val = True
+
+        for j in range(len(lst)):
+            if lst[j] != i or retry:
+                lst_var.append(lst[j])
+            else:
+                retry = True
+            if j + 1 == len(lst):
+                lst = lst_var
+    return lst[0]
+
+
+m = 3
+my_lst = [random.randint(0, 50) for _ in range(2 * m + 1)]
+print(my_lst)
+
+print(statistics.median(my_lst))
+print(my_median(my_lst, m))
