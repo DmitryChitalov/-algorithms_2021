@@ -80,3 +80,29 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# ----------------------------------------------------
+# Как видно по замеру, с мемоизацией быстрее, значит смысл есть. При мемоизации функция всё равно использует ранее вычисленные значения, которые берет из кэша
+# Мой вариант оптимизации функции: реверс через срез
+
+def reverse_str(number):
+    if number == 0:
+        return ''
+    return str(number)[::-1]
+
+print('Оптимизированная функция reverse_str')
+print(
+    timeit(
+        'reverse_str(num_100)',
+        setup='from __main__ import reverse_str, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse_str(num_1000)',
+        setup='from __main__ import reverse_str, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse_str(num_10000)',
+        setup='from __main__ import reverse_str, num_10000',
+        number=10000))
