@@ -12,6 +12,8 @@
 Добавьте аналитику: что вы сделали и почему!!!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from random import randint, randrange
 
 
 def func_1(nums):
@@ -20,3 +22,35 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for j, i in enumerate(nums) if not j % 2]
+
+
+def func_3(nums):
+    return nums[::2]
+
+
+def func_gen(nums):
+    for i in nums:
+        if i % 2 == 0:
+            yield i
+
+
+nums_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+print(f'1) func_1 -- {timeit("func_1(nums_arr)", "from __main__ import func_1, nums_arr", number=1000)}')
+print(f'2) func_2 -- {timeit("func_2(nums_arr)", "from __main__ import func_2, nums_arr", number=1000)}')
+print(f'3) func_3 -- {timeit("func_3(nums_arr)", "from __main__ import func_3, nums_arr", number=1000)}')
+print(f'4) func_gen -- {timeit("func_gen(nums_arr)", "from __main__ import func_gen, nums_arr", number=1000)}')
+
+"""
+1) Первый вариант выполнился за 0.0010472000000000016 - он самый медленный, так как сначала идет перебор элементов и
+только потом проверка деление на остаток
+2) Второй вариант - 0.0009224999999999997 быстрее за счет enumerate, так как он за нас перебирает индекс списка
+3) Третий вариант - 0.0001555999999999988. Самый быстрый, так как берется каждый второй элемент. Без перебора всех элем.
+4) Четвертый вариант - 0.0002052000000000026. Думал будет самым быстрым, так как читал, что функция генератор занимает
+меньше памяти, но пришел к тому, что данное решение не подходит, так как будет возвращен другой объект - генератор и
+чтобы добиться решения задачи, нам нужно будет пройтись по нему через for и записать данные в список
+"""
