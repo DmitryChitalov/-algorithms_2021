@@ -23,3 +23,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+import sys
+from collections import namedtuple
+
+is_input_from_file = False      # Ввод данных с консоли
+is_input_from_file = True       # флаг перенаправления консольного чтения ввода информации в файл (закомментировать)
+
+# создаем шаблон кортежа
+company_n_tup = namedtuple('Company', 'name profit')
+company_list = []               # Список для коллекций фирм
+
+if is_input_from_file:
+    sys.stdin = open('task_1.txt', "r")     # Redirect sys.stdin to the file
+    stdout_fileno = sys.stdout              # Remember file handler for sys.stdout
+    sys.stdout = open('Output.txt', 'w')    # Redirect sys.stdout to the file
+
+print('Введите количество предприятий для расчета прибыли:')
+amount_company = int(sys.stdin.readline())
+
+for i in range(amount_company):
+    print('Введите название предприятия:')
+    company_name = sys.stdin.readline().rstrip()
+    print('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала):')
+    profit = [float(el) for el in sys.stdin.readline().rstrip().split(' ')]
+    company_list.append(company_n_tup(company_name, profit))
+
+if is_input_from_file:
+    sys.stdout.close()
+    sys.stdout = stdout_fileno              # Restore sys.stdout to our old saved file handler
+
+profit_average = round(sum(sum(el.profit) for el in company_list) / len(company_list),2)
+company_upper = [el.name for el in company_list if sum(el.profit) > profit_average]
+company_lower = [el.name for el in company_list if sum(el.profit) < profit_average]
+
+print('Средняя годовая прибыль всех предприятий: ', profit_average)
+print('Предприятия, с прибылью выше среднего значения: ', ', '.join(company_upper))
+print('Предприятия, с прибылью ниже среднего значения: ', ', '.join(company_lower))
+print('Общий реестр предприятий:\n', '\n'.join([el.name + ' ' + str(el.profit) for el in company_list]))
