@@ -35,25 +35,28 @@ hx + hx
 """
 from collections import defaultdict
 
-# 1 вариант - Велосипедный
 
-# first_operand_string = input("Введите первое значение: ")
-first_operand_string = "A2"
-first_operand = defaultdict(int)
-for i, k in enumerate(list(first_operand_string)):
-    first_operand[i] = k
-print(first_operand)
-
-# second_operand_string = input("Введите второе значение: ")
-second_operand_string = "C4F"
-second_operand = defaultdict(int)
-for i, k in enumerate(list(second_operand_string)):
-    second_operand[i] = k
-print(second_operand)
+def default_dict_sum(d_dict):  # Сумма
+    result_val = 0
+    for i in d_dict:
+        result_val += int(''.join(d_dict[i]), 16)
+    return list(hex(result_val)[2:].upper())
 
 
-max_elements = max(len(first_operand), len(second_operand))
-reversed_range = reversed(range(max_elements))
-for iterator in range(1, max_elements+1):
-    print(iterator)
-    print(f"{first_operand[len(first_operand) - iterator]} + {second_operand[len(second_operand) - iterator]}")
+def default_dict_product(d_dict):  # Произведение
+    result_val = 1
+    for i in d_dict:
+        result_val *= int(''.join(d_dict[i]), 16)
+    return list(hex(result_val)[2:].upper())
+
+
+default_dict = defaultdict(list)
+
+first_op = input("Input first operand: ")
+second_op = input("Input second operand: ")
+
+default_dict[0] = list(first_op)
+default_dict[1] = list(second_op)
+
+print(f"Sum {default_dict_sum(default_dict)}")
+print(f"Product {default_dict_product(default_dict)}")
