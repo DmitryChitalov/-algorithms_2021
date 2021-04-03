@@ -18,3 +18,30 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_numbers_cycle(number):
+    odd = 0
+    even = 0
+    while number != 0:
+        if number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        number = number // 10
+    print(f'{even} четные, {odd} нечетные')
+
+
+def even_odd_numbers_rec(number, even=0, odd=0):
+    if number == 0:
+        print(f'{even} четные, {odd} нечетные')
+    else:
+        if number % 2 == 0:
+            even_odd_numbers_rec(number // 10, even + 1, odd)
+        else:
+            even_odd_numbers_rec(number // 10, even, odd + 1)
+
+
+if __name__ == '__main__':
+    even_odd_numbers_cycle(1234)
+    even_odd_numbers_rec(1234)

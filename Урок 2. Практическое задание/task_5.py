@@ -23,3 +23,31 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_tab_cycle():
+    i = 1
+    for char_num in range(32, 128):
+        if i < 10:
+            print(f'{ord(chr(char_num))} - {chr(char_num)}', end=' ')
+            i += 1
+        else:
+            print(f'{ord(chr(char_num))} - {chr(char_num)}')
+            i = 1
+
+
+def ascii_tab_rec(char_num=32, i=1):
+    if char_num == 128:
+        return ''
+    else:
+        if i < 10:
+            print(f'{ord(chr(char_num))} - {chr(char_num)}', end=' ')
+            i += 1
+        else:
+            print(f'{ord(chr(char_num))} - {chr(char_num)}')
+            i = 1
+        return ascii_tab_rec(char_num + 1, i)
+
+
+if __name__ == '__main__':
+    ascii_tab_cycle()
+    ascii_tab_rec()
