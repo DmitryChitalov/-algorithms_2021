@@ -33,3 +33,42 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+
+def hex_oper(x, y):
+    def_dict = defaultdict(list)
+    for i in x, y:
+        def_dict[i] = (list(i))
+    return (f'{def_dict[x]} + {def_dict[y]} = {list(hex(int(x, 16) + int(y, 16)).upper())[2:]}\n'
+            f'{def_dict[x]} * {def_dict[y]} = {list(hex(int(x, 16) * int(y, 16)).upper())[2:]}')
+
+
+print(hex_oper('A2', 'C4F'))
+
+"""Может я как-то неправильно понял задание, но не понятно, зачем тут defaultdict"""
+
+
+class HexNumber:
+
+    def __init__(self, num):
+        self.num = num
+        self.num_list = list(num)
+        self.oper = 0
+
+    def __add__(self, other):
+        self.oper = list(hex(int(self.num, 16) + int(other.num, 16)).upper())[2:]
+        return self.oper
+
+    def __mul__(self, other):
+        self.oper = list(hex(int(self.num, 16) * int(other.num, 16)).upper())[2:]
+        return self.oper
+
+    def __str__(self):
+        return f'{self.num_list}'
+
+
+a1 = HexNumber('A2')
+a2 = HexNumber('C4F')
+print(f'{a1} + {a2} = {a1 + a2}')
+print(f'{a1} * {a2} = {a1 * a2}')
