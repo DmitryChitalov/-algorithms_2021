@@ -80,3 +80,52 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.032300499999999996
+0.0350771
+0.058264999999999983
+Оптимизированная функция recursive_reverse_mem
+0.002461700000000011
+0.002575799999999989
+0.0020073000000000174
+
+Мемоизация положительно влияет на оптимазацию функци, 
+но Мемоизаци пригодится, если после наполнения кэша,
+потребуются новые вызовы функции.
+"""
+# Оптимизиация через встроенную функцию reversed
+
+
+def func_reversed(number):
+    return reversed(str(number))
+
+
+print('Использование reversed')
+print(
+    timeit(
+        'func_reversed(num_100)',
+        setup='from __main__ import func_reversed, num_100',
+        number=10000))
+print(
+    timeit(
+        'func_reversed(num_1000)',
+        setup='from __main__ import func_reversed, num_1000',
+        number=10000))
+print(
+    timeit(
+        'func_reversed(num_10000)',
+        setup='from __main__ import func_reversed, num_10000',
+        number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.029893799999999998
+0.025449
+0.047757200000000014
+Использование reversed
+0.003132700000000016
+0.0029993000000000103
+0.0031241000000000185
+"""
