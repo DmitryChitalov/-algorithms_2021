@@ -28,3 +28,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    operators = ['+', '-', '*', '/']
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operator != '0':  # шаг рекурсии
+        if operator in operators:
+            try:
+                operand_1 = float(input('Введите первое число: '))
+                operand_2 = float(input('Введите второе число: '))
+                if operator == '+':
+                    print(f'{operand_1} {operator} {operand_2} = {round(operand_1 + operand_2, 2)}')
+                elif operator == '-':
+                    print(f'{operand_1} {operator} {operand_2} = {round(operand_1 - operand_2, 2)}')
+                elif operator == '*':
+                    print(f'{operand_1} {operator} {operand_2} = {round(operand_1 * operand_2, 2)}')
+                else:
+                    print(f'{operand_1} {operator} {operand_2} = {round(operand_1 / operand_2, 2)}')
+            except ZeroDivisionError:
+                print('На 0 делить нельзя!')
+            except ValueError:
+                print('Вы вместо трехзначного числа ввели строку :(. Исправьтесь')
+        else:
+            print(f'{operator} не является оператором. Исправьтесь')
+        calculator()
+    else:
+        print('Завершение работы программы.')  # базовый случай
+
+calculator()
