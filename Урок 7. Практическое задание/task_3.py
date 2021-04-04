@@ -50,16 +50,12 @@ import random
 import statistics
 
 
+# для массива длинной 2 * m + 1
 def my_median(lst):
     lst = lst.copy()
-    max_val = False
     while len(lst) > 1:
-        if max_val:
-            lst.remove(min(lst))
-            max_val = False
-        else:
-            lst.remove(max(lst))
-            max_val = True
+        lst.remove(min(lst))
+        lst.remove(max(lst))
     return lst[0]
 
 
