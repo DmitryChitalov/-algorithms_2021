@@ -29,3 +29,11 @@ def fun_1(my_list):
 O(n^2) - квадратичная
 """
 
+def fun_2(my_list):
+    for i in my_list:
+        min1 = True
+        for j in my_list:
+            if i>j:
+                min1 = False
+        if min1:
+            return
