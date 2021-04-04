@@ -50,24 +50,22 @@ import random
 import statistics
 
 
-def my_median(lst, n):
+def my_median(lst):
     lst = lst.copy()
     max_val = False
     while len(lst) > 1:
-        i = 0
         if max_val:
-            i = min(lst)
+            lst.remove(min(lst))
             max_val = False
         else:
-            i = max(lst)
+            lst.remove(max(lst))
             max_val = True
-        lst.remove(i)
     return lst[0]
 
 
-m = 3
+m = 5
 my_lst = [random.randint(0, 50) for _ in range(2 * m + 1)]
 print(my_lst)
 
 print(statistics.median(my_lst))
-print(my_median(my_lst, m))
+print(my_median(my_lst))
