@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+def ascii_table(num=32, i=1):
+    if num == 128: # базовый случай
+        return ' '
+    else: # шаг рекурсии
+        if i % 10 == 0:  # новая строка через 10 элементов
+            print(f'{ord(chr(num))} - {chr(num)}')
+            i = 1
+        else:  # продолжаем строку с отступом
+            print(f'{ord(chr(num))} - {chr(num)}', end='   ')
+            i += 1
+        return ascii_table(num + 1, i)
+
+
+print(ascii_table())
