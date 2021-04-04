@@ -23,3 +23,15 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def character_table(start=32, fin=128):
+    if start == fin:
+        return
+    print(f'{start} - {chr(start)}', end=' ')
+    if (start - 1) % 10 == 0:
+        print('')
+    start += 1
+    return character_table(start)
+
+
+character_table()

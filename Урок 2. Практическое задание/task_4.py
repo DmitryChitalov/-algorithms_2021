@@ -12,3 +12,16 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def elements_summ(elem):
+    return 0 if elem == 0 else 1 + elements_summ(elem - 1) / - 2
+    # if elem == 0:
+    #     return 0
+    # else:
+    #     summ = 1 + elements_summ(elem - 1) / - 2
+    #     return summ
+
+
+num_of_elem = int(input('Введите количество элементов: '))
+print(f'Количество элементов: {num_of_elem}, их сумма: {elements_summ(num_of_elem)}')

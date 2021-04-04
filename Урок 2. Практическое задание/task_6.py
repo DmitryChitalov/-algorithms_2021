@@ -11,3 +11,29 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+
+from random import randint as r
+
+
+def gue_the_num(trial, number):
+    in_num = int(input(f'Ваш вариант: '))
+    if in_num == number:
+        print(f'Вы угадали!')
+        return
+    elif trial == 1:
+        print('*' * 40)
+        print(f'Не получилось :(')
+        print(f'Загаданное число = {number}')
+        return
+    else:
+        print('*' * 40)
+        print('БОЛЬШЕ' if in_num < number else 'меньше')
+        print(f'Оставшееся кол-во попыток : {trial - 1}')
+    gue_the_num(trial - 1, number)
+
+
+secret_number = r(1, 100)
+print('Угадай число от 1 до 100')
+print('*' * 40)
+gue_the_num(10, secret_number)
