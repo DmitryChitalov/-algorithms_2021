@@ -23,3 +23,15 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii(table=[], num=32):
+    if num == 128:
+        return [table[i:i + 10] for i in range(0, len(table), 10)]
+    else:
+        table.append(f'{num} - {chr(num)}')
+        num += 1
+        return ascii(table, num)
+
+
+for i in ascii():
+    print(*i)
