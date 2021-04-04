@@ -1,0 +1,46 @@
+from timeit import timeit
+from random import uniform
+
+
+def merge_sort(al, start, end):
+    if end - start > 1:
+        mid = (start + end) // 2
+        merge_sort(al, start, mid)
+        merge_sort(al, mid, end)
+        merge_list(al, start, mid, end)
+
+
+def merge_list(al, start, mid, end):
+    left = al[start:mid]
+    right = al[mid:end]
+    k = start
+    i = 0
+    j = 0
+    while start + i < mid and mid + j < end:
+        if left[i] <= right[j]:
+            al[k] = left[i]
+            i = i + 1
+        else:
+            al[k] = right[j]
+            j = j + 1
+        k = k + 1
+    if start + i < mid:
+        while k < end:
+            al[k] = left[i]
+            i = i + 1
+            k = k + 1
+    else:
+        while k < end:
+            al[k] = right[j]
+            j = j + 1
+            k = k + 1
+
+
+n = int(input('Введите число элементов:'))
+l = [uniform(0, 50) for _ in range(n)]
+print('Изначальный список', l)
+merge_sort(l, 0, len(l))
+print('Отсортированный список: ', end='')
+print(l)
+
+print(timeit("merge_sort(l[:], 0, len(l[:]))", globals=globals(), number=1000))
