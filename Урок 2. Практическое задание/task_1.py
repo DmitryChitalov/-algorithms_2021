@@ -28,3 +28,64 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+# Вариант 1
+def simple_cal():
+    oper = input(f'Введите операцию (+, -, *, / или 0 для выхода): ')
+    if oper == '0':
+        print(f'Вы завершили работу')
+    elif oper == '+':
+        num_1 = int(input(f'Введите первое число:'))
+        num_2 = int(input(f'Введите второе число:'))
+        print(f'Ваш результат = {num_1 + num_2}')
+        return simple_cal()
+    elif oper == '-':
+        num_1 = int(input(f'Введите первое число:'))
+        num_2 = int(input(f'Введите второе число:'))
+        print(f'Ваш результат = {num_1 - num_2}')
+        return simple_cal()
+    elif oper == '*':
+        num_1 = int(input(f'Введите первое число:'))
+        num_2 = int(input(f'Введите второе число:'))
+        print(f'Ваш результат = {num_1 * num_2}')
+        return simple_cal()
+    elif oper == '/':
+        num_1 = int(input(f'Введите первое число:'))
+        num_2 = int(input(f'Введите второе число:'))
+        print(f'Ваш результат = {num_1 / num_2}' if num_2 != 0 else f'На ноль нельзя делить!!!')
+        return simple_cal()
+    else:
+        print(f'Неверно! Введите операцию (+, -, *, / или 0 для выхода')
+        return simple_cal()
+
+
+simple_cal()
+
+
+# Вариант 2 чуть проще
+def simple_cal_2():
+    oper = input(f'Введите операцию (+, -, *, / или 0 для выхода): ')
+    if oper == '0':
+        print(f'Вы завершили работу')
+    elif oper in ('+', '-', '*', '/'):
+        num_1 = int(input('Введите первое число: '))
+        num_2 = int(input('Введите второе число: '))
+        if oper == '+':
+            print(f'{num_1 + num_2}')
+            return simple_cal_2()
+        elif oper == '-':
+            print(f'{num_1 - num_2}')
+            return simple_cal_2()
+        elif oper == '*':
+            print(f'{num_1 * num_2}')
+            return simple_cal_2()
+        elif oper == '/':
+            print(f'Ваш результат = {num_1 / num_2}' if num_2 != 0 else f'На ноль нельзя делить!!!')
+            return simple_cal_2()
+    else:
+        print(f'Неверно! Введите операцию (+, -, *, / или 0 для выхода')
+        return simple_cal_2()
+
+
+simple_cal_2()

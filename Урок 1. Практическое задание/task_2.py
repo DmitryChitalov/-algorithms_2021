@@ -19,3 +19,29 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# Квадратичная
+def search_square(income_list):  # O(n^2)
+    for i in income_list:        # O(n)
+        stop = True              # O(1)
+        for el in income_list:   # O(n)
+            if i > el:           # O(1)
+                stop = False     # O(1)
+        if stop:                 # O(1)
+            return i             # O(1)
+
+
+# Линейная
+def search_linear(income_list):  # O(n)
+    smallest = income_list[0]    # O(1)
+    for i in income_list:        # O(n)
+        if i < smallest:        # O(1)
+            smallest = i        # O(1)
+    return smallest             # O(1)
+
+
+test_list = [10, 23, 25, 32, 43, 123, 8, 45, 39, 36, 3, 48, 54, 67, 78, 6, 44, 98, 88, 5]
+
+print(search_square(test_list))
+print(search_linear(test_list))

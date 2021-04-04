@@ -18,3 +18,36 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+# Вариант 1 без ВЗЯТИЯ ЭЛЕМЕНТА ПО ИНДЕКСУ
+def sort_even_num_1(num, even=0, uneven=0):
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: ({even}, {uneven})'
+    elif num % 2 == 1:
+        return sort_even_num_1(num // 10, even, uneven + 1)
+    else:
+        return sort_even_num_1(num // 10, even + 1, uneven)
+
+
+int_num_1 = int(input(f'Введите натуральное число: '))
+print(sort_even_num_1(int_num_1))
+
+
+# Вариант 2 взял по индексу из кортежа
+def sort_even_num_2(num):
+    even = 0  # четное число
+    uneven = 0  # нечетное число
+    if num % 2:
+        even += 1
+    else:
+        uneven += 1
+    num //= 10
+    if num == 0:
+        return even, uneven
+    else:
+        return even + sort_even_num_2(num)[0], uneven + sort_even_num_2(num)[1]
+
+
+int_num_2 = int(input(f'Введите натуральное число: '))
+print(f'Количество четных и нечетных цифр в числе равно: {sort_even_num_2(int_num_2)}')
