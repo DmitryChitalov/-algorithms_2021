@@ -18,10 +18,7 @@
 
 
 def get_sum_of_set(base):
-    if base == 1:
-        return base
-    else:
-        return base + get_sum_of_set(base - 1)
+    return base if base == 1 else base + get_sum_of_set(base - 1)
 
 
 n = 500

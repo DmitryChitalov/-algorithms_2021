@@ -11,4 +11,19 @@
 
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
+1  1/2 1/4 1/8 1/16 1/32
+1   2   3   4   5    6
 """
+
+
+def get_sum(base):
+    return 1 if base == 1 else (base % 2 * 2 - 1) * (1 / (2 ** (base - 1))) + get_sum(base - 1)
+
+
+try:
+    number = int(input("Введите натуральное число: "))
+    if number < 1:
+        raise ValueError
+    print(f'Сумма {number} элементов ряда чисел: 1 -0.5 0.25 -0.125 ... : {get_sum(number)}')
+except ValueError:
+    print('Некорректный ввод.')
