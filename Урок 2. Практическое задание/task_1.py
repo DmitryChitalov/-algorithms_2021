@@ -28,3 +28,29 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+operations = {'+': (lambda x, y: x + y),
+              '-': (lambda x, y: x - y),
+              '/': (lambda x, y: x / y),
+              '*': (lambda x, y: x * y)}
+
+
+def calc():
+    try:
+        o = input('Введите операцию (+, -, *, / или 0 для выхода): \n')
+        if o == '0':
+            return f'До свидания'
+        x = int(input('Введите первое число:\n'))
+        y = int(input('Введите первое число:\n'))
+        v = (o, x, y)
+        if isinstance(v, tuple):
+            return f'Ответ : {operations[v[0]](v[1], v[2])}', calc()
+    except ZeroDivisionError:
+        print('Нельзя делить на ноль')
+        calc()
+    except KeyError:
+        print('Не верно веденый оператор')
+        return calc()
+
+
+print(calc())

@@ -12,3 +12,18 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def task_4(n, num):
+    if n == 0:
+        return num
+    n -= 1
+    if n % 2 == 0:
+        y = (num / 2) * -1
+        return task_4(n, num + y)
+    else:
+        x = num / 2
+        return task_4(n, num + x)
+
+
+print(task_4(int(input('Введите кол-во элементов: ')) - 1, 1))
