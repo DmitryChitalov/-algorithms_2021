@@ -19,3 +19,38 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+START = 1
+END = 101
+
+
+def get_min(ls: list):
+    """
+    O(1) + O(N) = O(N)
+    """
+    return min(ls)
+
+
+def get_min_second(ls: list):
+    """
+    (O(N) + O(1) + O(1) + O(1)) * (0(N) + O(1) + O(1)) + O(1) = O(N^2)
+    """
+    for row in range(1, len(ls)):  # O(n)
+        val = ls[row]
+        i = row - 1
+        while i >= 0 and val < ls[i]:  # O(n)
+            ls[i + 1] = ls[i]
+            i -= 1
+        ls[i + 1] = val
+
+    return ls[0]
+
+
+def main():
+    ls = [random.randint(START, END) for _ in range(START, END)]
+    print(get_min(ls))  # O(n)
+    print(get_min_second(ls))  # O(n^2)
+
+
+main()
