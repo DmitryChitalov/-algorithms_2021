@@ -22,3 +22,14 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def numbers(val, mirror_number, div):
+    if val == 0:
+        return f'Зеракльное число: {mirror_number}'
+    x = val % div
+    mirror_number += str(x)
+    return numbers(((val - x) // div), mirror_number, div)
+
+
+print(numbers(int(input('Число: ')), '', 10))
