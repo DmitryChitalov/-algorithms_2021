@@ -23,3 +23,31 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import defaultdict
+
+
+firms = int(input('Количество предприятий для расчета: '))
+
+def do_budget():
+    budget = defaultdict(int)
+    for i in range(firms):
+        firms_name = input('Введите название фирмы: ')
+        budget[firms_name] = sum(list(map(int, input('через пробел введите прибыль данного предприятия: ').split())))
+        budget['total_avg'] += budget[firms_name] / firms
+    return budget
+
+
+def get_statistic(dict):
+    dict_result = defaultdict(str)
+    for i in dict:
+        if dict[i] < dict['total_avg']:
+            dict_result['less_avg'] = i
+        if dict[i] > dict['total_avg']:
+            dict_result['more_avg'] = i
+    return f'Средняя годовая прибыль всех предприятий: {dict["total_avg"]}\n' \
+           f'Предприятия, с прибылью выше среднего значения: {dict_result["more_avg"]}\n' \
+           f'Предприятия, с прибылью ниже среднего значения: {dict_result["less_avg"]}'
+
+
+print(get_statistic(do_budget()))
