@@ -1,5 +1,5 @@
 """
-2.*	Написать программу сложения и умножения двух шестнадцатиричных чисел.
+2.*	Написать программу сложения и умножения двух шестнадцатеричных чисел.
 При этом каждое число представляется как массив, элементы которого это цифры числа.
 Например, пользователь ввёл A2 и C4F. Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
 Сумма чисел из примера: [‘C’, ‘F’, ‘1’], произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
@@ -33,3 +33,27 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+class HexNumber:
+
+    def __init__(self, number):
+
+        self.numb = "".join(number)
+
+    def __add__(self, other):
+
+        return list(f"{(int(self.numb, 16) + int(other.numb, 16)):X}")
+
+    def __mul__(self, other):
+
+        return list(f"{(int(self.numb, 16) * int(other.numb, 16)):X}")
+
+
+first_num = HexNumber(list(input("Введите первое число 16 - ричной системы: ")))
+
+second_num = HexNumber(list(input("Введите второе число 16 - ричной системы: ")))
+
+print("Сложение:", first_num + second_num)
+
+print("Умножение:", first_num * second_num)
