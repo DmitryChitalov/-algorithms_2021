@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum_of_set(base):
+    if base == 1:
+        return base
+    else:
+        return base + get_sum_of_set(base - 1)
+
+
+n = 500
+print(f'Is 1+2+...+{n} = {n}({n}+1)/2? \nAnswer: {get_sum_of_set(n) == n * (n + 1) / 2} (Sum = {get_sum_of_set(n)})')
