@@ -45,3 +45,31 @@ for i in
 
 
 """
+import random
+from statistics import median
+
+
+# Реализация гномьей сортировки:
+def sort_gnome(list_arg, n=1):
+    if n == len(list_arg):
+        return list_arg
+    else:
+        if list_arg[n] < list_arg[n-1] and n > 0:
+            list_arg[n], list_arg[n-1] = list_arg[n-1], list_arg[n]
+            n -= 1
+        else:
+            n += 1
+        return sort_gnome(list_arg, n)
+
+
+m = 10
+original_list = [random.randint(-50, 50) for i in range(2*m+1)]
+median_calculated = sort_gnome(original_list)[m]
+print(original_list)
+print(median_calculated)
+print(median(original_list))
+'''
+[-32, -24, -21, -12, -11, -11, -9, -6, -2, -1, 0, 3, 8, 10, 12, 19, 21, 22, 32, 42, 48]
+0
+0
+'''
