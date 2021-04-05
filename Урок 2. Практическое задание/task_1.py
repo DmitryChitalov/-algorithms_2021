@@ -28,3 +28,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if '+-*/0'.find(operation) == -1:
+        print("Вы ввели недопустимый символ для операции(((. Исправьтесь")
+        return
+    elif operation == '0':
+        return
+
+    try:
+        num1 = int(input('Введите первое число: '))
+    except ValueError:
+        print("Вы вместо числа ввели строку (((. Исправьтесь")
+        return
+
+    try:
+        num2 = int(input('Введите второе число: '))
+    except ValueError:
+        print("Вы вместо числа ввели строку (((. Исправьтесь")
+        return
+
+    if operation == '+':
+        print(f'Ваш результат: {num1 + num2}')
+    elif operation == '-':
+        print(f'Ваш результат: {num1 - num2}')
+    elif operation == '*':
+        print(f'Ваш результат: {num1 * num2}')
+    elif operation == '/':
+        try:
+            print(f'Ваш результат: {num1 / num2}')
+        except:
+            print('Деление на ноль запрещено!')
+            return
+
+    calc()
+
+
+calc()
