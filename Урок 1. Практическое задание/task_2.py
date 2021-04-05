@@ -19,3 +19,30 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def min_list_ver_1(roll):  # O(n^2)
+    print(f'Список: {roll}')
+    min_item = roll[0]  # O(1)
+    for it in roll:  # O(n)
+        for item in roll:  # O(n)
+            if it < item:  # O(1)
+                if it < min_item:  # O(1)
+                    min_item = it  # O(1)
+    return min_item  # O(1)
+
+
+def min_list_ver_2(roll):  # O(n)
+    print(f'Список: {roll}')
+    min_item = roll[0]  # O(1)
+    for item in roll:  # O(n)
+        if item < min_item:  # O(1)
+            min_item = item  # O(1)
+    return min_item  # O(1)
+
+
+list_from_sort = [random.randint(0, 100) for i in range(1, 50)]
+print(min_list_ver_1(list_from_sort))
+print(min_list_ver_2(list_from_sort))
+
