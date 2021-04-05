@@ -19,3 +19,34 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def min_value_hard(numbers):
+    # Итоговая сложность O(N**2)
+
+    min_val = numbers[0]                    # O(1)
+    for i in range(len(numbers)):           # O(N) - берем каждый элемент списка
+        for j in range(len(numbers)):       # O(N) - сравниваем каждый элемент списка со всеми остальными элементами
+            if numbers[i] < numbers[j]:     # O(1)
+                if numbers[i] < min_val:    # O(1)
+                    min_val = numbers[i]    # O(1)
+
+    return min_val                          # O(1)
+
+
+def min_value(numbers):
+    # Итоговая сложность O(N)
+
+    min_val = numbers[0]                    # O(1)
+    for i in range(len(numbers)):           # O(N)
+        if numbers[i] < min_val:            # O(1)
+            min_val = numbers[i]            # O(1)
+
+    return min_val                          # O(1)
+
+
+list = [2, 3, 10, 6, 3, -1, 5, 0]
+print(f'минимальный элемент списка, найденный с помощью неоптимального алгоритма: {min_value_hard(list)}')
+print(f'минимальный элемент списка, найденный с помощью оптимального алгоритма: {min_value(list)}')
+
+
+
