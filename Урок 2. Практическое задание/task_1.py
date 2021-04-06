@@ -28,3 +28,34 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+import operator
+
+actions = {'+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.truediv}
+
+def is_integer(n):
+    try:
+        int(n)
+    except ValueError:
+        print(f'Неверно! Введено неверное значение')
+        callc()
+    else:
+        return float(n).is_integer()
+
+def callc():
+    action = (input("Введите операцию (+, -, *, / или 0 для выхода) "))
+    if action == 0:
+        print(f'Вы завершили работу')
+    elif action in ("+", "-", "*", "/"):
+
+        number_1 = is_integer(input(f'Введите первое число: '))
+        number_2 = is_integer(input(f'Введите второе число: '))
+        if number_2 == 0:
+            print(f'Неверно! Деление на 0')
+            callc()
+        print(f'Ваш результат = {actions[action](number_1, number_2)}')
+        callc()
+    else:
+        print(f'Неверно!')
+        callc()
+
+callc()

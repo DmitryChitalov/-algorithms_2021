@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+def my_func(start_chr=32,end_chr=127):
+    if start_chr == end_chr:
+        return ''
+    print("{:<4}- {:<2}".format(start_chr,chr(start_chr)), end=" ")
+    if (start_chr-1) % 10 == 0:
+        print("")
+    start_chr += 1
+    return my_func(start_chr, end_chr)
+
+
+my_func()
