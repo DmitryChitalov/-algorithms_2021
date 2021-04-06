@@ -11,3 +11,32 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def guess(num, min=0, max=100, attempts=10):
+    n = int(input(f'Угадайте число от {min} до {max}, осталось {attempts} попыток: '))
+    if attempts == 0:
+        return f"Вы проиграли. Ответ: {num}"
+    else:
+        if n == num:
+            return f"Вы выиграли"
+        elif num < n:
+            if n > max:
+                max = max
+            else:
+                max = n
+            guess(num, min, max, attempts - 1)
+        elif num > n:
+            if n < min:
+                min = min
+            else:
+                min = n
+            guess(num, min, max, attempts - 1)
+
+
+num = random.choice(range(0, 100))
+print(guess(num))
+
+
+

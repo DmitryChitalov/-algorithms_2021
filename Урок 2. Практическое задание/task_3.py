@@ -22,3 +22,15 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def conv(num):
+    if num == 0:
+        return ' - перевернутое число'
+    else:
+        reverse_number = num % 10
+        num //= 10
+        return str(reverse_number) + conv(num)
+
+
+print(conv(int(input('Введите число, которое требуется перевернуть: '))))
