@@ -18,3 +18,15 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_event_odd_number(number, even=0, odd=0):
+    if number == 0:
+        return f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})'
+    elif number % 2 == 1:
+        return count_event_odd_number(number // 10, even, odd + 1)
+    else:
+        return count_event_odd_number(number // 10, even + 1, odd)
+
+
+print(count_event_odd_number(int(input(f'Введите число, например "123" :'))))

@@ -12,3 +12,11 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+def get_summ(number):
+    if number == 0:
+        return 0
+    else:
+        return 1 + get_summ(number - 1) / -2
+
+print(get_summ(int(input("Введите количество элементов: "))))
