@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc(result):
+    znak = input('Введите знак (0 для выхода): ')
+    if znak not in '0+-*/':
+        print('Введен неверный знак: ')
+        return calc()
+    if znak == '0':
+        return result
+    number_2 = int(input('Введите второе число: '))
+    number_2 = int(number_2)
+    if znak == '+':
+        print(f'Результат = {result + number_2}')
+        return calc(result=result + number_2)
+    if znak == '-':
+        print(f'Результат = {result - number_2}')
+        return calc(result=result - number_2)
+    if znak == '*':
+        print(f'Результат = {result * number_2}')
+        return calc(result=result * number_2)
+    if znak == '/':
+        try:
+            result = result / number_2
+            print(f'Результат = {result}')
+            return calc(result=result)
+        except ZeroDivisionError as e:
+            print(f'{e} На 0 делить нельзя!!!')
+            print(f'Результат = {result}')
+            return calc(result)
+
+
+number_1 = int(input('Введите первое число: '))
+
+print(calc(number_1))

@@ -17,3 +17,14 @@
 """
 
 # hash?
+
+
+def unique(word, string_hash=[]):
+    for k in range(2, len(word) + 1):
+        string_hash.append(hash(word[1:k]))
+        string_hash.append(hash(word[:k - 1]))
+
+    return f'{set(string_hash)}\nКоличество элементов: {len(set(string_hash))}'
+
+print(unique('papa'))
+
