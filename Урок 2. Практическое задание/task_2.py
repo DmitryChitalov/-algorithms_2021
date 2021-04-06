@@ -23,8 +23,7 @@
 def check_parity(number):
     if len(str(number)) < 2:
         return 0 if number % 2 else 1
-    else:
-        return check_parity(number // 10) + (0 if number % 2 else 1)
+    return check_parity(number // 10) + (0 if number % 2 else 1)
 
 
 try:

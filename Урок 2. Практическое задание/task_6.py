@@ -17,12 +17,13 @@ import random
 def guess_the_number(number, attempt=10, message=''):
     if message:
         print(message)
+    if attempt == 0:
+        print(f'Вы проиграли. Правильный ответ {number}')
+        return
     try:
         answer = int(input('Угадайте число от 0 до 100: '))
-        if attempt == 1:
-            print('Вы проиграли.')
-            return
-        elif answer == number:
+
+        if answer == number:
             print(f'Победа!!! Правильный ответ {number}')
             return
         elif answer < number:

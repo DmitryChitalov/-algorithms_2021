@@ -23,7 +23,26 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+"""
+# Решение с помощью цикла
 for i in range(32, 128):
     print(f'{i} - {chr(i)}', end=' ')
     if not (i - 1) % 10:
         print()
+"""
+
+
+def print_ascii(code_1=32, code_2=127, n=10):
+    if code_1 > code_2:
+        return
+    print(f'{code_1} - {chr(code_1)}', end=' ')
+    if n == 1:
+        print()
+        n = 10
+    print_ascii(code_1 + 1, code_2, n - 1)
+
+
+print_ascii(32, 127)
+
+
+

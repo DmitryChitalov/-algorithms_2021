@@ -21,5 +21,5 @@ def get_sum_of_set(base):
     return base if base == 1 else base + get_sum_of_set(base - 1)
 
 
-n = 500
+n = 50
 print(f'Is 1+2+...+{n} = {n}({n}+1)/2? \nAnswer: {get_sum_of_set(n) == n * (n + 1) / 2} (Sum = {get_sum_of_set(n)})')

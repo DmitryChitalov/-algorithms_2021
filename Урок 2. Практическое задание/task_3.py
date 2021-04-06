@@ -27,8 +27,7 @@
 def reverse_number(number):
     if len(str(number)) < 2:
         return str(number)
-    else:
-        return str(number % 10) + reverse_number(number // 10)
+    return str(number % 10) + reverse_number(number // 10)
 
 
 try:
