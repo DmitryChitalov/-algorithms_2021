@@ -34,28 +34,26 @@ import re
 
 def calculator() -> None:
     sign = input("Введите операцию (+, -, *, / или 0 для выхода):")
-    print(bool(re.compile("^[+-/*]+$").match(sign)))
     try:
         if int(sign) == 0:
             return None
     except ValueError:
         pass
-    try:
-        aa = input("Введите первое число:")
-        bb = input("Введите второе число:")
-        if sign.replace(" ", "") == "/" and float(bb) == 0.0:
-            print(" mda... ")
-        #
-        #
-        # this does not work, in multi condition!
-        # bool(re.compile("^[+-/*]+$").match(sign))
-        # why???
-        # if (bool(re.compile("^[+-/*]+$").match(sign)) and (len(sign) == 1)) or float(aa) or float(bb):
-        if len(sign) == 1:
-            if bool(re.compile("^[+-/*]+$").match(sign)) or float(aa) or float(bb):
+    if bool(re.compile("^[+-/*]+$").match(sign)) and len(sign) == 1:
+        try:
+            aa = input("Введите первое число:")
+            bb = input("Введите второе число:")
+            if sign.replace(" ", "") == "/" and float(bb) == 0.0:
+                print(" mda... ")
+            #
+            # this does not work, in multi condition!
+            # bool(re.compile("^[+-/*]+$").match(sign))
+            # why???
+            # if (bool(re.compile("^[+-/*]+$").match(sign)) and (len(sign) == 1)) or float(aa) or float(bb):
+            else:
                 print(eval(str(aa + sign + bb)))
-    except:
-        print("incorrect input, try again!..")
+        except:
+            print("incorrect input, try again!..")
     calculator()
 
 
