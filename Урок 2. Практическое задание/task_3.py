@@ -22,3 +22,18 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def reverse_number(number):
+    if len(str(number)) < 2:
+        return str(number)
+    return str(number % 10) + reverse_number(number // 10)
+
+
+try:
+    num_to_reverse = int(input("Введите натуральное число: "))
+    if num_to_reverse < 0:
+        raise ValueError
+    print(f'Перевернутое число: {reverse_number(num_to_reverse)}')
+except ValueError:
+    print('Некорректный ввод.')

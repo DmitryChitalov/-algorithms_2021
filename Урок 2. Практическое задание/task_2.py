@@ -18,3 +18,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_parity(number):
+    if len(str(number)) < 2:
+        return 0 if number % 2 else 1
+    return check_parity(number // 10) + (0 if number % 2 else 1)
+
+
+try:
+    num_to_check = int(input('Введите натуральное число: '))
+    if num_to_check < 0:
+        raise ValueError
+    parity = check_parity(num_to_check)
+    print(
+        f'Количество четных и нечетных цифр в числе {num_to_check} равно: '
+        f'({parity}, {len(str(num_to_check)) - parity})')
+
+except ValueError:
+    print('Некорректный ввод.')
