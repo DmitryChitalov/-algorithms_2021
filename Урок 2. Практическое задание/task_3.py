@@ -22,3 +22,24 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def f_reverse(p_in):
+    if p_in == 0:
+        return ''
+
+    v_ret = str(p_in % 10) + f_reverse(p_in // 10)
+
+    return v_ret
+
+
+while True:
+    try:
+        n = int(input('Введите положительное число, которое требуется перевернуть: '))
+        if n < 0:
+            raise ValueError
+        break
+    except ValueError:
+        print("Введенное значение не является положительным числом (((. Исправьтесь")
+
+print(f'Перевернутое число: {f_reverse(n) if n != 0 else 0}')

@@ -23,3 +23,16 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def f_print_ascii(p_no):
+    if p_no == 128:
+        return
+    if p_no % 10 == 2:
+        print()  # перевод строки
+
+    print(f'{p_no:4d}-{chr(p_no):2s}', end='')  # форматируем единицу вывода без перевода строки
+
+    f_print_ascii(p_no + 1)
+
+
+f_print_ascii(32)

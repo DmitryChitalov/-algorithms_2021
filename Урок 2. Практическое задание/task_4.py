@@ -12,3 +12,14 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+n = int(input('Введите количество элементов: '))
+
+
+def f_sum(start_value, no_elements):
+    if no_elements == 1:
+        return start_value
+    return start_value + f_sum(0 - (start_value / 2), no_elements - 1)
+
+
+print(f'Количество элементов: {n}, их сумма: {f_sum(1, n)}')

@@ -18,3 +18,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def f_calc_digits(p_in, even_cnt, odd_cnt):
+    if p_in == 0:
+        return (even_cnt, odd_cnt)
+
+    if p_in % 2 == 1:
+        odd_cnt += 1
+    else:
+        even_cnt += 1
+
+    return f_calc_digits(p_in // 10, even_cnt, odd_cnt)
+
+
+try:
+    n = int(input('Введите число: '))
+    print(f'Количество четных и нечетных цифр в числе равно: {f_calc_digits(n, 0, 0)}')
+except ValueError:
+    print("Вы вместо числа ввели строку (((. Исправьтесь")
