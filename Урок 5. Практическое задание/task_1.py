@@ -23,3 +23,36 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+i = 0
+sum_profit = 0
+company_list = []
+low_profit = "Предприятия, с прибылью ниже среднего значения: "
+high_profit = "Предприятия, с прибылью выше среднего значения: "
+
+num_comp = int(input("Введите количество предприятий для расчета прибыли:"))
+company = namedtuple("Company", "name profit")
+
+while i < num_comp:
+    profit = 0
+    company_name = input("Введите название компании:")
+    profit_list = input("через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала):").split()
+    for el in profit_list:
+        profit += int(el)
+    company_list.append(company(name = company_name, profit = profit))
+    sum_profit += profit
+    i += 1
+
+avg_profit = sum_profit / num_comp
+for el in company_list:
+    if el.profit < avg_profit:
+        low_profit += f"{el.name} "
+    else:
+        high_profit += f"{el.name} "
+
+#print(company_list)
+print("Средняя годовая прибыль всех предприятий:", avg_profit)
+print(high_profit)
+print(low_profit)
