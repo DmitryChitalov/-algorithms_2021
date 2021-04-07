@@ -16,4 +16,15 @@
 а
 """
 
+
 # hash?
+
+def count_substrings(user_str):
+    count_set = set()
+    for i in range(len(user_str)):
+        for j in range(i + 1, len(user_str) + 1):
+            count_set.add(hash(user_str[i:j]))
+    return len(count_set) - 1
+
+
+print(count_substrings('papa'))
