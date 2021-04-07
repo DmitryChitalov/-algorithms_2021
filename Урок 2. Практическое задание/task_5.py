@@ -23,3 +23,16 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+end_str = '\n'
+
+
+def print_code_list(code=32, pos=0):
+    print(f'{code} - {chr(code)}{end_str if pos == 9 else " "}', end='')
+    if code == 127:
+        return
+    else:
+        print_code_list(code+1, 0 if pos == 9 else pos+1)
+
+
+print_code_list()

@@ -12,3 +12,22 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def calc(steps, num=1.0, result=0.0):
+    if steps:
+        calc(steps-1, num/(-2), result+num)
+    else:
+        print(f'Сумма элементов ={result}')
+        return
+
+
+while True:
+    value = input('Введите количество итераций >')
+    if value.isdigit():
+        value = int(value)
+        if value > 0:
+            break
+    print("Введены некорректные данные")
+
+calc(value)
