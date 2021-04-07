@@ -4,48 +4,55 @@
 Программа должна определить среднюю прибыль (за год для всех предприятий)
 и вывести наименования предприятий, чья прибыль выше среднего и отдельно
 вывести наименования предприятий, чья прибыль ниже среднего.
+
 Подсказка:
 Для решения задачи обязательно примените какую-нибудь коллекцию из модуля collections
+
 Пример:
 Введите количество предприятий для расчета прибыли: 2
 Введите название предприятия: Фирма_1
 через пробел введите прибыль данного предприятия
 за каждый квартал(Всего 4 квартала): 235 345634 55 235
+
 Введите название предприятия: Фирма_2
 через пробел введите прибыль данного предприятия
 за каждый квартал(Всего 4 квартала): 345 34 543 34
+
 Средняя годовая прибыль всех предприятий: 173557.5
 Предприятия, с прибылью выше среднего значения: Фирма_1
+
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
 
-
 from collections import namedtuple
-my_var = "Company"
-n = int(input('введите количество компаний: '))
-companies = namedtuple(my_var, "name quarter1 quarter2 quarter3 quarter4")
-profit_aver = {}
+
+n = int(input("Введите количество предприятий: "))
+companies = namedtuple("Company", " name quart_1 quart_2 quart_3 quart_4") # называем нашу структуру companies
+profit = {}
+avenger = 0
+prepare_sum = 0
 
 for i in range(n):
-    my_var = input("name")
-    company = companies(my_var, quarter1=int(input("quarter1 ")),
-                        quarter2=int(input("quarter2 ")),
-                        quarter3=int(input("quarter3 ")),
-                        quarter4=int(input("quarter4 ")))
-    print(company)
-    profit_aver[company.name] = (company.quarter1 + company.quarter2 + company.quarter3 + company.quarter4) / 4
-    print(profit_aver)
+    company = companies(
+        name=input("название: "),
+        quart_1=int(input("первый квартал: ")),
+        quart_2=int(input("второй квартал: ")),
+        quart_3=int(input("третий квартал: ")),
+        quart_4=int(input("четвертый квартал: ")))
 
-print(company)
-total_aver = 0
-for value in profit_aver.values():
-    total_aver += value
-total_aver = total_aver / n
+    profit[company.name] = ((company.quart_1 + company.quart_2 + company.quart_3 + company.quart_4) / 4)
+    print("profit", profit) # способ при котором средние значения записываются в отдельный словать подсмотрен из примера
 
-for key, value in profit_aver.items():
-    if value > total_aver:
+for key, value in profit.items():
+    prepare_sum = prepare_sum + profit.get(key)
+    print("prepare_sum", prepare_sum)
+avenger = prepare_sum / len(profit)
+print("avenger", avenger)
+
+for key, value in profit.items():
+    if value > avenger:
         print(key, "прибыль выше среднего")
-    elif value < total_aver:
+    elif value < avenger:
         print(key, "прибыль ниже среднего")
-    elif value == total_aver:
-        print(key, "прибыль средняя")
+    else:
+        print(key, "средняя прибыль")
