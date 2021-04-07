@@ -5,3 +5,30 @@
 Придумать как это решить!
 Есть очень простое решение!
 """
+from memory_profiler import profile
+
+@profile
+def factorial_wrap(n):
+    return factorial(n)
+
+def factorial(n):
+    if n == 0: return 1
+    return n*factorial(n-1)
+
+
+print(factorial_wrap(990))
+
+'''
+Решение с рекурсией под декоратором профилировщика, либо переполнит стек или выведет на каждый вызов отдельную 
+таблицу с аналитикой, что будет не информативно.
+Поэтому, обернем свою функцию в другую, поставив декоратор на вспомогательную функцию.
+  
+Аналитика:
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    10     18.5 MiB     18.5 MiB           1   @profile
+    11                                         def factorial_wrap(n):
+    12     20.3 MiB      1.8 MiB           1       return factorial(n)
+'''
+
+
