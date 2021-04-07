@@ -15,3 +15,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from task_4 import sum_n as sn
+
+
+def get_next(num: int):
+    return num + 1
+
+
+def right_fun(nn: int):
+    return (nn * (nn + 1)) / 2
+
+
+if __name__ == '__main__':
+    n = int(input("set N number:"))
+    left = sn(1, n, get_next)
+    right = right_fun(n)
+    print(left, " == ", right, " ? ", (left == right))
+
