@@ -23,7 +23,6 @@ import sqlite3
 from binascii import hexlify
 from hashlib import pbkdf2_hmac, blake2b
 
-
 sqlite_connection = sqlite3.connect('sqlite.db')
 cursor = sqlite_connection.cursor()
 

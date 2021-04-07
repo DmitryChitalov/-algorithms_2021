@@ -16,7 +16,6 @@
 а
 """
 
-
 def equal_string(srt_val):
     equal_r={}
     for i in range(len(srt_val)):
