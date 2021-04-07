@@ -12,3 +12,19 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_n(base: float, n: int) -> float:
+    if n > 1:
+        return base + sum_n(base / -2, n - 1)
+    else:
+        return base
+
+
+if __name__ == '__main__':
+    print(sum_n(1, int(input("set N nuber:"))))
+
+    for i in range(20):
+        print("N:", i, ") = ", sum_n(1, i))
+
+
