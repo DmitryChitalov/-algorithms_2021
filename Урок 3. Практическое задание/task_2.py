@@ -18,3 +18,32 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+from binascii import hexlify
+from hashlib import pbkdf2_hmac
+
+
+class UserData:
+    def __init__(self, new_login, new_pass: str):
+        self.login = new_login.lower()
+        password_hash = pbkdf2_hmac(hash_name='sha256', password=new_pass.encode(), salt=self.login.encode(),
+                                    iterations=10000)
+        self._password_hash = hexlify(password_hash)
+
+    def authorization(self, password):
+        check_password = pbkdf2_hmac(hash_name='sha256', password=new_pass.encode(), salt=self.login.encode(),
+                                     iterations=10000)
+        if self._password_hash == hexlify(check_password):
+            print('вы авторизированы')
+        else:
+            print('попробуйте еще раз')
+
+
+login = input('введите логин')
+password = input("введите пароль")
+user_1 = UserData(login, password)
+
+print('passwrod hash', user_1._password_hash)
+auth_pass = password = input('введите пароль')
+
+user_1.authorization(auth_pass)

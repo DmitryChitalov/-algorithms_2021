@@ -27,10 +27,10 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: len(lst_obj)+1.
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(len(lst_obj)) or O(n)
+    return lst_to_set  # 0
 
 
 #############################################################################################
@@ -42,12 +42,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: n^2.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
+            return False                   # 0
+    return True                            # 0
 
 
 #############################################################################################
@@ -58,23 +58,25 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: n^2+n+nlogn
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(n)
+    lst_copy.sort()                          # O(n log n)
+    for i in range(len(lst_obj) - 1):        # O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # O(n)
+            return False                     #
+    return True                              #
 
 #############################################################################################
 
+"""Сложность: n+3
+"""
 
 for j in (50, 500, 1000, 5000, 1000):
     # Из 100000 чисел возьмем 'j' случайно выбранных
     # Всего 10 тыс. чисел
-    lst = random.sample(range(-100000, 100000), j)
+    lst = random.sample(range(-100000, 100000), j) #O(n)
 
-print(check_1(lst))
-print(check_2(lst))
-print(check_3(lst))
+print(check_1(lst)) #O(1)
+print(check_2(lst)) #O(1)
+print(check_3(lst)) #O(1)
