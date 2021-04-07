@@ -9,3 +9,18 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+import secrets
+import hashlib
+
+salt = secrets.token_hex(8)
+dict_url = {}
+
+def unique_url(uri):
+  if uri not in dict_url:
+    dict_url[uri] = hashlib.md5(salt.encode() + uri.encode()).hexdigest()
+    
+unique_url('https://github.com/korshunov418' )
+unique_url('https://yandex.ru' )
+unique_url('https://yandex.ru' )
+
+print(dict_url)
