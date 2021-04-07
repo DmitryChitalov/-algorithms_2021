@@ -23,3 +23,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import Counter 
+
+
+def inter_fabric(count_f,i = 0, fabrisc = Counter({})): 
+    
+    if i == count_f:
+        min_fab = []
+        max_fab = []
+        print(fabrisc)
+        mid = sum(fabrisc.values())/count_f
+        print(f"Среднегодовая прибыль всех предприятий: {mid}")
+        for key, vals in list(fabrisc.items()): 
+            if vals > mid:
+                max_fab.append(key)
+            else:
+                min_fab.append(key)
+        print(f"Предприятия, с прибылью выше среднего значения {max_fab}")
+        print(f"Предприятия, с прибылью ниже среднего значения {min_fab}")
+    else:
+        fabric_name = input('Введите название предприятия: ')
+        fabric_frofit = input('через пробел введите прибыль данного предприятия: ')
+        year_profit = sum(list(map(lambda x: int(x), fabric_frofit.split())))
+        fabrisc.update({fabric_frofit:year_profit})
+        i = i+1
+        inter_fabric(count_f, i, fabrisc)
+    
+        
+
+inter_fabric(int(input('Введите количество предприятий: ')))
+
+
