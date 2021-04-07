@@ -18,3 +18,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def func_1(num, even=0, odd=0):
+    char = num % 10
+    if char % 2:
+        odd += 1
+    else:
+        even += 1
+    if char != num:
+        func_1(num // 10, even, odd)
+    else:
+        print(f'Найдено {even} четных и {odd} нечетных')
+        return
+
+
+while True:
+    value = input('Введите натуральное число >')
+    if value.isdigit():
+        value = int(value)
+        if value > 0:
+            break
+    print("Введены некорректные данные")
+func_1(value)

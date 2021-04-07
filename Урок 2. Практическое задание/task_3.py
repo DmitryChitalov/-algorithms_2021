@@ -22,3 +22,23 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def func_1(num, revers=''):
+    char = num % 10
+    revers += str(char)
+    if char != num:
+        func_1(num // 10, revers)
+    else:
+        print(f'Найдено {revers} нечетных цифр')
+        return
+
+
+while True:
+    value = input('Введите натуральное число >')
+    if value.isdigit():
+        value = int(value)
+        if value > 0:
+            break
+    print("Введены некорректные данные")
+func_1(value)
