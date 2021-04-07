@@ -21,3 +21,195 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+from memory_profiler import memory_usage, profile
+
+from functools import wraps
+
+from pympler import asizeof
+
+
+def memory_dec(function):
+
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+
+        first_mu = memory_usage()
+
+        function(*args, **kwargs)
+
+        second_mu = memory_usage()
+
+        return second_mu[0] - first_mu[0]
+
+    return wrapper
+
+
+@memory_dec
+def list_work(list_arg):
+
+    new_list = [item ** 2 for item in list_arg]
+
+    return new_list
+
+
+@memory_dec
+def generator_work(list_arg):
+
+    for i in list_arg:
+
+        yield i ** 2
+
+
+test_list = list(range(1000))
+
+print(list_work(test_list))
+
+print(generator_work(test_list))
+
+'''
+-----------------------------------------------------------------------------------------------------------------------
+Memory_dec - декоратор, который подсчитывает кол-во памяти в переданной ему функции (ту, которую функция использует).
+При генерации нового списка и его возвращения, это занимает определенный объем памяти. В функции, которая использует
+генератор, будет достаточно паямти которая была дана (выделена) в начале работы кода (скрипта). Из этого выходит,
+что функция с генератором имеет лучшее (выгодное) потребление памятии. В результатах можно увидеть существенную разницу
+между ними.
+-----------------------------------------------------------------------------------------------------------------------
+Результаты с ПК:
+-----------------------------------------------------------------------------------------------------------------------
+0.11328125
+0.0
+-----------------------------------------------------------------------------------------------------------------------
+'''
+
+
+class FirstRoad:
+
+    weight_per_m2 = 25
+
+    def __init__(self, length, width):
+
+        self._length = length
+
+        self._width = width
+
+    def weight_calculation(self, thickness):
+
+        weight = self._width * self._length * FirstRoad.weight_per_m2 * thickness / 1000
+
+        print(f"Масса асфальта: {round(weight,2)} тонн.")
+
+
+class SecondRoad:
+
+    __slots__ = ['_length', '_width']
+
+    weight_per_m2 = 25
+
+    def __init__(self, length, width):
+
+        self._length = length
+
+        self._width = width
+
+    def weight_calculation(self, thickness):
+
+        weight = self._width * self._length * SecondRoad.weight_per_m2 * thickness / 1000
+
+        print(f"Масса асфальта: {round(weight,2)} тонн.")
+
+
+first_road = FirstRoad(20000, 20)
+
+second_road = SecondRoad(20000, 20)
+
+print(f"Объект first_road (первая дорога) занимает {asizeof.asizeof(first_road)} в пямяти.")
+
+print(f"Объект second_road(вторая дорога) занимает {asizeof.asizeof(second_road)} в пямяти.")
+
+'''
+-----------------------------------------------------------------------------------------------------------------------
+Если отказаться от использования хеш таблиц при хранении атрибутов класса, мы сможем сэкономить память.
+По результатам можно увидеть что second_road(вторая дорога) занимает меньше места в памяти.
+-----------------------------------------------------------------------------------------------------------------------
+Результаты:
+-----------------------------------------------------------------------------------------------------------------------
+Объект first_road (первая дорога) занимает 328 в пямяти.
+Объект second_road(вторая дорога) занимает 112 в пямяти.
+-----------------------------------------------------------------------------------------------------------------------
+'''
+
+
+@profile
+def first_function(list_arg):
+
+    original_list = [i * 2 for i in list_arg]
+
+    new_list = original_list
+
+    del original_list
+
+    return new_list
+
+
+second_test_list = list(range(100000))
+
+first_function(second_test_list)
+
+'''
+-----------------------------------------------------------------------------------------------------------------------
+Результаты:
+-----------------------------------------------------------------------------------------------------------------------
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+   140     35.2 MiB     35.2 MiB           1   @profile
+   141                                         def first_function(list_arg):
+   142                                         
+   143     39.8 MiB  -2873.5 MiB      100003       original_list = [i * 2 for i in list_arg]
+   144                                         
+   145     39.8 MiB      0.0 MiB           1       new_list = original_list
+   146                                         
+   147     39.8 MiB      0.0 MiB           1       del original_list
+   148                                         
+   149     39.8 MiB      0.0 MiB           1       return new_list
+-----------------------------------------------------------------------------------------------------------------------
+'''
+
+
+@profile
+def second_function(list_arg):
+
+    original_list = [i * 2 for i in list_arg]
+
+    new_list = original_list
+
+    del original_list
+
+    del new_list
+
+    new_list = []
+
+    return new_list
+
+
+second_function(second_test_list)
+
+'''
+-----------------------------------------------------------------------------------------------------------------------
+Если посмотреть на результаты выполнения функции, мы можем увидеть то, что при удалении ссылок на один и тот же
+объект память будет освобождаться.
+-----------------------------------------------------------------------------------------------------------------------
+Результаты:
+-----------------------------------------------------------------------------------------------------------------------
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+   168     36.3 MiB     36.3 MiB           1   @profile
+   169                                         def second_function(list_arg):
+   170     39.7 MiB  -5726.7 MiB      100003       original_list = [i * 2 for i in list_arg]
+   171     39.7 MiB      0.0 MiB           1       new_list = original_list
+   172     39.7 MiB      0.0 MiB           1       del original_list
+   173     36.9 MiB     -2.8 MiB           1       del new_list
+   174     36.9 MiB      0.0 MiB           1       new_list = []
+   175     36.9 MiB      0.0 MiB           1       return new_list
+-----------------------------------------------------------------------------------------------------------------------
+'''
