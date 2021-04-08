@@ -17,3 +17,14 @@
 """
 
 # hash?
+
+def my_func(string):
+    tmp = {}
+    for i in range(len(string)):
+        for el in range(i, len(string)):
+            element = string[i:el + 1]
+            tmp[hash(element)] = element
+    tmp.pop(hash(string))
+    print(f'{len(tmp)} уникальных подстрок \n')
+
+my_func('papa')
