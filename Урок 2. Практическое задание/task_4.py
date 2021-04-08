@@ -12,3 +12,16 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def prog_sum(n=int(input('Введите количество элементов:')), num=1, total=0):
+    if n:
+        total += num
+        num = -num/2
+        return prog_sum(n-1, num, total)
+    else:
+        return sum
+
+
+if __name__ == "__main__":
+    print(prog_sum())

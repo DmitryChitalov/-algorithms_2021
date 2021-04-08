@@ -18,3 +18,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def digiter(number=None, even_odd=[0, 0]):
+
+    if number == 0:
+        print(even_odd)
+        return even_odd
+    elif number is None:
+        number = int(input('Введите число:'))
+    if number % 2 == 0:
+        even_odd[0] += 1
+    else:
+        even_odd[1] += 1
+    return digiter(number//10, even_odd)
+
+
+if __name__ == "__main__":
+    digiter()
