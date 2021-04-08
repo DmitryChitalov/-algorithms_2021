@@ -17,3 +17,16 @@
 """
 
 # hash?
+
+
+def func(word):
+    sub_s = set()
+    for el in range(len(word)):
+        for j in range(el + 1, len(word) + 1):
+            sub_s.add(hash(word[el:j]))
+    return sub_s
+
+
+print(func('papa'))
+
+
