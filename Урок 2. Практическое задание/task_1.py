@@ -28,35 +28,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
-def calcul():
+def calculator():
     oper = input("Введите операцию (+, -, *, / или 0 для выхода):")
     if oper == '0':
         return
     elif oper not in ('0', '+', '-', '*', '/'):
         print('Операция не распознана!')
-        return calcul()
+        return calculator()
     else:
         try:
             first = int(input("Введите первое число:"))
             second = int(input("Введите второе число:"))
         except ValueError:
-            print('Вы вместо числа ввели строку')
-            return calcul()
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            return calculator()
         if oper == '+':
-            print(first + second)
-            return calcul()
+            print('Ваш результат:', first + second)
+            return calculator()
         elif oper == '-':
-            print(first - second)
-            return calcul()
+            print('Ваш результат:', first - second)
+            return calculator()
         elif oper == '/':
             if second == 0:
                 print('деление на 0!')
-                return calcul()
-            print(first / second)
-            return calcul()
+                return calculator()
+            print('Ваш результат:', first / second)
+            return calculator()
         elif oper == '*':
-            print(first * second)
-            return calcul()
+            print('Ваш результат:', first * second)
+            return calculator()
 
 
-calcul()
+calculator()
