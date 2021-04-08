@@ -24,12 +24,12 @@ import random
 def check_1(lst_obj):
     """Функция должна создать множество из списка.
 
-    Алгоритм 3:
+    Алгоритм 3:s
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(len(list_obj)).
     """
-    lst_to_set = set(lst_obj)  # !!!
+    lst_to_set = set(lst_obj)  # O(len(list_obj))
     return lst_to_set  # !!!
 
 
@@ -42,12 +42,16 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность:  O(n^2-n))  =>  O(n^2).
+
+        if lst_obj[j] in lst_obj[j+1   :]:   - это синтаксис мне не известен возможно ли здесь опечатка?
+
+
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):  # O(n)
+        if lst_obj[j] in lst_obj[j + 1:]:  # O(n-1)
+            return False  # !!!
+    return True  # !!!
 
 
 #############################################################################################
@@ -58,17 +62,18 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(n log n)
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)  # O(len(lst_obj))
+    lst_copy.sort()  # O(N Log N)
+    for i in range(len(lst_obj) - 1):  # O(N) + O(1)
+        if lst_copy[i] == lst_copy[i + 1]:  # O(N)
+            return False  # !!!
+    return True  # !!!
+
 
 #############################################################################################
-
+#   Возможно последнее 1000 должно быть 10 000
 
 for j in (50, 500, 1000, 5000, 1000):
     # Из 100000 чисел возьмем 'j' случайно выбранных

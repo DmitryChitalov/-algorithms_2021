@@ -26,3 +26,84 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+import hashlib as hh
+# universal password: testtest
+
+user_list = {
+    "vasiliy": "0cfcf7ed735fed225ecec79d4d38ec6e",
+    "terkin": "0433f98198191d66f875c4c7657c71f7",
+    "some_guy": "96d56f4a5dc544db34b91d72322e159b"
+}
+
+logged_in_user_list = []
+
+
+# complexity: unknown
+def hash_it(login_str, pass_str):
+    res = hh.md5((login_str + pass_str).encode())
+    res_hash = res.hexdigest()
+    return res_hash
+
+
+def user_pass_gen():
+    for k in user_list.keys():
+        res = hh.md5((k+"testtest").encode())
+        print(k, ":", res.hexdigest())
+        hash_it(k, "testtest")
+
+# user_pass_gen()
+
+
+# get all logged in users
+# complexity: O(len()) ?
+def getInUsers():
+    return logged_in_user_list
+
+
+# if user is logged in
+# complexity: O(n)
+def ifUserLoggedin(u_name):
+    return u_name in logged_in_user_list
+
+
+# complexity: - not an option, infinite working time
+def loggin_function():
+    flag = True
+    while flag:
+        u_login = input("Hello, who are you? (input your login): ")
+        if u_login.lower() == "stop":
+            flag = False
+        # complexity: O(n)
+        elif u_login.lower() in logged_in_user_list:
+            som_inp = input("You are already logged in the system, if you want out, type exit: ")
+            if som_inp.lower() == "exit":
+                logged_in_user_list.remove(u_login)
+        elif u_login.lower() not in user_list.keys():
+            answer = input("You are not in access list, do you want to create an account? (Yes/No): ")
+            if answer.lower() == "yes" or answer.lower() == "y":
+                flag2 = True
+                while flag2:
+                    u_pass1 = input("type in your password:")
+                    u_pass2 = input("repeat you password please:")
+                    # #### getpass not working properly, cannot echo off the console
+                    # print("type in your password:")
+                    # u_pass1 = getpass()
+                    # print("repeat you password please:")
+                    # u_pass2 = getpass()
+                    if u_pass1.lower() == u_pass2.lower():
+                        flag2 = False
+                        user_list[u_login.lower()] = hash_it(u_login.lower(), u_pass1.lower())
+                    else:
+                        print("Something went wrong! your password do not match, please try again")
+        else:
+            u_pass = input("type in your password:")
+            if hash_it(u_login.lower(), u_pass.lower()) == user_list[u_login.lower()]:
+                logged_in_user_list.append(u_login.lower())
+                # redirect for the rest of the app should be here
+            else:
+                print("Try again:")
+
+
+loggin_function()
+

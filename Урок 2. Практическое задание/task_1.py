@@ -28,3 +28,34 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+import re
+
+
+def calculator() -> None:
+    sign = input("Введите операцию (+, -, *, / или 0 для выхода):")
+    try:
+        if int(sign) == 0:
+            return None
+    except ValueError:
+        pass
+    if bool(re.compile("^[+-/*]+$").match(sign)) and len(sign) == 1:
+        try:
+            aa = input("Введите первое число:")
+            bb = input("Введите второе число:")
+            if sign.replace(" ", "") == "/" and float(bb) == 0.0:
+                print(" mda... ")
+            #
+            # this does not work, in multi condition!
+            # bool(re.compile("^[+-/*]+$").match(sign))
+            # why???
+            # if (bool(re.compile("^[+-/*]+$").match(sign)) and (len(sign) == 1)) or float(aa) or float(bb):
+            else:
+                print(eval(str(aa + sign + bb)))
+        except:
+            print("incorrect input, try again!..")
+    calculator()
+
+
+if __name__ == '__main__':
+    calculator()

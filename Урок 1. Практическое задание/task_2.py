@@ -19,3 +19,36 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# O(n^2) type
+def minSearch1(sl):
+    if len(sl) == 0: return None
+    flag = True
+    iter = len(sl)
+    while flag and iter > 0:
+        min_val = sl[iter - 1]
+        flag = False
+        for m in sl:
+            if min_val > m:
+                flag = True
+                break
+        iter -= 1
+    return min_val
+
+
+# O(n) type
+def minSearch2(sl):
+    if len(sl) == 0:
+        return None
+    min_val = sl[0]
+    for n in sl:
+        if n < min_val:
+            min_val = n
+    return min_val
+
+
+search_list = [1, 2, 3, 4, 5, 6]
+
+print("O(n^2) : ", minSearch1(search_list))
+print("O(n)   : ", minSearch2(search_list))

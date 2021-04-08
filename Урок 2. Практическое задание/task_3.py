@@ -22,3 +22,14 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def num_reverse(num):
+    if len(str(num)) <= 1:
+        return list(str(num)).pop()
+    else:
+        return list(str(num)).pop() + num_reverse(''.join(str(num)[:-1]))
+
+
+if __name__ == '__main__':
+    print(num_reverse(input("Write yourNumber: ")))
