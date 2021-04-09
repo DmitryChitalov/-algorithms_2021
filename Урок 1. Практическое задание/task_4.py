@@ -26,3 +26,41 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def user_checker_01(dict_source, user):
+    if user[0] not in dict_source.keys():  # O(N)
+        print('Доступ запрещен - не найдено имя пользователя')
+    elif user[1] != dict_source[user[0]][0]:
+        print('Доступ запрещен- неправильный пароль!')
+    elif not dict_users[user[0]][1]:
+        print('Доступ запрещен - пожалуйста, пройдите активацию учетной записи!')
+    else:
+        print('Доступ разрешен - добро пожаловать!')
+
+
+def user_checker_02(dict_source, user):
+    user_registered = False
+    for i in dict_source.keys():  # O(N)
+        if user[0] == i:
+            user_registered = True
+            if user[1] != dict_source[i][0]:
+                print('Доступ запрещен- неправильный пароль!')
+            elif not dict_users[i][1]:
+                print('Доступ запрещен - пожалуйста, пройдите активацию учетной записи!')
+            else:
+                print('Доступ разрешен - добро пожаловать!')
+            break
+    if not user_registered:
+        print('Доступ запрещен - не найдено имя пользователя')
+
+
+"""
+Оба решения имеют сложность O(N) - в первом решении сложность определяется if user[0] not in dict_source.keys(),
+во втором - циклом for. Соответственно, оба решения одинаково эффективны.
+"""
+
+
+dict_users = {'Ivanov': ['1234', True], 'Petrov': ['qwerty', True], 'Sokolov': ['ytrewq', False]}
+user_current = [input('Введите логин: '), input('Введите пароль: ')]
+user_checker_02(dict_users, user_current)
