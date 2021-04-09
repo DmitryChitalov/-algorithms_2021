@@ -31,17 +31,17 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=10000000))  # увеличиваю в 1.000 раз
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=10000000))  # увеличиваю в 1.000 раз
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=10000000))  # увеличиваю в 1.000 раз
 
 
 def memoize(f):
@@ -69,14 +69,29 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=10000000))  # увеличиваю в 1.000 раз
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=10000000))  # увеличиваю в 1.000 раз
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=10000000))  # увеличиваю в 1.000 раз
+
+# При number=10000 (небольших относительно количествах посторений) мемоизация не очень нужна,
+# время выполнения одинаково практически.
+# Однако, увеличив number в тысячу раз number=10000000 получаем, что мемоизация сильно помогает и делает время
+# выполнения функции меньше:
+# Вот какие получились результаты:
+#
+# Не оптимизированная функция recursive_reverse
+# 25.822353136
+# 30.439066600999997
+# 60.11809007
+# Оптимизированная функция recursive_reverse_mem
+# 2.4431046870000017
+# 2.3244705649999986
+# 2.4316942359999985

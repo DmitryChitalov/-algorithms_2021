@@ -12,6 +12,8 @@
 И можете предложить еще свой вариант решения!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers_1(enter_num, revers_num=0):
@@ -36,3 +38,22 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+number_of_rev = 10000000
+
+def main_rev():
+    revers_1(number_of_rev)
+    revers_2(number_of_rev)
+    revers_3(number_of_rev)
+
+run('main_rev()')
+
+print(f'revers_1: {timeit("revers_1(number_of_rev)", globals=globals(), number=100000)}')
+print(f'revers_2: {timeit("revers_2(number_of_rev)", globals=globals(), number=100000)}')
+print(f'revers_3: {timeit("revers_3(number_of_rev)", globals=globals(), number=100000)}')
+
+# На запуск всех функций ушло 0 секунд.
+# Рекурсивная функция выполняется дольше всего (revers_1),
+# revers_3 - самая быстрая, так как использован срез.
+# На втором месте revers_2
