@@ -23,3 +23,13 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+def my_ascii(el=35):
+    if el != 128:
+        if el % 10:
+            print(f' {el} - {chr(el)}', end=' ')
+        else:
+            print('')
+        return my_ascii(el + 1)
+
+
+my_ascii()

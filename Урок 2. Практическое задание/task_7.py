@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def proof(numb):
+    if numb != 1:
+        return proof(numb - 1) + numb
+    else:
+        return numb
+
+
+try:
+    numb = int(input("при n = "))
+    if proof(numb) == numb * (numb + 1) / 2:
+        print("проверяем: 1+2+...+n = n(n+1)/2",
+              "\n1+2+...+n = ", proof(numb),
+              "\nn(n+1)/2 = ", round(numb * (numb + 1) / 2),
+              "\nправая и левые части равны")
+except ValueError:
+    print("введено не число")

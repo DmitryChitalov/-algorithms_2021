@@ -18,3 +18,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def my_comparison(n, even=0, odd=0):
+    if n != 0:
+        el = n % 10
+        n = n // 10
+        if el % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return my_comparison(n, even, odd)
+    else:
+        return print("количество четных = ", even, "\nколичество нечетных = ", odd)
+
+
+try:
+    numb = int(input("введите число: "))
+except ValueError:
+    print("введено не число")
+
+my_comparison(numb)
