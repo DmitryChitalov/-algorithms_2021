@@ -18,3 +18,25 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+my_salt = str(hash('my_salt')).encode('utf-8')
+data_name = 'pass.data'
+new_pass = input('Введите пароль >')
+obj = pbkdf2_hmac('sha256', new_pass.encode('utf-8'), my_salt, 100000)
+try:
+    with open('data_name', 'wb') as file_w:
+        file_w.write(hexlify(obj))
+    sec_pass = input('Подтвердите пароль >')
+    obj = pbkdf2_hmac('sha256', sec_pass.encode('utf-8'), my_salt, 100000)
+    with open('data_name', 'rb+') as file_r:
+        check_pass = file_r.read()
+        if check_pass == hexlify(obj):
+            print('Пароли совпадают')
+        else:
+            print('Пароли не совпадают')
+except IOError:
+    print('Проблемы работы с файлами')
