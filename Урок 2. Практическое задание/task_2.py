@@ -27,10 +27,11 @@ def even_odd_counter(number):
         else:
             return [0, 1]
     else:
+        prev_counter = even_odd_counter(number // 10)
         if number % 2 == 0:
-            return [even_odd_counter(number // 10)[0] + 1, even_odd_counter(number // 10)[1]]
+            return [prev_counter[0] + 1, prev_counter[1]]
         else:
-            return [even_odd_counter(number // 10)[0], even_odd_counter(number // 10)[1] + 1]
+            return [prev_counter[0], prev_counter[1] + 1]
 
 
 print(f'Количество четных и нечетных цифр в числе равно: {even_odd_counter(int(input("Введите число: ")))}.')
