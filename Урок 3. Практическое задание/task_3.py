@@ -17,3 +17,17 @@
 """
 
 # hash?
+
+
+s = input('Введите строку из маленьких латинских букв: ')
+
+
+def unique(word, string_hash=[]):
+    for k in range(2, len(word) + 1):
+        string_hash.append(hash(word[1:k]))
+        string_hash.append(hash(word[:k - 1]))
+
+    return f'Количество ункальных подстрок: {len(set(string_hash))}'
+
+
+print(unique(s))
