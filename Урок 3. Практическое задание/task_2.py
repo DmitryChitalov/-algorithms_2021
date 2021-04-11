@@ -18,3 +18,21 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+from uuid import uuid4
+import hashlib
+
+
+def passwd_checker():
+    salt = uuid4().hex
+    password = input("Введите пароль: ")
+    res = hashlib.sha256(password.encode() + salt.encode()).hexdigest()
+    print(f"В базе данных хранится строка: {res}")
+    snd_password = input("Введите пароль еще раз для проверки: ")
+    res_2 = hashlib.sha256(snd_password.encode() + salt.encode()).hexdigest()
+    if res == res_2:
+        return 'Вы ввели верный пароль'
+    else:
+        return 'Пароль неверный'
+
+
+print(passwd_checker())

@@ -17,3 +17,19 @@
 """
 
 # hash?
+
+
+def num_strings(s):
+    variety = set()
+    n = len(s)
+
+    for i in range(n):
+        for j in range(i):
+            value = hash(s[j:(n-i)])
+            variety.add(value)
+
+    return len(variety) + 1
+
+
+string = input("Введите строку: ")
+print(num_strings(string))
