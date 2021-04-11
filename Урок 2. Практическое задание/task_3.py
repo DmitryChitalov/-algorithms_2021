@@ -22,3 +22,21 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def reverse_number(number):
+
+    new_number, final_number = divmod(number, 10)
+
+    if new_number == 0:
+
+        return str(final_number)
+
+    else:
+
+        return str(final_number) + reverse_number(new_number)
+
+
+input_number = int(input("Введите число, которое требуется перевернуть: "))
+
+print(f"Перевернутое число: {reverse_number(input_number)}")

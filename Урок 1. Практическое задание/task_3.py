@@ -21,3 +21,66 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# В этом задании я все-таки решила использовать "random", для многократной проверки кода во втором примере.
+# В первом решении решила вбить значения вручную, тем самым продемонстрировать 2 способа, т.к. не знаю какой правильней.
+# Так же я решила продемонстрировать работу как с list, так и с dict.
+
+import random
+
+
+# O(N) быстрее 2го алгортима
+
+company_first = (700503, "SsberBank")
+company_second = (2508, "Vvans")
+company_third = (2081, "Nnike")
+company_four = (510020, "Vvtb")
+company_five = (345567, "Ttinkoff")
+
+print("Список компаний:")
+
+lst = [company_first, company_second, company_third, company_four, company_five]
+
+print(lst)
+
+print()
+
+while len(lst) > 3:
+    lst.remove(min(lst))
+
+print("Компании с самой большой годовой прибылью:")
+
+print(lst)
+
+#####################################################################################################################
+
+# O(N log N)  медленнее чем 1ый алгортим (так же здесь используется dict, а в 1ом list),
+# так же данное решение представлено в виде функции, а 1ое нет
+
+
+def second_algorithm(simple_dict):
+
+    first_dict = dict(simple_dict)
+    second_dict = sorted(first_dict.items(), key=lambda x: x[1], reverse=True)
+    final_companies = dict(second_dict[:3])
+    return final_companies
+
+
+print()
+
+print("Список компаний:")
+
+companies = ["SberBank", "Vans", "Nike", "Vtb", "Tinkoff"]
+
+print(companies)
+
+companies_dict = {}
+
+for i in companies:
+    companies_dict[i] = random.choice(range(0, 100000))
+
+print()
+
+print("Компании с самой большой годовой прибылью:")
+
+print(second_algorithm(companies_dict))
