@@ -106,7 +106,7 @@ def inter_fabric2(count_f,i = 0, fabrisc = Counter({})):
         year_profit = sum(list(map(lambda x: int(x), fabric_frofit.split())))
         fabrisc.update({fabric_frofit:year_profit})
         i = i+ 1
-        inter_fabric2(count_f, i, fabrisc)      
+        inter_fabric2(count_f, i, fabrisc)       
 
 inter_fabric1(int(input('Введите количество предприятий: ')))
 inter_fabric2(int(input('Введите количество предприятий: ')))
