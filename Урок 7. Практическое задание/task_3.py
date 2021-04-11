@@ -45,3 +45,30 @@ for i in
 
 
 """
+
+
+from random import randint
+from statistics import median
+
+def new_random_number_array(m = 5):
+    a = []
+    for i in range(2*m + 1):
+        a.append(randint(-100, 99))
+    return a
+
+def get_median(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1] 
+            if i > 1:
+                i -= 1
+    return data[len(data)//2]
+
+new_random = new_random_number_array()
+
+print(new_random)
+print(get_median(new_random))
+print(median(new_random))
