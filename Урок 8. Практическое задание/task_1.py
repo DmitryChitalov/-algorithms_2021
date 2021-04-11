@@ -70,6 +70,7 @@ def huffman_encode(code_table, string):
 
 test_string = "Do geese see God"
 print(huffman_encode(huffman_code(test_string), test_string))
+
 """
 0101 011 11 1001 00 00 101 00 11 101 00 00 11 0100 011 1000
 
