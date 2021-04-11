@@ -21,3 +21,46 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = [
+    {"name": "Google", "profit": 9},
+    {"name": "GeekBrains", "profit": 2},
+    {"name": "Apple", "profit": 1},
+    {"name": "Tesla", "profit": 1},
+    {"name": "X5", "profit": 1},
+    {"name": "Yandex", "profit": 1},
+    {"name": "Microsoft", "profit": 1}
+]
+
+
+def find_richest_company1(companies, count=3):
+    """
+    Сложность: O(N log N)
+    """
+    return sorted(companies, key=lambda k: k['profit'], reverse=True)[0:count]
+
+
+def find_richest_company2(companies, count=3):
+    """
+    Сложность: O(N ** 3)
+    """
+    top_companies = []
+    for companie in companies:  # O(N)
+        profit = companie['profit']  # O(1)
+        if len(top_companies) < count:  # O(1)
+            top_companies.append(companie)  # O(1)
+        else:
+            for top_companie in top_companies:  # O(N)
+                if profit > top_companie['profit']:  # O(1)
+                    top_companies.remove(top_companie)  # O(N)
+                    top_companies.append(companie)  # O(1)
+                    break
+
+    return top_companies
+
+
+print(companies)
+print(find_richest_company1(companies))
+print(find_richest_company2(companies))
+
+# первый вариант круче, т.к. имеет сложность N log N и при увеличении количества N будет выполняться гораздо быстрее

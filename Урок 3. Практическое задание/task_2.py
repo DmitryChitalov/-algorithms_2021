@@ -18,3 +18,32 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+
+from binascii import hexlify
+from hashlib import pbkdf2_hmac
+from uuid import uuid4
+
+password = input("Введите пароль: ")
+salt = uuid4().hex
+
+# Здесь мы создаем хеш sha256 в пароле при помощи соли со 100,000 итераций.
+obj = pbkdf2_hmac(hash_name='sha256',
+                  password=password.encode(),
+                  salt=salt.encode(),
+                  iterations=100000)
+
+result = hexlify(obj)
+
+print(f'В базе данных хранится {result}')
+
+password2 = input("Введите пароль повторно: ")
+obj2 = pbkdf2_hmac(hash_name='sha256',
+                   password=password2.encode(),
+                   salt=salt.encode(),
+                   iterations=100000)
+
+if obj2 == obj:
+    print("Пароли совпадают")
+else:
+    print("Пароли не совпадают")

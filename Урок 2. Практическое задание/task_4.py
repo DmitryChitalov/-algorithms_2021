@@ -12,3 +12,14 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def my_sum(elem_count, elem_sum=0, i=1, num=1):
+    elem_sum += num
+    if i < elem_count:
+        return my_sum(elem_count, elem_sum, i + 1, (num / 2) * -1)
+    else:
+        return elem_sum
+
+
+print(my_sum(int(input("ВВЕДИТЕ ЦЕЛОЕ ЧИСЛО::::"))))
