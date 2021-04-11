@@ -33,3 +33,38 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+from functools import reduce
+
+
+class HexNumbers:
+    def __init__(self, hex_number):
+        self.hex_number = hex_number
+
+    def __add__(self, other):
+        return list(hex(int(self.hex_number, 16) + int(other.hex_number, 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(self.hex_number, 16) * int(other.hex_number, 16)))[2:]
+
+
+num_1 = input("Введите первое шестнадцатиричное число:")
+num_2 = input("Введите второе шестнадцатиричное число:")
+first_num = HexNumbers(num_1)
+second_num = HexNumbers(num_2)
+print("Решение с помощь ООП:")
+print(f"Сумма чисел равна: {first_num + second_num}")
+print(f"произведение чисел равно: {first_num * second_num}")
+print("*" * 100)
+print("Решение с помощь defaultdict:")
+
+def_dict = defaultdict(list)
+
+def_dict.update({"1": list(num_1)})
+def_dict.update({"2": list(num_2)})
+
+print(f"Сумма чисел равна: {hex(sum([int(''.join(elem), 16) for elem in def_dict.values()]))[2:]}")
+print(
+    f"Произведение чисел равно: "
+    f"{hex(reduce(lambda n_1, n_2: n_1 * n_2, [int(''.join(elem), 16) for elem in def_dict.values()]))[2:]}")
+print(def_dict)
