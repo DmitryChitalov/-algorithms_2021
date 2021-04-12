@@ -18,3 +18,33 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+from uuid import uuid4
+import hashlib
+
+
+def hash_pass(password, salt):
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+
+def create_password():
+    salt = uuid4().hex
+    password = hash_pass(input('Введите пароль: '), salt)
+    print(password)
+    with open("user_password.txt", "w") as f:
+        f.write(salt + '\n' + password)
+
+
+def check_password():
+    with open("user_password.txt", "r") as f:
+        from_file = f.read().splitlines()
+    salt = from_file[0]
+    password_from_file = from_file[1]
+    if password_from_file == hash_pass(input('Введите пароль еще раз: '), salt):
+        print('Пароли совпадают')
+    else:
+        print('Пароли не совпадают')
+
+
+create_password()
+check_password()
