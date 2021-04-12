@@ -18,3 +18,58 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+from storage import Storage
+
+import datetime
+from uuid import uuid4
+import hashlib
+import re
+
+pattern = re.compile(r'^[0-9a-zA-Z]{8,}$')
+last_login = datetime.datetime.now()
+temp_passwd = '123'
+
+storage = Storage()
+
+
+def create_passwd():
+    salt = uuid4().hex
+    while True:
+        passwd = input('Введите пароль: ')
+        if pattern.match(passwd):
+            res = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+            # if res not in storage.res => proceed
+            print(res)
+            if res == hashlib.sha256(salt.encode() + input('Введите пароль еще раз: ').encode()).hexdigest():
+                result = res
+                print('ok')
+                break
+            else:
+                print('Пароли не свопадают!')
+        else:
+            print('Длина пароля не менее 8 символов, только латинские букрвы и цифры')
+
+
+while True:
+    print('Главное меню:')
+    answer = input('  1 - Вход\n  2 - Регистрация\n  3 - Выход\nВыберете пункт меню: ')
+
+    if answer == '1':
+        passwd = input('Введите пароль: ')
+        login = storage.get_account(passwd)
+        if login is not None:
+            print('Вы успешно авторизовались!')
+            print(f'Последнмй вход выполнен: {login}')
+            answer = input('  1 - Изменить пароль\n  2 - Удалить учетную запись\n  3 - Вернуться в главное меню'
+                           '\nВыберете пункт меню: ')
+        else:
+            print('Неверный пароль!')
+
+    elif answer == '2':
+        create_passwd()
+
+    elif answer == '3':
+        print('Выход')
+        break
+
