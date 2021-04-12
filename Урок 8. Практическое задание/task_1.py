@@ -71,4 +71,7 @@ huf = Huffman(s)
 print(f'Дерево: \n{huf.get_tree()}\n')
 print(f'Коды символов: \n{huf.tree_encode()}\n')
 
+for i in s:
+    print(huf.tree_encode()[i], end=' ')
+
 
