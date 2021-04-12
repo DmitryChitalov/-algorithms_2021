@@ -14,13 +14,13 @@ b) выполните набор операций и со списком, и с�
 то реализуйте ф-цию-декоратор для подсчета времени работы ваших пользовательских функций
 И примените ее к своим функциям!
 """
+import time
+
 my_list = list()
 my_dict = dict()
 
 
 def benchmark(func):
-    import time
-
     def wrapper(*args, **kwargs):
         start_val = time.time()
         res = func(*args, **kwargs)
@@ -70,6 +70,37 @@ print(list_add(0))
 Копирование списка
 Время выполнения 0.000997304916381836
 Отчистка списка"""
+
+
+@benchmark
+def dict_search():
+    for el in my_dict.keys():
+        if el == 'key_30000':
+            return f"Поиск в словаре по ключу"
+
+
+print(dict_search())
+
+
+@benchmark
+def dict_values():
+    for el in my_dict.values():
+        if el == 'value_30000':
+            return f"Поиск в словаре по значению"
+
+
+print(dict_values())
+
+
+@benchmark
+def list_search():
+    for el in range(len(my_list)):
+        if my_list[el] == 30000:
+            print(el)
+    return "Поиск по списку"
+
+
+print(list_search())
 
 
 @benchmark

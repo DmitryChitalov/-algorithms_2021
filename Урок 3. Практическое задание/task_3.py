@@ -23,7 +23,8 @@ def func(word):
     sub_s = set()
     for el in range(len(word)):
         for j in range(el + 1, len(word) + 1):
-            sub_s.add(hash(word[el:j]))
+            if hash(word[el:j]) != hash(word):
+                sub_s.add(word[el:j])
     return sub_s
 
 

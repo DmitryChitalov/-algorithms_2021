@@ -21,20 +21,22 @@
 
 import hashlib
 
+data = open('password_data.txt', 'r+')
+
 
 def reg_func():
-    with open('password_data.txt', 'r+') as data:
-        login = input('Для регистрации введит новый логин:\n')
-        password = input('Введите новый пароль')
-        hash_password = hashlib.sha256(login.encode() + password.encode()).hexdigest()
-        data.write(hash_password)
-        password_check = input('Введите повторно пароль')
-        hash_check = hashlib.sha256(login.encode() + password_check.encode()).hexdigest()
-        check_data = data.readline()
-        if check_data == hash_check:
-            print('Добро пожаловать')
-            return
-    return hash_check, hash_password
+    login = input('Для регистрации введит новый логин:\n')
+    password = input('Введите новый пароль')
+    hash_password = hashlib.sha256(login.encode() + password.encode()).hexdigest()
+    data.write(hash_password)
+    password_check = input('Введите повторно пароль')
+    hash_check = hashlib.sha256(login.encode() + password_check.encode()).hexdigest()
+    check_data = data.readline()
+    if check_data == hash_check:
+        print('Добро пожаловать')
+        data.close()
+        return hash_password
+    return hash_password
 
 
 print(reg_func())
