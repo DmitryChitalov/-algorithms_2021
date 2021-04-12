@@ -18,3 +18,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_counter(number):
+    if number < 10:
+        if number % 2 == 0:
+            return [1, 0]
+        else:
+            return [0, 1]
+    else:
+        prev_counter = even_odd_counter(number // 10)
+        if number % 2 == 0:
+            return [prev_counter[0] + 1, prev_counter[1]]
+        else:
+            return [prev_counter[0], prev_counter[1] + 1]
+
+
+print(f'Количество четных и нечетных цифр в числе равно: {even_odd_counter(int(input("Введите число: ")))}.')
+
+
+"""
+Если я все учел, доставать цифру не обязательно - если последняя цифра числа четная, то и все число четное, 
+значит нам достаточно проверять четность самого числа. Если я что-то упустил - прошу указать.
+"""

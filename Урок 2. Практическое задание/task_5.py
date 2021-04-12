@@ -23,3 +23,17 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def ascii_output(start_el):
+    if start_el + 10 > 127:
+        for i in range(start_el, 128):
+            print(f'{i} - {chr(i)} ', end='')
+        return
+    else:
+        for i in range(start_el, start_el + 10):
+            print(f'{i} - {chr(i)} ', end='')
+        print('\n')
+        ascii_output(start_el + 10)
+
+
+ascii_output(32)

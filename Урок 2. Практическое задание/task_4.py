@@ -12,3 +12,17 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def get_sum_seq(number_of_el):
+    if number_of_el == 1:
+        return [1, 1]
+    else:
+        prev = get_sum_seq(number_of_el - 1)
+        new_elem = prev[0] * (-0.5)
+        return [new_elem, prev[1] + new_elem]
+
+
+seq_number = int(input('Введите количество элементов: '))
+seq_sum = get_sum_seq(seq_number)
+print(f'Количество элементов: {seq_number}, их сумма: {seq_sum[1]}.')
