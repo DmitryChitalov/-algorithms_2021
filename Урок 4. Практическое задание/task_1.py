@@ -12,6 +12,9 @@
 Добавьте аналитику: что вы сделали и почему!!!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
 
 def func_1(nums):
@@ -20,3 +23,15 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [el for el in range(len(nums)) if nums[el] % 2 == 0]
+    return new_arr
+
+
+print(timeit("func_1(nums)", globals=globals()))
+print(timeit("func_2(nums)", globals=globals()))
+"""Я решил использовать генератор списка для ускорения создания нового списка, 
+и обхода append() как в func_1, по моим замерам функция func_1 закончила работу за 2.2411408 сек,
+когда функция с генератором 1.5580051000000004 по скольку ей не надо использовать append()."""
