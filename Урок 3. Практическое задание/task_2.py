@@ -18,3 +18,25 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+import hashlib
+
+data = open('password_data.txt', 'r+')
+
+
+def reg_func():
+    login = input('Для регистрации введит новый логин:\n')
+    password = input('Введите новый пароль')
+    hash_password = hashlib.sha256(login.encode() + password.encode()).hexdigest()
+    data.write(hash_password)
+    password_check = input('Введите повторно пароль')
+    hash_check = hashlib.sha256(login.encode() + password_check.encode()).hexdigest()
+    check_data = data.readline()
+    if check_data == hash_check:
+        print('Добро пожаловать')
+        data.close()
+        return hash_password
+    return hash_password
+
+
+print(reg_func())
