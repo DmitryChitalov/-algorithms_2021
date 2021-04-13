@@ -18,3 +18,13 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+
+password = input('Введите пароль: ')
+salt = 'rand salt'
+password_hash = password + salt
+
+pasword_repeat = input('Введите пароль повторно: ')
+pasword_repeat_hash = pasword_repeat + salt
+
+print(f'Пароли {("не ", "")[password_hash == pasword_repeat_hash]}совпадают')
