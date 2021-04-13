@@ -18,3 +18,32 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+from hashlib import sha256
+from uuid import uuid4
+
+
+def password_hash():
+    password = input('Введите пароль: ')
+    salt = uuid4().hex
+    pw_first_hash = sha256(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
+    file = open('db.txt', 'w')
+    file.write(pw_first_hash + ':' + salt)
+    file.close()
+    print(f'В файл "db.txt" записана строка - {pw_first_hash}')
+
+
+def password_check():
+    password = input('Введите пароль повторно для проверки: ')
+    file = open('db.txt', 'r')
+    f_str = file.readline()
+    file.close()
+    f_str = f_str.split(':')
+    pw_sec_hash = sha256(password.encode('utf-8') + f_str[1].encode('utf-8')).hexdigest()
+    if pw_sec_hash == f_str[0]:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Неправильный пароль!')
+
+
+password_hash()
+password_check()
