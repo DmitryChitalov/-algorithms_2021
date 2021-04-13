@@ -17,3 +17,19 @@
 """
 
 # hash?
+
+import hashlib
+
+
+def get_count(str):
+    _set = set()
+    for i in range(len(str)):
+        for j in range(i + 1, len(str) + 1):
+            hash_obj = hashlib.md5(str[i:j].encode())
+            _set.add(hash_obj.hexdigest())
+
+    print(f'Количество уникальный подстрок: {len(_set) - 1}')
+
+
+get_count('papa')
+
