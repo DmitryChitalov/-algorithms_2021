@@ -20,6 +20,7 @@ def double_decrease_with_alternating_sign(counter, number=1, sum=1):
     number = - number / 2
     sum += number
     counter -= 1
+    # Шаг рекурсии
     return double_decrease_with_alternating_sign(counter, number, sum)
 
 
