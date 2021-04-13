@@ -26,6 +26,7 @@ def get_digit_number(number, position):
 
 
 def count_evens_and_odds(number, number_decreaser=0, position=0, result=None):
+    # Базовый случай
     if number_decreaser < 0:
         return result
     elif position == 0:
@@ -36,6 +37,7 @@ def count_evens_and_odds(number, number_decreaser=0, position=0, result=None):
     result_position = digit % 2
     result[result_position] = result[result_position] + 1
     position += 1
+    # Шаг рекурсии
     return count_evens_and_odds(number, number_decreaser, position, result)
 
 

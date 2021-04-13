@@ -59,6 +59,7 @@ def calculator(operation=None, number_1=None, number_2=None):
         if not validate_operation(operation):
             print(TEXT_GENERATOR['OPERATION_INPUT_ERROR'](operation))
             calculator()
+        # Базовый случай
         elif operation == '0':
             return 0
 
@@ -80,6 +81,7 @@ def calculator(operation=None, number_1=None, number_2=None):
 
     result = calc(number_1, operation, number_2)
     print(TEXT_GENERATOR['RESULT'](result))
+    # Шаг рекурсии
     calculator()
 
 
