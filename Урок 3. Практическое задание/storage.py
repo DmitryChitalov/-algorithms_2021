@@ -10,38 +10,59 @@ class Storage:
                            """)
 
     def create_account(self, username, passwd):
-        query = f"INSERT INTO users VALUES (?,?,?)"
-        self.__cur.execute(query, (username, passwd, '-'))
-        self.__conn.commit()
+        try:
+            query = "INSERT INTO users VALUES (?,?,?)"
+            self.__cur.execute(query, (username, passwd, '-'))
+            self.__conn.commit()
+        except sqlite3.DatabaseError:
+            return 'Ошибка БД при создании аккаунта'
         return 'ok'
 
     def update_account(self, username, new_passwd=''):
-        if new_passwd == '':
-            query = f"UPDATE users " \
-                    f"SET last_login = strftime('%Y-%m-%d %H-%M-%S','now') " \
-                    f"WHERE username = '{username}'"
-        else:
-            query = f"UPDATE users " \
-                    f"SET passwd_hash = '{new_passwd}' " \
-                    f"WHERE username = '{username}'"
-        self.__cur.execute(query)
-        self.__conn.commit()
+        try:
+            query = "UPDATE users SET passwd_hash = (?) WHERE username = (?)"
+            self.__cur.execute(query, (new_passwd, username))
+            self.__conn.commit()
+        except sqlite3.DatabaseError:
+            return 'Ошибка БД при обновлении пароля'
+        return 'ok'
 
     def delete_account(self, username):
-        query = f"DELETE FROM users WHERE username = {username}'"
-        temp = self.__cur.execute(query)
-        print('delete_account', temp)
-        self.__conn.commit()
+        try:
+            query = f"DELETE FROM users WHERE username = (?)"
+            self.__cur.execute(query, (username,))
+            self.__conn.commit()
+        except sqlite3.DatabaseError:
+            return 'Ошибка БД при удалении аккаунта'
+        return 'ok'
 
-    def get_last_login(self, username):
-        query = f"SELECT last_login FROM users WHERE username = '{username}'"
-        self.__cur.execute(query)
+    def update_login_time(self, username):
+        try:
+            query = "UPDATE users SET last_login = strftime('%Y-%m-%d %H-%M-%S','now') WHERE username = (?)"
+            self.__cur.execute(query, (username,))
+            self.__conn.commit()
+        except sqlite3.DatabaseError:
+            return 'Ошибка БД'
+        return 'ok'
+
+    def get_login_time(self, username):
+        try:
+            query = "SELECT last_login FROM users WHERE username = (?)"
+            self.__cur.execute(query, (username,))
+        except sqlite3.DatabaseError:
+            return 'Ошибка БД'
         return self.__cur.fetchone()
 
     def get_passwd_hash(self, username):
-        query = f"SELECT passwd_hash FROM users WHERE username = '{username}'"
-        self.__cur.execute(query)
+        try:
+            query = "SELECT passwd_hash FROM users WHERE username = (?)"
+            self.__cur.execute(query, (username,))
+        except sqlite3.DatabaseError:
+            return 'Ошибка БД'
         return self.__cur.fetchone()
+
+    def close(self):
+        self.__conn.close()
 
     def __del__(self):
         self.__conn.close()

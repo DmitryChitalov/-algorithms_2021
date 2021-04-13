@@ -16,7 +16,6 @@ b) выполните набор операций и со списком, и с�
 """
 
 
-
 def benchmark(func):
     import time
 
@@ -29,13 +28,13 @@ def benchmark(func):
 
 
 @benchmark
-def get_list(n):
-    return [x * 2 for x in range(n)]
+def get_list(n, f=2):
+    return [x * f for x in range(n)]
 
 
 @benchmark
-def get_dict(n):
-    return {x: x * 2 for x in range(n)}
+def get_dict(n, f=1):
+    return {x: x * f for x in range(n)}
 
 
 @benchmark
@@ -58,35 +57,27 @@ def get_rand_dict_values(_dict, n):
     return temp_list
 
 
-@benchmark
-def join_lists(first_list, second_list):
-    """ Функция объединяет два словаря """
-    return first_list.copy().extend(second_list)
-
-
-@benchmark
-def join_dicts(first_dict, second_dict):
-    """ Функция объединяет два словаря """
-    return first_dict.copy().update(second_dict)
-
+print('\n=== GENERATE COLLECTIONS ===========\n')
 
 my_list_1 = get_list(10000000)
+my_list_2 = get_list(20000000, 3.5)
+my_list_3 = get_list(30000000, -2)
 my_dict_1 = get_dict(10000000)
+my_dict_2 = get_dict(20000000, 3.5)
+my_dict_3 = get_dict(30000000, -2)
 
 # Для создания славоря требуется больше времени
-# т.к. для моделирования связи между ключом и значением создаются хэш-таблицы
+# т.к. для моделирования связи между ключом и значением создаются хеш-таблицы
 
-temp_list = get_rand_list_values(my_list_1, 1000)
-temp_list = get_rand_dict_values(my_dict_1, 1000)
+print('\n=== GET RANDOM VALUES ===========\n')
 
-# чтение произволных элементов в словаре происходит гораздо быстрее чем в списке, благодаря хэш-таблицам
+print('my_list_1', get_rand_list_values(my_list_1, 1000)[:5])
+print('my_list_2', get_rand_list_values(my_list_2, 2055)[:5])
+print('my_list_3', get_rand_list_values(my_list_3, 10000)[:5])
+print('my_dict_1', get_rand_dict_values(my_dict_1, 1000)[:5])
+print('my_dict_2', get_rand_dict_values(my_dict_2, 2055)[:5])
+print('my_dict_3', get_rand_dict_values(my_dict_3, 10000)[:5])
 
-my_list_2 = get_list(200000)
-my_dict_2 = get_dict(200000)
-
-my_list_3 = join_lists(my_list_1, my_list_2)
-my_dict_3 = join_dicts(my_dict_1, my_dict_2)
+# чтение произволных элементов в словаре происходит гораздо быстрее чем в списке, благодаря хеш-таблицам
 
 
-# print('my_list_2', my_list_2)
-# print('my_list_3', my_list_3)
