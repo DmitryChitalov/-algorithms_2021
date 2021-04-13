@@ -39,31 +39,54 @@ def fill_list(number):
 def fill_dict(number):
     new_dict = {}
     for i in range(0, number):
-        val = i * 99
-        new_dict[i] = val
+        new_dict[i] = f'{i}'
     return new_dict
 
 
 @time_counter
-def list_pop(obj, number):
-    if number > len(obj):
-        number = len(obj)
-    for i in range(0, number):
-        obj.pop()
+def list_index_search(list_obj):
+    for i in range(0, len(list_obj)):
+        if i == 666:
+            print(list_obj[i])
 
 
 @time_counter
-def dict_pop(obj, number):
-    if number > len(obj):
-        number = len(obj)
-    for i in range(0, number):
-        obj.pop(i)
+def dict_index_search(dict_obj):
+    print(dict_obj[666])
 
 
-my_list = fill_list(10000000)  # Время выполнения функции - 1.7269349098205566.
-my_dict = fill_dict(10000000)  # Время выполнения функции - 3.7117152214050293.
+@time_counter
+def list_value_search(list_obj):
+    for i in list_obj:
+        if i == 666:
+            print(i)
 
-# Заполнение списка происходит быстрее, так как при заполнении словаря происходит расчет хэша.
 
-list_pop(my_list, 100000)
-dict_pop(my_dict, 100000)
+@time_counter
+def dict_value_search(dict_obj):
+    for i in dict_obj.values():
+        if i == 666:
+            print(i)
+
+
+my_list = fill_list(1000000)  # Время выполнения функции - 0.24684977531433105.
+my_dict = fill_dict(1000000)  # Время выполнения функции - 0.6905722618103027.
+
+"""
+Заполнение списка происходит быстрее, так как при заполнении словаря происходит расчет хэша.
+"""
+
+list_index_search(my_list)  # Время выполнения функции - 0.12991976737976074.
+dict_index_search(my_dict)  # Время выполнения функции - 0.0.
+
+"""
+Поиск по индексу работает быстрее в словаре, т.к. словарь это хэш-таблица, и алгоритм поиска по хэш-таблице
+работает быстрее, чем простой перебор списка.
+"""
+
+list_value_search(my_list)  # Время выполнения функции - 0.06896185874938965.
+dict_value_search(my_dict)  # Время выполнения функции - 0.10792994499206543.
+
+"""
+Поиск по значению работает быстрее в списке. 
+"""
