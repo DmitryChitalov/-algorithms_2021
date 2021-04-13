@@ -23,8 +23,25 @@
 Перевернутое число: 0321
 """
 
-def revert_number(number):
-    return number
+
+def get_digit_number(number, position):
+    position_pow = pow(10, position)
+    return (number % (position_pow * 10) - number % position_pow) // position_pow
+
+
+def revert_number(number, number_decreaser=0, position=0, result=None):
+    # Базовый случай
+    if number_decreaser < 0:
+        return result
+    elif position == 0:
+        number_decreaser = number
+        result = ''
+    number_decreaser = number_decreaser - pow(10, position) * 9
+    digit = get_digit_number(number, position)
+    result = f'{result}{digit}'
+    position += 1
+    # Шаг рекурсии
+    return revert_number(number, number_decreaser, position, result)
 
 
 test_cases = [
