@@ -12,6 +12,9 @@
 И можете предложить еще свой вариант решения!
 Без аналитики задание считается не принятым
 """
+from cProfile import run
+from random import randint
+from timeit import timeit
 
 
 def revers_1(enter_num, revers_num=0):
@@ -36,3 +39,30 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+num = randint(10000000000000, 100000000000000)
+print(num)
+
+print('cProfile')
+
+run('revers_1(num)')
+run('revers_2(num)')
+run('revers_3(num)')
+
+print('timeit')
+print('revers_1',
+    timeit(
+        "revers_1(num)",
+        setup='from __main__ import revers_1, num',
+        number=10000))
+print('revers_2',
+    timeit(
+        "revers_2(num)",
+        setup='from __main__ import revers_2, num',
+        number=10000))
+print('revers_3',
+    timeit(
+        "revers_3(num)",
+        setup='from __main__ import revers_3, num',
+        number=10000))
