@@ -6,41 +6,42 @@ class Storage:
         self.__conn = sqlite3.connect("users.db")
         self.__cur = self.__conn.cursor()
         self.__cur.execute("""CREATE TABLE IF NOT EXISTS users
-                              (passwd_hash text PRIMARY KEY, last_login text)
+                              (username text PRIMARY KEY, passwd_hash blob, last_login text)
                            """)
 
-    def close(self):
-        self.__conn.close()
-
-    def get_account(self, passwd):
-        query = f"SELECT last_login FROM users WHERE passwd_hash = {passwd}"
-        self.__cur.execute(query)
-        return self.__cur.fetchone()
-
-    def create_account(self, passwd):
-        query = f"INSERT INTO users VALUES ('{passwd}', '-')"
-        temp_exec = self.__cur.execute(query)
-        print('create_account', temp_exec)
+    def create_account(self, username, passwd):
+        query = f"INSERT INTO users VALUES (?,?,?)"
+        self.__cur.execute(query, (username, passwd, '-'))
         self.__conn.commit()
+        return 'ok'
 
-    def update_account(self, prev_passwd, new_passwd=''):
+    def update_account(self, username, new_passwd=''):
         if new_passwd == '':
             query = f"UPDATE users " \
                     f"SET last_login = strftime('%Y-%m-%d %H-%M-%S','now') " \
-                    f"WHERE passwd_hash = '{prev_passwd}'"
+                    f"WHERE username = '{username}'"
         else:
             query = f"UPDATE users " \
                     f"SET passwd_hash = '{new_passwd}' " \
-                    f"WHERE passwd_hash = '{prev_passwd}'"
-        temp = self.__cur.execute(query)
-        print('update_account', temp)
+                    f"WHERE username = '{username}'"
+        self.__cur.execute(query)
         self.__conn.commit()
 
-    def delete_account(self, passwd):
-        query = f"DELETE FROM users WHERE passwd_hash = {passwd}'"
+    def delete_account(self, username):
+        query = f"DELETE FROM users WHERE username = {username}'"
         temp = self.__cur.execute(query)
         print('delete_account', temp)
         self.__conn.commit()
+
+    def get_last_login(self, username):
+        query = f"SELECT last_login FROM users WHERE username = '{username}'"
+        self.__cur.execute(query)
+        return self.__cur.fetchone()
+
+    def get_passwd_hash(self, username):
+        query = f"SELECT passwd_hash FROM users WHERE username = '{username}'"
+        self.__cur.execute(query)
+        return self.__cur.fetchone()
 
     def __del__(self):
         self.__conn.close()

@@ -19,36 +19,62 @@
 """
 # sqlite, postgres, db_api, orm
 
-from storage import Storage
-
 import datetime
 from uuid import uuid4
-import hashlib
+
 import re
 
-pattern = re.compile(r'^[0-9a-zA-Z]{8,}$')
+from storage import Storage
+
+
 last_login = datetime.datetime.now()
 temp_passwd = '123'
 
 storage = Storage()
 
 
-def create_passwd():
-    salt = uuid4().hex
+def get_passwd_hash(login, passwd):
+    from hashlib import pbkdf2_hmac
+    from binascii import hexlify
+    passwd_hash = pbkdf2_hmac(hash_name='sha256',
+                              password=passwd.encode(),
+                              salt=login.encode(),
+                              iterations=100000)
+    return hexlify(passwd_hash)
+
+
+def create_passwd(new_login):
+    pattern = re.compile(r'^[0-9a-zA-Z]{8,}$')
+
     while True:
-        passwd = input('Введите пароль: ')
-        if pattern.match(passwd):
-            res = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
-            # if res not in storage.res => proceed
+        new_passwd = input('Введите пароль: ')
+        if pattern.match(new_passwd):
+            res = get_passwd_hash(new_login, new_passwd)
             print(res)
-            if res == hashlib.sha256(salt.encode() + input('Введите пароль еще раз: ').encode()).hexdigest():
-                result = res
-                print('ok')
-                break
+
+            if storage.create_account(new_login, res) == 'ok':
+                print(f'Аккаунт для пользователя {new_login} успешно создан.')
+                return
             else:
-                print('Пароли не свопадают!')
+                print('Внутренняя ошибка сервиса - не удалось записать данные.')
+                return
         else:
             print('Длина пароля не менее 8 символов, только латинские букрвы и цифры')
+
+
+def update_passwd(login):
+    pattern = re.compile(r'^[0-9a-zA-Z]{8,}$')
+
+    new_passwd = input('Введите пароль: ')
+    if pattern.match(new_passwd):
+        res = get_passwd_hash(new_login, new_passwd)
+
+        storage.update_account(res)
+
+
+def authorization(check_login, check_passwd):
+    if get_passwd_hash(check_login, check_passwd) == storage.get_passwd_hash(check_login):
+        return 'ok'
 
 
 while True:
@@ -56,20 +82,32 @@ while True:
     answer = input('  1 - Вход\n  2 - Регистрация\n  3 - Выход\nВыберете пункт меню: ')
 
     if answer == '1':
+        login = input('Введите имя пользователя: ')
         passwd = input('Введите пароль: ')
-        login = storage.get_account(passwd)
-        if login is not None:
+        if authorization(login, passwd) == 'ok':
             print('Вы успешно авторизовались!')
-            print(f'Последнмй вход выполнен: {login}')
+            print(f'Последнмй вход в систему: {storage.get_last_login(login)[0]}')
+            storage.update_account(login)
             answer = input('  1 - Изменить пароль\n  2 - Удалить учетную запись\n  3 - Вернуться в главное меню'
                            '\nВыберете пункт меню: ')
+            if answer == '1':
+                update_passwd(login)
+            if answer == '2':
+                storage.delete_account(login)
+            if answer == '3':
+                continue
         else:
-            print('Неверный пароль!')
+            print('Неверное имя пользователя или пароль!')
 
     elif answer == '2':
-        create_passwd()
+        new_login = input('Введите имя пользователя: ')
+        if storage.get_last_login(new_login)[0]:
+            print('Пользователь с таким логином уже существует.')
+            continue
+        create_passwd(new_login)
 
     elif answer == '3':
         print('Выход')
+        storage.close()
         break
 
