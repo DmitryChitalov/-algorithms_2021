@@ -33,3 +33,63 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+def_d = defaultdict(list)
+
+
+def add_dict(*args):
+    for i in args:
+        def_d[i] = [v for v in i]
+
+
+def my_func(numb_1, numb_2):
+    try:
+        sum_numb = hex(int(numb_1, 16) + int(numb_2, 16)).upper()[2:]
+        multi_numb = hex(int(numb_1, 16) * int(numb_2, 16)).upper()[2:]
+        add_dict(numb_1, numb_2, sum_numb, multi_numb)
+        return sum_numb, multi_numb
+    except ValueError:
+        print('Вы ввели не коректные данные')
+
+
+numb_1 = input('Введите первое значение: ')
+numb_2 = input('Введите второе значение: ')
+result = my_func(numb_1, numb_2)
+try:
+    print(
+        f'Cумма = {result[0]} \n'
+        f'Произведение = {result[1]} ')
+except TypeError:
+    print('Введены не коректные данные!')
+
+print('\n' + '-' * 10 + '\n')
+
+
+class MyClass:
+
+    def __init__(self, numb):
+        self.numb = numb
+
+    def __str__(self):
+        return f'{self.numb}'
+
+    def __add__(self, other):
+        try:
+            return hex(int(self.numb, 16) + int(other.numb, 16)).upper()[2:]
+        except ValueError:
+            print("Вы ввели не коректные данные")
+            return ''
+
+    def __mul__(self, other):
+        try:
+            return hex(int(self.numb, 16) * int(other.numb, 16)).upper()[2:]
+        except ValueError:
+            print("Вы ввели не коректные данные")
+            return ''
+
+
+z = MyClass(input('Введите первое значение '))
+c = MyClass(input('Введите второе значение '))
+print('Сложение через классы', z + c)
+print('Умножение через классы', z * c)
