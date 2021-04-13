@@ -22,3 +22,37 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+def revert_number(number):
+    return number
+
+
+test_cases = [
+    {
+        'props': 123,
+        'result': '321',
+    },
+    {
+        'props': 1230,
+        'result': '0321',
+    },
+    {
+        'props': 0,
+        'result': '0',
+    },
+    {
+        'props': 11223344,
+        'result': '44332211',
+    }
+]
+
+passed_tests = 0
+for test_case in test_cases:
+    props = test_case["props"]
+    expected_result = test_case["result"]
+    real_result = revert_number(props)
+    is_ok = real_result == expected_result
+    if is_ok:
+        passed_tests += 1
+    print(f'{is_ok} revert_number({props}) => {real_result}{(f", but {expected_result} expected", "")[is_ok]}')
+print(f'passed tests: {passed_tests}/{len(test_cases)}\n')
