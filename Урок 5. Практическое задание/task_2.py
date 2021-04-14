@@ -33,3 +33,44 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+
+# вариант 1
+def sum_16(first, second):
+    return list(hex(int(''.join(first), 16) + int(''.join(second), 16)).upper())[2:]
+
+
+def mul_16(first, second):
+    return list(hex(int(''.join(first), 16) * int(''.join(second), 16)).upper())[2:]
+
+
+numbers = defaultdict(list)
+numbers['first'] = list(input('Введите первое число в 16-ричной системе: ').upper())
+numbers['second'] = list(input('Введите второе число в 16-ричной системе: ').upper())
+numbers['addition'] = sum_16(numbers['first'], numbers['second'])
+numbers['multiplication'] = mul_16(numbers['first'], numbers['second'])
+for key, values in numbers.items():
+    print(key, values)
+
+
+# вариант 2
+
+class HexNumber():
+
+    def __init__(self, number):
+        self.number = list(number.upper())
+
+    def __add__(self, other):
+        addition = hex(int(''.join(self.number), 16) + int(''.join(other.number), 16)).upper()[2:]
+        return HexNumber(addition)
+
+    def __mul__(self, other):
+        multiplication = hex(int(''.join(self.number), 16) * int(''.join(other.number), 16)).upper()[2:]
+        return HexNumber(multiplication)
+
+
+a1 = HexNumber(input('Введите первое число в 16-ричной системе: '))
+a2 = HexNumber(input('Введите второе число в 16-ричной системе: '))
+print((a1 + a2).number)
+print((a1 * a2).number)
