@@ -19,6 +19,7 @@ from random import randint
 # много повторяющихся значений в массиве:
 array = [randint(400, 409) for _ in range(200)]
 
+
 # много уникальных значений в массиве
 # array = [randint(100, 900) for _ in range(200)]
 
@@ -61,26 +62,23 @@ print('func_1', func_1())
 print('func_2', func_2())
 print('func_3', func_3())
 
-
-
 print('timeit')
 
 print('func_1',
-    timeit.repeat(
-        "func_1()",
-        setup='from __main__ import func_1',
-        number=10000))
+      timeit.repeat(
+          "func_1()",
+          setup='from __main__ import func_1',
+          number=10000))
 print('func_2',
-    timeit.repeat(
-        "func_2()",
-        setup='from __main__ import func_2',
-        number=10000))
-
+      timeit.repeat(
+          "func_2()",
+          setup='from __main__ import func_2',
+          number=10000))
 print('func_3',
-    timeit.repeat(
-        "func_3()",
-        setup='from __main__ import func_3',
-        number=10000))
+      timeit.repeat(
+          "func_3()",
+          setup='from __main__ import func_3',
+          number=10000))
 
 
 # Добавлен 3 алгоритм -  значение вычисляется с помощью функции max(set(array), key=array.count)
@@ -118,9 +116,7 @@ def func_1_v2():
 print('func_1_v2', func_1_v2())
 
 print('func_1_v2',
-    timeit.repeat(
-        "func_1_v2()",
-        setup='from __main__ import func_1_v2',
-        number=10000))
-
-
+      timeit.repeat(
+          "func_1_v2()",
+          setup='from __main__ import func_1_v2',
+          number=10000))
