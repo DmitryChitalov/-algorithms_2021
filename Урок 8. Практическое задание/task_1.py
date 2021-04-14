@@ -32,4 +32,4 @@ if(summa > incidence_sort[1]):
     print('нужно поставить правее') # ???? 
 
 # print(incidence_sort[0].values(), incidence_sort[1])
-
+# Не смог(())
