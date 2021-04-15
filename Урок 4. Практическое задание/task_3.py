@@ -13,6 +13,10 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+from cProfile import run
+value = 123456789123456789
+
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -36,3 +40,36 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+# удаляю промежуточные переменные, экономлю время и память для их выделения
+def revers_4(enter_num):
+    return str(enter_num)[::-1]
+
+
+statements = [
+    'revers_1(value)',
+    'revers_2(value)',
+    'revers_3(value)',
+    'revers_4(value)']
+
+
+for sta in statements:
+    print(timeit(sta, globals=globals(), number=1000000))
+
+
+def main():
+    for i in range(1000000):
+        revers_1(value)
+        revers_2(value)
+        revers_3(value)
+        revers_4(value)
+
+
+run("main()")
+
+
+"""
+Выводы. Из предложеных в задании вериантов реверса 3-й оптимальный. Т.к. срез является встроенной
+        функцией, да и в целом там выполняется наименьшее число операций.
+"""
