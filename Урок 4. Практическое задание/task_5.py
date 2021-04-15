@@ -16,10 +16,11 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснвование рез-ам
 """
+from timeit import timeit
 
 
 def simple(i):
-    """Без использования «Решета Эратосфена»"""
+    """Без использования «Решета Эратосфена» - Квадратичная сложность О(n^2) """
     count = 1
     n = 2
     while count <= i:
@@ -39,46 +40,57 @@ def simple(i):
 
 
 def sieve(n):
-    # список заполняется значениями от 0 до n
-    a = []
-    for i in range(n + 1):
-        a.append(i)
+    """ Сложность О(Nlog(logN))"""
 
-    # Вторым элементом является единица, которую не считают простым числом забиваем ее нулем.
+    m = n * 10
+    a = [i for i in range(m + 1)]
     a[1] = 0
-
-    # начинаем с 3-го элемента
     i = 2
-    while i <= n:
-        # Если значение ячейки до этого
-        # не было обнулено,
-        # в этой ячейке содержится
-        # простое число.
+
+    while i <= m:
         if a[i] != 0:
-            # первое кратное ему
-            # будет в два раза больше
             j = i + i
-            while j <= n:
-                # это число составное,
-                # поэтому заменяем его нулем
+            while j <= m:
                 a[j] = 0
-                # переходим к следующему числу,
-                # которое кратно i
-                # (оно на i больше)
                 j = j + i
         i += 1
 
-    # Превращая список во множество, избавляемся от всех нулей кроме одного.
-    a = set(a)
-    # удаляем ноль
-    a.remove(0)
-    return a
+    a = [i for i in a if i != 0]
+    return a[n - 1]
 
 
-# i = int(input('Введите порядковый номер искомого простого числа: '))
-# print(simple(i))
+n_10 = 10
+n_100 = 100
+n_1000 = 1000
 
-#print([simple(i) for i in range(1, 11)])
+print('simple(10): ', simple(n_10))
+print('sieve(10): ', sieve(n_10))
+print('simple(100): ', simple(n_100))
+print('sieve(100): ', sieve(n_100))
+print('simple(1000): ', simple(n_1000))
+print('sieve(1000): ', sieve(n_1000))
 
-print(simple(10))
-print(sieve(10))
+print('simple(n_10)', timeit("simple(n_10)", setup='from __main__ import simple, n_10', number=100))
+print('sieve(n_10)', timeit("sieve(n_10)", setup='from __main__ import sieve, n_10', number=100))
+print('simple(n_100)', timeit("simple(n_100)", setup='from __main__ import simple, n_100', number=100))
+print('sieve(n_100)', timeit("sieve(n_100)", setup='from __main__ import sieve, n_100', number=100))
+print('simple(n_1000)', timeit("simple(n_1000)", setup='from __main__ import simple, n_1000', number=100))
+print('sieve(n_1000)', timeit("sieve(n_1000)", setup='from __main__ import sieve, n_1000', number=100))
+
+
+"""
+Оценки сложности:
+Простой алгоритм (simple): О(N^2)
+Решето Эратосфена (sieve): О(Nlog(logN))
+
+Время выполнения алгоритмов: 
+simple(n_10) 0.0014814659999999868
+sieve(n_10) 0.0019892959999999738
+simple(n_100) 0.19284296299999998
+sieve(n_100) 0.03233687799999996
+simple(n_1000) 28.049433399
+sieve(n_1000) 0.27304932900000267
+
+Результаты замеров показали, что при увеличении количества элементов простой алгоритм выполняется намного медленнее 
+алогирма "Решето Эратосфена". Такие данные соответсвуют оценке сложности двух алгоритмов.
+"""
