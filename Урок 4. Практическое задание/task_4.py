@@ -41,3 +41,30 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+from timeit import timeit
+
+
+array = [1, 3, 1, 3, 4, 5, 1]
+
+@@ -39,5 +41,21 @@ def func_2():
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+def func_3():
+    elem = max(array, key=array.count)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {array.count(elem)} раз(а)'
+
+print(func_1())
+print(func_2())
+print(func_3())
+
+print(f'{timeit("func_1()",globals=globals(), number = 1000)} func_1' )
+print(f'{timeit("func_2()",globals=globals(), number = 1000)} func_2' )
+print(f'{timeit("func_3()",globals=globals(), number = 1000)} func_3' )
+
+#0.003340799999999998 func_1
+#0.007536400000000006 func_2
+#0.0032724999999999976 func_3
+# func_2 самая медленная из-за создания нового массива и применения append, a func_1 и func_3 примерно одинаковы
