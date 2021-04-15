@@ -54,7 +54,9 @@ for i in range(3):
             timeit(
                 f"{func_name}(num_{pow(10, (j + 2))})",
                 setup=f'from __main__ import {func_name}, num_100, num_1000, num_10000',
-                number=10000))
+                number=10000
+            )
+        )
 
 
 def main():
