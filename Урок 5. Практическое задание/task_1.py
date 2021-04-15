@@ -23,3 +23,35 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+count = 0
+quanity = int(input('Введите кол-во компаний: '))
+profit = 0
+company_dict = dict()
+while quanity > 0:
+    company_name = input('Введит название компании: ')
+    company_att = input('Введите прибыль данного предприятия за каждый квартал через пробел: ').split(' ')
+    COMPANY = namedtuple(f'Company', 'name first_quarter second_quarter third_quarter fourth_quarter '
+                                     'average_profit')
+    company = COMPANY(
+        name=company_name,
+        first_quarter=int(company_att[0]),
+        second_quarter=int(company_att[1]),
+        third_quarter=int(company_att[2]),
+        fourth_quarter=int(company_att[3]),
+        average_profit=(int(company_att[0]) + int(company_att[1]) + int(company_att[2]) + int(company_att[3])) / 4
+    )
+    profit += company.average_profit
+    company_dict[company.name] = company.average_profit
+    count += 1
+    quanity -= 1
+all_average = profit / count
+for key, value in company_dict.items():
+    if value < all_average:
+        print(f'Компания {key} ниже среднего уровня прибыли')
+    elif value > profit / count:
+        print(f'Компания {key} выше среднего уровня прибыли')
+    else:
+        print(f'Компания {key}  равна среднему уровню прибыли')
+print(f'Средняя общая прибыль {all_average}')
