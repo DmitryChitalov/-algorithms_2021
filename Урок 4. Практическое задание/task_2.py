@@ -80,3 +80,39 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация имеет смысл, только если эта функция будет вызываться более одного раза с одинаковым значением.
+Здесь она вызывается несколько раз при замерах, при однократном же вызове прироста не будет.
+"""
+
+
+def built_in_reverse(number):
+    if number == 0:
+        return ''
+    return int(''.join(reversed(list(str(number)))))
+
+
+print(built_in_reverse(num_100))
+
+print('Оптимизированная функция built_in_reverse')
+print(
+    timeit(
+        'built_in_reverse(num_100)',
+        setup='from __main__ import built_in_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'built_in_reverse(num_1000)',
+        setup='from __main__ import built_in_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'built_in_reverse(num_10000)',
+        setup='from __main__ import built_in_reverse, num_10000',
+        number=10000))
+
+"""
+За счет использования встроенных функций по преобразованию одного типа данных в другой и изменению порядка следования элементов в массиве
+можно добиться увеличения скорости выполнения по сравнению с рекурсивными вызовами
+"""
