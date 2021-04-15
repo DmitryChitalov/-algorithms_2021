@@ -22,6 +22,7 @@ from __main__ import func_1, func_2, nums
 
 nums=range(2000)
 
+
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
@@ -32,6 +33,7 @@ def func_1(nums):
 
 def func_2(nums):
     return list(filter(lambda x: x % 2 == 0, nums))
+
 
 print(f'Test for same result: func_1(nums) == func_2(nums) # {func_1(nums) == func_2(nums)}')
 
