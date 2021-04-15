@@ -33,3 +33,64 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+from collections import defaultdict, namedtuple
+from functools import reduce
+
+
+# Вариант_1 "defaultdict"
+def hex_result(n_1, n_2):
+    collect = defaultdict(list)
+    collect['summ'] = list(hex(int(n_1, 16) + int(n_2, 16))[2:].upper())
+    collect['mult'] = list(hex(int(n_1, 16) * int(n_2, 16))[2:].upper())
+    return f'Сумма чисел {list(n_1.upper())} и {list(n_2.upper())} = {collect["summ"]}\n' \
+           f'Произведение чисел {list(n_1.upper())} и {list(n_2.upper())} = {collect["mult"]}'
+
+
+# Вариант_2 "defaultdict" и reduce
+def hex_reduce(n_1, n_2):
+    collect = defaultdict(list)
+    collect['first'] = list(n_1)
+    collect['second'] = list(n_2)
+    return f'Сумма чисел {str(collect["first"]).upper()} и {str(collect["second"]).upper()} =' \
+           f' {list(hex(reduce(lambda x, y: x + y, [int("".join(i), 16) for i in collect.values()]))[2:].upper())}\n' \
+           f'Произведение чисел {str(collect["first"]).upper()} и {str(collect["second"]).upper()} = ' \
+           f'{list(hex(reduce(lambda x, y: x * y, [int("".join(i), 16) for i in collect.values()]))[2:].upper())}'
+
+
+# Вариант_3 "namedtuple"
+def hex_tuple(n_1, n_2):
+    collect = namedtuple('hex_tuple', 'numb')
+    first = collect(numb=list(n_1))
+    second = collect(numb=list(n_2))
+    summ = hex(int(''.join(first.numb), 16) + int(''.join(second.numb), 16))
+    mult = hex(int(''.join(first.numb), 16) * int(''.join(second.numb), 16))
+    return f'Сумма чисел {first.numb} и {second.numb} = {list(summ.upper())[2:]}\n' \
+           f'Произведение чисел {first.numb} и {second.numb} = {list(mult.upper())[2:]}'
+
+
+# Вариант_3 ООП
+class CalcHex:
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, second):
+        return hex(int(self.number, 16) + int(second.number, 16)).upper()[2:]
+
+    def __mul__(self, second):
+        return hex(int(self.number, 16) * int(second.number, 16)).upper()[2:]
+
+
+if __name__ == '__main__':
+    input_number_1 = input(f'Введите первое шестнадцатеричное число: ')
+    input_number_2 = input(f'Введите второе шестнадцатеричное число: ')
+    print(f'{"*" * 25} Первый вариант "defaultdict" {"*" * 25}')
+    print(hex_result(input_number_1, input_number_2))
+    print(f'{"*" * 25} Второй вариант "defaultdict" {"*" * 25}')
+    print(hex_reduce(input_number_1, input_number_2))
+    print(f'{"*" * 25} Третий вариант "namedtuple" {"*" * 25}')
+    print(hex_tuple(input_number_1, input_number_2))
+    print(f'{"*" * 35} ООП {"*" * 35}')
+    print(f"Сумма чисел {list(CalcHex(input_number_1) + CalcHex(input_number_2))}")
+    print(f"Произведение чисел  {list(CalcHex(input_number_1) * CalcHex(input_number_2))}")
