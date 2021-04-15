@@ -24,31 +24,30 @@ def recursive_reverse(number):
 
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
+num_10000 = randint(100000000000000, 1000000000000000000)
 
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=10000000))
 
 
 def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
@@ -69,14 +68,22 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=100000))
+
+print(num_100, num_1000, num_10000)
+
+
+"""
+Нет повторного и спользования полученных данных при мемоизации, 
+в данном случае она не нужна.
+"""
