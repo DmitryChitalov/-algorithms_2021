@@ -23,3 +23,18 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from functools import reduce
+
+companies = {}
+
+company_count = int(input('Введите количество предприятий для расчета прибыли: '))
+
+for _ in range(company_count):
+    company_name = input('Введите название предприятия: ')
+    q_profit_str = input('через пробел введите прибыль данного предприятия'
+                         'за каждый квартал(Всего 4 квартала)')
+    q_profit = [int(i) for i in q_profit_str.split()]
+    y_profit = reduce(lambda a, b: a + b, q_profit)/len(q_profit)
+    companies.update({company_name: y_profit})
+
+print(companies)
