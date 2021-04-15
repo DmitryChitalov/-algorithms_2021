@@ -41,17 +41,6 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-ddd = {}
-
-
-def fff(el):
-    print(el)
-    if ddd.get(el) is None:
-        ddd[el] = 1
-    else:
-        ddd[el] = ddd[el] + 1
-
-
 def func_3():
     m = 0
     num = 0
