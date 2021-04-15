@@ -18,3 +18,30 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+from uuid import uuid4
+import hashlib
+
+
+def generate_salt():
+    return uuid4().hex
+
+
+def generate_password_hash(password, salt=generate_salt()):
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+
+password = input('Введите пароль: ')
+salt = generate_salt()
+password_hash = generate_password_hash(password, salt)
+
+pasword_repeat = input('Введите пароль повторно: ')
+pasword_repeat_hash = generate_password_hash(pasword_repeat, salt)
+
+print(f'Пароли {("не ", "")[password_hash == pasword_repeat_hash]}совпадают')
+
+print()
+print('Отладочная информация:')
+print(f'соль: {salt}')
+print(f'хешь первого пароля: {password_hash}')
+print(f'хешь повтора пароля: {pasword_repeat_hash}')
