@@ -24,6 +24,8 @@
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
 
+from collections import ChainMap
+
 is_mock = True
 
 
@@ -74,26 +76,33 @@ if is_mock:
 else:
     companies = get_companies()
 
-companies = list(map(add_average_annual_profit, companies))
+average_profits = list(map(lambda company: get_average(company['profits']), companies))
 
-profits = list(map(
-    lambda company: company['average_annual_profit'],
-    companies
-))
-total_average_annual_profit = get_average(profits)
+company_views = []
+for i in range(len(companies)):
+    company = companies[i]
+    average_profit = average_profits[i]
+    company_views.append(ChainMap(
+        company,
+        {
+            'average_annual_profit': average_profit,
+        }
+    ))
+
+total_average_annual_profit = get_average(average_profits)
 
 names_with_more_than_average_annual_profit = list(map(
     lambda company: company['name'],
     filter(
         lambda company: company['average_annual_profit'] > total_average_annual_profit,
-        companies
+        company_views
     )
 ))
 names_with_less_than_average_annual_profit = list(map(
     lambda company: company['name'],
     filter(
         lambda company: company['average_annual_profit'] < total_average_annual_profit,
-        companies
+        company_views
     )
 ))
 
