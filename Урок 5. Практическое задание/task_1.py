@@ -23,3 +23,80 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+is_mock = True
+
+
+def get_companies_mock():
+    return [
+        {
+            'name': 'Yandex',
+            'profits': [20, 30, 40, 50],
+        },
+        {
+            'name': 'Google',
+            'profits': [50, 90, 70, 90],
+        },
+        {
+            'name': 'Apple',
+            'profits': [10, 10, 20, 90],
+        },
+    ]
+
+
+def get_companies():
+    companies_count = input('Введите количество предприятий для расчета прибыли: ')
+    companies = []
+    for _ in range(int(companies_count)):
+        name = input('Введите название предприятия: ')
+        profits_raw = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+        profits = list(map(int, profits_raw.split(' ')))
+        companies.append({
+            'name': name,
+            'profits': profits,
+        })
+    return companies
+
+
+def get_average(array):
+    return sum(array) / len(array)
+
+
+def add_average_annual_profit(company):
+    company['average_annual_profit'] = get_average(company['profits'])
+    return company
+
+
+companies = []
+
+if is_mock:
+    companies = get_companies_mock()
+else:
+    companies = get_companies()
+
+companies = list(map(add_average_annual_profit, companies))
+
+profits = list(map(
+    lambda company: company['average_annual_profit'],
+    companies
+))
+total_average_annual_profit = get_average(profits)
+
+names_with_more_than_average_annual_profit = list(map(
+    lambda company: company['name'],
+    filter(
+        lambda company: company['average_annual_profit'] > total_average_annual_profit,
+        companies
+    )
+))
+names_with_less_than_average_annual_profit = list(map(
+    lambda company: company['name'],
+    filter(
+        lambda company: company['average_annual_profit'] < total_average_annual_profit,
+        companies
+    )
+))
+
+print(f'Средняя годовая прибыль всех предприятий: {total_average_annual_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {names_with_more_than_average_annual_profit}')
+print(f'Предприятия, с прибылью ниже среднего значения: {names_with_less_than_average_annual_profit}')
