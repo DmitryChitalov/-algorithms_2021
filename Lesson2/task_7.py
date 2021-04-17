@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def hypothesis(n, i=0):
+
+    if n == 1 and i == 0:
+        return f'{n} = {n} * ({n} + 1) / 2'
+    elif n == 1:
+        return f'{n} + '
+    elif i == 0:
+        return hypothesis(n - 1, i + 1) + f'{n} = {n} * ({n} + 1) / 2'
+    else:
+        return hypothesis(n - 1, i + 1) + f'{n} + '
+
+
+print(hypothesis(5))
+print(hypothesis(1))

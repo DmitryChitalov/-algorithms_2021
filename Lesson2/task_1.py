@@ -28,3 +28,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def math():
+
+    operation = input('\nPlease enter symbol for choosing math operation:\n+ — addition;\n- — subtraction;'
+                      '\n* — multiplication;\n/ — division;\n0 — quit from program.\n')
+
+    if operation == '0':
+        print('End of calculation.')
+        return
+
+    if operation in ['+', '-', '*', '/']:
+        try:
+            first = input('Enter the first number:')
+            if not (first.isnumeric() or (first[1:].isnumeric() and first[0] == '-')):
+                raise ValueError
+
+            second = input('Enter the second number:')
+            if not (second.isnumeric() or (second[1:].isnumeric() and second[0] == '-')):
+                raise ValueError
+
+            result = eval(f'{first}{operation}{second}')
+
+            if int(first) % int(second) != 0 and operation == '/':
+                print(f'{first} {operation} {second} = {result:.3f}')
+
+            else:
+                print(f'{first} {operation} {second} = {result:.0f}')
+
+        except ZeroDivisionError:
+            print('Division by zero, please try again!')
+        except ValueError:
+            print('Please enter integer numbers!')
+
+    else:
+        print('Incorrect operation!')
+    math()
+
+
+math()
