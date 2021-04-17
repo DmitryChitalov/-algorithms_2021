@@ -19,3 +19,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def min1(lst):  # n^2
+    for i in lst:
+        check = 1
+        for k in lst:
+            if i > k:
+                check = 0
+        if check:
+            return i
+
+
+def min2(lst):  #n
+    minx = lst[0]
+    for i in lst:
+        if i < minx:
+            minx = i
+    return minx
+
+
+print(min1([5, 2, 5, 2, 6, 1, 0, -1]))
+print(min2([5, 2, 5, 2, 6, 1, 0, 8]))

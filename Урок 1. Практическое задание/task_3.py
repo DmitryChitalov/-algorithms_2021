@@ -21,3 +21,49 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def the_most_rich1(dict, lim):  # 2n^2
+    lst = list(dict.values())  # O(n)
+    for i in range(len(lst) - 1):  # O(n)
+        for j in range(len(lst) - 1):  # O(n)
+            if lst[j] < lst[j + 1]: # O(1)
+                lst[j], lst[j + 1] = lst[j + 1], lst[j] # O(1)
+
+    top = {}    # O(1)
+    for el in lst:  # O(n)
+        for i, k in dict.items():   # O(n)
+            if k == el: # O(1)
+                top.update({i: k})  # O(1)
+    j = 1   # O(1)
+    for i, k in top.items():    # O(n)
+        print(f'On the {j} place is {i} and their income is {k}')   # O(1)
+        if j < lim: # O(1)
+            j += 1  # O(1)
+        else:
+            return  # O(1)
+
+
+def the_most_rich2(lst, lim):   # n^2
+    for i in range(len(lst) - 1):   # O(n)
+        for j in range(len(lst) - 1):   # O(n)
+            if lst[j][1] < lst[j + 1][1]:   # O(1)
+                lst[j], lst[j + 1] = lst[j + 1], lst[j] # O(1)
+    j = 1
+    for i, k in lst:    # O(n)
+        print(f'On the {j} place is {i} and their income is {k}')   # O(1)
+        if j < lim: # O(1)
+            j += 1  # O(1)
+        else:
+            return  # O(1)
+
+
+the_most_rich1({'a': 1000, 'b': 3000, 'c': 5000, 'd': 10000, 'e': 1000}, 3)
+
+the_most_rich2([('a', 1000), ('b', 3000), ('c', 5000), ('d', 10000), ('e', 1000)], 3)
+
+"""
+Второй вариант решения задачи проще чем первый 
+и с точки зрения реализации и с точки зрения 
+сложности
+"""

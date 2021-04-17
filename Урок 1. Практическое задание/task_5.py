@@ -23,3 +23,29 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class StackClass:
+    def __init__(self, count):
+        self.plat_list = []
+        self.new_plat_list = []
+        self.max_of_plates = count
+
+    def push_in(self, count):
+        self.plat_list.append(count)
+        while self.stack_size() > self.max_of_plates:
+            self.new_plat_list.append(self.plat_list[:self.max_of_plates])
+            self.plat_list = self.plat_list[self.max_of_plates:]
+
+    def all_stack_size(self):
+        return self.new_plat_list + self.plat_list
+
+    def stack_size(self):
+        return len(self.plat_list)
+
+
+game = StackClass(5)
+
+for i in range(1, 14):
+    game.push_in(i)
+    print(game.all_stack_size())
