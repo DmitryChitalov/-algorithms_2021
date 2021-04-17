@@ -23,8 +23,8 @@
 """
 
 
-def the_most_rich1(dict, lim):  # 2n^2+n
-    lst = list(dict.values())  # O(1)
+def the_most_rich1(dict, lim):  # 2n^2
+    lst = list(dict.values())  # O(n)
     for i in range(len(lst) - 1):  # O(n)
         for j in range(len(lst) - 1):  # O(n)
             if lst[j] < lst[j + 1]: # O(1)
@@ -44,7 +44,7 @@ def the_most_rich1(dict, lim):  # 2n^2+n
             return  # O(1)
 
 
-def the_most_rich2(lst, lim):   # n^2+n
+def the_most_rich2(lst, lim):   # n^2
     for i in range(len(lst) - 1):   # O(n)
         for j in range(len(lst) - 1):   # O(n)
             if lst[j][1] < lst[j + 1][1]:   # O(1)

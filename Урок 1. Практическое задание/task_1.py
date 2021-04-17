@@ -60,7 +60,7 @@ def check_3(lst_obj):
 
     Сложность: O(NlogN)
     """
-    lst_copy = list(lst_obj)                 # O(1)
+    lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(NlogN)
     for i in range(len(lst_obj) - 1):        # O(n)
         if lst_copy[i] == lst_copy[i+1]:     # O(n)
