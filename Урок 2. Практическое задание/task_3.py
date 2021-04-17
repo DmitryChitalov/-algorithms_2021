@@ -22,3 +22,18 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+
+def mirror(num, refl=''):
+    if num == 0:  # базовый случай
+        return print(refl)
+    else:  # шаг рекурсии
+        try:
+            refl += str(int(num) % 10)
+            return mirror(num // 10, refl)
+        except ValueError:
+            print(f'Значение {num} - не натуральное число')
+
+
+mirror(1230)
+mirror('привет')

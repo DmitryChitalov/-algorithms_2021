@@ -9,3 +9,25 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+
+import hashlib
+from uuid import uuid4
+
+urls = {}
+salt = uuid4().hex
+
+
+def save_url(url):
+    url_salted = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    if urls.get(url):
+        print(f'Адрес {url} уже есть в кэше.')
+    else:
+        urls[url] = url_salted
+        print(f'Сохраняем в кэш: {url}.')
+
+
+save_url('https://geekbrains.ru/')  # сохраняем в кэш (не было еще)
+save_url('https://google.com')  # сохраняем в кэш (не было еще)
+save_url('https://google.com')  # ужэ в кэше, поэтому сохранение второй раз не происходит
+
+print(f'Кэш: {urls}')
