@@ -23,3 +23,27 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+# сначала обрисую общий концепт работы рекурсии, а затем дополню необходимыми условиями
+'''def show_ascii_concept(start=32, end=127): 
+
+    if start == end:
+        print(f'{start} — {chr(start)} ')
+    else:
+        print(f'{start} — {chr(start)} ')
+        return show_ascii_concept(start + 1)
+
+
+show_ascii_concept()'''
+
+
+def show_ascii(start=32, text='', end=127):
+
+    if start == end:
+        print(text + f'{start} — {chr(start)} ')
+    elif (end - start + 4) % 10 == 0:
+        return show_ascii(start + 1, text + f'{start} — {chr(start)}\n')
+    else:
+        return show_ascii(start + 1, text + f'{start} — {chr(start)} ')
+
+
+show_ascii()
