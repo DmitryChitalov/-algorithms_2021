@@ -21,3 +21,117 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+from timeit import default_timer
+from memory_profiler import memory_usage
+
+
+def memory_profile(func):
+    def wrapper(*args):
+        start_time = default_timer()
+        start_memory = memory_usage()
+        func(*args)
+        end_time = default_timer()
+        end_memory = memory_usage()
+        print(f'Временные затраты: {end_time - start_time}\nЗатраты памяти: {end_memory[0] - start_memory[0]}')
+
+    return wrapper
+
+
+# Скрипт №1
+@memory_profile
+def listcomp_creating(n):
+    return [i for i in range(n)]
+
+
+@memory_profile
+def generator_creating(n):
+    numbers_list = list(range(n))
+    for i in numbers_list:
+        yield i
+
+print('Скрипт 1 \nList comprehension:')
+listcomp_creating(1000000)
+print('\nGenerator:')
+generator_creating(1000000)
+
+'''
+List comprehension:
+Временные затраты: 0.17258455900000003
+Затраты памяти: 4.1484375
+
+Generator:
+Временные затраты: 0.10467023800000003
+Затраты памяти: 0.0
+
+Генератов гораздо экономнее расходует память, чем  механизм спискового включения.
+Ленивые вычисления эффективны
+'''
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Скрипт №2
+
+@memory_profile
+def iter_used(lst):
+    for i in range(len(lst)):
+        lst[i] = str(lst[i])
+    return lst
+
+
+@memory_profile
+def map_used(lst):
+    return list(map(str, lst))
+
+
+my_list = [x+10 for x in range(1000000)]
+print('\n\nСкрипт 2 \nБез использования функции map():')
+iter_used(my_list)
+print('\nС использованием функции map():')
+map_used(my_list)
+
+'''
+Без использования функции map():
+Временные затраты: 0.385755195
+Затраты памяти: 36.07421875
+
+С использованием функции map():
+Временные затраты: 0.2230677710000002
+Затраты памяти: 6.78515625
+
+Функция map_used эффективнее, чем функция iter_used за счет использования встроенной функции 
+map и затрачивает меньше памати (аж в 6 раз) и времени (почти в 2 раза).
+'''
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Скрипт №3
+
+@memory_profile
+def get_list(n):
+    return [i**2 for i in range(n)]
+
+
+@memory_profile
+def get_dict(n):
+    return {i**2: i for i in range(n)}
+
+k = 100000
+
+print('\n\nСкрипт 3\nСоздание словаря:')
+get_dict(k)
+print('\nСоздание списка:')
+get_list(k)
+
+'''
+Создание словаря:
+Временные затраты: 0.15319952100000012
+Затраты памяти: 10.96875
+
+Создание списка:
+Временные затраты: 0.14219764099999987
+Затраты памяти: 5.98828125
+
+Рассмотрел создание разныз структур: словаря и списка.
+Создание словаря занимает больше памяти, чем создание списка (получилось примерно в 2 раза).
+'''

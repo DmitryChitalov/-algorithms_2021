@@ -21,3 +21,47 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+"""
+nlogn + 3 + 3 + 2n -> O(n^2), доминируют два цикла (n^2) над линейно-логарифмической - квадратичная
+"""
+dict_1 = {'a': 10, 'b': 16, 'c': 5, 'd': 3, 'e': 8, 'f': 27}
+
+sorted_elems = sorted(dict_1.values()) #O(n*logn)
+sorted_three = sorted_elems[-3:]       #O(3)
+result = {}                            #O(1)
+for i in sorted_three:                 #O(n)
+    for k in dict_1.keys():            #O(n)
+        if dict_1[k] == i:             #O(1)
+            result[k] = dict_1[k]      #O(1)
+            break
+print(result)
+
+
+
+"""
+Сложность: 3 + 3 + 7n -> O(n) - линейная
+"""
+dict_2 = {'a': 10, 'b': 16, 'c': 5, 'd': 3, 'e': 8, 'f': 27, 'g': 1}
+
+result = {}                         # O(1)
+key_list = list(dict_2.keys())      # O(n)
+val_list = list(dict_2.values())    # O(n)
+
+for k in range(3):                  # O(3)
+    m = val_list[0]                 # O(1)
+    for i in range(len(val_list)):  # O(n)
+        if val_list[i] > m:         # O(1)
+            m = val_list[i]         # O(n)
+    position = val_list.index(m)    # O(n)
+    result[key_list[position]] = m  # O(n)
+    val_list.pop(position)          # O(n)
+print(result)
+
+"""
+Для этой задачи:
+1) вверху
+2) 1 - O(n^2), 2 - O(n)
+3) Второе решение эффективнее, так как линейная функция возрастает медленнее, чем квадратичная (O(n) эффективнее, 
+   чем O(n^2)
+"""

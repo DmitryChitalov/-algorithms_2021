@@ -12,3 +12,15 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+def element_sum(element_num, total=0, counter=0, num=-2.0):
+    if element_num == 0:  # базовый случай
+        print('Количество элементов: 0, их сумма: 0')
+    elif counter == element_num:
+        print(f'Количество элементов: {element_num}, их сумма: {total}') # выход из рекурсии
+    else:  # шаг рекурсии
+        num = (num / -2)
+        total += num
+        element_sum(element_num, total, counter + 1, num)
+
+element_sum(3)

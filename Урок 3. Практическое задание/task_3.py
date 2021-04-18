@@ -17,3 +17,18 @@
 """
 
 # hash?
+
+def number_unique_pieces(word):
+    set_1 = set()
+    for i in range(len(word)):
+        for j in range(i + 1, len(word) + 1):
+            if word[i: j] != word:
+                set_1.add(hash(word[i:j]))
+                print(word[i:j])
+    return len(set_1)
+
+# Напечатано 9 значений, а не 6. Это происходит потому, что "a", "p" и "pa" по два раза (их хеши совпадают).
+# Но функция len(set_1) возвращает длину множества с уникальными значениями (то есть 6),
+# так как множество хранит только уникальные значения.
+
+print(number_unique_pieces('papa'))
