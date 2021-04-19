@@ -33,3 +33,26 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+
+def add_hex_nums(_hex_num):
+    hex_sum = hex(int(''.join(_hex_num[0]), 16) + int(''.join(_hex_num[1]), 16))
+    return list(str(hex_sum)[2:].upper())
+
+
+def mul_hex_nums(_hex_num):
+    hex_mul = hex(int(''.join(_hex_num[0]), 16) * int(''.join(_hex_num[1]), 16))
+    return list(str(hex_mul)[2:].upper())
+
+
+hex_nums = defaultdict(list)
+
+# ввод строки с числами через пробел
+hex_str = 'A2 C4F'
+
+for i, num in enumerate(hex_str.split(' ')):
+    hex_nums[i] = list(num)
+
+print(f'{hex_nums[0]} + {hex_nums[1]} =', add_hex_nums(hex_nums))
+print(f'{hex_nums[0]} * {hex_nums[1]} =', mul_hex_nums(hex_nums))
