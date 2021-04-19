@@ -17,6 +17,7 @@ deque – это обобщение стеков и очередей.
 """
 from collections import deque
 from timeit import timeit
+from random import randint
 
 test_list = [i for i in range(1000, 15000)]
 test_deque = deque(test_list)
@@ -71,7 +72,14 @@ def list_popleft(_list):
 def deque_popleft(_deque):
     return _deque.popleft()
 
-print(type(deque))
+
+def list_insert(_list):
+    return _list.insert(5000, 1000)
+
+
+def get_random_values(_list, n=100):
+    return [_list[randint(0, 13999)] for _ in range(n)]
+
 
 value = 10000
 index = 5000
@@ -157,24 +165,57 @@ print('deque_popleft:',
           setup='from __main__ import deque_popleft, temp_deque',
           number=10000))
 
+temp_list = get_list()
+temp_deque = get_deque()
+
+print('List insert:',
+      timeit(
+          'list_insert(temp_list)',
+          setup='from __main__ import list_insert, temp_list',
+          number=10000))
+print('Deque insert:',
+      timeit(
+          'list_insert(temp_deque)',
+          setup='from __main__ import list_insert, temp_deque',
+          number=10000))
+
+temp_list = get_list()
+temp_deque = get_deque()
+
+print('Get random elements from List:',
+      timeit(
+          'get_random_values(temp_list)',
+          setup='from __main__ import get_random_values, temp_list',
+          number=1000))
+print('Get random elements from Deque:',
+      timeit(
+          'get_random_values(temp_deque)',
+          setup='from __main__ import get_random_values, temp_deque',
+          number=1000))
+
 """
 Результаты:
 
-get_list 0.368733378
-get_deque 1.082350129
-list_append 0.0012524099999999816
-deque_append 0.0010660239999999988
-list_appendleft 0.12246638799999987
-deque_appendleft 0.0010945759999998472
-list_reverse 0.05054520299999998
-deque_reverse 0.0917512250000001
-list_pop: 8.6295000000014e-05
-deque_pop: 8.854099999999754e-05
-list_popleft: 0.013675779000000166
-deque_popleft: 0.0008591070000001366
+get_list 0.27492479999999997
+get_deque 0.8092379000000001
+list_append 0.0009094999999998965
+deque_append 0.0008037999999999101
+list_appendleft 0.09000499999999989
+deque_appendleft 0.0007912000000001029
+list_reverse 0.03735960000000005
+deque_reverse 0.06579630000000014
+list_pop: 6.999999999979245e-05
+deque_pop: 6.879999999997999e-05
+list_popleft: 0.012452099999999966
+deque_popleft: 0.0006360999999999173
+List insert: 0.06634799999999985
+Deque insert: 0.05249389999999998
+Get random elements from List: 0.05474690000000004
+Get random elements from Deque: 0.0660113
 
-Результаты измерений подтверждают приведенные в документации области применения для deque и list
-Коллекция deque хорошо подходит для извления/вставки элементов в начало и в конец такого объекта, 
-однако требует больше времени для его создания. Также функция reverse в deque работает медленнее.
+Операции связанные со вставкой/извлечением элементов из начала коллекции для Deque выполняются намного быстрее 
+чем для обычного списка. 
+Операции с произвольными элементами и с элементами из конца выполняются за примерно  за одинаковое время.
+Функции reverse и copy для deque выполняются медленее чем для встроенных списков.
 
 """

@@ -45,7 +45,10 @@ for _ in range(company_count):
             company_name = input('Введите название предприятия: ')
             if len(company_name) < 2:
                 raise ValueError
-            q_profits_str = input('через пробел введите прибыль данного предприятия'
+            if company_name in [company.name for company in companies]:
+                print(f'Компания {company_name} уже в списке!')
+                continue
+            q_profits_str = input('Через пробел введите прибыль данного предприятия'
                                   'за каждый квартал(Всего 4 квартала): ')
             q_profits = [float(i) for i in q_profits_str.split()]
             if len(q_profits) != 4:
