@@ -33,3 +33,17 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+from collections import defaultdict
+
+
+def hex_result(number_one, number_two):
+    collect = defaultdict(list)
+    collect['add'] = list(hex(int(number_one, 16) + int(number_two, 16))[2:].upper())
+    collect['mul'] = list(hex(int(number_one, 16) * int(number_two, 16))[2:].upper())
+
+    return f'Сумма - {list(number_one.upper())} и {list(number_two.upper())} = {collect["add"]}\n' \
+           f'Произведение - {list(number_one.upper())} и {list(number_two.upper())} = {collect["mul"]}'
+
+print(hex_result("A2","C4F"))
