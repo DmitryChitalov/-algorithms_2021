@@ -36,3 +36,33 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+from random import randint
+from timeit import timeit
+from cProfile import run
+
+def revers_1(enter_num, revers_num=0):
+    if enter_num == 0:
+    enter_num = str(enter_num)
+    revers_num = enter_num[::-1]
+    return revers_num
+
+num_10000 = randint(100000000, 10000000000000)
+
+print(f'cProfile')
+run('revers_1(num_10000) ')
+run('revers_2(num_10000)')
+run('revers_3(num_10000)')
+
+print('"timeit"')
+print('revers_1',end=" ")
+print(f'{timeit("revers_1(num_10000)", number=10000, globals=globals())}')
+print('revers_2',end=" ")
+print(f'{timeit("revers_2(num_10000)", number=10000, globals=globals())}')
+print('revers_3',end=" ")
+print(f'{timeit("revers_3(num_10000)", number=10000, globals=globals())}')
+
+
+# функция revers_1 самая медленная, так как использует рекурсию
+# функция revers_2  быстрее, чем revers_1, так как использует цикл вместо рекурсии
+# функция revers_3 самая быстрая, так как используется встроенная функция
