@@ -45,3 +45,34 @@ for i in
 
 
 """
+from statistics import median
+from random import randint
+
+
+def gnome_sort(lst_obj):
+    i = 1
+    while i < len(lst_obj):
+        if lst_obj[i - 1] <= lst_obj[i]:
+            i += 1
+        else:
+            lst_obj[i - 1], lst_obj[i] = lst_obj[i], lst_obj[i - 1]
+            if i > 1:
+                i -= 1
+    return lst_obj
+
+
+m = randint(1, 10)
+real_list = [randint(1, 20) for _ in range(2*m + 1)]
+
+print(real_list)
+print(gnome_sort(real_list))
+
+print(f"Медиана массива - {gnome_sort(real_list)[m]}")
+print(f"Проверка встроенной функцией: медиана - {median(real_list)}")
+
+"""
+[1, 11, 10, 17, 3]
+[1, 3, 10, 11, 17]
+Медиана массива - 10
+Проверка встроенной функцией: медиана - 10
+"""
