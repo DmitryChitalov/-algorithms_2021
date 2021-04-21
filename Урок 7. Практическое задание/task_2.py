@@ -13,3 +13,111 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+
+from random import uniform, randint
+from memory_profiler import profile, memory_usage
+from timeit import default_timer
+
+
+def decor(func):
+    """Функция декортатор для замеров времени и памяти"""
+
+    def wrapper(*args, **kwargs):
+        t1 = default_timer()
+        m1 = memory_usage()
+        res = func(args[0])
+        m2 = memory_usage()
+        t2 = default_timer()
+        mem_diff = m2[0] - m1[0]
+        time_dif = t2 - t1
+        print(f'Функция - {func.__name__}\n Время заняло: {time_dif}\n Памяти заняло:{mem_diff}\n')
+        return res
+
+    return wrapper
+
+
+def merge(A, B):
+    Res = []
+    i = 0
+    j = 0
+    while i < len(A) and j < len(B):
+        if A[i] <= B[j]:
+            Res.append(A[i])
+            i += 1
+        else:
+            Res.append(B[j])
+            j += 1
+    Res += A[i:] + B[j:]
+    return Res
+
+
+def MergeSort(A):
+    if len(A) <= 1:
+        return A
+    else:
+        L = A[:len(A) // 2]
+        R = A[len(A) // 2:]
+    return merge(MergeSort(L), MergeSort(R))
+
+
+@decor
+def call_func(rand_list):
+    return MergeSort(rand_list)
+
+
+rand_list = [uniform(1, 50) for _ in range(5)]
+print('Замеры 5:\n')
+print(f"Исходный лист - {rand_list}")
+print(f"Отсортированный лист- {call_func(rand_list)}")
+
+rand_list_10 = [uniform(1, 50) for _ in range(10)]
+rand_list_100 = [uniform(1, 50) for _ in range(100)]
+rand_list_1000 = [uniform(1, 50) for _ in range(1000)]
+
+
+print('/*'*30+'\n')
+print('Замеры 10:\n')
+call_func(rand_list_10)
+print('/*'*30+'\n')
+print('Замеры 100:\n')
+call_func(rand_list_100)
+print('/*'*30+'\n')
+print('Замеры 1000:\n')
+call_func(rand_list_1000)
+
+
+"""
+Замеры 5:
+
+Исходный лист - [21.210959126412106, 17.60127795711224, 9.159807851696684, 10.499478504308469, 2.413141962725898]
+Функция - call_func
+ Время заняло: 0.20085250000000002
+ Памяти заняло:0.0078125
+
+Отсортированный лист- [2.413141962725898, 9.159807851696684, 10.499478504308469, 17.60127795711224, 21.210959126412106]
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+Замеры 10:
+
+Функция - call_func
+ Время заняло: 0.2005594
+ Памяти заняло:0.0
+
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+Замеры 100:
+
+Функция - call_func
+ Время заняло: 0.20105760000000006
+ Памяти заняло:0.0
+
+/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+Замеры 1000:
+
+Функция - call_func
+ Время заняло: 0.20427839999999997
+ Памяти заняло:0.0703125
+ 
+ Вариант реалицации функции найден в интернете
+"""
