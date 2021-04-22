@@ -10,3 +10,25 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+
+def palindrome_check(user_string):
+    user_list = list(user_string)
+    new_list = []
+    for i in user_list:
+        if i != ' ':
+            new_list.append(i)
+    new_string = ''.join(new_list)
+    rev_string = ''.join(reversed(new_list))
+    if new_string == rev_string:
+        return True
+    else:
+        return False
+
+
+print(palindrome_check('а роза упала на лапу азора'))
+
+'''
+В данном задании я попытался реализовать отличную функцию от функции в уроке. 
+Но получилось довольно громоздко. На мой взгляд, сложность такого алгоритма - квадратичная.
+'''
