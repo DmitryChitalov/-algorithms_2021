@@ -21,3 +21,33 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+"""
+Сложность O(nlogn) - линейно-логарифмическая, чуть наиболее эффективный при небольшой выборке, нежели sorted
+"""
+
+
+from collections import Counter
+
+comp = {'a': 2000, 'b': 1000, 'c': 300, 'd': 2000, 'e': 3000}
+
+count = Counter(comp).most_common(3)
+
+print(count)
+
+
+"""
+Сложность O(nlogn) - линейно-логарифмическая
+"""
+
+comp_sorted = sorted(comp.items(), key=lambda x: x[1], reverse=True)
+
+print(comp_sorted[:3])
+
+
+"""
+
+"""
+
+
+

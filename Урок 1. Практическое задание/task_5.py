@@ -23,3 +23,34 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.lst = []
+
+    def push(self, item):
+        self.stack.append(item)
+        if len(self.stack) > 2:
+            self.lst.append(self.stack)
+            self.stack = []
+
+
+s = Stack()
+
+s.push(1)
+s.push(1)
+s.push(1)
+s.push(1)
+s.push(2)
+s.push(4)
+s.push(5)
+s.push(5)
+s.push(5)
+s.push(5)
+
+print(s.stack)
+
+print(s.lst)
+

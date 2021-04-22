@@ -19,3 +19,29 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+row = [1, 2, 3, 4, 5]
+
+"""
+O (n^2) Квадратичная 
+"""
+
+
+def getmin(m):
+    answer = m[0]
+    for i in m:
+        if i < answer:
+            answer = i
+    return answer
+
+
+getmin(row)
+
+"""
+O(n) - Линейная
+"""
+
+m = [n for n in row if all(n <= i for i in row)]
+
+print(m)
+
