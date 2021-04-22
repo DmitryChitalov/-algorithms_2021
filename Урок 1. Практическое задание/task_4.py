@@ -25,3 +25,57 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def user_authentication1(login, password, web_data: dict):
+    """
+        Принимает три параметра:
+        первый и второй - логин и пароль от пользователя,
+        третий в виде словаря из БД с логином (ключ), паролем и активацией.
+        Проверяет активацию учётной записи пользователя.
+        В случае не активной предлагает пройти её.
+        Если логин и пароль верный - то авторизация успешно пройдена.
+        Сложность алгоритма O(N) - линейная
+    """
+    if login in web_data:  # O(N)
+        if web_data.get(login)[0] == password:
+            return 'Успешно' if web_data.get(login)[1] else 'Необходимо пройти активацию учетной записи'
+    return 'Неверный логин или пароль'
+
+
+def user_authentication2(login, password, web_data: dict):
+    """
+        Принимает три параметра:
+        первый и второй - логин и пароль от пользователя,
+        третий в виде словаря из БД с логином (ключ), паролем и активацией.
+        Проверяет активацию учётной записи пользователя.
+        В случае не активной предлагает пройти её.
+        Если логин и пароль верный - то авторизация успешно пройдена.
+        Сложность алгоритма O(1) - константная
+    """
+    if web_data.get(login) and web_data[login][1]:  # O(1)
+        return 'Успешно' if web_data[login][0] == password else 'Неверный пароль'
+    elif web_data.get(login) and not web_data[login][1]:
+        return 'Необходимо пройти активацию учетной записи'
+    else:  # такого логина нет
+        return 'Неверный логин'
+
+
+base_data = {
+    'user1': ['asdf', 1],
+    'user2': ['qwer', 0],
+    'user3': ['zxcv', 1],
+    'user4': ['ghjk', 1],
+    'user5': ['yuio', 0]
+}
+
+
+print(user_authentication1('user1', 'asdf', base_data))
+print(user_authentication1('use1', 'asdf', base_data))
+print(user_authentication1('user1', 'adf', base_data))
+print(user_authentication1('user2', 'qwer', base_data), end='\n \n')
+
+print(user_authentication2('user1', 'asdf', base_data))
+print(user_authentication2('user2', 'qwer', base_data))
+print(user_authentication2('user3', 'zxcv', base_data))
+print(user_authentication2('use1', 'asdf', base_data))
