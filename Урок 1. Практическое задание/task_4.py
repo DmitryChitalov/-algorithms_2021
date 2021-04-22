@@ -26,3 +26,42 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+authorization_data = {
+    'user_1': ['password_1', True],
+    'user_2': ['password_2', False],
+    'user_3': ['password_3', True],
+    'user_4': ['password_4', False],
+    'user_5': ['password_5', True],
+    'user_6': ['password_6', True],
+    'user_7': ['password_7', False],
+    'user_8': ['password_8', True],
+    'user_9': ['password_9', False],
+    'user_10': ['password_10', False]
+}
+
+
+# O(1) - константная сложность
+# Используются
+def authorization_1(login, password):
+
+    if login not in authorization_data \
+             or password != authorization_data[login][0]:
+        print('Неверные данны пользователя. Доступ запрещён.')
+    elif not authorization_data[login][1]:
+        user_input = input('Ваша учётная запись не активирована.'
+                           'Желаете активировать её сейчас? Да/Нет\n>>>')
+        if user_input.lower() == 'да':
+            authorization_data[login][1] = True
+            print('Авторизация завершена. Доступ разрешён.')
+        else:  # user_input.lower() == 'нет':
+            print('Доступ запрещён. Необходимо активировать учётную запись.')
+    else:
+        print('Доступ разрешён. Добро пожаловать!')
+
+
+if __name__ == '__main__':
+
+    authorization_1('user_1', 'password_1')
+    authorization_1('user_20', 'password_3')
+    authorization_1('user_2', 'password_2')

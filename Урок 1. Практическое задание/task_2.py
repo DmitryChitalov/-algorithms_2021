@@ -19,3 +19,35 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+# Сложность O(n^2) - квадратичная, вложенные циклы
+def find_min_1(sequence):
+    for el_1 in sequence:                      # O(n) - линейная
+        is_min = True                          # O(1) - константная, присваивание
+        for el_2 in sequence:                  # O(n) - линейная
+            if el_2 < el_1:                    # O(1) - константная
+                is_min = False                 # O(1) - константная
+                break
+        if is_min:                             # O(1) - константная
+            return el_1                        # O(1) - константная
+
+
+# Сложность O(n) - линейная, 1 проход по элементам
+def find_min_2(sequence):
+    min_el = sequence[0]                       # O(1) - константная
+    for i in range(1, len(sequence)):          # O(n) - линейная
+        if sequence[i] < min_el:               # O(1) - константная
+            min_el = sequence[i]               # O(1) - константная
+    return min_el                              # O(1) - константная
+
+
+if __name__ == '__main__':
+    for j in (50, 500, 1000, 5000, 1000):
+        lst = random.sample(range(-100000, 100000), j)
+
+    print(find_min_1(lst))
+    print(find_min_2(lst))
+    # проверка
+    print(min(lst))

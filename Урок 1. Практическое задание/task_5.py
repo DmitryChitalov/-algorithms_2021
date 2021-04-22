@@ -23,3 +23,44 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+class PlateStack(StackClass):
+
+    def __init__(self, max_plate_count):
+        super().__init__()
+        self.elems.append([])
+        self.max_plate_count = max_plate_count
+        self.stack_count = 0
+
+    def push_in(self, el):
+        if len(self.elems[self.stack_count]) == self.max_plate_count:
+            self.elems.append([])
+            self.stack_count += 1
+            self.elems[self.stack_count].append(el)
+
+
+
+if __name__ == '__main__':
+
+    p_st = PlateStack(3)
