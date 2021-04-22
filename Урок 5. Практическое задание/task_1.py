@@ -23,3 +23,30 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+import collections
+
+# создаем шаблон кортежа
+firm_template = collections.namedtuple('firm', 'id name profit1 profit2 profit3 profit4 total_profit')
+# список предприятий
+firm_list = []
+
+cnt = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(1, cnt + 1):
+    name = input('Введите название предприятия: ')
+    list_income = list(map(int, input(
+        'Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split()))
+    # заполняем шаблон данными
+    v_firm = firm_template(i, name, *list_income, sum(list_income))
+    print(v_firm)
+    firm_list.append(v_firm)
+
+#  print(f'Список предприятий: {firm_list}')
+s = sum(map(lambda i: i.total_profit, firm_list)) / cnt
+print(f'Средняя годовая прибыль всех предприятий: {round(s, 2)}')
+h_list = list(filter(lambda i: i.total_profit >= s, firm_list))
+h = ','.join(map(lambda i: i.name, h_list))
+print(f'Предприятия, с прибылью выше среднего значения: {h}')
+l_list = list(filter(lambda i: i.total_profit < s, firm_list))
+l = ','.join(map(lambda i: i.name, l_list))
+print(f'Предприятия, с прибылью ниже среднего значения: {l}')
