@@ -45,3 +45,23 @@ for i in
 
 
 """
+
+import random
+import statistics
+
+
+# для массива длинной 2 * m + 1
+def my_median(lst):
+    lst = lst.copy()
+    while len(lst) > 1:
+        lst.remove(min(lst))
+        lst.remove(max(lst))
+    return lst[0]
+
+
+m = 5
+my_lst = [random.randint(0, 50) for _ in range(2 * m + 1)]
+print(my_lst)
+
+print(statistics.median(my_lst))
+print(my_median(my_lst))
