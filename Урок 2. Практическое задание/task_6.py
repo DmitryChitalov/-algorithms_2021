@@ -11,3 +11,28 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+from random import randint
+
+
+def guessing(number, attempts):
+    if attempts == 0:
+        print(f'Выши попытки истекли. Загаданное число {number}')
+        return
+    while True:
+        user_num = input(f'Угадайте число от 0 до 100. Осталось попыток: {attempts}\n>>>')
+        try:
+            user_num = int(user_num)
+            break
+        except ValueError:
+            print('Нужно ввести число от 0 до 100!')
+    if user_num == number:
+        print(f'Поздравляем! Вы угадали. Загаданное число {number}')
+        return
+    if user_num > number:
+        print('Число слишком большое.')
+    else:
+        print('Число слишком маленькое.')
+    guessing(number, attempts-1)
+
+
+guessing(randint(0, 100), 10)

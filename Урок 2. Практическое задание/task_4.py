@@ -12,3 +12,17 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def sum_n_el(n):
+    return 1 if n == 1 else 1 + sum_n_el(n-1) / -2
+
+
+while True:
+    number = input('Введите количество элементов последовательности чисел: '
+                   '1 -0.5 0.25 -0.125 ... (n > 0) \n>>> ')
+    if number.isdigit() and int(number) > 0:
+        break
+
+number = int(number)
+print(f'Сумма элементов последовательности {sum_n_el(number)}')

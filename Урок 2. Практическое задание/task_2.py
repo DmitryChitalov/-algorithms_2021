@@ -18,3 +18,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def odd_and_even(num):
+    global odd, even
+    if num == 0:
+        return
+
+    if num % 10 & 1:
+        odd += 1
+    else:
+        even += 1
+    odd_and_even(num // 10)
+
+
+while True:
+    number = input('Введите целое число для подсчёта чётных и нечётных цифр:\n>>> ')
+    if number.isdigit() and int(number) > 0:
+        number = int(number)
+        break
+    print('Неверный ввод, попробуйте снова.')
+
+odd = even = 0
+odd_and_even(number)
+print(f'четных {even} нечётных {odd}')

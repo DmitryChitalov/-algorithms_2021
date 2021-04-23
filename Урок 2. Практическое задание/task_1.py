@@ -28,3 +28,45 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода):\n>>> ')
+    if operator in ('+', '-', '*', '/', "0"):
+        if operator == '0':
+            print('Работа завершена.')
+            return
+
+        while True:
+            num_1 = input('Введите первое число:\n>>> ')
+            try:
+                num_1 = float(num_1)
+                break
+            except ValueError:
+                print('Введено не число, попробуйте снова!')
+
+        while True:
+            num_2 = input('Введите второе число:\n>>> ')
+            try:
+                num_2 = float(num_2)
+                break
+            except ValueError:
+                print('Введено не число, попробуйте снова!')
+
+        if operator == '+':
+            print(f'Сумма чисел {num_1} и {num_2} равна {num_1 + num_2}')
+        elif operator == '-':
+            print(f'Разность чисел {num_1} и {num_2} равна {num_1 - num_2}')
+        elif operator == '*':
+            print(f'Произведение чисел {num_1} и {num_2} равно {num_1 * num_2}')
+        else:
+            if num_2 == 0:
+                print('Ошибка. Попытка деления на 0. Попробуйте снова.')
+            else:
+                print(f'Часное чисел {num_1} и {num_2} равно {num_1 / num_2}')
+
+    calc()
+
+
+calc()

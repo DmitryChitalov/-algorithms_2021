@@ -23,3 +23,14 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def print_ascii_ch(begin, end):
+    if begin > end:
+        return
+    print(f'{begin} - {chr(begin)} ', end='')
+    if not (begin - 31) % 10:  # каждые 10 чисел переводим строку
+        print()
+    print_ascii_ch(begin+1, end)
+
+
+print_ascii_ch(32, 127)
