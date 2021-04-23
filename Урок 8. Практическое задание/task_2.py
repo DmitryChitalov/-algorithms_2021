@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,8 +22,14 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        try:
+            if new_node >= self.root:
+                raise ValueError
+        except ValueError:
+            print(f'Ошибка! {new_node} >= {self.root}, необходимо вставлять вправо')
+            return
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if self.left_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -36,8 +43,14 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        try:
+            if new_node < self.root:
+                raise ValueError
+        except ValueError:
+            print(f'Ошибка! {new_node} < {self.root}, необходимо вставлять в левую часть дерева')
+            return
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -66,14 +79,14 @@ class BinaryTree:
         return self.root
 
 
-r = BinaryTree(8)
+r = BinaryTree(100)
 print(r.get_root_val())
+r.insert_right(150)
+r.insert_left(25)
 print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
 print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+print(r.get_left_child().get_root_val())
+r.insert_left(15)
+r.insert_right(12)
+r.insert_left(200)
+print(r.get_left_child().get_root_val())
