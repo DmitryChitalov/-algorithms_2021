@@ -45,3 +45,112 @@ for i in
 
 
 """
+
+from statistics import median
+import random
+import timeit
+
+
+# Идея: Перебираем элементы массива; для каждого элемента считаем количество элементов не меньшее и не большее ему,
+# пока для элемента не окажется равное количество элементов сдева и справа.
+def nosort_method(l):
+    ln = len(l)
+    # определяем два списка, в которые будем откидыывать то, что не меньше медианы, а в другой то, что не больше
+    left = []
+    right = []
+    # бежим по списку и "раскидываем" элементы в левый и правый списки-приемники
+    for i in range(ln):
+        for j in range(ln):
+            if l[i] > l[j]:
+                left.append(l[j])
+            if l[i] < l[j]:
+                right.append(l[j])
+            # если значения равны и итерация внешнего цикла больше, то учитываем значения в левом списке
+            if l[i] == l[j] and i > j:
+                left.append(l[j])
+            if l[i] == l[j] and i < j:
+                right.append(l[j])
+        #  если длины равны, то это значит, что мы уже находимся на медиане, сразу выыходим
+        if len(left) == len(right):
+            #  print(left, right)
+            return l[i]
+        #  оччищаем списки, т.к. они понадобятся следуеюшей итерации, в этой мы "не угадали"
+        left.clear()
+        right.clear()
+
+
+#  Простейшая идея - удаляем максимальные элементы столько раз, чтобы остановиться на медиане
+def remove_max(l):
+    l_copy = l  # обязательно делаем копию
+    for i in range(len(l) // 2):
+        l_copy.remove(max(l_copy))
+    return max(l_copy)
+
+
+#  Гномья сортировка
+#  Идея: просматриваем массив слева-направо, при этом сравниваем (и меняем, если это неотсортированная пара)
+#  соседние элементы. Если происходит обмен элементов, то возвращемся на один шаг назад.
+#  Если обменов не происходит, то продолжаем просмотр массива слева-направо в поиске неотсортированных пар.
+def gnome_sort(l):
+    i, j, size = 1, 2, len(l)
+    while i < size:
+        if l[i - 1] <= l[i]:
+            i, j = j, j + 1
+        else:
+            l[i - 1], l[i] = l[i], l[i - 1]
+            i -= 1
+            if i == 0:
+                i, j = j, j + 1
+    return l
+
+
+cnt = int(input('Введите некоторое натуральное число: '))
+l = [random.randint(0, 100) for _ in range(2 * cnt + 1)]
+print(f'Исходный массив: {l}')
+print(f'Медиана функцией median: {median(l)}')
+print(f'Медиана функцией nosort_method: {nosort_method(l)}')
+print(f'Медиана функцией remove_max: {remove_max(l)}')
+gl = gnome_sort(l)
+print(f'Медиана функцией gnome_sort: {gl[cnt]}')
+
+# замеры
+print('median',
+      timeit.timeit(
+          "median(l[:])",
+          globals=globals(),
+          number=2000))
+
+print('nosort_method',
+      timeit.timeit(
+          "nosort_method(l[:])",
+          globals=globals(),
+          number=2000))
+
+print('remove_max',
+      timeit.timeit(
+          "remove_max(l[:])",
+          globals=globals(),
+          number=2000))
+
+print('gnome_sort',
+      timeit.timeit(
+          "gnome_sort(l[:])[cnt]",
+          globals=globals(),
+          number=2000))
+"""
+Введите некоторое натуральное число: 100
+Медиана функцией median: 51
+Медиана функцией nosort_method: 51
+Медиана функцией remove_max: 51
+Медиана функцией gnome_sort: 51
+median 0.0034893000000000285
+nosort_method 2.3632495000000002
+remove_max 0.19855610000000024
+gnome_sort 0.02296350000000036
+Вывод:
+Использование встренного метода median существенно быстрее, т.к. наилучшим образом оптимизирован.
+Алгоритм без сортировки с ростом числа элементов показывает существенное замедление, то неудивительно при 
+квадратичной сложности.
+Гномья сортировка показывает также очень неплохой результат.
+
+"""
