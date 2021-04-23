@@ -13,3 +13,77 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import timeit
+import random
+
+
+def merge_sort(L):
+    if len(L) < 2:  # базовое условие
+        return L[:]
+    else:
+        middle = int(len(L) / 2)
+        left = merge_sort(L[:middle])
+        right = merge_sort(L[middle:])
+        return merge(left, right)
+
+
+#  Функция слияния двух массивов. Как результат - новый отсортированный массив
+def merge(left, right):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    return result
+
+
+cnt = int(input('Введите количество элементов массива: '))
+l = [random.random() * 50 for _ in range(cnt)]
+print(f'Исходный - {l}\nОтсортированный - {merge_sort(l)}')
+
+l = [random.random() * 50 for _ in range(10)]
+# замеры 10
+print('merge_sort(10)',
+    timeit.timeit(
+        "merge_sort(l[:])",
+        globals=globals(),
+        number=1000))
+
+l = [random.randint(-100, 100) for _ in range(100)]
+# замеры 100
+print('merge_sort(100)',
+    timeit.timeit(
+        "merge_sort(l[:])",
+        globals=globals(),
+        number=1000))
+
+l = [random.randint(-100, 100) for _ in range(1000)]
+# замеры 1000
+print('merge_sort(1000)',
+    timeit.timeit(
+        "merge_sort(l[:])",
+        globals=globals(),
+        number=1000))
+
+"""
+Введите количество элементов массива: 10
+Исходный - [12.750735107223054, 36.82768799003272, 40.56318397104656, 28.79211518114433, 15.187963044193275, 25.549533920385496, 39.9243178214783, 21.117736758726906, 16.22779492938245, 23.398552413320427]
+Отсортированный - [12.750735107223054, 15.187963044193275, 16.22779492938245, 21.117736758726906, 23.398552413320427, 25.549533920385496, 28.79211518114433, 36.82768799003272, 39.9243178214783, 40.56318397104656]
+merge_sort(10) 0.016008800000000267
+merge_sort(100) 0.22961089999999995
+merge_sort(1000) 2.8826913
+
+Вывод:
+Сортировка слиянием - оень эффективный по скорости алгоритм.  Недостатком можно считать использование дополнительной
+памяти для своей реализации. 
+"""
