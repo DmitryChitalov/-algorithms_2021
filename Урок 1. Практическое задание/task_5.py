@@ -25,42 +25,93 @@
 """
 
 
-class StackClass:
-    def __init__(self):
-        self.elems = []
+class PlateStack:
+
+    # Создаём стопки тарелок, как список списков
+    # При создании задаём максимальное количество тарелок в одной стопке
+    def __init__(self, max_plate_count: int):
+        self.stacks = []
+        self.max_plate_count = max_plate_count
 
     def is_empty(self):
-        return self.elems == []
+        return self.stacks == []
 
+    # добавляем новый элемент в последнюю стопку
+    # если нет стопок или текущая стопка полная, добавляем новую
     def push_in(self, el):
-        self.elems.append(el)
+        if self.is_empty() or len(self.stacks[self.stacks_count-1]) == self.max_plate_count:
+            self.stacks.append([])
+        self.stacks[self.stacks_count-1].append(el)
 
+    # удаляем элемент из последней стопки
+    # если в стопке не осталось элементов, удаляем её
     def pop_out(self):
-        return self.elems.pop()
+        item = self.stacks[self.stacks_count-1].pop()
+        if not self.stacks[self.stacks_count-1]:
+            del self.stacks[self.stacks_count-1]
+        return item
 
-    def get_val(self):
-        return self.elems[len(self.elems) - 1]
+    # свойство, количество имеющихся стопок
+    @property
+    def stacks_count(self):
+        return len(self.stacks)
 
-    def stack_size(self):
-        return len(self.elems)
+    # предполагая, что все тарелки одинаковые, можно брать тарелку
+    # из любой стопки и класть на верх любой, не полной
 
+    # забираем тарелку из произвольной стопки
+    # если стопка опустела, удаляем её из списка стопок
+    # если номер стопки больше количества стопок, удаляем элемент из последней
+    def pop_from(self, stack_num):
+        if stack_num >= self.stacks_count:
+            return self.pop_out()
+        item = self.stacks[stack_num].pop()
+        if not self.stacks[stack_num]:
+            del self.stacks[stack_num]
+        return item
 
-class PlateStack(StackClass):
-
-    def __init__(self, max_plate_count):
-        super().__init__()
-        self.elems.append([])
-        self.max_plate_count = max_plate_count
-        self.stack_count = 0
-
-    def push_in(self, el):
-        if len(self.elems[self.stack_count]) == self.max_plate_count:
-            self.elems.append([])
-            self.stack_count += 1
-            self.elems[self.stack_count].append(el)
-
+    # добавляем тарелку в первую неполную стопку
+    # если таких нет, добавляем тарелку в последнюю стопку
+    def push_at_incomplete(self, el):
+        for num in range(self.stacks_count):
+            if len(self.stacks[num]) != self.max_plate_count:
+                self.stacks[num].append(el)
+                break
+        else:
+            self.push_in(el)
 
 
 if __name__ == '__main__':
 
-    p_st = PlateStack(3)
+    # создаём экземпляр класса "стопка тарелок"
+    # максимум 3 тарелки в стопке
+    plates = PlateStack(3)
+
+    # заполняем элементами
+    for i in range(10):
+        plates.push_in(i)
+
+    # выводим на экран получившиеся списки
+    for i in range(plates.stacks_count):
+        print(plates.stacks[i])
+
+    # взять последний элемент
+    print(plates.pop_out())
+
+    # добавить два элемента
+    plates.push_in(10)
+    plates.push_in(11)
+
+    # поочерёдно берём тарелки из 2й стопки
+    plates.pop_from(2)
+    plates.pop_from(2)
+    plates.pop_from(2)
+
+    # добавляем тарелки в неполные стопки
+    plates.push_at_incomplete(100)
+    plates.pop_from(0)
+    plates.push_at_incomplete(100)
+
+    # Результат:
+    for i in range(plates.stacks_count):
+        print(plates.stacks[i])

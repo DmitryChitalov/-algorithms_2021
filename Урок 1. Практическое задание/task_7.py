@@ -35,35 +35,15 @@ class DequeClass:
         return len(self.elems)
 
 
-# вариант 1
-def pal_checker_1(string: str):
-    dc_obj = DequeClass()
-
-    string = string.replace(' ', '').lower()
-    # удаляем пробелы из строки и приводим строку к нижнему регистру
-    for el in string:
-        dc_obj.add_to_rear(el)
-
-    still_equal = True
-
-    while dc_obj.size() > 1 and still_equal:
-        first = dc_obj.remove_from_front()
-        last = dc_obj.remove_from_rear()
-        if first != last:
-            still_equal = False
-
-    return still_equal
-
-# вариант 2
-def pal_checker_2(string: str):
+def pal_checker(string: str):
     dc_obj = DequeClass()
 
     for el in string:
         if el != ' ':
             dc_obj.add_to_rear(el.lower())
         # добавляем символ в дек, только если это не пробел
-        # будет работать быстрее первого варианта,
-        # т.к. нет дополнительных проходов по строке
+        # приводим добавляемую букву к нижнему регистру, что бы
+        # сравнивать строки не мешали заглавные буквы
 
     still_equal = True
 
@@ -76,8 +56,5 @@ def pal_checker_2(string: str):
     return still_equal
 
 
-print(pal_checker_1("молоко делили ледоколом"))
-print(pal_checker_1("А роза упала на лапу Азора"))
-
-print(pal_checker_2("молоко делили ледоколом"))
-print(pal_checker_2("А роза упала на лапу Азора"))
+print(pal_checker("молоко делили ледоколом"))
+print(pal_checker("А роза упала на лапу Азора"))
