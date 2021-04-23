@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -18,6 +19,15 @@ class BinaryTree:
         self.left_child = None
         # правый потомок
         self.right_child = None
+
+    # вставка с валидацией
+    def val_insert(self, new_node):
+        if new_node > self.get_root_val():
+            self.insert_left(new_node)
+        elif new_node < self.get_root_val():
+            self.insert_right(new_node)
+        else:
+            print('Это уже не банарное дерево!')
 
     # добавить левого потомка
     def insert_left(self, new_node):
@@ -69,10 +79,11 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+r.val_insert(40)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
-r.insert_right(12)
+r.val_insert(12)
+r.val_insert(2)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
