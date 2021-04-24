@@ -20,3 +20,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+def find_max(data_dict):          # O(N)
+    kmax = None
+    vmax = -1
+    for k,v in data_dict.items(): # O(N)
+        if v > vmax:              # O(1)
+            vmax = v              # O(1)
+            kmax = k              # O(1)
+    return kmax, vmax             # O(1)
+
+def find_leaders_1(data_dict):       # Сложность O(N)
+    leaders = {}                     # O(1)
+    kmax, vmax = find_max(data_dict) # O(N)
+    leaders[kmax] = vmax             # O(1)
+    data_dict.pop(kmax)              # O(1)
+    kmax, vmax = find_max(data_dict) # O(N)
+    leaders[kmax] = vmax             # O(1)
+    data_dict.pop(kmax)              # O(1)
+    kmax, vmax = find_max(data_dict) # O(N)
+    leaders[kmax] = vmax             # O(1)
+    data_dict.pop(kmax)              # O(1)
+    return leaders                   # O(1)
+
+
+data = {
+    '1 Ltd': 12345.67,
+    '2 Ltd': 56789.01,
+    '3 Ltd': 67890.12,
+    '4 Ltd': 23456.78,
+    '5 Ltd': 89012.34,
+    '6 Ltd': 34567.89,
+    '7 Ltd': 45678.90,
+    '8 Ltd': 78901.23,
+    '9 Ltd': 90123.45
+}
+
+print(find_leaders_1(data))
