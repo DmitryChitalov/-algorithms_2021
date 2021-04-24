@@ -57,4 +57,5 @@ def pal_checker(string: str):
 
 
 print(pal_checker("молоко делили ледоколом"))
+
 print(pal_checker("А роза упала на лапу Азора"))

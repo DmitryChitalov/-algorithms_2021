@@ -38,7 +38,6 @@ def find_min_2(sequence):
 
 
 if __name__ == '__main__':
-
     # Список из 10 целых чисел от -100 до 100
     lst = [randint(-100, 100) for i in range(0, 10)]
     print(lst)
