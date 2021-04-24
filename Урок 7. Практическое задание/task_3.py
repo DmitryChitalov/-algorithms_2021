@@ -45,3 +45,25 @@ for i in
 
 
 """
+
+from random import randint
+
+def gnome(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+m = int(input("Введите число m:"))
+orig_list = [randint(0, 100) for _ in range(2 * m + 1)]
+print(orig_list)
+
+sorted_list = gnome(orig_list)
+print(sorted_list)
+
+print("Медиана: ", sorted_list[m])
