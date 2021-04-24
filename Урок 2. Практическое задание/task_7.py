@@ -33,5 +33,4 @@ while True:
         break
 
 number = int(number)
-
 print(compare_sum(number))

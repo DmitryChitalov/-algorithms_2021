@@ -25,9 +25,18 @@
 
 
 def reverse_num(num):
-    return '' if num == 0 else str(num % 10) + reverse_num(num // 10)
+    return str(num) if num < 10 else str(num % 10) + reverse_num(num // 10)
 
 
-print(f'1010 - {reverse_num(1010)}')
-print(f'123 - {reverse_num(123)}')
-print(f'3486 - {reverse_num(3486)}')
+# проверка
+# print(f'1010 - {reverse_num(1010)}')
+# print(f'3486 - {reverse_num(3486)}')
+
+while True:
+    number = input('Введите число:\n>>> ')
+    if number.isdigit():
+        number = int(number)
+        break
+    print('Неверный ввод, попробуйте снова.')
+
+print(f'Перевернутое число для числа {number} - {reverse_num(number)}')

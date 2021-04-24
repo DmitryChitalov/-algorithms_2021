@@ -31,7 +31,6 @@
 
 
 def calc():
-
     operator = input('Введите операцию (+, -, *, / или 0 для выхода):\n>>> ')
     if operator in ('+', '-', '*', '/', "0"):
         if operator == '0':

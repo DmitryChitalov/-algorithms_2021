@@ -23,6 +23,6 @@ while True:
                    '1 -0.5 0.25 -0.125 ... (n > 0) \n>>> ')
     if number.isdigit() and int(number) > 0:
         break
-
 number = int(number)
+
 print(f'Сумма элементов последовательности {sum_n_el(number)}')

@@ -24,7 +24,6 @@ def odd_and_even(num):
     global odd, even
     if num == 0:
         return
-
     if num % 10 & 1:
         odd += 1
     else:
@@ -41,4 +40,5 @@ while True:
 
 odd = even = 0
 odd_and_even(number)
+
 print(f'четных {even} нечётных {odd}')

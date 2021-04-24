@@ -18,6 +18,7 @@ def guessing(number, attempts):
     if attempts == 0:
         print(f'Выши попытки истекли. Загаданное число {number}')
         return
+
     while True:
         user_num = input(f'Угадайте число от 0 до 100. Осталось попыток: {attempts}\n>>>')
         try:
@@ -25,9 +26,11 @@ def guessing(number, attempts):
             break
         except ValueError:
             print('Нужно ввести число от 0 до 100!')
+
     if user_num == number:
         print(f'Поздравляем! Вы угадали. Загаданное число {number}')
         return
+
     if user_num > number:
         print('Число слишком большое.')
     else:
