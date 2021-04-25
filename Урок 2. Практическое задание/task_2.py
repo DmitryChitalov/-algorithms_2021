@@ -20,11 +20,31 @@
 """
 
 
-def task02(num, odd_count, even_count, call_count):
+def task02(original_num, num, odd_count, even_count, call_count):
 
     if num == 0:
-        print('')
+        print(f'В числе {original_num}: {odd_count} нечетных и {even_count} четных цифры')
+        print(f'Количество вызовов функции - {call_count}')
         return
 
+    if num % 10 in [0, 2, 4, 6, 8]:
+        even_count += 1
+    else:
+        odd_count += 1
 
-task02(84576870934869874, 0, 0, 1)
+    call_count += 1
+
+    task02(original_num, num // 10, odd_count, even_count, call_count)
+
+
+while True:
+    input_num = input('Введите число, либо 0 для завершения: ')
+    if input_num == '0':
+        break
+
+    try:
+        input_num = int(input_num)
+    except ValueError:
+        print('Введено некорректное значение!')
+    else:
+        task02(input_num, input_num, 0, 0, 1)
