@@ -15,3 +15,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def task07(left_value):
+    if left_value == 1:
+        return 1
+    else:
+        return left_value + task07(left_value - 1)
+
+
+while True:
+    input_value = input('Введите натуральное число для проверки равенства, либо 0 для завершения: ')
+    if input_value == '0':
+        break
+
+    try:
+        input_value = int(input_value)
+    except ValueError:
+        print('Введено некорректное значение!')
+    else:
+        res = task07(input_value)
+        if res == input_value * (input_value + 1) / 2:
+            print(f'Значения в левой и правой части равенства совпали! Сумма членов прогрессии равна {res}')
