@@ -28,3 +28,53 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_user_data_for_calc():
+    """
+        Запрашивает у пользователя операнд и два числа для операции.
+        Проводит проверки и в случае некорректного ввода сообщает пользователю об этом
+        Возвращает корректный операнд и два натуральных числа
+    """
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operator not in ('+', '-', '*', '/', '0'):
+        print('Недопустимая операция. Повторите ввод')
+        return get_user_data_for_calc()
+    if operator == '0':
+        return '0', None, None
+    number1 = input('Введите первое число: ')
+    number2 = input('Введите второе число: ')
+    try:
+        number1 = float(number1)
+        number2 = float(number2)
+    except ValueError:
+        print('Некорректный ввод чисел')
+        return get_user_data_for_calc()
+    else:  # number1.isdigit() and number2.isdigit()
+        return operator, number1, number2
+
+
+def calc_two_numbers():
+    """ Реализует простой калькулятор двух чисел """
+    operator, first_number, second_number = get_user_data_for_calc()
+    if operator == '0':
+        print('This is the end of program. ')
+        return
+    else:  # operator in ('+', '-', '*', '/')
+        if operator == '+':
+            result = first_number + second_number
+        elif operator == '-':
+            result = first_number - second_number
+        elif operator == '*':
+            result = first_number * second_number
+        else:  # operator == '/':
+            try:
+                result = first_number / second_number
+            except ZeroDivisionError:
+                print('Деление на ноль. Повторите ввод')
+                return calc_two_numbers()
+        print(f'Результат операции: {result}')
+        return calc_two_numbers()
+
+
+calc_two_numbers()

@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_reverse_number(number: int, reverse_number=''):
+    """ Делает реверс натурального числа """
+    remainder = number % 10
+    if len(str(number)) == 1:
+        reverse_number += str(remainder)
+        return print(f'Перевёрнутое число: {reverse_number}')
+    reverse_number += str(remainder)
+    return get_reverse_number(number // 10, reverse_number)
+
+
+get_reverse_number(1230)
+

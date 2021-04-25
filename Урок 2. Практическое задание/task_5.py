@@ -21,3 +21,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_ascii_symbols_and_codes(code_number=31):
+    """
+        Вывеодит на экран коды и символы таблицы ASCII, начиная с символа
+        под номером 32 и заканчивая 127-м включительно.
+    """
+    code_number += 1
+    if code_number == 127:
+        print(f'{code_number} - {chr(code_number)}', end=' ')
+        return
+
+    if not (code_number - 1) % 10:
+        print(f'{code_number} - {chr(code_number)}', end='\n')
+        return get_ascii_symbols_and_codes(code_number)
+    else:
+        print(f'{code_number} - {chr(code_number)}', end=' ')
+        return get_ascii_symbols_and_codes(code_number)
+
+
+get_ascii_symbols_and_codes()
