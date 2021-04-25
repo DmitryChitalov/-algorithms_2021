@@ -16,4 +16,13 @@
 а
 """
 
-# hash?
+
+def substring(string, str_hash=[]):
+    for i in range(2, len(string) + 1):
+        str_hash.append(hash(string[1:i]))
+        str_hash.append(hash(string[:i - 1]))
+    return f'{string} содержит {len(set(str_hash))} уникальных подстрок'
+
+
+print(substring('papa'))
+print(substring('параллелепипед'))

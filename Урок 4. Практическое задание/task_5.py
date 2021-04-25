@@ -16,7 +16,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснвование рез-ам
 """
-
+import timeit
 
 def simple(i):
     """Без использования «Решета Эратосфена»"""
@@ -40,3 +40,25 @@ def simple(i):
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+def eratosfen(i):
+    # O(n log(log n))
+    """Используя алгоритм «Решето Эратосфена»"""
+    n = 2
+    l = 10000
+    sieve = [x for x in range(l)]
+    sieve[1] = 0
+    while n < l:
+        if sieve[n] != 0:
+            m = n * 2
+            while m < l:
+                sieve[m] = 0
+                m += n
+        n += 1
+    return [p for p in sieve if p != 0][i - 1]
+
+
+i = int(input('Введите порядковый номер искомого простого числа: '))
+
+print(timeit.timeit("simple(i)", globals=globals(), number=100))
+print(timeit.timeit("eratosfen(i)", globals=globals(), number=100))

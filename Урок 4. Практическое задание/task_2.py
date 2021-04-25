@@ -16,6 +16,7 @@ from timeit import timeit
 from random import randint
 
 
+# Рекурсивная функция, без мемоизации
 def recursive_reverse(number):
     if number == 0:
         return str(number % 10)
@@ -44,6 +45,7 @@ print(
         number=10000))
 
 
+# С мемоизацией
 def memoize(f):
     cache = {}
 
@@ -54,6 +56,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +83,18 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.0554046
+0.06712230000000002
+0.12959840000000003
+Оптимизированная функция recursive_reverse_mem
+0.0037380999999999664
+0.004961500000000008
+0.004337900000000006 
+При однократном запуске не поможет. 
+Не смотря на результаты использование мемоизации здесь не целесообразно, 
+так как не предусматривается повторных вызовов
+функции с теми же аргрументами после наполнения кэша
+"""
