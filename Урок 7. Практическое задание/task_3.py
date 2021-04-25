@@ -9,39 +9,25 @@
 
 Но если это слишком сложно, то используйте метод сортировки,
 который не рассматривался на уроках: Шелла, Гномья, Кучей...
-
-[5, 3, 4, 3, 3, 3, 3]
-
-[3, 3, 3, 3, 3, 4, 5]
-
-my_lst
-new_lts
-
-arr[m]
-
-
-from statistics import median
-
-[3, 4, 3, 3, 5, 3, 3]
-
-
-left.clear()
-right.clear()
-
-
-m = 3
-len = 7
-i
-left = []
-right = []
-
-left == right and
-
-for i in
-    for
-    left == right
-    left.clear()
-    right.clear()
-
-
 """
+import random
+
+n = 3
+
+my_list = [random.randint(100, 100000) for i in range(2 * n + 1)]
+
+
+def gnome(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+print(f'{my_list[::]} исходный список  \n {gnome(my_list[::])} отсортированные список \n '
+      f'{my_list[n]} медиана массива')
