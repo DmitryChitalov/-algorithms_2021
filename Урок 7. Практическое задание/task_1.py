@@ -18,4 +18,38 @@
 
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
+
+
+ОТВЕТ: Я сделал переменую sort которая присваивает значение True, и пока sort = True мы не выходим из цикла,
+после входа в цикл sort присваеивает значение False, в for in при перемещении элементов массива sort = True,
+и пока циклу есть что двигать мы не выйдем из массива.
+Если сравнивать с примером с урока и замерами, то разницы по времени нет.
+
+0.0001031000000000018
+0.1440037
+112.2250655
 """
+from random import randint
+from timeit import timeit
+
+
+def bubble_func(my_list):
+    sort = True
+    while sort:
+        sort = False
+        for el in range(len(my_list) - 1):
+            if my_list[el] < my_list[el + 1]:
+                my_list[el], my_list[el + 1] = my_list[el + 1], my_list[el]
+                sort = True
+    return my_list
+
+
+my_list = [randint(-100, 100) for el in range(10)]
+print(timeit("bubble_func(my_list[:])", globals=globals(), number=10))
+
+my_list = [randint(-100, 100) for el in range(100)]
+print(timeit("bubble_func(my_list[:])", globals=globals(), number=100))
+
+my_list = [randint(-100, 100) for el in range(1000)]
+print(timeit("bubble_func(my_list[:])", globals=globals(), number=1000))
+
