@@ -27,7 +27,7 @@
 который вы придумаете, например, реализовать словарь.
 """
 
-#1ый вариант - O(2*n) - экспоненциальная
+#1ый вариант - O(n^2) - квадратичная
 user_lst = [["bazuka", "3125$#$!!#", True],["Zaec", "%$#%FDS", False],["Volchara", "gfddw111QWERTy", True],
             ["BiCDuck", "ghh4FGDRR", False]]
 
@@ -63,3 +63,40 @@ elif system_answer == "not_ok":
             user_lst.append(user_answer2)
             print("Пользователь и пароль успешно добавлены. Добро пожаловать в систему")
             break
+            
+            
+            
+#2ой вариант решения: O(N) - линейная
+user_dict_name_pass = {"Eren_s_Gori": "Mountains_UP", "Still_moving": "speedUP", "43nie_lives_better": "GOGO_black"}
+user_dict_name_acs = {"Eren_s_Gori": True, "Still_moving": False, "43nie_lives_better": True}
+
+def security_check(user_data_lst):
+    Func_check = False
+    for el in user_dict_name_pass:
+        if el == user_data_lst[0]:
+            if user_dict_name_pass[el] == user_data_lst[1]:
+                if user_dict_name_acs[el] == True:
+                    Func_check = True
+    return Func_check
+user_answer = input("Приветствуем Вас в нашей системе. Для доступа к системе просим ввести Ваш логин и пароль: ")
+
+system_answer = security_check(user_answer.split())
+
+if system_answer == True:
+    print("Вход разрешен. Вы в системе")
+else:
+    while True:
+        user_answer = input("Желаете ли пройти регистрацию? Да/Нет: ")
+        if user_answer.lower() == "нет":
+            break
+        elif user_answer.lower() == "да":
+            user_answer = input("Введите логин и пароль через пробел: ")
+            user_answer2 = user_answer.split()
+            user_dict_name_pass[user_answer2[0]] = user_answer2[1]
+            user_dict_name_acs[user_answer2[0]] = True
+            print(f"Пользователь и пароль успешно добавлены. Добро пожаловать в систему. \n "
+                  f"For checking: 1st dict {user_dict_name_pass}\n and 2nd dict {user_dict_name_acs}")
+            break
+
+#!!!! Вывод: выбираем вариант решения - по сложности линейная, т.к. для исполнения квадратичной сложности затрачивается
+# больше времени на исполнение.
