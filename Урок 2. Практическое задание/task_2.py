@@ -20,10 +20,10 @@
 """
 
 
-def task02(original_num, num, odd_count, even_count, call_count):
+def task02(num, odd_count, even_count, call_count):
 
     if num == 0:
-        print(f'В числе {original_num}: {odd_count} нечетных и {even_count} четных цифры')
+        print(f'В введенном числе {odd_count} нечетных и {even_count} четных цифры')
         print(f'Количество вызовов функции - {call_count}')
         return
 
@@ -34,7 +34,7 @@ def task02(original_num, num, odd_count, even_count, call_count):
 
     call_count += 1
 
-    task02(original_num, num // 10, odd_count, even_count, call_count)
+    task02(num // 10, odd_count, even_count, call_count)
 
 
 while True:
@@ -47,4 +47,4 @@ while True:
     except ValueError:
         print('Введено некорректное значение!')
     else:
-        task02(input_num, input_num, 0, 0, 1)
+        task02(input_num, 0, 0, 1)
