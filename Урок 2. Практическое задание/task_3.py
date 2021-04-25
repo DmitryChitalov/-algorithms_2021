@@ -34,7 +34,7 @@ def task03(input_num, reverse_num, call_count):
     reverse_num += str(input_num % 10)
     call_count += 1
 
-    task03(input_num //10, reverse_num, call_count)
+    task03(input_num // 10, reverse_num, call_count)
 
 
 while True:
