@@ -45,3 +45,21 @@ for i in
 
 
 """
+from random import randint
+
+
+def shell(list_num):
+    inc = len(list_num) // 2
+    while inc:
+        for i, el in enumerate(list_num):
+            while i >= inc and list_num[i - inc] > el:
+                list_num[i] = list_num[i - inc]
+                i -= inc
+            list_num[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return list_num
+
+
+m = 3
+list_num = [randint(1, 50) for el in range(2 * m + 1)]
+print(shell(list_num[:]))
