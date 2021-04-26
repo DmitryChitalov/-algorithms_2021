@@ -67,3 +67,59 @@ n_3000 = 3000
 
 # print('sieve(3000): ', sieve(n_3000))
 print('sieve(3000): ', sieve_numpy(n_3000))
+
+"""
+Результаты:
+
+ *** функция со встроенным списком ***
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    28     30.0 MiB     30.0 MiB           1   @profile
+    29                                         def sieve(n):
+    30     30.0 MiB      0.0 MiB           1       m = n * 10
+    31     31.3 MiB      1.3 MiB       30004       a = [i for i in range(m + 1)]
+    32     31.3 MiB      0.0 MiB           1       a[1] = 0
+    33     31.3 MiB      0.0 MiB           1       i = 2
+    34                                         
+    35     31.3 MiB      0.0 MiB       30000       while i <= m:
+    36     31.3 MiB      0.0 MiB       29999           if a[i] != 0:
+    37     31.3 MiB      0.0 MiB        3245               j = i + i
+    38     31.3 MiB      0.0 MiB       76455               while j <= m:
+    39     31.3 MiB      0.0 MiB       73210                   a[j] = 0
+    40     31.3 MiB      0.0 MiB       73210                   j = j + i
+    41     31.3 MiB      0.0 MiB       29999           i += 1
+    42                                         
+    43     31.3 MiB      0.0 MiB       30004       a = [i for i in a if i != 0]
+    44     31.3 MiB      0.0 MiB           1       return a[n - 1]
+
+
+sieve(3000):  27449
+
+ *** Функция с массивом NumPy ***
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    47     30.0 MiB     30.0 MiB           1   @profile
+    48                                         def sieve_numpy(n):
+    49     30.0 MiB      0.0 MiB           1       m = n * 10
+    50     30.2 MiB      0.1 MiB           1       np_a = arange(m + 1)
+    51     30.2 MiB      0.0 MiB           1       np_a[1] = 0
+    52     30.2 MiB      0.0 MiB           1       i = 2
+    53                                         
+    54     30.2 MiB      0.0 MiB       30000       while i <= m:
+    55     30.2 MiB      0.0 MiB       29999           if np_a[i] != 0:
+    56     30.2 MiB      0.0 MiB        3245               j = i + i
+    57     30.2 MiB      0.0 MiB       76455               while j <= m:
+    58     30.2 MiB      0.0 MiB       73210                   np_a[j] = 0
+    59     30.2 MiB      0.0 MiB       73210                   j = j + i
+    60     30.2 MiB      0.0 MiB       29999           i += 1
+    61                                         
+    62     30.2 MiB      0.1 MiB           1       np_a = np_a[np_a != 0]
+    63     30.2 MiB      0.0 MiB           1       return np_a[n - 1]
+
+В данном варианте алгоритма решето Эратосфена, требуется создание большого массива. Профилировка показала, что при 
+использовании  массива из библиотеки NumPy тратится гораздо меньше памяти, чем при использовании 
+аналогичного ему встроенного списка.
+Результаты показывают, что библиотека NumPy хорошо оптимизирована и эффективно управяет ресурсами памяти.
+"""
