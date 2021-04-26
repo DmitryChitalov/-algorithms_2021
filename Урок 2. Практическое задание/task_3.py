@@ -26,13 +26,8 @@
 
 def get_reverse_number(number: int, reverse_number=''):
     """ Делает реверс натурального числа """
-    remainder = number % 10
-    if len(str(number)) == 1:
-        reverse_number += str(remainder)
-        return print(f'Перевёрнутое число: {reverse_number}')
-    reverse_number += str(remainder)
-    return get_reverse_number(number // 10, reverse_number)
+    return print(f'Перевёрнутое число: {reverse_number + str(number % 10)}') if len(str(number)) == 1 \
+        else get_reverse_number(number // 10, reverse_number + str(number % 10))
 
 
-get_reverse_number(1230)
-
+get_reverse_number(100)

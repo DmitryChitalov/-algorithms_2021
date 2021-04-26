@@ -24,25 +24,10 @@ def get_list_of_even_and_odd(number: int, even_digits=0, odd_digits=0):
     """
         Принимает в качестве агрумента натуральное число и распечатывает количество четных и нечетных цифр в нём
     """
-    remainder = number % 2
+    odd_digits if number % 2 else even_digits += 1   # увеличиваем соответствующий счётчик
 
-    if len(str(number)) == 1:  # базовый случай, счётчики к этому времени заполнятся
-        if remainder:
-            odd_digits += 1
-            print(f"Количество четных и нечетных цифр в числе равно: ({even_digits}, {odd_digits})")
-            return
-        else:  # remainder == 0
-            even_digits += 1
-            print(f"Количество четных и нечетных цифр в числе равно: ({even_digits}, {odd_digits})")
-            return
-
-    if remainder:
-        odd_digits += 1
-        new_number = number // 10
-    else:  # remainder == 0  - чётное
-        even_digits += 1
-        new_number = number // 10
-    return get_list_of_even_and_odd(new_number, even_digits, odd_digits)
+    return print(f"Количество четных и нечетных цифр в числе равно: ({even_digits}, {odd_digits})") \
+        if len(str(number)) == 1 else get_list_of_even_and_odd(number // 10, even_digits, odd_digits)
 
 
 def get_natural_number():

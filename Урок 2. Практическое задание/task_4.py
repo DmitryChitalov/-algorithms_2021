@@ -14,27 +14,15 @@
 """
 
 
-def get_sum_descending_row(number: int, reminder=1, sum_of_row=0, depth_value=1):
+def get_sum_descending_row(number: int, number_of_row=1.0, sum_of_row=0.0, depth_value=1):
     """
         Считает сумму чисел убывающего ряда (sum_of_row) чисел вида: : 1 -0.5 0.25 -0.125 ...
         где number - количество (depth_value) чисел этого ряда, т.е. натуральное число
     """
-    if number == 1:
-        sum_of_row += reminder
-        reminder /= 2
-        return f'Количество элементов: {depth_value} , их сумма: {sum_of_row}'
-    if number % 2:
-        sum_of_row += reminder
-        reminder /= 2
-        new_number = number - 1
-    else:  # not number % 2
-        sum_of_row -= reminder
-        reminder /= 2
-        new_number = number - 1
-
-    depth_value += 1
-    return get_sum_descending_row(new_number, reminder, sum_of_row, depth_value)
+    sum_of_row += (number_of_row if depth_value % 2 else - number_of_row)  # суммируем в переменную
+    return print(f'Количество элементов: {depth_value} , их сумма: {sum_of_row}') if number == 1 \
+        else get_sum_descending_row(number - 1, number_of_row / 2, sum_of_row, depth_value + 1)
 
 
 user_number = int(input('Введите количество элементов: '))
-print(get_sum_descending_row(user_number))
+get_sum_descending_row(user_number)

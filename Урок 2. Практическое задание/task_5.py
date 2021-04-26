@@ -23,22 +23,15 @@
 """
 
 
-def get_ascii_symbols_and_codes(code_number=31):
+def get_ascii_symbols_and_codes(code_number=32):
     """
         Вывеодит на экран коды и символы таблицы ASCII, начиная с символа
         под номером 32 и заканчивая 127-м включительно.
     """
-    code_number += 1
-    if code_number == 127:
-        print(f'{code_number} - {chr(code_number)}', end=' ')
+    if code_number == 128:
         return
-
-    if not (code_number - 1) % 10:
-        print(f'{code_number} - {chr(code_number)}', end='\n')
-        return get_ascii_symbols_and_codes(code_number)
-    else:
-        print(f'{code_number} - {chr(code_number)}', end=' ')
-        return get_ascii_symbols_and_codes(code_number)
+    print(f'{code_number} - {chr(code_number)}', end=(' ' if (code_number - 1) % 10 else '\n'))
+    return get_ascii_symbols_and_codes(code_number + 1)
 
 
 get_ascii_symbols_and_codes()
