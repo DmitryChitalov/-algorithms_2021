@@ -9,6 +9,41 @@
 
 Но если это слишком сложно, то используйте метод сортировки,
 который не рассматривался на уроках: Шелла, Гномья, Кучей...
+
+[5, 3, 4, 3, 3, 3, 3]
+
+[3, 3, 3, 3, 3, 4, 5]
+
+my_lst
+new_lts
+
+arr[m]
+
+
+from statistics import median
+
+[3, 4, 3, 3, 5, 3, 3]
+
+
+left.clear()
+right.clear()
+
+
+m = 3
+len = 7
+i
+left = []
+right = []
+
+left == right and
+
+for i in
+    for
+    left == right
+    left.clear()
+    right.clear()
+
+
 """
 from statistics import median
 from random import randint
