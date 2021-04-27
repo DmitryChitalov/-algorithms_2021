@@ -16,3 +16,29 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+# Алгоритм с Квадратичной сложностью O(n^2)
+def find_min_el1(lst):
+    rez = lst[0] # O(1)
+    for i in range(len(lst)):  # O(n)
+        for el in lst:  # O(n)
+            if lst[i] > el and el < rez:  # O(2)
+                rez = el  # O(1)
+    return rez  # O(1)
+
+
+# Алгоритм с линейной сложностью O(n)
+def find_min_el2(lst):
+    rez = lst[0]  # O(1)
+    for el in lst:  # O(n)
+        if el < rez:  # O(1)
+            rez = el  # O(1)
+    return rez  # O(1)
+
+
+if __name__ == '__main__':
+    my_list = [13, 4, 16, 7, 20, 21, 13]
+
+    print(find_min_el1(my_list))
+    print(find_min_el2(my_list))
