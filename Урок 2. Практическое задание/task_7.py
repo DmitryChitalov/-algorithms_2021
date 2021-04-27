@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_n(n):
+    if n == 1:
+        return n
+    else:
+        return sum_n(n-1) + n
+
+
+def compare(n):
+
+    if sum_n(n) == n * (n + 1) / 2:
+        return 'Верно!'
+    else:
+        return 'Неверно'
+
+
+number = int(input('Введите N '))
+
+print(compare(number))
