@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,8 +22,16 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+
+        # Проверяем, нет ли  нарушения в алгоритме построения бинарного дерева.
+        # Для этого проверяем можем ли мы добавить новое знаение влево от узла
+        if not (new_node < self.root):
+            print(f'Вы добавляете значение {new_node} влево от значения узла {self.root}, но '
+                  f'должны добавлять вправо!')
+            return
+
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if self.left_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -36,8 +45,16 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+
+        # Проверяем, нет ли нарушения в алгоритме построения бинарного дерева.
+        # Для этого проверяем можем ли мы добавить новое значение вправо от узла
+        if not (new_node > self.root):
+            print(f'Вы добавляете значение {new_node} вправо от значения узла {self.root}, а '
+                  f'должны добавлять влево.')
+            return
+
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -66,14 +83,13 @@ class BinaryTree:
         return self.root
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r = BinaryTree(9)
+print(f'root = {r.get_root_val()}')
+r.insert_left(4)
+print(f'(left <- root) = ({r.get_left_child().get_root_val()} <- {r.get_root_val()})')
+r.insert_right(17)
+print(f'(root -> right) = ({r.get_root_val()} -> {r.get_right_child().get_root_val()})')
+r.get_left_child().insert_left(6)
+r.get_left_child().insert_right(6)
+print(f'(right <- left <- root) = ({r.get_left_child().get_right_child().get_root_val()} <- '
+      f'{r.get_left_child().get_root_val()} <- {r.get_root_val()})')
