@@ -22,6 +22,13 @@ class BinaryTree:
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
+
+        try:
+            if new_node >= self.root:
+                raise ValueError
+        except ValueError:
+            print(f'Error! {new_node} >= {self.root}')
+            return
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -36,6 +43,12 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        try:
+            if new_node < self.root:
+                raise ValueError
+        except ValueError:
+            print(f'Error! {new_node} < {self.root}')
+            return
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -69,9 +82,11 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
+r.insert_left(7)
 r.insert_left(40)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
+r.insert_right(4)
 r.insert_right(12)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
