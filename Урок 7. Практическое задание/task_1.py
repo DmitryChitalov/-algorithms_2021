@@ -100,7 +100,7 @@ test_cases = [
 
 def unit_test_fn(fn):
     passed_tests = 0
-    print(sorted.__name__)
+    print(fn.__name__)
     for test_case in test_cases:
         props = test_case["props"]
         expected_result = test_case["result"]
