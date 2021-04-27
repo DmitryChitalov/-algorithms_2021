@@ -22,3 +22,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse_digits(n):
+    if n < 10:
+        return n
+    else:
+        reverse = str(n % 10) + str(reverse_digits(n // 10))
+        return reverse
+
+
+print(reverse_digits(1234))
