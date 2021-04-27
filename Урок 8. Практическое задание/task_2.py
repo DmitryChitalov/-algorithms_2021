@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,25 +22,28 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
+        try:
+            if new_node > self.root:
+                raise ValueError('Нарушающие требования бинарного дерева!')
+        except ValueError as e:
+            print(f'{e}\n'
+                  f'Левый узел >{new_node}< больше корня >{self.root}<!')
+        if self.left_child is None:
             self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
         else:
-            # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.left_child = self.left_child
             self.left_child = tree_obj
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
+        try:
+            if new_node < self.root:
+                raise ValueError('Нарушающие требования бинарного дерева!')
+        except ValueError as e:
+            print(f'{e}\n'
+                  f'Правый узел >{new_node}< меньше корня >{self.root}<!')
+        if self.right_child is None:
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
         else:
@@ -51,11 +55,23 @@ class BinaryTree:
 
     # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        try:
+            if self.right_child is None:
+                raise Exception('Введите правого потомка')
+            else:
+                return self.right_child
+        except Exception as e:
+            print(e)
 
     # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        try:
+            if self.left_child is None:
+                raise Exception('Введите левого потомка')
+            else:
+                return self.left_child
+        except Exception as e:
+            print(e)
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -68,11 +84,13 @@ class BinaryTree:
 
 r = BinaryTree(8)
 print(r.get_root_val())
+r.insert_left(4)
 print(r.get_left_child())
-r.insert_left(40)
+# r.insert_left(40)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
+# r.insert_right(1)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
