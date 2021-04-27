@@ -22,3 +22,11 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+def reverse_amn(numb_1):
+    if numb_1 < 10:
+        return numb_1
+    else:
+        return str(numb_1 % 10) + str(reverse_amn(numb_1 // 10))
+
+print(reverse_amn(int(input("Введи номерок: "))))

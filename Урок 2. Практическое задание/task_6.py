@@ -11,3 +11,22 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+import random as rnd
+
+def number_s(rnd, n):
+    user_answ = int(input(f"количество попыток = {n}. Введите число от 0 до 100: "))
+    if n == 0:
+        return f"Попытки закончились, вы не угадали. было число {rnd}"
+    elif user_answ == rnd:
+        return f"Вы отгадали!"
+    else:
+        if user_answ < rnd:
+            print("не отгадали, ваше число меньше загаданного")
+            return number_s(rnd, n - 1)
+        elif user_answ > rnd:
+            print("не отгадали, ваше число больше загаданного")
+            return number_s(rnd, n - 1)
+
+
+print(number_s(int(rnd.random() * 100), 10))

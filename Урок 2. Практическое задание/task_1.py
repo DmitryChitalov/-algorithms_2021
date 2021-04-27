@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calcul_method():
+    system_check = input('Введите +, -, *, / или 0 для выхода: ')
+    if system_check not in ['+', '-', '*', '/', '0']:
+        print('Введите другой знак, не подходит')
+        return calcul_method()
+
+    if system_check == '0':
+        return f'Вы вышли из проги.'
+
+    try:
+        num_1 = float(input('Введите первое число: '))
+        num_2 = float(input('Введите второе число: '))
+    except ValueError:
+        print(f'Алерт! Не число')
+        return calcul_method()
+
+    if system_check == '+':
+        print(f'Answer: {num_1 + num_2}')
+        return calcul_method()
+    if system_check == '-':
+        print(f'Answer: {num_1 - num_2}')
+        return calcul_method()
+    if system_check == '*':
+        print(f'Answer: {num_1 * num_2}')
+        return calcul_method()
+    if system_check == '/':
+        try:
+            print(f'Answer: {num_1 / num_2}')
+            return calcul_method()
+        except ZeroDivisionError:
+            print('Деление на ноль, исправьте ситуацию')
+            return calcul_method()
+
+print(calcul_method())
