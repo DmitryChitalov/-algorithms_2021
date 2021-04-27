@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def Check_number(user_answer):
+    global count_odd, count_even
+    if user_answer == 0:
+        return f"Чётных чисел - {count_even}, нечётных чисел - {count_odd}"
+    else:
+        if (user_answer % 10) % 2 == 0:
+            count_even += 1
+            return Check_number(int(user_answer / 10))
+        else:
+            count_odd += 1
+            return Check_number(int(user_answer / 10))
+
+count_even = 0
+count_odd = 0
+print(Check_number(int(input("Введите число: "))))
