@@ -48,9 +48,10 @@ for i in
 
 from random import randint
 from statistics import median
+from math import inf
 
 
-def custom_median(array):
+def custom_median_1(array):
     for i in range(len(array) - 1):
         el = array[i]
         l = []
@@ -69,8 +70,39 @@ def custom_median(array):
     return array[len(array) - 1]
 
 
+def custom_median(array):
+    min_el = -inf
+    max_el = inf
+    i = 0
+    while i < len(array):
+        el = array[i]
+        if (el > min_el) and (el < max_el):
+            l = []
+            m = []
+            r = []
+            for el2 in array:
+                if el2 < el:
+                    l.append(el2)
+                elif el2 > el:
+                    r.append(el2)
+                else:
+                    m.append(el2)
+            len_l = len(l)
+            len_m = len(m)
+            len_r = len(r)
+            if abs((len_l - len_m) - (len_r - len_m)) < len_m:
+                return el
+            if len_l - len_r < 0:
+                min_el = el
+            else:
+                max_el = el
+        i += 1
+
+    return array[len(array) - 1]
+
+
 def make_shuffled_odd_array(number=10):
-    return [randint(10, 20) for _ in range(2 * number + 1)]
+    return [randint(10, 90) for _ in range(2 * number + 1)]
 
 
 shuffled_odd_array_1 = make_shuffled_odd_array(1)
@@ -91,7 +123,7 @@ test_cases = [
     },
     {
         'description': 'in the middle',
-        'props': [11, 12, 13, 21, 31, 32, 33],
+        'props': [13, 12, 11, 21, 33, 32, 31],
         'result': 21,
     },
     {
@@ -100,19 +132,23 @@ test_cases = [
         'result': 40,
     },
     {
+        'description': 'shuffled_odd_array_1',
         'props': shuffled_odd_array_1,
         'result': median(shuffled_odd_array_1),
     },
     {
+        'description': 'shuffled_odd_array_10',
         'props': shuffled_odd_array_10,
         'result': median(shuffled_odd_array_10),
     },
     {
+        'description': 'shuffled_odd_array_100',
         'props': shuffled_odd_array_100,
         'result': median(shuffled_odd_array_100),
         'is_detailed': False,
     },
     {
+        'description': 'shuffled_odd_array_500',
         'props': shuffled_odd_array_500,
         'result': median(shuffled_odd_array_500),
         'is_detailed': False,
@@ -142,6 +178,7 @@ def unit_test_fn(fn):
 
 test_fns = [
     median,
+    custom_median_1,
     custom_median,
 ]
 
