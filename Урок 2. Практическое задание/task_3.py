@@ -22,3 +22,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+# Рекурсивная функция для переворота чисел
+def num_reverse(num):
+    if num == 0:
+        return ''
+    else:
+        return str(num % 10) + num_reverse(num // 10)
+
+
+def program():
+    try:
+        num = int(input('Введите число, которое требуется перевернуть: '))
+        print(num_reverse(num))
+    except ValueError:
+        print('Необходимо ввести число!!!')
+        program()
+
+
+if __name__ == '__main__':
+    program()
