@@ -23,14 +23,6 @@ from statistics import median
 
 [3, 4, 3, 3, 5, 3, 3]
 
-
-left.clear()
-right.clear()
-
-
-m = 3
-len = 7
-i
 left = []
 right = []
 
