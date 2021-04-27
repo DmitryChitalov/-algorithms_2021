@@ -49,6 +49,7 @@ for i in
 from random import randint
 from statistics import median
 from math import inf
+import timeit
 
 
 def custom_median_1(array):
@@ -105,10 +106,34 @@ def make_shuffled_odd_array(number=10):
     return [randint(10, 90) for _ in range(2 * number + 1)]
 
 
+test_array_names = [
+    '10',
+    '100',
+    '500',
+]
+test_fns = [
+    median,
+    custom_median_1,
+    custom_median,
+]
+
 shuffled_odd_array_1 = make_shuffled_odd_array(1)
 shuffled_odd_array_10 = make_shuffled_odd_array(10)
 shuffled_odd_array_100 = make_shuffled_odd_array(100)
 shuffled_odd_array_500 = make_shuffled_odd_array(500)
+
+for test_array_name in test_array_names:
+    print(f'shuffled_odd_array_{test_array_name}')
+    for test_fn in test_fns:
+        print(test_fn.__name__)
+        print(
+            timeit.timeit(
+                f'{test_fn.__name__}(shuffled_odd_array_{test_array_name})',
+                globals=globals(),
+                number=1000,
+            )
+        )
+    print()
 
 test_cases = [
     {
@@ -184,3 +209,36 @@ test_fns = [
 
 for test_fn in test_fns:
     unit_test_fn(test_fn)
+
+
+"""
+В начале сделал без сортировки:
+custom_median_1
+но там сложность был перебор до тех пор, пока не найдется нужное число
+
+custom_median
+оптимизированный вариант
+по ходу выполнения начал записывать максимальный и минимальный элемент
+в зависимости от размеров правого и левого массива
+и пропускать те элементы, которые не входят между min_el и max_el
+
+Худший случай остался O(n^2)
+но средний приблизился к O(n * log(n))
+Оптимизация дала ускорение в среднем в 5 раз
+
+shuffled_odd_array_100
+median
+0.014500322999999996
+custom_median_1
+1.5732338110000001
+custom_median
+0.24601487499999997
+
+shuffled_odd_array_500
+median
+0.07766113200000002
+custom_median_1
+1.6349787269999998
+custom_median
+0.3711790719999999
+"""
