@@ -18,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def numbers():
+    number = input('Введите натуральное число: ')
+    if not number.isdigit() or not int(number):  # После этого остаются только натуральные числа. Последним отсекаем '0'
+        print('Вы должны были ввести натуральное число. Попробуйте еще раз.')
+        return numbers()
+    return even_odd(int(number))
+
+
+def even_odd(number):
+    values = [0, 0]
+    if not number // 10:
+        if number % 2:
+            values[1] += 1
+        else:
+            values[0] += 1
+        return values
+    return tuple(x + y for x, y in zip(even_odd(number // 10), even_odd(number % 10)))
+
+
+print('Количество четных и нечетных цифр в числе равно:', numbers())
