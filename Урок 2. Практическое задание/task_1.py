@@ -28,3 +28,50 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculation():
+    actions = '+-*/'
+    exit_condition = '0'
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if operation == exit_condition:
+        print('Выход из программы')
+    elif operation not in actions:
+        print('Необходимо ввести одну из операций (+, -, *, / или 0 для выхода)')
+        calculation()
+    else:
+        num1 = input('Введите первое число: ')
+        num2 = input('Введите второе число: ')
+
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except ValueError:
+            print('Необходимо ввести число!!!')
+            calculation()
+
+        if operation == '+':
+            rez = int(num1) + int(num2)
+            print(f'Результат: {rez}')
+            calculation()
+        elif operation == '-':
+            rez = int(num1) - int(num2)
+            print(f'Результат: {rez}')
+            calculation()
+        elif operation == '*':
+            rez = int(num1) * int(num2)
+            print(f'Результат: {rez}')
+            calculation()
+        elif operation == '/':
+            try:
+                rez = int(num1) / int(num2)
+                print(f'Результат: {rez}')
+                calculation()
+            except ZeroDivisionError:
+                print('На 0 делить нельзя')
+                calculation()
+
+
+if __name__ == '__main__':
+    calculation()
