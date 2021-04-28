@@ -16,3 +16,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equal(number):
+    if number == 1:
+        return 1
+    return number + equal(number - 1)
+
+
+number = 17
+left = equal(number)
+right = number * (number + 1) / 2
+print(left == right)
