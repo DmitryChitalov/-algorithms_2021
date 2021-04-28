@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from functools import reduce
+
+def even_odd_collector(arrays, x):
+    """
+    :param arrays: Массив вида [0: [нечетные числа], 1: [четные числа]]
+    :param x: Число
+    :return: Массив вида [0: [нечетные числа], 1: [четные числа]]
+    """
+    x = int(x)
+    arrays[x % 2].append(x)
+    return arrays
+
+n = input('Введите число: ')
+(odd, even) = reduce(even_odd_collector, n, [[], []])
+print('{} нечетных цифр {} и {} четных цифр {}'.format(len(even), even, len(odd), odd))
