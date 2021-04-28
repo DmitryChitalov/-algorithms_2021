@@ -16,3 +16,28 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+"""
+    Сложность: O(N^2).
+"""
+def find_min_1(lst_obj):
+    for i in range(len(lst_obj)):
+        is_min = true
+        for j in range(len(lst_obj) - i - 1):
+            if lst_obj[i] > lst_obj[i + j + 1]:
+                is_min = false
+        if is_min:
+            return lst_obj[i]
+    return lst_obj[-1]
+   
+
+
+"""
+    Сложность: O(N).
+"""
+def find_min_2(lst_obj):
+    min = lst_obj[0]
+    for i in range(len(lst_obj) - 1):
+        if min > lst_obj[i+1]:
+            min = lst_obj[i+1]
+    return min

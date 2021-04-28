@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def ask_answer(number, attempt):
+    if attempt <= 0:
+        print(f'Попыки закончились. Правильное число: {number}')
+        return
+    answer = int(input("Угадайте число от 0 до 100: "))
+    if answer == number:
+        print("Поздравляю! Вы угадали.")
+        return
+    if answer < number:
+        print("Мало.")
+    else:
+        print("Много.")
+    ask_answer(number, attempt - 1)
+
+
+
+from random import randint
+
+ask_answer(randint(0,100), 10)
