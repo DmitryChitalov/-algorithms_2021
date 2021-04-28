@@ -9,3 +9,34 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+
+
+def web_hex():
+    import hashlib
+    from uuid import uuid4
+
+    url = input('Введите адрес страницы. (0 - для выхода): ')
+    if url == '0':
+        return 'Выход.'
+    else:
+
+        salt = uuid4().hex
+        res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+
+        with open('hex_list.txt', 'a+') as file:
+            if res not in file:
+                file.write(res + '\n')
+                print(f'Страница добавлена в кэш.')
+                return web_hex()
+            if res in file:
+                print(f'Страница существует.')
+                return web_hex()
+
+
+print(web_hex())
+
+"""
+В данном задании возникла проблема следующего характера - 
+при попытке записи одной и той же строки, хеши получаются разные
+и соответственно, при сравнивании хешей, создается новый, так как нет совпадений.
+"""
