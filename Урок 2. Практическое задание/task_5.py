@@ -21,3 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func(start, i):
+    if i == 0:
+        if 32 > start or start >= 38:  # базовый случай
+            return start
+    else:
+        print(start+1, chr(func(start + 1, i-1)), sep=' - ', end=' ')
+        return start
+
+# n = 10
+# if n <= 10
+#     print()
+# else:
+
+print(func(32, 2))

@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+number = '1230'
+
+
+def reverse(num):
+    if len(num) == 1:
+        return num
+    else:
+        return reverse(num[1:]) + num[0]
+
+
+print(reverse(number))
+
