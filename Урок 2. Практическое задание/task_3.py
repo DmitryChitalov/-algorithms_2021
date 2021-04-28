@@ -22,3 +22,8 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from functools import reduce
+
+number = input('Введите число: ')
+print(''.join(reduce(lambda reverse, char: [char] + reverse, number, [])))
