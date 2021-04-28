@@ -31,16 +31,6 @@ def get_time_diff(fn):
     return wrapped
 
 
-# Это моя первая попытка сделать обертку, до сих пор не сталкивался.
-# Мне в этом коде непонятная излишняя вложенность. Вопрос: почему нельзя обойтись без
-# wrapped? Т.е. сделать так:
-# def get_time_diff(fn):
-#    start_time = time.time()
-#    fn()
-#    return time.time() - start_time
-# Интерпретатор ругается на ошибку TypeError: 'float' object is not callable. А в чем суть ошибки?
-
-
 @get_time_diff
 def make_list(items_count):
     print(f'Формируем список из {items_count} элементов')

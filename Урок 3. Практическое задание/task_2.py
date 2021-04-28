@@ -26,19 +26,31 @@ with open('saved_pass.txt', 'w') as pass_file:
     pass_str = input('Введите пароль: ')
 
     salt = uuid.uuid4().hex
+
+    # В первой строке сохраняем соль
+    pass_file.write(salt)
+
     save_pass_str = hashlib.sha256(salt.encode() + pass_str.encode()).hexdigest()
-    print(f'salt = {salt}')
-    print(f'saved pass string = {save_pass_str}')
+
+    # Во второй - схешированный пароль
     pass_file.write(save_pass_str)
 
+    print(f'salt = {salt}')
+    print(f'saved pass string = {save_pass_str}')
+
+#  Имитируем проверку введенного пароля
+with open('saved_pass.txt', 'r') as pass_file:
+    saved_str = pass_file.readline()
+    salt = saved_str[0:32]
+    saved_pass_str = saved_str[32:]
+
     pass_str = input('Введите пароль повторно для проверки: ')
-    if hashlib.sha256(salt.encode() + pass_str.encode()).hexdigest() == save_pass_str:
+    if hashlib.sha256(salt.encode() + pass_str.encode()).hexdigest() == saved_pass_str:
         print('Пароль введен верно!')
     else:
         print('Пароль введен неверно!')
 
-# И тут что-то я упустил. В файл сохранен зашифрованный соленый пароль.
-# Ок. В следующий раз при авторизации мы должны получить введенную строку с паролем,
-# посолить, зашифровать и сравнить с сохраненным значением. Но как мы это сделаем,
-# если соль генерится каждый раз разная? Т.е. соль, смешанная с паролем и записанная в файл, будет
-# отличаться от той, которую мы будем генерить при авторизации. Где я что пропустил?
+# Возможно я что-то упустил в теоретической части. Соль необходимо сохранять в файл в несхешированном виде
+# чтобы иметь возможность проверить потом сохраненный пароль?
+# И еще один вопрос: в ряде источников в интернете прочитал, что uuid генерит  не случайную, а уникальную
+# последовательность, и использовать uuid для генерации соли не рекомендуется. Так ли это?
