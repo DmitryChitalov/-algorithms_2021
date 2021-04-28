@@ -1,12 +1,9 @@
 """
 Задание 2.
-
 Доработайте пример структуры "дерево",
 рассмотренный на уроке.
-
 Предложите варианты доработки и оптимизации
 (например, валидация значений узлов в соответствии с требованиями для бинарного дерева)
-
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
@@ -19,29 +16,27 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
-    # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
+        try:
+            if new_node > self.root:
+                raise ValueError('Нарушение требования бинарного дерева!')
+        except ValueError as e:
+            print(e)
         if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
         else:
-            # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.left_child = self.left_child
             self.left_child = tree_obj
 
-    # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
+        try:
+            if new_node < self.root:
+                raise ValueError('Нарушение требования бинарного дерева!')
+        except ValueError as e:
+            print(e)
         if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
         else:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
