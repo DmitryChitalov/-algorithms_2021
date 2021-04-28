@@ -28,3 +28,54 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_calc():
+    operators = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if operators == '0':
+        print('Завершение программы')
+        return
+
+    else:
+        if operators in '+-*/':
+            while True:
+                first_operand = input("Введите первое число\n>>>")
+                if first_operand.isdigit():
+                    first_operand = float(first_operand)
+                    break
+                else:
+                    print("Вы ввели не число, пожалуйста введите число")
+            while True:
+                second_operand = input("Введите второе число\n>>>")
+                if second_operand.isdigit():
+                    second_operand = float(second_operand)
+                    break
+                else:
+                    print("Вы ввели не число, пожалуйста введите число")
+            if operators == '+':
+                result = first_operand + second_operand
+                print(f'Результат операции: {result}')
+                return my_calc()
+            elif operators == '-':
+                result = first_operand - second_operand
+                print(f'Результат операции: {result}')
+                return my_calc()
+            elif operators == '*':
+                result = first_operand * second_operand
+                print(f'Результат операции: {result}')
+                return my_calc()
+            elif operators == '/':
+                try:
+                    result = first_operand / second_operand
+                except ZeroDivisionError:
+                    print('Нельзя делить на ноль')
+                else:
+                    print(f'Результат операции: {result}')
+                return my_calc()
+        else:
+            print('Пожалуйста, введите символ из списка.')
+            return my_calc()
+
+
+my_calc()

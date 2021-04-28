@@ -22,3 +22,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse_number(number, reverse_digits_list=[]):
+    digit = int(number) % 10
+
+    reverse_digits_list.append(str(digit))
+
+    if len(number) == 1:
+        result = ''
+        for number in reverse_digits_list:
+            result += str(number)
+        print(f'Перевернутое число: {result}')
+        return
+
+    reverse_number(number[:-1], reverse_digits_list)
+
+
+reverse_number(input('Введите число: '))
