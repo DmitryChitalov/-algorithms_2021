@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def output_ASCII(num):
+    if num == 127:
+        return f'{num} - {chr(127)} '
+    if str(num)[-1] == '1':
+        return f'{num} - {chr(num)}\n' \
+               f'{num} - {output_ASCII(num + 1)} '
+    else:
+        return f'{num} - {chr(num)} ' \
+               f'{num + 1} - {output_ASCII(num + 1)} '
+
+
+print(output_ASCII(32))

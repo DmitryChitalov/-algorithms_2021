@@ -16,3 +16,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def proof_of_equality(n, sum=0, formul=0):
+    if formul == 0:
+        formul = n * (n+1) // 2
+    if n == 1:
+        sum += 1
+        print(f'1 + 2 + ... + n = n(n+1)/2\n'
+              f'{sum} - {formul}')
+        return sum == formul
+    sum += n
+    return proof_of_equality(n - 1, sum, formul)
+
+
+print(proof_of_equality(6))
