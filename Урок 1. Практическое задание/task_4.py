@@ -25,3 +25,35 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Сложность O(n)
+def aut(users, username, userpass):
+    for key, value in users.items():
+        if key == username:
+            if value['пароль'] == userpass and value['аутентификация']:
+                return "Доступ разрешен"
+            elif value['пароль'] == userpass \
+                    and not value['аутентификация']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['password'] != userpass:
+                return "Введен не верный пароль"
+
+    return "Такого пользователя не существует. Пройдите активацию"
+
+
+# Сложность O(1)
+def aut(users, username, userpass):
+    if users.get(username):
+        if users[username]['пароль'] == userpass \
+                and users[username]['аутентификация']:
+            return "Доступ разрешен"
+        elif users[username]['пароль'] == userpass \
+                and not users[username]['activation']:
+            return "Учетная запись не активна! Пройдите активацию!"
+        elif users[username]['пароль'] != userpass:
+            return "Введен не верный пароль"
+    else:
+        return "Такого пользователя не существует. Пройдите активацию"
+
+
+"""Второй метод лучше, т.к. сложность О(1) лучше"""
