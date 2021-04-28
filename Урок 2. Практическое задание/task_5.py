@@ -21,3 +21,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def ASCII_table(code, min, max, line_len):
+    if code > max:
+        return ""
+    result = f'{code} - {chr(code)}'
+    result += " " if (code - min + 1) % line_len else "\n"
+    result += ASCII_table(code + 1, min, max, line_len)
+    return result
+
+print(ASCII_table(72, 72, 127, 10))
