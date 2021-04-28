@@ -28,3 +28,46 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def validation(number):
+    try:
+        float(number)
+        return True
+    except ValueError:
+        print('This is not a number')
+        return False
+
+
+def calculator():
+    operation = input("select operation +, -, *, / or 0 to exit: ")
+    if operation == '0':
+        return print('You entered "0". Termination of the function.')
+    if operation not in ('+', '-', '*', '/'):
+        print('incorrect input')
+        return calculator()
+
+    first_number = input("Enter the first number: ")
+    if not validation(first_number):
+        return calculator()
+    first_number = float(first_number)
+    second_number = input("Enter the second number:")
+    if not validation(second_number):
+        return calculator()
+    second_number = float(second_number)
+
+    if operation == '+':
+        print(f'Result:  {first_number + second_number}')
+    elif operation == '-':
+        print(f'Result:  {first_number - second_number}')
+    elif operation == '*':
+        print(f'Result:  {first_number * second_number}')
+    elif operation == '/' and second_number:
+        print(f'Result:  {first_number / second_number}')
+    else:
+        print(f'The divisor must be nonzero)')
+
+    return calculator()
+
+
+calculator()
