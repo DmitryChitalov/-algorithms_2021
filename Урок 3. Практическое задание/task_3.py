@@ -16,4 +16,15 @@
 а
 """
 
-# hash?
+
+def substring_count(string):
+    substrings = [hash(string[i:i+j]) for i in range(len(string))
+                                      for j in range(1, len(string))]
+    print(f'В строке {string} {len(set(substrings))} уникальных подстрок.')
+
+
+if __name__ == '__main__':
+
+    substring_count('papa')
+    substring_count('papapa')
+    substring_count('qwerty')
