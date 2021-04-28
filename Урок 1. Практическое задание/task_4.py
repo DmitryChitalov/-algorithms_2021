@@ -25,3 +25,43 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def authentication_n(login, password, users_data):  # O(n)
+    if login in users_data:  # O(n)
+        if users_data.get(login)[0] == password:  # O(1)
+            if users_data.get(login)[1]:  # O(1)
+                return 'Success'  # O(1)
+            else:
+                return 'Confirm your account'  # O(1)
+    return 'Invalid login or password'  # O(1)
+
+
+def authentication_1(login, password, users_data):  # O(1)
+    if users_data.get(login) and users_data[login][1]:  # O(1)
+        if users_data[login][0] == password:  # O(1)
+            return 'Success'  # O(1)
+        else:
+            return 'Invalid password'  # O(1)
+    elif users_data.get(login) and not users_data[login][1]:  # O(1)
+        return 'Confirm your account'  # O(1)
+    else:
+        return 'Invalid login'  # O(1)
+
+
+users_data = {
+    'user_1': [12345, True],
+    'user_2': [22323, False],
+    'user_3': [11111, True],
+    'user_4': [22222, False],
+    'user_5': [33333, True],
+}
+print(f'\nAuthentication O(n)\n'
+      f'    1. {authentication_n("user_1", 12345, users_data)}\n'  # True
+      f'    2. {authentication_n("user_21", 22323, users_data)}\n'  # Invalid login
+      f'    3. {authentication_n("user_4", 22222, users_data)}\n')  # Not Confirmed account
+
+print(f'Authentication O(1)\n'
+      f'    1. {authentication_1("user_1", 12345, users_data)}\n'  # True 
+      f'    2. {authentication_1("user_21", 22323, users_data)}\n'  # Invalid login
+      f'    3. {authentication_1("user_4", 22222, users_data)}\n')  # Not Confirmed account
