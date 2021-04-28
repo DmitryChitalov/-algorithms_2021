@@ -4,8 +4,10 @@
 для оптимизации памяти и
 доказать!!! (наглядно, кодом) их эффективность (на примере профилировщика)
 """
-from memory_profiler import memory_usage
 import timeit
+
+from memory_profiler import memory_usage
+
 import task_2_cython as cp
 
 

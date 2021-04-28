@@ -21,8 +21,9 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
-from memory_profiler import profile
 from functools import reduce
+
+from memory_profiler import profile
 
 
 @profile

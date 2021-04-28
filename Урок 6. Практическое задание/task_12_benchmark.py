@@ -22,6 +22,7 @@
 С одновременным замером времени (timeit.default_timer())!
 """
 import timeit
+
 from memory_profiler import memory_usage
 from numpy import arange
 

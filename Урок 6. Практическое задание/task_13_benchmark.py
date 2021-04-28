@@ -22,8 +22,9 @@
 С одновременным замером времени (timeit.default_timer())!
 """
 import timeit
-from memory_profiler import memory_usage
 from functools import reduce
+
+from memory_profiler import memory_usage
 
 
 def benchmark(func):
