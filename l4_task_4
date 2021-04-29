@@ -1,0 +1,21 @@
+from hashlib import sha256
+
+d = {}
+
+
+def url_hash(u):
+    salt = u[10:15]
+    code = sha256(u.encode() + salt.encode()).hexdigest()
+    ur = d.get(code)
+    if ur is None:
+        d[code] = u
+        print(f'URL {u} added')
+    else:
+        print(f'URL {ur} already added')
+
+
+url = 'https://gb.ru/'
+cnt = 0
+while cnt < 2:
+    url_hash(url)
+    cnt += 1
