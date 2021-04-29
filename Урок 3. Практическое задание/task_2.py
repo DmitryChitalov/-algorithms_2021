@@ -18,3 +18,24 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from hashlib import sha256
+
+
+# Так как логина нет, привязывать соль не к кому. Так что просто поместим ее в функцию. Так будет удобнее.
+
+def our_pass_hash(passwd):
+    salt = 'Vasya'
+    return sha256(salt.encode() + passwd.encode()).hexdigest()
+
+
+with open(file='task_2_output.txt', encoding='UTF-8', mode='w+') as my_file:
+    user_pass = input('Введите пароль: ')
+    my_file.write(our_pass_hash(user_pass))
+    my_file.seek(0)
+    print('В базе данных хранится строка:', my_file.read())
+    user_pass = input('Введите пароль еще раз для проверки: ')
+    my_file.seek(0)
+    print('Вы ввели правильный пароль') if my_file.read() == our_pass_hash(user_pass) else print(
+        'Вы ввели неправильный пароль')
+
