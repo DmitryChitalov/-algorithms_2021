@@ -18,3 +18,22 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+from uuid import uuid4
+import hashlib
+
+user_pass = input("Введите пароль: ")
+salt = uuid4().hex
+res1 = hashlib.sha256(salt.encode() + user_pass.encode()).hexdigest()
+file_db = open('file_db.txt', 'w')
+file_db.write(res1)
+file_db.close()
+print(f'В базе данных и в файле хранится строка: {res1}')
+
+user_pass2 = input("Введите пароль еще раз для проверки: ")
+res2 = hashlib.sha256(salt.encode() + user_pass2.encode()).hexdigest()
+file_db = open('file_db.txt', 'r')
+res1 = file_db.readline()
+file_db.close()
+if res1 == res2:
+    print("Вы ввели правильный пароль")
