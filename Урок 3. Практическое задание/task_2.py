@@ -52,7 +52,7 @@ def validation_check():
                     return f'Correct password'
                 else:
                     return f'Invalid password'
-        return f'User exists.'
+        return f'User not exists.'
 
 
 print(f'{hashing_password(12345)}\n'
