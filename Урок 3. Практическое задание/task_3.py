@@ -16,4 +16,10 @@
 а
 """
 
-# hash?
+
+def count(line):
+    newlines = [hash(line[i:i + n]) for i in range(len(line)) for n in range(1, len(line))]
+    print(len(set(newlines)))
+
+
+count('papafd')

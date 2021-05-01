@@ -17,4 +17,19 @@
 
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
-# sqlite, postgres, db_api, orm
+
+from hashlib import sha256
+
+login = input('Введите Логин: ')
+
+with open(file='task_2.txt', encoding='UTF-8', mode='w+') as txt:
+    password = input('Введите пароль: ')
+    txt.write(sha256(login.encode() + password.encode()).hexdigest())
+    txt.seek(0)
+    login = input('Введите Логин еще раз: ')
+    password = input('А теперь еще разок пароль: ')
+    txt.seek(0)
+    if txt.read() == sha256(login.encode() + password.encode()).hexdigest():
+        print('Верно!')
+    else:
+        print('Неверно!')
