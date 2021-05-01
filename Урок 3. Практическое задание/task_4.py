@@ -11,3 +11,33 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from uuid import uuid4
+import hashlib
+
+
+class UrlCache:
+    def __init__(self):
+        self.url_dict = {}
+        self.salt = uuid4().hex
+
+    def __str__(self):
+        return str(self.url_dict)
+
+    def add_url(self, new_url):
+        self.url_dict[hashlib.sha256(self.salt.encode() + new_url.encode()).hexdigest()] = new_url
+
+    def check_url(self, new_url):
+        if not self.url_dict.get(hashlib.sha256(self.salt.encode() + new_url.encode()).hexdigest()):
+            self.add_url(new_url)
+
+
+urls_hash = UrlCache()
+urls_hash.check_url('http://www.vk.ru')
+urls_hash.check_url('http://www.twitter.com')
+urls_hash.check_url('http://www.vk.ru')
+urls_hash.check_url('http://www.facebook.com')
+urls_hash.check_url('http://www.vk.ru')
+urls_hash.check_url('http://www.instagram.com')
+
+print(urls_hash)
