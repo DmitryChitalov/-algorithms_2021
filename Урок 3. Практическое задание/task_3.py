@@ -16,3 +16,14 @@
 р
 а
 """
+
+
+user_str = input('Введите строку состоящую только из строчных латинских букв: ')
+
+substrs_set = set()
+for i in range(len(user_str)):
+    for j in range(i, len(user_str)):
+        if user_str[i:j+1] != user_str:
+            substrs_set.add(hash(user_str[i:j+1]))
+
+print(f'Количество различных (уникальных) подстрок в введенной строке: {len(substrs_set)}')
