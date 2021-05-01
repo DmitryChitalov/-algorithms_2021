@@ -1,3 +1,7 @@
+from random import randint
+from time import sleep
+from datetime import datetime
+
 """
 Задание 1.
 
@@ -16,3 +20,26 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+def check_time(func):
+    start_time = datetime.now()
+    func
+    sleep(1)  # Поставил т. к. время отображалось как "0"
+    return datetime.now() - start_time
+
+
+def fill_lst(el):
+    lst = [randint(0, 100) for i in range(el)]
+    return lst
+
+
+def fill_dict(el):
+    usr_dict = {'User_' + str(key): randint(0, 100) for key in range(el)}
+    return usr_dict
+
+
+print(  # f'{fill_lst(10)}\n'
+    # f'{fill_dict(10)}\n'
+    f'Время выполнения фун-и заполнения списка: {check_time(fill_lst(10000))}.\n'
+    f'Время выполнения фун-и заполнения словоря: {check_time(fill_dict(10000))}.\n')
