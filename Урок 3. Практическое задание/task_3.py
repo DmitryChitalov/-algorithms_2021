@@ -16,3 +16,16 @@
 р
 а
 """
+
+
+def substrings(string):
+    result = []
+    for i in range(len(string)):
+        for j in range(1, len(string)):
+            result.append(hash(string[i:i + j]))
+    print(f'Unique substrings: {len(set(result))}\n')
+
+
+substrings('papa')
+substrings('rhhjf')
+substrings('asdfg')
