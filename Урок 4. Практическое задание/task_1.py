@@ -13,6 +13,8 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +22,45 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+# меняем цикл на list comprehension:
+# избавляемся от операций создания пустого массива и append'а
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+# меняем меняем range(len(nums)) на enumerate(nums):
+# позволяет проходить циклом сразу по элементам массива с получением номера элемента,
+# не получая его длину и не запрашивая дополнительно элемент из массива
+def func_3(nums):
+    return [i for i, num in enumerate(nums) if num % 2 == 0]
+
+
+# убираем сравнение с нулём, заменяя на логическое отрицание,
+# т.к. 0 всегда будет ложью, любое другое число истиной,
+# нет необходимости проводить дополнительное сравнение,
+# достаточно взять отрицание от выражений, дающих 0 и отбросить остальные
+def func_4(nums):
+    return [i for i, num in enumerate(nums) if not num % 2]
+
+
+# тестовый список из чётных и нечётных чисел
+numbers = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2]
+
+# измеряем время выполнения функций
+print('func_1:', timeit('func_1(numbers)', globals=globals()))
+print('func_2:', timeit('func_2(numbers)', globals=globals()))
+print('func_3:', timeit('func_3(numbers)', globals=globals()))
+print('func_4:', timeit('func_4(numbers)', globals=globals()))
+
+"""
+Результаты:
+func_1: 1.2008219
+func_2: 1.2039081999999999
+func_3: 1.1372544999999996
+func_4: 0.9338997999999994
+Между первыми двумя функциями незначительная разница в скорости раоты.
+Третья выполняется чуть быстрее.
+Быстрее всего выполняется четвёртый вариант.
+"""

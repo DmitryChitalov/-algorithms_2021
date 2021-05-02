@@ -8,12 +8,12 @@
 Сделаны замеры обеих реализаций.
 
 Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
-Если у вас есть идеи, предложите вариант оптимизации, если мемоизация не имеет смысла.
-Без аналитики задание считается не принятым
+Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
 
 from timeit import timeit
 from random import randint
+from cProfile import run
 
 
 def recursive_reverse(number):
@@ -80,3 +80,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+run('recursive_reverse(num_10000)')
+run('recursive_reverse_mem(num_10000)')
+
+"""
+В данном случае меморизация не нужна, т.к. она эффективна только при 
+многократном вызове функции с одним и тем же аргументом.
+В данной же функции для каждой цифры в числе функция вызывается только
+один раз и декоратор только добавляет дополнительные действия в программу.
+timeit показывает меньшее время, т.к. при декорировании функции
+мы фактически подменяем её функцией-декоратором, и timeit показывает время работы декоратора.
+Это наглядно показывает профайлер:
+
+Для первой функции:
+ 16 function calls (4 primitive calls) in 0.000 seconds
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+     13/1    0.000    0.000    0.000    0.000 task_2.py:19(recursive_reverse)
+      ^ 14 вызовов рекурсивной функции     
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+Для второй функции:
+         4 function calls in 0.000 seconds
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 task_2.py:50(decorate)
+        ^ единственный вызов функции-декоратора
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+"""
