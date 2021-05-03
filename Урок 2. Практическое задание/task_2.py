@@ -18,3 +18,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def task02(num, odd_count, even_count, call_count):
+
+    if num == 0:
+        print(f'В введенном числе {odd_count} нечетных и {even_count} четных цифры')
+        print(f'Количество вызовов функции - {call_count}')
+        return
+
+    if num % 10 in [0, 2, 4, 6, 8]:
+        even_count += 1
+    else:
+        odd_count += 1
+
+    call_count += 1
+
+    task02(num // 10, odd_count, even_count, call_count)
+
+
+while True:
+    input_num = input('Введите число, либо 0 для завершения: ')
+    if input_num == '0':
+        break
+
+    try:
+        input_num = int(input_num)
+    except ValueError:
+        print('Введено некорректное значение!')
+    else:
+        task02(input_num, 0, 0, 1)

@@ -16,3 +16,21 @@
 р
 а
 """
+
+# Я правильно понял, подстрока это часть строки, не являющаяся самой строкой?
+# Таким образом, строка, состоящая из 1 символа, не будет иметь подстрок
+while True:
+    input_str = input('Введите строку из строчных латинских букв, либо пустую строку для завершения: ')
+    if len(input_str) == 0:
+        print('Введена пустая строка!')
+        break
+
+    subs_set = set()
+    for i in range(len(input_str)):
+        for j in range(i, len(input_str)):
+            # print(i, j+1, input_str[i:j+1])
+            if input_str[i:j+1] != input_str:
+                subs_set.add(hash(input_str[i:j+1]))
+
+    # print(f'Полученное множество хешей: {subs_set}')
+    print(f'Количество уникальных подстрок в введенной строке: {len(subs_set)}')

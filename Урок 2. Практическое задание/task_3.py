@@ -22,3 +22,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def task03(input_num, reverse_num, call_count):
+
+    if input_num == 0:
+        print(f'Перевернутое число: {reverse_num}')
+        print(f'Количество вызовов: {call_count}')
+        return
+
+    reverse_num += str(input_num % 10)
+    call_count += 1
+
+    task03(input_num // 10, reverse_num, call_count)
+
+
+while True:
+    input_value = input('Введите число, либо 0 для завершения: ')
+    if input_value == '0':
+        break
+
+    try:
+        input_value = int(input_value)
+    except ValueError:
+        print('Введено некорректное значение!')
+    else:
+        task03(input_value, '', 1)

@@ -28,3 +28,49 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import random
+
+
+class StackClass:
+    def __init__(self, is_fixed_size, max_count):
+        self.elem = []
+        self.is_fixed_size = is_fixed_size
+        if self.is_fixed_size:
+            self.max_count = max_count
+        else:
+            self.max_count = random.randint(1, max_count)
+
+    def check_free_space(self):
+        return self.stack_size() < self.max_count
+
+    def push_in(self, el):
+        self.elem.append(el)
+
+    def stack_size(self):
+        return len(self.elem)
+
+    def __str__(self):
+        if self.stack_size() == 0:
+            return ""
+        else:
+            return str(self.elem)
+
+
+def stack_plates(is_fixed_size, max_size, plates_count):
+    new_stack = StackClass(is_fixed_size, max_size)
+
+    for i in range(plates_count):
+        new_stack.push_in(i)
+        if not new_stack.check_free_space():
+            print(new_stack)
+            new_stack = StackClass(is_fixed_size, max_size)
+
+    print(new_stack)
+
+
+# Стопки разной высоты, максимально - 5
+stack_plates(0, 5, 40)
+
+# Все стопки одной высоты
+stack_plates(1, 7, 70)

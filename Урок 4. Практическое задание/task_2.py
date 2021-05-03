@@ -21,25 +21,44 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
+def call_reverse_func(num_len):
+    if num_len == 100:
+        num = randint(10000, 1000000)
+        recursive_reverse(num)
+
+    elif num_len == 1000:
+        num = randint(1000000, 10000000)
+        recursive_reverse(num)
+
+    elif num_len == 10000:
+        num = randint(100000000, 10000000000000)
+        recursive_reverse(num)
+
+# num_100 = randint(10000, 1000000)
+# num_1000 = randint(1000000, 10000000)
+# num_10000 = randint(100000000, 10000000000000)
+
 
 print('Не оптимизированная функция recursive_reverse')
+num_len = 100
 print(
     timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
+        'call_reverse_func(num_len)',
+        setup='from __main__ import call_reverse_func, num_len',
         number=10000))
+
+num_len = 1000
 print(
     timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
+        'call_reverse_func(num_len)',
+        setup='from __main__ import call_reverse_func, num_len',
         number=10000))
+
+num_len = 10000
 print(
     timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
+        'call_reverse_func(num_len)',
+        setup='from __main__ import call_reverse_func, num_len',
         number=10000))
 
 
@@ -63,19 +82,70 @@ def recursive_reverse_mem(number):
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
+def call_reverse_func_mem(num_len):
+    if num_len == 100:
+        num = randint(10000, 1000000)
+        recursive_reverse_mem(num)
+
+    elif num_len == 1000:
+        num = randint(1000000, 10000000)
+        recursive_reverse_mem(num)
+
+    elif num_len == 10000:
+        num = randint(100000000, 10000000000000)
+        recursive_reverse_mem(num)
+
+
+num_len = 100
 print('Оптимизированная функция recursive_reverse_mem')
 print(
     timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
+        'call_reverse_func_mem(num_len)',
+        setup='from __main__ import call_reverse_func_mem, num_len',
         number=10000))
+
+num_len = 1000
 print(
     timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
+        'call_reverse_func_mem(num_len)',
+        setup='from __main__ import call_reverse_func_mem, num_len',
         number=10000))
+
+num_len = 10000
 print(
     timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
+        'call_reverse_func_mem(num_len)',
+        setup='from __main__ import call_reverse_func_mem, num_len',
         number=10000))
+
+# Вижу буквально следующее: в исходном коде не оптимизированный и мемоизированный алгоритмы
+# вызываются 10000 раз для одного и того же числа. Кэшировать одно и то же число
+# в случае мемоизированного алгоритма смысла нет. Если бы при каждой итерации передаваемое
+# в функцию число было разным, замеры скорости выполнения были бы другими (в порядке предположения)
+
+# Внес изменения в код: теперь в каждый вызов функции реверса передается разное число.
+# Результаты замеров следующие:
+
+# Не оптимизированная функция recursive_reverse
+# 0.064840629
+# 0.039523932
+# 0.06580236499999997
+# Оптимизированная функция recursive_reverse_mem
+# 0.034466883000000004
+# 0.047352597999999996
+# 0.11996126199999996
+
+# Отсюда следующее предположение:
+# для "длинного" диапазона случайных чисел (randint(100000000, 10000000000000))
+# кэширование смысла не имеет, так как на 10000 итераций очень низкая вероятность
+# нахождения в кэше уже сохраненного ранее значения (даже с учетом следующего ниже
+# вывода)
+
+# И еще предположение: так как в кэш сохраняются числа на каждом этапе реверса исходного числа,
+# например, вот такой фрагмент кэша:
+# (24,): '42', (242,): '242', (2427,): '7242', (24270,): '07242', (242701,): '107242',
+# то (хоть мы этого еще не проходили, но...) есть вероятность утечки памяти(?)
+
+# И еще обнаружил: в кэш сохраняется пара ключ - значение. В нашем случае сохраняется только прямая
+# последовательность, реверсивная - нет. Если randint сгенерит число, реверсивное сохраненному ранее,
+# то поиск в кэше ничего не вернет. Уж если писать ключи в кэш, то оба: и прямой, и реверсивный
