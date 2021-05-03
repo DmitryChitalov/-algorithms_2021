@@ -18,39 +18,50 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-even, odd = 0, 0
+n = int(input('Введите число: '))
 
 
-def subtract(num):
-    global odd, even
-    if 0 < num <= 1:   # базовый случай для вычитания
-        odd += 1
-        return
-    elif num == 0:   # базовый случай для вычитания
+def subtract(num, even=0, odd=0):
+    curr_num = num % 10
+    if curr_num % 2 == 0:
         even += 1
-        return
-    else:
-        subtract(num-2)
+    if curr_num % 2 != 0:
+        odd += 1
+    if num//10 == 0:
+        return f'четных цифр в числе - {even}, нечетных - {odd}'
+    subtract(num//10, even, odd)
 
 
-def func():     # ф-ция проверки введенного числа
-    n = input("Введите число: ")
-    num = 0
-    try:
-        num = [int(i) for i in n]
-    except ValueError:
-        print("Вы ввели не число, попробуем еще раз: ")
-        func()
-    iterate(num)
-    return f"Количество четных цифр в числе '{n}' равно {even}, нечетных - {odd}"
+print(subtract(n))
+
+    # if 0 < num <= 1:   # базовый случай для вычитания
+    #     odd += 1
+    #     return
+    # elif num == 0:   # базовый случай для вычитания
+    #     even += 1
+    #     return
+    # else:
+    #     subtract(num-2)
 
 
-def iterate(num):       # рекурсивная ф-ция для перебора по списку
-    if not num:   # базовый случай для перебора
-        return
-    else:
-        subtract(num.pop())
-        iterate(num)
-
-
-print(func())
+# def func():     # ф-ция проверки введенного числа
+#     n = input("Введите число: ")
+#     num = 0
+#     try:
+#         num = [int(i) for i in n]
+#     except ValueError:
+#         print("Вы ввели не число, попробуем еще раз: ")
+#         func()
+#     iterate(num)
+#     return f"Количество четных цифр в числе '{n}' равно {even}, нечетных - {odd}"
+#
+#
+# def iterate(num):       # рекурсивная ф-ция для перебора по списку
+#     if not num:   # базовый случай для перебора
+#         return
+#     else:
+#         subtract(num.pop())
+#         iterate(num)
+#
+#
+# print(func())

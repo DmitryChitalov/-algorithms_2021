@@ -23,17 +23,22 @@
 """
 
 
-def func(start, i):
-    if i == 0:
-        if 32 > start or start >= 38:  # базовый случай
-            return start
-    else:
-        print(start+1, chr(func(start + 1, i-1)), sep=' - ', end=' ')
+def func(start, end, i):
+    if start == end+1:
         return start
+    print(start, chr(start), sep=' - ', end=' ')  # 32, 33, 34....
+    if i % 10 == 0:
+        print('\n')
+    func(start+1, end, i+1)
 
-# n = 10
-# if n <= 10
+
+func(32, 127, 1)
+
+
+# for start in range(32, 40):   # циклом
+#     for i in range(2):
+#         print(start, chr(start), sep=' - ', end=' ')
+#         start+=1
+#         i+=1
 #     print()
-# else:
 
-print(func(32, 2))

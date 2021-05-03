@@ -22,16 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-
-number = '1230'
+n = int(input('Введите число, которое требуется перевернуть: '))
 
 
 def reverse(num):
-    if len(num) == 1:
+    if num // 10 == 0:
         return num
     else:
-        return reverse(num[1:]) + num[0]
+        print(num % 10, end='')
+        return reverse(num // 10)
 
 
-print(reverse(number))
-
+print(reverse(n))
