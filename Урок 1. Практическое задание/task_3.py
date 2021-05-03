@@ -20,3 +20,37 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from operator import itemgetter
+
+dict_company = {
+    'ColaCoca': 580900,
+    'Horns&Hooves': 358050,
+    'Willy Wonka': 460550,
+    'Big-Pig': 168200,
+    'Shop of miracles': 220180
+}
+
+
+# в этой функции параметр count отвечает за количество выводимых объектов словаря.
+def max_profit(data, count):                                    # общая сложность O(N log N)
+    maximum = [(k, data[k]) for k in data]                      # O(N)
+    maximum = sorted(maximum, key=itemgetter(1), reverse=True)  # сортировка O(N log N) + реверс O(N)
+    return dict(maximum[:count])                                # O(N)
+
+
+def max_profit_v2(data):                                 # общая сложность O(N)
+    profit_three_company = {}                            # O(1)
+    for i in range(3):                                   # O(1)
+        maximum = max(data.items(), key=lambda k: k[1])  # O(N)
+        del data[maximum[0]]                             # O(1)
+        profit_three_company[maximum[0]] = maximum[1]    # O(1)
+    return profit_three_company
+
+
+print(max_profit(dict_company, 3))
+print(max_profit_v2(dict_company))
+
+"""
+Вторая функция более быстрая, в ней отсутствует сортировка, 
+которая является более затратной по времени.
+"""
