@@ -12,9 +12,9 @@
 Без аналитики задание считается не принятым
 """
 
+from cProfile import run
 from timeit import timeit
 from random import randint
-
 
 def recursive_reverse(number):
     if number == 0:
@@ -80,3 +80,35 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+
+run('recursive_reverse(num_10000)')
+run('recursive_reverse_mem(num_10000)')
+
+"""
+Вывод:
+Считаю, что меморизация не нужна, она будет действеннее работать при большом количетсве вызовов функций с одинаковыми
+аргументами. В указанной функции в каждом блоке с цифрами вызов срабатывает единожды, а декоратор только добавляет еще
+одно дейсвтие. Timeit показывает меньшее время, т.к. идет подмена декоратором - в этом то и соль, т.к. идет отображение
+времени декоратора.
+
+Детали можем увидеть через профайлер:
+Для первой функции:
+17 function calls (4 primitive calls) in 0.000 seconds
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+     14/1    0.000    0.000    0.000    0.000 task_2.py:19(recursive_reverse) *
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+* 14 вызовов рекурсивной функции            
+
+Для второй функции:
+4 function calls in 0.000 seconds
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 task_2.py:50(decorate) *
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+* только 1 вызов функции декоратора
+"""
