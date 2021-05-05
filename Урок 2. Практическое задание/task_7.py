@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def induction(n):
+    if n == 1:
+        if n == n*(n+1)/2:
+            return 'Верно'
+    else:
+        def summ(n):
+            if n == 1:
+                return 1
+            else:
+                return n + summ(n-1)
+        if summ(n) == n*(n+1)/2:
+            return 'Верно'
+
+
+print(induction(15))
