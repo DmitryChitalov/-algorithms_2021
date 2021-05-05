@@ -14,7 +14,7 @@
 
 from timeit import timeit
 from random import randint
-
+from cProfile import run
 
 def recursive_reverse(number):
     if number == 0:
@@ -80,3 +80,16 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Сравним работу функций через cProfiler
+"""
+run('recursive_reverse_mem(num_10000)')
+run('recursive_reverse(num_10000)')
+
+
+"""
+Мемоизация для данной функции не нужна, т.к. не эффективна однократных вызовов функции.
+В нашем случае timeit считает работу декоратора, по этой причине данные между timeit и cProfiler разнятся.
+
+"""

@@ -13,6 +13,8 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +22,18 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+array = [1, 2, 3, 4, 1, 1, 2, 4, 5]
+
+
+def func_2(nums):
+    """Добавлен LC, сравнение с нулем всегда false, берем отрицание от выражений с нулем, отбрасываем остальные. Замена
+    на enumerate позволяет избавится от запроса длины массива и элемента,проходя циклом и получая номера элементов,
+     это позволяет выполнить операцию быстрее"""
+    return [i for i, number in enumerate(nums) if not number % 2]
+
+
+print('func_1 - ', timeit('func_1(array)', globals=globals()))
+print('func_2 - ', timeit('func_2(array)', globals=globals()))
+
