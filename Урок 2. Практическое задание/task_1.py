@@ -28,3 +28,34 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func():
+    result = 0
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation == '0':  # базовый случай
+        return "Выход из программы"
+    elif operation not in '+-*/':
+        return func()
+    try:
+        num_1 = int(input("Введите первое число: "))
+        num_2 = int(input("Введите второе число: "))
+    except ValueError:
+        print("Вы вместо числа ввели строку (((. Исправьтесь")
+        return func()
+    if operation == '+':
+        result = num_1 + num_2
+    elif operation == '-':
+        result = num_1 - num_2
+    elif operation == '*':
+        result = num_1 * num_2
+    elif operation == '/':
+        if num_2 != 0:
+            result = num_1 / num_2
+        else:
+            print("А на ноль делить нельзя! Исправьтесь")
+    return f" Результат: {result}"
+
+
+# print(int(input()))
+print(func())

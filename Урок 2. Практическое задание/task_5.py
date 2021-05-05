@@ -21,3 +21,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func(start, end, i):
+    if start == end+1:
+        return start
+    print(start, chr(start), sep=' - ', end=' ')  # 32, 33, 34....
+    if i % 10 == 0:
+        print('\n')
+    func(start+1, end, i+1)
+
+
+func(32, 127, 1)
+
+
+# for start in range(32, 40):   # циклом
+#     for i in range(2):
+#         print(start, chr(start), sep=' - ', end=' ')
+#         start+=1
+#         i+=1
+#     print()
+

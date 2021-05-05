@@ -16,3 +16,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func(num):
+    if num == 1:
+        return num
+
+    else:
+        return func(num-1) + num
+
+
+def true_equal(n):
+    if func(n) == n*(n+1)/2:
+        return f'1+2+...{n} = {n}*({n}-1)/2\n{func(n)} = {int(n*(n+1)/2)} - все верно!'
+
+
+print(true_equal(5))
+
+
+# func(1, 5, 0)
+
+

@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+n = int(input('Введите число: '))
+
+
+def subtract(num, even=0, odd=0):
+    curr_num = num % 10
+    if curr_num % 2 == 0:
+        even += 1
+    if curr_num % 2 != 0:
+        odd += 1
+    if num//10 == 0:
+        print('Количество четных и нечетных цифр в числе равно: ', end='')
+        return even, odd
+    return subtract(num//10, even, odd)
+
+
+print(subtract(n))
