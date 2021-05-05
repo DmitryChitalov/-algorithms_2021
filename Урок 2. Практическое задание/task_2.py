@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_and_uneven(num, even=0, uneven=0):
+    if num == 0:
+        print(f'Even: {even}\n'
+              f'Uneven: {uneven}\n')
+        return 'Done!'
+    elif num % 2 == 0:
+        even += 1
+    else:
+        uneven += 1
+    return even_and_uneven(num // 10, even, uneven)
+
+
+print(even_and_uneven(1245567))

@@ -1,3 +1,5 @@
+from timeit import timeit
+
 """
 Задание 1.
 
@@ -14,9 +16,30 @@
 """
 
 
-def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+def func_1(nums):  # O(n)
+    new_arr = []  # O(1)
+    for i in range(len(nums)):  # O(len(nums)) ==> O(n)
+        if nums[i] % 2 == 0:  # O(1)
+            new_arr.append(i)  # O(1)
+    return new_arr  # O(1)
+
+
+def func_2(nums):  # Сделал это безобразие, только с целью расставления сложности, т.к не понимаю.
+    return \
+        list(  # O(len(list)) ==> O(n)
+            filter(lambda x: x % 2 == 0, nums))  # O(len(nums)) ==> O(n) т.к действие выполняется для каждого элемента.
+    # Отсюда получается: O(n) * O(n) == O(n^2)
+
+
+nums = range(10)
+
+print(f'Первая функция: {timeit("func_1(nums)", globals=globals(), number=1000000)} сек.\n'
+      f'Вторая функция: {timeit("func_2(nums)", globals=globals(), number=1000000)} сек.')
+
+"""
+    Выходит, что ф_1 == O(n), а ф_2 == O(n^2), но ф_2 выполняется быстрее.
+    Как я поимаю "lambda x: x % 2 == 0, nums" то практически тоже самое что и тело ф_1.
+    А фукция "filter" и "list" на основе "lambda" генерируют списк, то есть сложность О(n) или выше.
+    Можно сказать это была аналитика, но не дан ответ почему и что быстрее работает.
+    Не понимаю где я ошибаюсь.    
+"""

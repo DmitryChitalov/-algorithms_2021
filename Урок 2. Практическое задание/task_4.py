@@ -12,3 +12,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def usr_sum(numbers):
+    if numbers == 1:
+        return 1
+    else:
+        return 1 + usr_sum(numbers - 1) / -2
+
+
+number = int(input('Enter the number of "n": '))
+print(usr_sum(number))
