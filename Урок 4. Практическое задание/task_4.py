@@ -1,3 +1,6 @@
+from timeit import timeit
+from collections import Counter
+
 """
 Задание 4.
 
@@ -39,5 +42,31 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    return f'Чаще всего встречается число {max(array, key=array.count)},' \
+           f' оно появилось в массиве {array.count(max(array, key=array.count))} раз(а)'
+
+
+def func_4():
+    tmp = Counter(array).most_common(1)[0]
+    num = tmp[0]
+    count = tmp[1]
+    return f'Чаще всего встречается число {num},' \
+           f' оно появилось в массиве {count} раз(а)\n'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+
+print(f'func_1: {timeit("func_1", globals=globals(), number=10000)}\n'
+      f'func_2: {timeit("func_2", globals=globals(), number=10000)}\n'
+      f'func_3: {timeit("func_3", globals=globals(), number=10000)}\n'
+      f'func_4: {timeit("func_4", globals=globals(), number=10000)}')
+
+"""
+    Ф_4 быстрее всех(да и проще) из-за встроенной библиотеки Counter из collections.
+    Ф_2 работает медленнее потому, что создает новый список.
+    Ф_3 меленный из-за "max" и ".count", у них сложность O(n). 
+"""
