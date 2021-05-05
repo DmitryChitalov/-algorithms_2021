@@ -28,40 +28,9 @@ def subtract(num, even=0, odd=0):
     if curr_num % 2 != 0:
         odd += 1
     if num//10 == 0:
-        return f'четных цифр в числе - {even}, нечетных - {odd}'
-    subtract(num//10, even, odd)
+        print('Количество четных и нечетных цифр в числе равно: ', end='')
+        return even, odd
+    return subtract(num//10, even, odd)
 
 
 print(subtract(n))
-
-    # if 0 < num <= 1:   # базовый случай для вычитания
-    #     odd += 1
-    #     return
-    # elif num == 0:   # базовый случай для вычитания
-    #     even += 1
-    #     return
-    # else:
-    #     subtract(num-2)
-
-
-# def func():     # ф-ция проверки введенного числа
-#     n = input("Введите число: ")
-#     num = 0
-#     try:
-#         num = [int(i) for i in n]
-#     except ValueError:
-#         print("Вы ввели не число, попробуем еще раз: ")
-#         func()
-#     iterate(num)
-#     return f"Количество четных цифр в числе '{n}' равно {even}, нечетных - {odd}"
-#
-#
-# def iterate(num):       # рекурсивная ф-ция для перебора по списку
-#     if not num:   # базовый случай для перебора
-#         return
-#     else:
-#         subtract(num.pop())
-#         iterate(num)
-#
-#
-# print(func())
