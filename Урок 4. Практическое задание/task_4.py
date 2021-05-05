@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,30 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_count = max(array, key=array.count)
+    return f'Чаще всего встречается число {max_count}, ' \
+           f'оно появилось в массиве {array.count(max_count)} раз(а)'
+
+
+def func_4():
+    new_dict = {array.count(el): el for el in set(array)}
+    maximum = max([value for value in new_dict.keys()])
+    return f'Чаще всего встречается число {new_dict.get(maximum)}, ' \
+           f'оно появилось в массиве {maximum} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+
+
+functions = ['func_1', 'func_2', 'func_3', 'func_4']
+for func in functions:
+    print(f'{func}:', timeit(f'{func}()', globals=globals(), number=100000))
+
+# Наиболее эффективным и лаконичным алгоритмом оказался func_3, хотя все они имеют одинаковую временную сложность O(N^2)
+# Вариант со словарем оказался не самым плохим, что несколько удивило даже
+# При больших списках на поиск наибольшего количества вхождений имеет смысл использовать множества,
+# как реализовано в алгоритме со словарем.

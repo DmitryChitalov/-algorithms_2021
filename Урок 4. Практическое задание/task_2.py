@@ -80,3 +80,25 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Проведём замеры в цикле с каждым новым занчением аргумента для функции
+
+times1 = []
+for i in range(10000):
+    num_10000 = randint(100000000, 10000000000000)
+    times1.append(timeit("recursive_reverse(num_10000)", globals=globals(), number=1))
+time1 = sum(times1)
+
+print(f'Время выполнения функции без мемоизации для 10000 запусков с новым аргументом на каждой итерации: \n {time1}')
+
+
+times2 = []
+for i in range(10000):
+    num_10000 = randint(100000000, 10000000000000)
+    times2.append(timeit("recursive_reverse_mem(num_10000)", globals=globals(), number=1))
+time2 = sum(times2)
+
+print(f'Время выполнения функции c мемоизацией для 10000 запусков с новым аргументом на каждой итерации: \n {time2}')
+
+# Как видно из результатов такого тестирования для данного алгоритма мемоизация не имеет смысла
+# и даже немного вредит, забирая ресурсы оперативной памяти
