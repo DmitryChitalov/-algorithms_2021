@@ -54,6 +54,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +81,11 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+    Меморизация не требуется т.к функция вызывается с постоянно с разными значениеми.
+    Минимальный диапозон от 10000 до 1000000 слишком большой и мемоизация пригодиться не скоро.
+    А память съедать будет постоянно.
+    
+    И "str(number)[::-1]" будет куда быстрее.
+"""
