@@ -18,3 +18,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def odd_or_even(some_int, odd_list=[], even_list=[]):
+    if  some_int == 0:
+        return len(odd_list), len(even_list)
+    else:
+        base_int = some_int % 10
+        if base_int % 2 == 0:
+            even_list.append(base_int)
+        else:
+            odd_list.append(base_int)
+        some_int = some_int // 10
+        return odd_or_even(some_int)
+
+
+if __name__ == '__main__':
+    user_int = input('Введите натуральное число: ')
+    try:
+        user_int = int(user_int)
+    except Exception:
+        print('Вы ввели не число, а строку! Исправьтесь.')
+
+    odd_count, even_count = odd_or_even(user_int)
+    print(f'Четных цифр {even_count}, нечетных цифр {odd_count}')
+

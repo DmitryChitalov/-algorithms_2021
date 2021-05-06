@@ -16,3 +16,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def recur_func(n):
+    if n == 1:
+        return n
+    return n + recur_func(n - 1)
+
+if __name__ == '__main__':
+    n = input('Введите любое натуральное число: ')
+    try:
+        n = int(n)
+    except ValueError:
+        print('Вы ввели не число, а строку! Исправьтесь')
+    result = recur_func(n)
+    print(type(result))
+    if result == n * (n + 1) / 2:
+        print('Равенство верно!')
+    else:
+        print('Равенство не верно!')
+
