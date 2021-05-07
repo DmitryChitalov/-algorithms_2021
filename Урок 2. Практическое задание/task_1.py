@@ -28,3 +28,51 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+    # предлагаем ввести доступные символы
+    action = input("Введите +, -, *, / или q для выхода и нажмите enter\n")
+
+    if action.lower() == 'q':
+        # если введена буква q, то выход из функции если ввели
+        # прописную букву Q, то она приводится к нижнему регистру
+        exit()
+
+    if action in '+-*/':
+        # если введенный символ есть в строке, то выполняем скрипт
+        try:
+            number_1 = int(input("Введите первое число\n"))  # запрос ввода 1-го чосла
+            number_2 = int(input("Введите второе число\n"))  # и 2-го числа
+
+            if action == '+':
+                result = number_1 + number_2
+                print(f"Сумма ваших чисел {result}")
+                return calculator()
+            elif action == '-':
+                result = number_1 - number_2
+                print(f"Разность ваших чисел {result}")
+                return calculator()
+            elif action == '*':
+                result = number_1 * number_2
+                print(f"Произведение ваших чисел {result}")
+                return calculator()
+            elif action == '/':
+                try:
+                    result = number_1 / number_2
+                    print(f"Частное от вашего деления {result}")
+                except ZeroDivisionError:  # проверка деления на 0
+                    print("На ноль делить нельзя")
+                    return calculator()
+        except ValueError:
+            # если были введены не числа или хотя бы не 1 число, то обрабатываем исключение
+            print("Ошибка! Вы ввели не число.")
+            return calculator()
+            # рекурсивный запуск
+    else:
+        # если вначале ввели символ отличный от предложенных, то
+        print("Вы ввели некорректный символ.")  # сообщаем об этом
+        return calculator()                     # и запускаем рекурсию
+
+
+calculator()
