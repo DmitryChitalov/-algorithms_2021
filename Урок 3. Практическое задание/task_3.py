@@ -16,3 +16,16 @@
 р
 а
 """
+
+
+def uniqe_substrings() -> str:
+    my_string = input("Введите слово или набор латинских букв: ").lower()
+    hash_set = set()
+    for i in range(len(my_string)):
+        for j in range(len(my_string[i:])):
+            hash_set.add(hash(my_string[i:j+1]))
+            print(f"Включает в  себя: {my_string[i:j+1]}")
+    return f"{my_string} - {len(hash_set)-1} уникальных подстрок.\n"
+
+
+print(uniqe_substrings())
