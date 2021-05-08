@@ -16,3 +16,17 @@
 р
 а
 """
+
+import hashlib
+
+some_string = 'papa'
+uniq_substrings = set()
+for i in range(0, len(some_string)+1):
+    for j in range(i+1, len(some_string)+1):
+        substr = some_string[i:j]
+        if substr == some_string:
+            continue
+        hash_obj = hashlib.sha256(substr.encode('UTF-8'))
+        uniq_substrings.add(hash_obj.hexdigest())
+print(f'Количество уникальных подстрок в строке "{some_string}" - {len(uniq_substrings)} шт.')
+
