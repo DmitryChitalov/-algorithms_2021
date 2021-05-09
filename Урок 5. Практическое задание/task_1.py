@@ -23,3 +23,54 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+# Решение с использованием именованного кортежа
+from collections import namedtuple
+
+# Шаблон, для названия фирмы и годового дохода
+FIRM = namedtuple('Firm', 'name year_income')
+
+# Запрашиваем количество фирм
+while True:
+    try:
+        count = int(input('Введите количество предприятий: '))
+        break
+    except ValueError:
+        pass
+
+average_profit = 0
+firms = []
+i = 1
+# вводим данные о фирмах (название и поквартальная прибыль)
+while i <= count:
+    name = input(f'Введите название фирмы {i}: ')
+    income = input('Введите прибыль предприятия за 4 квартала, через пробел: ').split()
+    if len(income) != 4:
+        print('Неверный ввод. Нужно ввести прибыль за 4 квартала.')
+        continue
+
+    try:
+        income = sum(map(float, income))
+    except ValueError:
+        print('Неверные данные о доходе. Повторите попытку.')
+        continue
+
+    # сразу суммируем прибыль предприятий
+    average_profit += income
+    # и добавляем фирму в общий список
+    firm = FIRM(
+        name=name,
+        year_income=income
+    )
+    firms.append(firm)
+    i += 1
+
+# Считаем среднюю годовую прибыль предприятий
+average_profit = round(average_profit / count, 2)
+
+# разделяем фирмы на два списка, относительно годовой прибыли и выводим на экран
+more = [f.name for f in firms if f.year_income > average_profit]
+less = [f.name for f in firms if f.year_income < average_profit]
+print(f'Средняя годовая прибыль предприятий {average_profit}\n'
+      f'Фирмы с прибылью выше среднего: {", ".join(more)}\n'
+      f'Фирмы с прибылью ниже среднего: {", ".join(less)}')
