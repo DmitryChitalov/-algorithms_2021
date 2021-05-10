@@ -18,3 +18,50 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import hashlib
+import json
+from uuid import uuid4
+
+def hash_func(user_name, password, hash_dict={}):
+    phrase = 'some salt text'
+    salt = user_name + phrase
+    hash_obj = hashlib.sha256(salt.encode('UTF-8') + password.encode('UTF-8'))
+    user_pass_hash = hash_obj.hexdigest()
+    print(f'Созданный хеш - {user_pass_hash}')
+    hash_dict[user_name] = user_pass_hash
+
+    with open('passwd.json', 'w', encoding='UTF-8') as file:
+        json.dump(hash_dict, file)
+
+def authorize(user_name, password):
+    phrase = 'some salt text'
+    salt = user_name + phrase
+    hash_obj = hashlib.sha256(salt.encode('UTF-8') + password.encode('UTF-8'))
+    user_input_pass_hash = hash_obj.hexdigest()
+    print(user_input_pass_hash)
+
+    with open('passwd.json', 'r', encoding='UTF-8') as file:
+        hash_dict = json.load(file)
+        user_pass_hash = hash_dict.get(user_name)
+
+    if user_input_pass_hash == user_pass_hash:
+        return True
+
+
+if __name__ == '__main__':
+    print('Создание учетной записи')
+    user_name = input('Введите имя пользователя: ')
+    password = input('Введите пароль: ')
+    hash_func(user_name, password)
+    print('======================================')
+    print('Авторизация')
+    user_name = input('Введите имя пользователя: ')
+    password = input('Введите пароль: ')
+    if authorize(user_name, password):
+        print('Пароль верный! Вход разрешен.')
+    else:
+        print('Не верный пароль!')
+
+
+
