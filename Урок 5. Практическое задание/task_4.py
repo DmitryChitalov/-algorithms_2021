@@ -13,60 +13,60 @@ from timeit import Timer
 
 def fill_simple_dict(n):
 
-    dict = {}
+    dct = {}
 
     for i in range(n):
-        dict[i] = i ** 2
+        dct[i] = i ** 2
 
-    return dict
+    return dct
 
 
 def fill_ord_dict(n):
 
-    dict = collections.OrderedDict()
+    dct = collections.OrderedDict()
 
     for i in range(n):
-        dict[i] = i ** 2
+        dct[i] = i ** 2
 
-    return dict
-
-
-def clear_simple_dict(dict):
-
-    return dict.clear()
+    return dct
 
 
-def clear_ord_dict(dict):
+def clear_simple_dict(dct):
 
-    return dict.clear()
-
-
-def copy_simple_dict(dict):
-
-    return dict.copy()
+    return dct.clear()
 
 
-def copy_ord_dict(dict):
+def clear_ord_dict(dct):
 
-    return dict.copy()
+    return dct.clear()
 
 
-def pop_simple_dict(dict):
+def copy_simple_dict(dct):
 
-    n = len(dict)
+    return dct.copy()
+
+
+def copy_ord_dict(dct):
+
+    return dct.copy()
+
+
+def pop_simple_dict(dct):
+
+    n = len(dct)
     for i in range(n):
-        dict.popitem()
+        dct.popitem()
 
-    return dict
+    return dct
 
 
-def pop_ord_dict(dict):
+def pop_ord_dict(dct):
 
-    n = len(dict)
+    n = len(dct)
     for i in range(n):
-        dict.popitem()
+        dct.popitem()
 
-    return dict
+    return dct
 
 
 el_count = 1000000
