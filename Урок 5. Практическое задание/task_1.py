@@ -23,3 +23,59 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+org_list = []
+i = 0
+avg_profit = 0
+while True:
+    i += 1
+    org_tuple = namedtuple(f'org_{i}', 'org_name profit1 profit2 profit3 profit4')
+    org_name = input('Введите название организации, либо пустую строку для окончания ')
+    if org_name == '':
+        break
+
+    org_profit = input('Введите через пробел прибыль организации за каждый квартал ').split(' ')
+
+    org_list.append(org_tuple(
+        org_name=org_name,
+        profit1=int(org_profit[0]),
+        profit2=int(org_profit[1]),
+        profit3=int(org_profit[2]),
+        profit4=int(org_profit[3])
+    ))
+
+    avg_profit += org_list[i-1].profit1 + org_list[i-1].profit2 + org_list[i-1].profit3 + org_list[i-1].profit4
+
+avg_profit = avg_profit / len(org_list)
+print(f'Средняя прибыль всех предприятий = {avg_profit}')
+
+print('Список предприятий с годовой прибылью выше среднего:')
+for i, el in enumerate(org_list):
+    org_profit = el.profit1 + el.profit2 + el.profit3 + el.profit4
+    if org_profit >= avg_profit:
+        print(f'{el.org_name}, годовая прибыль {org_profit}')
+
+print('Список предприятий с годовой прибылью ниже среднего:')
+for i, el in enumerate(org_list):
+    org_profit = el.profit1 + el.profit2 + el.profit3 + el.profit4
+    if org_profit < avg_profit:
+        print(f'{el.org_name}, годовая прибыль {org_profit}')
+
+# Введите название организации, либо пустую строку для окончания a
+# Введите через пробел прибыль организации за каждый квартал 1 2 3 4
+# Введите название организации, либо пустую строку для окончания b
+# Введите через пробел прибыль организации за каждый квартал 10 20 30 40
+# Введите название организации, либо пустую строку для окончания c
+# Введите через пробел прибыль организации за каждый квартал 100 200 300 400
+# Введите название организации, либо пустую строку для окончания d
+# Введите через пробел прибыль организации за каждый квартал 1000 2000 3000 4000
+# Введите название организации, либо пустую строку для окончания
+# Средняя прибыль всех предприятий = 2777.5
+# Список предприятий с годовой прибылью выше среднего:
+# d, годовая прибыль 10000
+# Список предприятий с годовой прибылью ниже среднего:
+# a, годовая прибыль 10
+# b, годовая прибыль 100
+# c, годовая прибыль 1000
