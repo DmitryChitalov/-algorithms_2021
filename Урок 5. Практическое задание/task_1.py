@@ -23,3 +23,51 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+def func_max(comp_dict, aver_forsyst):
+    comp_lst = []
+    for i in range(len(comp_dict)):
+        amt_ofquats = int(comp_dict[i+1].profit_q1) + int(comp_dict[i+1].profit_q2) +\
+                      int(comp_dict[i+1].profit_q3) + int(comp_dict[i+1].profit_q4)
+        if amt_ofquats > aver_forsyst:
+            comp_lst.append(comp_dict[i+1].company)
+    return comp_lst
+
+def func_min(comp_dict, aver_forsyst):
+    comp_lst = []
+    for i in range(len(comp_dict)):
+        amt_ofquats = int(comp_dict[i+1].profit_q1) + int(comp_dict[i+1].profit_q2) +\
+                      int(comp_dict[i+1].profit_q3) + int(comp_dict[i+1].profit_q4)
+        if amt_ofquats < aver_forsyst:
+            comp_lst.append(comp_dict[i+1].company)
+    return comp_lst
+
+def firm_func():
+    n = int(input("Введите количество компаний: "))
+    i = 1
+    comp_dict = {}
+    comp_avprofit = 0
+    while i != n + 1:
+        company_tmplate = namedtuple(f"Company_{i}", "company profit_q1 profit_q2 profit_q3 profit_q4")
+        user_cmpname = input(f"Введите название предприятия №{i}: ")
+        user_cmpprofit = input(f"Через пробел введите прибыль предприятия №{i} "
+                               f"за каждый квартал (всего 4 квартала): ").split()
+        company_tpl = company_tmplate(
+            company=user_cmpname,
+            profit_q1=user_cmpprofit[0],
+            profit_q2=user_cmpprofit[1],
+            profit_q3=user_cmpprofit[2],
+            profit_q4=user_cmpprofit[3]
+        )
+        comp_dict[i] = company_tpl
+        i += 1
+        comp_avprofit += int(company_tpl.profit_q1) + int(company_tpl.profit_q2) \
+                         + int(company_tpl.profit_q3) + int(company_tpl.profit_q4)
+    aver_forsyst = comp_avprofit / (i-1)
+    print(f'Средняя годовая прибыль всех предприятий: {aver_forsyst}')
+    print(f"Предприятия, с прибылью выше среднего значения: {', '.join(func_max(comp_dict, aver_forsyst))}")
+    print(f"Предприятия, с прибылью ниже среднего значения: {', '.join(func_min(comp_dict, aver_forsyst))}")
+
+firm_func()
