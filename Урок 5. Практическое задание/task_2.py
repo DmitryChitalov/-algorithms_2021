@@ -33,3 +33,29 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+
+class HexNumber:
+    def __init__(self, number):
+        self.hex_number = number
+
+    def __add__(self, number):
+        hex_sum = hex(int(self.hex_number, 16) + int(number.hex_number, 16))
+        return str(hex_sum)[2:].upper()
+
+    def __mul__(self, number):
+        hex_mul = hex(int(self.hex_number, 16) * int(number.hex_number, 16))
+        return str(hex_mul)[2:].upper()
+
+    def __str__(self):
+        return self.hex_number
+
+
+if __name__ == '__main__':
+    num_1 = HexNumber(input('Enter the first number: '))
+    num_2 = HexNumber(input('Enter the second number: '))
+    # num_1 = HexNumber('A2')
+    # num_2 = HexNumber('C4F')
+
+    print(f'Sum: {num_1 + num_2}\n'
+          f'Mul: {num_1 * num_2}\n')
