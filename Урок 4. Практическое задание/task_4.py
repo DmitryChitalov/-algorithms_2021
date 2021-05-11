@@ -12,6 +12,8 @@
 Без аналитики задание считается не принятым
 """
 
+import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -41,3 +43,11 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+print('func_1', timeit.repeat("func_1()", setup='from __main__ import func_1', repeat=3, number=100000))
+print('func_2', timeit.repeat("func_2()", setup='from __main__ import func_2', repeat=3, number=100000))
+
+"""
+1. func_1 - быстрая, т.к. просто перебор списка
+2. func_2 - медленная, т.к. используется дополнительный список и его наполнение
+"""
