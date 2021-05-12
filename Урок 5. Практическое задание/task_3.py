@@ -15,3 +15,35 @@ deque – это обобщение стеков и очередей.
 
 И добавить аналитику, так ли это или нет.!
 """
+
+
+from collections import deque
+from timeit import timeit
+
+
+def append(test, value=1):
+    return test.append(value)
+
+
+def pop(test):
+    return test.pop()
+
+
+def reverse(test):
+    return test.reverse()
+
+
+test_list = [i for i in range(1, 999999)]
+test_deque = deque(test_list)
+
+print(f"append(list): {timeit('append(test_list)', globals=globals(), number=10000)} sec.")
+print(f"append(deque): {timeit('append(test_deque)', globals=globals(), number=10000)} sec.")
+print(f"pop(list): {timeit('pop(test_list)', globals=globals(), number=10000)} sec.")
+print(f"pop(deque): {timeit('pop(test_deque)', globals=globals(), number=10000)} sec.")
+print(f"reverse(list): {timeit('reverse(test_list)', globals=globals(), number=10000)} sec.")
+print(f"reverse(deque): {timeit('reverse(test_deque)', globals=globals(), number=10000)} sec.")
+
+"""
+Функции reverse для deque выполняются медленее, чем для простого списка.
+Функции append, pop  для deque занчительно быстрее.
+"""

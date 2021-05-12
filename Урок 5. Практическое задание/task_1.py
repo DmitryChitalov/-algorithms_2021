@@ -23,3 +23,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import defaultdict
+
+avg_profit = 0
+i = 1
+
+firm_count = int(input('Введите количество предприятий: '))
+
+firm_dict = defaultdict(list)
+
+
+while i <= firm_count:
+    firm_name = input(f'Введите название фирмы : ')
+
+    income = input(' Через запятую "," введите прибыль за 4 кварталла ').split(',')
+    if len(income) != 4:
+        print('Неверный ввод. Нужно ввести прибыль за 4 квартала.')
+        continue
+
+    firm_dict[firm_name] = list(map(float, income))
+
+    avg_profit += sum(firm_dict[firm_name])
+    i = i + 1
+
+average_profit = round(avg_profit / firm_count, 2)
+
+top_firm = [name for name in firm_dict if sum(firm_dict[name]) > average_profit]
+worst_firm = [name for name in firm_dict if sum(firm_dict[name]) < average_profit]
+
+print(f'Средняя годовая прибыль всех предприятий: {average_profit}\n'
+      f'Предприятия, с прибылью выше среднего значения: {", ".join(top_firm)}\n'
+      f'Предприятия, с прибылью ниже среднего значения: {", ".join(worst_firm)}')
