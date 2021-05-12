@@ -7,6 +7,7 @@
 И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях?
 """
 
+
 from collections import OrderedDict
 from timeit import timeit
 
