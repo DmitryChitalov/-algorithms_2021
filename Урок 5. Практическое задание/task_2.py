@@ -33,3 +33,47 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+from collections import deque
+
+
+def convert_hex_to_int(num_str):
+    # Здесь функция преобразует введенное 16-ричное число к десятичному виду.
+    num_deq = deque(num_str)
+    rate = 0        # разряд числа
+    ret_val = 0     # возвращаемое значение
+    while len(num_deq):
+        ret_val += int(num_deq.pop(), 16) * 16 ** rate
+        rate += 1
+
+    return ret_val
+
+
+class HexNum:
+    def __init__(self, num_str):
+        self.num = convert_hex_to_int(num_str)
+
+    def __add__(self, other):
+        return hex(self.num + other.num)
+
+    def __mul__(self, other):
+        return hex(self.num * other.num)
+
+
+n1_str, n2_str = input('Введите первое 16-ричное число: '), input('Введите второе 16-ричное число: ')
+
+print('# Вариант с применением deque')
+n1 = convert_hex_to_int(n1_str)
+n2 = convert_hex_to_int(n2_str)
+# print(f'{n1_str} преобразовано в десятичное {n1}')
+# print(f'{n2_str} преобразовано в десятичное {n2}')
+print(f'{n1_str} + {n2_str} = {hex(n1 + n2)}')
+print(f'{n1_str} * {n2_str} = {hex(n1 * n2)}')
+
+print('# Вариант с применением ООП (хотя он и ссылается на функцию, в которой используется deque)')
+print(f'{n1_str} + {n2_str} = {HexNum(n1_str) + HexNum(n2_str)}')
+print(f'{n1_str} * {n2_str} = {HexNum(n1_str) * HexNum(n2_str)}')
+
+print('# Вариант без коллекций и ООП')
+print(f'{n1_str} + {n2_str} = {hex(int(n1_str, 16) + int(n2_str, 16))}')
+print(f'{n1_str} * {n2_str} = {hex(int(n1_str, 16) * int(n2_str, 16))}')
