@@ -23,3 +23,46 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+# Вводим количество компаний
+companys_count = int(input('Введите количество предприятий для расчета прибыли: '))
+
+# Создаем шаблон кортежа
+FIRMS = namedtuple('Firm', 'name quarter_1 quarter_2 quarter_3 quarter_4 year_profit')
+
+# Создаем список компаний и заполняем данными
+firms_lst = []
+for i in range(companys_count):
+    name = input('Введите название предприятия: ')
+    profits = [int(i) for i in input('Через пробел введите прибыль данного предприятия\n'
+                                     'за каждый квартал(Всего 4 квартала): ').split()]
+    firms_lst.append(FIRMS(
+        name=name,
+        quarter_1=profits[0],
+        quarter_2=profits[1],
+        quarter_3=profits[2],
+        quarter_4=profits[3],
+        year_profit=sum(profits)
+    ))
+
+# Находим среднюю прибыль среди компаний
+profits_sum = 0
+for i in range(companys_count):
+    profits_sum += firms_lst[i].year_profit
+avrg_profit = profits_sum / companys_count
+
+print(f'\nСредняя годовая прибыль всех предприятий: {avrg_profit}')
+
+# Создаем списки компаний с прибылью выше и ниже средней
+above_avrg = []
+below_avrg = []
+for i in range(companys_count):
+    if firms_lst[i].year_profit > avrg_profit:
+        above_avrg.append(firms_lst[i].name)
+    else:
+        below_avrg.append(firms_lst[i].name)
+
+print('Предприятия, с прибылью выше среднего значения: ', *above_avrg)
+print('Предприятия, с прибылью ниже среднего значения: ', *below_avrg)

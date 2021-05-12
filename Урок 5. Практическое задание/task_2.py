@@ -33,3 +33,22 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+from collections import defaultdict
+from functools import reduce
+
+# Вводим 2 числа и собираем их в словарь в нужном формате
+hex_digit = defaultdict(list)
+first_num = input('Введите первое число в шестнадцатеричном формате: ')
+second_num = input('Введите второе число в шестнадцатеричном формате: ')
+hex_digit[int(first_num, 16)] = ' '.join(first_num).split()
+hex_digit[int(second_num, 16)] = ' '.join(second_num).split()
+
+# Вычисляем результаты операций с использованием формат строк
+res_mul = reduce(lambda f_num, s_num: ('%X' % (f_num * s_num)),
+                 [int(''.join(value), 16) for value in hex_digit.values()])
+
+res_add = reduce(lambda f_num, s_num: ('%X' % (f_num + s_num)),
+                 [int(''.join(value), 16) for value in hex_digit.values()])
+
+print(f'Результат сложения чисел: {res_add} \nРезультат умножения чисел: {res_mul}')
