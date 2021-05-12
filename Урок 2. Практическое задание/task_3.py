@@ -22,3 +22,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+def flip_the_number(some_int, some_list=[]):
+    if some_int == 0:
+        new_int = ''.join(some_list)
+        return new_int
+    list_el = str(some_int % 10)
+    some_list.append(list_el)
+    some_int = some_int // 10
+    return flip_the_number(some_int)
+
+if __name__ == '__main__':
+    user_int = input('Введите число: ')
+    try:
+        user_int = int(user_int)
+    except Exception:
+        print('Вы ввели не число, а строку! Исправьтесь.')
+
+    print(flip_the_number(user_int))
+

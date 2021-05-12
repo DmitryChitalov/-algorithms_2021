@@ -21,3 +21,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def print_ascii(start=32, stop=128, step=10):
+    if start == stop:
+        return print('\nВывод окончен!')
+    new_str_element = f'{start} - {chr(start)}'
+    print(new_str_element, end=' ')
+    step -= 1
+    start += 1
+    if step == 0:
+        print('\n')
+        step = 10
+    return print_ascii(start, stop, step)
+
+
+if __name__ == '__main__':
+    print_ascii()
+
