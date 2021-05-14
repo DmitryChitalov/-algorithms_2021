@@ -20,3 +20,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def top3_metod_1():                               # O(n) - линейная сложность
+    copy_firm = firm_dict.copy()                  # O(n) - линейная сложность
+    top_dict = {}                                 # O(1) - константная сложность
+    for el in range(3):                           # O(1) - константная сложность
+        max_profit = list(copy_firm.values())[0]  # O(n) - линейная сложность
+        for name, profit in copy_firm.items():    # O(n) - линейная сложность
+            if profit >= max_profit:              # O(1) - константная сложность
+                max_name = name                   # O(1) - константная сложность
+                max_profit = profit               # O(1) - константная сложность
+        top_dict[max_name] = max_profit           # O(1) - константная сложность
+        del copy_firm[max_name]                   # O(1) - константная сложность
+    return top_dict                               # O(1) - константная сложность
+
+
+def top3_metod_2():                                                   # O(n log n) - линейно-логарифмическая сложность
+    sorted_firm = sorted(firm_dict, key=firm_dict.get, reverse=True)  # O(n log n) - линейно-логарифмическая сложность
+    top_dict = {}                                                     # O(1) - константная сложность
+    for el in range(3):                                               # O(1) - константная сложность
+        top_dict[sorted_firm[el]] = firm_dict.get(sorted_firm[el])    # O(1) - константная сложность
+    return top_dict                                                   # O(1) - константная сложность
+
+
+firm_dict = {
+    'Лукойл': 21000,
+    'Татнефть': 20000,
+    'Сибнефть': 22000,
+    'Газпром': 33000,
+    'Роснефть': 69000,
+    'Северсталь': 99000,
+    'НЛМК': 10000}
+
+print(top3_metod_1())
+print(top3_metod_2())
+
+""" Первый метод лучше так как линейная сложность лучше чем линейно-логарифмическая"""

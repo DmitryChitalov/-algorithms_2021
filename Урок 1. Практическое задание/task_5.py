@@ -28,3 +28,61 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Stack_of_plates:
+    def __init__(self, size):
+        self.all_plates = []
+        self.current_list = []
+        self.size = size
+
+    def is_empty(self):
+        return self.current_list == []
+
+    def push_in(self):
+        if len(self.current_list) == self.size:
+            self.all_plates.append(self.current_list.copy())
+            self.current_list.clear()
+        self.current_list.append(f'Plates_{len(self.current_list) + len(self.all_plates) * self.size + 1}')
+
+    def pop_out(self):
+        if len(self.current_list) == 1:
+            last_plates = self.current_list.pop()
+            if len(self.all_plates):
+                self.current_list = self.all_plates.pop()
+            return last_plates
+        if self.is_empty() is False:
+            return self.current_list.pop()
+
+        else:
+            return None
+
+    def get_val(self):
+        return self.current_list[len(self.all_plates) - 1]
+
+    def stack_size(self):
+        return len(self.all_plates) * self.size + len(self.current_list)
+
+
+if __name__ == '__main__':
+
+    stack_plates = Stack_of_plates(4)
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    print(stack_plates.pop_out())
+    print(stack_plates.pop_out())
+    print(stack_plates.get_val())
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    stack_plates.push_in()
+    print(stack_plates.stack_size())
+
+

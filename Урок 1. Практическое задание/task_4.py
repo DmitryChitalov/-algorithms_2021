@@ -25,3 +25,58 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def valid_users_metod_1():                                               # O(n^2) - квадратичная сложность
+    username = input('Введите имя пользователя')                         # O(1) - константная сложность
+    password = input('Введите пароль')                                   # O(1) - константная сложность
+    for name in users:                                                   # O(n) - линейная сложность
+        if name == username:                                             # O(1) - константная сложность
+            for key, value in users.get(username).items():               # O(n) - линейная сложность
+                if key == 'passwd':                                      # O(1) - константная сложность
+                    if password == value:                                # O(1) - константная сложность
+                        pass_valid = True                                # O(1) - константная сложность
+                    else:                                                # O(1) - константная сложность
+                        return print('Пароль неверный')                  # O(1) - константная сложность
+                if key == 'active':                                      # O(1) - константная сложность
+                    if pass_valid == True:                               # O(1) - константная сложность
+                        if value == True:                                # O(1) - константная сложность
+                            return print('Вы получили доступ!')          # O(1) - константная сложность
+                        else:                                            # O(1) - константная сложность
+                            return print('Активируйте учетную запись!')  # O(1) - константная сложность
+    return print('Такого пользователя нет')                              # O(1) - константная сложность
+
+
+def valid_users_metod_2():                                      # O(1) - константная сложность
+    username = input('Введите имя пользователя')                # O(1) - константная сложность
+    password = input('Введите пароль')                          # O(1) - константная сложность
+    if users.get(username) is None:                             # O(1) - константная сложность
+        return print('Такого пользователя нет')                 # O(1) - константная сложность
+    else:                                                       # O(1) - константная сложность
+        passwd = users.get(username).get('passwd')              # O(1) - константная сложность
+        active = users.get(username).get('active')              # O(1) - константная сложность
+        if passwd == password:                                  # O(1) - константная сложность
+            if active == True:                                  # O(1) - константная сложность
+                return print('Вы получили доступ!')             # O(1) - константная сложность
+            else:                                               # O(1) - константная сложность
+                return print('Активируйте учетную запись!')     # O(1) - константная сложность
+        else:                                                   # O(1) - константная сложность
+            return print('Пароль неверный')                     # O(1) - константная сложность
+
+
+
+users = {
+    'username_1': {'passwd': '11111', 'active': True},
+    'username_2': {'passwd': '22222', 'active': False},
+    'username_3': {'passwd': '33333', 'active': True},
+    'username_4': {'passwd': '44444', 'active': True},
+    'username_5': {'passwd': '55555', 'active': False},
+    'username_6': {'passwd': '66666', 'active': True}
+        }
+
+
+
+valid_users_metod_1()
+valid_users_metod_2()
+
+'''Второй метод лучше так как константная сложность лучше чем линейная'''

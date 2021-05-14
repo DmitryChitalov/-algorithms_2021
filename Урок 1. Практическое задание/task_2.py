@@ -16,3 +16,31 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import random
+
+
+def min_one(my_list):               # O(n^2) - квадратичная сложность
+    min_count = my_list[0]          # O(1) - константная сложность
+    for el in my_list:              # O(n) - линейная сложность
+        for el_2 in my_list:        # O(n) - линейная сложность
+            if el < el_2:           # O(1) - константная сложность
+                if el < min_count:  # O(1) - константная сложность
+                    min_count = el  # O(1) - константная сложность
+    return min_count                # O(1) - константная сложность
+
+
+def min_two(my_list):       # O(n) - линейная сложность
+    min_count = my_list[0]  # O(1) - константная сложность
+    for el in my_list:      # O(n) - линейная сложность
+        if el < min_count:  # O(1) - константная сложность
+            min_count = el  # O(1) - константная сложность
+    return min_count        # O(1) - константная сложность
+
+
+
+my_list = list(random.randint(0, 1000) for el in range(0, random.randint(2, 20)))
+
+print(my_list)
+print(f'Минимальное значение списка: {min_one(my_list)}')
+print(f'Минимальное значение списка: {min_two(my_list)}')
