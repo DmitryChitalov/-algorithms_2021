@@ -1,6 +1,5 @@
 """
 Задание 5.
-Задание на закрепление навыков работы со стеком
 
 Реализуйте структуру "стопка тарелок".
 
@@ -20,11 +19,42 @@
 1) созд-е экземпляров стека (если стопка - класс)
 или
 2) lst = [[], [], [], [],....]
-
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
-
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Plates:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        self.elems.insert(0, el)
+        self.notify()
+
+    def pop_out(self):
+        return self.elems.pop(0)
+
+    def get_val(self):
+        return self.elems[0]
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def notify(self):
+        max_place = 3
+        if len(self.elems) >= max_place:
+            print('Используйте новый стек')
+        else:
+            print(f'Будьте внимательны. Лимит тарелок 3 шт.')
+
+
+plates = Plates()
+
+plates.push_in(10)
+plates.push_in(2)
+plates.push_in(1)
+
+
+

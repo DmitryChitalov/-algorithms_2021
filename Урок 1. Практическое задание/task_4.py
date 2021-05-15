@@ -25,3 +25,45 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+#Решение 1 более эффективное, так как проверяет пароль и логин сразу в заданном значении,
+# в то время как во второй реализации кода проходит по значениям и ищет совпадения.
+
+
+data = {'Ivan Sergeev': ['ivan.sergeev@gmail.com', 'erkf2010', 1],
+        'Sergey Petrov': ['petrov@yandex.ru', '1234df', 0],
+        'Alina Ivanova': ['alinchik77@mail.ru', 'krasotka', 0]}
+
+
+# Ищем пользователей с не активной учеткой (применяется для двух реализаций)
+
+# 0(n log n)
+
+for k, v in data.items():
+    if v[-1] == 0:
+        print(f'Пользователь {k} не активирован. Пожалуйста, введите логин и пароль.')
+
+
+# Сложность 0(log n)
+
+def access(login, password):
+    a = data.get('Sergey Petrov')
+    if a[0] == login and a[1] == password:
+        print(f'Доступ разрешен. Ваш логин {login}, пароль {password}.')
+    else:
+        print(f'У вас ошибка. Попробуйте еще раз')
+
+
+access('petrov@yandex.ru', '1234df')
+
+# Сложность O(n)
+
+def verify(login, password):
+    for i in data.get('Alina Ivanova'):
+        try:
+            if login and password in i:
+                print('Ура. Вы прошли аутентификацию')  # выдается ошибка typeerror, а также из-за 0 в значении выдает, что пользователь не прошел. Подскажите, пожалуйста, где ошибка.
+        except TypeError:
+            pass
+
+verify('alinchik77@mail.ru', 'krasotka')

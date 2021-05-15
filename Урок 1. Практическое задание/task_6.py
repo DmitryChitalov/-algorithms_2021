@@ -11,10 +11,27 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
-
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from collections import deque
+
+q = deque()
+
+q.append('eat')
+q.append('sleep')
+q.append('work')
+
+print(q)
+
+# список решенных задач
+def resolved():
+    resolved_list = [q.popleft()]
+    return resolved_list
+
+# Очередь на доработку
+def revision():
+    revision_list = [q.popleft()]
+    return revision_list
+
+
+

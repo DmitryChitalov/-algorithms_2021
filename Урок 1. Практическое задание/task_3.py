@@ -20,3 +20,24 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# 2 решение более эффективное, потому что не нужно проходить по всем элементам и добавлять их в новый список.
+
+# Сложность O(n log n)
+
+data = {'Gazprom': 25, 'Sberbank': 2, 'MTS': 15, 'Megafon': 10, 'VEON': 5}
+lst = []
+for el in data.values():
+    lst.append(el)
+lst.sort()
+print(lst[-3:])
+
+
+#  Сложность O(n)
+
+data_2 = {'Gazprom':25, 'Sberbank':2, 'MTS': 15, 'Megafon': 10, 'VEON': 5}
+
+val = list(data_2.values())
+val.sort()
+print(val[-3:])
