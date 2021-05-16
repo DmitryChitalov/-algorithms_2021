@@ -28,3 +28,82 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+STACK_SIZE = 10  # размер стопки тарелок
+
+
+class StackPlates:
+    """Класс стэк.
+    """
+    def __init__(self):
+        self.plates = []
+
+    def push_in(self):
+        self.plates.append('Тарелка')
+
+    def pop_out(self):
+        return self.plates.pop()
+
+    def stack_size(self):
+        return len(self.plates)
+
+    def __str__(self):
+        return str(len(self.plates))
+
+    @property
+    def is_empty(self):
+        return self.plates == []
+
+    @property
+    def is_full(self):
+        return len(self.plates) == STACK_SIZE
+
+
+class Handler:
+    """Класс обработчик.
+       Содержит список стэков.
+       Отслеживает заполнение стэка и в случае необходимости создает новый
+    """
+    def __init__(self):
+        self.stacks = []
+
+    def get_actual_stack(self):
+        """Функция получения актуального стэка.
+           Если стэков нет, то создает новый.
+           Если стэки есть, то находит первых неполный
+        """
+        if self.is_empty():
+            self.stacks.append(StackPlates())
+            return self.stacks[0]
+        else:
+            for stack in self.stacks:
+                if not stack.is_full:
+                    return stack
+
+    def put_plates(self, N):
+        stack = self.get_actual_stack()
+        for i in range(N):
+            if not stack.is_full:
+                stack.push_in()
+            else:
+                stack = StackPlates()      # Создаем новый экземпляр стэка
+                self.stacks.append(stack)
+                stack.push_in()
+
+    def is_empty(self):
+        return self.stacks == []
+
+    def __str__(self):
+        """Функция переопределения вывода.
+        """
+        string = ''
+        for stack in self.stacks:
+            string = f'{string}Количестов тарелок в стопке {stack}\n'
+        return string
+
+
+plates = int(input('Введите количество тарелок: '))
+stack_plates = Handler()
+stack_plates.put_plates(plates)
+print(stack_plates)
+
