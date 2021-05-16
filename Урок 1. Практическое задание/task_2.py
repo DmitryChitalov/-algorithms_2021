@@ -16,3 +16,28 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+# первый вариант
+# O(N^2)
+def minimum(arr):
+    mini = arr[0]  # O(1)
+    for el in arr:  # O(N)
+        for el1 in arr:  # O(N)
+            if el1 < el and el1 < mini:  # O(1)
+                mini = el1  # O(1)
+    return mini  # O(1)
+
+
+# второй вариант
+# O(N)
+def minimum_1(arr):
+    mini = arr[0]  # O(1)
+    for el in arr:  # O(N)
+        if el < mini:  # O(1)
+            mini = el  # O(1)
+    return mini  # O(1)
+
+
+print(minimum((4, 3, 4, 7, 2, 8, 9)))
+print(minimum_1((4, 3, 4, 7, 2, 8, 9)))
