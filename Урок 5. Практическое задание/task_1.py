@@ -23,3 +23,27 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+quantity_enterprises = int(input('Введите количество предприятий: '))
+
+Enterprise = namedtuple('Enterprise', 'name profit')
+enterprises = []
+profits = []
+
+for i in range(quantity_enterprises):
+    name = input(f'Введите название {i + 1}го предприятия: ')
+    annual_profit = sum(map(int, input(
+                        'Введите через пробел ежеквартальную прибыль данного предприятия за последний год: ').split()))
+    profits.append(annual_profit)
+    enterprise = Enterprise(name, annual_profit)
+    enterprises.append(enterprise)
+
+average_profit = sum(profits) / quantity_enterprises
+
+less_average = [i.name for i in enterprises if i.profit < average_profit]
+more_average = [i.name for i in enterprises if i.profit >= average_profit]
+
+print(f'Предприятия, чья прибыль ниже среднего значения: {less_average}')
+print(f'Предприятия, чья прибыль равна или выше среднего значения: {more_average}')
