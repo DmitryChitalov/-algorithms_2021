@@ -28,3 +28,18 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# В СВЯЗИ С НЕХВАТКОЙ ВРЕМЕНИ НЕ УСПЕЛ СДЕЛАТЬ 5 ДЗ, НУЖНО ЕЩЕ ВРЕМЯ, 4 ЗАДАНИЯ ГОТОВО НА ПРОВЕРКУ
+#
+# class StackClass:
+#     def __init__(self):
+#         self.stack = []
+#
+#     def stack_size(self):
+#         return len(self.stack)
+#
+#     def push(self, item):
+#         self.stack.append(item)
+#
+#     def pop(self):
+#         if len(self.stack) == 10
+#             return
