@@ -25,3 +25,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users1 = ({'username':'user1','password':'pass1','active':'yes'},
+         {'username':'user2','password':'pass2','active':'no'},
+         {'username':'user3','password':'pass3','active':'yes'})
+
+# Решение 1 O(n)
+def auth1(login,password):
+    for i in users1: # O(n)
+        if i['username'] == login and i['active'] == 'yes' and i['password'] == password: # O(1)
+            print('Аутентификация успешна!')
+            break
+        if i['username'] == login and i['active'] == 'no':  # O(1)
+            print('Вам необходимо активировать учетную запись!')
+            break
+        else:
+            print('Неверный логин или пароль!')
+            break
+
+# Решение 2 O(1) - Лучшее решение, т.к. константная сложность лучше, чем !
+
+users2 = {'user1': {'password': 'pass1', 'active': True},
+         'user2': {'password': 'pass2', 'active': False},
+         'user3': {'password': 'pass3', 'active': True}}
+
+def auth2():
+    login = input('Login: ')
+    password = input('Password: ')
+    if users2.get(login) is None:
+        return print("Login doesn't find!")
+    else:
+        passwd = users2.get(login).get('password')
+        active = users2.get(login).get('active')
+        if passwd == password:
+            if active == True:
+                return print('Logon success!')
+            else:
+                return print('Account not activated!')
+        else:
+            return print('Incorrect password!')
+
+auth1('user1','pass1')
+auth2()
