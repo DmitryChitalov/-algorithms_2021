@@ -28,3 +28,29 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+class StackPlates:
+    def __init__(self, volume):
+        self.plate_list = []
+        self.new_plate_list = []
+        self.max_of_plates = volume
+
+    def stack_size(self):
+        return len(self.plate_list)
+
+    def push_in(self, count):
+        self.plate_list.append(count)
+        while self.stack_size() > self.max_of_plates:
+            self.new_plate_list.append(self.plate_list[:self.max_of_plates])
+            self.plate_list = self.plate_list[self.max_of_plates:]
+
+    def all_stack_size(self):
+        return self.new_plate_list + self.plate_list
+
+
+if __name__ == '__main__':
+
+    folding = StackPlates(5)
+
+    for i in range(1, 14):
+        folding.push_in(i)
+        print(folding.all_stack_size())
