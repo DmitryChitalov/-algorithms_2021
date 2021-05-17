@@ -16,3 +16,29 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+# O(n^2)
+
+
+def min_value(list_1):
+    min_val = list_1[0]  # O(1)
+
+    for el in range(len(list_1) - 1):  # O(n)
+        if list_1[el] < min_val:  # O(len(list_1[el]))
+            min_val = list_1[el]  # O(1)
+    return min_val  # O(1)
+
+
+# O(n)
+
+
+def min_value_2(list_2):
+
+    list_2.sort()  # O(nlog(n))
+    return list_2[0]  # O(1)
+
+
+my_list = [78, 85, 64, 55, 5, 2, 7]
+print(min_value(my_list))
+print(min_value_2(my_list))
