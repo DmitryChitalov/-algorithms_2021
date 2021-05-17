@@ -46,6 +46,7 @@ def decor(func):
 
 @decor
 def func_1(array):
+
     arr_value = []
     arr_count = []
     for el in array:
