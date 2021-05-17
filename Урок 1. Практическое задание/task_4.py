@@ -1,4 +1,4 @@
-"""
+""" Домашняя работа Дармограй Полины
 Задание 4.
 
 Для этой задачи:
@@ -25,3 +25,33 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+system_data = [['login', 'password', True],['nlogin', 'npassword', False]]
+
+def func1(list): # O(n)
+    login = input('Введите логин: ') # O(1)
+    password = input('Введите пароль: ') # O(1)
+    for i in list: # O(n)
+        if login == i[0] and password == i[1] and i[2] is True: # O(1)
+            print('Вы успешно авторизованы.') # O(1)
+            break # O(1)
+        else: # O(1)
+            print('Пройдите активацию учетной записи или создайте ее.') # O(1)
+            break # O(1)
+
+def func2(list): # O(n)
+    login = input('Введите логин: ') # O(1)
+    password = input('Введите пароль: ') # O(1)
+    list_n = [login, password] # O(1)
+    for i in list: # O(n)
+        if list_n == i[0:2]: # O(2)
+            if i[2] is True: # O(1)
+                print('Вы успешно авторизованы.') # O(1)
+                break # O(1)
+        else: # O(1)
+            print('Пройдите активацию учетной записи или создайте ее.') # O(1)
+            break # O(1)
+
+
+func2(system_data)
+
+# Сложность решений одинакова поэтому нельзя выделить одно из них.

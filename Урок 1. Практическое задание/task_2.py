@@ -1,4 +1,4 @@
-"""
+""" Домашняя работа Дармограй Полины
 Задание 2.
 
 Реализуйте два алгоритма.
@@ -16,3 +16,26 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+def func1(list): # Сложность такого алгоритма: O(n^2) - квадратичная.
+    min = list[0] # O(1)
+    for i in list: # O(n)
+        for j in list: # O(n)
+            if i < min or j < min: # O(1)
+                if i < j: # O(1)
+                    min = i # O(1)
+                else: # O(1)
+                    min = j # O(1)
+    return min # O(1)
+
+def func2(list): # Сложность такого алгоритма: O(n) - линейная.
+    min = list[0] # O(1)
+    for i in list: # O(n)
+        if min > i: # O(1)
+            min = i # O(1)
+    return min # O(1)
+
+
+numbers = [1, 2, 3, 4, 5, 0, 6, 9]
+print(func1(numbers))
+print(func2(numbers))
