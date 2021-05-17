@@ -25,3 +25,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# Вариант 1. Сложность: O(1)
+def variant_1(profiles: dict, login: str, password: int):
+    if profiles.get(login.lower()):
+        if profiles.get(login.lower())[0] != password:
+            return 'Wrong password!'
+        elif profiles.get(login.lower())[0] == password and profiles.get(login.lower())[1]:
+            return 'Welcome!'
+        else:
+            return 'Wrong user!'
+    else:
+        return 'Wrong login!'
+
+
+# Вариант 2. Сложность: O(n)
+def variant_2(profiles: dict, login: str, password: int):
+    for key, val in profiles.items():
+        if key == login.lower():
+            if val[0] == password and val[1]:
+                return 'Welcome!'
+            elif val[0] != password:
+                return 'Wrong password!'
+            elif val[0] == password and not val[1]:
+                return 'Wrong user!'
+    return 'Wrong login!'
+
+# Первый вариант оптимальнее
+
+user_profiles = {'Max': [123, False],
+                 'Leo': [777, True],
+                 'Bob': [111, True]
+                 }
+
+login = input('Login (a-z): ')
+password = int(input('Password (0-9): '))
+
+print(variant_1(user_profiles, login, password))
+print(variant_2(user_profiles, login, password))
