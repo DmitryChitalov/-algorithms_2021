@@ -16,3 +16,30 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+""""" задание 1
+"""""
+
+
+def min_func(min_list):
+    minimal = min_list[0]  # O(N)
+    # minimal_ind = 0
+    for i in range(1, len(min_list)):  # O(N)
+        if min_list[i] < minimal:  # O(N)
+            minimal = min_list[i]  # O(1)
+            # minimal_ind = i
+    # return minimal_ind можем поискать индекс числа или само число как ниже
+    return minimal  # O(1)
+
+
+print(min_func([80, 85, 665, 558, 984, 78, 65, 99]))
+# надеюсь правильно, но может O(N^3) вместо O(N^2) вышло, не совсем уверен в понимании.
+
+""""    задание 2
+"""
+
+
+def min_min_func(m_list):
+    minimal = min(m_list)  # O(N)
+    return minimal  # O(1)
+print(min_min_func([102, 103, 303, 99, 3001, 36541]))
+# Должно точно O(N) быть

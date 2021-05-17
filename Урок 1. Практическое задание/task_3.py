@@ -20,3 +20,37 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+'''
+'''
+
+company_d = {'Sapple': 399999, 'Fonor': 188888, 'Zamzung': 300009, 'Miaomi': 200009}
+print(company_d)
+
+# N1
+from collections import Counter
+
+company_d = {'Sapple': 399999, 'Fonor': 188888, 'Zamzung': 300009, 'Miaomi': 200009}
+c = Counter(company_d)
+
+for el in c.most_common(3):  # O(N)
+    print(el[:1:])
+    # print(el[:1:], end='')
+print(c.most_common(3))
+
+# N2
+company_list = {'Sapple': 399999, 'Fonor': 188888, 'Zamzung': 300009, 'Miaomi': 200009}
+print(sorted(company_list.keys(), reverse=True)[:3])  # O(N)
+
+# N3
+from operator import itemgetter
+
+company_l = [('Sapple', 399999), ('Fonor', 188888), ('Zamzung', 300009), ('Miaomi', 200009)]
+c = sorted(company_l, key=itemgetter(1), reverse=True)  # O(N)
+
+print(c[:3])
+
+""" 
+Думаю, что вариант №2 подходит лучше, так как нет нужды добавлять что-либо.
+
+"""
