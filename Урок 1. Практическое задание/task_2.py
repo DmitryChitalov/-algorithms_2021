@@ -16,3 +16,20 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+# Квадратичная O(n**2)
+def search_square(some_list):  # O(n**2)
+    for i in some_list:        # O(n)
+        stop = True              # O(1)
+        for el in some_list:   # O(n)
+            if i > el:           # O(1)
+                stop = False     # O(1)
+        if stop:                 # O(1)
+            return i             # O(1)
+
+# Линейная O(n)
+def search_linear(some_list):  # O(n)
+    smallest = some_list[0]    # O(1)
+    for i in some_list:        # O(n)
+        if i < smallest:        # O(1)
+            smallest = i        # O(1)
+    return smallest             # O(1)
