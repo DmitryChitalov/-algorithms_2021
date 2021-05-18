@@ -47,8 +47,8 @@ def recursive_reverse_mem(number):
 # обернул ее всеми возможными декораторами. Результат ниже.
 # Т.е. таблиц профайлера при вызове рекурсивной функции одна.
 # Правда сама таблица малоинформативна, вероятно из-за того, что функция в одну строку
-@profile
 @decor
+@profile
 def call_reverse_mem(num):
     return recursive_reverse_mem(num)
 
@@ -59,20 +59,16 @@ el, mem_diff, exec_time = call_reverse_mem(num)
 print('el  =', el)
 print(f'call_reverse. Использовано {mem_diff} Mib памяти')
 print(f'Время выполнения simple_1 = {exec_time}')
-
 # num = 5691973753489
 # Filename: ...\-algorithms_2021\Урок 6. Практическое задание\task_3.py
 #
 # Line #    Mem usage    Increment  Occurences   Line Contents
 # ============================================================
-#     16     21.5 MiB     21.5 MiB           1       def wrapper(*args):
-#     17     21.5 MiB      0.0 MiB           1           start_time = timeit.default_timer()
-#     18     21.5 MiB      0.0 MiB           1           m1 = memory_profiler.memory_usage()
-#     19     21.5 MiB      0.0 MiB           1           res1 = func(args[0])
-#     20     21.5 MiB      0.0 MiB           1           m2 = memory_profiler.memory_usage()
-#     21     21.5 MiB      0.0 MiB           1           end_time = timeit.default_timer()
-#     22     21.5 MiB      0.0 MiB           1           return res1, m2[0] - m1[0], end_time - start_time
-#
+#     51     21.6 MiB     21.6 MiB           1   @decor
+#     52                                         @profile
+#     53                                         def call_reverse_mem(num):
+#     54     21.6 MiB      0.0 MiB           1       return recursive_reverse_mem(num)
+
 #
 # el  = 9843573791965
 # call_reverse. Использовано 0.0078125 Mib памяти
