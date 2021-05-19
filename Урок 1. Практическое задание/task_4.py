@@ -25,55 +25,58 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+user_data = {"aura768": {"password": "sxcvbjuytfcv85", "if_activated": True},
+             "sova677": {"password": "jhgfdxcbjgf8749", "if_activated": False},
+             "sweety296": {"password": "qwdedswdxs874584", "if_activated": True},
+             "flower90": {"password": "jhgfcvbjh85", "if_activated": False},
+             "guitar564": {"password": "pollkjhglk9876", "if_activated": True},
+             "bomb945": {"password": "ytredcvhjk89652", "if_activated": False}}
+
+
 # Вариант 1
-logins = ["aura94", "sova98", "sweety984", "somebody366", "maylie965", "onlygirls567"]  # O(1)
-passwords = ["hgfcvbhjgv5125", "qwsxdcxsde874521", ";lllkmk8lknm", "hgvbnhgv85", "hgvnmjhgv842", "fcvbhjuhgfv"]  # O(1)
-if_activated = [True, False, False, True, True, False]  # O(1)
 
 
-def user_authentication(login, password):
-    if login in logins:  # O(n)
-        if password in passwords and logins.index(login) == passwords.index(password):  # O(n)
-            if if_activated[passwords.index(password)]:  # O(1)
-                print("Вы вошли в систему")  # O(1)
-            else:
-                print("Для входа в систему активируйте учетную запись")  # O(1)
-        else:
-            print("Неверный пароль. Попробуйте еще раз")  # O(1)
+def authentication(user_bd, login, password):
+    if user_bd.get(login):
+        if user_bd[login]["password"] == password \
+                and user_bd[login]["if_activated"]:
+            return "Вы успешно вошли в систему"
+        elif not user_bd[login]["if_activated"]:
+            return "Для входа активируйте учетную запись"
+        elif user_bd[login]["password"] != password:
+            return "Пароль введен не верно. Повторите попытку"
     else:
-        print("Пользователя с таким логином нет в системе. Зарегистрируйтесь")  # O(1)
+        return "Пользователь не найден. Зарегистрируйтесь"
 
-
-user_authentication("aura94", "hgfcvbhjgv5125")  # O(n)
-user_authentication("sova98", "qwsxdcxsde874521")  # O(n)
-user_authentication("somebody366", "dfghjmnbvf52541")  # O(n)
-user_authentication("onlygirls666", "jhgfvbnjhgb52145")  # O(n)
 
 # Вариант 2
-authentication = [["aura94", "hgfcvbhjgv5125"], ["sova98", "qwsxdcxsde874521"],
-                  ["sweety984", ";lllkmk8lknm"], ["somebody366", "hgvbnhgv85"],
-                  ["maylie965", "hgvnmjhgv842"], ["onlygirls567", "fcvbhjuhgfv"]]  # O(1)
 
 
-def user_aut(data):
-    if data[0] in [n for row in authentication for n in row]:  # O(n^3)
-        if data[1] in [n for row in authentication for n in row]:  # O(n^3)
-            if data[2]:  # O(n)
-                print("Вы вошли в систему")  # O(1)
-            else:
-                print("Активируйте учетную запись")  # O(1)
-        else:
-            print("Неверный пароль. Попробуйте еще раз")  # O(1)
-    else:
-        print("Пользователь не найден. Зарегистрируйтесь")  # O(1)
+def authentication_2(user_bd, login, password):
+    for key, value in user_bd.items():
+        if key == login:
+            if value["password"] == password and value["if_activated"]:
+                return "Вы вошли в систему"
+            elif not value["if_activated"]:
+                return "Активируйте учетную запись"
+            elif value["password"] != password:
+                return "Пароль введен не верно. Повторите попытку"
+
+    return "Пользователь не найден. Зарегистрируйтесь"
 
 
-user_aut(["maylie965", "fcvbhjuhgfv", False])  # O(n)
-user_aut(["somebody366", "hgvbnhgv85", True])  # O(n)
-user_aut(["sweety984", ";hgbnjuhg", True])  # O(n)
-user_aut(["sweety999", ";lllkmk8lknm", False])  # O(n)
+print(authentication(user_data, "bomb945", "ytredcvhjk89652"))
+print(authentication_2(user_data, "bomb945", "ytredcvhjk89652"))
+print(authentication(user_data, "aura768", "sxcvbjuytfcv85"))
+print(authentication_2(user_data, "sweety296", "qwdedswdxs874584"))
+print(authentication(user_data, "somthing768", "oiuyfdcgvhj"))
+print(authentication_2(user_data, "mary8765", "poiklok;l85"))
+print(authentication(user_data, "guitar564", "uygfvbuhg52"))
+print(authentication_2(user_data, "aura768", "kjhgbnmkj"))
 
 
 """
-Вариант 1 будет наиболее эффективным, так как общая сложность у него О(n), в то время как у Варианта 2 - O(n^3)
+Вариант 1 будет эффективнее, так как имеет константную сложность O(1) из-за отсутствия сложных алгоритмов, в то время 
+как вариант 2 имеет сложность линейную O(n), так как содержит цикл 
 """

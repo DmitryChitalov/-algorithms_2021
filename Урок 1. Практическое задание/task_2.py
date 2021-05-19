@@ -18,7 +18,7 @@
 """
 
 
-# O(n^2)
+# O(n)
 
 
 def min_value(list_1):
@@ -30,13 +30,17 @@ def min_value(list_1):
     return min_val  # O(1)
 
 
-# O(n)
+# O(n ^ 2)
 
 
 def min_value_2(list_2):
 
-    list_2.sort()  # O(nlog(n))
-    return list_2[0]  # O(1)
+    minimal = list_2[0]
+
+    for el in list_2:
+        if el < minimal:
+            minimal = el
+    return minimal
 
 
 my_list = [78, 85, 64, 55, 5, 2, 7]

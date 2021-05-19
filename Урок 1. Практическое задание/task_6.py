@@ -24,7 +24,7 @@ class QueueClass:
     def __init__(self):
         self.elems = []
 
-    def is_empty(self):
+    def if_empty(self):
         return self.elems == []
 
     def to_queue(self, item):
@@ -33,22 +33,53 @@ class QueueClass:
     def from_queue(self):
         return self.elems.pop()
 
-    def size(self):
+    def size_of_queue(self):
         return len(self.elems)
 
 
-def task_board(tasks_lst):
-    tasks_queue_obj = QueueClass()
-    tasks_to_modify = QueueClass()
-    done = []
+class TaskBoard:
+    def __init__(self):
+        self.cur_queue = QueueClass()    # Первая очередь
+        self.revision_queue = QueueClass()   # очередь на доработку
+        self.log = []  # Список выполненных задач
 
-    for task in tasks_lst:
-        tasks_queue_obj.to_queue(task)
-        tasks_to_modify.to_queue(tasks_queue_obj.from_queue())
-        done.append(tasks_to_modify.from_queue())
+    def complete_task(self):
+        task = self.cur_queue.from_queue()
+        self.log.append(task)
 
-    return done
+    def task_for_revision(self):
+        task = self.cur_queue.from_queue()
+        self.revision_queue.to_queue(task)
+
+    def to_current_queue(self, item):
+        self.cur_queue.to_queue(item)
+
+    def task_from_revision(self):
+        task = self.revision_queue.from_queue()
+        self.cur_queue.to_queue(task)
+
+    def current_task(self):
+        return self.cur_queue.elems[len(self.cur_queue.elems) - 1]
+
+    def current_revision(self):
+        return self.revision_queue.elems[len(self.revision_queue.elems) - 1]
 
 
-tasks = ["task 1", "task 2", "task 3", "task 4", "task 5", "task 6", "task 7"]
-print(task_board(tasks))
+if __name__ == '__main__':
+    task_board = TaskBoard()
+    task_board.to_current_queue("Task1")
+    task_board.to_current_queue("Task2")
+    task_board.to_current_queue("Task3")
+    task_board.to_current_queue("Task4")
+    task_board.to_current_queue("Task5")
+    task_board.to_current_queue("Task6")
+    print(task_board.cur_queue.elems)
+    print(task_board.current_task())
+    task_board.task_for_revision()
+    task_board.task_for_revision()
+    task_board.complete_task()
+    task_board.task_from_revision()
+    print(task_board.cur_queue.elems)
+    task_board.task_for_revision()
+    print(task_board.current_task())
+    print(task_board.log)
