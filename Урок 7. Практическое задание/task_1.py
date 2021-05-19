@@ -75,6 +75,7 @@ n = 1000
 t = Timer("bubble_sort2(n)", "from __main__ import bubble_sort2, n")
 print('t2_3', t.timeit(number=10))
 
+
 # t1_1 0.0003116000000000091
 # t1_2 0.016124399999999997
 # t1_3 3.5524643
