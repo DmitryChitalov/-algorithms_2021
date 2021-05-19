@@ -13,3 +13,64 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+
+from random import random
+from timeit import Timer
+
+
+def merge_sort(lst):
+    if len(lst) > 1:
+        left = lst[: len(lst) // 2]
+        right = lst[len(lst) // 2 :]
+
+        lst = []
+
+        left = merge_sort(left)
+        right = merge_sort(right)
+
+        while len(left) and len(right):
+            if left[0] < right[0]:
+                lst.append(left.pop(0))
+            else:
+                lst.append(right.pop(0))
+
+        if len(left) > 0:
+            lst.extend(left)
+        else:
+            lst.extend(right)
+
+    return lst
+
+
+n = 10
+lst = [random() * 50 for _ in range(n)]
+print(lst)
+print(merge_sort(lst[:]))
+t = Timer("merge_sort(lst)", "from __main__ import merge_sort, lst")
+print('t1', t.timeit(number=1))
+
+n = 100
+lst = [random() * 50 for _ in range(n)]
+# print(lst)
+# print(merge_sort(lst[:]))
+t = Timer("merge_sort(lst)", "from __main__ import merge_sort, lst")
+print('t1', t.timeit(number=1))
+
+n = 1000
+lst = [random() * 50 for _ in range(n)]
+# print(lst)
+# print(merge_sort(lst[:]))
+t = Timer("merge_sort(lst)", "from __main__ import merge_sort, lst")
+print('t1', t.timeit(number=1))
+
+# Не стал приводить списки из 100 и 1000 элементов, там все аналогично
+# Согласно теории (https://ru.wikipedia.org/wiki/Сортировка_слиянием), при сортировке слиянием
+# должен формироваться третий массив, содержащий элементы первых двух массивов в отсортированном
+# порядке. Реализация, приведенная в конспекте, третий массив не использует. Я решил добавить
+# третий массив, заодно уменьшив код
+
+# [8.737101377338641, 26.72791729767895, 8.66104209738982, 40.82179461086861, 28.88434097245992, 48.86821406621116, 47.59820071214975, 33.602218087925124, 42.58216434663962, 35.97315594155189]
+# [8.66104209738982, 8.737101377338641, 26.72791729767895, 28.88434097245992, 33.602218087925124, 35.97315594155189, 40.82179461086861, 42.58216434663962, 47.59820071214975, 48.86821406621116]
+# t1 0.00016620000000000523
+# t1 0.0066701999999999595
+# t1 0.037145500000000053
