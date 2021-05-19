@@ -21,40 +21,39 @@
 2) lst = [[], [], [], [],....]
 """
 
+STACK_LEN = 5
 
-class Plates:
+class StackOfPlates:
     def __init__(self):
-        self.elems = []
+        self.stack = {}
+        self.stack_key = 0
 
-    def is_empty(self):
-        return self.elems == []
-
-    def push_in(self, el):
-        self.elems.insert(0, el)
-        self.notify()
-
-    def pop_out(self):
-        return self.elems.pop(0)
-
-    def get_val(self):
-        return self.elems[0]
-
-    def stack_size(self):
-        return len(self.elems)
-
-    def notify(self):
-        max_place = 3
-        if len(self.elems) >= max_place:
-            print('Используйте новый стек')
+    def append(self, value):
+        if len(self.stack) == 0:
+            self.stack_key = 0
+            self.stack[self.stack_key] = [value]
         else:
-            print(f'Будьте внимательны. Лимит тарелок 3 шт.')
+            use_stack = self.stack[self.stack_key]
+            if len(use_stack) < STACK_LEN:
+                use_stack.append(value)
+            else:
+                self.stack_key = len(self.stack)
+                self.stack[len(self.stack)] = [value]
 
-
-plates = Plates()
-
-plates.push_in(10)
-plates.push_in(2)
-plates.push_in(1)
-
+    def pop(self):
+        if len(self.stack) == 0:
+            print('Stack of plates empty')
+            return
+        use_stack = self.stack[self.stack_key]
+        if len(use_stack) != 0:
+            return use_stack.pop()
+        else:
+            del self.stack[self.stack_key]
+            self.stack_key = len(self.stack) - 1
+            if len(self.stack) == 0:
+                print('Stack of plates empty')
+                return
+            use_stack = self.stack[self.stack_key]
+            return use_stack.pop()
 
 

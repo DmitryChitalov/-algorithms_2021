@@ -26,8 +26,7 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
-#Решение 1 более эффективное, так как проверяет пароль и логин сразу в заданном значении,
-# в то время как во второй реализации кода проходит по значениям и ищет совпадения.
+# Последнее решение более эффективное, так как поиск в словаре по ключу позволяет моментально обратиться к значению.
 
 
 data = {'Ivan Sergeev': ['ivan.sergeev@gmail.com', 'erkf2010', 1],
@@ -56,14 +55,23 @@ def access(login, password):
 
 access('petrov@yandex.ru', '1234df')
 
-# Сложность O(n)
+# Сложность О(1)
 
-def verify(login, password):
-    for i in data.get('Alina Ivanova'):
-        try:
-            if login and password in i:
-                print('Ура. Вы прошли аутентификацию')  # выдается ошибка typeerror, а также из-за 0 в значении выдает, что пользователь не прошел. Подскажите, пожалуйста, где ошибка.
-        except TypeError:
-            pass
+def access(data, login, password):
+    if data.get(login):
+        if data[login]['password'] == password and data[login]['activation']:
+            return 'Вы в системе'
+        elif data[login]['password'] == password and not data[login]['activation']:
+            return 'Учетная запись не активна'
+        elif data[login]['password'] != password:
+            return 'Пароль не верный'
+    else:
+        return 'Пользователя нет в системе'
 
-verify('alinchik77@mail.ru', 'krasotka')
+
+users = {'ivan.sergeev@gmail.com': {'password': 'erkf2010', 'activation': True},
+             'petrov@yandex.ru': {'password': '1234df', 'activation': False},
+             'alinchik77@mail.ru': {'password': 'krasotka', 'activation': False}}
+
+
+print(access(users, 'petrov@yandex.ru', '1234df'))

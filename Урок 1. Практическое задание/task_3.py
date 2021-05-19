@@ -22,22 +22,34 @@
 """
 
 
-# 2 решение более эффективное, потому что не нужно проходить по всем элементам и добавлять их в новый список.
+# 2 решение более эффективное, потому что в нем не заложен двойной проход по элементам, как в первом решении.
 
-# Сложность O(n log n)
+# Сложность O(n^2)
+
+def sorted(rand_l):
+    for i in range(len(rand_l)):
+        lowest_value_index = i
+        for j in range(i + 1, len(rand_l)):
+            if rand_l[j][1] > rand_l[lowest_value_index][1]:
+                lowest_value_index = j
+                rand_l[i], rand_l[lowest_value_index] = rand_l[lowest_value_index], rand_l[i]
+                return rand_l[:3]
+
 
 data = {'Gazprom': 25, 'Sberbank': 2, 'MTS': 15, 'Megafon': 10, 'VEON': 5}
-lst = []
-for el in data.values():
-    lst.append(el)
-lst.sort()
-print(lst[-3:])
+val = list(data.items())
+for i in sorted(val):
+    print(i[0], ':', i[1])
 
-
-#  Сложность O(n)
+#  Сложность O(n log n)
 
 data_2 = {'Gazprom':25, 'Sberbank':2, 'MTS': 15, 'Megafon': 10, 'VEON': 5}
 
-val = list(data_2.values())
-val.sort()
-print(val[-3:])
+val = list(data_2.items())
+val.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+    print(val[i][0], ':', val[i][1])
+
+
+
+

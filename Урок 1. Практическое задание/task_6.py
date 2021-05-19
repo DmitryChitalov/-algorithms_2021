@@ -13,25 +13,48 @@
 
 """
 
-from collections import deque
+class QueueClass:
+    def __init__(self):
+        self.elems = []
 
-q = deque()
+    def is_empty(self):
+        return self.elems == []
 
-q.append('eat')
-q.append('sleep')
-q.append('work')
+    def to_queue(self, item):
+        self.elems.insert(0, item)
 
-print(q)
+    def from_queue(self):
+        return self.elems.pop()
 
-# список решенных задач
-def resolved():
-    resolved_list = [q.popleft()]
-    return resolved_list
+    def size(self):
+        return len(self.elems)
 
-# Очередь на доработку
-def revision():
-    revision_list = [q.popleft()]
-    return revision_list
+class TaskBoard:
+    def __init__(self):
+        self.cur_queue = QueueClass()
+        self.revision_queue = QueueClass()
+        self.log = []
+
+    def resolve_task(self):      # удаление из текущей и добавление в список решенных
+        task = self.cur_queue.from_queue()
+        self.log.append(task)
+
+    def to_revision_task(self):       # отправление задачи на доработку
+        task = self.cur_queue.from_queue()
+        self.revision_queue.to_queue(task)
+
+    def to_current_queue(self, item):    # добавление задачи в текущие
+        self.cur_queue.to_queue(item)
+
+    def current_task(self):   # текущая задача
+        return self.cur_queue.elems[len(self.cur_queue.elems) - 1]
+
+    def current_revision(self):    # текущие доработки
+        return self.revision_queue.elems[len(self.revision_queue.elems) - 1]
+
+
+
+
 
 
 
