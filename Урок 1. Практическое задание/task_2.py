@@ -22,6 +22,7 @@
 
 
 def min_value(list_1):
+
     min_val = list_1[0]  # O(1)
 
     for el in range(len(list_1) - 1):  # O(n)

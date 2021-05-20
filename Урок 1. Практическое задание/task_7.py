@@ -58,4 +58,3 @@ def pal_checker(string):
 
 print(pal_checker("молоко делили ледоколом"))
 print(pal_checker("Словосочетание не палиндром"))
-

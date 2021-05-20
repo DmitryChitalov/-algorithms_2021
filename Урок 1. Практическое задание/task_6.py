@@ -38,6 +38,7 @@ class QueueClass:
 
 
 class TaskBoard:
+
     def __init__(self):
         self.cur_queue = QueueClass()    # Первая очередь
         self.revision_queue = QueueClass()   # очередь на доработку
