@@ -30,7 +30,7 @@ manager_auth_data = ['manager1', 12345, True]
 # manager_auth_data = ['manager1', 12345, False]
 
 
-# Вариант_1
+# Вариант_1  O(1)
 def login_user(login, pswd):
     if login == manager_auth_data[0]:  # O(1)
         if pswd == manager_auth_data[1]:  # O(1)
@@ -51,7 +51,7 @@ def login_user(login, pswd):
 # Вариант_2
 def login_user_1():
     trycount = 0
-    while trycount < 3:  # O (log (n))
+    while trycount < 3:  # O (1)
         login = input('Введите Ваш логин: ').lower()  # O(1)
         if login == manager_auth_data[0]:  # O(1)
             pswrd = int(input('Введите ваш пароль: '))  # O(1)
@@ -74,6 +74,32 @@ def login_user_1():
 
 login_user_1()
 
+
+# Вариант 3 O(n)
+users_base = {
+    'manager_1': {'pass': '12345', 'active': True},
+    'manager_2': {'pass': '123456', 'active': True},
+    'manager_3': {'pass': '1234567', 'active': True},
+    'manager_5': {'pass': '1234577', 'active': False}
+
+}
+
+
+def login_user_3():
+    login = input('Логин')
+    passwd = input('Пароль')
+    for key, value in users_base.items():
+        if key == login:
+            if value['pass'] == passwd and value['activation']:
+                print('Доступ разрешен')
+            elif value['pass'] == passwd and not value['active']:
+                print('Ваша учетная запись не активирована! Обратитесь к администратору')
+            elif value['pass'] != passwd:
+                print('введите правильный пароль')
+        print('Пользователь не зарегистрирован')
+
+
+login_user_3()
 
 '''
 Первый способ выполнен со сложностью линейной функции, во втором варианте при добавлении цикла сложность увеличивается

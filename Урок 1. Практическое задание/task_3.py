@@ -32,11 +32,16 @@ company_cost = {
 }
 
 # Вариант 1. Сложность O(N log N)
-print(sorted(company_cost.values())[3:])
+temp_list = list(company_cost.items())  # O(1)
+temp_list.sort(key=lambda i: i[1], reverse=True)  # O(NlogN)
+for item in range(3):  # O(1)
+    print(f'{temp_list[item][0]} : {temp_list[item][1]}')
+
+
 
 # Вариант 2. Сложность O(N2)
 cout = 0
-while cout < 3:  # O(N)
+while cout < 3:  # O(1)
     a = [k for k, v in company_cost.items() if v == max(company_cost.values())]  # O(N)
     a1 = ''.join(a)  # O(N)
     company_cost.pop(a1)
