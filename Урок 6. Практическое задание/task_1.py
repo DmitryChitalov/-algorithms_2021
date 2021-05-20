@@ -21,3 +21,106 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+from memory_profiler import memory_usage
+from timeit import default_timer
+from numpy import array
+
+
+def decor(func):
+    def wrapper(*args,**kwargs):
+        start = default_timer()
+        memory = memory_usage()
+        result = func(*args, **kwargs)
+        print(f'Потребовалось памяти: {memory_usage()[0] - memory[0]} Mib')
+        print(f'Время выполнения: {default_timer()-start} с')
+        return result
+    return wrapper
+
+
+# Пример 1. Numpy
+print('Пример 1. Numpy:')
+
+
+@decor
+def numpy_array():
+    n_arr = array([el for el in range(10**5)])
+    return n_arr
+
+
+@decor
+def usual_arr():
+    u_arr = list(el for el in range(10**5))
+    return u_arr
+
+
+numpy_array()
+usual_arr()
+
+"""
+1. Использование встроенных функций модуля numpy позволяет в разу сократить потребление памяти при выполнении аналогичных
+скриптов. При этом, чем больше количество элементов, тем больше становится преимущество numpy.
+При малых количетсвах элементов (результаты сопоставимы):
+Потребовалось памяти: 0.80078125 Mib - numpy
+Потребовалось памяти: 3.69921875 Mib
+При большем количестве элементов (разница в 10 раз):
+Потребовалось памяти: 38.60546875 Mib - numpy
+Потребовалось памяти: 386.0 Mib
+"""
+
+# Пример 2. Генератор:
+print('Пример 2. Генератор:')
+
+
+@decor
+def usual_list():
+    my_list = [i for i in range(1000000)]
+    return my_list
+
+
+@decor
+def gener():
+    my_list = (i for i in range(1000000))
+    yield my_list
+
+usual_list()
+gener()
+
+
+"""
+По результатам сравнительного профилирования спискового включения и генератора делаем вывод, что генератор требует 
+меньше памяти, так как не помещает в память весь список, а выдает только результат единичного запроса.
+Потребовалось памяти: 37.8125 Mib
+Время выполнения: 0.29673819999999995 с
+Потребовалось памяти: 0.0 Mib - генератор
+Время выполнения: 0.20188150000000005 с
+"""
+
+# Пример 3. Map:
+print('Пример 3. Map:')
+
+
+@decor
+def iter_func(lst):
+    for i in range(len(lst)):
+        lst[i] = str(lst[i])
+    return lst
+
+
+@decor
+def map_func(lst):
+    return list(map(str, lst))
+
+
+nums_list = [x**2 for x in range(10000)]
+iter_func(nums_list)
+map_func(nums_list)
+
+'''
+Функция, построенная с использованием встроенной функции map, требует меньше памяти (в 4 раза) и выполняется чуть 
+быстрее
+Потребовалось памяти: 0.3125 Mib
+Время выполнения: 0.21275299999999997 с
+Потребовалось памяти: 0.08203125 Mib - map
+Время выполнения: 0.20980960000000004 с
+'''
