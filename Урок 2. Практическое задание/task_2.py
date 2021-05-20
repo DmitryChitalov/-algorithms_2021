@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def parity(number, count_par, count_not_par):
+    if number == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({count_par}, {count_not_par})')
+    if (number % 2) == 1:
+        count_not_par += 1
+    else:
+        count_par += 1
+    parity(number // 10, count_par, count_not_par)
+
+
+try:
+    number = int(input('Введите число'))
+    count_par = 0
+    count_not_par = 0
+    parity(number, count_par, count_not_par)
+except:
+    print('Вы ввели не число!!!')
