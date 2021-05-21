@@ -15,3 +15,75 @@ deque – это обобщение стеков и очередей.
 
 И добавить аналитику, так ли это или нет.!
 """
+
+from collections import deque
+from timeit import timeit
+
+lst = []
+deq = deque()
+n = 100000
+
+
+def change_lst(l):  # изменяет список
+    for i in range(n):
+        l[i] = i
+
+
+def change_deq(d):  # изменяет колоду
+    for i in range(n):
+        d[i] = i
+
+
+print(f'Время добавления {n} элементов в начало списка составляет '
+      f'{timeit("lst.insert(0, 1)", globals=globals(), number=n)}')
+
+print(f'Время добавления {n} элементов в начало колоды составляет '
+      f'{timeit("deq.appendleft(1)", globals=globals(), number=n)}')
+
+print('-' * 120)
+
+print(f'Время удаления {n} элементов c начала списка составляет '
+      f'{timeit("lst.pop(0)", globals=globals(), number=n)}')
+
+print(f'Время удаления {n} элементов c начала колоды составляет '
+      f'{timeit("deq.popleft()", globals=globals(), number=n)}')
+
+print('-' * 120)
+
+print(f'Время добавления {n} элементов c конца списка составляет '
+      f'{timeit("lst.append(2)", globals=globals(), number=n)}')
+
+print(f'Время добавления {n} элементов c конца колоды составляет '
+      f'{timeit("deq.append(2)", globals=globals(), number=n)}')
+
+print('-' * 120)
+
+print(f'Время удаления {n} элементов c конца списка составляет '
+      f'{timeit("lst.pop()", globals=globals(), number=n)}')
+
+print(f'Время удаления {n} элементов c конца колоды составляет '
+      f'{timeit("deq.pop()", globals=globals(), number=n)}')
+
+print('-' * 120)
+
+lst = [3 for i in range(n)]
+deq = deque([3 for i in range(n)])
+
+print(f'Время изменения {n} элементов списка составляет '
+      f'{timeit("change_lst(lst)", "from __main__ import change_lst, lst", number=1)}')
+
+print(f'Время изменения {n} элементов колоды составляет '
+      f'{timeit("change_deq(deq)", "from __main__ import change_deq, deq", number=1)}')
+
+print('-' * 120)
+
+print("Вывод: колоды работают значительно быстрее списков при удалении/добавлении\n"
+      "элементов в начале массива, асимптотическая сложность колод O(1), у списков O(n)\n"
+      "примерно одинаковое время занимают добавление/удаление элементов\n"
+      "в конце массива, сложность здесь O(1)\n"
+      "а вот время изменения элементов у списков меньше чем у колод.\n"
+      "Колода - полезный тип данных, если учитывать условия его работы.")
+
+
+
+
