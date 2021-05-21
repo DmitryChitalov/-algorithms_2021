@@ -16,3 +16,33 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+from random import randint
+
+# В задании для решения не принципиален вид чисел в списке, так что пусть они будут целыми.
+
+test_list = [randint(-100, 100) for _ in range(20)]
+
+print('Тестовый список:', test_list, '\nМинимальный элемент в нем:', min(test_list))
+
+
+def func1(line):  # Каждый сравнивается с каждым/ Сложность O(n**2)
+    for i in line:
+        flag = 0
+        for j in line:
+            flag = 1 if j < i else flag
+        if not flag:
+            return i
+
+
+print('\nРезультат работы первой функции:', func1(test_list))
+
+
+def func2(line):  # Один проход. Сложность O(n)
+    buffer = line[0]
+    for i in line:
+        buffer = i if i < buffer else buffer
+    return buffer
+
+
+print('Результат работы второй функции:', func2(test_list))
