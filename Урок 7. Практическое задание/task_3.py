@@ -45,3 +45,38 @@ for i in
 
 
 """
+
+from random import randint
+from statistics import median
+
+def gnom_sort(obj_lst):
+    j = 0
+    while j < len(obj_lst):
+        if j == 0 or obj_lst[j] >= obj_lst[j - 1]:
+            j += 1
+        else:
+            obj_lst[j], obj_lst[j - 1] = obj_lst[j - 1], obj_lst[j]
+            j -= 1
+    return obj_lst
+
+def sort_median(lst_obj):
+    return gnom_sort(lst_obj)[median_user]
+
+def split_median(lst_obj):
+    for el in lst_obj:
+        left_m = [el2 for el2 in lst_obj if el2 < el]
+        right_m = [el2 for el2 in lst_obj if el2 > el]
+        if len(left_m) == len(right_m) or abs(len(left_m) - len(right_m)) < lst_obj.count(el):
+            return el
+
+def max_median(lst_obj):
+    for i in range(len(lst_obj) // 2):
+        lst_obj.remove(max(lst_obj))
+    return max(lst_obj)
+
+median_user = int(input("Необходимо ввести значение m: "))
+obj_list = [randint(0, 1000000) for i in range(2 * median_user + 1)]
+print(sort_median(obj_list))
+print(median(obj_list[:]))
+print(split_median(obj_list[:]))
+print(max_median(obj_list[:]))
