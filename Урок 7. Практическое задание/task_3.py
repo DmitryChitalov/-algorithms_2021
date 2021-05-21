@@ -45,3 +45,36 @@ for i in
 
 
 """
+import random
+from statistics import median
+
+
+m = int(input('Введите натуральное число: '))
+lst = [random.randint(0, 50) for _ in range(2 * m + 1)]
+print(lst)
+print(median(lst))
+print('___statistics median___')
+
+
+def my_median(l):
+    # Шелла
+    mid = len(l) // 2
+    while mid > 0:
+        for el in range(mid, len(l)):
+            current = l[el]
+            position = el
+            while position >= mid and l[position - mid] > current:
+                l[position] = l[position - mid]
+                position -= mid
+                l[position] = current
+        mid //= 2
+    # print(l)
+    # median
+    if len(l) % 2 == 1:
+        return l[len(l) // 2]
+    else:
+        return 0.5 * (l[len(l) / 2 - 1] + l[len(l) / 2])
+
+
+print(my_median(lst))
+print('___my median___')
