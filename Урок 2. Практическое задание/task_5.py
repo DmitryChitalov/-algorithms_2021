@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_ascii(start):
+    if start == 128:
+        return True
+    print(f' {start} _ {chr(start)}', end='')
+    if (start - 31) % 10 == 0:
+        print('\n')
+    print_ascii(start + 1)
+
+
+print_ascii(32)
