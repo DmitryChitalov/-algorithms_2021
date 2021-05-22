@@ -19,3 +19,47 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+from random import randint
+from timeit import timeit
+
+
+def bubble_reverse(nums):
+    """
+    Метод пузырька
+    """
+    for j in range(len(nums) - 1):
+        for i in range(len(nums) - 1 - j):
+            if nums[i] < nums[i + 1]:
+                nums[i], nums[i + 1] = nums[i + 1], nums[i]
+    return nums
+
+
+def bubble_reverse_mod(lst_obj):
+    """
+    Доработка, Если не совершается ни одной сортировки, завершаем.
+    """
+    n = 1
+    while n < len(lst_obj):
+        sort = True
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                sort = False
+        n += 1
+        if sort:
+            break
+    return lst_obj
+
+
+m = [randint(-100, 100) for _ in range(100)]
+
+
+print('Пузырек без оптимизации', timeit('bubble_reverse(m[:])', globals=globals(), number=10000))
+print('Пузырек c оптимизацией', timeit('bubble_reverse_mod(m[:])', globals=globals(), number=10000))
+
+'''
+Доработка, Если не совершается ни одной сортировки, завершаем.
+Доработка не имеет смысл и ухудшила время сортировки на проверку условий.
+Маленький шанс получить сразу сортированый список, по этой причине данная доработка не нужна
+'''

@@ -45,3 +45,32 @@ for i in
 
 
 """
+
+from random import randint
+
+m = int(input("Введите m "))
+
+arr = [randint(0, 10) for i in range(2 * m + 1)]
+print(arr)
+
+
+def gnome_sort(data):
+    """
+    Гномья сортировка
+    """
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+sorted_arr = gnome_sort(arr)
+
+print(sorted_arr)
+
+print("Медиана ", sorted_arr[m])
