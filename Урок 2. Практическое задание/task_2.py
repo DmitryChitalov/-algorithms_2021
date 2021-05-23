@@ -18,3 +18,42 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import sys
+
+
+def check(number):
+    """
+    Функция проверки четности
+    """
+    global count_even
+    global count_odd
+    if number % 2 == 0:
+        count_even += 1
+    else:
+        count_odd += 1
+
+
+def count(numbers):
+    global count_even
+    global count_odd
+    if numbers < 10:
+        check(numbers)
+        print(f'Четных чисел: {count_even}, нечетных чисел: {count_odd}')
+        return
+    else:
+        check(numbers % 10)
+        count(numbers // 10)
+
+
+count_even = 0
+count_odd = 0
+try:
+    num = int(input('Введите натуральное число '))
+except:
+    print('Это не число. До свидания!')
+    sys.exit()
+if num < 1:
+    print('Число должно быть натуральным')
+else:
+    count(num)
+

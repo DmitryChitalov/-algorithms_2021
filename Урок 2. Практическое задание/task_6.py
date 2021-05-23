@@ -11,3 +11,36 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_num(num):
+    global counter
+    try:
+        print(f'Попытка номер {counter}')
+        user_num = int(input('Введите натуральное число от 1 до 100: '))
+    except:
+        print('Шутки шутим? Попробуйте ещё раз')
+        guess_num(num)
+    if user_num < 1 or user_num > 100:
+        print('Число не в указанных пределах. Попробуйте ещё раз')
+        guess_num(num)
+    if user_num == num:   # первый базовый случай
+        print('Поздравляем! Число отгадано')
+        return
+    elif user_num < num:
+        print('Загаданное число больше')
+    else:
+        print('Загаданное число меньше')
+    counter += 1
+    if counter > 10:   # второй базовый случай
+        print(f'Вы проиграли:( Загаданное число {num}')
+        return
+    guess_num(num)
+
+
+counter = 1
+number = random.randint(1, 100)
+print('Число загадно. Играем!')
+guess_num(number)

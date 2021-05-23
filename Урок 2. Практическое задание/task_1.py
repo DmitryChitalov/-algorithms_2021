@@ -28,3 +28,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+    """
+    Основаня функция - калькулятор
+    Так как калькулятор возвращает строку 'До встречи', везде делал через return
+    """
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода) ')
+    if operation not in '+-*/0':
+        print('Попробуйте ещё раз')
+        return calculator()
+    if operation == '0':     # базовый случай
+        return 'До встречи!'
+    try:
+        first_val = float(input('Введите первое число '))
+        second_val = float(input('Введите второе число '))
+    except:
+        print('Какие-то числа не числа. Попробуйте ещё раз')
+        return calculator()
+    if operation == '+':
+        print(first_val + second_val)
+    elif operation == '-':
+        print(first_val - second_val)
+    elif operation == '*':
+        print(first_val * second_val)
+    else:
+        if second_val != 0:
+            print(first_val/second_val)
+            return calculator()
+        else:
+            print('На ноль делить неохота. Попробуйте ещё раз')
+            return calculator()
+    return calculator()
+
+
+print(calculator())
