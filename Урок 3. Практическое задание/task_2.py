@@ -18,3 +18,39 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import sqlite3
+import hashlib
+
+
+def hex_digit(salt, text):
+    hash_obj = hashlib.sha256(salt.encode() + text.encode())
+    hex_dig = hash_obj.hexdigest()
+    return hex_dig
+
+
+conn = sqlite3.connect('users.db')
+cursor = conn.cursor()
+cursor.execute("""CREATE TABLE IF NOT EXISTS users (
+        name TEXT UNIQUE, 
+        password TEXT)
+""")
+conn.commit()
+login = input('Введите ваш логин')
+cursor.execute('SELECT name, password FROM users WHERE name = ?', (login,))
+user = cursor.fetchone()
+if user is None:
+    password = input('Такого пользователя не существует, введите пароль для добавления в базу')
+    hex_dig = hex_digit(login, password)
+    create_user = 'INSERT INTO users(name, password) VALUES (?, ?);'
+    data_tuple = (login, hex_dig)
+    cursor.execute(create_user, data_tuple)
+    conn.commit()
+    print('Пользователь успешно добавлен!!!')
+else:
+    password = input('Такой пользователь существует, введите пароль для проверки')
+    hex_dig = hex_digit(login, password)
+    if user[1] == hex_dig:
+        print('Вы ввели правельный пароль!!!')
+    else:
+        print('Пароль не верный!!!')
+
