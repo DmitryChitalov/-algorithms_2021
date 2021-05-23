@@ -22,3 +22,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reversion(num):
+
+    digits, numbr = divmod(num, 10)
+
+    if digits == 0:
+        return str(numbr)
+    else:
+        return str(numbr) + str(reversion(digits))
+
+
+user_input = int(input('Введите число: '))
+
+print(f'Результат: {reversion(user_input)}')

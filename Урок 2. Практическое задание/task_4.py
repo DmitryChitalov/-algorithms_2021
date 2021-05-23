@@ -12,3 +12,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def elems_sum(i, num, el_qty, sum):
+    if i == el_qty:
+        print(f'Количество элементов: {el_qty}, их сумма: {sum}')
+    elif i < el_qty:
+        return elems_sum(i + 1, num / 2 * -1, el_qty, sum+num)
+
+
+try:
+    el_qty = int(input('Введите количество элементов: '))
+    elems_sum(0, 1, el_qty, 0)
+
+except ValueError:
+    print('Неверный формат данных. Введите число.')

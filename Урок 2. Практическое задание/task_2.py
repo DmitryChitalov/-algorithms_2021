@@ -18,3 +18,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def odd_even_qty(num, odd=0, even=0):
+
+    if num == 0:
+        return odd, even
+
+    else:
+        num_1 = num % 10
+
+        num = num // 10
+
+        if num_1 % 2 == 0:
+            even += 1
+
+        else:
+            odd += 1
+        return odd_even_qty(num, odd, even)
+
+
+try:
+    num = int(input('Введите натуральное число: '))
+    print(f'Всего четных и нечетных цифр: {odd_even_qty(num)}')
+
+except ValueError:
+    print('Неверный формат данных. Введите число.')
