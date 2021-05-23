@@ -22,3 +22,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def mirror_for_number(user_number, mirrored=[]):
+
+    if user_number == 0:
+        return int(f"".join(map(str, mirrored)))
+    else:
+        rem_of_div = user_number % 10
+        user_number = user_number // 10
+        mirrored.append(rem_of_div)
+        return mirror_for_number(user_number)
+
+
+try:
+    number = int(input("Введите число, которое требуется перевернуть: "))
+    print(f"Перевернутое число: {mirror_for_number(number)}")
+except ValueError:
+    print("Это не число. Попробуйте еще раз")

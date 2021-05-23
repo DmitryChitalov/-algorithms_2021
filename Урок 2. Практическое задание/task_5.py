@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_ascii(ascii_el_from, ascii_el_to):
+    if ascii_el_from == ascii_el_to:
+        return True
+    print(f' {ascii_el_from} - {chr(ascii_el_from)}', end=' ')
+    if (ascii_el_from - 31) % 10 == 0:
+        print('\n')
+
+    print_ascii(ascii_el_from + 1, ascii_el_to)
+
+
+print_ascii(32, 128)

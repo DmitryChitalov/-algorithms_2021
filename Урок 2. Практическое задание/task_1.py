@@ -28,3 +28,53 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator(operation):
+
+    if operation == "0":
+        print("Вы вышли из программы")
+    else:
+        try:
+            if operation == "+":
+                first_number = int(input("Введите первое число: "))
+                second_number = int(input("Введите второе число: "))
+                summ = first_number + second_number
+                print(summ)
+                calculator(input("Введите операцию: "))
+            elif operation == "-":
+                first_number = int(input("Введите первое число: "))
+                second_number = int(input("Введите второе число: "))
+                diff = first_number - second_number
+                print(diff)
+                calculator(input("Введите операцию: "))
+            elif operation == "*":
+                first_number = int(input("Введите первое число: "))
+                second_number = int(input("Введите второе число: "))
+                mult = first_number * second_number
+                print(mult)
+                calculator(input("Введите операцию: "))
+            elif operation == "/":
+                first_number = int(input("Введите первое число: "))
+                second_number = int(input("Введите второе число: "))
+                if second_number == 0:
+                    print("На 0 делить нельзя. Введите другое число")
+                    second_number = int(input("Введите второе число: "))
+                    quo = first_number / second_number
+                    print(quo)
+                    calculator(input("Введите операцию: "))
+                else:
+                    quo = first_number / second_number
+                    print(quo)
+                    calculator(input("Введите операцию: "))
+            else:
+                print("Такой операции не существует. Попробуйте еще раз")
+                calculator(input("Введите операцию: "))
+
+        except ValueError:
+            print("Это не число. Попробуйте еще раз")
+            return calculator(input("Введите операцию: "))
+
+
+user_operation = input("Введите операцию (+, -, *, / или 0 для выхода из программы): ")
+calculator(user_operation)
