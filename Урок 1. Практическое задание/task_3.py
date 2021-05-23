@@ -20,3 +20,37 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {'Intel': 240999,
+             'Sony': 109330,
+             'Samsung': 98298,
+             'HP': 579332,
+             'Apple': 984101,
+             'Dell': 73456,
+             'Oracle': 98222,
+             'EPAM': 895234,
+             'Google': 111098,
+             'EY': 77546}
+
+def variant_1(dict):
+    max_three = []
+    for i in sorted(dict.values(), reverse=True)[:3]:
+        for x, n in dict.items():
+            if i == n:
+                max_three.append(x)
+    return max_three
+
+# Сложность O(n^3)
+
+
+def variant_2(dict):
+    max_three = list(dict.items())
+    max_three.sort(key=lambda i: i[1], reverse=True)
+    return max_three[:3]
+
+# Сложность O(NlogN)
+
+
+
+print(variant_1(companies))
+print(variant_2(companies))
