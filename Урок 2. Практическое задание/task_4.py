@@ -12,3 +12,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def number_sum(number):
+    if number == 0:
+        return 0
+    else:
+        sum = 1 + number_sum(number - 1) / - 2
+        return sum
+
+
+num_of_number = int(input('Enter the number of elements: '))
+print(f'Amount of elements: {num_of_number}, their sum: {number_sum(num_of_number)}')
