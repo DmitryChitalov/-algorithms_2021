@@ -22,3 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def number_flipper(num):
+    if num == 0:
+        return ''
+    else:
+        revers = str(num % 10)
+        num //= 10
+        return revers + number_flipper(num)
+
+
+some_number = int(input(f'Enter the number: '))
+print(number_flipper(some_number))
