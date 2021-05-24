@@ -16,3 +16,29 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+def min_list_number1(numbers_list):             # Сложность функции: 5n**2 + n
+    for i in numbers_list:                      # O(n)
+        is_lower = 0                            # O(1)
+        for n in numbers_list:                  # O(n)
+            if i <= n:                          # O(1)
+                is_lower += 1                   # O(1)
+            else:
+                break
+        if is_lower == len(numbers_list):       # O(1)
+            min_num = i                         # O(1)
+    return min_num                              # O(1)
+
+
+def min_list_number2(numbers_list):             # Сложность функции: 3n + 1
+    min_number = numbers_list[0]                # O(1)
+    for i in numbers_list:                      # O(n)
+        if i < min_number:                      # O(1)
+            min_number = i                      # O(1)
+    return min_number                           # O(1)
+
+
+test_numbers_list = [4, 3, 6, 7, 1, -9, 0]
+print(min_list_number1(test_numbers_list))
+print(min_list_number2(test_numbers_list))
