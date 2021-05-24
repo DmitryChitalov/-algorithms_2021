@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def guess(n, counter):
+    print(f'Попытка № {counter}')
+    answer = int(input('Угадай число от 1 до 100: '))
+    if answer == n or counter == 10:
+        if answer == n:
+            print('Верно')
+        print(f'Загаданное число: {n}')
+    else:
+        if answer > n:
+            print(f'Нужное число меньше {answer}')
+        else:
+            print(f'Нужное число больше {answer}')
+
+        guess(n, counter + 1)
+
+guess(random.randint(0, 100), 1)
