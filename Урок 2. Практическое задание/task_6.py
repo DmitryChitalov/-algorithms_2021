@@ -11,3 +11,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+def zagadka(num, attempts):
+
+    try:
+        answer = int(input('Угадайте загаданное число (от 0 до 100): '))
+    except Exception:
+        print('Неверный ввод!')
+        return zagadka(num,attempts)
+
+    if num == answer or attempts == 0:
+        return print(f'Загаданное число: {num}')
+    if answer < num:
+        print('Введенное число меньше, чем загаданное.')
+    else:
+        print('Введенное число больше, чем загаданное.')
+    attempts -= 1
+    return zagadka(num, attempts)
+
+if __name__ == '__main__':
+    attempts = 10
+    num = random.randint(0,100)
+    zagadka(num, attempts)

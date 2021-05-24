@@ -12,3 +12,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def input_num():
+    try:
+        num = int(input('Введите количество элементов: '))
+        if num <= 0:
+            print("Ошибка! Число должно быть натуральным.")
+            return input_num()
+    except ValueError:
+        print("Неверный ввод!")
+        return input_num()
+    print(f"Количество элементов: {num}")
+    return my_sum(num)
+
+
+def my_sum(num):
+    if num > 1:
+        return (-0.5) ** (num - 1) + my_sum(num - 1)
+    print("их сумма")
+    return num
+
+
+print(input_num())
