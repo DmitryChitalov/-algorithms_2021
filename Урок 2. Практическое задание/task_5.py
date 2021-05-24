@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def ascii_table(first_symbol=32, last_symbol=128):
+    if first_symbol == last_symbol:
+        return
+    print(f'{first_symbol} - {chr(first_symbol)}', end=' ')
+    if (first_symbol - 1) % 10 == 0:
+        print('')
+    first_symbol += 1
+    return ascii_table(first_symbol)
+
+
+ascii_table()
