@@ -18,3 +18,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def chet(chislo, chetn, nechetn):
+    if chislo == 0:
+        return chetn, nechetn
+    if (chislo % 10) % 2 == 0:
+        return chet(chislo // 10, chetn + 1, nechetn)
+    else:
+        return chet(chislo // 10, chetn, nechetn + 1)
+
+print(chet(123, 0, 0))
