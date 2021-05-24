@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def digit_counter(num, even=0, odd=0):
+    if num == 0:
+        return f'The number of even and odd digits in a number is equal to: ({even}, {odd})'
+    elif num % 2 == 1:
+        return digit_counter(num // 10, even, odd + 1)
+    else:
+        return digit_counter(num // 10, even + 1, odd)
+
+
+int_num_1 = int(input(f'Enter a natural number: '))
+print(digit_counter(int_num_1))
