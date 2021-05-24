@@ -25,16 +25,16 @@ class BTree:
         else:                           # Если передали потомков
             self.name = ''              # наименование узла пустое
             self.id_parent = 0          # пока родительский узел равен 0
-            self.lc = lc                # объект - правый потомок
-            self.rc = rc                # объект - левый потомок
+            self.lc = lc                # объект - левый потомок
+            self.rc = rc                # объект - правый потомок
             lc.id_parent = self         # теперь для левого потомка записываем родителя
             rc.id_parent = self         # теперь для правого потомка записываем родителя
             self.weight = lc.weight + rc.weight     # вес узла
 
 
-def encode_str(s):
-
-    lst = sorted(dict(Counter(s)).items(), key=lambda x: x[1])  # преобразуем строку в отсортированный список
+def make_btree(s):
+    # преобразуем строку в отсортированный список
+    lst = sorted(dict(Counter(s)).items(), key=lambda x: x[1])
 
     # преобразуем каждый символ в объект класса BTree
     lst_node = []
@@ -43,16 +43,14 @@ def encode_str(s):
         lst_node.append((new_node, new_node.weight))
 
     # Строим дерево
-    while True:
-        if len(lst_node) > 1:
-            l_node = lst_node.pop(0)
-            r_node = lst_node.pop(0)
-            new_node = BTree('', 0, l_node[0], r_node[0])
-            lst_node.append((new_node, new_node.weight))
-            lst_node.sort(key = lambda x: (x[1]))
-        else:
-            break
+    while len(lst_node) > 1:
+        l_node = lst_node.pop(0)
+        r_node = lst_node.pop(0)
+        new_node = BTree('', 0, l_node[0], r_node[0])
+        lst_node.append((new_node, new_node.weight))
+        lst_node.sort(key=lambda x: (x[1]))
 
+    # Возвращаем объект - дерево
     return lst_node[0][0]
 
 
@@ -72,17 +70,25 @@ def get_s_dict(s_dict, obj_tree, encode):
     return
 
 
-s = 'abrakadabra'
-s_btree = encode_str(s)
-s_dct = {}
-get_s_dict(s_dct, s_btree, '')
-print('Словарь: ', s_dct)
+def encode_haffman(s):
+    # Строим бинарное дерево
+    s_btree = make_btree(s)
 
-encode_s = ''
-for el in s:
-    encode_s += s_dct.get(el)
+    # Получаем словарь на основе бинарного дерева
+    s_dct = {}
+    get_s_dict(s_dct, s_btree, '')
+    print('Словарь: ', s_dct)
 
-print('Закодированная строка: ', encode_s)
+    # Формируем закодированную строку
+    encode_str = ''
+    for el in s:
+        encode_str += s_dct.get(el)
+
+    return encode_str
+
+
+encode_str = encode_haffman('abrakadabra')
+print('Закодированная строка: ', encode_str)
 
 # Словарь:  {'a': '0', 'k': '100', 'd': '101', 'b': '110', 'r': '111'}
 # Закодированная строка:  01101110100010101101110
