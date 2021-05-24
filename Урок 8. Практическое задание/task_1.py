@@ -80,15 +80,14 @@ def encode_haffman(s):
     print('Словарь: ', s_dct)
 
     # Формируем закодированную строку
-    encode_str = ''
+    res = ''
     for el in s:
-        encode_str += s_dct.get(el)
+        res += s_dct.get(el)
 
-    return encode_str
+    return res
 
 
-encode_str = encode_haffman('abrakadabra')
-print('Закодированная строка: ', encode_str)
+print('Закодированная строка: ', encode_haffman('abrakadabra'))
 
 # Словарь:  {'a': '0', 'k': '100', 'd': '101', 'b': '110', 'r': '111'}
 # Закодированная строка:  01101110100010101101110
