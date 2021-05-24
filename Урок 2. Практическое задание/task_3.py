@@ -22,3 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# def revers_number(numb):
+#     rest_numb, numeral = divmod(numb, 10)
+#     if rest_numb == 0:
+#         return str(numeral)
+#     else:
+#         return str(numeral) + str(revers_number(rest_numb))
+
+def revers_number(num):
+    return str(num) if num < 10 else str(num % 10) + revers_number(num // 10)
+
+number = int(input('Введитче число: '))
+print(f'Реверс: {revers_number(number)}')
