@@ -20,3 +20,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {
+             "Shnidder": 560367,
+             "Apil": 789345,
+             "Krontis": 430453,
+             "Samsun": 843912,
+             "Devred": 356238,
+             "EstBoys": 732842
+             }
+
+
+def rich_company_1(input_companies):
+    """
+    Сложность O(n^2) - квадратичная
+    """
+    new_dict = {}                                       # O(1)
+    income = sorted(input_companies.values())[-3:]      # O(n*log(n))
+    for i in income:                                    # O(n)
+        for j in companies:                             # O(n)
+            if companies[j] == i:                       # O(1)
+                new_dict.update({j: i})                 # O(1)
+                break
+    return new_dict
+
+
+def rich_company_2(input_companies):
+    """
+    Сложность O(n*log(n)) - линейно-логарифмическая
+    """
+    new_dict = {}                                                         # O(1)
+    sorted_keys = sorted(input_companies, key=input_companies.get)[-3:]   # O(n*log(n))
+    for i in sorted_keys:                                                 # O(n)
+        new_dict[i] = input_companies[i]                                  # O(1)
+    return new_dict
+
+"""
+Второй вариант более эффективен, так как рост количества операций от количества элементов меньше
+"""
+
+print(rich_company_1(companies))
+print(rich_company_2(companies))

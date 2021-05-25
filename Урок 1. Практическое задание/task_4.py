@@ -25,3 +25,55 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {
+    "1": [111, True],
+    "2": [222, False],
+    "3": [333, True],
+    "4": [444, False],
+}
+
+
+def check_users_1(users_info, login, password):
+    """
+    Сложность O(1) - константная
+    """
+    if login in users_info.keys() and users_info[login][0] == password:
+        if users_info[login][1]:
+            print("Аутентификация прошла успешно")
+        else:
+            print("Активируйте Вашу учетную запись")
+    else:
+        print("Неверный логин или пароль")
+
+
+def check_users_2(users_info, login, password):
+    """
+    Сложность O(n) - линейная
+    """
+    for i in users_info:
+        if i == login:
+            if users_info[i][0] == password:
+                if users_info[login][1]:
+                    return "Аутентификация прошла успешно"
+                else:
+                    return "Активируйте Вашу учетную запись"
+            else:
+                return "Неверный пароль"
+        else:
+            continue
+    return "Неверный логин"
+
+
+"""
+Первый вариант сработает быстрее из-за отсутствия цикла
+"""
+
+check_users_1(users, "1", 111)
+check_users_1(users, "12", 222)
+check_users_1(users, "2", 222)
+
+print(check_users_2(users, "1", 111))
+print(check_users_2(users, "12", 22))
+print(check_users_2(users, "2", 222))
+print(check_users_2(users, "4", 22))

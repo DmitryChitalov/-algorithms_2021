@@ -16,3 +16,36 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import random
+
+for j in (50, 500, 1000, 5000):
+    random_list = random.sample(range(-100000, 100000), j)
+
+
+def min_search_1(input_list):
+    """
+    Сложность O(n^2)
+    """
+    result = input_list[0]    # O(1)
+    for i in input_list:      # O(n)
+        result = i            # O(1)
+        for j in input_list:  # O(n)
+            if result > j:    # O(1)
+                result = j    # O(1)
+    return result
+
+
+def min_search_2(input_list):
+    """
+    Сложность O(n)
+    """
+    result = input_list[0]    # O(1)
+    for i in input_list:      # O(n)
+        if i < result:        # O(1)
+            result = i        # O(1)
+    return result
+
+
+print(min_search_1(random_list))
+print(min_search_2(random_list))
