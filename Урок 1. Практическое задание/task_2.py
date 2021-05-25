@@ -16,3 +16,37 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+def find_min(lst):
+    """
+    Алгоритм 1:
+    Сравнение каждого числа со всеми другими элементами списка,
+    поиск минимального значения для списка.
+    Сложность: O(N^2).
+    """
+    min_obj = lst[0]               # O(1)
+    for i in range(len(lst)):      # O(n)
+        for j in range(len(lst)):  # O(n)
+            if lst[i] > lst[j]:    # O(1)
+                min_obj = lst[j]   # O(1)
+    return min_obj                 # O(1)
+
+
+def find_min_simple(lst):
+    """
+    Алгоритм 2:
+    Сравнение каждого числа со всеми другими элементами списка
+    Сложность: O(N).
+    """
+    min_obj = lst[0]         # O(1)
+    for elem in lst:         # O(n)
+        if elem < min_obj:   # O(1)
+            min_obj = elem   # O(1)
+    return min_obj           # O(1)
+
+
+if __name__ == "__main__":
+    lst_sample = [0, 1, 2, 4, -1, -20, 30, 28, 5, 4, 2]
+    print(find_min(lst))
+    print(find_min_simple(lst))
