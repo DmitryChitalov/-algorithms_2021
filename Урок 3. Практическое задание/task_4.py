@@ -11,3 +11,27 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+#Функция должна принимать url-адрес и проверять
+#есть ли в кэше соответствующая страница, если нет, то вносить ее в кэш
+
+import hashlib
+from uuid import uuid4
+
+data = {}
+
+
+def check_caching(url):
+    r = data.get(url)
+    if r is None:
+        salt = uuid4().hex
+        data[url] = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+
+
+check_caching('www.utf-8.ru')
+print(data)
+check_caching('www.utf-8.ru')
+print(data)
+check_caching('www.utf-9.ru')
+print(data)

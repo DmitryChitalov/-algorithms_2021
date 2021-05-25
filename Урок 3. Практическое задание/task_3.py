@@ -16,3 +16,18 @@
 р
 а
 """
+
+import hashlib
+
+uniq_set = set()
+
+s = 'papa'
+
+for i in range(len(s)):
+    for j in range(i+1, len(s) + 1):
+        if s[i:j] != s:
+            uniq_set.add(hashlib.sha256(s[i:j].encode()).hexdigest())
+
+print(f'{s} - {len(uniq_set)} уникальных подстрок.')
+print(uniq_set)
+
