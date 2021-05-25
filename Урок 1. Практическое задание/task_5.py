@@ -28,3 +28,32 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+class StackClass:
+    def __init__(self, max_size: int):
+        self.stacks = []
+        self.max_size = max_size
+
+    def is_empty(self):
+        return self.stacks == []
+
+    def push_in(self, element):
+        if self.is_empty() or len(self.stacks[self.stacks_count - 1]) == self.max_size:
+            self.stacks.append([])
+        self.stacks[self.stacks_count - 1].append(element)
+
+    @property
+    def stacks_count(self):
+        return len(self.stacks)
+
+
+if __name__ == '__main__':
+
+    plates = StackClass(4)
+
+    # заполняем элементами
+    for i in range(15):
+        plates.push_in(i)
+
+    # выводим на экран получившиеся списки
+    for i in range(plates.stacks_count):
+        print(plates.stacks[i])

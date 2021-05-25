@@ -16,3 +16,27 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+import random as r
+
+def min_1(in_list):      # O(N**2)
+    for x in in_list:       # O(N)
+        flag = 0
+        for y in in_list:   # O(N)
+            flag = 1 if y < x else flag
+        if not flag:
+            return x
+
+def min_2(in_list):      # O(N)
+    if len(in_list) > 0:
+        low_one = in_list[0]
+        for x in in_list:   # O(N)
+            if x < low_one:
+                low_one = x
+        return low_one
+
+start_list = [r.randint(-100, 100) for z in range(10)]
+
+print('Start List:', start_list)
+print('First method:', min_1(start_list))
+print('Second method:', min_2(start_list))
+

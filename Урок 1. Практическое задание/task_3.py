@@ -20,3 +20,35 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# Вариант 1. Cложность: O(N*logN)
+def find_3_max_1(in_dict):
+    list_v = sorted(in_dict.items(), key=lambda i: i[1], reverse=True)[:3]  #O(N*logN)
+    for company in list_v:                                                  #O(N)
+            print(f'{company[0]} : {company[1]}')
+
+# Вариант 2. Cложность: O(n)
+def find_3_max_2(in_dict):
+    top_company = {}                                                                           # O(1)
+    temp_dict = dict(in_dict)                                                                  # O(1)
+    for i in range(3):                                                                         # O(n)
+        top = max(temp_dict.items(), key=lambda val: val[1])                                   # O(n)
+        top_company[top[0]] = top[1]                                                           # O(1)
+        del temp_dict[top[0]]                                                                  # O(1)
+    for company, profit in top_company.items():                                                # O(n)
+        print(f'{company} : {profit}')
+
+main_dict = {
+    'Huawei': 1257000,
+    'Apple': 1579000,
+    'Samsung': 1080000,
+    'OnePlus': 687000,
+    'Xiaomi': 864000,
+}
+print(main_dict)
+find_3_max_1(main_dict)
+find_3_max_2(main_dict)
+
+# Второй вариант оптимальнее, т.к. сложность линейная и с ростом данным
+# время выполнения будет меньше, чем у линейно-логарифмической модели.
+# При этом второй вариант требует больше ресурсов памяти,
+# так как там надо хранить словарь, его копию и итоговый словарь топ3 компаний
