@@ -28,3 +28,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+        self.stopk = []
+
+    def pusto(self):
+        return self.stopk == []
+
+    def clear_elems(self):
+        self.elems.clear()
+
+    def push_in(self, el):
+        self.elems.append(el)
+        if len(self.elems) == 5:
+            self.stopki()
+
+    def stopki(self):
+        self.stopk.append(self.elems.copy())
+        self.clear_elems()
+
+    def popen(self):
+        return self.stopk.pop()
+
+
+def proba(n):
+    stk = StackClass()
+
+    for i in range(n):
+        stk.push_in(1)
+    if stk.elems:
+        stk.stopki()
+    result = ""
+    while not stk.pusto():
+        result += str(len(stk.popen())) + " "
+
+    return f"Всего стопок: " + result
+
+
+print(proba(6))
+print(proba(12))
+print(proba(53))
