@@ -16,3 +16,20 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+# O(N^2)
+def min_value1(list):
+    for i in list:
+        min_value = True
+        for j in list:
+            if j < i:
+                min_value = False
+                break
+        if min_value:
+            return i
+
+def min_values2(list):
+    min_value = list[0]
+    for i in range(1, len(list)):
+        if list(i) < min_value:
+            min_value = list(i)
+    return min_value

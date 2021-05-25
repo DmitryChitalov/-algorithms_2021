@@ -16,3 +16,13 @@
 р
 а
 """
+def get_substrings(string):
+    substrings = set()
+    for i in range(1, len(string)):
+        for j in range(len(string)):
+            substring = string[j:j+i]
+            print(hash(substring))
+            substrings.add(substring)
+    return substrings
+
+print(get_substrings('papa'))
