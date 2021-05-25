@@ -21,38 +21,39 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
-
-company_dict = {'company1': 576567567, 'company2': 765876876, 'company3': 76547566, 'company4': 87567456,
-                'company5': 5435345, 'company6': 765756, 'company7': 65754645, 'company8': 765654, 'company9': 6546544,
-                'company10': 543432,'company11': 6543434, 'company12': 4234324}
-# for i in company_dict:
-#     print(i)
-#     a = company_dict.get(i)
-#     print(a)
+# Тяжелее вторая функция, так как её доминанта - линейно-логарифмическая, а у первой - линейная.
 
 
-# def max_dict_number(company_dict1):
-#     company_dict = company_dict1
-#     best_companies = []
-#     for n in range(3):
-#         max_number = list(company_dict.values())[0]
-#         for i in company_dict:
-#             if company_dict.get(i) > max_number:
-#                 max_number = company_dict.get(i)
-#         best_companies.append(max_number)
-#         # company_dict.pop(i)
-#         del company_dict[i]
-#     return best_companies
-#
-# print(max_dict_number(company_dict))
+def max_dict_rev1(company_dict_func):                    # n + 1 + 3(3n + n + 1 + n) + 1 = 16n + 5
+    company_dict_temp = company_dict_func.copy()            # O(n)
+    best_companies = []                                     # O(1)
+    for n in range(3):                                      # O(3)
+        max_number = list(company_dict_temp.values())[0]    # O(n)
+        for i in company_dict_temp:                         # O(n)
+            if company_dict_temp.get(i) >= max_number:      # O(1)
+                max_number = company_dict_temp.get(i)       # O(1)
+                max_key = i                                 # O(1)
+        best_companies.append(max_key)                      # O(1)
+        del company_dict_temp[max_key]                      # O(n)
+    return best_companies                                   # O(1)
 
-best_companies = []
-for n in range(3):
-    max_number = list(company_dict.values())[0]
-    for i in company_dict:
-        if company_dict.get(i) > max_number:
-            max_number = company_dict.get(i)
-        best_companies.append(max_number)
-        # company_dict.pop(i)
-        del company_dict[i]
-    print(company_dict)
+
+def max_dict_rev2(company_dict_func1):                  # n + nlogn + 3 + 1 + 3(2n) + 2n + 1 = nlogn + 9n + 5
+    rev_list = list(company_dict_func1.values())        # O(n) Я не нашёл значение для values. И хотел бы узнать,
+    rev_list.sort(reverse=True)                         # O(nlogn)    в таком случае надо складывать или умножать
+    top_3_rev = rev_list[:3]                            # O(3)
+    top_3_comp = []                                     # O(1)
+    for i in top_3_rev:                                 # O(3)
+        for comp, rev in company_dict_func1.items():    # O(n) Я не нашёл цену items и хотел бы узнать как считать цену,
+            if rev == i:                                # O(1)                когда мы итерируемся по результату функции
+                top_3_comp.append(comp)                 # O(1)
+    top_3_comp = list(set(top_3_comp))                  # O(2n)
+    return top_3_comp                                   # O(1)
+
+
+company_dict = {'company1': 55555, 'company2': 66666, 'company3': 77777, 'company4': 88888,
+                'company5': 99999, 'company6': 11111, 'company7': 22222, 'company8': 33333, 'company9': 44444,
+                'company10': 12345, 'company11': -11111, 'company12': 99999}
+
+print(max_dict_rev1(company_dict))
+print(max_dict_rev2(company_dict))
