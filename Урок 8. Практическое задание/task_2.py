@@ -10,6 +10,12 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
+class MyError(Exception):
+    def __init__(self, text):
+        self.txt = text
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,10 +27,12 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
+        try:
+            if new_node > self.root:
+                raise MyError('Левый потомок должен быть меньше корня (узла)')
+        except MyError as mr:
+            print(mr)
+        if self.left_child is None:
             self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
         else:
@@ -36,10 +44,12 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
+        try:
+            if new_node < self.root:
+                raise MyError('Правый потомок должен быть больше корня (узла)')
+        except MyError as mr:
+            print(mr)
+        if self.right_child is None:
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
         else:
@@ -51,11 +61,23 @@ class BinaryTree:
 
     # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        try:
+            if self.right_child is None:
+                raise MyError('Вы не ввели величину правого потомка')
+            else:
+                return self.right_child
+        except MyError as mr:
+            print(mr)
 
     # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        try:
+            if self.left_child is None:
+                raise MyError('Вы не ввели величину левого потомка')
+            else:
+                return self.left_child
+        except MyError as mr:
+            print(mr)
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -70,10 +92,8 @@ r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
 r.insert_left(40)
-print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
-print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
