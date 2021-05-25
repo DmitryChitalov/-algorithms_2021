@@ -20,12 +20,12 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
-brands = {"Coca-Cola": 98990,
-             "Amazon": 188200,
+brands = {"Coca-Cola": 198990,
+             "Amazon": 198200,
              "Google": 190000,
              "Microsoft": 101900,
              "IBM": 135930,
-             "Apple.Inc": 174343}  # O(len(...))
+             "Apple.Inc": 134343}  # O(len(...))
 
 
 #  Variant_1
