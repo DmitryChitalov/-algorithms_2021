@@ -11,3 +11,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from uuid import uuid4
+import hashlib
+
+url = input('Type your site here: ')
+salt = url
+cache = {}
+
+
+def cache_site(site):
+    if not cache.get(site):
+        odj = hashlib.sha256(salt.encode() + site.encode()).hexdigest()
+        cache[site] = odj
+        print(cache)
+    else:
+        print('There is such site in base')
+
+
+cache_site(url)
+cache_site(url)
