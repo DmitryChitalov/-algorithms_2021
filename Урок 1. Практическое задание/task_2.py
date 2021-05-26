@@ -16,3 +16,37 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+from random import randint
+
+
+def find_min_1(lst_obj):
+    """Функция должна искать минимальное значение в списке с помощью сравнения
+    каждого числа со всеми другими элементами списка. Сложность такого алгоритма: O(n^2) - квадратичная.
+    """
+    for j, number in enumerate(lst_obj):
+        min_was_found = 1
+        for n in lst_obj[j+1:]:
+            if number > n:
+                min_was_found = 0
+                break
+        if min_was_found == 1:
+            return number
+
+
+def find_min_2(lst_obj):
+    """Функция должна искать минимальное значение в списке.
+    Сложность такого алгоритма: O(n) - линейная.
+    """
+    min_value = lst_obj[0]
+    for number in lst_obj[1:]:
+        if number < min_value:
+            min_value = number
+    return min_value
+
+
+test_list = [randint(0, 50) for _ in range(10)]
+print(test_list)
+print(find_min_1(test_list))    #O(N^2)
+print(find_min_2(test_list))    #O(N)
+
