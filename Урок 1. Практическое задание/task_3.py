@@ -20,3 +20,29 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company_dict = {'company1': 341343,
+                'company2': 24452,
+                'company3': 4133,
+                'company4': 678923,
+                'company5': 42232,
+                'company6': 997922}
+
+# Первый вариант. Сложность  n log n
+max_company = sorted(company_dict.items(), key=lambda el: el[1], reverse=True)[:3]  # O(n log n)
+for company in max_company:  # O(n)
+    print(f'{company[0]} - {company[1]} млн.руб.')
+
+# Второй вариант. Сложность O(n)
+
+top_company = {}  # O(1)
+new_dict = dict(company_dict)  # O(1)
+for i in range(3):  # O(n)
+    top = max(new_dict.items(), key=lambda el: el[1])  # O(n)
+    top_company[top[0]] = top[1]  # O(1)
+    del new_dict[top[0]]  # O(1)
+for company, profit in top_company.items():  # O(n)
+    print(f'{company} - {profit} млн.руб.')
+
+# Второй вариант более предпочтителен, так как там линейная сложность.
+# Соответственно скорость выполнения будет выше.

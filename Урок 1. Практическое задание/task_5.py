@@ -28,3 +28,42 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackPlates:
+    def __init__(self, volume):
+        self.plate_list = [[]]
+        self.max_of_plates = volume
+        self.stack_count = 0
+
+    def stack_size(self):
+        return len(self.plate_list)
+
+    def push_in(self, count):
+        if len(self.plate_list[self.stack_count]) == self.max_of_plates:
+            self.plate_list.append([])
+            self.stack_count += 1
+        self.plate_list[self.stack_count].append(count)
+
+    def pop_out(self):
+        if not self.stack_size():
+            plate = self.plate_list[self.stack_count].pop()
+            if not self.stack_size() and not len(self.plate_list[self.stack_count]):
+                self.plate_list.pop()
+                self.stack_count -= 1
+            return plate
+        else:
+            return 'В стопках нет тарелок'
+
+    def all_stack_size(self):
+        return self.plate_list
+
+
+if __name__ == '__main__':
+
+    stack = StackPlates(5)
+
+    for i in range(1, 23):
+        stack.push_in(i)
+        print(stack.all_stack_size())
+
