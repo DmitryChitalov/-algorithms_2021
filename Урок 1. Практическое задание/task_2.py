@@ -26,7 +26,11 @@ print(search([1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 0]))
 
 
 def search_2(lst):  # O(N)
-    return min(lst)  # N
+    min = lst[0] # 1
+    for i in lst: # N
+        if i < min:  # 1
+            min = i # 1
+    return min # 1
 
 
 print(search_2([1, 2, 3, 4, 5, 6, 5, -2, 3, 2, 2]))
