@@ -16,5 +16,22 @@
 Вы ввели правильный пароль
 
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
-А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
-"""
+А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там."""
+
+
+import hashlib
+from hashlib import sha256
+
+password = input('Введите пароль: ')
+password_hash = (sha256(password.encode('utf-8')).hexdigest())
+an_salt = 'salt'
+salt = (sha256(an_salt.encode('utf-8')).hexdigest())
+n = len(password_hash + salt)
+f = open('password.txt', 'r+')
+f.write(password_hash + salt)
+password2 = input('Повторите пароль: ')
+if ((sha256(password2.encode('utf-8')).hexdigest())+salt) == f.read(n):
+    print('Авторизация прошла успешно')
+else:
+    print('Авторизация не выполнена')
+f.close()

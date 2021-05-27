@@ -16,3 +16,37 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import time # Заполнение списка происходит быстрее исходя из замеров
+
+def time_of_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter_ns()
+        res = function(*args)
+        print(time.perf_counter_ns() - start_time)
+        return res
+    return wrapped
+
+@time_of_function
+def main_list(j):
+    list = []
+    for i in range(j):
+        x = input('Введите новый элемент списка: ')
+        list.append(x)
+    print(list)
+
+@time_of_function
+def main_dict(j):
+    dict = {}
+    for i in range(j):
+        x = input('Введите имя ключа: ')
+        y = input('Введите значение ключа: ')
+        dict.update({x: y})
+    print(dict)
+
+main_list(3)
+main_dict(3)
+
+
+
+

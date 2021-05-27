@@ -11,3 +11,16 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from hashlib import sha256
+
+main_set = set()
+an_salt = 'salt'
+salt = (sha256(an_salt.encode('utf-8')).hexdigest())
+def url_hash(string):
+    main_set.add((sha256(string.encode('utf-8')).hexdigest()) + salt)
+    print(main_set)
+
+url_hash('https://gb.ru/lessons/132193')
+url_hash('https://gb.ru/lessons/132193')
+url_hash('https://gb.ru/lessons/132194')
