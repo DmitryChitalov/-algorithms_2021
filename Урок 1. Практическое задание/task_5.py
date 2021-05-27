@@ -36,6 +36,15 @@ class StackClass:
     def is_empty(self):
         return self.stacks == []
 
+    def pop_out(self):
+        return self.stacks.pop(0)
+
+    def get_val(self):
+        return self.stacks[0]
+
+    def stack_size(self):
+        return len(self.stacks)
+
     def push_in(self, element):
         if self.is_empty() or len(self.stacks[self.stacks_count - 1]) == self.max_size:
             self.stacks.append([])
@@ -53,6 +62,9 @@ if __name__ == '__main__':
     # заполняем элементами
     for i in range(15):
         plates.push_in(i)
+
+    # plates.pop_out()
+    # print(plates.get_val())
 
     # выводим на экран получившиеся списки
     for i in range(plates.stacks_count):
