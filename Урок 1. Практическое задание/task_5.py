@@ -33,10 +33,10 @@
 class StackClass:
     def __init__(self):
         self.elems = []
-        self.stopk = []
+        self.stack = []
 
-    def pusto(self):
-        return self.stopk == []
+    def empty(self):
+        return self.stack == []
 
     def clear_elems(self):
         self.elems.clear()
@@ -44,30 +44,30 @@ class StackClass:
     def push_in(self, el):
         self.elems.append(el)
         if len(self.elems) == 5:
-            self.stopki()
+            self.stacks()
 
-    def stopki(self):
-        self.stopk.append(self.elems.copy())
+    def stacks(self):
+        self.stack.append(self.elems.copy())
         self.clear_elems()
 
-    def popen(self):
-        return self.stopk.pop()
+    def pop_out(self):
+        return self.stack.pop()
 
 
-def proba(n):
+def test(n):
     stk = StackClass()
 
     for i in range(n):
         stk.push_in(1)
     if stk.elems:
-        stk.stopki()
+        stk.stacks()
     result = ""
-    while not stk.pusto():
-        result += str(len(stk.popen())) + " "
+    while not stk.empty():
+        result += str(len(stk.pop_out())) + " "
 
     return f"Всего стопок: " + result
 
 
-print(proba(6))
-print(proba(12))
-print(proba(53))
+print(test(6))
+print(test(12))
+print(test(53))
