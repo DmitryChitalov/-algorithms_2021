@@ -28,3 +28,58 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class MyError(Exception):
+    def __init__(self, txt: str):
+        self.txt = txt
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+        self.max_size = 10
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        try:        # Добавил для исключения переполнения стека
+            if len(self.elems) <= self.max_size:
+                self.elems.append(el)
+            else:
+                raise MyError('Переполнение стека')
+        except MemoryError:
+            print('Стек заполнен')
+
+        except MyError as err:
+            print(err)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def overflow(self):     # Информация о переполнении стека (необходима для реализации нескольких стопок)
+        return len(self.elems) == self.max_size
+
+
+def add_stack():        # возвращает объект стек (необходима для реализации нескольких стопок)
+    return StackClass()
+
+
+sc_plate = [add_stack()]
+
+for i in range(35):     # Наполняем стек
+    if not sc_plate[len(sc_plate) - 1].overflow():      # Контроль за переполнением стека
+        sc_plate[len(sc_plate) - 1].push_in(i)
+    else:
+        sc_plate.append(add_stack())
+for i in sc_plate:      # Извлекаем элементы из стека
+    for n in range(i.stack_size()):
+        print(i.pop_out())
