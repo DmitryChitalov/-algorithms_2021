@@ -24,7 +24,7 @@ comp = [["Evil componi", 12231], ["Good componi", 12566471], ["Normal componi", 
         ["min componi", 1264]]
 
 
-def zad1(com):  # T(N^2+16N+6) O(N^2)
+def task1(com):  # T(N^2+16N+6) O(N^2)
     number = [x[1] for x in com]  # 1 + N
     comp, fin = [], []  # 2
     for i in range(3):  # 3(
@@ -36,17 +36,17 @@ def zad1(com):  # T(N^2+16N+6) O(N^2)
     return fin  # 1
 
 
-print(zad1(comp))
+print(task1(comp))
 
 
-def zad2(com):  # T(NLogN +6N + 1) O(NlogN)
+def task2(com):  # T(NLogN +6N + 1) O(NlogN)
     comp = {}  # 1
     for i in com:  # N(
         comp[i[0]] = i[1]  # 1+1+1 )
     return sorted(comp.items(), key=lambda x: x[1], reverse=True)[:3]  # NlogN +N+N+N
 
 
-print(zad2(comp))
+print(task2(comp))
 
 """Вывод: Второй лудшее чем первый. Так как в первом слишком много действий связоное с циклами и поиском, 
 а во втором даже меньше код по длинне и меньше действий. Но все же они оба плохи не знаю о чем думал когда их делал
