@@ -16,3 +16,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def formula(n):
+    return n * (n+1) / 2
+
+
+def equality(n):
+    if n == 1:
+        return n
+    else:
+        return n + equality(n-1)
+
+
+print(equality(5) == formula(5))

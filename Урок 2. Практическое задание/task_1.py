@@ -28,3 +28,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+operations = {
+    '+': lambda x, y: x + y,
+    '-': lambda x, y: x - y,
+    '/': lambda x, y: x / y,
+    '*': lambda x, y: x * y
+}
+
+
+def calculator():
+    symbol = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if symbol not in operations:
+        if symbol == '0':
+            return 'Спасибо, что воспользовались нашим калькулятором!'
+        else:
+            print('Неверный знак операции!')
+            calculator()
+    try:
+        a, b = [int(input('Введите {} число: '.format('первое' if not i else 'второе'))) for i in range(2)]
+        print(f'Ваш результат: {operations[symbol](a, b)}')
+    except ZeroDivisionError:
+        print('Деление на 0!')
+    except ValueError:
+        print('Вы вместо числа ввели строку (((. Исправьтесь')
+    finally:
+        calculator()
+
+
+print(calculator())
