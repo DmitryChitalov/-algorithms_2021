@@ -16,3 +16,26 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+import time
+
+x = 10000
+
+def fill_list(n):
+    start = time.time()
+    my_list = [i ** 3 for i in range(n)]
+    end = time.time()
+    elapsed = end - start
+    return elapsed
+
+
+dict = {}
+def fill_dict(n):
+    start = time.time()
+    for i in range(n):
+        dict[i**2] = i ** 8
+    end = time.time()
+    elapsed = end - start
+    return elapsed
+
+print (fill_list(x))
+print (fill_dict(x))
