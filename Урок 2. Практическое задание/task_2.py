@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def eve(number, eve_coun=0, uneve_coun=0):
+    if number == 0:
+        return (eve_coun, uneve_coun)
+    elif number < 0:
+        print("Только натуральные числа")
+        return ''
+    else:
+        even = number % 2
+        if even == 0:
+            return eve(number // 10, eve_coun + 1, uneve_coun)
+        elif even == 1:
+            return eve(number // 10, eve_coun, uneve_coun + 1)
+
+
+print(eve(12345666111100054697))

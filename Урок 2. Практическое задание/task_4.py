@@ -12,3 +12,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def summ(n=-1, sum=0, number=1, start=0):
+    if n == -1:
+        try:
+            n = int(input('Введите количество элементов: '))
+        except ValueError:
+            print("Давай без шуток")
+            return summ()
+        start = n
+    elif n == 0:
+        return f'Количество элементов: {start}, их сумма: {sum}'
+
+    return summ(n - 1, sum + number, number * (-0.5), start)
+
+
+print(summ())
+
+
+def summ1(n, r=1, sum=0): return summ1(n - 1, r * (-0.5), sum + r) if n != 0 else print(sum)
+
+
+summ1(3)
