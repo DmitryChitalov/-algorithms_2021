@@ -16,3 +16,26 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+def find_min_quad(data: list):
+    """Сложность:
+        1n * 2n + 1 = O(n^2)
+    """
+    for i in data:  # O(n)
+        minimum = i  # O(1)
+        for j in data:  # O(n)
+            if minimum > j:  # O(1)
+                minimum = j  # O(1)
+    return minimum  # O(1)
+
+
+def find_min_line(data: list):
+    """Сложность:
+        1 + 2n + 1 = O(n)
+    """
+    minimum = data[0]  # O(1)
+    for i in data:  # O(2n)
+        if i < minimum:
+            minimum = i
+    return minimum  # O(1)
