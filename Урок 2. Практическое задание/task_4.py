@@ -12,3 +12,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def get_num():
+    try:
+        num = int(input('Введите число элементов ряда: '))
+        return num
+    except ValueError:
+        print('На число не похоже. Попробуйте еще раз.')
+
+
+def get_sum(multi, count):
+    # if multi < count:
+    #     return (-0.5)**multi + get_sum(multi + 1, count)
+    # else:
+    #     return (-0.5)**multi
+    return (-0.5)**multi + get_sum(multi + 1, count) if multi < count else (-0.5)**multi
+
+num = get_num()
+if num is not None:
+    print(get_sum(0, num-1))

@@ -22,3 +22,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def get_num():
+    try:
+        num = int(input('Введите число: '))
+        return num
+    except ValueError:
+        print('На число не похоже. Попробуйте еще раз.')
+
+
+def reverse_number(num, multi):
+    base = 10
+    if num >= base:
+        return num%base * base**multi + reverse_number(num // base, multi - 1)
+    else:
+        return num * base**multi
+
+num = get_num()
+if num is not None:
+    print(reverse_number(num, len(str(num)) - 1))

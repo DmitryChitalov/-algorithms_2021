@@ -16,3 +16,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def get_num():
+    try:
+        num = int(input('Введите число элементов ряда: '))
+        return num
+    except ValueError:
+        print('На число не похоже. Попробуйте еще раз.')
+
+def get_sum(cur_num, count):
+    return cur_num + get_sum(cur_num+1, count) if cur_num < count else cur_num
+
+num = get_num()
+if num is not None:
+    row_sum = get_sum(1, num)
+    sum_expr = num*(num+1)/2
+    if row_sum == sum_expr:
+        print('Ура! Формула для ряда верная. Сумма ряда:', row_sum)
+    else:
+        print('Где то косяяк')
