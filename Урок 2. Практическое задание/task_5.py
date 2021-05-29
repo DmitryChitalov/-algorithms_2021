@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(code):
+    if code == 128:
+        return
+    else:
+        print(f"{str(code)} - {chr(code)}", end=' ')
+        if code % 10 == 1:
+            print('\n', end='')
+        ascii_table(code+1)
+
+
+ascii_table(32)
+
+

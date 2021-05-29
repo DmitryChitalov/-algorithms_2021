@@ -12,3 +12,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_row(n):
+    if n == 1:
+        return 1, 1
+    else:
+        previous_number, previous_sum = sum_row(n-1)
+        current_number = previous_number/(-2)
+        current_sum = previous_sum + current_number
+        return current_number, current_sum
+
+
+def summarize(n):
+    return sum_row(n)[1]
+
+
+print(summarize(int(input('Введите количество элементов ряда для суммирования: '))))
+
