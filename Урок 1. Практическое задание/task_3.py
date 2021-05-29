@@ -20,3 +20,21 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+firms = {
+    "Horns" : "100000",
+    "H&K" : "200000",
+    "Gardener" : "249000",
+    "Warner" : "248000",
+    "Bros" : "315000",
+    "Hadson" : "260000",
+    "Watsons" : "400000",
+    "Ratchet" : "415000"}
+print(firms)
+result = sorted(firms, key=firms.get, reverse=True)[:3]
+print(result)
+list_firms = list(firms.items())
+list_firms.sort(key=lambda i: i[1])
+for i in list_firms:
+    print(i[0], ':', i[1])
+
