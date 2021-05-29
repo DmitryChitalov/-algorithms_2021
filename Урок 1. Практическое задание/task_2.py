@@ -23,13 +23,13 @@ def get_minimal_value_1(lst_obj: list):
     """ Функция осуществляет поиск минимального значения в полученном списке
     :param lst_obj - список.
     :return: minimal - минимальное значение в списке.
-    Сложность алгоритма - квадратичная O(N**2)
+    Сложность алгоритма: N+N**2+1 квадратичная O(N**2)
     """
     lst_copy = lst_obj[:]                                               # Создаю копию списка O(N)
     for i in range(len(lst_copy)):
         for k in range(len(lst_copy)):
-            if lst_copy[k] > lst_copy[i]:                               # Сортирую список двумя циклами O(N**2)
-                lst_copy[k], lst_copy[i] = lst_copy[i], lst_copy[k]     # методом пузырька
+            if lst_copy[k] > lst_copy[i]:                               # Сортировка двумя вложенными циклами
+                lst_copy[k], lst_copy[i] = lst_copy[i], lst_copy[k]     # O(N**2)
     return lst_copy[0]                                                  # возвращаю минимальное значение O(1)
 
 

@@ -19,27 +19,55 @@
 # через строки документации в самом коде.
 # Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 # Задание творческое. Здесь нет жестких требований к выполнению.
+#############################################################################
+
+# Решение.
+
+# Объявление функций
 
 
 def top_3_in_profit_v1(database: dict):
     """ Функция сортирует полученную базу данных по значению и выводит три записи
-    с наибольшими значениями
-    :param - база данных (ключ - название компании, значение - прибыль).
+    с наибольшими значениями, возвращает список из трех лидирующих компаний.
+    :param - словарь база данных (ключ - название компании, значение - прибыль).
     :return - список лидирующих компаний.
-    Сложность алгоритма: 6+N**2**(N*logN)+N   O(N**2**N*logN) т.е. неудачный.
+    Сложность алгоритма: 5+N**2**(N*logN)+2N --> O(N**2**N*logN) т.е. неудачный.
     """
-    top_company = []                                            # O(1)
-    i = 0                                                       # O(1)
-    while i < len(database):                                    # O(N)
-        for key, value in database.items():                       # O(N)
-            if value == sorted(database.values())[i]:               # O(N*logN)
-                top_company.append(key)                         # O(1)
-        i += 1                                                  # O(1)
-    for value in top_company[-3:]:                              # O(N)
-       print(f'{value}, прибыль: {database[value]}.')           # O(1)
-    return top_company[-3:]                                     # O(1)
+    top_company = []                                    # O(1)
+    i = 0                                               # O(1)
+    while i < len(database):
+        for key, value in database.items():               # O(N**2) два вложенных цикла
+            if value == sorted(database.values())[i]:       # O(N*logN) вложенная сортировка
+                top_company.append(key)                 # O(1)
+        i += 1                                          # O(1)
+    for value in top_company[-3:]:                      # O(N)
+        print(f'{value}, прибыль: {database[value]}.')  # O(1)
+    return top_company[-3:]                             # O(N)
 
 
+def top_3_in_profit_v2(database: dict):
+    """ Функция использует базу данных ключ и значение помещает в разные списки
+        объединение данных происходит по внешнему ключу - позиции в списке.
+        Использована квадратичная "пузырьковая сортировка" списков.
+    :param - словарь база данных (ключ - название компании, значение - прибыль).
+    :return - список лидирующих компаний.
+    Сложность алгоритма: 5+4N+N**2 --> O(N**2) квадратичный (лучше v1).
+    """
+    cmp_name, cmp_profit = [], []                   # O(1)
+    for key, value in database.items():             # O(N) Один проход цикла.
+        cmp_name.append(key)                        # O(1)
+        cmp_profit.append(value)                    # O(1) Заполняем словари.
+    for i in range(len(cmp_profit) - 1):
+        for k in range(len(cmp_profit) - 1):          # два вложенных цикла O(N**2)
+            if cmp_profit[k] > cmp_profit[k + 1]:   # O(1) Сравниваем два значения
+                cmp_profit[k], cmp_profit[k + 1] = cmp_profit[k + 1], cmp_profit[k]     # O(1)
+                cmp_name[k], cmp_name[k + 1] = cmp_name[k + 1], cmp_name[k]             # O(1)
+    cmp_name.reverse()          # O(N) "Разворачиваем" списки
+    cmp_profit.reverse()        # O(N) --"--
+    return cmp_name[0:3]        # O(N) Делаем срез из трех компаний-лидеров.
+
+
+# Cоздание базы данных.
 company_database = {
     'Sunlight': 4300000,
     'Metal gear': 3000000,
@@ -47,8 +75,13 @@ company_database = {
     'Nemo action': 50000,
     'New horizons': 2300000,
     'Crocodile': 5134000,
-    'Pumping iron': 850000
+    'Pumping iron': 850000,
+    'My neighborhood': 1800000,
+    'New hope': 3100000,
+    'Happy worker': 900000
 }
 
+# Основной блок программы
 if __name__ == '__main__':
     top_3_in_profit_v1(company_database)
+    print(top_3_in_profit_v2(company_database))
