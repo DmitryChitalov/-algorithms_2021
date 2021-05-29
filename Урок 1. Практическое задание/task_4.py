@@ -25,8 +25,11 @@
 #   Задание творческое. Здесь нет жестких требований к выполнению.
 
 
-class Var1:
-    """Представление процедуры регистрации пользователя в системе"""
+class Variant1:
+    """ Представление процедуры регистрации пользователя в системе
+    Сложность выражений данного алгоритма на большем его протяжении константная, лишь при переборе значений
+    словаря сталкиваемся с линейной сложностью. Таким образом общая сложность данного варианта O(N).
+    """
 
     user_db = {
         'maksim': ['test001', True],
@@ -34,21 +37,22 @@ class Var1:
         'michail': ['test003', True]
     }
 
+    @staticmethod
     def get_login():
         """Функция аутентификации пользователя"""
         print('\033[31m Hi, everywhere!\n For continue - please, Sign_In or Register: ')
         print('\033[0m Enter Your name, than press Enter', end=' : ')
         login = input()
-        if login in Var1.user_db.keys():
+        if login in Variant1.user_db.keys():
             print(f'Welcome back, {login}!')
-            if Var1.check_status(login):
-                Var1.get_password(login)
+            if Variant1.check_status(login):
+                Variant1.get_password(login)
             else:
                 print('You need to get access from system administrator!')
                 return
         else:
             print(f'\033[31m {login}, you are not in user list. Please, get registration.')
-            Var1.get_registration()
+            Variant1.get_registration()
 
     def get_password(login: str):
         """Функция проверки пароля"""
@@ -56,7 +60,7 @@ class Var1:
         while i < 4:
             print('\033[31m Insert password', end=' : ')
             password = input()
-            if password == Var1.user_db[login][0]:
+            if password == Variant1.user_db[login][0]:
                 print('\033[33m Correct password!')
                 break
             else:
@@ -64,19 +68,19 @@ class Var1:
                 i += 1
                 continue
         if i == 4:
-            Var1.user_db[login][1] = False
+            Variant1.user_db[login][1] = False
             print('Too many failure in password. Your account was blocked.\nSend to system administrator')
-            print(Var1.user_db)
 
     def check_status(login: str):
         """Функция проверки статуса учетной записи"""
-        if Var1.user_db[login][1]:
+        if Variant1.user_db[login][1]:
             print('\033[35mAccess guarantee!')
             return True
         else:
             print('\033[31mAccess denied!\033[0m\nTry connect to system administrator.')
             return False
 
+    @staticmethod
     def get_registration():
         """Функция регистрации нового пользователя."""
         login = input('Insert name : ')
@@ -86,10 +90,10 @@ class Var1:
             confirm_password = input('Confirm password :')
         phone = input('Phone : ')
         email = input('E-mail :')
-        Var1.user_db[login] = [user_password, False, phone, email]
+        Variant1.user_db[login] = [user_password, False, phone, email]
         print('\033[36mRegistration complete!\nThan wait message from system administrator to get access.')
-        Var1.get_login()
+        Variant1.get_login()
 
 
 if __name__ == '__main__':
-    Var1.get_login()
+    Variant1.get_login()
