@@ -28,3 +28,41 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc():
+    operation = input("Введите знак операции или '0' для выхода: ")
+    if operation in ["+", "-", "/", "*"]:
+        while True:
+            first_number = input("Первое число: ")
+            if first_number.replace("-", "").isdigit():
+                first_number = int(first_number)
+                break
+        while True:
+            second_number = input("Второе число: ")
+            if second_number.replace("-", "").isdigit():
+                second_number = int(second_number)
+                if operation == "/" and second_number == 0:
+                    print("На ноль делить нельзя!")
+                    continue
+                break
+        if operation == "+":
+            print(f"{first_number} {operation} {second_number} = {first_number + second_number}")
+            return calc()
+        elif operation == "-":
+            print(f"{first_number} {operation} {second_number} = {first_number - second_number}")
+            return calc()
+        elif operation == "*":
+            print(f"{first_number} {operation} {second_number} = {first_number * second_number}")
+            return calc()
+        elif operation == "/":
+            print(f"{first_number} {operation} {second_number} = {first_number / second_number}")
+            return calc()
+    elif operation == "0":
+        return print("Завершение работы")
+    else:
+        print("Неизвестная операция")
+        return calc()
+
+
+calc()

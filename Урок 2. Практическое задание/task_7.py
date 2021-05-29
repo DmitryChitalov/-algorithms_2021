@@ -16,3 +16,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def row_sum(n, result=0):
+    if n >= 1:
+        result += n
+        return row_sum(n-1, result)
+    return result
+
+
+def check_equal(result_row_sum, n):
+    print(f'{result_row_sum} = {n * (n + 1) // 2}')
+
+
+check_equal(row_sum(5), 5)

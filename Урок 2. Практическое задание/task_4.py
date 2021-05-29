@@ -12,3 +12,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+while True:
+    user_number = input("Введите количество элементов n - ")
+    if user_number.isdigit():
+        user_number = int(user_number)
+        break
+
+
+def row_sum(n):
+    if n > 1:
+        return (-0.5) ** (n - 1) + row_sum(n - 1)
+    return n
+
+
+print(row_sum(user_number))

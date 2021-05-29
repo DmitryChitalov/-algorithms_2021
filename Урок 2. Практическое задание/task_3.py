@@ -22,3 +22,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+while True:
+    user_number = input("Введите натуральное число - ")
+    if user_number.isdigit():
+        user_number = int(user_number)
+        break
+
+
+def reverse_number(number, result=""):
+    if number > 0:
+        result += str(number % 10)
+        return reverse_number(number//10, result)
+    else:
+        return result
+
+
+print(reverse_number(user_number))

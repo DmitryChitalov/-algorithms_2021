@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+while True:
+    user_number = input("Введите натуральное число - ")
+    if user_number.isdigit():
+        user_number = int(user_number)
+        break
+
+
+def even_odd_counter(number, even=0, odd=0):
+    if number > 0:
+        if number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd_counter(number//10, even, odd)
+    else:
+        return f"Всего четных цифр - {even}, нечетных - {odd}"
+
+
+print(even_odd_counter(user_number))
+
