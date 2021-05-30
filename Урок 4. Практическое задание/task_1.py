@@ -18,6 +18,7 @@ import timeit
 nums = [100, 10, 1, 200, 20, 2]
 
 
+
 # Исходный вариант
 def func_1(nums):
     new_arr = []
