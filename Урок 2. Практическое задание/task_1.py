@@ -28,3 +28,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def calculator():
+    type_operation = input("Input operation (+, -, *, / or 0 for exit)")
+    if type_operation == 0:
+        return "Exit"
+    else:
+        if type_operation in "=, -, *, /":
+            try:
+                num_1 = int(input("Input first number:"))
+                num_2 = int(input("Input first number:"))
+
+                if type_operation == "+":
+                     res = num_1 + num_2
+                     print(f'You result {res}')
+                     return calculator()
+                elif type_operation == "-":
+                    res = num_1 - num_2
+                    print(f'You result {res}')
+                    return calculator()
+                elif type_operation == "*":
+                    res = num_1 * num_2
+                    print(f'You result {res}')
+                    return calculator()
+                elif type_operation == "/":
+                    try:
+                        res = num_1 / num_2
+                    except ZeroDivisionError:
+                        print("Not null")
+                    else:
+                        print(f'You result {res}')
+                    finally:
+                        return calculator()
+            except ValueError:
+                print("You input string")
+                return calculator()
+        else:
+            print("You input error symbol")
