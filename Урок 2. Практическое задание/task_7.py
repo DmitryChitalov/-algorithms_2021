@@ -23,10 +23,7 @@ def formula(n):
 
 
 def equality(n):
-    if n == 1:
-        return n
-    else:
-        return n + equality(n-1)
+    return n if n == 0 else n + equality(n-1)
 
 
 print(equality(5) == formula(5))
