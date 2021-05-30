@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def number_revers(num):
+    if num == 0:
+        return ''
+    else:
+        revers = str(num % 10)
+        num //= 10
+        return revers + number_revers(num)
+
+
+number_user = int(input(f'Введите число: '))
+print(number_revers(number_user))

@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def numbers(num, odd=[], even=[]):
+    if num == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({len(even)}, {len(odd)})')
+
+    else:
+        base_num = num % 10
+        if base_num % 2 == 0:
+            even.append(base_num)
+
+        else:
+            odd.append(base_num)
+        num = num // 10
+        return numbers(num)
+
+
+number = 123456
+numbers(number)
