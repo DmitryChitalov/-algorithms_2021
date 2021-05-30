@@ -11,10 +11,10 @@
 
 def search(lst):  # 2N^2+2 O(N^2)
     min = 0  # 1
-    for i in range(len(lst)):  #
-        for j in range(len(lst)):  # N^2(
+    for i in range(len(lst)):  #N(
+        for j in range(len(lst)):  # N(
             if lst[j] < lst[i]:  # 1
-                min = lst[j]  # 1)
+                min = lst[j]  # 1))
     return min  # 1
 
 
