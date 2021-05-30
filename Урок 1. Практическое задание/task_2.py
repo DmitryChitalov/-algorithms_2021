@@ -18,7 +18,7 @@
 """
 
 
-def min_list_number1(numbers_list):             # Сложность функции: 5n**2 + n
+def min_list_number1(numbers_list):             # Сложность функции: O(n**2) квадратичная
     for i in numbers_list:                      # O(n)
         is_lower = 0                            # O(1)
         for n in numbers_list:                  # O(n)
@@ -31,7 +31,7 @@ def min_list_number1(numbers_list):             # Сложность функц�
     return min_num                              # O(1)
 
 
-def min_list_number2(numbers_list):             # Сложность функции: 3n + 1
+def min_list_number2(numbers_list):             # Сложность функции: O(nlogn) линейно-логарифмическая
     min_number = numbers_list[0]                # O(1)
     for i in numbers_list:                      # O(n)
         if i < min_number:                      # O(1)

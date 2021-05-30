@@ -28,8 +28,8 @@
 # Тяжелее вторая функция, так как они обе линейные, но у второй доминанта в два раза больше.
 
 
-def autent_func1(login, password):              # n + 1 + 1 + 1 + 1 + 1 + 1 = n + 6 (Исполняется только один return,
-    if not login in users.keys():               # O(n)                                  поэтому должно быть n + 3?)
+def autent_func1(login, password):              # Сложность функции: O(n) линейная
+    if not login in users.keys():               # O(n)
         return 'Пользователь не найден'         # O(1)
     elif password != users.get(login)[0]:       # O(1)
         return 'Неверный пароль'                # O(1)
@@ -39,7 +39,7 @@ def autent_func1(login, password):              # n + 1 + 1 + 1 + 1 + 1 + 1 = n 
         return 'Вы допущены к ресурсу'          # O(1)
 
 
-def autent_func2(login, password):              # 1 + 2n + 7 = 2n + 8
+def autent_func2(login, password):              # Сложность функции: O(n)линейная
     counter = 0                                 # O(1)
     for i in users.keys():                      # O(n)
         if login == i:                          # O(1)

@@ -24,7 +24,7 @@
 # Тяжелее вторая функция, так как её доминанта - линейно-логарифмическая, а у первой - линейная.
 
 
-def max_dict_rev1(company_dict_func):                    # n + 1 + 3(3n + n + 1 + n) + 1 = 16n + 5
+def max_dict_rev1(company_dict_func):                       # Сложность функции: O(n) линейная
     company_dict_temp = company_dict_func.copy()            # O(n)
     best_companies = []                                     # O(1)
     for n in range(3):                                      # O(3)
@@ -38,7 +38,7 @@ def max_dict_rev1(company_dict_func):                    # n + 1 + 3(3n + n + 1 
     return best_companies                                   # O(1)
 
 
-def max_dict_rev2(company_dict_func1):                  # n + nlogn + 3 + 1 + 3(2n) + 2n + 1 = nlogn + 9n + 5
+def max_dict_rev2(company_dict_func1):                  # Сложность функции: O(nlogn) линейно-логарифмическая
     rev_list = list(company_dict_func1.values())        # O(n) Я не нашёл значение для values. И хотел бы узнать,
     rev_list.sort(reverse=True)                         # O(nlogn)    в таком случае надо складывать или умножать
     top_3_rev = rev_list[:3]                            # O(3)
