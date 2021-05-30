@@ -26,3 +26,47 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+"""
+Погнали - 2 способа реализуем
+1ый - встроенная функция get, с ее помощью получаем пользователя из словаря, алгоритм константа
+2ой - тут ищем пользователя в цикле - алгоритм линейный за счет цикла
+"""
+def valid_user(dict_forusers, user_name, password):
+    if dict_forusers.get(user_name):
+        if dict_forusers[user_name]['password'] == password:
+            if dict_forusers[user_name]['is_active'] == 1:
+                return 'Доступ открыт'
+            else:
+                return 'Необходима активация учетки'
+        else:
+            return 'Incorrect password'
+    else:
+        return 'Не существующий пользователь'
+
+def entery_foruser(dict_forusers, user_name, password):
+    for el, data in dict_forusers.items():
+        if el == user_name:
+            if data['password'] == password:
+                if data['is_active'] == 1:
+                    return 'Доступ разрешен'
+                else:
+                    return 'Необходима активация учетки'
+            else:
+                return 'Incorrect password'
+    else:
+        return 'Не существующий пользователь'
+
+
+dict_forusers = {'user1': {'password': 'paswword1', 'is_active': 1},
+    'user2': {'password': 'password2', 'is_active': 0},
+    'user3': {'password': 'password3', 'is_active': 1},
+    'user4': {'password': 'password4', 'is_active': 0},
+    'user5': {'password': 'password5', 'is_active': 1},
+    'user6': {'password': 'password6', 'is_active': 0}, }
+
+print(valid_user(dict_forusers, 'user6', '2353532367'))
+print(valid_user(dict_forusers, 'user1', 'paswword1'))
+
+print(entery_foruser(dict_forusers, 'user3', '33333333'))
+print(entery_foruser(dict_forusers, 'user5', 'password5'))
