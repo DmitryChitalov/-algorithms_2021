@@ -1,4 +1,4 @@
-"""
+﻿"""
 Задание 2.
 
 Реализуйте два алгоритма.
@@ -16,3 +16,24 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+def min_el1(lst_obj):                                # O(n^2)
+    min_e = lst_obj[0]                               # O(1)
+    for i in range(len(lst_obj)):                    # O(n^2)
+        min_e = lst_obj[i]                           # O(1)
+        for j in range(len(lst_obj)):                # O(n)
+        if (i != j) and (lst_obj[j] < lst_obj[i]):   # O(1)
+            min_e = lst_obj[j]                       # O(1)
+    return min_e				     # O(1)
+
+
+def min_el2(lst_obj):   # O(n)
+    min_e = lst_obj[0]  # O(1)
+    for el in lst_obj:  # O(n)
+        if el < min_e:  # O(1)
+            min_e = el  # O(1)
+    return min_e        # O(1)
+
+my_list = [4, 0, 1000, -4, 53215, 1,-4000]
+print(min_el1(my_list))
+print(min_el2(my_list))
