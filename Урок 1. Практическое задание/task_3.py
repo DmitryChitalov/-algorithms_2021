@@ -39,13 +39,13 @@ def max_dict_rev1(company_dict_func):                       # Сложность
 
 
 def max_dict_rev2(company_dict_func1):                  # Сложность функции: O(nlogn) линейно-логарифмическая
-    rev_list = list(company_dict_func1.values())        # O(n) Я не нашёл значение для values. И хотел бы узнать,
-    rev_list.sort(reverse=True)                         # O(nlogn)    в таком случае надо складывать или умножать
+    rev_list = list(company_dict_func1.values())        # O(n)
+    rev_list.sort(reverse=True)                         # O(nlogn)
     top_3_rev = rev_list[:3]                            # O(3)
     top_3_comp = []                                     # O(1)
     for i in top_3_rev:                                 # O(3)
-        for comp, rev in company_dict_func1.items():    # O(n) Я не нашёл цену items и хотел бы узнать как считать цену,
-            if rev == i:                                # O(1)                когда мы итерируемся по результату функции
+        for comp, rev in company_dict_func1.items():    # O(n)
+            if rev == i:                                # O(1)
                 top_3_comp.append(comp)                 # O(1)
     top_3_comp = list(set(top_3_comp))                  # O(2n)
     return top_3_comp                                   # O(1)
