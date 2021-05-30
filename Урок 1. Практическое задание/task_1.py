@@ -20,7 +20,7 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: O(len(lst_obj))
+    Сложность: O(N)
     """
     lst_to_set = set(lst_obj)  # len(lst_obj)
     return lst_to_set  # 1
