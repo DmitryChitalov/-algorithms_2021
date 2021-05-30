@@ -1,4 +1,4 @@
-"""
+﻿"""
 1.	Написать программу, которая будет складывать, вычитать, умножать или делить
 два числа. Числа и знак операции вводятся пользователем. После выполнения
 вычисления программа не должна завершаться, а должна запрашивать новые данные
@@ -28,3 +28,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_calc():
+    my_operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if (my_operation != "+") and (my_operation != "-") and (my_operation != "*") and (my_operation != "/") and (my_operation != "0"):
+        print("\nВведена некорректная операция!!! Пожалуйста, повторите ввод!\n")
+        my_calc()
+        return
+    if my_operation == "0":
+        return
+    else:
+        try:
+            first_number = float(input("Введите первое число: "))
+            second_number = float(input("Введите первое число: "))
+        except ValueError:
+            print("Вы вместо  числа ввели строку (((. Исправьтесь\n")
+            my_calc()
+            return
+        if my_operation == "+":
+            my_result = first_number + second_number
+        elif my_operation == "-":
+            my_result = first_number - second_number
+        elif my_operation == "*":
+            my_result = first_number * second_number
+        elif my_operation == "/":
+            try:
+                my_result = first_number / second_number
+            except ZeroDivisionError:
+                print("Нельзя выполнить деление на ноль!!!\n")
+                my_calc()
+                return
+        print("Ваш результат: %.2f\n" % (my_result))
+        my_calc()
+        return
+
+my_calc()

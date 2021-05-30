@@ -1,4 +1,4 @@
-"""
+﻿"""
 5.	Вывести на экран коды и символы таблицы ASCII, начиная с символа
 под номером 32 и заканчивая 127-м включительно.
 Вывод выполнить в табличной форме: по десять пар "код-символ" в каждой строке.
@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def output_ascii (start_char, end_char):
+    if (start_char - 32 + 1) % 10 == 0:
+        print("%d - %s" % (start_char, chr(start_char)))
+    else:
+        print("%d - %s" % (start_char, chr(start_char)), end=' ')
+    if start_char == end_char:
+        return
+    else:
+        output_ascii (start_char + 1, end_char)
+
+output_ascii(32, 127)
