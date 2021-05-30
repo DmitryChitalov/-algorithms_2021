@@ -16,3 +16,39 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+lst_1 = [10, 100, 150, 150, 160, 8, 190]
+
+#Сложность O(n^2).
+def minseeker_1(lst):
+    i = len(lst) #O(n)
+    while i>1: #O(n)
+        maxnum = max(lst) #O(n)
+        lst.remove(maxnum) #O(n)
+        i = i-1 #O(1)
+    minnum = lst[0] #O(1)
+    return minnum #O(1)
+
+print(minseeker_1(lst_1))
+
+
+#Сложность O(n).
+def minseeker_2(lst):
+    minnum = lst[0] #O(1) + O(1) (Присваивания + получения индекса)
+    for i in lst: #O(n) (Перебор списка)
+        if i < minnum: #O(1) (Сравнение чисел)
+            minnum = i  #O(1)
+    return minnum #O(1)
+
+
+print(minseeker_2(lst_1))
+
+# Сложность O(n^2).
+def minseeker_3(lst):
+    minnum = None  # O(1)
+    for i in range(len(lst)):  # O(n)
+        for j in range(len(lst)): #O(n)
+            if lst[i] > lst[j]:  # O(1)
+                minnum = lst[j]  # O(1)
+    return minnum  # O(1)
+
+print(minseeker_3(lst_1))
