@@ -17,3 +17,44 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+from random import randint
+from timeit import timeit
+
+def bubble_sort(list_obj):
+    """Не оптимизировання функция пузырьковой сортировки"""
+    for i in range(len(list_obj)):
+        for j in range(len(list_obj) - 1):
+            if list_obj[j] < list_obj[j + 1]:
+                list_obj[j], list_obj[j + 1] = list_obj[j + 1], list_obj[j]
+    return list_obj
+
+
+def bubble_sort_opt(list_obj):
+    """Оптимизированная функция пузырьковой сортировки"""
+    flag = True
+    while flag:
+        flag = False
+        for i in range(len(list_obj) - 1):
+            if list_obj[i] < list_obj[i + 1]:
+                list_obj[i], list_obj[i + 1] = list_obj[i + 1], list_obj[i]
+                flag = True
+    return list_obj
+
+
+if __name__ == '__main__':
+    some_list = [randint(1, 250) for i in range(500)]
+
+    print(timeit('bubble_sort(some_list[:])', globals=globals(), number=1000))
+    print(timeit('bubble_sort_opt(some_list[:])', globals=globals(), number=1000))
+
+"""
+Результаты оптимизации:
+До оптимизации - 32.101786993000005
+После оптимизации - 31.224361666
+
+Выводы:
+Идея потимизации была в том,чтобы в моменте если следующие элементы уже выстроены,
+больше цикл не запускать. Оптимизация существенного прироста не дала.
+"""
+
