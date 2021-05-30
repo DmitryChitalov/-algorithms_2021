@@ -30,13 +30,13 @@ def get_num():
         print('На число не похоже. Попробуйте еще раз.')
 
 
-def reverse_number(num, multi):
+def reverse_number(num):
     base = 10
     if num >= base:
-        return num%base * base**multi + reverse_number(num // base, multi - 1)
+        return str(num % base) + reverse_number(num // base)
     else:
-        return num * base**multi
+        return str(num % base)
 
 num = get_num()
 if num is not None:
-    print(reverse_number(num, len(str(num)) - 1))
+    print(reverse_number(num))
