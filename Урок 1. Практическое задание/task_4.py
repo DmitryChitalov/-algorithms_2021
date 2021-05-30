@@ -31,9 +31,9 @@ unknown = {"log": 'net'}
 
 
 def raund1(user):  # T(n) = 11N + 2  O(N)
-    massa = {"abcd1": '123321', "sasdz": '321123'}  # 1
+    mass = {"abcd1": '123321', "sasdz": '321123'}  # 1
     passe = None  # 1
-    for i in massa.items():  # N(
+    for i in mass.items():  # N(
         if i[0] == user['log']:  # 1+1
             passe = i[1]  # 1
             break  # 1)
