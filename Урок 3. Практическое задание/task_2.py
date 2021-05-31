@@ -18,3 +18,24 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+from uuid import uuid4
+import hashlib
+
+user_pass = input("Введите пароль ")
+salt = uuid4().hex
+res = hashlib.sha256(salt.encode() + user_pass.encode()).hexdigest()
+
+print(res)
+
+user_pass2 = input("Введите пароль ещё раз ")
+res2 = hashlib.sha256(salt.encode() + user_pass2.encode()).hexdigest()
+
+if res == res2:
+    print("Пароли совпадают")
+else:
+    print("Пароли не совпадают")
+
+
+

@@ -16,3 +16,21 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+import time
+
+
+def time_tracker(func):
+    start_val = time.time()
+    func_res = func
+    end_val = time.time()
+    return func_res, end_val - start_val
+
+
+@time_tracker
+def func1():
+    return 1 + 1
+
+
+print(func1)
+
+

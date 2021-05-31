@@ -16,3 +16,18 @@
 р
 а
 """
+
+import hashlib
+
+s = input("Введите строку, состояфщую из строчных латинских букв ")
+s_substring = set()
+
+for i in range(len(s)):
+    for j in range(len(s), i, -1):
+        if s != s[i:j]:
+            hash_s = hashlib.sha256(s[i:j].encode()).hexdigest()
+            s_substring.add(hash_s)
+
+print(s_substring)
+print(f'Строка содержит {len(s_substring)} уникальных подстрок')
+
