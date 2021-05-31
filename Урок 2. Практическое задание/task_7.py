@@ -16,3 +16,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equal(number):
+    if number == 0:
+        return number
+    else:
+        temp_number = number + equal(number - 1)
+        return temp_number
+
+
+print(equal(10))
