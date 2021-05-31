@@ -21,8 +21,8 @@
 """
 import random
 """ Алгоритм первый O(N^2) """
-def bubble_sort (lst_obj): # O(N*N) = O(N^2)
-    lst = list(lst_obj)# O(len(...)) O(8)
+def bubble_sort (lst_obj): # O(N+N*N+O(1)) = O(N^2)
+    lst = list(lst_obj)# O(N)
     for index_one in range(len(lst)):# O(N)
         for index_next in range(index_one + 1, len(lst)): # O(N)
             if lst[index_next] < lst[index_one]: # O(1)
@@ -30,8 +30,8 @@ def bubble_sort (lst_obj): # O(N*N) = O(N^2)
     return lst[0]
 """ Алгоритм второй O(N) """
 def min_func(lst_obj):# O(N)
-    lst = lst_obj # O(len(lst|_obj))
-    return min(lst) # O(N)
+    lst = lst_obj # O(N)
+    return min(lst) # O(1)
 
 original_list = [(element + 1) for element in range(random.randint(5, 25)) if element > 5]
 random.shuffle(original_list)
