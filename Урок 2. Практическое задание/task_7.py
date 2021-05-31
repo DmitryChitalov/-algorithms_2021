@@ -18,14 +18,14 @@
 """
 
 
-def lot(n=5, sum=0, n_fin=0):
+def lot(n=5, s=0, n_fin=0):
     if n == 0:
-        return f"Сумма({n_fin}) = {sum}, а {n_fin}({n_fin}+1)/2 = {int(n_fin * (n_fin + 1) / 2)} они равны = {sum == n_fin * (n_fin + 1) / 2}"
+        return f" они равны = {s == n_fin * (n_fin + 1) / 2}"
     elif n < 0:
         print("ненадо так")
         return
     else:
-        return lot(n - 1, sum + n, n_fin + 1)
+        return lot(n - 1, s + n, n_fin + 1)
 
 
 print(lot(100))
