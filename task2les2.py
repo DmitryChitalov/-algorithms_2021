@@ -1,14 +1,13 @@
-def numbers(num, chet = 0, nechet = 0):
+def numbers(num):
     if num == 0:
-        return "Количество четных и нечетных чисел: ", chet, nechet
+        return "Количество четных и нечетных чисел: ", 0, 0
     else:
-        figure = num % 10
-        num = num//10
-        if figure % 2 == 0:
+        chet, nechet = numbers(num // 10)
+        if num % 2 == 0:
             chet+=1
         else:
             nechet+=1
-        return numbers(num, chet, nechet)
+        return chet, nechet
 
 try:
     k = int(input("Введите натуральное число: "))
