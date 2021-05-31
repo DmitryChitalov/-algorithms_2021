@@ -13,6 +13,8 @@
 Без аналитики задание не принимается
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +22,21 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+t1 = timeit('func_1', 'from __main__ import func_1', number=100000)
+print(f'Результат замера func_1: {t1} мс.')
+
+
+# Полученный результат: 0.02067000600072788
+
+
+def func_2(nums):
+    return [el for el in nums if el % 2 == 0]
+
+
+t2 = timeit('func_2', 'from __main__ import func_2', number=100000)
+print(f'Результат замера func_2: {t2} мс.')
+# Полученный результат: new_arr = 0.01085840000087046
+# Поскольку не затрачивается время на создание дополнительных переменных и функций,
+# генератор списков (func_2) работает быстрее.
