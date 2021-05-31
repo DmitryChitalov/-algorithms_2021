@@ -22,76 +22,90 @@ from __future__ import annotations
 import sqlite3
 import hashlib
 from uuid import uuid4
-import os
 
 
-def create_connection(db_name: str) -> tuple:
-    """
-    Create connection with the database. If the db not exists -> create db.
-    :param db_name: name of db
-    :return: connection obj, cursor obj
-    """
-    conn = sqlite3.connect(db_name)
-    cursor = conn.cursor()
-    return conn, cursor
+class DbSession:
+    def __init__(self, db_name):
+        self._db_name = db_name
+        self.conn, self.cursor = self.create_connection()
 
+    def create_connection(self) -> tuple:
+        """
+        Create connection with the database. If the db not exists -> create db.
+        :return: connection obj, cursor obj
+        """
+        conn = sqlite3.connect(self._db_name)
+        cursor = conn.cursor()
+        return conn, cursor
 
-def create_table(db_name: str, cursor: Cursor) -> None:
-    """
-    Create the main table with user_id, login and password_hash columns
-    :param db_name: name of db
-    :param cursor: cursor obj
-    :return: None
-    """
-    cwd = os.getcwd()
-    db_path = os.path.join(cwd, db_name)
+    def close_connection(self) -> None:
+        self.conn.close()
 
-    if not os.path.exists(db_path):
+    def create_table(self) -> None:
+        """
+        Create the main table with user_id, login and password_hash columns
+        :return: None
+        """
         try:
-            cursor.executescript("""BEGIN TRANSACTION;
-                                        CREATE TABLE IF NOT EXISTS login_info(
-                                            `user_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-                                            `login` VARCHAR(100) UNIQUE,
-                                            `password_hash` TEXT(300) UNIQUE);
-                                    COMMIT;
+            self.cursor.executescript("""BEGIN TRANSACTION;
+                                            CREATE TABLE IF NOT EXISTS login_info(
+                                                `user_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                `login` VARCHAR(100) UNIQUE,
+                                                `password_hash` TEXT(300) UNIQUE);
+                                        COMMIT;
             """)
         except sqlite3.Error as e:
             print('Ошибка БД: ' + str(e))
-    return None
+        return None
 
+    def create_login(self) -> User:
+        """
+        Insert user into database if the uniqueness condition is True
+        :return: User obj
+        """
+        while True:
+            try:
+                login = input('Придумайте имя пользователя: ')
+                password = input('Введите пароль: ')
+                user = User(login, password)
+                self.register_user_to_db(user)
+                print(f'В базе данных хранится строка: {user.password}')
+            except sqlite3.Error as e:
+                print(f'Ошибка БД: {e}. Выберете другое имя')
+            else:
+                return user
 
-def create_login(cursor: Cursor, conn: Connection):
-    """
-    Insert user into database if the uniqueness condition is True
-    :param cursor: cursor obj
-    :param conn: connection obj
-    :return: User obj
-    """
-    while True:
-        try:
-            login = input('Придумайте имя пользователя: ')
-            password = input('Введите пароль: ')
-            user = User(login, password)
-            user.register_user_to_db(cursor, conn)
-            print(f'В базе данных хранится строка: {user.password}')
-        except sqlite3.Error as e:
-            print(f'Ошибка БД: {e}. Выберете другое имя')
+    def check_user(self, user: User, next_try='') -> str:
+        """
+        Checking the second password against data
+        :param user: User obj
+        :param next_try: empty string
+        :return: positive test result
+        """
+        while user.hash_password(user.salt, next_try) != self.get_pw_hash_from_db(user):
+            next_try = input('Введите пароль еще раз: ')
         else:
-            return user
+            return 'Вы ввели правильный пароль'
 
+    def register_user_to_db(self, user: User) -> None:
+        """
+        Insert new user to db
+        :return: None
+        """
+        self.cursor.execute("""INSERT INTO login_info(`login`, `password_hash`)
+                                VALUES (:login, :password_hash);       
+        """, {'login': user.login, 'password_hash': user.password})
+        self.conn.commit()
 
-def check_user(user: User, cursor: Cursor, next_try=''):
-    """
-    Checking the second password against data
-    :param user: User obj
-    :param cursor: cursor obj
-    :param next_try: empty string
-    :return: positive test result
-    """
-    while user.hash_password(user.salt, next_try) != user.get_pw_hash_from_db(cursor):
-        next_try = input('Введите пароль еще раз: ')
-    else:
-        return 'Вы ввели правильный пароль'
+    def get_pw_hash_from_db(self, user: User) -> str:
+        """
+        Receive password_hash from db
+        :param user: User ibj
+        :return: password_hash string
+        """
+        return self.cursor.execute("""SELECT `password_hash` FROM login_info
+                                    WHERE `login`= :login;       
+        """, {'login': user.login}).fetchone()[0]
 
 
 class User:
@@ -99,6 +113,10 @@ class User:
         self._login = login
         self.salt = uuid4().hex
         self._password_hash = self.hash_password(self.salt, password)
+
+    @property
+    def login(self) -> str:
+        return self._login
 
     @property
     def password(self) -> str:
@@ -114,35 +132,13 @@ class User:
         """
         return hashlib.sha256(salt.encode('utf-8') + pw.encode('utf-8')).hexdigest()
 
-    def register_user_to_db(self, cursor: Cursor, conn: Connection) -> None:
-        """
-        Insert new user to db
-        :param cursor: Cursor obj
-        :param conn: Connection obj
-        :return: None
-        """
-        cursor.execute("""INSERT INTO login_info(`login`, `password_hash`)
-                                VALUES (:login, :password_hash);       
-        """, {'login': self._login, 'password_hash': self._password_hash})
-        conn.commit()
-
-    def get_pw_hash_from_db(self, cursor: Cursor) -> str:
-        """
-        Receive password_hash from db
-        :param cursor: Cursor obj
-        :return: password_hash string
-        """
-        return cursor.execute("""SELECT `password_hash` FROM login_info
-                                    WHERE `login`= :login;       
-        """, {'login': self._login}).fetchone()[0]
-
 
 def main():
-    conn, cursor = create_connection('users.sqlite')
-    create_table('users.sqlite', cursor)
-    user = create_login(cursor, conn)
-    print(check_user(user, cursor))
-    conn.close()
+    db_session = DbSession('users.sqlite')
+    db_session.create_table()
+    user = db_session.create_login()
+    print(db_session.check_user(user))
+    db_session.close_connection()
 
 
 if __name__ == '__main__':
