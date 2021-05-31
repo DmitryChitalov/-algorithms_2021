@@ -14,7 +14,7 @@
 """
 
 
-def summ(n=-1, sum=0, number=1, start=0):
+def summ(n=-1, s=0, number=1, start=0):
     if n == -1:
         try:
             n = int(input('Введите количество элементов: '))
@@ -23,15 +23,15 @@ def summ(n=-1, sum=0, number=1, start=0):
             return summ()
         start = n
     elif n == 0:
-        return f'Количество элементов: {start}, их сумма: {sum}'
+        return f'Количество элементов: {start}, их сумма: {s}'
 
-    return summ(n - 1, sum + number, number * (-0.5), start)
+    return summ(n - 1, s + number, number * (-0.5), start)
 
 
 print(summ())
 
 
-def summ1(n, r=1, sum=0): return summ1(n - 1, r * (-0.5), sum + r) if n != 0 else print(sum)
+def summ1(n, r=1, s=0): return summ1(n - 1, r * (-0.5), s + r) if n != 0 else print(s)
 
 
 summ1(3)
