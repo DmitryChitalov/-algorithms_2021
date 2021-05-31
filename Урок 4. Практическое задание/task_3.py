@@ -13,6 +13,9 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
+from random import randint
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +40,32 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return str(enter_num)[::-1]
+
+
+num = randint(1000000, 1000000000)
+
+
+print('revers_1:', timeit('revers_1(num)', globals=globals()))
+print('revers_2:', timeit('revers_2(num)', globals=globals()))
+print('revers_3:', timeit('revers_3(num)', globals=globals()))
+print('revers_4:', timeit('revers_4(num)', globals=globals()))
+
+
+def test():
+    revers_1(num)
+    revers_2(num)
+    revers_3(num)
+    revers_4(num)
+
+print()
+run('test()')
+#  Первый вариант самый долгий за счёт выполнения рекурсии.
+# Выриант с циклом выполняется быстрее, требуется всего один проход цикла для решения задачи.
+# Третий вариант самый быстрый из предложенных, из строки сразу берутся элементы в обратном порядке.
+
+# CProfile не эффективен, единичный вызов функции выполняется слишком быстро, что бы дать какие либо результаты.
+# Быстрее всего работает 4-я функция.

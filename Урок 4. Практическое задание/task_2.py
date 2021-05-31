@@ -79,3 +79,5 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# здесь уже из разбора понял, что она не нужна, из-за повторного ввызова значений из кэша

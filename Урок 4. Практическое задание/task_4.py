@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,20 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    elem = max(array, key=array.count)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {array.count(elem)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print('func_1:', timeit('func_1()', globals=globals(), number=10000))
+print('func_2:', timeit('func_2()', globals=globals(), number=10000))
+print('func_3:', timeit('func_3()', globals=globals(), number=10000))
+
+#  Первый алггоритм работает быстрее второго, так как находит искомый элемент за один проход по списку.
+#  Второй тратит время на создание дополнительного списка и поиска в нём максимального элемента.
+#  Третий работает немного быстрее второго за счёт использования встроенных функций.
