@@ -11,3 +11,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def func(count, number):
+    print(f'Попытка № {count}')
+    answer = int(input("Введите число от 0 до 100: "))
+    if count == 10 or answer == number:
+        if answer == number:
+            print("Вы угадали")
+        return
+    else:
+            if number < answer:
+                print("\nЗагаданное число - меньше.")
+            else:
+                print("\nЗагаданное число - больше.")
+    func(count + 1, number)
+    return
+
+
+func(1, randint(0, 100))

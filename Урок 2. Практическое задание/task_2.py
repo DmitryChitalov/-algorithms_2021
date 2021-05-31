@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func(number, odd=0, even=0):
+    if number == 0:
+        print("(Чётных - %d, Нечётных - %d)" % (even, odd))
+    else:
+        digit = number % 10
+        if digit % 2 != 0:
+            odd += 1
+        else:
+            even += 1
+        func(number // 10, odd, even)
+
+
+func(int(input("Введите число: ")))

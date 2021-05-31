@@ -22,3 +22,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func(number):
+    if number >= 10:
+        return str(number % 10) + func(number // 10)
+    else:
+        return str(number)
+
+
+print(func(int(input("Введите число: "))))
