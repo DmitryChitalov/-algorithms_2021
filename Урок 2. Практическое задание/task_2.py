@@ -20,18 +20,18 @@
 """
 
 
-def eve(number, eve_coun=0, uneve_coun=0):
+def eve(number, eve_count=0, uneve_count=0):
     if number == 0:
-        return (eve_coun, uneve_coun)
+        return eve_count, uneve_count
     elif number < 0:
         print("Только натуральные числа")
         return ''
     else:
         even = number % 2
         if even == 0:
-            return eve(number // 10, eve_coun + 1, uneve_coun)
+            return eve(number // 10, eve_count + 1, uneve_count)
         elif even == 1:
-            return eve(number // 10, eve_coun, uneve_coun + 1)
+            return eve(number // 10, eve_count, uneve_count + 1)
 
 
 print(eve(12345666111100054697))
