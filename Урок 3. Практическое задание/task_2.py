@@ -21,8 +21,12 @@
 import hashlib
 
 
+def decoding(n):
+    return hashlib.sha256('hell'.encode() + f'{n}'.encode()).hexdigest()
+
+
 def password(n):
-    safe = hashlib.sha256('hell'.encode() + f'{n}'.encode()).hexdigest()
+    safe = decoding(n)
     with open('password.txt', 'w') as f:
         f.write(safe)
     return "Done"
@@ -31,7 +35,7 @@ def password(n):
 def open_pas(n):
     with open('password.txt', 'r') as f:
         safe = f.read()
-    if safe == hashlib.sha256('hell'.encode() + f'{n}'.encode()).hexdigest():
+    if safe == decoding(n):
         return "Все верно"
     return "Неверно"
 
