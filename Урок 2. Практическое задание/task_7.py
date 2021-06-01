@@ -26,4 +26,11 @@ def equal(number):
         return temp_number
 
 
-print(equal(10))
+user_answer = int(input('Введите любое натуральное число'))
+number_1 = equal(user_answer)
+number_2 = (user_answer * (user_answer + 1) / 2)
+
+if number_1 == number_2:
+    print(f'{number_1} = {number_2} is True')
+else:
+    print('False')
