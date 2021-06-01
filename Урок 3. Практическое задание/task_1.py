@@ -42,31 +42,29 @@ def dict_1(n):
 
 print(f"время создания списка: {list_1(1000000)}")
 print(f"время создания словаря: {dict_1(1000000)}")
-"""Вывод: Словари оказались медленее в заполнение списка. Так как, словари, выполняет два действия, 
+"""Вывод: Словари оказались медленее списка. Так как, словари, выполняет два действия, 
 записыват значеие и присваивает к этому
 значению ключ."""
+
+
+def func(arr):
+    n = len(arr)
+    del arr[n - 1]
+    arr2 = n - 1 in arr
+    len(arr)
+    return arr
 
 
 @time_work
 def list_2(n):
     arr = [x for x in range(n)]
-    del arr[n - 1]
-    arr2 = n - 1 in arr
-    arr.pop()
-    arr.append('hell')
-    len(arr)
-    return arr
+    return func(arr)
 
 
 @time_work
 def dict_2(n):
     arr = {x: x for x in range(n)}
-    del arr[n - 1]
-    arr2 = n - 1 in arr
-    arr.popitem()
-    arr.update({'hell': 'hell'})
-    len(arr)
-    return arr
+    return func(arr)
 
 
 print(f"время создания 2-го списка: {list_2(1000000)}")
