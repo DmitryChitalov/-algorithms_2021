@@ -12,3 +12,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursion(i, num, count, sum):
+    if i ==count:
+        print(f'Количество элементов: {count}, их сумма: {sum}')
+    elif i < count:
+        return recursion(i + 1, num / 2 * -1, count, sum + num)
+
+try:
+    count = int(input('Ввидите количество элементов: '))
+    recursion(0, 1, count, 0)
+except:
+    print('Ввидите число, а не строку')

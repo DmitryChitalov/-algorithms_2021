@@ -22,3 +22,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse(num):
+    giv_num, numeral = divmod(num, 10)
+    if giv_num == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(reverse(giv_num))
+
+number = int(input('Ввидите число, которое требуется перевернуть: '))
+print(f'Перевернутое число: {reverse(number)}')

@@ -16,3 +16,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+def recursion(num):
+    if num == 1:
+        return num
+    else:
+        return recursion(num - 1) + num
+
+try:
+    num = int(input('Ввидите число: '))
+    if recursion(num) == num * (num + 1) / 2:
+        print('Равенство верно')
+except ValueError:
+    print('Ввидите число, а не строку')
