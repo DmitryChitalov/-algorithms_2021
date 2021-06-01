@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_func_2_2(number, even= 0, odd = 0):
+    if number == 0:
+        return even, odd
+    else:
+        current_number = number % 10
+        number = number // 10
+        if current_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return my_func_2_2(number, even, odd)
+
+try:
+    input_data = int(input("Веедите число:"))
+    print(f"Количество четных и нечетных цифр в числе равно:{my_func_2_2(input_data)}")
+except ValueError:
+    print("Введена строка вместо числа.Повторите попытку")

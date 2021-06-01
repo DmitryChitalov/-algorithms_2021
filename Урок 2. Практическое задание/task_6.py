@@ -11,3 +11,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def my_func_2_6(count, num):
+    print(f'Попытка №{count}')
+    response = int(input("Введите число от 0 до 100:"))
+    if count == 10 or response == num:
+        if response == num:
+            print("Правильно!")
+        print(f'Сгенерированное число: {num}')
+    else:
+        if response > num:
+            print(f'Сгенерированное число меньше чем {num}')
+        else:
+            print(f'Сгенерированное число больше чем {num}')
+        my_func_2_6(count + 1, num)
+
+my_func_2_6(1, random.randint(0, 100))
