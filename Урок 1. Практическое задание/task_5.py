@@ -1,8 +1,7 @@
 """ Домашнее задание к уроку №1 курс Алгоритмы и структуры данных на Python
     студент: Максим Сапунов Jenny6199@yandex.ru
-    27.05.2021
+    28.05.2021
 """
-
 
 #    Задание 5.
 #    Задание на закрепление навыков работы со стеком
@@ -27,24 +26,87 @@
 
 
 class Stack:
-    """docstring"""
+    """ Простое представление стека """
 
-    stack_db = []
-    stack_part = []
+    def __init__(self, boarder: int):
+        """
+        Конструктор класса
+        :param - boarder - значение переполнения элемента стэка
+        """
+        self.boarder = boarder
+        self.stack_element = []
+        self.stack_collection = []
 
-    def __init__(self, boarder_of_stack):
-        self.boarder_of_stack = boarder_of_stack
+    def put_to_stack(self, box):
+        """
+        Добавить запись в стек
+        :param - box - значение добавляемое в стэк.
+        :return - None
+        """
+        if self.boarder_line():
+            self.stack_collection.append(self.stack_element[:])
+            self.stack_element.clear()
+            self.stack_element.append(box)
+        else:
+            self.stack_element.append(box)
+
+    def get_from_stack(self):
+        """
+        Функция извлекает последнее значение из стэка и возвращает его значение.
+        :return - последнее помещенное в стэк значение, или None если стэк пустой.
+        """
+        if self.stack_is_empty():
+            print('Стэк пустой')
+            return None
+        else:
+            if len(self.stack_element) == 0:
+                self.stack_element = self.stack_collection.pop()
+                return self.stack_element.pop()
+            return self.stack_element.pop()
+
+    def boarder_line(self):
+        """
+        Функция проверяет заполненность экземпляра стэка
+        :return Истина если граница наполненности экземпляра стэка достигнута, иначе ложь.
+        """
+        return True if (len(self.stack_element) == self.boarder) else False
 
     def stack_is_empty(self):
-        """ Проверяет наличие элементов в базе данных стэка"""
-        return True if (len(self.stack_db) == 0) else False
+        """
+        Функция проверяет наличие элементов в стэке
+        :return - Истина при наличии элементов в стэке, иначе ложь.
+        """
+        return True if self.stack_element == [] and self.stack_collection == [] else False
 
-    def push_to_stack(self, box):
-        """Добавить данные в стэк"""
-        pass
+    def stack_remove(self):
+        """
+        Функция очищает очередь стэка
+        :return: None
+        """
+        self.stack_collection.clear()
+        self.stack_element.clear()
+        print('Стэк очищен.')
+
+    def count_of_stack(self):
+        """ Функция сообщает об общем количестве элементов в стэке"""
+        stack_len = len(self.stack_collection) * self.boarder + len(self.stack_element)
+        print(f'В настоящий момент в стэке всего {stack_len} элементов.')
+        return stack_len
 
 
 if __name__ == '__main__':
+    # Создаем экземпляр стэка.
     v1 = Stack(5)
-    v1.push_to_stack('box')
-    print(v1.stack_db)
+    # Наполняем стэк и демонстрируем работу функции.
+    for i in range(16):
+        v1.put_to_stack('+')
+        print(v1.stack_collection)
+        print(v1.stack_element)
+
+    v1.count_of_stack()
+
+    # Убираем значения из стэка и демонстрируем работу функции.
+    for i in range(16):
+        v1.get_from_stack()
+        print(v1.stack_collection)
+        print(v1.stack_element)
