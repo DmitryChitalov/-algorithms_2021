@@ -27,4 +27,4 @@ def uniq(word):
     return len(arr)
 
 
-print(uniq('papa'), )
+print(uniq('papa'))
