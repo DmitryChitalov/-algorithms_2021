@@ -11,3 +11,29 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+import uuid
+
+cache_dict = {}
+salt = uuid.uuid4().hex
+
+
+def check_url(url_address):
+    hash_url = hashlib.sha256(salt.encode() + url_address.encode()).hexdigest()
+    if hash_url in cache_dict.keys():
+        print(f"Кэш для {url_address} уже существует")
+    else:
+        cache_dict[hash_url] = "cache"
+        print(f"Кэш для {url_address} успешно добавлен")
+    return
+
+
+check_url("https://github.com/")
+check_url("https://gb.ru/")
+check_url("https://www.codewars.com/")
+check_url("https://mail.ru/")
+check_url("https://gb.ru/")
+check_url("https://habr.com/ru/")
+check_url("https://github.com/")
