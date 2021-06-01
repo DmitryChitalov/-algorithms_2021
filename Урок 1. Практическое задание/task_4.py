@@ -32,9 +32,9 @@ class Variant1:
     """
 
     user_db = {
-        'maksim': ['test001', True],
-        'oleg': ['test002', False],
-        'michail': ['test003', True]
+        'Maksim': ['test001', True],
+        'Oleg': ['test002', False],
+        'Michail': ['test003', True]
     }
 
     @staticmethod
@@ -82,7 +82,9 @@ class Variant1:
 
     @staticmethod
     def get_registration():
-        """Функция регистрации нового пользователя."""
+        """ Функция регистрации нового пользователя. После вненсения пользовательских данных
+            создается неактивная учетная запись, до подтверждения системным администратором.
+        """
         login = input('Insert name : ')
         user_password, confirm_password = '+', '-'
         while user_password != confirm_password:
