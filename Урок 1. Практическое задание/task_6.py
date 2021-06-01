@@ -50,3 +50,7 @@ def test_queue():
 
 if __name__ == '__main__':
     test_queue()
+
+    waiting_task = Queue()
+    completed_task = Queue()
+    not_full_task = Queue()
