@@ -11,3 +11,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def try_turn(number, turns_left):
+    print('Осталось', turns_left, 'попыток')
+    if turns_left == 0:
+        print('Вы потерпели неудачу!')
+        print(number)
+    else:
+        x = int(input())
+        if x == number:
+            print('Верно!')
+        else:
+            if x > number:
+                print('Загаданное число меньше')
+            else:
+                print('Загаданное число больше')
+            try_turn(number, turns_left - 1)
+
+
+print('Задание 6')
+
+secret_number = random.randint(0, 100)
+try_turn(secret_number, 10)

@@ -21,3 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_char(code, pos, stop_code):
+    if pos == 9:
+        tail_part = '\n'
+        pos = 0
+    else:
+        tail_part = ' '
+        pos += 1
+    print(code, '-', chr(code), end=tail_part)
+    if code != stop_code:
+        print_char(code + 1, pos, stop_code)
+
+
+print('Задание 5')
+print_char(32, 0, 127)
