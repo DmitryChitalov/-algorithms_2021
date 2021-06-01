@@ -13,7 +13,7 @@
 """
 
 
-class Web_cache():
+class Webcam:
     def __init__(self):
         self.arr = {}
 
@@ -27,7 +27,7 @@ class Web_cache():
         return hash('hell' + web_1)
 
 
-web = Web_cache()
+web = Webcam()
 arr = ['https://yandex.ru/', 'https://www.google.ru/', 'https://www.opera.com/ru']
 for i in arr:
     web.web_cache(i)
@@ -35,3 +35,4 @@ print(web.web_cache('https://yandex.ru/'))
 print(web.web_cache('https://www.google.ru/'))
 print(web.web_cache('https://www.opera.com/ru'))
 print(web.web_cache('https://www.opera.com/rY'))
+
