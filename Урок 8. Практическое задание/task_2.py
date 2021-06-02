@@ -10,10 +10,16 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
+class PositionOfTheTreeElementError(Exception):
+    def __init__(self, text):
+        self.txt = text
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
-        self.root = root_obj
+        self.__root = root_obj
         # левый потомок
         self.left_child = None
         # правый потомок
@@ -21,8 +27,14 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        try:
+            if new_node > self.__root:
+                raise PositionOfTheTreeElementError('Ошибка вставки потомка:')
+        except PositionOfTheTreeElementError as pos:
+            print(f'{pos} вставляемое значение потомка - {new_node} должно быть меньше корня - {self.__root}')
+            return
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if self.left_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -36,8 +48,14 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        try:
+            if new_node < self.__root:
+                raise PositionOfTheTreeElementError('Ошибка вставки потомка:')
+        except PositionOfTheTreeElementError as pos:
+            print(f'{pos} вставляемое значение потомка - {new_node} должно быть больше корня - {self.__root}')
+            return
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -59,21 +77,29 @@ class BinaryTree:
 
     # метод установки корня
     def set_root_val(self, obj):
-        self.root = obj
+        self.__root = obj
 
     # метод доступа к корню
     def get_root_val(self):
-        return self.root
+        return self.__root
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+user_tree = BinaryTree(8)
+print(user_tree.get_root_val())
+user_tree.insert_left(8)
+print(user_tree.get_left_child().get_root_val())
+
+user_tree.insert_left(2)
+
+print(user_tree.get_left_child().get_left_child().get_left_child())
+
+user_tree.insert_right(16)
+user_tree.get_right_child().set_root_val(4)
+print(user_tree.get_right_child().get_root_val())
+
+# Это довольно сырая реализация бинарного дерева, пользовательский код может вызвать ошибки. Можно обратиться
+# к несуществующим узлам и запросить какой-либо метод, возникнет AttributeError - NoneType объект не имеет атрибутов.
+# Кроме того метод установки корня также нуждается в доработке - проверок на вставляемое значение нет, а проверку
+# сделать в такой реализации вряд ли получится, т.к. нет доступа к родителю.
+
+# Сделана небольшая оптимизация по вставляемому значению для новых потомков.
