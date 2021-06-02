@@ -16,3 +16,16 @@
 р
 а
 """
+
+
+def sub_count(my_str):
+    sub_set = set()
+    for num in range(1, len(my_str)):
+        for num2 in range(len(my_str)):
+            str_sub = my_str[num:num2+num]
+            sub_set.add(hash(str_sub))
+    return len(sub_set)
+
+
+print(sub_count('testing'))
+
