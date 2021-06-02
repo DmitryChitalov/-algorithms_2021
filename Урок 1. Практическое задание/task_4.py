@@ -54,6 +54,7 @@ class Variant1:
             print(f'\033[31m {login}, you are not in user list. Please, get registration.')
             Variant1.get_registration()
 
+    @staticmethod
     def get_password(login: str):
         """Функция проверки пароля"""
         i = 1
@@ -71,6 +72,7 @@ class Variant1:
             Variant1.user_db[login][1] = False
             print('Too many failure in password. Your account was blocked.\nSend to system administrator')
 
+    @staticmethod
     def check_status(login: str):
         """Функция проверки статуса учетной записи"""
         if Variant1.user_db[login][1]:
