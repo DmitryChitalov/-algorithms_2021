@@ -16,3 +16,17 @@
 р
 а
 """
+
+def num_uniq_substr(s):
+    list_str = set()
+    for i in range(1, len(s)):
+        for j in range(len(s)):
+            tmp_str = s[j:j + i]
+            list_str.add(hash(tmp_str))
+
+    return len(list_str)
+
+str = input('Введите строку: ')
+print('Число уникальных подстрок:', num_uniq_substr(str))
+
+
