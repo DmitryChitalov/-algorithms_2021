@@ -21,6 +21,7 @@ class DequeClass:
         self.element = []
 
     def is_empty(self):
+        """ Возвращает истину если дэк пустой."""
         return self.element == []
 
     def add_to_rear(self, elem):
@@ -45,15 +46,16 @@ class DequeClass:
 
 
 def is_string_palindrome(palindrome):
-    var1 = DequeClass()
+    analysed_string = DequeClass()
+    palindrome = "".join(palindrome.split())
     for symbol in palindrome:
-        var1.add_to_rear(symbol)
+        analysed_string.add_to_rear(symbol)
     symbols_equal = True
-    while var1.size() > 1 and symbols_equal:
-        start_symbol = var1.remove_from_rear()
-        last_symbol = var1.remove_from_front()
+    while analysed_string.size() > 1 and symbols_equal:
+        start_symbol = analysed_string.remove_from_rear()
+        last_symbol = analysed_string.remove_from_front()
         if start_symbol != last_symbol:
-            symbols_equal = False
+            return False
     return True
 
 

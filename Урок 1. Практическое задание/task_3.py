@@ -67,7 +67,7 @@ def top_3_in_profit_v2(database: dict):
     return cmp_name[0:3]        # O(N) Делаем срез из трех компаний-лидеров.
 
 
-# Cоздание базы данных.
+# Создание базы данных.
 company_database = {
     'Sunlight': 4300000,
     'Metal gear': 3000000,

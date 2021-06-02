@@ -63,6 +63,7 @@ if __name__ == '__main__':
     waiting_task.new_task('Сходить в аптеку')
     waiting_task.new_task('Забрать детей из сада')
 
+    # Опрашиваем пользователя о статусе задач
     print(waiting_task.queue)
     for el in range(len(waiting_task.queue)):
         current_task = waiting_task.next_task
@@ -72,5 +73,7 @@ if __name__ == '__main__':
             completed_task.new_task(current_task)
         else:
             not_full_task.new_task(current_task)
+
+    # Выводим списки задач
     print(f'Выполненные задачи : {completed_task.queue}')
     print(f'Ожидают завершения : {not_full_task.queue}')
