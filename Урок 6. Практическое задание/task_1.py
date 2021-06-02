@@ -22,11 +22,9 @@
 С одновременным замером времени (timeit.default_timer())!
 """
 
-import sqlite3
-import hashlib
 from memory_profiler import memory_usage, profile
 from timeit import default_timer
-
+from collections import namedtuple
 
 def memory_time_profiler(func):
     def wraper(*args):
@@ -39,16 +37,48 @@ def memory_time_profiler(func):
         return result
     return wraper
 
-@memory_time_profiler
 @profile
-def reverse_nums_shell(n):
-    def reverse_nums(num):
-        if len(str(num)) == 1:
-            return num
+def add_firm(count_firm):
+    all_company = []
+    for el in range(count_firm):
+        name = input('Введите название фирмы')
+        profits_srt = input('Введите через пробел прибыль данного предприятия за каждый квартал: ')
+        profits = profits_srt.split()
+        if len(profits) != 4:
+                print('Вы ввели либо мало, либо много значений')
+                continue
+        try:
+            average_profit = (int(profits[0]) + int(profits[1]) + int(profits[2]) + int(profits[3])) / 4
+            firm_tuple = Firm_template(name_firm=name,
+                                       average_profit_firm=average_profit)
+            all_company.append(firm_tuple)
+        except ValueError:
+            print('Вы ввели не правильное значение прибыли!!!')
+            continue
+    return all_company
+
+@profile
+def aver_profit(all_company):
+    average_profit_all_firm = 0
+    average_profit_less = []
+    average_profit_more = []
+    for el in all_company:
+        average_profit_all_firm = average_profit_all_firm + el.average_profit_firm
+    average_profit_all_firm = average_profit_all_firm / len(all_company)
+    print(f'Средняя годовая прибыль всех предприятий: {average_profit_all_firm}')
+    for el in all_company:
+        if el.average_profit_firm >= average_profit_all_firm:
+            average_profit_more.append(el.name_firm)
         else:
-            return str(num % 10) + str(reverse_nums(num // 10))
+            average_profit_less.append(el.name_firm)
+    print(f'Предприятия, с прибылью выше среднего значения: {average_profit_more}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {average_profit_less}')
 
-    return reverse_nums(n)
 
+Firm_template = namedtuple('Firm_Profit', 'name_firm average_profit_firm')
+try:
+    count_firm = int(input('Введите количество предприятий для расчета прибыли: '))
+    aver_profit(add_firm(count_firm))
+except ValueError:
+    print('Вы ввели не число!!!')
 
-reverse_nums_shell(113221414124124124)
