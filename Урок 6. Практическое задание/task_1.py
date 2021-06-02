@@ -21,3 +21,34 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+import sqlite3
+import hashlib
+from memory_profiler import memory_usage, profile
+from timeit import default_timer
+
+
+def memory_time_profiler(func):
+    def wraper(*args):
+        memory = memory_usage()
+        timer = default_timer()
+        result = func(*args)
+        memory = memory_usage()[0] - memory[0]
+        timer = default_timer() - timer
+        print(f'Время выполнения: {timer}\nИспользуемая память: {memory}')
+        return result
+    return wraper
+
+@memory_time_profiler
+@profile
+def reverse_nums_shell(n):
+    def reverse_nums(num):
+        if len(str(num)) == 1:
+            return num
+        else:
+            return str(num % 10) + str(reverse_nums(num // 10))
+
+    return reverse_nums(n)
+
+
+reverse_nums_shell(113221414124124124)

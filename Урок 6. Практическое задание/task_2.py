@@ -4,3 +4,5 @@
 для оптимизации памяти и
 доказать!!! (наглядно, кодом) их эффективность (на примере профилировщика).
 """
+import memory_profiler as mem_profile
+mem_profile.memory_usage_psutil()
