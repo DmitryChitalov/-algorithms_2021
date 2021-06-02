@@ -67,4 +67,3 @@ operators = {
 }
 
 calculator()
-
