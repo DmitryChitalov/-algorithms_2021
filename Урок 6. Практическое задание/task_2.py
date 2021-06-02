@@ -8,8 +8,7 @@
 import sys
 
 
-
-ob = {'x':1, 'y':2, 'z':3}
+ob = {'x': 1, 'y': 2, 'z': 3}
 
 
 class Point:
@@ -19,7 +18,8 @@ class Point:
         self.y = y
         self.z = z
 
-ob_class = Point(1,2,3)
+
+ob_class = Point(1, 2, 3)
 
 print(sys.getsizeof(ob))
 print(sys.getsizeof(ob_class.__dict__))
@@ -28,5 +28,3 @@ print(sys.getsizeof(ob_class.__dict__))
 # Словарь экземпляра класса занимает меньше места в оперативной памяти, чем обычный словарь
 # 232
 # 104
-
-
