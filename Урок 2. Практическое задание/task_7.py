@@ -34,4 +34,3 @@ if number_1 == number_2:
     print(f'{number_1} = {number_2} is True')
 else:
     print('False')
-
