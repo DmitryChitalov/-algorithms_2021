@@ -40,35 +40,30 @@ def memory_time_profiler(func):
 
 
 @memory_time_profiler
-def even_and_uneven_shell(n):
-    def even_and_uneven_rec(num, even=0, uneven=0):
-        if num == 0:
-            return f'   even_and_uneven_shell\n' \
-                   f'Even: {even}\n' \
-                   f'Uneven: {uneven}\n'
-        elif num % 2 == 0:
-            even += 1
-        else:
-            uneven += 1
-        return even_and_uneven_rec(num // 10, even, uneven)
-
-    return even_and_uneven_rec(n)
+def parity(number, count_par, count_not_par):
+    if number == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({count_par}, {count_not_par})')
+    if (number % 2) == 1:
+        count_not_par += 1
+    else:
+        count_par += 1
+    parity(number // 10, count_par, count_not_par)
 
 
-@memory_time_profiler
-def even_and_uneven(num):
-    even = 0
-    uneven = 0
-    for i in str(num):
-        if int(i) % 2 == 0:
-            even += 1
-        else:
-            uneven += 1
-    return f'   even_and_uneven\n' \
-           f'Even: {even}\n' \
-           f'Uneven: {uneven}\n'
-
-
-usr_num = randint(900000, 1000000)
-usr_lst = [randint(0, 100) for el in range(1000)]
-print(usr_num)
+# @memory_time_profiler
+# def even_and_uneven(num):
+#     even = 0
+#     uneven = 0
+#     for i in str(num):
+#         if int(i) % 2 == 0:
+#             even += 1
+#         else:
+#             uneven += 1
+#     return f'   even_and_uneven\n' \
+#            f'Even: {even}\n' \
+#            f'Uneven: {uneven}\n'
+#
+#
+# usr_num = randint(900000, 1000000)
+# usr_lst = [randint(0, 100) for el in range(1000)]
+# print(usr_num)
