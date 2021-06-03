@@ -11,3 +11,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random as rnd
+
+num_game = rnd.randrange(0, 100)
+print(num_game)
+max_count = 5
+
+def game(num, max_count, count=0):
+
+    num_player = int(input(f'Отгадайте число от 0 до 100. У вас {max_count - count} попыток(тки): '))
+
+    if count == max_count:
+        return f'Игра окончена. Вы проиграли. Число {num}'
+
+    else:
+        if num_player == num:
+            return 'Вы отгадали число! Победа!'
+
+        elif num_player > num:
+            print('Введенное Вами число больше загаданного')
+
+        elif num_player < num:
+            print('Введенное Вами число меньше загаданного')
+
+        count = count + 1
+        return game(num, max_count, count)
+
+
+print(game(num_game, 5))
