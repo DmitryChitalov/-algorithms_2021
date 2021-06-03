@@ -13,6 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +39,25 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    revers_num = int("".join(reversed(str(enter_num))))
+    return revers_num
+
+
+def main():
+    user_numb = 321
+    revers_1(user_numb)
+    revers_2(user_numb)
+    revers_3(user_numb)
+    revers_4(user_numb)
+
+
+run('main()')
+
+user_num = 321
+print(timeit('revers_1(user_num)', globals=globals()))
+print(timeit('revers_2(user_num)', globals=globals()))
+print(timeit('revers_3(user_num)', globals=globals()))
+print(timeit('revers_4(user_num)', globals=globals()))
