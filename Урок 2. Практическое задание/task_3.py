@@ -22,6 +22,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+class OwnError (Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+
+def req_reverse(user_number, reverse_str=''):
+    return req_reverse(user_number // 10, reverse_str + str(user_number % 10)) if user_number >= 10 else reverse_str + str(user_number)
+
+
+while True:
+    try:
+        user_number = int(input(f"Введите число:"))
+        if user_number <= 0:
+            raise OwnError("Введено не натуральное число!\n")
+        print(req_reverse(user_number))
+        break
+    except ValueError:
+        print('Введено не число!\n')
+    except OwnError as err:
+        print(err)
 
 
 
