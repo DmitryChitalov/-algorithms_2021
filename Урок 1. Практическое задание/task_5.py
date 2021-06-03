@@ -23,11 +23,18 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+class Error (Exception):
+    pass
+
+class ValueTooLargeError (Error):
+    pass
+
+class ValueTooSmallError (Error):
+    pass
 
 class StackClass:
     def __init__(self):
         self.elems = []
-        self.count = None
 
     def is_empty(self):
         return self.elems == []
@@ -47,28 +54,61 @@ class StackClass:
         return len(self.elems)
 
 class Shot(StackClass):
-    def __init__(self):
+    def __init__(self, max_size = 3):
         super ().__init__ ()
-        self.max_size_stack = 5
+        self.max_size_stack = max_size
 
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
-        if self.stack_size () <= self.max_size_stack:
-            self.elems.append(el)
+        self.elems.append(el)
+        if self.stack_size () >= self.max_size_stack:
+            raise ValueTooLargeError
+
+    def pop_out(self):
+        if self.is_empty():
+            raise ValueTooSmallError
         else:
-            self.count += 1
+            return self.elems.pop ()
 
 
 
 
 if __name__ == '__main__':
+    max_size = 3
+    stack_me = []
+    my_list  = [10, 'code', False,
+                11, 'code+', False,
+                12, 'code++', False,
+                13, 'code+++', False,
+                14, 'code++++', False,
+                15, 'code+++++', False,
+                16, 'code++++++', False,
+                17, 'code+++++++', False,
+                18, 'code++++++++', False,
+                ]
+    count = 0
+    stack_me.append (Shot ())
+    for value in my_list:
+        try:
+            stack_me[count].push_in (value)
+        except ValueTooLargeError:
+            count += 1
+            if count < len(my_list) / max_size:
+                stack_me.append (Shot ())
 
-    shot_one = Shot()
-
-    while
 
 
-'''
+    for stack in stack_me:
+        print(stack.elems)
+        print(stack.get_val())
+
+    for stack in stack_me:
+        print(stack.pop_out())
+        print (stack.elems)
+
+
+
+''' 
     SC_OBJ = StackClass()
 
     print(SC_OBJ.is_empty())  # -> стек пустой
