@@ -11,3 +11,26 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from uuid import uuid4
+
+url_cache = {}
+salt = uuid4().hex
+
+
+def make_url_cache(url: str):
+    salted_url_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    if url_cache.get(url):
+        print(f'The address is already in the cache {url}')
+    else:
+        url_cache[url] = salted_url_hash
+        print(f'Save to cache: \n{url} ')
+
+
+make_url_cache('https://geekbrains.ru/')
+make_url_cache('https://www.vk.com/')
+make_url_cache('https://auto.ru/')
+make_url_cache('https://www.rambler.ru/')
+make_url_cache('https://www.ya.ru/')
+
+print(f'Save in cashe: \n{url_cache}')
