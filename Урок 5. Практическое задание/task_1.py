@@ -23,3 +23,44 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+RES = namedtuple('Firm', 'name first_quarter second_quarter third_quarter fours_quarter sum')
+
+
+def get_res():
+    name = input('Введите название предприятия '),
+    fst = int(input('Введите прибыль за первый квартал '))
+    snd = int(input('Введите прибыль за второй квартал '))
+    trd = int(input('Введите прибыль за третий квартал '))
+    fth = int(input('Введите прибыль за четвертый квартал '))
+    return RES(
+        name=name,
+        first_quarter=fst,
+        second_quarter=snd,
+        third_quarter=trd,
+        fours_quarter=fth,
+        sum=fst + snd + trd + fth
+    )
+
+
+def get_firms(num):
+    firms = []
+    all_sum = 0
+    for i in range(num):
+        firm = get_res()
+        firms.append(firm)
+        all_sum += firm.sum
+    all_sum = all_sum / num
+    print(f'Средняя годовая прибыль всех предприятий = {all_sum}')
+    for firm in firms:
+        if firm.sum < all_sum:
+            print(f'Предприятие {firm.name} имеет прибиль меньше общей среднегодовой')
+        elif firm.sum > all_sum:
+            print(f'Предприятие {firm.name} имеет прибиль больше общей среднегодовой')
+        else:
+            print(f'Предприятие {firm.name} имеет прибиль равную общей среднегодовой')
+
+
+num_firms = int(input('Введите количество предприятий '))
+get_firms(num_firms)

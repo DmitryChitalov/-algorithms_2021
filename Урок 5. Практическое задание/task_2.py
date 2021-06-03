@@ -34,3 +34,17 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+
+
+d = defaultdict(list)
+first = input('Введите первое шестнадцатиричное число ')
+d[first] = list(first)
+second = input('Введите второй шестнадцатиричное число ')
+d[second] = list(second)
+sum = hex(int(first, 16) + int(second, 16))[2:]
+d[sum] = list(sum)
+mul = hex(int(first, 16) * int(second, 16))[2:]
+d[mul] = list(mul)
+
+print(d)
