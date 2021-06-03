@@ -21,3 +21,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_rec(start: int, stop: int, current: int = 0) -> str:
+    if current == 0:
+        tmp_current = start
+    else:
+        tmp_current = current
+
+    if tmp_current > stop or tmp_current > 255:
+        return ''
+
+    result = f'{tmp_current} - {chr(tmp_current)} '
+    if (tmp_current - start + 1) % 10 == 0:
+        result += '\n'
+    return result + ascii_rec(start, stop, tmp_current+1)
+
+
+print(ascii_rec(32, 127))

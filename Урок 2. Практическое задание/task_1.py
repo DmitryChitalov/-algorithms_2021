@@ -28,3 +28,53 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def add(num_1: int, num_2: int) -> int:
+    return num_1 + num_2
+
+
+def sub(num_1: int, num_2: int) -> int:
+    return num_1 - num_2
+
+
+def mul(num_1: int, num_2: int) -> int:
+    return num_1 * num_2
+
+
+def div(num_1: int, num_2: int) -> float:
+    return num_1 / num_2
+
+
+def calc_rec():
+
+    operation_dict = {
+        '+': add,
+        '-': sub,
+        '*': mul,
+        '/': div,
+        '0': None
+    }
+    operation = input(f'Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation not in operation_dict.keys():
+        return calc_rec()
+
+    if operation == '0':
+        return
+
+    try:
+        num_1 = int(input(f'Введите первое число: '))
+        num_2 = int(input(f'Введите второе число: '))
+    except ValueError:
+        print(f'Вы ввели не число (((. Исправьтесь')
+        return calc_rec()
+
+    try:
+        print(f'Ваш результат {operation_dict[operation](num_1, num_2)}')
+    except ZeroDivisionError:
+        print(f'Деление на 0!!!')
+
+    return calc_rec()
+
+
+calc_rec()

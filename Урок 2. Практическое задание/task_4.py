@@ -12,3 +12,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def series_sum(max_count: int, element: float = 1, count: int = 0) -> float:
+    if count >= max_count:
+        return 0
+
+    return element + series_sum(max_count, element/(-2), count+1)
+
+
+while True:
+    try:
+        user_num = int(input(f'Введите количество элементов: '))
+    except ValueError:
+        continue
+    print(f'Количество элементов: {user_num}, их сумма: {series_sum(user_num)}')
+    break

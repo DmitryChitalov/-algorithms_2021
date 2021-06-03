@@ -16,3 +16,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_check(n: int, number: int = 1) -> int:
+    if number > n:
+        return 0
+    result = number + sum_check(n, number + 1)
+    if number == 1:
+        if result == n*(n+1)/2:
+            print(f'Для n = {n}, утвержденеи верно')
+        else:
+            print(f'Для n = {n}, утвержденеи не верно')
+    return result
+
+
+sum_check(10)
