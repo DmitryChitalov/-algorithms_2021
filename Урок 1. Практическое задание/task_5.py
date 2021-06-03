@@ -75,6 +75,7 @@ class Shot(StackClass):
 
 if __name__ == '__main__':
     max_size = 3
+    reduction_size = 25
     stack_me = []
     my_list  = [10, 'code', False,
                 11, 'code+', False,
@@ -87,24 +88,31 @@ if __name__ == '__main__':
                 18, 'code++++++++', False,
                 ]
     count = 0
-    stack_me.append (Shot ())
+    stack_me.append (Shot (max_size))
     for value in my_list:
         try:
             stack_me[count].push_in (value)
         except ValueTooLargeError:
             count += 1
             if count < len(my_list) / max_size:
-                stack_me.append (Shot ())
+                stack_me.append (Shot (max_size))
 
 
 
     for stack in stack_me:
         print(stack.elems)
-        print(stack.get_val())
 
-    for stack in stack_me:
-        print(stack.pop_out())
-        print (stack.elems)
+    # length_stack_me = len(stack_me)
+    length_stack_me = reduction_size // max_size
+
+    for index in range(length_stack_me):
+        for index_two in range(stack_me[length_stack_me - (index + 1) ].stack_size()):
+            print(f'Вытаскиваем из стопки', (length_stack_me - index), ' ',
+                  stack_me[length_stack_me - (index + 1)].pop_out())
+        stack_me.pop()
+
+    print(f'Содержание стэка', stack_me)
+
 
 
 
