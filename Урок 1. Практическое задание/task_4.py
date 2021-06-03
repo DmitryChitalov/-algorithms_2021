@@ -25,3 +25,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users = {
+    'user1': {'password': '123456', 'activated': True},
+    'user2': {'password': '123456', 'activated': True},
+    'user3': {'password': '123456', 'activated': False},
+    'user4': {'password': '123456', 'activated': True},
+}
+
+def auth_ex_1(users, login, password):
+    """
+    O(n) - линейная сложность
+    """
+    for key, value in users.items():                            # O(n)
+        if login == key and value['password'] == password\
+                and value['activated'] == True:
+            return f'Добро пожаловать!'                         # O(1)
+        elif login == key and value['password'] == password\
+                and value['activated'] == False:
+            return f'Пройдите активацию'                        # O(1)
+
+response = auth_ex_1(users, 'user1', '123456')
+print(response)
+
+def auth_ex_2(users, login, password):
+    """
+    O(1) - константная сложность
+    """
+    user = users.get(login)                         # O(1)
+    if user.get('password') == password \
+            and user.get('activated') == True:      # O(1)
+        return f'Добро пожалдовать!'                # O(1)
+    elif user.get('password') == password\
+            and user.get('activated') == False:     # O(1)
+        return f'Пройдите активацию'                # O(1)
+
+response = auth_ex_2(users, 'user3', '123456')
+print(response)
+
+"""
+Вывод: второе решение более оптимальное, т.к. сложность константная, самый быстрый 
+алгоритм из таблицы формул. 
+"""

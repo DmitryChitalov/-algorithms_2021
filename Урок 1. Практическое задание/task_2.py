@@ -16,3 +16,32 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+lst = [2, 1, 45, 23, 11, 67, 27, 7, 87, 61, 42, 9, 13, 99]
+
+def min_quadratic(lst):
+    """
+    O(n^2)
+    """
+    for i in lst:               # O(n)
+        min = True              # O(1)
+        for j in lst:           # O(n)
+            if i > j:           # O(1)
+                min = False     # O(1)
+        if min:
+            return i            # O(1)
+
+def min_linear(lst):
+    """
+    O(n)
+    """
+    min = lst[0]        # O(1)
+    for i in lst:       # O(n)
+        if i < min:     # O(1)
+            min = i     # O(1)
+    return min          # O(1)
+
+min_quadratic = min_quadratic(lst)
+print(f'квадратичная сложность - {min_quadratic}')
+
+min_linear = min_linear(lst)
+print(f'линейная сложность - {min_linear}')
