@@ -13,7 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
-
+from timeit import timeit
+from cProfile import run
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -37,3 +38,27 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def revers_4(enter_num):
+    temp_list = list(str(enter_num))
+    temp_list.reverse()
+    temp = ''.join(temp_list)
+    return int(temp)
+
+if __name__ == '__main__':
+    enter_num = 123456789
+    revers_num = 5
+    print(timeit("revers_1(enter_num, revers_num)", globals=globals(), number=10000)) # 0.0281225
+    print(timeit("revers_2(enter_num, revers_num)", globals=globals(), number=10000)) # 0.017520900000000006
+    print(timeit("revers_3(enter_num)", globals=globals(), number=10000)) # 0.003629199999999999
+    print(timeit("revers_4(enter_num)", globals=globals(), number=10000)) # 0.008472099999999996
+    run("revers_1(enter_num, revers_num)")
+    run("revers_2(enter_num, revers_num)")
+    run("revers_3(enter_num)")
+    run("revers_4(enter_num)")
+
+'''
+Профилировка через timeit гораздо информативнее, т.к. позволяет указать количество замеров.
+
+Третий вариант самый эффективный, т.к. мы получаем реверс путем среза.
+'''
