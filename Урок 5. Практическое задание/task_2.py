@@ -34,3 +34,38 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+from collections import defaultdict, namedtuple
+from functools import reduce
+
+
+# "defaultdict"
+def hex_result(n_1, n_2):
+    collect = defaultdict(list)
+    collect['summ'] = list(hex(int(n_1, 16) + int(n_2, 16))[2:].upper())
+    collect['mult'] = list(hex(int(n_1, 16) * int(n_2, 16))[2:].upper())
+    return f'Sum of numbers {list(n_1.upper())} and {list(n_2.upper())} = {collect["summ"]}\n' \
+           f'Product of numbers {list(n_1.upper())} and {list(n_2.upper())} = {collect["mult"]}'
+
+
+# "class HexNumber"
+class HexNumber:
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, second):
+        return hex(int(self.number, 16) + int(second.number, 16)).upper()[2:]
+
+    def __mul__(self, second):
+        return hex(int(self.number, 16) * int(second.number, 16)).upper()[2:]
+
+
+if __name__ == '__main__':
+    input_number_1 = input(f'Enter the first hexadecimal number: ')
+    input_number_2 = input(f'Enter the second hexadecimal number: ')
+    print(f'{"*" * 25} "defaultdict" {"*" * 25}')
+    print(hex_result(input_number_1, input_number_2))
+    print(f'{"*" * 35} "class HexNumber" {"*" * 35}')
+    print(f"Sum of numbers {list(CalcHex(input_number_1) + CalcHex(input_number_2))}")
+    print(f"Product of numbers  {list(CalcHex(input_number_1) * CalcHex(input_number_2))}")
