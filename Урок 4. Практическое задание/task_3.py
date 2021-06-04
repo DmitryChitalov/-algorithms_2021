@@ -14,6 +14,9 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+from cProfile import run
+
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -37,3 +40,32 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return ''.join(list(reversed(str(1234))))
+
+
+print('Вариант 1:', timeit("revers_1(1234)", globals=globals()))
+print('Вариант 2:', timeit("revers_2(1234)", globals=globals()))
+print('Вариант 3:', timeit("revers_3(1234)", globals=globals()))
+print('Вариант 4:', timeit("revers_4(1234)", globals=globals()))
+
+
+def main():
+    revers_1(1234)
+    revers_2(1234)
+    revers_3(1234)
+    revers_4(1234)
+
+help(str)
+run("revers_1(1234)")
+run("revers_2(1234)")
+run("revers_3(1234)")
+run("revers_4(1234)")
+
+"""
+Первый вариант самый медленный из-за рекурсии, очень много вызовов.
+Второй вариант побыстрее благодаря использованию цикла, но третий самый быстрый, потому что 
+выполняется встроенная функция.
+"""

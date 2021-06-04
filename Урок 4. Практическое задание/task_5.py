@@ -1,4 +1,4 @@
-"""
+﻿"""
 Задание 5.**
 
 Приведен наивный алгоритм нахождения i-го по счёту
@@ -41,3 +41,25 @@ def simple(i):
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+
+def Sieve_of_Eratosthenes():
+    n = i ** 2
+    number_set = set(range(2, n))
+    array = []
+    while number_set:
+        prime = min(number_set)
+        array.append(prime)
+        number_set -= set(range(prime, n, prime))
+        if len(array) > i:
+            break
+    return array
+print(Sieve_of_Eratosthenes()[i-1])
+
+print(timeit("simple(i)", globals=globals(), number=1))
+print(timeit("Sieve_of_Eratosthenes()", globals=globals(), number=1))
+
+"""
+Нашел другой вариант реализации алгоритма "Решето Эратосфена" и переделал его, чтобы можно было найти
+i - е простое число. Этот алгоритм получился медленнее.
+"""
