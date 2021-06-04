@@ -2,7 +2,7 @@ import random
 
 
 def guess_game(user_input, count=1, guess_num=random.randint(0, 100)):
-    if user_input == guess_num or count == 2:
+    if user_input == guess_num or count == 10:
         if user_input == guess_num:
             print('You are the winner!')
         else:
