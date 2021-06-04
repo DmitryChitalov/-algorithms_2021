@@ -52,7 +52,9 @@ def memoize(f):
             return cache[args]
         else:
             cache[args] = f(*args)
+            print(cache)
             return cache[args]
+
     return decorate
 
 
@@ -64,18 +66,23 @@ def recursive_reverse_mem(number):
 
 
 print('Оптимизированная функция recursive_reverse_mem')
-print(
-    timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+print(print(num_100),
+      timeit(
+          'recursive_reverse_mem(num_100)',
+          setup='from __main__ import recursive_reverse_mem, num_100',
+          number=10000))
+print(print(num_1000),
+      timeit(
+          'recursive_reverse_mem(num_1000)',
+          setup='from __main__ import recursive_reverse_mem, num_1000',
+          number=10000))
+print(print(num_10000),
+      timeit(
+          'recursive_reverse_mem(num_10000)',
+          setup='from __main__ import recursive_reverse_mem, num_10000',
+          number=10000))
+
+"""Оптимизация не нужна так как она сохраняет не каждый элемент, а результат и это обьясняет скорость работы 
+timeit сохраняет результат в первом проходе, а в остальных (9999 повторов) просто печатает ответ сахроненом в словаре.
+Еще причина по которой оптимизация не нужна, это то что при каждой вызове новой функции(не предыдущий) словарь 
+в менетезации сбрасыватся сводя на нет все старания прошлого вызыва"""
