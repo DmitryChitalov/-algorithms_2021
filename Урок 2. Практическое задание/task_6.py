@@ -23,10 +23,10 @@ def func(count, number):
             print("Вы угадали")
         return
     else:
-            if number < answer:
-                print("\nЗагаданное число - меньше.")
-            else:
-                print("\nЗагаданное число - больше.")
+        if number < answer:
+            print("\nЗагаданное число - меньше.")
+        else:
+            print("\nЗагаданное число - больше.")
     func(count + 1, number)
     return
 
