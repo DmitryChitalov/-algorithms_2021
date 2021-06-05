@@ -11,3 +11,19 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+
+dict = {}
+def url_save(db):
+    url = input('http://kinopoisk.ru/')
+    salt = url[:2]
+    do_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    if url in db:
+        return db
+    db[url] = do_hash
+    return f'Страницы нет в кэше'
+
+while True:
+    print(url_save(dict))
