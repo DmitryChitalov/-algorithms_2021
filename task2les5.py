@@ -1,19 +1,14 @@
-import collections
-import functools
+from collections import defaultdict
+from functools import reduce
 
-def calculator():
-    numbers = collections.defaultdict(list)
-    for i in range(2):
-        n = input(f'Введите число номер {i+1}: ')
-        numbers[f"{i+1}-{n}"] = list(n)
-    print(numbers)
+new_dict = defaultdict(list)
 
-    result1 = sum([int(''.join(i), 16) for i in numbers.values()])
-    print("Сумма: ", list('%X' % result1))
+new_dict.update({'первое число': list('A2')})
+new_dict.update({'второе число': list('C4F')})
 
-    result2 = functools.reduce(lambda a, b: a * b, [int(''.join(i), 16) for i in numbers.values()])
-    print("Произведение: ", list('%X' % result2))
+add1 = list(hex(sum([int(''.join(i), 16) for i in new_dict.values()])))
+mul2 = list(hex(reduce(lambda a, b: a * b,
+                               [int(''.join(i), 16) for i in new_dict.values()])))
 
-calculator()
-
-
+print("Рещультат сложения: ", add1[2:])
+print("Результат произведения: ", mul2[2:])

@@ -53,29 +53,31 @@ def deque_func_4():
     return new_deque
 
 
-print(timeit("list_func_1", globals=globals(),number=1000))
-print(timeit("deque_func_1", globals=globals(),number=1000))
-print(timeit("list_func_2", globals=globals(),number=1000))
-print(timeit("deque_func_2", globals=globals(),number=1000))
-print(timeit("list_func_3", globals=globals(),number=1000))
-print(timeit("deque_func_3", globals=globals(),number=1000))
-print(timeit("list_func_4", globals=globals(),number=1000))
-print(timeit("deque_func_4", globals=globals(),number=1000))
+print(timeit("list_func_1", globals=globals(),number=10000))
+print(timeit("deque_func_1", globals=globals(),number=10000))
+print(timeit("list_func_2", globals=globals(),number=10000))
+print(timeit("deque_func_2", globals=globals(),number=10000))
+print(timeit("list_func_3", globals=globals(),number=10000))
+print(timeit("deque_func_3", globals=globals(),number=10000))
+print(timeit("list_func_4", globals=globals(),number=10000))
+print(timeit("deque_func_4", globals=globals(),number=10000))
 
 """ Результаты измерений:
----- Вставление элемента в начало ----
-6.349999999999412e-05
-6.290000000000462e-05
----- Вставление элемента в конец ----
-6.349999999999412e-05
-6.270000000001275e-05
+---- Добавление элемента в начало ----
+0.00013960000000000014
+0.00015070000000000014
+---- Добавление элемента в конец ----
+0.00015070000000000014
+0.00013949999999999727
 ---- Удаление элемента с конца ----
-6.799999999999862e-05
-6.779999999999287e-05
+0.00015070000000000014
+0.00018309999999999854
 ---- Удаление элемента с начала ----
-6.810000000000149e-05
-6.789999999999574e-05
+0.00013950000000000073
+0.00015060000000000073
 
-Процесс заполнения списка происходит немного дольше, чем зполнение дека
-Процесс удаления элементов тоже быстрее происходит в деке, нежели в списке
+Процесс додавления элементов в начало дека происходит немного дольше, чем зполнение списка
+Процесс додавления элементов в конец происходит быстрее в деке
+Удаление элементов с конца происходит быстрее в списке, нежели в деке
+Удаление элементов с начала происходит быстрее в списке, нежели в деке
 """
