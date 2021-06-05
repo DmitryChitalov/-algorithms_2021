@@ -16,3 +16,15 @@
 р
 а
 """
+
+
+def unique_substring(user_str):
+    substring_amount = set()
+    for i in range(1, len(user_str)):
+        for j in range(len(user_str)):
+            str_sub = user_str[i:j + i]
+            substring_amount.add(hash(str_sub))
+    return f"Количество уникальных подстрок для введенной строки: {len(substring_amount)}"
+
+
+print(unique_substring(input("Введите строку, состоящую из строчных латинских букв: ")))
