@@ -18,3 +18,23 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import uuid
+import hashlib
+
+salt = uuid.uuid4().hex
+
+password = input()
+pass_hash = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+print(pass_hash)
+
+with open('file.pass', 'w') as f:
+    f.write(pass_hash)
+
+password2 = input()
+pass2_hash = hashlib.sha256(salt.encode() + password2.encode()).hexdigest()
+
+
+with open('file.pass', 'r') as f:
+    pass_hash = f.readline()
+    print(pass_hash == pass2_hash)

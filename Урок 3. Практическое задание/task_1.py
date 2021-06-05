@@ -16,3 +16,58 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import random
+import time
+
+LENGTH = 100000
+
+
+def time_spent_decorator(func):
+
+    def internal():
+        start_time = time.time()
+        res = func()
+        print(time.time() - start_time)
+        return res
+
+    return internal
+
+
+@time_spent_decorator
+def fill_list() -> list:
+    l = list()
+    for i in range(LENGTH):
+        x = random.randint(0, 100)
+        l.append(x)
+    return l
+
+
+@time_spent_decorator
+def fill_dict() -> dict:
+    d = dict()
+    for i in range(LENGTH):
+        x = random.randint(0, 100)
+        d[x] = x
+    return d
+
+
+@time_spent_decorator
+def operations_list():
+    l = fill_list()
+    while len(l) != 0:
+        l.pop()
+
+
+@time_spent_decorator
+def operations_dict():
+    d = fill_dict()
+    keys = list(d.keys())
+    for key in keys:
+        d.pop(key)
+
+
+operations_dict()
+print('operations_dict')
+operations_list()
+print('operations_list')
