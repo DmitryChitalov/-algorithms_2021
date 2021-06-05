@@ -11,3 +11,23 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib as hs
+import uuid as uu
+
+cache = {}
+salt = uu.uuid4().hex
+
+def cache_check(url, salt):
+    if url not in cache.keys():
+        url_hash = hs.sha256(url.encode() + salt.encode()).hexdigest()
+        cache.update({url: url_hash})
+        print('Данный url добавлен в cache')
+    else:
+        print('Данный url уже существует в cache')
+
+cache_check('https://pythonworld.ru/', salt)
+print(cache)
+cache_check('https://pythonworld.ru/', salt)
+cache_check('https://www.youtube.com/', salt)
+print(cache)
