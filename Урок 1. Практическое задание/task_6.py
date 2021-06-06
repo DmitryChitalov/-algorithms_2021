@@ -34,6 +34,7 @@ class QueueClass:
 
 class Board(QueueClass):
     def __init__(self):
+        super ().__init__ ()
         self.basic_queue = QueueClass()
         self.rework_queue = QueueClass ()
         self.done_list = []
@@ -71,8 +72,6 @@ if __name__ == '__main__':
         task_one.basic_queue.to_queue(value)
 
     print(f'Current basic task: ', task_one.get_basic_task())
-    print(task_one.basic_queue.elems)
-
     print (f'Задачи в базовой очереди', task_one.basic_queue.elems)
     print (f'Задачи в очереди на доработку', task_one.rework_queue.elems)
     print (f'Список выполненных задач', task_one.done_list, '\n')
