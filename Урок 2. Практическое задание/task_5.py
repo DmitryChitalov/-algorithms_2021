@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def code_simbol(el=32, n=0):
+    """ n - счётчик для вывода строк по 10 значений вряд """
+    if el > 127:
+        return f'\nВывод завершён'
+    elif n == 9:
+        return str(el) + ' - ' + str(chr(el)) + '\n' + code_simbol(el + 1, n=0)
+    else:
+        n += 1
+        return str(el) + ' - ' + str(chr(el)) + '    ' + code_simbol(el + 1, n)
+
+print(code_simbol())
