@@ -13,6 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +39,27 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    n_list = list(str(enter_num))
+    n_list.reverse()
+    revers_num = "".join(n_list)
+    return revers_num
+
+
+num = 123456789
+print(timeit("revers_1(num)", globals=globals(), number=10000))
+print(timeit("revers_2(num)", globals=globals(), number=10000))
+print(timeit("revers_3(num)", globals=globals(), number=10000))
+print(timeit("revers_4(num)", globals=globals(), number=10000))
+
+
+run('revers_1(num)')
+run('revers_2(num)')
+run('revers_3(num)')
+run('revers_4(num)')
+
+# timeit за счет того что мы указываем количество замеров лучше.
+# функция со срезом работает быстрее остальных
+
