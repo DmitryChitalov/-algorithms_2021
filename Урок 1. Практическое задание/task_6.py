@@ -14,3 +14,33 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+
+if __name__ == '__main__':
+    my_list = [10, 'code', False,
+               11, 'code+', False,
+               12, 'code++', False,
+               13, 'code+++', False,
+               14, 'code++++', False,
+               15, 'code+++++', False,
+               16, 'code++++++', False,
+               17, 'code+++++++', False,
+               18, 'code++++++++'
+               ]
+    qc_obj = QueueClass()
+    
