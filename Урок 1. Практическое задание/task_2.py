@@ -33,7 +33,7 @@ def min_func(lst_obj):# O(N)
     lst = lst_obj # O(N)
     min_val = lst[0] # O(1)
     for val in lst: # O(N)
-        if val < min_val # O(1)
+        if val < min_val: # O(1)
             min_val = val # O(1)
     return min_val # O(1)
 
