@@ -58,6 +58,7 @@ class Shot(StackClass):
         super ().__init__ ()
         self.max_size_stack = max_size
 
+
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
         self.elems.append(el)
@@ -71,37 +72,30 @@ class Shot(StackClass):
             return self.elems.pop ()
 
 
-
-
 if __name__ == '__main__':
-    max_size = 3
-    reduction_size = 25
-    stack_me = []
-    my_list  = [10, 'code', False,
-                11, 'code+', False,
-                12, 'code++', False,
-                13, 'code+++', False,
-                14, 'code++++', False,
-                15, 'code+++++', False,
-                16, 'code++++++', False,
-                17, 'code+++++++', False,
-                18, 'code++++++++', False,
-                ]
-    count = 0
-    stack_me.append (Shot (max_size))
-    for value in my_list:
-        try:
+    try:
+        max_size = 3
+        reduction_size = 25
+        stack_me = []
+        my_list  = [10, 'code', False,
+                    11, 'code+', False,
+                    12, 'code++', False,
+                    13, 'code+++', False,
+                    14, 'code++++', False,
+                    15, 'code+++++', False,
+                    16, 'code++++++', False,
+                    17, 'code+++++++', False,
+                    18, 'code++++++++', False,
+                    ]
+        count = 0
+        stack_me.append (Shot (max_size))
+        for value in my_list:
             stack_me[count].push_in (value)
-        except ValueTooLargeError:
-            count += 1
-            if count < len(my_list) / max_size:
-                stack_me.append (Shot (max_size))
 
+    except ValueTooLargeError:
+            stack_me.append (Shot (max_size))
 
-
-    for stack in stack_me:
-        print(stack.elems)
-
+    print(f'Содержание стэка', stack_me.pop())
     # length_stack_me = len(stack_me)
     length_stack_me = reduction_size // max_size
 
@@ -113,10 +107,8 @@ if __name__ == '__main__':
 
     print(f'Содержание стэка', stack_me)
 
+'''
 
-
-
-''' 
     SC_OBJ = StackClass()
 
     print(SC_OBJ.is_empty())  # -> стек пустой

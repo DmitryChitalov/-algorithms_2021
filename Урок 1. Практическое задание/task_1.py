@@ -27,7 +27,7 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: O(len(...)) зависет от размера ... структуры
+    Сложность: O(n)
     """
     lst_to_set = set(lst_obj)  # O(len(...))
     return lst_to_set  # O(1)
@@ -42,10 +42,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: O(N)
+    Сложность: O(N^2)
     """
     for j in range(len(lst_obj)):          # O(N) так как перебор
-        if lst_obj[j] in lst_obj[j+1:]:    # O(1) так как сравнивается один элемент с одним элементов
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n) = O(n) + O(n)
             return False                   # O(1)
     return True                            # O(1)
 
@@ -58,12 +58,12 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: O(1)+O(N log N)+O(N*N)+O(1)+O(1) = 3*O(1)+O(N log N)+O(N^2)=O(N^2)
+    Сложность: O(1)+O(N log N)+O(N)+O(1)+O(1) = 3*O(1)+O(N log N)+O(N)=O(N log n)
     """
-    lst_copy = list(lst_obj)                 # O(1)
+    lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(N log N)
     for i in range(len(lst_obj) - 1):        # O(N)
-        if lst_copy[i] == lst_copy[i+1]:     # O(N)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
     return True                              # O(1)
 
