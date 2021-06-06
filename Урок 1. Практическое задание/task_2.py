@@ -31,7 +31,11 @@ def bubble_sort (lst_obj): # O(N+N*N+O(1)) = O(N^2)
 """ Алгоритм второй O(N) """
 def min_func(lst_obj):# O(N)
     lst = lst_obj # O(N)
-    return min(lst) # O(1)
+    min_val = lst[0] # O(1)
+    for val in lst: # O(N)
+        if val < min_val # O(1)
+            min_val = val # O(1)
+    return min_val # O(1)
 
 original_list = [(element + 1) for element in range(random.randint(5, 25)) if element > 5]
 random.shuffle(original_list)
