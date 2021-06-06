@@ -21,3 +21,26 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+from memory_profiler import profile
+
+
+@profile
+def main():
+    a = []
+    b = []
+    c = []
+    for i in range(10000):
+        a.append(5)
+    for i in range(10000):
+        b.append([5])
+    for i in range(10000):
+        c.append('5')
+    del a
+    del b
+    del c
+
+
+if __name__ == '__main__':
+    main()
+
+"""Учимся работать с профилировщиком"""
