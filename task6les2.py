@@ -1,16 +1,20 @@
-def generator(attemp, n):
-    print("У вас осталось",10 - attemp , "попыток")
-    you = int(input())
-    if attemp == 10 or you == n:
-        if you == n:
-            print("Вы угадали число!")
-        print("Загаданное число: ", n)
-
+def guess_number(attemp, number):
+    if attemp == 10:
+        print(f"Ваши попытки кончились! Вы не угадали! Загаданное число: {number}")
+    try:
+        user_number = int(input(f'Угадайте число от 0 до 100 (осталось попыток {10 - attemp}): '))
+    except ValueError:
+        print(f'Некорректный ввод! Попробуйте еще раз!')
+        return guess_number(attemp+1, number)
+    if user_number == number:
+        print("Вы угадали число!")
+        print("Загаданное число: ", number)
     else:
-        if you > n:
+        if user_number > number:
             print("Вы не угадали! Загаданное число меньше!")
-        if you < n:
+            return guess_number(attemp+1, number)
+        if user_number < number:
             print("Вы не угадали! Загаданное число больше!")
-        generator(attemp+1, n)
+            return guess_number(attemp+1, number)
 
-generator(0, 43)
+guess_number(0, 43)

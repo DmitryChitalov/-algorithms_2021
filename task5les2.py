@@ -1,11 +1,11 @@
-def acii(a = 32):
-    if a == 128:
+def ascii_rec(ascii_value = 32):
+    if ascii_value == 128:
         return True
-    print(a, "-", chr(a), end=" ")
-    if (a-31)%10 == 0:
+    print(ascii_value, "-", chr(ascii_value), end=" ")
+    if (ascii_value-31)%10 == 0:
         print()
 
-    acii(a+1)
+    ascii_rec(ascii_value+1)
 
 
-acii()
+ascii_rec()

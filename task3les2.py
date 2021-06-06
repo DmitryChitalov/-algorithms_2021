@@ -1,6 +1,14 @@
-def number(n):
-    return str(n) if n<10 else str(n%10) + number(n//10)
+def inverted_number(num: int):
+    if num != 0:
+        return str(num % 10) + inverted_number(num // 10)
+    else:
+        return ''
 
-n = int(input("Введите число, которое требуется перевернуть:"))
-print("Перевернутое число:", number(n))
+while True:
+    try:
+        n = int(input("Введите число: "))
+    except ValueError:
+        print("Некорректный ввод!")
+        continue
+    inverted_number(n)
 

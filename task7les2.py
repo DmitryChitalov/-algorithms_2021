@@ -1,9 +1,9 @@
-def summa(n):
+def sum_check(n):
     if n == 1:
-        return n
+        return 1, 1
     else:
-        return summa(n-1) + n
+        return sum_check(n-1) + n
 
 num = int(input("Введите число: "))
-if summa(num) == num*(num-1) / 2:
+if sum_check(num) == num*(num-1) / 2:
     print("Выражение доказано!")

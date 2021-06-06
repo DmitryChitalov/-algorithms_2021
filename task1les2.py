@@ -8,21 +8,17 @@ def calculator():
                 number1 = int(input("Введите первое число: "))
                 number2 = int(input("Введите второе число: "))
                 if sign == "+":
-                    itog = number1+number2
-                    print("", itog)
+                    print("", number1+number2)
                     return calculator()
                 if sign == "-":
-                    itog = number1 - number2
-                    print("", itog)
+                    print("", number1 - number2)
                     return calculator()
                 if sign == "*":
-                    itog = number1 * number2
-                    print("", itog)
+                    print("",  number1 * number2)
                     return calculator()
                 if sign == "/":
                     if number2 != 0:
-                        itog = number1 / number2
-                        print("", itog)
+                        print("", number1 / number2)
                     else:
                         print("На 0 делить нельзя!")
                     return calculator()

@@ -1,14 +1,18 @@
-def numbers(num, chet = 0, nechet = 0):
-    if num == 0:
-        return "Количество четных и нечетных чисел: ", chet, nechet
-    else:
-        figure = num % 10
-        num = num//10
-        if figure % 2 == 0:
-            chet+=1
+def amount_of_even_odd(number: int, even: int = 0, odd: int = 0):
+    if number != 0:
+        if (number % 10) % 2 == 0:
+            even += 1
         else:
-            nechet+=1
-        return numbers(num)
+            odd += 1
+        return amount_of_even_odd(number // 10, even, odd)
+    else:
+        print(f'Количество четных цифр: {even}, нечетных цифр {odd})')
+        return
 
-n = int(input())
-numbers(n)
+while True:
+    try:
+        n = int(input("Введите число: "))
+    except ValueError:
+        print("Некорректный ввод!")
+        continue
+    amount_of_even_odd(n)
