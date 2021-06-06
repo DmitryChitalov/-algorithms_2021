@@ -23,14 +23,6 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
-class Error (Exception):
-    pass
-
-class ValueTooLargeError (Error):
-    pass
-
-class ValueTooSmallError (Error):
-    pass
 
 class StackClass:
     def __init__(self):
@@ -58,84 +50,55 @@ class Shot(StackClass):
         super ().__init__ ()
         self.max_size_stack = max_size
 
+    def __str__(self):
+        return str(self.elems)
+
+    def is_empty(self):
+        return self.elems == []
+
+    def _pucking(self, element):
+        self.elems[self.stack_size() - 1].append(element)
+
+    def _stack_size_shot(self):
+        return len(self.elems[self.stack_size() - 1])
 
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
-        self.elems.append(el)
-        if self.stack_size () >= self.max_size_stack:
-            raise ValueTooLargeError
+        if self.is_empty(): # если первый элемент, то добавляем элемент стопка и заносим значение
+            self.elems.append ([])
+            self._pucking(el)
+        elif self._stack_size_shot() < self.max_size_stack:
+                self._pucking(el)
+        else:
+            self.elems.append([]) # Если есть переполнение стопки то формируем новую стопку
+            self._pucking(el)
 
     def pop_out(self):
-        if self.is_empty():
-            raise ValueTooSmallError
-        else:
-            return self.elems.pop ()
+        value_out = self.elems[self.stack_size() - 1].pop()
+        if self._stack_size_shot() == 0:
+            self.elems.pop()
+        return value_out
+
+    def get_val(self): # Вернуть значение из определенной стопки без удаления
+        return self.elems[self.stack_size() - 1][self._stack_size_shot() - 1]
+
 
 
 if __name__ == '__main__':
-    try:
-        max_size = 3
-        reduction_size = 25
-        stack_me = []
-        my_list  = [10, 'code', False,
-                    11, 'code+', False,
-                    12, 'code++', False,
-                    13, 'code+++', False,
-                    14, 'code++++', False,
-                    15, 'code+++++', False,
-                    16, 'code++++++', False,
-                    17, 'code+++++++', False,
-                    18, 'code++++++++', False,
-                    ]
-        count = 0
-        stack_me.append (Shot (max_size))
-        for value in my_list:
-            stack_me[count].push_in (value)
+    my_list = [10, 'code', False,
+               11, 'code+', False,
+               12, 'code++', False,
+               13, 'code+++', False,
+               14, 'code++++', False,
+               15, 'code+++++', False,
+               16, 'code++++++', False,
+               17, 'code+++++++', False,
+               18, 'code++++++++'
+               ]
 
-    except ValueTooLargeError:
-            stack_me.append (Shot (max_size))
+    shot_one = Shot(3)
+    for value in my_list:
+        shot_one.push_in(value)
 
-    print(f'Содержание стэка', stack_me.pop())
-    # length_stack_me = len(stack_me)
-    length_stack_me = reduction_size // max_size
+    print(shot_one.elems)
 
-    for index in range(length_stack_me):
-        for index_two in range(stack_me[length_stack_me - (index + 1) ].stack_size()):
-            print(f'Вытаскиваем из стопки', (length_stack_me - index), ' ',
-                  stack_me[length_stack_me - (index + 1)].pop_out())
-        stack_me.pop()
-
-    print(f'Содержание стэка', stack_me)
-
-'''
-
-    SC_OBJ = StackClass()
-
-    print(SC_OBJ.is_empty())  # -> стек пустой
-
-    # наполняем стек
-    SC_OBJ.push_in(10)
-    SC_OBJ.push_in('code')
-    SC_OBJ.push_in(False)
-    SC_OBJ.push_in(5.5)
-
-    # получаем значение первого элемента с вершины стека, но не удаляем сам элемент из стека
-    print(SC_OBJ.get_val())  # -> 5.5
-
-    # узнаем размер стека
-    print(SC_OBJ.stack_size())  # -> 4
-
-    print(SC_OBJ.is_empty())  # -> стек уже непустой
-
-    # кладем еще один элемент в стек
-    SC_OBJ.push_in(4.4)
-
-    # убираем элемент с вершины стека и возвращаем его значение
-    print(SC_OBJ.pop_out())  # -> 4.4
-
-    # снова убираем элемент с вершины стека и возвращаем его значение
-    print(SC_OBJ.pop_out())  # -> 5.5
-
-    # вновь узнаем размер стека
-    print(SC_OBJ.stack_size())  # -> 3
-'''
