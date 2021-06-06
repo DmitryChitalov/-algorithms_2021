@@ -101,4 +101,10 @@ if __name__ == '__main__':
         shot_one.push_in(value)
 
     print(shot_one.elems)
+    print(shot_one.pop_out())
+    print (shot_one.pop_out ())
+    print (shot_one.pop_out ())
+    print (shot_one.pop_out ())
+    print (shot_one.pop_out ())
+    print (shot_one.pop_out ())
 
