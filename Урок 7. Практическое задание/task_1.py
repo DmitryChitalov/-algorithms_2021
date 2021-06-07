@@ -17,3 +17,58 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+# Доработка не помогла, так как время затрачено практически одинаково. Это связано с тем, что вероятность получения отсортированного списка в целом нереальна.
+# ВЫВОДЫ ПО ЗАМЕРАМ:
+# 1.447519673 - ДЛЯ ОБЫЧНОГО
+# 1.263337649 - ДЛЯ ОПТИМИЗИРОВАННОГО КОДА
+
+
+import timeit
+import random
+
+
+# Отсортировка по убыванию
+def reversed_bubble_sort(lst):
+    n = 1
+    while n < len(lst):
+        mx = len(lst) - 1
+        for i in range(mx - 1, -1, -1):
+            if lst[i] > lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        n += 1
+    return lst
+
+
+# Оптимизированный код
+def reversed_optimized_bubble_sort(lst):
+    flag = True
+    while flag:
+        flag = False
+        mx = len(lst) - 1
+        for i in range(mx - 1, -1, -1):
+            if lst[i] > lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                flag = True
+    return lst
+
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры для обычного отсортированного массива
+print(
+    timeit.timeit(
+        "reversed_bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+# замеры для оптимизированного отсортированного массива
+print(
+    timeit.timeit(
+        "reversed_optimized_bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+print(f'Не отсортированный массив - {orig_list}')
+print(f'Отсортированный массив - {reversed_bubble_sort(orig_list)}')

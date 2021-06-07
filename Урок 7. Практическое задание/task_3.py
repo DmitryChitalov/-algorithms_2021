@@ -36,3 +36,28 @@ for i in
 
 
 """
+import random
+
+def gnome(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+def gnome_median(data):
+    return gnome(data)[len(data) // 2]
+
+
+m = int(input('Введите m: '))
+orig_list = [random.randint(0, 100) for i in range(2 * m + 1)]
+
+
+print(f'Не отсортированный массив - {orig_list}')
+print(f'Отсортированный массив - {gnome(orig_list)}')
+print(f'Медиана - {gnome_median(orig_list)}')
