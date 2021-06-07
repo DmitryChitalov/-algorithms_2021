@@ -49,6 +49,7 @@ class Calculator:
         self.digit_1 = None
         self.digit_2 = None
         self.operator = None
+        print('Запущена программа - калькулятор v.01 от 05.06.2021.')
 
     def insert_operator(self):
         """ Пользователь вводит оператор."""
@@ -58,12 +59,12 @@ class Calculator:
             if operator in self.operand_list:
                 return operator
             elif operator == 'q' or operator == 'Q':
-                print('\033[031mОперация прервана пользователем.\033[033m')
+                print('\033[031mОперация прервана пользователем.\033[0m')
                 self.flag = False
                 break
             else:
-                print('\033[031m  Ошибка! Неверный ввод.')
-                print('\033[032m  Попробуйте еще раз, можно вводить операторы +. -. *. /')
+                print('\033[031m  Ошибка! Неверный ввод.\033[0m')
+                print('\033[96m  Попробуйте еще раз, можно вводить операторы +. -. *. /\033[0m')
 
     def insert_digit(self):
         """ Пользователь вводит число."""
@@ -76,8 +77,8 @@ class Calculator:
             try:
                 digit = float(digit)
             except ValueError:
-                print('\033[031m  Ошибка! Вы ввели не число.')
-                print('\033[1m  Попробуйте еще раз - можно вводить целые и дробные числа:\033[032m')
+                print('\033[031m  Ошибка! Вы ввели не число.\033[0m')
+                print('\033[96m  Попробуйте еще раз - можно вводить целые и дробные числа:\033[0m')
         return digit
 
     def show_input_log(self):
@@ -88,21 +89,26 @@ class Calculator:
 
     def get_result(self):
         """ Подсчет финального результата."""
-        if self.operator == '+':
-            return self.digit_1 + self.digit_2
-        elif self.operator == '-':
-            return self.digit_1 - self.digit_2
-        elif self.operator == '/':
-            return self.digit_1 / self.digit_2
-        elif self.operator == '*':
-            return self.digit_1 * self.digit_2
+        if self.flag:
+            if self.operator == '+':
+                return self.digit_1 + self.digit_2
+            elif self.operator == '-':
+                return self.digit_1 - self.digit_2
+            elif self.operator == '/':
+                try:
+                    result = self.digit_1 / self.digit_2
+                    return result
+                except ZeroDivisionError:
+                    print('\033[031m Ошибка! Делить на ноль нельзя!\033[0m')
+            elif self.operator == '*':
+                return self.digit_1 * self.digit_2
         else:
-            print('Программа завершает работу по запросу пользователя.')
+            return str('Программа завершает работу по запросу пользователя.')
 
     def create_formula(self):
         """ Конкатенация формулы из введенных пользователем значений. """
         if self.flag:
-            print(f' Выполняется расчет: {self.digit_1} {self.operator} {self.digit_2} :')
+            print(f'Выполняется расчет: {self.digit_1} {self.operator} {self.digit_2} :')
 
     def new_calculate(self):
         """ Запуск расчета."""
@@ -112,6 +118,7 @@ class Calculator:
         self.create_formula()
         print(self.get_result())
         if self.flag:                   # Здесь реализован рекурсивный запуск функции.
+            print('Новый расчет:')
             self.new_calculate()
 
 
