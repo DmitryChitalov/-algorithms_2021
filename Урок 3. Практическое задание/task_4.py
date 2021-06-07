@@ -1,4 +1,4 @@
-"""
+﻿"""
 Задание 4.
 Реализуйте скрипт "Кэширование веб-страниц"
 
@@ -11,3 +11,28 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+
+my_cash = {}
+
+
+def is_cashed(my_url):
+    my_hash = hashlib.sha256((my_url + my_url.swapcase()).encode('utf-8'))  # "солим" хэш
+    my_dig = my_hash.hexdigest()
+    if my_dig in my_cash.keys():  # проверяем на дубль
+        print("Такой элемент уже есть!!!")
+    else:
+        my_cash[my_dig] = my_url  # если хэш уникальный - сохраняем URL
+    return
+
+
+while True:
+    my_url = input("Введите URL-адрес. Для завершения введите пустую строку: ")
+    if my_url == "":
+        break
+    else:
+        is_cashed(my_url)
+
+print(my_cash)

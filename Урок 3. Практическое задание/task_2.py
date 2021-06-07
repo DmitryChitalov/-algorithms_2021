@@ -1,4 +1,4 @@
-"""
+﻿"""
 Задание 2.
 Ваша программа должна запрашивать пароль
 Для этого пароля вам нужно получить хеш, используя функцию sha256
@@ -18,3 +18,26 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+import hashlib
+
+my_login = input("Пожалуйста, введите имя пользователя: ")
+my_pass1 = input("Пожалуйста, задайте пароль: ")
+my_hash1 = hashlib.sha256(((my_pass1 + my_login.swapcase()).encode('ascii')))  # "солим"
+my_dig1 = my_hash1.hexdigest()
+my_file = open("bd.txt", "w")
+my_file.write(my_dig1)  # записываем в файл хеш
+my_file.close()
+print("В базе данных хранится строка:", my_dig1)
+
+my_pass2 = input("\nВведите пароль еще раз для проверки:")  # запрашиваем пароль повторно
+my_hash2 = hashlib.sha256(((my_pass2 + my_login.swapcase()).encode('ascii')))  # "солим"
+my_dig2 = my_hash2.hexdigest()
+my_file = open("bd.txt", "r")
+my_dig3 = my_file.readline()  # считываем из файла первоначальный хэш
+my_file.close()
+if my_dig3 == my_dig2:  # сравниваем хэши
+    print("Вы ввели правильный пароль")
+else:
+    print("Пароль неверный")
