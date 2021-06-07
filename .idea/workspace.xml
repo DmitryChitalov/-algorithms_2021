@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba378908-b71b-4e2e-b469-42b97c76c59d" name="Default Changelist" comment="" />
+    <list default="true" id="ba378908-b71b-4e2e-b469-42b97c76c59d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_6.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/practic/task_7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,18 +21,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1szD7dt8eBWSEYQG4SUrgJE8AuX" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lessons-four/task2.py" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.task_1">
     <configuration name="-algorithms_2021" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -183,6 +197,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\sebkd\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ba378908-b71b-4e2e-b469-42b97c76c59d" name="Default Changelist" comment="" />
@@ -204,5 +221,8 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

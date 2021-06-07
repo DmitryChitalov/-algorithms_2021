@@ -28,6 +28,45 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
-import sys
 
-print(sys.getrecursionlimit())
+def verife_operand (char_operand):
+    if char_operand == 43 or char_operand == 45 or char_operand == 42 or char_operand == 47 or char_operand == 48:
+        print(char_operand, chr(char_operand))
+        return 1
+    else:
+        return 0
+
+
+if __name__ == '__main__':
+      # 43 +
+      # 45 -
+      # 42 *
+      # 47 /
+      # 48 0
+    while True:
+        operand = input (f'Введите операцию (+, -, *, / или 0 для выхода): ')
+        if ord (operand) == 48:
+            break
+        number_one = input (f'Введите первое 3-значное число : ')
+        number_two = input (f'Введите второе 3-значное число : ')
+        if not number_one.isdigit() or not number_two.isdigit():
+            print (f'Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+            continue
+        elif int(number_one) < 1000 or int(number_two) < 1000:
+            if ord(operand) == 43:
+                print (f'Ваш результат: ', int(number_one) + int(number_two))
+            elif ord(operand) == 45:
+                print (f'Ваш результат: ', int(number_one) - int(number_two))
+            elif ord(operand) == 42:
+                print (f'Ваш результат: ', int(number_one) * int(number_two))
+            elif ord(operand) == 47:
+                print (f'Ваш результат: ', int(number_one) / int(number_two))
+            else:
+                print (f'Вы ввели не операцию и не выход')
+                continue
+        else:
+            print (f'Вы вместо трехзначного числа ввели больше')
+            continue
+    print (f'Выход')
+
+
