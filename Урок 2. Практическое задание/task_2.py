@@ -18,3 +18,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def func_recursion_two(number):
+    global even_numbers, odd_numbers
+    if number < 10:
+        if number % 2:
+            odd_numbers += 1
+        else:
+            even_numbers += 1
+    else:
+        func_recursion_two (number // 10)
+        if (number % 10) % 2:
+            odd_numbers += 1
+        else:
+            even_numbers += 1
+    return even_numbers, odd_numbers
+
+
+if __name__ == '__main__':
+    even_numbers, odd_numbers = 0, 0
+    print (f'Количество четных и нечетных цифр в числе равно: ',
+           func_recursion_two (int (input (f'Введите число: '))))
