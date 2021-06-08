@@ -22,3 +22,18 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+def func_recursion_three(number):
+    global my_list
+    if number < 10:
+        my_list.insert(0, number)
+    else:
+        func_recursion_three (number // 10)
+        my_list.insert (0, number % 10)
+    return ''.join(map(str, my_list))
+
+
+if __name__ == '__main__':
+    my_list = []
+    print (f'Ваше число в перевернутом виде: ',
+           func_recursion_three (int (input (f'Введите число: '))))
