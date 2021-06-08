@@ -34,3 +34,28 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+
+first_number = input('Введите первое шестнадцатиричное число ').upper()
+second_number = input('Введите второе шестнадцатиричное число ').upper()
+
+numbers_dict = defaultdict(list)
+numbers_dict[first_number] = list(first_number)
+numbers_dict[second_number] = list(second_number)
+
+first_number_again = ''.join(numbers_dict[first_number])
+second_number_again = ''.join(numbers_dict[second_number])
+
+
+numbers_sum = hex(int(first_number_again, 16) + int(second_number_again, 16))
+numbers_composition = hex(int(first_number_again, 16) * int(second_number_again, 16))
+
+numbers_sum_no_0x = list(numbers_sum.replace('0x', '').upper())
+numbers_composition_no_0x = list(numbers_composition.replace('0x', '').upper())
+
+
+print(f'Введенные числа: {numbers_dict[first_number]} и {numbers_dict[second_number]}')
+print(f'Сумма чисел: {numbers_sum_no_0x}')
+print(f'Произведение чисел: {numbers_composition_no_0x}')
+
