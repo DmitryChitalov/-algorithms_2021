@@ -22,7 +22,7 @@ def n_substring(my_str, n):
     i = 0
     n_substrings_set = set()
     while n+i <= len(my_str):
-        n_substrings_set.add(hash(my_str[i:n+i]))  # хэш засунул, только потому, что просили, смысл не очень уловил
+        n_substrings_set.add((my_str[i:n+i]))  # хэш засунул, только потому, что просили, смысл не очень уловил
         i += 1
     return n_substrings_set
 
