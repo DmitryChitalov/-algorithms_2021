@@ -17,16 +17,18 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
+    # O(n**2)
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
-    while count <= i:
+    while count <= i:  # O(n)
         t = 1
         is_simple = True
-        while t <= n:
+        while t <= n:  # O(n)
             if n % t == 0 and t != 1 and t != n:
                 is_simple = False
                 break
@@ -39,5 +41,48 @@ def simple(i):
     return n
 
 
+def eratosthenes(i):  # Решето Эратосфена
+    # O(n**2)
+    set_of_simple = {2, }  # O(1)
+    n = 3  # O(1)
+    while True:
+        if len(set_of_simple) == i:  # O(1)
+            break
+        else:
+            copy_set = set_of_simple.copy()  # O(n)
+            flag = 0  # O(1)
+            for el in copy_set:  # O(n)
+                if n % el == 0:
+                    flag = 1
+                    break
+            if flag == 0:
+                set_of_simple.add(n)  # O(1)
+        n += 1
+    return max(set_of_simple)
+
+
 i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+
+print(f'Время simple(i): {timeit("simple(i)", globals=globals(), number=1000)}')
+print(f'Время eratosthenes(i): {timeit("eratosthenes(i)", globals=globals(), number=1000)}')
+
+'''
+Для 10 простого числа:
+Время simple(i): 0.0300625
+Время Eratosthenes(i): 0.0175849
+
+Для 100 простого числа:
+Время simple(i): 3.3350659
+Время Eratosthenes(i): 1.0512979000000002
+
+Для 1000 простого числа:
+Время simple(i): 564.5236413
+Время Eratosthenes(i): 122.8700536
+
+Алгоритм, реализующий решето Эратосфена, оказался в разы быстрее, особенно на больших значениях.
+Это можно объяснить тем, что в отличии от первого алгоритма, перебираются не все числа в качестве делителя, а только
+уже найденные простые числа. Меньше число итерация.
+
+Асимптотическая сложность у двух алгоритмов оказалась одинаковой, однако из-за того, что во втором цикле значение n
+будет всегда меньше, то и выполняться будет быстрее. 
+'''
