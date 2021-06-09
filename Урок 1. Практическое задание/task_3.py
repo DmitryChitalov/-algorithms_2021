@@ -20,3 +20,19 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# 1. Сложность: O(N log N) - линейно-логарифмическая
+company_dict = {'Nike': 10000, 'Adidas': 55322, 'Reebok': 24699, 'Puma': 23425, 'Asics': 32222}
+my_list = list(company_dict.items()) # O(N)
+my_list.sort(key = lambda index: index[1]) # O(NlogN)
+print(my_list[:3])  # O(N)
+
+# 2. Сложность: O(N) - линейная
+from operator import itemgetter
+company_dict = {'Nike': 10000, 'Adidas': 55322, 'Reebok': 24699, 'Puma': 23425, 'Asics': 32222}
+
+def get_max(data, count):
+    maximum = [(k, data[k]) for k in data] # O(N)
+    maximum = sorted(maximum, key=itemgetter(1), reverse=True) # O(N)
+    return dict(maximum[:count]) # O(N)
+
+print(get_max(company_dict,3))

@@ -16,3 +16,20 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+# Алгоритм линейная сложность O(N)
+# def min_number(my_list): # O(N) - линейная
+#     min_num = my_list[0]  # O(1) - константная
+#     for i in my_list: # O(N) - линейная
+#         if i < min_num: # O(1) - константная
+#             min_num = i # O(1) - константная
+#     return min_num # O(1) - константная
+
+# Алгоритм квадратичная сложность O(N^2)
+# O(N+N*N+O(1)+O(1)) = O(N^2)
+def min_number2(my_list): # O(N) - линейная
+    for one in range(len(my_list)): # O(N) - линейная
+        for two in range(one + 1, len(my_list)): # O(N) - линейная
+            if my_list[two] < my_list[one]: # O(1) - константная
+                my_list[two], my_list[one] = my_list[one], my_list[two] # O(1) - константная
+    return my_list[0]
