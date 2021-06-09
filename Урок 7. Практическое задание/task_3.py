@@ -36,3 +36,18 @@ for i in
 
 
 """
+import random
+import numpy as np
+
+
+m = int(input('Введите натуральное число: '))
+orig_list = [random.randint(0, 20) for _ in range(2 * m + 1)]  # размер массива 2m + 1 вставил сюда
+
+print(sorted(orig_list))
+np.median(orig_list)  # маленькая встроенная функция
+
+print(f'Медиана равна : {np.median(orig_list)}')
+
+#  нашел встроенную функцию медиана в библиотеке numPy, вместе с sorted должно решать задание.
+#  работает
+

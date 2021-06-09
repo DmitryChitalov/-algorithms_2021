@@ -20,65 +20,19 @@
 import timeit
 import random
 
-# как в уроке, но по убыванию
-def bubble_sort(lst_obj):
-    n = 1
-    while n < len(lst_obj):
-        for i in range(len(lst_obj)-n):
-            if lst_obj[i] < lst_obj[i+1]:
-                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
-        n += 1
-    return lst_obj
-
-
-orig_list = [random.randint(-100, 100) for _ in range(10)]
-
-print(orig_list)
-print(bubble_sort(orig_list))
-
-
-print(
-    timeit.timeit(
-        "bubble_sort(orig_list[:])",
-        globals=globals(),
-        number=1000))
-
-orig_list = [random.randint(-100, 100) for _ in range(100)]
-
-# замеры 100
-print(
-    timeit.timeit(
-        "bubble_sort(orig_list[:])",
-        globals=globals(),
-        number=1000))
-
-orig_list = [random.randint(-100, 100) for _ in range(1000)]
-
-# замеры 1000
-print(
-    timeit.timeit(
-        "bubble_sort(orig_list[:])",
-        globals=globals(),
-        number=1000))
-
-
-
-"""
-0.007448299999999998
-0.7391278
-80.6800633 - вышел быстрее чем в примере
-"""
-# с прерыванием, не уверен, но работает быстрее
-
+# с прерыванием, поменял знак(направление) перебора, плюс с помощью счетчика делаем отсечку,
+# если счетчик не срабатывает, прерываем.
+# подобный вариант не сильно ускоряет процесс сортировки, что показывает его ненужность
+# 61.781127
 
 def bubble_sort_while(lst_obj):
     n = 1
     counter = 0
     while n < len(lst_obj):
-        for i in range(len(lst_obj) - n):
-            if lst_obj[i] < lst_obj[i + 1]:
-                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
-                counter += 1
+        for el in range(len(lst_obj) - n):
+            if lst_obj[el] < lst_obj[el + 1]:
+                lst_obj[el], lst_obj[el + 1] = lst_obj[el + 1], lst_obj[el]
+            counter += 1
         if not counter:
             break
         else:
@@ -86,60 +40,46 @@ def bubble_sort_while(lst_obj):
     return lst_obj
 
 
-test_list = [[100, 40, 20, 10, 9, 5, 4, 2, 1, -1, -4] for _ in range(10)]
-print(test_list)
-print(bubble_sort_while(test_list))
+orig_list1 = [random.randint(-100, 100) for _ in range(1000)]
 
-print(
-    timeit.timeit(
-        "bubble_sort_while(test_list[:])",
-        globals=globals(),
-        number=1000))
-
-test_list = [[100, 40, 20, 10, 9, 5, 4, 2, 1, -1, -4] for _ in range(100)]
-
-# замеры 100
-print(
-    timeit.timeit(
-        "bubble_sort_while(test_list[:])",
-        globals=globals(),
-        number=1000))
-
-test_list = [[100, 40, 20, 10, 9, 5, 4, 2, 1, -1, -4] for _ in range(1000)]
-
+print(orig_list1)
+print(bubble_sort_while(orig_list1))
 # замеры 1000
 print(
     timeit.timeit(
-        "bubble_sort_while(test_list[:])",
+        "bubble_sort_while(orig_list1[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [random.randint(-100, 100) for _ in range(10)]
+"""
+вот такой еще вариант сделал, еще одно условие добавил(хотел бы научно обосновать, но еще учусь, 
+предположил, что данным условием смогу прервать пробег по массиву),
+был еще вариант тестовый, но удалил, после каунтера и забыл, что написал там, вроде работал((
+и вот этот доработанный товарищ выдал ускорение сортировки на треть, не знаю как, но он это делает.
+42.469262300000004
+"""
+def bubble_sort_upgrade(lst_obj):
+    i = 1
+    while i < len(lst_obj):
+        for el in range(len(lst_obj) - i):
+            if lst_obj[el] < lst_obj[el + 1]:  # знак
+                lst_obj[el], lst_obj[el + 1] = lst_obj[el + 1], lst_obj[el]
+                if lst_obj[el] == lst_obj[el + 1]:  # предположил, что данным условием смогу прервать пробег по массиву
+                    break
+        else:
+            i += 1
+    return lst_obj
 
-print(orig_list)
-print(bubble_sort_while(orig_list))
-
-
-print(
-    timeit.timeit(
-        "bubble_sort_while(orig_list[:])",
-        globals=globals(),
-        number=1000))
-
-orig_list = [random.randint(-100, 100) for _ in range(100)]
-
-# замеры 100
-print(
-    timeit.timeit(
-        "bubble_sort_while(orig_list[:])",
-        globals=globals(),
-        number=1000))
 
 orig_list = [random.randint(-100, 100) for _ in range(1000)]
 
+print(orig_list)
+print(bubble_sort_upgrade(orig_list))
 # замеры 1000
 print(
     timeit.timeit(
-        "bubble_sort_while(orig_list[:])",
+        "bubble_sort_upgrade(orig_list[:])",
         globals=globals(),
         number=1000))
+
+
