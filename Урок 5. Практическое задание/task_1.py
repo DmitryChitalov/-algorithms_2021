@@ -23,3 +23,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def get_tuple():
+    temp_tuple = namedtuple('Company', 'name first_qr second_qr third_qr fourth_qr')
+    res_tuple = temp_tuple(
+        name=input('Введите название предприятия '),
+        first_qr=input('Введите прибыль за первый квартал '),
+        second_qr=input('Введите прибыль за второй квартал '),
+        third_qr=input('Введите прибыль за третий квартал '),
+        fourth_qr=input('Введите прибыль за четвертый квартал ')
+    )
+    return res_tuple
+
+
+result = {'high rate': [], 'low rate': []}
+count_company = int(input('Введите кол-во предприятий '))
+tup = [get_tuple() for i in range(count_company)]
+sum_company = [int(i.first_qr) + int(i.second_qr) + int(i.third_qr) + int(i.fourth_qr) for i in tup]
+avg_result = sum(sum_company) / count_company
+for i in range(len(tup)):
+    result['high rate'].append(tup[i].name) if sum_company[i] > avg_result else result['low rate'].append(tup[i].name)
+print(f'Компании с высокой прибылью {result["high rate"]}')
+print(f'Компании с низкой прибылью {result["low rate"]}')
+
