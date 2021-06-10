@@ -18,12 +18,12 @@
 """
 
 # Алгоритм линейная сложность O(N)
-# def min_number(my_list): # O(N) - линейная
-#     min_num = my_list[0]  # O(1) - константная
-#     for i in my_list: # O(N) - линейная
-#         if i < min_num: # O(1) - константная
-#             min_num = i # O(1) - константная
-#     return min_num # O(1) - константная
+def min_number(my_list): # O(N) - линейная
+    min_num = my_list[0]  # O(1) - константная
+    for i in my_list: # O(N) - линейная
+        if i < min_num: # O(1) - константная
+            min_num = i # O(1) - константная
+    return min_num # O(1) - константная
 
 # Алгоритм квадратичная сложность O(N^2)
 # O(N+N*N+O(1)+O(1)) = O(N^2)
