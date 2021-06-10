@@ -23,3 +23,21 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+def func_recursion_four (counter, element):
+    global result
+    if counter > 0:
+        counter -= 1
+        func_recursion_four(counter, (element * (-1)) / 2)
+        result += element
+    return result
+
+# 1 -0.5 0.25 сумма равна 1-0,5+0,25 = 0,5 + 0,25 = 0,75
+# 1 -0.5 0.25 -0,125 сумма равна 1-0,5+0,25 - 0,125  = 0,5 + 0,25 - 0,125 = 0,75 - 0,125 = 0,625
+
+
+
+if __name__ == '__main__':
+    result = 0
+    print (f'Ваша сумма: ',
+           func_recursion_four (int (input (f'Найти сумму n элементов следующего ряда чисел:'
+                                 f' 1 -0.5 0.25 -0.125 ...  Введите количество элементов: ')), element = 1))
