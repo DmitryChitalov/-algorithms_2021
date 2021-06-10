@@ -33,6 +33,35 @@ for i in
     left == right
     left.clear()
     right.clear()
-
+"""
 
 """
+[15, 10, 4, 5, 11, 18, 6, 5, 16]
+[4, 5, 5, 6, 10, 11, 15, 16, 18]
+Медиана массива - 10
+Проверка встроенной функцией - 10
+"""
+from statistics import median
+from random import randint
+
+
+def sort(list_object):
+    i = 1
+    while i < len(list_object):
+        if list_object[i - 1] <= list_object[i]:
+            i += 1
+        else:
+            list_object[i - 1], list_object[i] = list_object[i], list_object[i - 1]
+            if i > 1:
+                i -= 1
+    return list_object
+
+
+m = randint(1, 10)
+list = [randint(1, 20) for _ in range(2 * m + 1)]
+
+print(list)
+print(sort(list))
+
+print(f"Медиана массива - {sort(list)[m]}")
+print(f"Проверка встроенной функцией - {median(list)}")
