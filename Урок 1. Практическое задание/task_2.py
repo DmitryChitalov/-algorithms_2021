@@ -13,27 +13,28 @@
 """
 
 
-# O(N^2)
+# O(n^2)
 
-def sort(n):
-    for i in range(0, len(n) - 1):  # O(n)
-        for j in range(i + 1, len(n)):  # O(n)
-            if n[j] < n[i]:  # O (log N)
-                n[i], n[j] = n[j], n[i]  # O(1)
-
-
-n = [2, 7, 8]
-sort(n)
-print(n[0])
+def sort_values(lst):
+    for i in range(0, len(lst) - 1):         # O(n)
+        for j in range(i + 1, len(lst)):     # O(n)
+            if lst[j] < lst[i]:    # O(log n)
+                lst[i], lst[j] = lst[j], lst[i]    # O(1)
 
 
-# O(N)
-def min(a):
-    b = a[0]  # O(1)
-    for el in a:  # O(n)
-        if el < b:  # O(log N)
-            el = b  # O(1)
-    return b  # O(1)
+lst = [2, 10, 1]
+sort_values(lst)
+print(lst[0])
 
 
-print(min([2, 3, 4]))
+# O(n)
+
+def min_value(lst):
+    low = lst[0]    # 0(1)
+    for el in lst:   # 0(n)
+        if el < low:    # 0(1)
+            low = el   # 0(1)
+    return low     # O(1)
+
+
+print(min_value([7, 5, 4]))
