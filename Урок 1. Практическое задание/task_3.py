@@ -17,20 +17,31 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 # Второе решение лучше и короче, так как мы не добавляем значение в новый список => не создаем переменную и не используем аppend
-# Сложность O(n^2)
-company = {
-    'Rosneft': 1,
-    'Lukoil': 2,
-    'Surgutneftegaz': 3,
-    'Bashkirneft': 4,
-    'Gazpromneft': 5
-}
-lst = []  # O(len(...))
-for k in company.values():  # O(n)
-    lst.append(k)  # O(1)
-print(*lst[-3:])  # O(1)
-
 # Сложность O(n)
-company_2 = {'Rosselhoz': 1, 'Sberbank': 2, 'MTS': 3, 'VTB': 4, 'Alpha': 5}
-val = [el for el in company_2.values()]  # O(n)
-print(*val[-3:])  # O(1)
+# 2 решение более эффективное, потому что в нем не заложен двойной проход по элементам, как в первом решении.
+
+# Сложность O(n^2)
+
+def sorted(rand_l):
+    for i in range(len(rand_l)):
+        lowest_value_index = i
+        for j in range(i + 1, len(rand_l)):
+            if rand_l[j][1] > rand_l[lowest_value_index][1]:
+                lowest_value_index = j
+                rand_l[i], rand_l[lowest_value_index] = rand_l[lowest_value_index], rand_l[i]
+                return rand_l[:3]
+
+
+data = {'Rosneft': 1, 'Lukoil': 2, 'Surgutneftegaz': 3, 'Bashkirneft': 4, 'Gazpromneft': 5}
+val = list(data.items())
+for i in sorted(val):
+    print(i[0], ':', i[1])
+
+#  Сложность O(n log n)
+
+data_2 = {'Rosselhoz':1, 'Sberbank':2, 'MTS': 3, 'Vtb': 4, 'Alpha': 5}
+
+val = list(data_2.items())
+val.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+    print(val[i][0], ':', val[i][1])
