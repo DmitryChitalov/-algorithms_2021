@@ -16,3 +16,33 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+# O(N^2)
+
+def min_value_1(list_check):
+    for item in list_check:
+        is_min = True
+        for i in list_check:
+            if item <= i and is_min:
+                is_min = True
+            else:
+                is_min = False
+                break
+        if is_min:
+            return item
+
+
+# O(N)
+def min_value_2(list_check):
+    min_value = list_check[0]
+    for item in list_check[1:]:
+        if item < min_value:
+            min_value = item
+    return min_value
+
+
+
+lst = [int(x) for x in input('Введите значения типа int через пробел: ').split()]
+
+print(min_value_1(lst))
+print(min_value_2(lst))
