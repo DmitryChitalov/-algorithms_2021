@@ -12,11 +12,29 @@
 Добавьте аналитику: что вы сделали и почему!!!
 Без аналитики задание не принимается
 """
+import timeit
 
 
 def func_1(nums):
+
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+####
+def func_2(nums):
+
+    return [i for i ,el in enumerate(nums) if  el% 2 == 0]
+
+print(timeit.timeit(lambda: func_1([i for i in range(1000)]), number=10000))
+print(timeit.timeit(lambda: func_2([i for i in range(1000)]), number=10000))
+
+"""
+обе  функции   линейные  со  сложностью  O(n),  а  значит что сложность
+алгоритма линейно растёт с увеличением входных данных. В  первом   варианте
+цикл выполняется от 0 до n. Т.е. чем больше n, тем больше раз выполнится цикл
+Другими словами, удвоение размера входных данных удвоит и необходимое время для выполнения алгоритма.
+Таким образом    употребление enumerate сокращает  время в 2 раза
+"""
