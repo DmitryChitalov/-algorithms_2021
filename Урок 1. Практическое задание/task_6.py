@@ -57,3 +57,16 @@ class TaskBoard:
 
     def current_revision(self):
         return self.revision_queue.elems[len(self.revision_queue.elems) - 1]
+if __name__ == '__main__':
+    task_board = TaskBoard()
+    task_board.to_current_queue('Task1')
+    task_board.to_current_queue('Task3')
+    task_board.to_current_queue('Task6')
+    print(task_board.cur_queue.elems)
+    print(task_board.current_task())
+    task_board.to_revision_task()
+    print(task_board.cur_queue.elems)
+    print(task_board.current_task())
+    task_board.to_revision_task()
+    print(task_board.cur_queue.elems)
+    print(task_board.current_task())
