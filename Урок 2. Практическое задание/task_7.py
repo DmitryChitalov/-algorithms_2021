@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def func_recursion_seven (number, verification_number):
+    if number != verification_number:
+        nu
+
+
+
+    return True
+
+
+if __name__ == '__main__':
+    my_number = int(input(f'Введите натуральное число '))
+    if func_recursion_seven(my_number, (my_number * (my_number + 1)) / 2))
