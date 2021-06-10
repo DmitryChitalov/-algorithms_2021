@@ -1,9 +1,8 @@
-import time
-from colorama import Fore, Back, Style
 import memory_profiler
 import timeit
-import sys
+from pympler import asizeof
 from numpy import array
+from random import randint
 
 def memory_time(func):
     def wrapper(*args):
@@ -15,54 +14,61 @@ def memory_time(func):
         time_diff = timeit.default_timer() - start_time
         return mem_diff, time_diff
     return wrapper
+
 """Первый пример"""
-class Traffic:
-    def __init__(self, color):
-        self.color = color
+#Старый код
+def numbers():
+    number = input('Введите натуральное число: ')
+    if not number.isdigit() or not int(number):  # После этого остаются только натуральные числа. Последним отсекаем '0'
+        print('Вы должны были ввести натуральное число. Попробуйте еще раз.')
+        return numbers()
+    return even_odd(int(number))
 
-    def traf(self):
-        print(Fore.RED + self.color)
-        time.sleep(7)
-        self.color = 'Yellow'
-        print(Fore.YELLOW + self.color)
-        time.sleep(3)
-        self.color = 'Green'
-        print(Fore.GREEN + self.color)
 
-class Traffic_opt():
-    __slots__ = ('color')
+@memory_time
+def wrap(number):
+    def even_odd(number):
+        values = [0, 0]
+        if not number // 10:
+            if number % 2:
+                values[1] += 1
+            else:
+                values[0] += 1
+            return values
+        return tuple(x + y for x, y in zip(even_odd(number // 10), even_odd(number % 10)))
 
-    def __init__(self, color):
-        self.color = color
+    return even_odd(number)
 
-    def traf(self):
-        print(Fore.RED + self.color)
-        time.sleep(7)
-        self.color = 'Yellow'
-        print(Fore.YELLOW + self.color)
-        time.sleep(3)
-        self.color = 'Green'
-        print(Fore.GREEN + self.color)
-if __name__ == '__main__':
-    traffic1 = Traffic('Red')
-    traffic2 = Traffic_opt('Red')
-    print(sys.getsizeof(traffic1))
-    print(sys.getsizeof(traffic2))
 
-""" Для оптимизации использовала __slots__. Это помогло немного изменить объем 
-заниманиемой памяти (все из-за небольшого количества атрибутов и впринципе 
-цифры сами по себе небольшие).
-Вот результаты измерений:
-48
-40
+@memory_time
+def even_odd1(number):
+    values = [0, 0]
+    while number:
+        if number % 10 % 2:
+            values[1] += 1
+        else:
+            values[0] += 1
+        number = number // 10
+    return values
+
+
+a = 1
+for i in range(200):
+    a *= randint(2, 1000)
+
+print(wrap(a))
+print(even_odd1(a))
 """
-
-
-
+(0.8046875, 0.1083732)
+(0.0, 0.10813709999999999)
+Можно заметить, что решение без рекурсии оптимальнее и по памяти и по времени.
+Что говорит нам о том, чтобы не использовать ее без 
+необходимости. 
+"""
 
 """Второй пример. Впринципе основан на том же самом способе уменьшитть объем 
 занимаемой памяти"""
-@memory_time
+
 class Road:
     def __init__(self, length, width):
         self._length = length
@@ -72,7 +78,7 @@ class Road:
         a = self._width * self._length*25*5/1000
         print("Масса асфальта равна ", a, "т")
 
-@memory_time
+
 class Road2:
     __slots__ = ("length2", "width2", "weight2", "thickness2")
     def __init__(self, length2, width2):
@@ -84,60 +90,58 @@ class Road2:
         a2 = self.width2 * self.length2 * self.weight2 * self.thickness2/1000
         print("Масса асфальта равна ", a2, "т")
 
-b = Road(5000, 20)
+b1 = Road(5000, 20)
 b2 = Road2(500, 20)
-print(b)
-print(b2)
-print(sys.getsizeof(b))
-print(sys.getsizeof(b2))
+print(asizeof.asizeof((b1)))
+print(asizeof.asizeof((b2)))
 """ Вот какой результат получился: 
 328
 192
-(0.00390625, 0.10726159999999996)
-(0.0, 0.10217589999999999)
 Можно заметить, что после добавления __slots__ программа стала занимать намного меньше памяти, чем раньше. Улучшение 
-почти в 2 раза
-Плюс можно заметить прирост производительности (помимо уменьшения использования памяти)
+почти в 2 раза. Оптимизация проведена
 """
 
 
 """Третий варинат"""
-def eratosphen(i):
-    n = 2
-    l = 100000
-    a = [j for j in range(l)]
-    a[1] = 0
-    while n<l:
-        if a[n] != 0:
-            m = n + n
-            while m < l:
-                a[m] = 0
-                m = m + n
-        n += 1
-    return [k for k in a if k != 0][i - 1]
-
-
+@memory_time
 def eratosphen1(i):
-    n = 0
-    l = 100000
-    a = array([j for j in range(l)])
-    a[1] = 0
-    for n in a:
+    length = 100000
+    list_of_numbers = [j for j in range(length)]
+    list_of_numbers[1] = 0
+    count = 0
+    for n in list_of_numbers:
         if n:
-            for k in range(n + 2, len(a)):
-                if a[k
-                ] % n == 0:
-                    a[k] = 0
-            n += 1
-            if n == i:
+            for _ in range(n + 2, len(list_of_numbers)):
+                if list_of_numbers[_] % n == 0:
+                    list_of_numbers[_] = 0
+            count += 1
+            if count == i:
                 return n
 
-print(sys.getsizeof(eratosphen(100)))
-print(sys.getsizeof(eratosphen1(100)))
+@memory_time
+def eratosphen2(i):
+    length = 100000
+    list_of_numbers = array([j for j in range(length)])
+    list_of_numbers[1] = 0
+    count = 0
+    for n in list_of_numbers:
+        if n:
+            for _ in range(n + 2, len(list_of_numbers)):
+                if list_of_numbers[_] % n == 0:
+                    list_of_numbers[_] = 0
+            count += 1
+            if count == i:
+                return n
+
+c1 = eratosphen1(100)
+c2 = eratosphen2(100)
+print(c1)
+print(c2)
 """Вот результаты измерений:
-56
-28
-Можно заметить, что array помог довольно-таки сильно уменьшить объем занимаемой памяти
-Второй способ показывает себя намного эффективней чем просто первый способ где 
-простой список
+(0.42578125, 0.7440925)
+(0.01171875, 2.8448868000000003)
+Можно заметить, что array помог уменьшить объем занимаемой памяти
+Он показывает себя эффективней по памяти, чем список.
+Однако, этот способ работает дольше. Вывод: нужно
+выбирать реализацию исходя из наших данных(ресурсов)
 """
