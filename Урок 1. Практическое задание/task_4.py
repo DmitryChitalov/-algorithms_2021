@@ -19,19 +19,20 @@
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
-# Второе решение лучше, т.к. мы имеем дело только с ключами и значениями
+#Вместо O(log n) - O(1)-первое задание. Итого первое решение выходит на O(n) с учетом перебора ключа:
+# значения с целью выяснения чья учетная запись активирована. Вывод по двум решениям не изменен.
 
-# Сложность 0(log n)
+# Сложность 0(1)
 data = {'Ivan Ivanov': ['ivan.ivanov@gmail.com', '12314', 1],
         'Sergey Petrov': ['petrov.serg@yandex.ru', '125ergfdf', 0],
         'Masha Vasileva': ['masha.vas1@mail.ru', 'cvbdg4a', 0]}
 # 0(N)
 for k, v in data.items():  # O(N)
-    if v[-1] == 0:  # O(N)
+    if v[-1] == 0:  # O(1)
         print(f'Вы не прошли аутентификацию {k}, пожалуйста, авторизуйтесь')
 
 
-def proverka(login, password):
+def check_access(login, password):
     a = data.get('Ivan Ivanov')  # O(1)
     if a[0] == login and a[1] == password:  # (log N)
         print(f'Доступ разрешен')
@@ -39,7 +40,7 @@ def proverka(login, password):
         print(f'У вас ошибка, попробуйте ещё раз')
 
 
-proverka('ivan.ivanov@gmail.com', '12314')
+check_access('ivan.ivanov@gmail.com', '12314')
 
 
 # ----------------------------------------------------------------------------------------
