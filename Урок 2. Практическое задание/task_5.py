@@ -23,21 +23,27 @@
 и допускается комб-е - цикл и рекурсия
 """
 
-def func_recursion_four (counter, element):
-    global result
-    if counter > 0:
-        counter -= 1
-        func_recursion_four(counter, (element * (-1)) / 2)
-        result += element
-    return result
 
-# 1 -0.5 0.25 сумма равна 1-0,5+0,25 = 0,5 + 0,25 = 0,75
-# 1 -0.5 0.25 -0,125 сумма равна 1-0,5+0,25 - 0,125  = 0,5 + 0,25 - 0,125 = 0,75 - 0,125 = 0,625
+def func_recursion_five(start, stop):
+    global my_list
+    if start < stop:
+        start += 1
+        func_recursion_five (start, stop)
+        my_list.insert (0, [start, chr (start)])
+    return my_list
 
+
+def func_five(*args):
+    list: start_number = args
+    func_recursion_five (start_number, (start_number + 10) if start_number < 121 else (start_number + 6))
+    str_var = ''
+    for el in my_list:
+        str_var += ' - '.join (map (str, el)) + ' '
+    my_list.clear ()
+    print (str_var)
 
 
 if __name__ == '__main__':
-    result = 0
-    print (f'Ваша сумма: ',
-           func_recursion_four (int (input (f'Найти сумму n элементов следующего ряда чисел:'
-                                 f' 1 -0.5 0.25 -0.125 ...  Введите количество элементов: ')), element = 1))
+    my_list = []
+    for start_number in range (31, 131, 10):
+        func_five (start_number)
