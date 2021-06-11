@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def func7(num: int, count: int = 0, my_string: = ''):
+    if num >= 1:
+        count += num
+        my_string
+
+
+    # if num >= 1:
+    #     if (num % 10) % 2 == 0:
+    #         even_count += num
+    #     else:
+    #         odd_count += 1
+    #     return func1(num // 10, even_count, odd_count)
+    # else:
+    #     print(f'Четных : {even_count}, нечетных {odd_count})')
+    #     return
+
+func7(5)
