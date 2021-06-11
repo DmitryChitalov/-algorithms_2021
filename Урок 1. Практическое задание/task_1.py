@@ -53,8 +53,8 @@ def check_3(lst_obj):
 
     Сложность: !!!
     """
-    lst_copy = list(lst_obj)                 # O(1)
-    lst_copy.sort()                          # O(1)
+    lst_copy = list(lst_obj)                 # O(n)
+    lst_copy.sort()                          # nlogn
     for i in range(len(lst_obj) - 1):        # O(N)
         if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
