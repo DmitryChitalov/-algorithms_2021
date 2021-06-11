@@ -51,10 +51,10 @@ class BinaryTree:
         # если у узла нет правого потомка
         try:
             if int(new_node) <= int(self.root):
-                raise RootValueError(f'Значение левого узла меньше корня')
+                raise RootValueError(f'Значение правого узла меньше корня')
         except RootValueError:
             # print(f'Значение меньше корня')
-            return f''
+            return f'Значение правого узла меньше корня'
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -113,3 +113,4 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 print(r.get_right_child().set_root_val(16))
 print(r.get_right_child().get_root_val())
+
