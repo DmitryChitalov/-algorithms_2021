@@ -16,3 +16,26 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+# O(n^2)
+def find_min_list_1(temp_list):
+    temp_min = temp_list[0]             # O(1)
+    for i in temp_list:                 # O(n)
+        for j in temp_list:             # O(n)
+            if j < i and temp_min > j:  # O(1)
+                temp_min = j            # O(1)
+    return temp_min                     # O(1)
+
+
+# O(n)
+def find_min_list_2(temp_list):
+    temp_min = temp_list[0]             # O(1)
+    for i in temp_list:                 # O(n)
+        if i < temp_min:                # O(1)
+            temp_min = i                # O(1)
+    return temp_min                     # O(1)
+
+
+test_list = [9, 5, 1, 7, 3, 4, 2, 8, 6]
+print(find_min_list_1(test_list))
+print(find_min_list_2(test_list))
