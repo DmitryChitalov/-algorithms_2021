@@ -16,3 +16,39 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+lst = [1, 2, 3, -5, 4, 5, 0, -3]
+
+
+# сложность О(n**2) - квадратичная
+
+def my_min2(list):
+    if len(list) == 0:  # O(1)
+        return None  # O(1)
+    result = list[0]  # O(1)
+    for i in list:  # O(n)
+        answer = True  # O(1)
+        for j in list:  # O(n)
+            if i > j:  # O(1)
+                answer = False  # O(1)
+        if answer:  # O(1)
+            result = i  # O(1)
+    return result  # O(1)
+
+
+print(my_min2(lst))
+
+
+# сложность О(n) - линейная
+
+def my_min1(list):
+    if len(list) == 0:  # O(1)
+        return None  # O(1)
+    result = list[0]  # O(1)
+    for i in range(1, len(list)):  # O(n)
+        if list[i] < result:  # O(1)
+            result = list[i]  # O(1)
+    return result  # O(1)
+
+
+print(my_min1(lst))
