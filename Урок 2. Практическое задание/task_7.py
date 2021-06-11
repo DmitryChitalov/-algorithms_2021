@@ -18,15 +18,14 @@
 import random
 
 
-def func_recursion_seven (number, verification_number, the_sum = 0):
-    print(the_sum, number, verification_number)
+def func_recursion_seven(number, verification_number, the_sum=0, counter=1):
+    the_sum = the_sum + counter
+    print(f' number, verification_number, the_sum, counter ', number, verification_number, the_sum, counter)
     if the_sum != verification_number:
-        number -= 1
-        the_sum += 1
-        func_recursion_seven(number, verification_number, the_sum)
-    return True
+        func_recursion_seven(number, verification_number, the_sum, counter = counter + 1)
+    return the_sum
 
 
 if __name__ == '__main__':
-    my_number = int(input(f'Введите натуральное число '))
-    func_recursion_seven(my_number, (my_number * (my_number + 1)) / 2)
+    my_number = int (input (f'Введите натуральное число '))
+    print(f'final ', func_recursion_seven (my_number, int((my_number * (my_number + 1)) / 2)))
