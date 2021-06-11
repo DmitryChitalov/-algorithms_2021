@@ -11,9 +11,10 @@
 Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
 
+
+""" Задание не выполнил, разбирался на разборе ДЗ в записи"""
 from timeit import timeit
 from random import randint
-
 
 def recursive_reverse(number):
     if number == 0:
