@@ -11,3 +11,60 @@ deque – это обобщение стеков и очередей.
 
 Не забудьте, что сравнивать, например, можно операцию appendleft дека и insert списка и т.д.
 """
+from collections import deque
+from timeit import timeit
+
+my_list = list(range(10000))
+my_deque = deque(range(10000))
+
+print('Заполнение:')
+print(f'Список: {timeit("my_list = list(range(10000))", globals=globals(), number=10000)}')
+print(f'Дек: {timeit("my_deque = deque(range(10000))", globals=globals(), number=10000)}')
+
+print('Добавление в конец:')
+print(f'Список: {timeit("my_list.append(10)", globals=globals(), number=1000000)}')
+print(f'Дек: {timeit("my_deque.append(10)", globals=globals(), number=1000000)}')
+
+print('Добавление в начало:')
+print(f'Список: {timeit("my_list.insert(0, 1)", globals=globals(), number=10000)}')
+print(f'Дек: {timeit("my_deque.appendleft(1)", globals=globals(), number=10000)}')
+
+print('Удаление с конца:')
+print(f'Список: {timeit("my_list.pop()", globals=globals(), number=1000000)}')
+print(f'Дек: {timeit("my_deque.pop()", globals=globals(), number=1000000)}')
+
+print('Удаление с начала:')
+print(f'Список: {timeit("my_list.pop(0)", globals=globals(), number=10000)}')
+print(f'Дек: {timeit("my_deque.popleft()", globals=globals(), number=10000)}')
+
+print('Поиск по индексу:')
+print(f'Список: {timeit("my_list.index(9999)", globals=globals(), number=10000)}')
+print(f'Дек: {timeit("my_deque.index(9999)", globals=globals(), number=10000)}')
+
+'''
+Заполнение:
+Список: 1.2290407
+Дек: 1.7775641000000002
+Добавление в конец:
+Список: 0.07286640000000011
+Дек: 0.05061910000000003
+Добавление в начало:
+Список: 8.9756164
+Дек: 0.00046549999999889735
+Удаление с конца:
+Список: 0.051484699999999606
+Дек: 0.04235139999999937
+Удаление с начала:
+Список: 0.021880300000001185
+Дек: 0.0004100999999998578
+Поиск по индексу:
+Список: 1.2665682
+Дек: 1.1691605000000003
+Заполнение происходит немного быстрее в списке,дек отстает
+Во всех остальных случаях дек быстрее,где-то даже в 10-100 раз быстрее
+
+Deques быстрее добавляет/удаляет элементы до конца или начала.
+Списки ускоряют добавление/удаление элементов в любую другую "среднюю" позицию.
+Вы также можете использовать вложения (индекс, значение) в списках, тогда как на deques вы можете добавлять только влево или вправо
+Найдено на просторах интернета
+'''
