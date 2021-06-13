@@ -13,3 +13,51 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+from random import uniform
+from timeit import timeit
+
+
+def merge_two_list(a, b):
+    i, j = 0, 0
+    result = []
+    while i < len(a) and j < len(b):
+        if a[i] < b[j]:
+            result.append(a[i])
+            i += 1
+        else:
+            result.append(b[j])
+            j += 1
+    result += a[i:] + b[j:]
+    return result
+
+
+def merge_sort(a):
+    if len(a) > 1:
+        return merge_two_list(merge_sort(a[:len(a) // 2]), merge_sort(a[len(a) // 2:]))
+    else:
+        return a
+
+
+def get_rand_list(n):
+    return [uniform(0, 50) for i in range(n)]
+
+
+ls10 = get_rand_list(10)
+ls100 = get_rand_list(100)
+ls1000 = get_rand_list(1000)
+
+for ls in (ls10, ls100, ls1000):
+    print(
+        f'Исходный массив: {ls}\nОтсортированный массив: {merge_sort(ls[:])}')
+    print(f'Время выполнения merge_sort: ', timeit(f'merge_sort({ls[:]})', globals=globals(), number=1000))
+
+"""
+merge_sort(ls10):  0.012715199999999996
+merge_sort(ls100):  0.1801318
+merge_sort(ls1000):  2.2921354
+
+Как и ожидалось, сортировка слиянием оказывается быстрее классических квадратичных сортировок,
+однако и у нее есть свои минусы: она не только сложнее в качестве реализации, но и требует
+дополнительных затрат памяти, так как не только использует рекурсию, но и хранит промежуточные
+массивы.
+"""
