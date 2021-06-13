@@ -16,3 +16,33 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+# алгоритм 1: каждый элемент сравнивается со всеми другими элементами списка -
+# Итоговая сложность: O(N^2) квадратичная
+
+def get_min_element_1(lst):
+    for i in range(len(lst)):  # O(N^2) или O((N + 1)^2) - квадратичная сложность вложенных циклов доминирующая
+        flag = False  # O(1)
+        for j in range(len(lst)):
+            if lst[i] < lst[j]:  # O(N)
+                flag = True  # O(1)
+            else:
+                flag = False  # O(1)
+        if flag == True:
+            min_el = lst[i]  # O(1)
+    return min_el  # O(1)
+
+
+# алгоритм 2:  итоговая сложность: O(N) линейная
+def get_min_element_2(lst):
+    min_el = lst[0]  # O(1)
+    for i in range(1, len(lst)):  # O(N) + O(1), где О(1) - сложность len(lst)
+        if lst[i] < min_el:  # O(N)
+            min_el = lst[i]  # O(1)
+    return min_el  # O(1)
+
+
+my_list = [148, 789, 44, 6, -77, 100]
+print(get_min_element_1(my_list))
+print(get_min_element_2(my_list))
