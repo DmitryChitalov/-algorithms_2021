@@ -48,10 +48,10 @@ def counting(n):
         number = str(arr[i])  # здесь было: number = input("Введите чило: ")
         listed[number] = list(number)
     arr = [int(''.join(x), 16) for x in listed.values()]
-    summa = list(hex(sum(arr)))[2:]
+    summ = list(hex(sum(arr)))[2:]
     multi = list(hex(reduce(lambda x, y: x * y, arr)))[2:]
     return f"""Сохраняю: {[x for x in listed.values()]}
-Сумма из примера: {summa}
+Сумма из примера: {summ}
 Произведение: {multi}
 """
 
@@ -75,10 +75,10 @@ def counting2(n):
         number = str(list_res[i])
         listed[number] = (list(x for x in number))  # решил поставить генератор или же generator expression
     arr = [int(''.join(x), 16) for x in listed.values()]
-    summa = list(hex(sum(arr)))[2:]
+    summ = list(hex(sum(arr)))[2:]
     multi = list(hex(reduce(lambda x, y: x * y, arr)))[2:]
     return f"""Сохраняю: {[x for x in listed.values()]}
-Сумма из примера: {summa}
+Сумма из примера: {summ}
 Произведение: {multi}
 """
 
