@@ -28,3 +28,34 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def rek_fun():
+    try:
+        inp_op = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if inp_op == '0':
+            return 'Выход.'
+        elif inp_op not in '+-*/':
+            print('Неккоректный ввод операции. Исправтесь')
+            return f'{rek_fun()}'
+        inp_num1 = int(input('Введите первое число: '))
+        inp_num2 = int(input('Введите второе число: '))
+        if inp_op == '+':
+            print(f'Ваш результат {inp_num1 + inp_num2}')
+            return f'{rek_fun()}'
+        elif inp_op == '-':
+            print(f'Ваш результат {inp_num1 - inp_num2}')
+            return f'{rek_fun()}'
+        elif inp_op == '*':
+            print(f'Ваш результат {inp_num1 * inp_num2}')
+            return f'{rek_fun()}'
+        elif inp_op == '/':
+            print(f'Ваш результат {inp_num1 / inp_num2}')
+            return f'{rek_fun()}'
+    except ValueError:
+        print(f'Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        return f'{rek_fun()}'
+    except ZeroDivisionError:
+        print(f'Ай ай ай! НЕЛЬЗЯ ДЕЛИТЬ НА НОЛЬ! Исправтесь')
+        return f'{rek_fun()}'
+
+print(rek_fun())
