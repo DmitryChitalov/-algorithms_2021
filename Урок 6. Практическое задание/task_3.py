@@ -5,3 +5,24 @@
 Придумать как это решить!
 Есть очень простое решение
 """
+from memory_profiler import profile
+
+
+@profile
+def func_1(count):
+    if count == 1:
+        return 1
+    result = 1
+    result += (-1) * (func_1(count - 1) / 2)
+    return result
+
+
+@profile
+def func_2(num):
+    return func_1(num)
+
+
+func_1(10)
+
+# Профилирование функции с рекурсией приводит к тому что профилируется каждый вызов функции
+# Поэтому необходимо обернуть рекурсию в еще одну функцию.
