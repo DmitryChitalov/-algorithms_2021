@@ -16,3 +16,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def fun_proof(first_n, n, result):
+    if n == first_n or n == 0:
+        result += n
+        return result
+    else:
+        return fun_proof(first_n + 1, n, result + first_n)
+
+n = int(input('Введите `n` = '))
+print(f'1+2+...+n = n*(n+1)/2\nresult  fun_proof:  {fun_proof(1, n, 0)}'
+      f'\nresult (n*(n+1)/2): {int(n*(n+1)/2)}\n{fun_proof(1, n, 0) == n*(n+1)/2}')
