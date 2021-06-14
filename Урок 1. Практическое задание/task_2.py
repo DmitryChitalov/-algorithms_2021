@@ -16,3 +16,31 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+# Сложность: O(n) - линейная
+def get_min_value(lst):
+    min_value = lst[0]      # O(1) - константная
+    for el in lst:          # O(n) - линейная
+        if el < min_value:  # O(1) - константная
+            min_value = el  # O(1) - константная
+    return min_value        # O(1) - константная
+
+
+print(get_min_value([3, 1, 5, 8, 0, 10]))
+
+
+# Сложность: O(n**2) - квадратичная
+def get_min_value_each_for_each(lst):
+    min_value = lst[0]              # O(1) - константная
+    for val in lst:                 # O(n) - линейная
+        temp_min = val              # O(1) - константная
+        for el in lst:              # O(n) - линейная
+            if el < val:            # O(1) - константная
+                temp_min = el       # O(1) - константная
+        if min_value > temp_min:    # O(1) - константная
+            min_value = temp_min    # O(1) - константная
+    return min_value                # O(1) - константная
+
+
+print(get_min_value_each_for_each([3, 88, 5, 8, 6, 10]))

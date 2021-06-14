@@ -20,3 +20,26 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+accounting_dict = {'adidas': 1000000, 'puma': 6000000, 'reebok': 3000000, 'nike': 4000000}
+
+# Сложность: O(nlogn) - линейно-логарифмическая
+def max_profit_1(accounting):
+    return sorted(accounting, key=accounting.get)[-1:-4:-1] # O(nlogn) - линейно-логарифмическая
+
+print(*max_profit_1(accounting_dict))
+
+# Сложность: # O(7n) - линейная
+def max_profit_2(accounting):
+    temp_accounting = dict(accounting)                                      # O(n) - линейная
+    max_profit = []                                                         # O(1) - константная
+    for _ in range(3):                                                      # O(3) - константная
+        max_profit.append(max(temp_accounting, key=temp_accounting.get))    # O(n) - линейная
+        temp_accounting.pop(max(temp_accounting, key=temp_accounting.get))  # O(n) - линейная
+    return max_profit                                                       # O(1) - константная
+
+
+print(*max_profit_2(accounting_dict))
+
+
+""" Второй метод эффективнее, т.к. сложность алгоритма ниже, несмотря на худшую читаемость кода"""
