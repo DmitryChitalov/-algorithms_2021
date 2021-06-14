@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def gen_rand_num(rand_num, attempts):
+    inp_num = int(input('\nОтгадайте число от 0 до 100: '))
+    if inp_num == rand_num:
+        return 'Поздравляю, Вы отгадали число!'
+    elif attempts == 1:
+        return 'Вы проиграли, попытки кончились =('
+    elif inp_num > rand_num:
+        attempts -= 1
+        print(f'Вы не угадали, число больше, чем нужно.\nСчётчик попыток: {attempts}.')
+        return gen_rand_num(rand_num, attempts)
+    elif inp_num < rand_num:
+        attempts -= 1
+        print(f'Вы не угадали, число меньше, чем нужно.\nСчётчик попыток: {attempts}.')
+        return gen_rand_num(rand_num, attempts)
+
+print(gen_rand_num(random.randrange(0,100), 10))
