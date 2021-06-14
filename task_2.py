@@ -1,88 +1,52 @@
 """
-Задание 2.
+2. Написать программу сложения и умножения двух шестнадцатиричных чисел.
+При этом каждое число представляется как массив, элементы которого это цифры числа.
+Например, пользователь ввёл A2 и C4F. Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
+Сумма чисел из примера: [‘C’, ‘F’, ‘1’], произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
 
-Приведен код, который формирует из введенного числа
-обратное по порядку входящих в него цифр.
-Задача решена через рекурсию
-Выполнена попытка оптимизировать решение через мемоизацию.
-Сделаны замеры обеих реализаций.
+Подсказка:
+Для решения задачи обязательно примените какую-нибудь коллекцию из модуля collections
+Для лучшее освоения материала можете даже сделать несколько решений этого задания,
+применив несколько коллекций из модуля collections
+Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
+(в частности по перегрузке методов)
 
-Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
-Будьте внимательны, задание хитрое. Не все так просто, как кажется.
+__mul__
+__add__
+
+Пример:
+Например, пользователь ввёл A2 и C4F.
+Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
+Сумма чисел из примера: [‘C’, ‘F’, ‘1’]
+Произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
+
+1. вариант
+defaultdict(list)
+int(, 16)
+reduce
+
+2. вариант
+class HexNumber:
+    __add__
+    __mul__
+
+hx = HexNumber
+hx + hx
+hex()
 """
+#Вариант 1
 
-from timeit import timeit
-from random import randint
+from collections import defaultdict
+from functools import reduce
 
+user_numbers_dict = defaultdict(list)
 
-def recursive_reverse(number):
-    if number == 0:
-        return ''
-    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+user_numbers_dict.update({'first_num': list(input("Введите первое шестнадцатиричное число: "))})
+user_numbers_dict.update({'second_num': list(input("Введите второе шестнадцатиричное число: "))})
 
-
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
-
-print('Не оптимизированная функция recursive_reverse')
-print(
-    timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
-
-
-def memoize(f):
-    cache = {}
-
-    def decorate(*args):
-
-        if args in cache:
-            return cache[args]
-        else:
-            cache[args] = f(*args)
-            return cache[args]
-    return decorate
-
-
-@memoize
-def recursive_reverse_mem(number):
-    if number == 0:
-        return ''
-    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
-
-
-print('Оптимизированная функция recursive_reverse_mem')
-print(
-    timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
-
-
-"""
-При нескольких запусках программы время их выполнения практически не отличалось, так как кэш сохранялся и использовался
-при каждом запуске, и все хранилось в словаре. Так как рекурсия используется для замены цикла, а вычисление необходимо 
-провести лишь раз, меморизация здесь не нужна.
-"""
+hex_add = list(hex(sum([int(''.join(i), 16) for i in user_numbers_dict.values()])).upper()[2:])
+hex_mul = list(hex(reduce((lambda first_num, second_num: first_num * second_num),
+                          [int(''.join(i), 16) for i in user_numbers_dict.values()])).upper()[2:])
+print(hex_add)
+print(hex_mul)
+print(user_numbers_dict)

@@ -1,81 +1,95 @@
 """
-Задание 4.
+Задача 4.
+Поработайте с обычным словарем и OrderedDict.
+Выполните операции с каждым их них (заполнение, получение элемента) и сделайте замеры.
+Опишите полученные результаты, сделайте выводы.
 
-Приведены два алгоритма. В них определяется число,
-которое встречается в массиве чаще всего.
-
-Сделайте профилировку каждого алгоритма через timeit
-
-Попытайтесь написать третью версию, которая будет самой быстрой.
-Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
-
-Без аналитики задание считается не принятым!
+И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях?
 """
+from collections import OrderedDict
 from timeit import timeit
 
-array = [1, 3, 1, 3, 4, 5, 1]
+
+def create_dct():
+    dct = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10}
+    return dct
 
 
-def func_1():
-    m = 0
-    num = 0
-    for i in array:
-        count = array.count(i)
-        if count > m:
-            m = count
-            num = i
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {m} раз(а)'
+def create_odct():
+    odct = OrderedDict([('a', 1), ('b', 2), ('c', 3), ('d', 4), ('e', 5),
+                    ('f', 6), ('g', 7), ('h', 8), ('i', 9), ('j', 10)])
+    return odct
 
 
-def func_2():
-    new_array = []
-    for el in array:
-        count2 = array.count(el)
-        new_array.append(count2)
-
-    max_2 = max(new_array)
-    elem = array[new_array.index(max_2)]
-    return f'Чаще всего встречается число {elem}, ' \
-           f'оно появилось в массиве {max_2} раз(а)'
+dct = create_dct()
+odct = create_odct()
 
 
-def func_3(user_array):
-    new_array = {}
-    for el in user_array:
-        if not new_array.get(el):
-            count2 = user_array.count(el)
-            new_array[el] = count2
-    max_el = max(new_array, key=lambda x: new_array[x])
-    return f'Чаще всего встречается число {max_el}, ' \
-           f'оно появилось в массиве {new_array[max_el]} раз(а)'
+def iterate(dict):
+    for key, value in dict.items():
+        print(key, "->", value)
 
 
-print(func_1())
-print(func_2())
-print(func_3(array))
+print("Замеры времени для функций создания обычного и упорядоченного словарей: ")
+dct_time = timeit("create_dct()", globals=globals(), number=100)
+print(f"Dict: {dct_time}")
+odct_time = timeit("create_odct()", globals=globals(), number=100)
+print(f"OrderedDict: {odct_time}")
 
-print(timeit("func_1()", globals=globals(), number=100))
-print(timeit("func_2()", globals=globals(), number=100))
-print(timeit("func_3(array)", globals=globals(), number=100))
+print("Замеры времени для функции values обычного и упорядоченного словарей: ")
+dct_time = timeit("dct.values()", globals=globals(), number=100)
+print(f"Dict: {dct_time}")
+odct_time = timeit("odct.values()", globals=globals(), number=100)
+print(f"OrderedDict: {odct_time}")
+
+print("Замеры времени для функции keys обычного и упорядоченного словарей: ")
+dct_time = timeit("dct.keys()", globals=globals(), number=100)
+print(f"Dict: {dct_time}")
+odct_time = timeit("odct.keys()", globals=globals(), number=100)
+print(f"OrderedDict: {odct_time}")
+
+print("Замеры времени для функции update обычного и упорядоченного словарей: ")
+dct_time = timeit("dct.update({3: 5})", globals=globals(), number=100)
+print(f"Dict: {dct_time}")
+odct_time = timeit("odct.update({3: 5})", globals=globals(), number=100)
+print(f"OrderedDict: {odct_time}")
+
+print("Замеры времени для функции items обычного и упорядоченного словарей: ")
+dct_time = timeit("dct.items()", globals=globals(), number=100)
+print(f"Dict: {dct_time}")
+odct_time = timeit("odct.items()", globals=globals(), number=100)
+print(f"OrderedDict: {odct_time}")
+
+print("Замеры времени для итерации элементов обычного и упорядоченного словарей: ")
+dct_time = timeit("iterate(dct)", globals=globals(), number=100)
+print(f"Dict: {dct_time}")
+odct_time = timeit("iterate(odct)", globals=globals(), number=100)
+print(f"OrderedDict: {odct_time}")
 
 """
-Запуск 1:
-0.0002176999999999943
-0.00026480000000000253
-0.00022330000000000266
+Замеры времени для функций создания обычного и упорядоченного словарей: 
+Dict: 5.360000000000087e-05
+OrderedDict: 0.00023019999999999985
 
-Запуск 2:
-0.00021469999999999823
-0.0003029999999999977
-0.0002129999999999979
+Замеры времени для функции values обычного и упорядоченного словарей: 
+Dict: 8.899999999999186e-06
+OrderedDict: 1.0200000000001874e-05
 
-Запуск 3:
-0.00016269999999999826
-0.0003339999999999975
-0.00044750000000000345
+Замеры времени для функции keys обычного и упорядоченного словарей: 
+Dict: 8.099999999996998e-06
+OrderedDict: 8.700000000000374e-06
 
-Исходя из замеров нескольких запусков, можно сделать вывод о том, что первая реализация является самой эффективной,
-а вторая и третья выполняются примерно в одно время, хотя вторая оказывается быстрее чаще, чем третья. Ускорить задачу 
-не получилось.
+Замеры времени для функции update обычного и упорядоченного словарей: 
+Dict: 1.4800000000002311e-05
+OrderedDict: 2.8300000000001935e-05
+Замеры времени для функции items обычного и упорядоченного словарей: 
+Dict: 4.9999999999980616e-06
+OrderedDict: 5.100000000000937e-06
+
+Замеры времени для итерации элементов обычного и упорядоченного словарей: 
+Dict: 0.012615599999999998
+OrderedDict: 0.015033499999999998
+
+Обычный словарь заполняется быстрее упорядосенного, да и все рассмотренные функции занимают меньше времени выполнения.
+Таким образом, использовать OrderedDict в 3.6 и более поздних версиях использовать особо смысла нет
 """

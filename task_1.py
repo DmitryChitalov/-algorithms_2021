@@ -1,80 +1,56 @@
 """
-Задание 1.
+1.	Пользователь вводит данные о количестве предприятий, их наименования и прибыль
+за 4 квартала (т.е. 4 отдельных числа) для каждого предприятия.
+Программа должна определить среднюю прибыль (за год для всех предприятий)
+и вывести наименования предприятий, чья прибыль выше среднего и отдельно
+вывести наименования предприятий, чья прибыль ниже среднего.
 
-Приведен код, который позволяет сохранить в
-массиве индексы четных элементов другого массива
+Подсказка:
+Для решения задачи обязательно примените какую-нибудь коллекцию из модуля collections.
 
-Сделайте замеры времени выполнения кода с помощью модуля timeit
+Пример:
+Введите количество предприятий для расчета прибыли: 2
+Введите название предприятия: Фирма_1
+через пробел введите прибыль данного предприятия
+за каждый квартал(Всего 4 квартала): 235 345634 55 235
 
-Оптимизируйте, чтобы снизить время выполнения
-Проведите повторные замеры.
+Введите название предприятия: Фирма_2
+через пробел введите прибыль данного предприятия
+за каждый квартал(Всего 4 квартала): 345 34 543 34
 
-Добавьте аналитику: что вы сделали и почему!!!
-Без аналитики задание не принимается
+Средняя годовая прибыль всех предприятий: 173557.5
+Предприятия, с прибылью выше среднего значения: Фирма_1
+
+Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
-from random import randint
-from timeit import timeit, repeat, default_timer
+from collections import namedtuple
 
+firms_amount = int(input("Введите количество предприятий: "))
+firms = namedtuple("firm", "firm_name qv_1 qv_2 qv_3 qv_4")
+counter = 0
+firm_profit = {}
+while firms_amount > counter:
+    firms_tuple = firms(firm_name=input("Введите название предприятия: "), qv_1=int(
+                input("Введите прибыль за 1-ый квартал: ")), qv_2=int(
+                input("За 2-ой квартал: ")), qv_3=int(
+                input("За 3-ий квартал: ")), qv_4=int(
+                    input("За 4-ый квартал: ")))
+    counter += 1
 
-def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+    firm_profit[firms_tuple.firm_name] = firms_tuple.qv_1 + firms_tuple.qv_2 + firms_tuple.qv_3 + firms_tuple.qv_1
 
+average_profit = 0
+for profit in firm_profit.values():
+    average_profit += profit
+average_profit = average_profit / firms_amount
+high_profit = []
+low_profit = []
+for key, value in firm_profit.items():
+        if value > average_profit:
+            high_profit.append(key)
+        elif value < average_profit:
+            low_profit.append(key)
 
-def func_simplified(nums):
-    new_arr = [number for number, el in enumerate(nums) if el % 2 == 0]
-    return new_arr
-
-
-nums = [randint(1, 10000) for el in range(1, 100000)]
-
-print(timeit("func_1(nums)", globals=globals(), number=100))
-print(timeit("func_simplified(nums)", globals=globals(), number=100))
-
-
-setup = """
-from random import randint
-nums = [randint(1, 10000) for el in range(1, 100000)]
-def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
-def func_simplified(nums):
-    new_arr = [number for number, el in enumerate(nums) if el % 2 == 0]
-    return new_arr
-"""
-
-statements = ["func_1(nums)", "func_simplified(nums)"]
-
-for st in statements:
-    print(repeat(st, setup, default_timer, 3, 100))
-
-"""
-Запуск 1:
-0.7034294999999999
-0.5823429
-[0.6568506000000003, 0.6559984000000001, 0.6493831000000001]
-[0.5730233000000005, 0.5733457, 0.5736523]
-
-Запуск 2:
-0.706507
-0.5646665000000001
-[0.6496501999999997, 0.7308712000000002, 0.6764063999999999]
-[0.6501956000000004, 0.6623153000000004, 0.5641611000000006]
-
-Запуск 3:
-0.6644796000000001
-0.568535
-[0.6459163000000001, 0.6473067000000001, 0.6440108000000002]
-[0.5721562999999996, 0.5641093000000001, 0.5643495999999999]
-
-В 3 из 3 запусков функция с генератором выполняется быстрее, чем функция с итератором, 
-так как намного эффективнее используют память при работе с большими наборами данных.
-Также, была попытка написать код через лямбду, но применение данной функии потребовало использование еще 
-встроенных функций list и filter, что значительно увеличивало время работы функции.
-"""
+print(f"Средняя прибыль для {firms_amount} компаний - {average_profit}")
+print(f"Компании с прибылью выше среднего: {' '.join(high_profit)}")
+print(f"Компании с прибылью ниже среднего: {' '.join(low_profit)}")
