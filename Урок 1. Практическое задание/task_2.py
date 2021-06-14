@@ -16,3 +16,20 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+#сложность O(N)
+def min_func_1(lst_obj):
+    min_num = lst_obj[0]
+    for j in range(len(lst_obj)):
+        if lst_obj[j] < min_num:
+            min_num = lst_obj[j]
+    return min_num
+
+#сложность O(N^2)
+def min_func_2(lst_obj):
+    min_num = lst_obj[0]
+    for j in range(len(lst_obj)):
+        lst_copy = lst_obj[:]
+        if lst_copy[j] < min_num:
+            min_num = lst_copy[j]
+    return min_num
