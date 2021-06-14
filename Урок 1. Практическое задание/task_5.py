@@ -28,3 +28,64 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# 2)
+# stek = []
+# stek_stek = []
+# while True:
+#     tarelka = input("добавь в стэк\n")
+#     if tarelka == '':
+#         stek_stek.append(stek)
+#         break
+#     if len(stek) < 3:               # стопка
+#         stek.append(tarelka)
+#     else:
+#         stek_stek.append(stek)
+#         stek = []                   # если тут stek.clear() то очищало и stek_stek ?
+#         stek.append(tarelka)
+#
+# print(stek_stek)
+# print("стопок в стэке =", len(stek_stek))
+# # извлечение из стэка
+# print("извлекаем из стэка")
+# for i in range(len(stek_stek)):
+#     print(f'стопка {i + 1}')
+#     tmp = stek_stek.pop(-1)
+#     for j in range(len(tmp)):
+#         print(tmp.pop(-1))
+# print('стэк пуст')
+
+# 1)
+class Stek:
+    _stek = []
+    _stek_tmp = []
+
+    @staticmethod
+    def stek_add(tmp):
+        if len(Stek._stek_tmp) < 3:
+            Stek._stek_tmp.append(tmp)
+        else:
+            Stek._stek.append(Stek._stek_tmp)
+            Stek._stek_tmp = []
+            Stek._stek_tmp.append(tmp)
+
+        print(Stek._stek + Stek._stek_tmp)
+
+    @staticmethod
+    def stek_pop():
+        print(Stek._stek)
+
+
+a = Stek()
+a.stek_add(1)
+a.stek_add(2)
+a.stek_add(3)
+a.stek_add(4)
+a.stek_add(5)
+a.stek_add(6)
+a.stek_add(7)
+a.stek_add(8)
+
+a.stek_pop()
+a.stek_pop()
