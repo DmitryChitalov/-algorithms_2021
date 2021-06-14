@@ -22,7 +22,7 @@ def check_1(lst_obj):
 
     Сложность: О(n).
     """
-    lst_to_set = set(lst_obj)  # О(1)
+    lst_to_set = set(lst_obj)  # О(n)
     return lst_to_set          # О(1)
 
 
@@ -35,7 +35,7 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: О(n).
+    Сложность: О(n**2).
     """
     for j in range(len(lst_obj)):          # О(n)
         if lst_obj[j] in lst_obj[j+1:]:    # О(n)
@@ -53,7 +53,7 @@ def check_3(lst_obj):
 
     Сложность: О(n log n)
     """
-    lst_copy = list(lst_obj)                 # О(1)
+    lst_copy = list(lst_obj)                 # О(n)
     lst_copy.sort()                          # О(n log n)
     for i in range(len(lst_obj) - 1):        # О(n)
         if lst_copy[i] == lst_copy[i+1]:     # О(1)
