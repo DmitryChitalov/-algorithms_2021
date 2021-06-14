@@ -12,3 +12,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def sum_rec(first_n, n, el, result):
+    if n == 0:
+        return f'Количество элементов: {first_n}, их сумма: {result}'
+    else:
+        return sum_rec(first_n, n - 1, (el - el / 2) * (-1), result + el)
+
+inp_n = int(input('Введите количество элементов: '))
+print(sum_rec(inp_n, inp_n, 1, 0))
