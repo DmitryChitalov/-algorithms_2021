@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def table_char(num, counter):
+    if num == 127:
+        return f'{num} - {chr(num)}'
+    else:
+        if counter == 10:
+            print(f'{num} - {chr(num)}')
+            counter = 1
+            return f'{table_char(num+1, counter)}'
+        else:
+            print(str(num) + ' - ' + chr(num), end=' ')
+            return f'{table_char(num + 1, counter + 1)}'
+
+
+print(table_char(32, 1))
