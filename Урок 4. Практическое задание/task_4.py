@@ -12,10 +12,24 @@
 Без аналитики задание считается не принятым!
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+# Массив возьмем из произвольных чисел подлиннее, как в первом задании, чтоб было интереснее. В обоих решениях
+# для каждого элемента списка применяется метод count. В 1-м случае при каждом использовании метода мы сравниваем
+# результат с запомненным максимумом из предыдущих и заменяем его, если текущее, значение больше, во 2-м случае
+# все значения полученные от метода count кидаем в новый список а потом применяем функцию максимум и по индексу
+# ищем сам элемент. По смыслу и аремени одно и то же. Лаконичность можно получить беря максимум по ключу функции
+# лямбда, которая будет применять метод count к каждому элементу. Но прибавки к скорости не получится, о чем нам
+# сообщает и timeit и cProfile. Можно улучшить вторую функцию кидая все не в число повторов элемента не в
+# список, а словарь, ключом будет наш элемент, а значением число повторов. Тогда мы моментально сможем получить
+# часто встречающийся элемент с числом встреч без использования индекса. Это реализовано в функции 4, также т.к.
+# индекс элемента нам в случае со словарем не нужен, т.к. элемент уже есть в ключах, можно по повторяющимся
+# элементам не считать кол-во встреч. Время исполнения улучшилось, лаконичность пострадала.
 
 
-def func_1():
+from cProfile import run
+from random import randint
+from timeit import timeit
+
+def func_1(array):
     m = 0
     num = 0
     for i in array:
@@ -27,7 +41,7 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+def func_2(array):
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -39,5 +53,33 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3(array):
+    max_count = max(array, key=lambda el: array.count(el))
+    return f'Чаще всего встречается число {max_count}, ' \
+           f'оно появилось в массиве {array.count(max_count)} раз(а)'
+
+
+def func_4(array):
+    new_array = {}
+    for el in array:
+        if not new_array.get(el):
+            count2 = array.count(el)
+            new_array[el] = count2
+    max_el = max(new_array, key=lambda x: new_array[x])
+    return f'Чаще всего встречается число {max_el}, ' \
+           f'оно появилось в массиве {new_array[max_el]} раз(а)'
+
+
+nums = [randint(1, 1000) for el in range(1, 2000)]
+
+
+print(timeit("func_1(nums)", globals=globals(), number=100))
+print(timeit("func_2(nums)", globals=globals(), number=100))
+print(timeit("func_3(nums)", globals=globals(), number=100))
+print(timeit("func_4(nums)", globals=globals(), number=100))
+
+
+run('func_1(nums)')
+run('func_2(nums)')
+run('func_3(nums)')
+run('func_4(nums)')

@@ -34,3 +34,29 @@ hx = HexNumber
 hx + hx
 hex()
 """
+# Насильно применяю defaultdict, потому что не понял, каким боком он тут полезен. Честно старался.
+
+from collections import defaultdict
+
+
+def add_to_dict(user_dict, el):
+    user_dict[el] = list(el)
+
+
+a1 = input(f'Введите первое шестнадцатиричное число: ')
+a2 = input(f'Введите второе шестнадцатиричное число: ')
+d = defaultdict(int)
+add_to_dict(d, a1)
+add_to_dict(d, a2)
+sum16 = hex(int(a1, 16)+int(a2, 16))[2:]
+mlt16 = hex(int(a1, 16)*int(a2, 16))[2:]
+add_to_dict(d, sum16)
+add_to_dict(d, mlt16)
+print(d)
+print(f'Сумма чисел из примера: {d[sum16]}')
+print(f'Произведение чисел из примера: {d[mlt16]}')
+
+
+
+
+
