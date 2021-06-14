@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def char_descriptor(count=32):
+    max_count = 128
+    space = ''
+    if count == max_count:
+        return
+    else:
+        if count % 10 == 2:
+            space = '\n'
+        print(f'{space}{count}-{chr(count)}', end='\t')
+        char_descriptor(count + 1)
+
+
+char_descriptor()

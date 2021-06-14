@@ -12,3 +12,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+el = 1
+summ = 1
+
+def sequence_sum(n, count=1):
+    global summ, el
+    if count == n:
+        return
+    else:
+        el = el / 2 * (-1)
+        summ = summ + el
+        sequence_sum(n, count+1)
+    return summ
+
+
+print(sequence_sum(int(input('Input the number of elements: '))))
