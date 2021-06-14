@@ -23,3 +23,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+firms_amount = int(input("Введите количество предприятий: "))
+firms = namedtuple("firm", "firm_name qv_1 qv_2 qv_3 qv_4")
+counter = 0
+firm_profit = {}
+while firms_amount > counter:
+    firms_tuple = firms(firm_name=input("Введите название предприятия: "), qv_1=int(
+                input("Введите прибыль за 1-ый квартал: ")), qv_2=int(
+                input("За 2-ой квартал: ")), qv_3=int(
+                input("За 3-ий квартал: ")), qv_4=int(
+                    input("За 4-ый квартал: ")))
+    counter += 1
+
+    firm_profit[firms_tuple.firm_name] = firms_tuple.qv_1 + firms_tuple.qv_2 + firms_tuple.qv_3 + firms_tuple.qv_1
+
+average_profit = 0
+for profit in firm_profit.values():
+    average_profit += profit
+average_profit = average_profit / firms_amount
+high_profit = []
+low_profit = []
+for key, value in firm_profit.items():
+        if value > average_profit:
+            high_profit.append(key)
+        elif value < average_profit:
+            low_profit.append(key)
+
+print(f"Средняя прибыль для {firms_amount} компаний - {average_profit}")
+print(f"Компании с прибылью выше среднего: {' '.join(high_profit)}")
+print(f"Компании с прибылью ниже среднего: {' '.join(low_profit)}")

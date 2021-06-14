@@ -34,3 +34,19 @@ hx = HexNumber
 hx + hx
 hex()
 """
+#Вариант 1
+
+from collections import defaultdict
+from functools import reduce
+
+user_numbers_dict = defaultdict(list)
+
+user_numbers_dict.update({'first_num': list(input("Введите первое шестнадцатиричное число: "))})
+user_numbers_dict.update({'second_num': list(input("Введите второе шестнадцатиричное число: "))})
+
+hex_add = list(hex(sum([int(''.join(i), 16) for i in user_numbers_dict.values()])).upper()[2:])
+hex_mul = list(hex(reduce((lambda first_num, second_num: first_num * second_num),
+                          [int(''.join(i), 16) for i in user_numbers_dict.values()])).upper()[2:])
+print(hex_add)
+print(hex_mul)
+print(user_numbers_dict)
