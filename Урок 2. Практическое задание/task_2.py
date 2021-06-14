@@ -18,3 +18,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+# Можно ли func_1 считать рекурсией ? это мой первый вариант я его написал и мне показалось не правильно
+# что ф-ция сразу щитает а новый вызов лиш добовляет к значениям (или так дапустимо ?)
+def func_1(num_x, even=0, not_even=0):
+    if num_x == 0:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even}, {not_even})')
+    else:
+        even += int(num_x % 2 == 0)
+        not_even += int(num_x % 2 == 0)
+        func_1(num_x//10, even, not_even)
+
+
+def func_even(num_x):
+    if num_x // 10 == 0:
+        return int(num_x % 2 == 0)
+    else:
+        return func_even(num_x % 2) + func_even(num_x//10)
+
+
+try:
+    num_1 = int(input('Введите целое число. '))
+    if nun_1 != 0:
+        func_1(num_1)
+    x = func_even(num_1)
+    y = len(str(num_1)) - x
+    print(f'Количество четных и нечетных цифр в числе равно: ({x}, {y})')
+except TypeError:
+    print('Вы ввели не цыфру.')
+except ValueError:
+    print('Вы ввели не целое число.')
+
