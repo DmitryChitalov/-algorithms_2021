@@ -22,3 +22,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def shifter(num, result):
+    if num == 0:
+        return f'Перевернутое число: {result}'
+    remains = num % 10
+    return shifter(num // 10, result + str(remains))
+
+
+inp_num = int(input('Введите число, которое требуется перевернуть: '))
+print(shifter(inp_num, ''))
