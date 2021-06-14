@@ -28,3 +28,61 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self, max_size):
+        self.elements = [[]]
+        self.max_size = max_size
+
+    def is_empty(self):
+        return self.elements == [[]]
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        if len(self.elements[len(self.elements) - 1]) < self.max_size:
+            self.elements[len(self.elements) - 1].append(el)
+        else:
+            self.elements.append([])
+            self.elements[len(self.elements) - 1].append(el)
+
+    def pop_out(self):
+        plate = self.elements[len(self.elements) - 1].pop()
+        if len(self.elements[len(self.elements) - 1]) == 0:
+            self.elements.pop()
+        return f'Удалена тарелка {plate}'
+
+    def get_val(self):
+        return self.elements[len(self.elements) - 1][len(self.elements[len(self.elements) - 1]) - 1]
+
+    def stack_size(self):
+        sum_plates = (len(self.elements) - 1) * self.max_size + len(self.elements[len(self.elements) - 1])
+        sum_stacks = len(self.elements)
+        return f'Сумма стопок в стеке = {sum_stacks},\nСумма всех тарелок = {sum_plates}'
+
+
+plates = StackClass(3)
+print(plates.is_empty())
+plates.push_in(1)
+plates.push_in(2)
+plates.push_in(3)
+plates.push_in(4)
+plates.push_in(5)
+plates.push_in(6)
+plates.push_in(7)
+plates.push_in(8)
+plates.push_in(9)
+plates.push_in(10)
+plates.push_in(11)
+plates.push_in(12)
+print(plates)
+print(plates.get_val())
+print(plates.stack_size())
+print(plates.pop_out())
+print(plates.stack_size())
+print(plates.pop_out())
+print(plates.pop_out())
+print(plates.pop_out())
+print(plates.stack_size())
+print(plates.get_val())
+print(plates.is_empty())
