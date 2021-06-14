@@ -28,3 +28,42 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def two_nums_arithmetic():
+    oper_symb = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if oper_symb not in '+-*/0':
+        print('Введен неверный знак операции или завершения программы.')
+        return two_nums_arithmetic()
+    elif oper_symb == '0':
+        return  'Программа завершена пользователем.'
+    num_1 = input('Введите первое число: ')
+    if num_1.isdigit():
+        num_1 = int(num_1)
+    else:
+        print(f'Вместо первого числа Вы ввели строку: {num_1}. Исправьтесь')
+        return two_nums_arithmetic()
+    num_2 = input('Введите второе число: ')
+    if num_2.isdigit():
+        num_2 = int(num_2)
+    else:
+        print(f'Вместо второго числа Вы ввели строку: {num_2}. Исправьтесь')
+        return two_nums_arithmetic()
+    if oper_symb == '+':
+        print(f'Ваш результат: {num_1 + num_2}')
+        return two_nums_arithmetic()
+    elif oper_symb == '-':
+        print(f'Ваш результат: {num_1 - num_2}')
+        return two_nums_arithmetic()
+    elif oper_symb == '*':
+        print(f'Ваш результат: {num_1 * num_2}')
+        return two_nums_arithmetic()
+    elif oper_symb == '/':
+        if num_2 == 0:
+            print(f'На ноль делить нельзя! Исправьтесь')
+            return two_nums_arithmetic()
+        print(f'Ваш результат: {num_1 / num_2}')
+        return two_nums_arithmetic()
+
+if __name__ == "__main__":
+    print(two_nums_arithmetic())
+

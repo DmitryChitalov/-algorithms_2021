@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def even_odd_count(n, even_digits_count, odd_digits_count):
+    if n < 1:
+        return even_digits_count, odd_digits_count
+    if (n % 10) % 2 == 0:
+        even_digits_count += 1
+    else:
+        odd_digits_count += 1
+    return even_odd_count(n // 10, even_digits_count,odd_digits_count)
+
+if __name__ == "__main__":
+    print(even_odd_count(int(input('Введите натуральное число: ')), 0, 0))

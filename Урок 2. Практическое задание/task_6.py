@@ -11,3 +11,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import random
+def guess_the_number(k = 10):
+    if k > 0:
+        users_n = int(input('enter some random number from 0 to 100: '))
+        n = int(random() * 100)
+        if users_n == n:
+            return f'you are right! the hidden number is {n}'
+        else:
+            print(f'your number is {"greater" if users_n > n else "less"} than the hidden number. try more!')
+            return guess_the_number(k - 1)
+    else:
+        return f'attempts ended!'
+
+if __name__ == "__main__":
+    print(guess_the_number())
+

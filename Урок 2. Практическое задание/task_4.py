@@ -12,3 +12,9 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def my_function(k = int(input('enter a number of elements: ')), n = 1):
+    return n if k == 1 else my_function(k - 1, (n / 2) * (-1)) + n
+
+if __name__ == "__main__":
+    print(my_function())
