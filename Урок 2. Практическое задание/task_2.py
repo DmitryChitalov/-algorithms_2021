@@ -18,3 +18,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def count_numb1(n):
+    n = abs(n)
+    result = (1, 0) if n % 2 == 0 else (0, 1)
+    if n < 10:
+        return result
+    return tuple(map(sum, zip(count_numb1(n // 10), result)))
+
+
+print(count_numb1(34560345601))
+
+
+def count_numb2(n, even=0, odd=0):
+    if n == 0:
+        print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+    else:
+        cur_n = n % 10
+        n = n // 10
+        if cur_n % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return count_numb2(n, even, odd)
+
+n = int(input("Введите число: "))
+count_numb2(n)

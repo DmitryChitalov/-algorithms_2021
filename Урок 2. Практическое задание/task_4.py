@@ -12,3 +12,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recur_method1(i, numb, n_count, common_sum):
+    """Рекурсия"""
+    if i == n_count:
+        print(f"Количество элементов - {n_count}, их сумма - {common_sum}")
+    elif i < n_count:
+        return recur_method1(i + 1, numb / 2 * -1, n_count, common_sum+numb)
+try:
+    N_COUNT = int(input("Введите количество элементов: "))
+    recur_method1(0, 1, N_COUNT, 0)
+except ValueError:
+    print("Вы вместо числа ввели строку. Исправьтесь")
+
+
+def recur_method2(elem):
+    return 0 if elem == 0 else 1 + recur_method2(elem - 1) / - 2
+N_COUNT = int(input('Введите количество элементов: '))
+print(f'Количество элементов: {N_COUNT}, их сумма: {recur_method2(N_COUNT)}')
