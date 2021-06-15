@@ -12,3 +12,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+num_list = [1, -0.5, 0.25, -0.125]
+def math (n, el_list=[]):
+    if n == 0:
+        return el_list
+    c= num_list.pop(0)
+    el_list.append(c)
+    return math (n-1)
+numbers= int(input('Введите количество элементов: '))
+empty_list = math(numbers)
+total = 0
+for el in empty_list:
+    total += el
+print(f'Количество элементов: {numbers}, их сумма:{total}')
