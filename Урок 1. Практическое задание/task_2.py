@@ -18,3 +18,26 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+# O(n^2)
+def list_min2(list):
+    for i in list:
+        min = True
+        for k in list:
+            if i > k:
+                min = False
+    if min:
+        return i
+
+
+# O(n)
+def list_min(list):
+    min = list[0]
+    for i in list:
+        if i < min:
+            min = i
+        return min
+
+list1 = [1, 4, 34]
+
+print(list_min2(list1))
+print(list_min(list1))
