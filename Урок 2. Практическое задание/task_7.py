@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def function(num: int, count: int = 0):
+    if num >= 1:
+        count += num
+        return function(num - 1, count)
+    else:
+        return count
+
+n = 5
+num = function(n)
+
+if num == n * (n + 1) / 2:
+    print(f'Для num = {n}, утвержденеи верно')
+else:
+    print(f'Для num = {n}, утвержденеи не верно')
+
+
