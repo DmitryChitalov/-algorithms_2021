@@ -18,3 +18,38 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+
+
+# Функция  is_min проходит по всему массиву длиной n, ее запускаем в цикле для каждого элемента массива
+# Итоговая сложность будет n^2
+
+
+def find_min1(my_list):
+    def is_min(number):
+        res = True   # O(1)
+        for i in my_list:   # O(n)
+            if number > i:  # O(1)
+                res = False  # O(1)
+        return res  # O(1)
+
+    for item in my_list:  # O(n)
+        if is_min(item):  # O(n)
+            my_min = item  # O(1)
+    return my_min  # O(1)
+
+
+def find_min2(my_list):  # Сложность O(n) т.к. один раз проходим по всему массиву
+    my_min = my_list[0]  # O(1)
+    for item in my_list:  # O(n)
+        if my_min > item:  # O(1)
+            my_min = item  # O(1)
+    return my_min  # O(1)
+
+
+print(find_min1([6, 15, 76, 3, -10, 24]))
+print(find_min2([6, 15, 76, 3, -10, 24]))
+
+
+
+
+
