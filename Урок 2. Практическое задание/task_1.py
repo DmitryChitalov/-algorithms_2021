@@ -28,3 +28,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+# можно сделать как
+# if operand in "+-*/"
+# нужно добавить для деления на 0 исключение try, except ZeroDivisionError
+# также нужно добавить исключение которое ловило введенную операцию которая не входит в список +-/*
+
+
+def func_recursion(operand):
+    if ord (operand) == 48:
+        return 'Выход'
+    number_one = input (f'Введите первое 3-значное число : ')
+    number_two = input (f'Введите второе 3-значное число : ')
+    if not number_one.isdigit () or not number_two.isdigit ():
+        print (f'Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+    elif int (number_one) < 1000 or int (number_two) < 1000:
+        if ord (operand) == 43:
+            print (f'Ваш результат: ', int (number_one) + int (number_two))
+        elif ord (operand) == 45:
+            print (f'Ваш результат: ', int (number_one) - int (number_two))
+        elif ord (operand) == 42:
+            print (f'Ваш результат: ', int (number_one) * int (number_two))
+        elif ord (operand) == 47:
+            print (f'Ваш результат: ', int (number_one) / int (number_two))
+        else:
+            print (f'Вы ввели не операцию и не выход')
+    else:
+        print (f'Вы вместо трехзначного числа ввели больше')
+    func_recursion (input (f'Введите операцию (+, -, *, / или 0 для выхода): '))
+
+
+if __name__ == '__main__':
+    print (func_recursion (input (f'Введите операцию (+, -, *, / или 0 для выхода): ')))
