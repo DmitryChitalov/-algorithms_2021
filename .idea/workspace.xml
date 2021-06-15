@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ba378908-b71b-4e2e-b469-42b97c76c59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_3.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,10 +246,10 @@
     <list>
       <item itemvalue="Python.-algorithms_2021" />
       <item itemvalue="Python.task_1" />
+      <item itemvalue="Python.task_5" />
       <item itemvalue="Python.task_2" />
       <item itemvalue="Python.task_3" />
       <item itemvalue="Python.task_4" />
-      <item itemvalue="Python.task_5" />
       <item itemvalue="Python.task_6" />
       <item itemvalue="Python.task_7" />
     </list>

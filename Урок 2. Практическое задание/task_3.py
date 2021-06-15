@@ -22,7 +22,15 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
-
+'''
+можно сделать так
+def func_recursion_three(number):
+    rest_number, numeral = divmod(number, 10)
+    if rest_number == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(func_recursion_three(rest_number))
+'''
 def func_recursion_three(number):
     global my_list
     if number < 10:
