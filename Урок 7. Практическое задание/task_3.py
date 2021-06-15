@@ -37,6 +37,7 @@ for i in
 
 """
 import random
+from statistics import median
 
 
 # 1
@@ -52,12 +53,12 @@ def shell(data):
     return data
 
 
-m = (random.randint(0, 100) * 2) + 1
-lst_1 = [random.randint(0, 100) for _ in range(m)]
+n = (random.randint(0, 100) * 2) + 1
+lst_1 = [random.randint(0, 100) for _ in range(n)]
 lst_1_new = shell(lst_1[:])
 print("Old:", lst_1, "New:", lst_1_new, sep="\n")
-print("Элемент медианы:", lst_1_new[(len(lst_1_new) - 1) // 2], "медиана на позиции(по индекусу):",
-      (len(lst_1_new) - 1) // 2)
+m = (len(lst_1_new) - 1) // 2
+print("Элемент медианы:", lst_1_new[m], "медиана на позиции(по индекусу):",m)
 # 2
 lst_2 = lst_1[:]
 for i in range((len(lst_2[:]) - 1) // 2):
@@ -84,6 +85,5 @@ def median_1(lst):
 """Ошибку не удалось мне найти"""
 
 print(median_1(lst_1))
-from statistics import median
 
 print("Проверка:", median(lst_1))
