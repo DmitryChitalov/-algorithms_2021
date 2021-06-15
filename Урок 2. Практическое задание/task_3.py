@@ -24,15 +24,14 @@
 """
 
 num = []
-def reverser(number):
-    global num
+def reverser(num, number):
     if number == 0:
         return None
     else:
         num.append(str(number % 10))
         number = number // 10
-        reverser(number)
+        reverser(num, number)
     return ''.join(num)
 
 
-print(reverser(34560))
+print(reverser(num, 34560))
