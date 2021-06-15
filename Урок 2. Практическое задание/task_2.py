@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_even_odd(number, even=0, odd=0):
+    if number == 0:
+        return f'Even: {even}. Odd: {odd}'
+    elif number % 2 == 1:
+        return sum_even_odd(number // 10, even, odd + 1)
+    else:
+        return sum_even_odd(number // 10, even + 1, odd)
+
+
+user_number = int(input('Enter number'))
+print(sum_even_odd(user_number))

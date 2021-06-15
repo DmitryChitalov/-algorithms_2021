@@ -16,3 +16,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equal(number):
+    if number == 0:
+        return number
+    else:
+        temp_number = number + equal(number - 1)
+        return temp_number
+
+
+user_answer = int(input('Введите любое натуральное число'))
+number_1 = equal(user_answer)
+number_2 = (user_answer * (user_answer + 1) / 2)
+
+if number_1 == number_2:
+    print(f'{number_1} = {number_2} is True')
+else:
+    print('False')

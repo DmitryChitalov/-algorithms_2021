@@ -22,3 +22,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def reverse_number(number):
+    if number == 0:
+        return ''
+    else:
+        reverse = str(number % 10)
+        return reverse + reverse_number(number // 10)
+
+print(reverse_number(1305304204240))

@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def game(generated_number, count=10):
+    user_answer = int(input('Введите число: '))
+    if user_answer == generated_number:
+        return f'Вы угадали. Игра окончена'
+    if count == 1:
+        return f'Игра окончена. Колличество попыток закончилось'
+    else:
+        print(
+            f'Введеное число {"больше" if user_answer > generate_number else "меньше"} загадонного.\n'
+            f'Колличество оставишихся попыток равно: {count - 1}\n')
+        return game(generated_number, count - 1)
+
+
+generate_number = randint(0, 100)
+print(generate_number)
+print(game(generate_number))
