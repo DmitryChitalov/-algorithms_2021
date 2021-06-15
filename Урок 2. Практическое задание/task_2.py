@@ -22,18 +22,15 @@
 odd_count = 0
 even_count = 0
 
-def odd_even_char_calculator(number):
-    global odd_count, even_count
+def odd_even_char_calculator(odd_count, even_count, number):
     if number == 0:
-        return None
+        return print((odd_count, even_count))
     else:
         if number % 10 % 2 == 0:
             odd_count += 1
         else:
             even_count += 1
-        number = number // 10
-        odd_even_char_calculator(number)
-    return (odd_count, even_count)
+    odd_even_char_calculator(odd_count, even_count, number // 10)
 
 
-print(odd_even_char_calculator(34560))
+odd_even_char_calculator(odd_count, even_count, 34560)
