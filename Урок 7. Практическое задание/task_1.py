@@ -55,26 +55,22 @@ print(bobble([randint(-100, 100) for _ in range(1000)]))
 print(bobble1([randint(-100, 100) for _ in range(1000)]))
 
 lst_1 = [randint(-100, 100) for _ in range(10)]
-print('Old1:', timeit('bobble(lst_1)', globals=globals(), number=1000))
-print('New1:', timeit('bobble1(lst_1)', globals=globals(), number=1000))
+print('Old1:', timeit('bobble(lst_1[:])', globals=globals(), number=1000))
+print('New1:', timeit('bobble1(lst_1[:])', globals=globals(), number=1000))
 lst_1 = [randint(-100, 100) for _ in range(100)]
-print('Old2:', timeit('bobble(lst_1)', globals=globals(), number=1000))
-print('New2:', timeit('bobble1(lst_1)', globals=globals(), number=1000))
+print('Old2:', timeit('bobble(lst_1[:])', globals=globals(), number=1000))
+print('New2:', timeit('bobble1(lst_1[:])', globals=globals(), number=1000))
 lst_1 = [randint(-100, 100) for _ in range(1000)]
-print('Old3:', timeit('bobble(lst_1)', globals=globals(), number=1000))
-print('New3:', timeit('bobble1(lst_1)', globals=globals(), number=1000))
+print('Old3:', timeit('bobble(lst_1[:])', globals=globals(), number=1000))
+print('New3:', timeit('bobble1(lst_1[:])', globals=globals(), number=1000))
 
-# Old1: 0.004118499999999997
-# New1: 0.0008657999999999999
-# Old2: 0.2804929
-# New2: 0.004750499999999991
-# Old3: 28.939399
-# New3: 0.05484310000000292
+# Old1: 0.006981700000000007
+# New1: 0.006576100000000001
+# Old2: 0.47233899999999995
+# New2: 0.4583116999999999
+# Old3: 48.9217422
+# New3: 52.62251320000001
 
-"""Я поставил переменную ending в функции bobble1, значение которое равно True и если произошла хоть одна сортировка,
-то значение в ending будит False. И если по завершении цикла for не разу,не поменялась в списке местами, 
-то значение в перееменной ending останится True тем самым включает команду if после чего просходит команда break, 
-выключая цикал while.
-Вывод: По значению результатов можно заключить, что дороботаная версия работает лучшее, быстрее,
-так как не делается лишних действий, уменьшая тем самым время работы сортировки.  
+"""
+Вывод: оптимизация не влияет на результат или даже ухудшает при большим количество данных в массивах
 """
