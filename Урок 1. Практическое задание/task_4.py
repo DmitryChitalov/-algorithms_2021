@@ -39,21 +39,9 @@ def func_authorisation_1(login, password, list_users):
         print('Не верный логин или пароль.')
 
 
-def func_authorisation_2(list_user, login=input('Enter login '), password=input('Enter password')):
-    if login == list_user.keys() and password == list_user[login][0]:
-        if list_user[login][1] == 1:
-            print('You in system')
-        else:
-            x = input('Хотите ли вы авторизироватся ?(yes, no)')
-            list_users[login][1] = 1 if x == 'yes' else print('Конец сесии')
-    else:
-        print('You entered wrong login or password')
-        func_authorisation_2(list_user)
-
-
 if __name__ == '__main__':
     dct = {'wolf1': ['11111', 1], 'wolf2': ['22222', 1],  'wolf3': ['33333', 0]}
     login_1 = input('Enter login: ')
     password_1 = input('Enter password: ')
     func_authorisation_1(login_1, password_1, dct)
-    func_authorisation_2(dct)
+

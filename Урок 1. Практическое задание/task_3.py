@@ -61,11 +61,12 @@ def func_3(dict_x):
     return list_x[:3]
 
 
-dct = {'apple': 10000000, 'samsung': 9000000, 'lg': 1000000, 'google': 8000000, 'honor': 7000000, 'windows': 11000000}
-lst = []
-print(func_1(dct))
-print(func_2(dct))
-print(func_3(dct))
+if __name__ == "__main__":
+    dct = {'apple': 10000000, 'samsung': 9000000, 'lg': 1000000, 'google': 8000000, 'honor': 7000000, 'windows': 11000000}
+    lst = []
+    print(func_1(dct))
+    print(func_2(dct))
+    print(func_3(dct))
 
 # 2) оцените сложность каждого решения в нотации О-большое
 # func_1 = O(n), func_2 = O(n), func_3 = O(n log n)
