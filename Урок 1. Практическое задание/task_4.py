@@ -26,3 +26,51 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+def activate (login, mydict): # O(1)
+    print('Проверка активации')
+    if mydict.get (login)[1] == 0: # O(1)
+        if (input ('Необходимо пройти активацию ')).lower () == 'y': # O(1)
+            return 1
+        else:
+            return 0
+    return 1
+
+def login_to_web(login, mydict): # O(N)
+    if login in mydict.keys(): # O(N)
+        if activate(login, mydict) == 1: #O(1)
+            mydict[login][1] = 1 #O(1)
+            if (input('Введите пароль: ') == mydict.get(login)[0]): #O(1)
+                return 'Вэлком'
+            else:
+                return 'Пароль не совпадает'
+        else:
+            print('Активация не пройдена, вход в ресурс невозможен')
+    else:
+        print('Нет такого пользователя')
+    return 0
+
+def check_pass (login, mydict): #O(1)
+    if (input ('Введите пароль: ') == mydict.get (login)[0]): #O(1)
+        return 1
+    else:
+        return 0
+
+my_dict = {'Cool_boy': ['Andrey', 1],
+           'Billy_boy':['Bill_Geyts', 0],
+           'Teddy':['Bear_Paddington', 0],
+           'Lucky':['Al_Pacino', 1],
+           'Heardy_punch':['Anastasyay', 0],}
+
+
+    print('Способ 1') #O(N)
+    print(login_to_web(input('Введите логин:  '), my_dict)) #O(N)
+    print('Способ 2') #O(1)
+    login_web = input('Введите логин:  ') #O(1)
+    if my_dict [login_web][1] == 0: #O(1)
+        if activate(login_web,my_dict) == 1 & check_pass(login_web,my_dict) == 1: #O(1)
+            print('Вход выполнен')
+        else:
+            print ('Вход не выполнен')
+
+
+
