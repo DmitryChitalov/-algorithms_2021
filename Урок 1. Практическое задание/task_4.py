@@ -148,7 +148,7 @@ def check_user(user_data):
 
 
 # ИТОГО: O(N)
-# 
+#
 
 check_user({'name': 'Simon', 'pwd': 'asdaafdghetyjsd'})
 check_user({'name': 'Fred', 'pwd': 'Asfafddsf'})
@@ -166,7 +166,7 @@ def binary_search(lst, user_name):
     start = 0  # O(1)
     end = len(lst) - 1  # O(1) + O(1)
 
-    while start <= end:  # O(1)
+    while start <= end:  # O(N log N)
         mid = int((start + end) / 2)  # O(1) + O(1) + O(1)
         if lst[mid]['name'] == user_name:  # O(1) + O(1)
             return mid  # O(1)
@@ -179,7 +179,7 @@ def binary_search(lst, user_name):
 
 def check_user_data_2(users_list, user_data):
     new_lst = sorted(users_list, key=lambda x: x['name'])  # O(1) + O(N log N)
-    user = binary_search(new_lst, user_data['name'])  # O(1) + O(1)
+    user = binary_search(new_lst, user_data['name'])  # O(1) + O(N log N)
     if not user:  # O(1)
         print(f'Пользователь с логином {user_data["name"]} не найден')  # O(1)
         return  # O(1)
