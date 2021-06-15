@@ -17,8 +17,7 @@ from random import randint
 n = randint(0, 100)
 
 
-def try_to_guess(count=0):
-    global n
+def try_to_guess(n, count=0):
     if count == 10:
         print(f'10 attempts ended.It was {n}. You lose')
         return
@@ -29,10 +28,10 @@ def try_to_guess(count=0):
             return
         elif user_guess > n:
             print('Your number is more, try again')
-            try_to_guess(count + 1)
+            try_to_guess(n, count + 1)
         elif user_guess < n:
             print('Your number is less, try again')
-            try_to_guess(count + 1)
+            try_to_guess(n, count + 1)
 
 
-try_to_guess()
+try_to_guess(n)
