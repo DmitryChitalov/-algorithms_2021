@@ -20,3 +20,29 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+company = {
+    'g': 2342,
+    'a': 54,
+    'c': 3453,
+    'z': 233
+}
+#O(n)
+def max3(lst):
+    l_max = {}
+    lst = dict(lst)
+    for i in range(3):
+        maxim = max(lst.items(), key=lambda ans: ans[1])
+        del lst[maxim[0]]
+        l_max[maxim[0]] = maxim[1]
+    return l_max
+
+print(max3(company))
+#O(n log n)
+def log_max(lst):
+    direc_of_list = list(lst.items())
+    direc_of_list.sort(key=lambda i: i[1], reverse=True)
+    for i in range(3):
+        print(direc_of_list[i][0],':', direc_of_list[i][1])
+
+print(log_max(company))
+'''лучше первый вариант, так как у него самая маленькая вычеслительная сложность '''
