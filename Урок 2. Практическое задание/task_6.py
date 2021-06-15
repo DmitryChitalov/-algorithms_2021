@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from random import randrange
+
+def game(number, count = 9):
+    n = int(input("Введите число(0,100): "))
+    if n > number:
+        print("Число больше")
+    if n < number:
+        print("Число меньше")
+    if number == n:
+        return "You win"
+    if count == 0:
+        return "You lose"
+    else:
+        print(f'У вас осталось {count} попыток')
+        return game(number, count -1)
+
+n = randrange(0, 100)
+print(game(n))
