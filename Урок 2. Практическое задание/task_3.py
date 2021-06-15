@@ -30,6 +30,10 @@ def func_recursion_three(number):
         return str(numeral)
     else:
         return str(numeral) + str(func_recursion_three(rest_number))
+        
+и можно еще и так
+def func_recursion_three(number):
+    return str(number) if number < 10 else str(number % 10) + def func_recursion_three(number // 10)
 '''
 def func_recursion_three(number):
     global my_list
