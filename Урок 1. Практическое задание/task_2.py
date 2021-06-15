@@ -21,20 +21,20 @@
 # O(n^2)
 def list_min2(list):
     for i in list:
-        min = True
+        l_min = True
         for k in list:
             if i > k:
-                min = False
-    if min:
+                l_min = False
+    if l_min:
         return i
 
 
 # O(n)
 def list_min(list):
-    min = list[0]
+    l_min = list[0]
     for i in list:
         if i < min:
-            min = i
+            l_min = i
         return min
 
 list1 = [1, 4, 34]
