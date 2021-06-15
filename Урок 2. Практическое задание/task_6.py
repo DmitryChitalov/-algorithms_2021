@@ -12,6 +12,24 @@
 Базовый случай здесь - угадали число или закончились попытки
 """
 import random
+'''
+Возможный вариант
+def func_recursion_six (count, number):
+    print(f'Попытка № {count}')
+    answer = int(input('Введите число от 0 до 100: '))
+    if count == 10 or answer == number:
+        if answer == number:
+            print(f'Верно!')
+    else:
+        if answer > number:
+            print(f'Загаданное число меньше чем {number}')
+        else:
+            print(f'Загаданное число больше чем {number}')
+        func_recursion_six (count + 1, number)
+
+func_recursion_six (1, random.randint(0, 100))
+'''
+
 
 
 def func_recursion_six (number, count):
