@@ -16,3 +16,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_range_natural_nums(num):
+    if num == 1:
+        return num
+    else:
+        return num + sum_of_range_natural_nums(num-1)
+
+
+def is_it_true(num):
+    return sum_of_range_natural_nums(num) == (num * (num + 1) / 2)
+
+
+if __name__ == '__main__':
+    print(is_it_true(5))
+    print(is_it_true(59))

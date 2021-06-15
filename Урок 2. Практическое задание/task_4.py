@@ -12,3 +12,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_row(num, result=1):
+    if num < 1:
+        return 'некорректное значение'
+    elif num == 1:
+        return result
+    else:
+        return result + sum_of_row(num - 1, -(result/2))
+
+
+if __name__ == '__main__':
+    print(sum_of_row(1))
+    print(sum_of_row(2))
+    print(sum_of_row(3))
+    print(sum_of_row(4))

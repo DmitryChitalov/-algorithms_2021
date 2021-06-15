@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_even_and_odd_numeric_in_num(num, even_count=0, odd_count=0):
+    if (num % 10) % 2 == 0:
+        even_count += 1
+    else:
+        odd_count += 1
+    if num // 10 == 0:
+        return f'четных {even_count}, нечетных {odd_count}'
+    else:
+        return count_even_and_odd_numeric_in_num(num // 10, even_count, odd_count)
+
+
+if __name__ == '__main__':
+    print(count_even_and_odd_numeric_in_num(123))
+    print(count_even_and_odd_numeric_in_num(951753))
+    print(count_even_and_odd_numeric_in_num(84620))
+
+
+
