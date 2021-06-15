@@ -56,4 +56,5 @@ print("New:",merge_sort(lst_1),merge_sort(lst_2),merge_sort(lst_3),sep="\n")
 print("time_10:",timeit('merge_sort(lst_1)',globals=globals(),number=1000))
 print("time_100:",timeit('merge_sort(lst_2)',globals=globals(),number=1000))
 print("time_1000:",timeit('merge_sort(lst_3)',globals=globals(),number=1000))
+
 "Вывод: он сортирует, вывод вообще нужен?"
