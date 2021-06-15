@@ -28,3 +28,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from operator import truediv, mul, add, sub
+
+
+def calc(num_1, num_2, operator):
+    try:
+        return f'Результат равен: {operator(num_1, num_2)}'
+    except ZeroDivisionError:
+        return 'Деление на 0 недопустимо.'
+
+
+def calculator():
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operator == '0':
+        return print('exit')
+
+    if operator in operators.keys():
+        try:
+            number_1 = int(input('Введите первое число: '))
+            number_2 = int(input('Введите второе число: '))
+            print(calc(number_1, number_2, operators[operator]))
+            return calculator()
+        except ValueError:
+            print('Вы ввели строку вместо чисел')
+            return calculator()
+    else:
+        print('Вы ввели неверный оператор.')
+        return calculator()
+
+
+operators = {
+    '+': add,
+    '-': sub,
+    '*': mul,
+    '/': truediv
+}
+
+calculator()
+
