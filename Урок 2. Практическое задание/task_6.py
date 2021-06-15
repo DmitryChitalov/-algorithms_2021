@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def random_number(count, number):
+    print(f'Попытка № {count}')
+    answer = int(input('Введите число от 1 до 100: '))
+    if count == 10 or number == answer:
+        print(f'Загаданное число {number}')
+        if answer == number:
+            print('Корректно')
+    else:
+        if answer > number:
+            print(f'Загаданное число < чем {answer}')
+        else:
+            print(f'Загаданное число > чем {answer}')
+
+        random_number(count + 1, number)
+
+
+random_number(1, random.randint(1, 100))

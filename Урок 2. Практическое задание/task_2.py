@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def odd_even_number(n, odd_list=[], even_list=[]):
+    if n == 0:
+        return odd_list, even_list
+    c = n % 10
+    if c % 2 == 0:
+        even_list.append(c)
+    else:
+        odd_list.append(c)
+    n = n // 10
+    return odd_even_number(n)
+
+
+number = 123
+odd_list, even_list = odd_even_number(number)
+print(f'Количество четных цифр - {len(even_list)}, нечетные цифры - {len(odd_list)}')
