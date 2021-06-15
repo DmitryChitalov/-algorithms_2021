@@ -25,3 +25,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+dict_users = {
+    'user1': {'password': '12345', 'activation': False},
+    'user2': {'password': '12345', 'activation': True},
+    'user3': {'password': '12345', 'activation': False}
+}
+
+
+# O(n)
+def authorisation_1(users, login, password):
+    for key, value in users.items():
+        if key == login:
+            if value['password'] == password and value['activation']:
+                return f"Добро пожаловать, {login}!"
+            elif value['password'] != password:
+                return "Пароль не верный!"
+            elif value['password'] == password and not value['activation']:
+                return f"{login}, активируйте учётную запись!"
+    return "Такого пользователя не существует!"
+
+
+# O(1)
+def authorisation_2(users, login, password):
+    if users.get(login):
+        if users[login]['password'] == password and users[login]['activation']:
+            return f"Добро пожаловать, {login}!"
+        elif users[login]['password'] != password:
+            return "Пароль не верный!"
+        elif users[login]['password'] == password and not users[login]['activation']:
+            return f"{login}, активируйте учётную запись!"
+    return "Такого пользователя не существует!"
+
+
+print(authorisation_1(dict_users, 'user2', '12345'))
+print(authorisation_1(dict_users, 'user1', '12345'))
+print(authorisation_2(dict_users, 'user5', '12345'))
+print(authorisation_2(dict_users, 'user2', '123'))

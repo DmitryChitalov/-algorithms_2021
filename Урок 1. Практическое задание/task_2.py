@@ -16,3 +16,30 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+from random import randint
+
+
+# O(n) в O(n) = O(n^2)
+def list_min_square(lst):
+    for i in lst:               # O(n)
+        is_min = True           # O(1)
+        for j in lst:           # O(n)
+            if i > j:           # O(n)
+                is_min = False  # O(1)
+        if is_min:              # O(1)
+            return i            # O(1)
+
+
+# O(n)
+def list_min_linear(lst):
+    min_value = lst[0]          # O(1)
+    for i in lst:               # O(n)
+        if i < min_value:       # O(n)
+            min_value = i       # O(1)
+    return min_value            # O(1)
+
+
+lst_1 = [randint(0, 100) for i in range(10)]
+print(lst_1)
+print(list_min_square(lst_1))
+print(list_min_linear(lst_1))
