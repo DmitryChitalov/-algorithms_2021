@@ -18,3 +18,29 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+
+
+def find_min_el_1(lst):                                 # O(N^2) - вложенные циклы
+    for i in range(0, len(lst) - 1):                    # O(1) + O(N) = O(N)
+        for j in range(i + 1, len(lst)):                # O(1) + O(N) = O(N)
+            if lst[j] < lst[i]:                         # O(1) + O(1) + O(1) = O(1)
+                lst[i], lst[j] = lst[j], lst[i]         # O(1) + O(1) + O(1) = O(1)
+
+    return lst[0]                                       # O(1) + O(1) = O(1)
+
+# ИТОГО - O(N**2)
+
+
+def find_min_el_2(lst):
+    min_el = lst[0]                    # O(1) + O(1) = O(1)
+    for i in range(1, len(lst)):       # O(1) + O(N) = O(N)
+        if lst[i] < min_el:            # O(1) + O(1) = O(1)
+            min_el = lst[i]            # O(1) + O(1) = O(1)
+
+    return min_el                      # O(1)
+
+# ИТОГО - O(N)
+
+
+print(find_min_el_1([3, 4, 1, 6, 4, -3, 8, 10]))
+print(find_min_el_2([3, 4, 1, 6, 4, -3, 8, 10]))
