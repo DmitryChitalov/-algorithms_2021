@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_numbers(num: int):
+    if num <= 9:
+        return 1 if num % 10 % 2 == 0 else 0
+    else:
+        return count_numbers(num // 10) + (1 if num % 10 % 2 == 0 else 0)
+
+
+number = 3456011460
+print(f'Кол-во четных = {count_numbers(number)}, нечетных = {len(str(number)) - count_numbers(number)}')

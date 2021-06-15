@@ -18,3 +18,22 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+
+
+def search_min(lst_obj):  # O(n^2)
+    for i in lst_obj:
+        is_min = True
+        for n in lst_obj:
+            if i > n:
+                is_min = False
+                break
+        if is_min:
+            return i
+
+
+def search_min_2(lst_obj):    # O(n)
+    _min = lst_obj[0]
+    for i in lst_obj:
+        if i < _min:
+            _min = i
+    return _min
