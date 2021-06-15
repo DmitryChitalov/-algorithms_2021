@@ -12,3 +12,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func4(num1, num2, start: int = 1, result: int = 0):
+    if num2 == 0:
+        return f'Количество элементов: {num1}, их сумма: {result}'
+    else:
+        return func4(num1, num2 - 1, (-1) * (start - start / 2), result + start)
+
+
+print(func4(3, 3))

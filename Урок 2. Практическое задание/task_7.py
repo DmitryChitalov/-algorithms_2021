@@ -16,6 +16,8 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
 def func7_1(num: int, count: int = 0):
     if num >= 1:
         count += num
@@ -23,10 +25,12 @@ def func7_1(num: int, count: int = 0):
     else:
         return count
 
+
 def func_7_2(num):
-    if func7_1(num) == num*(num+1)/2:
+    if func7_1(num) == num * (num + 1) / 2:
         print(f'Для num = {num}, утвержденеи верно')
     else:
         print(f'Для num = {num}, утвержденеи не верно')
+
 
 func_7_2(5)

@@ -28,3 +28,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func1(result: int = 0):
+    answer1, answer2, answer3 = input('Введите +, -, *, / или 0 для выхода: '), input('Первое число: '), input(
+        'Второе число: ')
+    try:
+        int(answer2)
+        int(answer3)
+        if answer1 == '0':
+            return result
+        elif answer1 not in ['0', '+', '-', '*', '/']:
+            print('Вы ввели некорректный знак')
+            return func1()
+        elif answer1 == '/' and answer3 == '0':
+            print('На ноль делить нельзя')
+            return func1()
+        return print(eval(f'{answer2}{answer1}{answer3}'))
+
+    except ValueError:
+        print('Вы ввели не числа')
+        return func1()
+
+
+func1()
