@@ -18,3 +18,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class OwnError (Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+
+def req_count_even_odd(user_number, even_count=0, odd_count=0):
+    if (user_number % 10) % 2:
+        odd_count += 1
+    else:
+        even_count += 1
+    if user_number < 10:
+        print(f'Количество четных цифр в числе {even_count}, а нечетных {odd_count}')
+    else:
+        req_count_even_odd(user_number // 10, even_count, odd_count)
+
+
+while True:
+    try:
+        user_number = int(input(f"Введите число:"))
+        if user_number <= 0:
+            raise OwnError("Введено не натуральное число!\n")
+        req_count_even_odd(user_number)
+        break
+    except ValueError:
+        print('Введено не число!\n')
+    except OwnError as err:
+        print(err)

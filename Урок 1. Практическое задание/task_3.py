@@ -20,3 +20,62 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+#  Два варианта решения. Выводы в конце.
+# UPD не удержался добавил 3-е со встроенной функцией max.
+
+#  Как и в предыдущем задании функция find_max перебирает весь список сложность O(n),
+# делаем это 3 раза также 3 раза производим remove также O(n) Итоговая сложность O(n)
+
+
+def top3_1(my_dict, mq):
+    def find_max(my_list):
+        my_max = my_list[0]  # O(1)
+        for element in my_list:  # O(n)
+            if element[1] > my_max[1]:  # O(1)
+                my_max = element  # O(1)
+        return my_max  # O(1)
+    dict_list = list(my_dict.items())   # O(n) словарь перенесли в список
+    res_list = []  # O(1)
+    for i in range(0, mq):  # O(1) 3 раза
+        a = (find_max(dict_list))   # функция со сложностью O(n)
+        dict_list.remove(a)  # O(n)
+        res_list.append(a)  # O(1) можно добавлять только название организации a[0]
+    return res_list  # O(1)
+
+
+def top3_2(my_dict, mq):  # Общая сложность O(nlogn) из-за функции sorted
+    res = []  # O(1)
+    for i in range(0, mq):  # т.к. mq = 3 в нашей задаче, то сложность O(1)
+        res.append(  # O(1)
+            sorted(  # O(nlogn)
+                storage, key=lambda x: my_dict.get(x), reverse=True)[i])
+        # применение функции lambda в данном случае это получение значения по ключу - O(1)
+    return res
+
+
+def top3_3(my_dict, mq):
+    res_list = []  # O(1)
+    for i in range(0, mq):  # O(1) 3 раза
+        a = max(my_dict, key=lambda x: my_dict.get(x))   # функция max со сложностью O(n)
+        res_list.append(a)  # O(1)
+        my_dict.pop(a)  # O(1)
+    return res_list  # O(1)
+
+storage = {"gazflot": 500,
+           "gazprem": 1500,
+           "nashneft": 5200,
+           "glavrpz": 50,
+           "gazmyas": 7950,
+           "aeroflot": 100}
+max_quantity = 3
+
+print(top3_1(storage, max_quantity))
+print(top3_2(storage, max_quantity))
+print(top3_3(storage, max_quantity))
+
+# Выводы:
+# Для меня оказалось сюрпризом, или я ошибаюсь, но красивое и лаконичное решение из второго варианта
+# оказалось медленнее, чем первое из-за медленной сортировки. Ну еще стоит отметить, что вывод немного
+# отличается, но можно в первом варианте тоже выводить только первые значения кортежа a[0]. На скорость не повлияет.
+# Первый способ эффективнее. Не удержался переделал 1-ый вариант использовав готовую функцию max и использование lambda
+# получилась та же сложность O(n) и красота. Теперь 3 самый лучший!
