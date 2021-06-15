@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def odd_number(n, odd_list=[]):
+    if n == 0:
+        return odd_list
+    else:
+        c = n % 10
+        odd_list.append(c)
+        n = n // 10
+        return odd_number(n)
+
+
+number = int(input('Введите число: '))
+odd_list = odd_number(number)
+odd_list = ''.join(str(x) for x in odd_list)
+print(f'Перевернутое число: {odd_list}')
