@@ -18,3 +18,24 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import random
+import hashlib
+
+salt = str(random.randint(100000, 10000000))
+
+
+def gen_password(password):
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+
+def check_password(hashed_password, old_pass):
+    if hashed_password == hashlib.sha256(salt.encode() + old_pass.encode()).hexdigest():
+        return print(f'Вы ввели правильный пароль')
+    else:
+        return f'Вы ввели неправильный пароль'
+
+
+hashed_password = gen_password(input('Введите пароль: '))
+print('В базе данных хранится строка: ' + hashed_password)
+check_password(hashed_password, input('Введите пароль еще раз для проверки: '))
