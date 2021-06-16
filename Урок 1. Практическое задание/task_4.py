@@ -25,3 +25,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def check_user(dict_db, list_user):  # O(1)
+    res = [dict_db[list_user[0]]['pas'] == list_user[1], dict_db[list_user[0]]['activation'] is True]
+
+    if not res[0]:
+        print('Неверный пароль')
+        return False
+    elif not res[1]:
+        print('Необходимо активировать акаунт')
+        return False
+    print('Добро пожаловать 1 вариант')
+    return True
+
+
+def check_user2(dict_db, list_user):  # O(n)
+    res = [dict_db[i] for i in dict_db.keys() if i == list_user[0]]
+
+    if res[0]['pas'] != list_user[1]:
+        print('Неверный пароль')
+        return False
+    elif res[0]['activation'] is not True:
+        print('Необходимо активировать акаунт')
+        return False
+    print('Добро пожаловать 2 вариант')
+    return True
+
+
+CurrentDB = {'a': {'pas': 'qwe1', 'activation': True}, 'b': {'pas': 'qwe2', 'activation': False},
+             'c': {'pas': 'qwe3', 'activation': False}, 'd': {'pas': 'qwe4', 'activation': True}}
+test_user = ['d', 'qwe4']
+
+Permits = check_user(CurrentDB, test_user)
+Permits2 = check_user2(CurrentDB, test_user)
+
+# Лучшим решением является первая функция,
+# Так как в ней сложность алгоритма константная а во втором линейная

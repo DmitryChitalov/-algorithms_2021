@@ -12,3 +12,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_n_element(num: int, first_num=1):
+    if num == 1:
+        return first_num
+    else:
+        return sum_n_element(num - 1, first_num / (-2)) + first_num
+
+
+print(sum_n_element(3))
+print(sum_n_element(4))

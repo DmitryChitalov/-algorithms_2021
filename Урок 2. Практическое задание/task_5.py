@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_ascii(num: int, counter=0):
+    if num == 127:
+        if counter % 10 == 0:
+            print()
+        print(num, chr(num), end=' ')
+    else:
+        if counter % 10 == 0:
+            print()
+        print(num, chr(num), end=' ')
+        table_ascii(num + 1, counter + 1)
+
+
+table_ascii(32)  # Лучше придумать не смог
