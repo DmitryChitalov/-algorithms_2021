@@ -14,14 +14,29 @@
 """
 
 
-def func(n):
+def func_num(n):
+    if n == 1:
+        return 1
+    else:
+        return func_num(n-1) / 2
+
+
+def func_sum(n):
     if n == 1:
         return 1
     else:
         if n % 2 == 0:
-            return func(n-1) - (func(n-1) / 2)
+            return func_sum(n - 1) - func_num(n)
         else:
-            return func(n-1) + (func(n-1) / 2)
+            return func_sum(n - 1) + func_num(n)
 
 
-print(func(5))
+if __name__ == '__main__':
+    try:
+        x = int(input('enter number'))
+        print(func_sum(x))
+    except ValueError:
+        print('You entered not an integer.')
+
+
+

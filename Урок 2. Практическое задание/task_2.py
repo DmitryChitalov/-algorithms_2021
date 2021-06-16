@@ -38,15 +38,16 @@ def func_even(num_x):
         return func_even(num_x % 2) + func_even(num_x//10)
 
 
-try:
-    num_1 = int(input('Введите целое число. '))
-    if nun_1 != 0:
-        func_1(num_1)
-    x = func_even(num_1)
-    y = len(str(num_1)) - x
-    print(f'Количество четных и нечетных цифр в числе равно: ({x}, {y})')
-except TypeError:
-    print('Вы ввели не цыфру.')
-except ValueError:
-    print('Вы ввели не целое число.')
+if __name__ == '__main__':
+    try:
+        num_1 = int(input('Введите целое число. '))
+        if nun_1 != 0:
+            func_1(num_1)
+        x = func_even(num_1)
+        y = len(str(num_1)) - x
+        print(f'Количество четных и нечетных цифр в числе равно: ({x}, {y})')
+    except TypeError:
+        print('Вы ввели не цыфру.')
+    except ValueError:
+        print('Вы ввели не целое число.')
 

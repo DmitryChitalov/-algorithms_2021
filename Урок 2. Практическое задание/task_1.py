@@ -50,5 +50,5 @@ def func_calculator():
         print('Вы ввели не цыфру')
         func_calculator()
 
-
-func_calculator()
+if __name__ == '__main__':
+    func_calculator()
