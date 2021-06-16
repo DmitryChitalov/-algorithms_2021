@@ -16,3 +16,26 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+def get_min_in_list_n2(lst_obj):
+    """
+    Сложность O(n^2)
+    Алгоритм сравнивает каждое значение списка со всеми другми значениями.
+    Суммарно выполняя n^2 сравнений
+    """
+    for i in lst_obj:                   # O(n)
+        for j in lst_obj:               # O(n)
+            if i < j:                   # O(1)
+                min_number = i          # O(1)
+    return min_number                   # O(1)
+
+def get_min_in_list_n(lst_obj):
+    """
+    Сложность O(n)
+    """
+    min_number = lst_obj[0]             # O(1)
+    for i in range(1, len(lst_obj)+1):  # O(n)
+        if min_number > lst_obj[i]:     # O(1)
+            min_number = lst_obj[i]     # O(1)
+    return min_number                   # O(1)
