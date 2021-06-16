@@ -18,3 +18,30 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+
+my_list = [5, 104, 12, 3, 2, 4]
+
+# O(n^2)
+
+def find_min(input_list):
+    for v in input_list:
+        for other in input_list:
+            if v > other:
+                break
+        else:
+            min_value = v
+    return min_value
+
+print(find_min(my_list))
+
+# O(n)
+
+def find_min(input_list):
+    min_value = input_list[0]
+    for v in input_list:
+        if v < min_value:
+            min_value = v
+    return min_value
+
+print(find_min(my_list))
+

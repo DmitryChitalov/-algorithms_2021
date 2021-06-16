@@ -25,3 +25,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {
+    'user_1': {'password': 123, 'is_activated': True},
+    'user_2': {'password': 456, 'is_activated': False},
+    'user_3': {'password': 789, 'is_activated': True}
+}
+
+
+def authentication(login, password):
+    """сложность O(1) потому что каждый шаг O(1)"""
+    if login in users:
+        if password != users[login]['password']:
+            return 'Неверный пароль'
+        elif password == users[login]['password']:
+            if users[login]['is_activated']:
+                return 'Аутентификация прошла успешно'
+            else:
+                return 'Учетная запись не активирована. Пройдите активацию'
+    else:
+        return 'Учетная запись с таким именем не существует'
+
+print(authentication('user_1', 123))
+print(authentication('user_1', 777))
+print(authentication('user_2', 456))
+
+
+def authentication(login, password):
+    """сложность O(1), отличается от предыдущей тем, что сначала првоеряется активация, потом пароль"""
+    if login in users:
+        if users[login]['is_activated']:
+            if password != users[login]['password']:
+                return 'Неверный пароль'
+            elif password == users[login]['password']:
+                return 'Аутентификация прошла успешно'
+        else:
+            return 'Учетная запись не активирована. Пройдите активацию'
+    else:
+        return 'Учетная запись с таким именем не существует'
+
+
+print(authentication('user_1', 123))
+print(authentication('user_1', 777))
+print(authentication('user_2', 456))
+
+# Второй вариант кажется более преддпочтительным, потому что целесообразнее сначала проверить активацию, а затем пароль,
+# потому что проверка активации проводится в любом случае. При неактивированной учетной записи во второй функции
+# мы уже не должны проверять пароль. Хот сложность та же, и эффект будет незаметен.
