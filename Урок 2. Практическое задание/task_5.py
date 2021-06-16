@@ -21,3 +21,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def task_5_ASCII(a):
+        if a == 32:
+            return print(f'{a} - {chr(a)}', end=' ')
+        else:
+            task_5_ASCII(a - 1)
+            if (a - 2) % 10 == 0:
+                print()
+            return print(f'{a} - {chr(a)}', end=' ')
+
+
+task_5_ASCII(127)
+
+#print(chr(32))
+
+
+# '''a -начальный симво, b - конечный символ, rows - количество символов в строке'''
+# def task_5_ASCII(a, b, rows):
+#     count_call = 0
+#     while count_call <= (b - a):
+#         if count_call == 0 or count_call % rows != 0:
+#             print(f'{a + count_call} - {chr(a + count_call)}', end=' ')
+#             count_call += 1
+#         else:
+#             print(f'{a + count_call} - {chr(a + count_call)}', end=' ')
+#             print()
+#             count_call += 1
+#             continue
+#
+#
+# task_5_ASCII(32, 127, 10)

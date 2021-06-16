@@ -12,3 +12,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def element_series(n):
+    if n == 1:
+        return 1
+    else:
+        return (-1/2)**(n-1) + element_series(n-1)
+
+user_num = int(input("Введите число элементов для подсчёта суммы ряда\n"))
+print(f'Сумма {user_num} чисел ряда равна {element_series(user_num)}')
+
+# print(element_series(3))
+# print(element_series(998))

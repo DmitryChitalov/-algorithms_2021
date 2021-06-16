@@ -16,3 +16,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def summ_n(n):
+    if n == 1:
+        return 1
+    else:
+        return summ_n(n-1) + n
+
+def summ_ter_oper(n):
+    return 1 if n == 1 else summ_n(n-1) + n
+
+
+n = 5
+if summ_n(n) != n * (n + 1) / 2:
+    print('равенство не верно')
+else:
+    print('равенство верно')
+
+if summ_ter_oper(n) == n*(n+1)/2:
+    print('равенство верно')
+else:
+    print('равенство не верно')
