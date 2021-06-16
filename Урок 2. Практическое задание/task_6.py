@@ -11,3 +11,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from random import randint
+
+
+def guessing(num: int, attempts=10, win=False):
+    if win:
+        print('Правильно')
+        return True
+    if attempts == 0:
+        print('Попытки закончились')
+        return False
+    temp = int(input('Угадай задуманное число '))
+    if temp < num:
+        print("Ваше число меньше задуманного")
+        guessing(num, attempts - 1)
+    if temp > num:
+        print("Ваше число больше задуманного")
+        guessing(num, attempts - 1)
+    if temp == num:
+        win = True
+        guessing(num, attempts, win)
+
+
+guessing(randint(0, 100))
