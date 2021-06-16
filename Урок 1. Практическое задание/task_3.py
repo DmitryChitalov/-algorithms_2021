@@ -21,15 +21,24 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
-companies_profits = {"Enigma": 1150, "ZORO": 980, "ABC-advance": 2470, "IT space": 740, "Constalletion": 78,
-                     "ONB": 9871, "Easy move": 190, "GDD": 999, "IT-karma": 0, "SUP": 8496}
-
+companies_profits = {
+    "Enigma": 1150,
+    "ZORO": 980,
+    "ABC-advance": 2470,
+    "IT space": 740,
+    "Constalletion": 78,
+    "ONB": 9871,
+    "Easy move": 190,
+    "GDD": 999,
+    "IT-karma": 0,
+    "SUP": 8496
+}
 
 # Решение 1:
-def get_top_three_1(dict_obj):  # доминирующая сложность квадратичная O(N^2)
+def get_top_three_1(dict_obj):  # доминирующая сложность линейная O(N)
     top_three = {}  # O(1)
     transit_dict = dict_obj.copy()  # O(N)
-    while len(dict_obj) - len(transit_dict) < 3:  # O(N^2) доминирующая для вложенных циклов
+    while len(dict_obj) - len(transit_dict) < 3:  # O(1) константная, число итераций - 3
         max_profit = 0  # O(1)
         for c, p in transit_dict.items():
             if p > max_profit:  # O(1)
@@ -45,20 +54,19 @@ print()
 
 
 # Решение 2:
-def get_top_three_2(dict_obj):  # доминирующая сложность квадратичная O(N^2)
+def get_top_three_2(dict_obj):  # доминирующая сложность линейная O(N)
     profits_list = list(dict_obj.values())  # O(N) зависит от числа элементов
     companies_list = list(dict_obj.keys())  # O(N)
-    while len(profits_list) != 3:  # O(N^2) доминирующая для вложенных циклов
+    while len(profits_list) != 3:  # O(1) константная, число итераций - 3
         min_profit = profits_list[0]  # O(1)
-        for i in range(len(profits_list)):
+        for i in range(len(profits_list)): # O(N) зависит от числа элементов
             if profits_list[i] <= min_profit:  # O(1)
                 min_profit = profits_list[i]  # O(1)
                 idx = i  # O(1)
         del profits_list[idx]  # O(N)
         del companies_list[idx]  # O(N)
-    return dict(zip(companies_list, profits_list))  # O(?) ЗАТРУДНЯЮСЬ! 2*N  или 4*N... ? не нашла аналогичного примера
-    # получается не отсортированный по значению словарь, если
-    # если это принципиально, то нужен доп. код
+    return dict(zip(companies_list, profits_list))  # O(len(...))- сложность dict (зависит от длины
+    # аргумента, здесь это N),  O(N) - сложность zip. Итоговая  O(N)
 
 
 print(f'top three companies ranged by year profit: {get_top_three_2(companies_profits)}')
@@ -66,9 +74,9 @@ print()
 
 
 # Решение 3:
-def get_top_three_3(dict_obj):  # доминирующая сложность линейная O(N)
+def get_top_three_3(dict_obj):  # доминирующая сложность логарифмическая O(N*logN)
     ranged_dict_obj = {}  # O(1)
-    sorted_keys = sorted(dict_obj, key=dict_obj.get)  # O(N)
+    sorted_keys = sorted(dict_obj, key=dict_obj.get)  # O(N*logN) по аналогии с .sort для списка
     for c in sorted_keys:  # O(N)
         ranged_dict_obj[c] = dict_obj[c]  # O(1)
         k = 0  # O(1)
@@ -81,8 +89,21 @@ def get_top_three_3(dict_obj):  # доминирующая сложность л
 
 
 print(get_top_three_3(companies_profits))
+print()
 
-# Вывод: 1,2 варианты имеют квадратичную доминирующую сложность, вариант два хуже, особенно при небольших N,
-# ВАРИАНТ 3 имеет линейную сложность, он оптимальнее с точки зрения сложности, и с ростом числа пар в словаре,
-# он будет занимать гораздо меньше ресурсов машины, однако, думаю, конкретно этот мой вариант,
-# возвращаемый строку, как заглушку, не совсем правильный.
+
+# Решение 4:
+def get_top_three_4(dict_obj):  # доминирующая сложность линейная O(N)
+    top_three = {}
+    dict_obj_1 = dict(dict_obj)
+    for i in range(3):
+        maximum = max(dict_obj_1.items(), key=lambda k_v: k_v[1])
+        del dict_obj_1[maximum[0]]
+        top_three[maximum[0]] = maximum[1]
+    return top_three
+
+print(get_top_three_4(companies_profits))
+
+
+# Вывод: 1,2,4 варианты имеют линейную сложность - самая оптимальная из предложенных вариантов решений,
+# ВАРИАНТ 3 имеет линейно-логарифмическую сложность, он хуже линейной
