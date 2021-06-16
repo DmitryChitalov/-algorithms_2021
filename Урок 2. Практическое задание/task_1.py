@@ -28,3 +28,44 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class MyError(Exception):
+    def __init__(self, txt: str):
+        self.txt = txt
+
+
+def calculate():
+    try:
+        op = input('Введите операцию (+, -, *, / или 0 для выхода) ')
+        if op not in ['+', '-', '*', '/']:
+            raise MyError('Необходимо выбирать знак из списка')
+    except MemoryError:
+        print('Не верный знак')
+    except MyError as err:
+        print(err)
+        calculate()
+
+    if op == '0':
+        return
+    try:
+        a = int(input('Введите первое число '))
+        b = int(input('Введите второе число '))
+        if op == '+':
+            print(a + b)
+        if op == '-':
+            print(a - b)
+        if op == '*':
+            print(a * b)
+        if op == '/':
+            print(a / b)
+        calculate()
+    except ValueError:
+        print('Вы ввели не число')
+        calculate()
+    except ZeroDivisionError:
+        print('Делить на 0 нельзя')
+        calculate()
+
+
+calculate()    # Поехали

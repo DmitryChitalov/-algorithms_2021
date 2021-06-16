@@ -18,3 +18,48 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+import hashlib
+import sqlite3
+
+
+def check_hash(login, hash_obj):
+    conn = sqlite3.connect('My_DB.sqlite')
+    cursor = conn.cursor()
+    cursor.execute('select hash from users where login = ?', (login,))
+    result = cursor.fetchone()
+    conn.close()
+    if result is None:
+        print('Вы ввели некорректный логин/пароль')
+    elif result[0] == hash_obj:
+        print('Все корректно')
+        return False
+    else:
+        print('Вы ввели некорректный логин/пароль')
+
+    return
+
+
+def set_data_db(login, hash_obj):
+    conn = sqlite3.connect('My_DB.sqlite')
+    cursor = conn.cursor()
+    try:
+        cursor.execute('insert into users values (?, ?);', (login, hash_obj))
+    except sqlite3.IntegrityError:
+        print('Данный пользователь уже есть в базе')
+    conn.commit()
+    conn.close()
+    return
+
+
+Login = input('Для регистрации введите логин ')
+Passwd = input('Для регистрации введите пароль ')
+
+My_hash = hashlib.sha256(Login.encode() + Passwd.encode()).hexdigest()
+set_data_db(Login, My_hash)
+
+Repeat_login = input('Повторите ввод логина ')
+Repeat_pass = input('Повторите ввод пароля ')
+Repeat_hash = hashlib.sha256(Repeat_login.encode() + Repeat_pass.encode()).hexdigest()
+check_hash(Repeat_login, Repeat_hash)

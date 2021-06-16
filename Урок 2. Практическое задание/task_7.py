@@ -16,3 +16,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def proof(num: int):
+    if num == 1:
+        return 1
+    else:
+        return proof(num - 1) + num
+
+
+test_number = 5
+print(proof(test_number) == test_number * (test_number + 1) / 2)

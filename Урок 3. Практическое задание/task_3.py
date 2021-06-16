@@ -16,3 +16,12 @@
 р
 а
 """
+
+
+text = 'papa'
+set_obj = set()
+for i in range(0, len(text)):
+    for n in range(i + 1, len(text) + 1):
+        set_obj.add(hash(text[i:n]))
+set_obj.discard(hash(text))
+print(f'Кол-во уникальных подстрок для строки {text} = {len(set_obj)}')
