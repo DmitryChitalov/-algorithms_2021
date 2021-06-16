@@ -27,9 +27,10 @@
 """
 
 # Вариант 1:
-users_auth = {('fghfj47', 'gdhsjg5*'): 'aсtivated', ('fgth781', 'ghdh783#'): 'aсtivated',
-              ('fghjw', 'FGvj56+9'): 'aсtivated', ('aljd5', '$e6tHJJG'): 'non-aсtivated',
-              ('yhxa88', 'TjjsdT-4%'): 'aсtivated', ('Fghf-11', 'gkfY*iT1!'): 'non-aсtivated'}
+users_auth = {('user1', '1111'): 'aсtivated',
+              ('user2', '1111'): 'aсtivated',
+              ('user3', '1111'): 'non-aсtivated'
+             }
 
 
 def pass_user_authorization(dict_obj, tuple_obj):
@@ -38,7 +39,7 @@ def pass_user_authorization(dict_obj, tuple_obj):
     """
     keys_lst = dict_obj.keys()  # O(1)
     if tuple_obj in keys_lst:  # O(N) ЗАВИСИТ ОТ ДЛИНЫ СПИСКА
-        if dict_obj[tuple_obj] == 'aсtivated':  # O(1)
+        if dict_obj[tuple_obj] == 'aсtivated':
             return 'authorization passed'  # O(1)
         else:
             return 'the account is not activated! for activating your account click on the link below: '  # O(1)
@@ -46,15 +47,15 @@ def pass_user_authorization(dict_obj, tuple_obj):
         return 'authorization failed! incorrect login or password!'  # O(1)
 
 
-print(pass_user_authorization(users_auth, ('fgth781', 'ghdh783#')))
-print(pass_user_authorization(users_auth, ('fghfj47', 'ghdgh7*')))
-print(pass_user_authorization(users_auth, ('aljd5', '$e6tHJJG')))
+print(pass_user_authorization(users_auth, ('user1', '1111')))
+print(pass_user_authorization(users_auth, ('user3', '1111')))
+print(pass_user_authorization(users_auth, ('user2', '0000')))
 
 # Вариант 2:
-users_auth_2 = [[{'fgw': 'F+9'}, 'aсtivated'], [{'a5': '*9G'}, 'non-aсtivated']]
+users_auth_1 = [[{'user1': '1111'}, 'aсtivated'], [{'user2': '1111'}, 'non-aсtivated']]
 
 
-def pass_user_authorization_1(list_obj, lgn=input('enter your login: '), psw=input('enter your password: ')):
+def pass_user_authorization_1(list_obj, lgn, psw):
     """
     Сложность квадратичная O(N^2)  доминирующая
     """
@@ -64,14 +65,41 @@ def pass_user_authorization_1(list_obj, lgn=input('enter your login: '), psw=inp
                 if list_obj[i][1] == 'aсtivated':  # O(1)
                     return 'authorization passed'  # O(1)
                 else:
-                    return 'the account is not activated! for activating your account click on the link below: '  # O(1)
+                    return 'the account is not activated! for activating your account click on the link below: ' # O(1)
+            else:
+                return 'authorization failed! incorrect login or password!'  # O(1)
 
-    return 'authorization failed! incorrect login or password!'  # O(1)
+
+print(pass_user_authorization_1(users_auth_1, 'user1', '1111'))
+print(pass_user_authorization_1(users_auth_1, 'user1', '0000' ))
+print(pass_user_authorization_1(users_auth_1, 'user2', '1111'))
+
+# Вариант 3:
+
+def pass_user_authorization_2(users_dict, lgn, psw):
+    """
+    Сложность константная O(1)  доминирующая
+    """
+    if users_dict.get(lgn): # O(1)
+        if users_dict[lgn]['password'] == psw and users_dict[lgn]['activation'] is True:  # O(1)
+            return 'authorization passed'  # O(1)
+        elif users_dict[lgn]['password'] == psw and users_dict[lgn]['activation'] is False: # O(1)
+            return 'the account is not activated! for activating your account click on the link below: '  # O(1)
+        elif users_dict[lgn]['password'] != psw:
+            return 'authorization failed! incorrect password!'  # O(1)
+    else:
+        return 'there is no such user!'  # O(1)
 
 
-print(pass_user_authorization_1(users_auth_2))
+users_auth_2= {'user_1':{'password':'00000', 'activation': True},
+               'user_2':{'password':'11111', 'activation': False}
+              }
 
-# Вывод: вариант 1 решения более эффективен, чем вариант 2, так как его сложность линейная,
-# и при росте числа пользователей затраты ресурсов сервера будут расти прямо пропорционально их числу, а во 2 варианте -
-# затраты ресурсов сервера будут расти прямо пропорционально квадрату их числа.
+print(pass_user_authorization_2(users_auth_2, 'user_1', '00000'))
+print(pass_user_authorization_2(users_auth_2, 'user_1', '11111'))
+print(pass_user_authorization_2(users_auth_2, 'user_2', '11111'))
 
+
+# Вывод: вариант 3 решения более эффективен, чем варианты 1 и  2, так как его сложность константная,
+# и при росте числа пользователей ресурсозатратность не изменится в отличии от
+# первых двух вариантов.

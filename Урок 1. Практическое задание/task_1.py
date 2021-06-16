@@ -35,10 +35,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: 2*O(N) + 2*O(1) = O(N) - доминирующая линейная сложность
+    Сложность:  O(N^2) - доминирующая квадратичная сложность (вложена О(N) в О(N))
     """
-    for j in range(len(lst_obj)):          # O(N) + O(1)
-        if lst_obj[j] in lst_obj[j+1:]:    # O(N)
+    for j in range(len(lst_obj)):          #  O(N)
+        if lst_obj[j] in lst_obj[j+1:]:    #  O(N)
             return False                   # O(1)
     return True                            # O(1)  return срабатывает только раз, поэтому считаю его сложность один раз
 
