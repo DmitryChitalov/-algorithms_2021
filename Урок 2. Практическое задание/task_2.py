@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+count_even, count_odd = 0, 0
+def count_even_odd(num):
+    global count_even
+    global count_odd
+    if num < 10:
+        if num % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+    else:
+        count_even_odd(num % 10)
+        count_even_odd(num // 10)
+
+# user_number = int(input("Введите натуральное число"))
+user_number = int('34560')
+count_even_odd(user_number)
+print(f'number {user_number} contains even = {count_even}, odd = {count_odd}')

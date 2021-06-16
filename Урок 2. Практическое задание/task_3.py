@@ -22,3 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def revers_number(num):
+    if int(num) < 10:
+        return print(num, sep='', end='')
+    else:
+        print(int(num) % 10, sep='', end='')
+        revers_number(int(num) // 10)
+
+
+# user_number = int(input("Введите число"))
+user_number = '3486000'
+revers_number(user_number)
+

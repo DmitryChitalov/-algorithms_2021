@@ -11,3 +11,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+# аргумент функции задаёт число попыток. a-human, b-comp
+def comparison(n):
+    a = int(input("Введите целое число 0 - 100\n"))
+    global b
+    if n > 1:
+        if a == b:
+            return print(f'Вы угадали {a}')
+        else:
+            if a > b:
+                print(f'меньше {a}')
+                comparison(n - 1)
+            else:
+                print(f'больше {a}')
+                comparison(n - 1)
+    else:
+        return print(f'попытки кончились, загаданное число {b}')
+
+
+#
+b = random.randint(0, 100)
+comparison(10)
