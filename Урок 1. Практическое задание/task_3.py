@@ -20,3 +20,34 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {'ANO Roga i kopyta': 156359222.00, 'GMBH Populism': 25000000.00,
+             'IP Vanity Fair': 1200000.00, 'OOO Time': 70000000.00}
+
+
+# Решение с сортировкой. Недостаток этого кода в том, что просто выбирает 3 лидеров - не сортирует их на выходе
+# В задании о требованиях к выводу ничего не сказано. Максимальная сложность определяется сортировкой.
+def get_good_company_1(dict):                           # O(n Log n)
+    result = {}                                         # O(1)
+    sorted_val = sorted(dict.values(), reverse=True)    # O(n Log n)
+    for key, val in dict.items():                       # O(n)
+        for i in sorted_val[0:3]:                       # O(1)
+            if val == i:                                # O(1)
+                result.update({key: val})               # O(1)
+    return result                                       # O(1)
+
+
+# Решение без сортировки.
+# Поскольку нет сортировки, а 1й цикл - константен по сложности (О(3)*О(n)+О(n) = O(4n)) - этот алгоритм лучше
+def get_good_company_2(dict):                           # O(n)
+    result = {}                                         # O(1)
+    for i in range(3):                                  # O(1)
+        maximum = max(dict.values())                    # O(n)
+        good_company = {key: val for key, val in dict.items() if val == maximum}          # O(n)
+        result.update(good_company)                     # O(1)
+        dict.pop(list(good_company.keys())[0])          # O(1)
+    return result                                       # O(1)
+
+
+print(get_good_company_1(companies))
+print(get_good_company_2(companies))
