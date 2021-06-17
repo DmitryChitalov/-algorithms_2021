@@ -28,3 +28,58 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import copy
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def get_value(self):
+        return self.elems
+
+    def clear_value(self):
+        return self.elems.clear()
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+def plates_stack(amount, size):
+    num_stack = StackClass()
+    new_stack = StackClass()
+
+    result = amount // size
+    res = amount % size
+    for i in range(result):
+        for k in range(size):
+            new_stack.push_in(7)
+        num_stack.push_in(copy.deepcopy(new_stack.get_value()))
+        new_stack.clear_value()
+    for j in range(res):
+        new_stack.push_in(6)
+    num_stack.push_in(copy.deepcopy(new_stack.get_value()))
+
+    return num_stack.get_value()
+
+
+print(plates_stack(31, 6))
+
+
+
+
+
+

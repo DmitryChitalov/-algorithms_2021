@@ -18,3 +18,40 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+
+
+def first_min(my_list):  # O(N^2)
+
+    for smallest in my_list:  # O(N)
+        for num in my_list:  # O(N)
+            if smallest > num:  # O(len(smallest)) ?
+                smallest = num  # O(1)
+    return smallest  # O(1)
+
+
+def second_min(my_list):  # O(N)
+
+    smallest = my_list[0]  # O(1)
+    for i in my_list:  # O(N)
+        if i < smallest:  # O(len(i)) ?
+            smallest = i  # O(1)
+    return smallest  # O(1)
+
+
+lst = [11, 12, 13, - 14, - 1, 2, 3, 4, 13, - 18, - 1, 2, 3, 4, 5, -3, 7, 8, 9, - 10, 43, 15]
+print(first_min(lst))
+print(second_min(lst))
+
+
+def example(my_list):
+
+    a = my_list[0]
+    for i in my_list:
+        if i < a:
+            a = i
+        else:
+            my_list.remove(i)
+    return my_list
+
+
+print(example(lst))
