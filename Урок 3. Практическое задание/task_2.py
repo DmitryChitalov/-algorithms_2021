@@ -18,3 +18,25 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import hashlib
+import os
+
+
+def identification():
+    salt = os.urandom(32)
+    password = hashlib.sha256(input('Введите пароль: ').encode() + salt).hexdigest()
+    with open('pass', 'w+') as f:
+        f.write(password)
+        f.seek(0)
+        print(f'В базе данных хранится строка: {f.read()}')
+    check_password = hashlib.sha256(input('Введите пароль еще раз для проверки: ').encode()+ salt).hexdigest()
+    with open('pass', 'r') as f:
+        if f.read() == check_password:
+            print('Вы ввели правильный пароль')
+        else:
+            print('Вы ввели неверный пароль')
+
+
+if __name__ == '__main__':
+    identification()
