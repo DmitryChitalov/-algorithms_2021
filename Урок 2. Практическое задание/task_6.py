@@ -11,3 +11,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def quess_num(count=1, user_num=int(input('Введите ваше число: ')), comp_num=random.randint(1, 100)):
+    if count == 10 and comp_num != user_num:
+        return f'Вы проиграли! Загаданное число - {comp_num}.'
+    elif comp_num > user_num:
+        user_num = int(input(f'Загаданное число больше. Осталось {10-count} попыток. Попробуйте еще раз: '))
+        return quess_num(count+1, user_num, comp_num)
+    elif comp_num < user_num:
+        user_num = int(input(f'Загаданное число меньше. Осталось {10-count} попыток. Попробуйте еще раз: '))
+        return quess_num(count+1, user_num, comp_num)
+    else:
+        return f'Вы угадали!'
+
+
+print(quess_num())

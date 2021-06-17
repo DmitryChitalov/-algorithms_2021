@@ -16,3 +16,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def left_side(check_num):
+    return check_num if check_num == 1 else check_num + left_side(check_num - 1)
+
+
+def proof_form(user_num=int(input('Введите проверочное число: '))):
+    return f'левая часть - {left_side(user_num)}, правая - {int(user_num * (user_num + 1) / 2)}'
+
+
+print(proof_form())
+

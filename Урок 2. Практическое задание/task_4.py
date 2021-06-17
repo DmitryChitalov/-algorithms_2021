@@ -12,3 +12,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_num(end_num=int(input('Введите число: ')), count_num=1, a=1, result=0.5):
+    if count_num == end_num:
+        return a
+    elif count_num % 2 == 0:
+        return sum_num(end_num, count_num+1, a+result, result/2)
+    elif count_num % 2 == 1:
+        return sum_num(end_num, count_num+1, a-result, result/2)
+
+
+print(sum_num())

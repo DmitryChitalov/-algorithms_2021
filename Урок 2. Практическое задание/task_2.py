@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_num(base_num=int(input('Введите число: ')), even_count=0, odd_count=0, count_operation=0):
+    answer = f'В числе {even_count} четных цифр(ы), {odd_count} нечетных.'
+    if base_num == 0 and count_operation == 0:
+        return print("В нуле одна четная цифра")
+    elif base_num == 0:
+        return print(answer)
+    elif base_num % 10 % 2 == 0:
+        return count_num(base_num // 10, even_count + 1, odd_count, count_operation + 1)
+    elif base_num % 10 % 2 != 0:
+        return count_num(base_num // 10, even_count, odd_count + 1, count_operation + 1)
+
+
+count_num()
