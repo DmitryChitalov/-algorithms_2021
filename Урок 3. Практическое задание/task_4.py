@@ -11,3 +11,20 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+import uuid
+
+
+def func_url_check(url, bd={}, salt=uuid.uuid4().hex):
+    if url in bd.keys():
+        print(f'{url} есть в базе данных')
+    else:
+        hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        bd.update({url: hash})
+        print(f'{url} добавлен в базу данных')
+
+
+func_url_check('https://yandex.ru/')
+func_url_check('https://google.com/')
+func_url_check('https://www.drive2.ru/')
+func_url_check('https://www.drive2.ru/')
