@@ -19,4 +19,20 @@
 """
 # sqlite, postgres, db_api, orm
 
+from uuid import uuid4
+import hashlib
+import json
+
+'''Генерация случайно соли'''
+salt = uuid4 ().hex
+pass_original = json.dumps (hashlib.sha256 (salt.encode ()
+                               + input ('Введите пароль ').encode ()).hexdigest (),
+               indent = 4)
+print(f'В базе данных хранится строка: {pass_original}')
+if pass_original == \
+        json.dumps ((hashlib.sha256 (salt.encode () + input ('Введите пароль еще раз для проверки: ').encode ()).
+                hexdigest ()), indent = 4):
+    print (f'Вы ввели правильный пароль')
+else:
+    print (f'Пароли не совпадает')
 
