@@ -28,3 +28,38 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def is_empty(self):
+        return self.stack == []
+
+    def push(self, item):
+        if len(self.stack[len(self.stack) - 1]) >= 10:
+            self.stack.append([])
+        self.stack[len(self.stack) - 1].append(item)
+
+    def pop(self):
+        if len(self.stack) == 0:
+            return None
+        removed = self.stack[len(self.stack) - 1].pop()
+        if len(self.stack[len(self.stack) - 1]) == 0:
+            self.stack.pop()
+        return removed
+
+    def get(self):
+        return self.stack[len(self.stack) - 1].[len(self.stack[len(self.stack) - 1]) - 1]
+
+    def size(self):
+        lenght = [len(self.stack[i]) for i in range(len(self.stack[len(self.stack) - 1]))]
+        return lenght
+
+my_stack = Stack()
+for i in range(100, 300, 7):
+    my_stack.push(i)
+
+print(my_stack.size())
+print(my_stack.get())
