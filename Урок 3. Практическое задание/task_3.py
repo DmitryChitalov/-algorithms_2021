@@ -28,20 +28,6 @@ def verify_func(string):
     return len (string_set)
 
 
-def recursive_func(string, start=0, stop=0, string_set=()):
-    string_set = set(string_set)
-    start = len(string)
-    if start < 0:
-        return len(string_set)
-    else:
-        string_set.add(hash (string[start:stop]))
-        stop -= 1
-    start -= 1
-    return recursive_func (string, start, stop, string_set)
-
-
 if __name__ == '__main__':
     print (f'Количество уникальных подстрок в этой строке: {verify_func (str (input ("Введите строку: ")))}')
-    main_data = (str (input ("Введите строку: ")))
-    print (f'Количество уникальных подстрок в этой строке: '
-           f'{recursive_func (main_data, len(main_data), len(main_data))}')
+
