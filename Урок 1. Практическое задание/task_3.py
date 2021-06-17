@@ -20,3 +20,30 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+#1 решение
+#Сложность: O(nlogn) + O(n1) + O(n1) + O(n) + O(1) + O(1) + O(1) = O(nlogn)+O(n2)+O(n)+O(3)
+company_profit = {"ICBC" : 38, "ExxonMobil" : 45, "PetroChina" : 18, "Chevron" : 26, "Citigroup" : 8}
+profit = sorted(company_profit.values(), reverse=True) # O(nlogn)
+for key in company_profit: # O(n1)
+    for i in range(0,3):# O(n1) + O(n)
+        if profit[i] == company_profit[key]: # O(1)
+            top_company_profit = {key:profit[i]} # O(1)
+            print(top_company_profit) # O(1)
+#2 решение
+#Сложность:O(n1)+O(n)+O(n1)+O(1)+O(n1)+O(n1)+O(1)+O(1)+O(1)+O(n1)+O(1)+O(1)=O(n5)+O(n)+O(6)
+company_profit = {"ICBC" : 38, "ExxonMobil" : 45, "PetroChina" : 18, "Chevron" : 26, "Citigroup" : 8}
+new_dict = {value: key for key, value in company_profit.items()}# O(n1)
+my_list = []# O(n)
+for key in new_dict:# O(n1)
+    my_list.append(key)# O(1)
+for r in range(len(my_list)-1):# O(n1)
+    for i in range(len(my_list)-1-r):# O(n1)
+        if my_list[i]>my_list[i+1]:# O(1)
+            my_list[i], my_list[i+1]=my_list[i+1], my_list[i]# O(1)
+print(my_list)# O(1)
+for i in range(2):# O(n1)
+    new_dict.pop(my_list[i])# O(1)
+print(new_dict)# O(1)
+"""Сравнение: Хотя в 1 Решении присутствует O(nlogn) что должно говорить о более сложном и более затратом по времени процессе, 
+в 2 Решении O(n**5) еще более сложный процесс из-за пятикратной вложенности. 
+Т.о. я считаю 1 Решение более валидное за счет возможности варьировать кол-во входящих данных и таким образом влиять на сложность"""
