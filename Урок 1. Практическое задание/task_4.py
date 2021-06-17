@@ -25,3 +25,64 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Общая сложность O(n)
+def authorization1(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return "Добро пожаловать! Доступ к ресурсу предоставлен"
+            elif value['password'] == user_password \
+                    and not value['activation']:
+                return "Учетная запись не активна! Пройдите активацию!"
+            elif value['password'] != user_password:
+                return "Пароль не верный"
+
+    return "Данного пользователя не существует"
+
+
+# общая сложность O(1)
+def authorization2(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password \
+                and users[user_name]['activation']:
+            return "Добро пожаловать! Доступ к ресурсу предоставлен"
+        elif users[user_name]['password'] == user_password \
+                and not users[user_name]['activation']:
+            return "Учетная запись не активна! Пройдите активацию!"
+        elif users[user_name]['password'] != user_password:
+            return "Пароль не верный"
+    else:
+        return "Данного пользователя не существует"
+
+
+"""Вторая реализация будет намного эффективнее, 
+так как в ней не используется цикл, 
+поиск в словаре по ключу имеет сложность O(1)"""
+
+
+my_users = {'user1': {'password': '11111', 'activation': True},
+            'user2': {'password': '11111', 'activation': False},
+            'user3': {'password': '11111', 'activation': True},
+            'user4': {'password': '11111', 'activation': False}
+            }
+
+print(authorization2(my_users, 'user6', '1111'))
+
+def authorization3(collection, city):
+    if city in collection.values():  # если есть среди значений словаря collection
+        for name in collection.keys(): # переберите все ключи словаря
+            if friends[name] == city:  # если соответствующее ключу значение равно city
+                print('В городе ' + city + ' живёт ' + name + '.')
+    else:
+        print('Пока никого.')
+
+passwords = {
+    'user1': '11111',
+    'user2': '11111',
+    'user3': '11111',
+    'user4': '11111'
+}
+print(authorization3(my_users, 'user6', '1111'))
+
+is_anyone_in(friends, 'Хабаровск')
