@@ -22,3 +22,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse_number(cur_num):
+    if cur_num < 10:
+        return str(cur_num)
+    else:
+        return str(cur_num % 10) + reverse_number(cur_num // 10)
+
+
+def reverse_number_2(cur_num):
+    return str(cur_num) if cur_num < 10 else \
+        str(cur_num % 10) + reverse_number_2(cur_num // 10)
+
+
+if __name__ == '__main__':
+    while True:
+        try:
+            number = int(input('Введите натуральное число'))
+            if number < 0:
+                raise ValueError
+            break
+        except ValueError:
+            print('Недопустимое значение.')
+
+    print(f'Перевернутое число: {reverse_number(number)}')
+    print(f'Перевернутое число: {reverse_number_2(number)}')

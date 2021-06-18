@@ -18,3 +18,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_numbers(current_number, even, odd):
+    if current_number == 0:
+        return f'Количестов четных и нечетных чисел = {(even, odd)}'
+    else:
+        last_num = current_number % 10
+        if last_num % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return count_numbers(current_number // 10, even, odd)
+
+
+if __name__ == '__main__':
+    while True:
+        try:
+            number = int(input('Введите натуральное число'))
+            if number < 0:
+                raise ValueError
+            break
+        except ValueError:
+            print('Недопустимое значение.')
+
+    print(count_numbers(number, 0, 0))
