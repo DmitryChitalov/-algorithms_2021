@@ -18,3 +18,27 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+import json
+
+password = input("Введите пароль: ")
+
+salt = 'salt'
+key = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+# запись пароля в файл
+with open('task_2.txt', 'w') as f:
+    data = {'salt': salt, 'key': key}
+    json.dump(data, f)
+
+print("В базе данных хранится строка:", key)
+check_pass = input("Введите пароль еще раз для проверки: ")
+
+# чтение пароля из файла
+with open('task_2.txt', 'r') as f:
+    data = json.load(f)
+
+# проверка пароля
+key = hashlib.sha256(salt.encode() + check_pass.encode()).hexdigest()
+
+print("Вы ввели правильный пароль" if data['key'] == key else "Пароль не верный")
