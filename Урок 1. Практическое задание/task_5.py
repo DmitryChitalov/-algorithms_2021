@@ -31,20 +31,39 @@
 
 """Пример создания стека через ООП"""
 
+"""Пример создания стека через ООП"""
+
 
 class StackClass:
     def __init__(self):
         self.elems = []
+        self.stack = []
+
+    def push_in_stack(self):
+        """Копируем, поскольку иначе это будет функционировать как ссылка на elems"""
+        self.stack.append(self.elems.copy())
+
+    def pop_out_stack(self):
+        return self.stack.pop()
 
     def is_empty(self):
         return self.elems == []
 
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
-        self.elems.append(el)
+        if self.stack_size() < 10:
+            self.elems.append(el)
+        else:
+            self.push_in_stack()
+            self.elems.clear()
+            self.elems.append(el)
 
     def pop_out(self):
-        return self.elems.pop()
+        if self.stack_size() > 0:
+            return self.elems.pop()
+        else:
+            self.elems = self.pop_out_stack()
+            return self.elems.pop()
 
     def get_val(self):
         return self.elems[len(self.elems) - 1]
@@ -57,30 +76,21 @@ if __name__ == '__main__':
 
     SC_OBJ = StackClass()
 
-    print(SC_OBJ.is_empty())  # -> стек пустой
+    print(f'стек тарелок пустой: {SC_OBJ.is_empty()}')  # -> стек тарелок пустой
+    print(f'Размер стека тарелок: {SC_OBJ.stack_size()}')
 
-    # наполняем стек
-    SC_OBJ.push_in(10)
-    SC_OBJ.push_in('code')
-    SC_OBJ.push_in(False)
-    SC_OBJ.push_in(5.5)
+    # Наполняем стек тарелками. Индекс для того, чтобы тарелки были помечены
+    for i in range(39):
+        SC_OBJ.push_in(100 + i)
+    # Контроль
+    print(f'Размер стека тарелок: {SC_OBJ.stack_size()}')
+    print(f'Число и состав стопок: \n{SC_OBJ.stack}')
+    print(f'Контроль стека тарелок: \n{SC_OBJ.elems}')
 
-    # получаем значение первого элемента с вершины стека, но не удаляем сам элемент из стека
-    print(SC_OBJ.get_val())  # -> 5.5
-
-    # узнаем размер стека
-    print(SC_OBJ.stack_size())  # -> 4
-
-    print(SC_OBJ.is_empty())  # -> стек уже непустой
-
-    # кладем еще один элемент в стек
-    SC_OBJ.push_in(4.4)
-
-    # убираем элемент с вершины стека и возвращаем его значение
-    print(SC_OBJ.pop_out())  # -> 4.4
-
-    # снова убираем элемент с вершины стека и возвращаем его значение
-    print(SC_OBJ.pop_out())  # -> 5.5
-
-    # вновь узнаем размер стека
-    print(SC_OBJ.stack_size())  # -> 3
+    # уберем часть тарелок
+    for i in range(21):
+        SC_OBJ.pop_out()
+    # Контроль
+    print(f'Размер стека тарелок: {SC_OBJ.stack_size()}')
+    print(f'Число и состав стопок: \n{SC_OBJ.stack}')
+    print(f'Контроль стека тарелок: \n{SC_OBJ.elems}')
