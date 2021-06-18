@@ -19,40 +19,91 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
-class QueueClass:
-    def __init__(self):
-
-        self.task = []        # Поставленные задачи
-        self.allowed = []     # решенные задачи
-        self.refine = []      # Доработать
-
+class TaskClass:
+    allowed = {}  # решенные задачи
+    task = []  # Поставленные задачи
+    _task_id = 0
 
     def is_empty(self):
         return self.task == []
 
-    def to_queue(self, item):
-        self.task.insert(0, item)
+    def to_task(self, item):
+        self._task_id += 1
+        self.task.insert(0, {self._task_id: {'item': item}})
 
-    def from_queue(self):
-        return self.task.pop()
+    def from_task(self):
+        task = self.task.pop()
+        self.allowed.update(task)
+        return task
 
     def size(self):
         return len(self.task)
 
+    def show_allowed(self):
+        print(f'Всего задач выполнено:\n{"=" * 20}')
+        for task_id, item in self.allowed.items():
+            print(f'Идентификатор задачи: {task_id}; Описание: {item}')
+
+    @classmethod
+    def get_allowed(cls, task_id):
+        return cls.allowed.get(task_id)
+
+
+class TaskRefineClass(TaskClass):
+    refine_dict = {}  # Архив того, что отправлено на доработку
+
+    def __init__(self):
+        TaskClass.__init__(self)
+
+    def to_refine_task(self, task_id):
+        ref = self.allowed[task_id]
+        # Добавляем данные предыдущего id и записываем в задачи
+        result = {task_id: {'item': ref, 'refine': 'from_anybody'}}
+        TaskClass().task.insert(0, result)
+        self.refine_dict.update(result)
+        return f'Отправлена на доработку задача id: {task_id}. {self.allowed.pop(task_id)}'
+
+
 
 if __name__ == '__main__':
-    qc_obj = QueueClass()
-    print(qc_obj.is_empty())  # -> True. Очередь пустая
+    tc_object = TaskClass()
 
     # помещаем объекты в очередь
-    qc_obj.to_queue('my_obj')
-    qc_obj.to_queue(4)
-    qc_obj.to_queue(True)
+    for i in range(23):
+        tc_object.to_task(f'{i}-Текст задачи')
 
-    print(qc_obj.is_empty())  # -> False. Очередь пустая
+    print(f'Объем задач: {tc_object.size()}\n')
 
-    print(qc_obj.size())  # -> 3
+    # помещаем объекты в выполненные
+    for i in range(6):
+        tc_object.from_task()
 
-    print(qc_obj.from_queue())  # -> my_obj
+    # Смотрим выполненные
+    tc_object.show_allowed()
 
-    print(qc_obj.size())  # -> 2
+    # получаем выполненную задачу по id
+    print(tc_object.get_allowed(1))
+
+    # Создаем экземпляр дочернего класса
+    tc_rf_object = TaskRefineClass()
+
+    # Инициализируем экземпляр класса, возвращающего задачу в работу
+    print(tc_rf_object.to_refine_task(2))
+
+    # Инициализируем экземпляр класса, возвращающего задачу в работу
+    print(tc_rf_object.to_refine_task(6))
+
+    # Инициализируем экземпляр класса, возвращающего задачу в работу
+    print(tc_rf_object.to_refine_task(3))
+
+    # помещаем объект в  стандартную очередь
+    tc_object.to_task(f'GH-Текст задачи')
+
+    print(f'Объем задач: {tc_object.size()}\n')
+
+    # делаем контрольный срез задач в очереди. Задачи вернулись в очередь
+    for el in TaskClass.task:
+        print(el)
+
+    # Смотрим выполненные - сколько осталовсь. Те, которые вернулись в основную очеред ушли из выполненных
+    tc_object.show_allowed()
