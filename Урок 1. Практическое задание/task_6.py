@@ -64,7 +64,6 @@ class TaskRefineClass(TaskClass):
         return f'Отправлена на доработку задача id: {task_id}. {self.allowed.pop(task_id)}'
 
 
-
 if __name__ == '__main__':
     tc_object = TaskClass()
 
