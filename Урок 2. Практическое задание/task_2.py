@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def find_digits(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    elif number % 2 == 0:
+        return find_digits(number // 10, even + 1, odd)
+    else:
+        return find_digits(number // 10, even, odd + 1)
+
+
+user_number = int(input('Введите целое число: '))
+print(f'Количество четных и нечетных цифр в числе равно: {find_digits(user_number)}')

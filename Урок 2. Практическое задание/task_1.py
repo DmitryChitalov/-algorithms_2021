@@ -28,3 +28,47 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def is_int(datum):
+    try:
+        return int(datum)
+    except ValueError:
+        return None
+
+
+def calc():
+    operators = ('+', '-', '*', '/')
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода: ')
+    if operator == '0':
+        print('Программа завершена')
+        return
+    elif operator in operators:
+        num_1 = is_int(input('Введите первое число: '))
+        num_2 = is_int(input('Введите второе число: '))
+        if num_1 is None or num_2 is None:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            calc()
+        elif operator == '+':
+            print(f'Результат сложения: {num_1 + num_2}')
+            calc()
+        elif operator == '-':
+            print(f'Результат вычитания: {num_1 - num_2}')
+            calc()
+        elif operator == '*':
+            print(f'Результат умножения: {num_1 * num_2}')
+            calc()
+        elif operator == '/':
+            if num_2 == 0:
+                print('На ноль делить нельзя')
+                calc()
+            else:
+                print(f'Результат деления: {round(num_1 / num_2, 2)}')
+                calc()
+    else:
+        print('Вы ввели неверный знак операции')
+        calc()
+
+
+if __name__ == 'main':
+    calc()
