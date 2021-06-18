@@ -18,3 +18,38 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+
+
+def salt_and_pass(s):
+    user_salt = 'salt for password'
+    user_pass_hash = hashlib.sha256(s.encode() + user_salt.encode()).hexdigest()
+    print(user_pass_hash)
+    return user_pass_hash
+
+
+def get_pass_to_file():
+    with open('bd_hash_pass.txt') as file:
+        s = file.readline()
+        return s
+
+
+with open('bd_hash_pass.txt', 'w') as bd_hash:
+    bd_hash.write(salt_and_pass('qwerty'))
+
+
+n = 3
+while n > 0:
+    user_pass = input("Введите пароль\n")
+    if salt_and_pass(user_pass) == get_pass_to_file():
+        print("Пароль принят.")
+        break
+    else:
+        n -= 1
+        if n == 2:
+            print(f"Пароль не верный, у вас {n} попытки.")
+        elif n == 1:
+            print(f"Пароль не верный, у вас {n} попытка.")
+        else:
+            print("Попытки кончились, запись заблокиролванна.")
+        continue
