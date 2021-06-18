@@ -54,7 +54,7 @@ def get_min_numb(lst):
     """
     min_numb = lst[0]              # O(1) - константная
     for i in range(1, len(lst)):   # O(n) - линейная
-        if lst[i] < min_numb:      # O(n) - линейная
+        if lst[i] < min_numb:      # O(1) - константная
             min_numb = lst[i]      # O(1) - константная
     return min_numb                # O(1) - константная
 
