@@ -16,6 +16,30 @@
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 
-Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
-Подход должен быть максимально алгоритмическим.
+ф-ции min() и sort() не исп-ем!
 """
+from random import randint
+
+
+def search_min_1(my_list):          # Итого: O(n^2)
+    for i in my_list:               # O(n)
+        minimum = True              # O(1)
+        for j in my_list:           # O(n)
+            if i > j:               # O(n)
+                minimum = False     # O(1)
+        if minimum:                 # O(1)
+            return i                # O(1)
+
+
+def search_min_2(my_list):              # Итого: O(n)
+    minimum = my_list[0]                # O(1)
+    for i in range(1, len(my_list)):    # O(n)
+        if my_list[i] < minimum:        # O(n)
+            minimum = my_list[i]        # O(n)
+    return minimum                      # O(n)
+
+
+rnd = [randint(1, 99) for i in range(5)]
+print(rnd)
+print(f'O(n^2): {search_min_1(rnd)}')
+print(f'O(n)):  {search_min_2(rnd)}')

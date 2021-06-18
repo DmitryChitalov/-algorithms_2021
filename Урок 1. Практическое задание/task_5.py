@@ -28,3 +28,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StacksOfPlates:
+    def __init__(self, max_stack):
+        self.max_stack = max_stack
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        if self.is_empty():
+            self.elems.append(el)
+        else:
+            self.elems[len(self.elems) - 1] += el
+        while self.elems[len(self.elems) - 1] > self.max_stack:
+            self.elems.append(self.elems[len(self.elems) - 1] - self.max_stack)
+            self.elems[len(self.elems) - 2] = self.max_stack
+
+    def pop_out(self, el):
+        while el > self.elems[len(self.elems) - 1]:
+            el -= self.elems[len(self.elems) - 1]
+            self.elems.pop()
+        self.elems[len(self.elems) - 1] -= el
+
+    def stack_size(self):
+        elem_sum = 0
+        for stack in self.elems:
+            elem_sum += stack
+        return elem_sum
+
+
+if __name__ == '__main__':
+    num_of_plates = int(input('Сколько тарелок в стопке? '))
+    plates = StacksOfPlates(num_of_plates)
+    print('Стопка пустая или нет? ', plates.is_empty())
+    print('Добавляю необходимое количество тарелок:')
+    plates.push_in(35)
+    plates.push_in(23)
+    print(plates.elems)
+    print('Убираю нужное количество тарелок:')
+    plates.pop_out(22)
+    plates.pop_out(2)
+    print(plates.elems)
+    print('Всего тарелок сейчас: ')
+    print(plates.stack_size())
+

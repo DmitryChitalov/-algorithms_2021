@@ -25,3 +25,48 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+storage = {
+    'user_1': {'password': 'password_1', 'activation': True},
+    'user_2': {'password': 'password_2', 'activation': True},
+    'user_3': {'password': 'password_3', 'activation': True},
+    'user_4': {'password': 'password_4', 'activation': False},
+    'user_5': {'password': 'password_5', 'activation': True},
+    'user_6': {'password': 'password_6', 'activation': True},
+    'user_7': {'password': 'password_7', 'activation': False}
+}
+
+
+def auth_1(users, name, password):      # Итого: O(n^2)
+    for k, v in users.items():
+        if k == name:
+            if v['password'] == password and v['activation']:
+                return "Доступ предоставлен"
+            elif v['password'] == password and not v['activation']:
+                return "Доступ запрещен"
+            elif v['password'] != password:
+                return "Пароль неверный"
+    return "Данного пользователя не существует"
+
+
+def auth_2(users, name, password):  # Итого: O(1)
+    if users.get(name):
+        if users[name]['password'] == password and users[name]['activation']:
+            return "Доступ предоставлен"
+        elif users[name]['password'] == password and not users[name]['activation']:
+            return "Доступ запрещен"
+        elif users[name]['password'] != password:
+            return "Пароль неверный"
+    return "Данного пользователя не существует"
+
+
+print('Первое решение O(n):')
+print(auth_1(storage, 'user_3', 'password_3'))
+print(auth_1(storage, 'user_12', 'qwe'))
+print(auth_1(storage, 'user_4', 'w'))
+print('\nВторое решение O(1): ')
+print(auth_2(storage, 'user_3', 'password_3'))
+print(auth_2(storage, 'user_12', 'qawe'))
+print(auth_2(storage, 'user_4', 'weeee'))
+
+# Первое решение считаю не эффективным, потому что оно линейное, а второе, константное - лучшее
