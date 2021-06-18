@@ -16,3 +16,17 @@
 р
 а
 """
+
+def unic_char(my_str, my_set=set(), my_set2=set()):
+    for i in range(len(my_str)):
+        for y in range(i, len(my_str)):
+            if my_str[i:y + 1] != my_str:
+                my_set2.add(my_str[i:y + 1])
+                my_set.add(hash(my_str[i:y + 1]))
+    for o in my_set2:
+        print(o)
+
+    return print(f'Количество уникальных подстрок: {len(my_set)}')
+
+
+unic_char('papa')
