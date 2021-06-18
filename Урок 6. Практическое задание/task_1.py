@@ -23,11 +23,13 @@
 """
 # Задача 1 из курса основы питона. Увеличим длину генерируемого списка и уберем вывод результата на экран,
 # добавим профайлер памяти и замерим время исполнения
+import json
+
 from memory_profiler import profile
 from timeit import timeit
 from random import randint
-from numpy import array
-from recordclass import recordclass
+import numpy as np
+# from recordclass import recordclass
 # Представлен список чисел. Необходимо вывести элементы исходного списка,
 # значения которых больше предыдущего элемента.
 # Пример исходного списка: [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55].
@@ -87,7 +89,7 @@ print(timeit("func_2()", globals=globals(), number=1))
 
 @profile()
 def func_2_numpy():
-    nums = array([randint(1, 50000) for el in range(1, 100000)])
+    nums = np.array([randint(1, 50000) for el in range(1, 100000)])
     new_arr = [number for number, el in enumerate(nums) if el % 2 == 0]
     return new_arr
 
@@ -102,15 +104,17 @@ print(timeit("func_2_numpy()", globals=globals(), number=1))
 # Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 # Выведите результат.
 
-# Заменим словарь на recordclass
+# заменим словарь на словарь посерьезнее
+
 @profile()
 def top3_3():
-    storage = {"gazflot": 500,
-               "gazprem": 1500,
-               "nashneft": 5200,
-               "glavrpz": 50,
-               "gazmyas": 7950,
-               "aeroflot": 100}
+    # storage = {"gazflot": 500,
+    #            "gazprem": 1500,
+    #            "nashneft": 5200,
+    #            "glavrpz": 50,
+    #            "gazmyas": 7950,
+    #            "aeroflot": 100}
+    storage = {i: randint(0, 10000) for i in range(100000)}
     res_list = []
     for i in range(0, 3):
         a = max(storage, key=lambda x: storage.get(x))   # функция max со сложностью O(n)
@@ -121,24 +125,46 @@ def top3_3():
 
 print(timeit("top3_3()", globals=globals(), number=1))
 
-# @profile()
-def top3_3_recordclass():
+# Заменим словарь на recordclass
 
-    StorageNames = recordclass('StorageNames', 'gazflot gazprem nashneft glavrpz gazmyas aeroflot')
-    storage = StorageNames(500, 1500, 5200, 50, 7950, 100)
-    print(storage)
-    print(storage.__doc__)
-    print(max(storage))
 # И тут я потерпел жесточайшее фиаско. Как перебирать ключи или, как их возвращать? Хранить отдельнов кортеже?
 # могу выбрать максимум на лету, но чтобы отобрать второй по величине элемент, уже надо мучиться. Голову сломал
-# но уже жалею, что связался с этим классом. Упрямство не дает оставить попытки.
-
-    # for i in range(0, 3):
-    #      a = max(storage)
-    #      res_list.append(a)
-    #      storage.pop(a)
-    # return res_list
+# но уже жалею, что связался с этим классом. Упрямство не дает оставить попытки. Пытался прикрутить сюда массивы
+# из нумпай вместе с рекордклассом. UPD. В баню упрямство, пихаем
+# все JSON
 
 
-print(top3_3_recordclass())
-# print(timeit("top3_3_recordclass", globals=globals(), number=1))
+@profile()
+def top3_3_recordclass():
+    # StorageNames = recordclass('StorageNames', ('gazflot', 'gazprem', 'nashneft', 'lavrpz', 'gazmyas', 'aeroflot'))
+    # storage_r = StorageNames(500, 1500, 5200, 50, 7950, 100)
+    # res_list = np.array([])
+    # print(storage_r)
+    # print(storage_r.__doc__)
+    # print(max(storage_r))
+#     array_names = np.array(["gazflot", "gazprem", "nashneft", "glavrpz", "gazmyas", "aeroflot"])
+#     # storage = array(storage_r)
+#     for i in range(0, 3):
+#         a = max(storage_r)
+#         np.append(res_list, a)
+#         np.delete(array_names, a)
+#     # return res_list
+
+    storage = {i: randint(0, 10000) for i in range(100000)}
+    res_list = []
+    storage_json = json.dumps(storage)
+    for i in range(0, 3):
+        storage = json.loads(storage_json)
+        a = max(storage, key=lambda x: storage.get(x))
+        res_list.append(a)
+        storage.pop(a)
+        storage_json = json.dumps(storage)
+    return res_list
+
+
+# print(top3_3_recordclass())
+print(timeit("top3_3_recordclass()", globals=globals(), number=1))
+
+
+# Улучшений ожидаемо не случилось. Фиаско2. Постоянное вытаскивание и запихивание обратно словаря в json
+# не помогло
