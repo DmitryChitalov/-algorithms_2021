@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+even = 0
+odd = 0
+
+
+def parity(num):
+    global even
+    global odd
+    if num == 0:
+        return print(f"{even} четных и {odd} нечетных цифр")
+    else:
+        if (num%10) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return parity(num // 10)
+
+parity(1234)

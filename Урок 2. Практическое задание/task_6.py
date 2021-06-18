@@ -11,3 +11,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randrange
+
+
+def guess_num(num, n=10):
+    attempt = int(input('Попробуйте угадать число:'))
+    if n == 0:
+        return 'Попытки закончились! Вы не угадали число!'
+    if attempt == num:
+        return 'Отлично! Вы угадали число!'
+    else:
+        print('Не угадал, бери выше!' if attempt < num else 'Не ушадал! Попробуй поменьше!')
+        return guess_num(num, n-1)
+
+
+print(guess_num(randrange(1, 100)))
