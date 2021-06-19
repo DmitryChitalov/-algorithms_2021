@@ -11,3 +11,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def guessing_game(gen_num, count=10):
+    if count == 0:
+        return print(f'К сожалению, вы проиграли. Загаданное число - {gen_num}')
+    user_answer = int(input('Введите число, которое загадал компьютер (от 0 до 100): '))
+    if user_answer == gen_num:
+        return print(f'Поздравляем, вы победили! Загаданное число - {gen_num}')
+    count -= 1
+    if gen_num > user_answer:
+        return print(f'Загаданное число больше вашего. Попыток осталось - {count}'), guessing_game(gen_num, count)
+    return print(f'Загаданное число меньше вашего. Попыток осталось - {count}'), guessing_game(gen_num, count)
+
+
+guessing_game(randint(0, 100))

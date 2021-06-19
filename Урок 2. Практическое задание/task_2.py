@@ -18,3 +18,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_number(num, even_num=0, odd_num=0):
+    return print(f'Количество четных и нечетных цифр в числе равно: {even_num, odd_num}') if num == 0 else\
+        get_number(num // 10, even_num + 1, odd_num) if num % 2 == 0 else get_number(num // 10, even_num, odd_num + 1)
+
+
+get_number(12311)
