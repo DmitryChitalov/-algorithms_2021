@@ -20,3 +20,47 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def var1(comp_list):                                                            # Сложность O(n log n)
+    profit_list = []                                                                      # O(1)
+    if len(comp_list) > 0:                                                                # O(1)
+        for i in range(len(comp_list)):                                                   # O(n)
+            profit_list.append(comp_list[i][1])                                           # O(1)
+        profit_list.sort(reverse=True)                                                    # O(n lon n)
+        for i in range(len(comp_list)):                                                   # O(n)
+            if comp_list[i][1] in profit_list[0:3]:                                       # O(n)
+                print(f'Компания {comp_list[i][0]}, годовая прибыль = {comp_list[i][1]}') # O(1)
+    else:                                                                                 # O(1)
+        return print('Ошибка! Вы не ввели данные!')                                       # O(1)
+    return                                                                                # O(1)
+
+
+
+
+def var2(comp_list):                                                            # Сложность O(n)
+    profit_list = []                                                                      # O(1)
+    if len(comp_list) > 0:                                                                # O(1)
+        for i in range(len(comp_list)):                                                   # O(n)
+            profit_list.append(comp_list[i][1])                                           # O(1)
+        for i in range(3):                                                                # O(1)
+            j = profit_list.index(max(profit_list))                                       # O(n)
+            print(f'Компания {comp_list[j][0]}, годовая прибыль'                          # O(1)
+                  f'= {comp_list[j][1]}')
+            profit_list[j] = 0                                                            # O(1)
+    else:                                                                                 # O(1)
+        return print('Ошибка! Вы не ввели данные!')                                       # O(1)
+    return                                                                                # O(1)
+
+
+
+comp_list = [['a',200],['c',6],['f',101],['h',8],['t',9],['o',10],['p',0],['y',3],['r',1],['w',1000]]
+
+
+print('Вариант решения №1')
+var1(comp_list)
+print('\nВариант решения №2')
+var2(comp_list)
+
+#Второй вариант решения предлагает линейную сложность, так как удалось избежать
+#сортировки списка, которая реализована в первом варианте
