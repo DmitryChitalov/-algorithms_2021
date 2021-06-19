@@ -21,3 +21,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+counter = 0
+
+
+def print_ascii_table(n):
+    global counter
+    if n == 127:
+        return print(f'{n} - {chr(n)}')
+    else:
+        counter += 1
+        if (counter % 10) == 1:
+            print(f'\n')
+        print(f'{n} - {chr(n)}', end=' ')
+        return print_ascii_table(n+1)
+
+
+n = 32
+print(print_ascii_table(n))
+
