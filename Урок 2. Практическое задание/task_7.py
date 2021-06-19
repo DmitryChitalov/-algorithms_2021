@@ -16,3 +16,10 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def count(number):
+    return number + count(number - 1) if number != 1 else 1
+
+if __name__ == '__main__':
+    num = int(input('Введите число:\n'))
+    print(count(num) == num * (num + 1) / 2)

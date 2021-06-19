@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_even_odd(num, even=0, odd=0):
+
+    if not num:
+        print(f'Количество четных чисел: {even}, нечетных: {odd}')
+        return
+
+    divide_by_ten = num // 10
+    last_digit = num % 10 if divide_by_ten else divide_by_ten
+    if last_digit % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+
+    count_even_odd(divide_by_ten, even=even, odd=odd)
+
+
+if __name__ == '__main__':
+    number = int(input('Введите число:\n'))
+    count_even_odd(number)

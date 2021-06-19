@@ -22,3 +22,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def upturn(number):
+    return str(number % 10) + upturn(number // 10) if number // 10 else str(number)
+
+
+if __name__ == '__main__':
+    print(upturn(1260))
