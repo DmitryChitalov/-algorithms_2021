@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_even_digits(number):
+    if (number // 10) == 0:
+        return 0
+    else:
+        return int((number % 10) % 2 == 0) + count_even_digits(number // 10)
+
+def count_odd_digits(number):
+    if (number // 10) == 0:
+        return 0
+    else:
+        return int((number % 10) % 2 != 0) + count_even_digits(number // 10)
+
+
+my_number = int(input('Введите число: '))
+print(f'Количество четных и нечетных цифр в числе равно: '
+      f'({count_even_digits(my_number)}, {count_odd_digits(my_number)})')
