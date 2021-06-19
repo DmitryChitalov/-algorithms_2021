@@ -28,3 +28,58 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import math
+
+
+def calculate():
+    messages = ['Вас приветстсвует калькулятор.\n',
+                'Введите операцию (+, -, *, / или ! для выхода):\n',
+                'Введите первое число:\n',
+                'Введите второе число:\n',
+                'Ваш результат:\n',
+                'Деление на ноль недопустимо! Программа прекратила работу.',
+                'Вы вместо числа ввели что-то другое. Исправьтесь\n',
+                'Введите корректный оператор',
+                'Вы завершили работу калькулятора. Здоровья!']
+    _operators = ('+', '-', '*', '/')
+    print(messages[0])
+
+    def realisation():
+        operation = input(messages[1])
+        if operation == '!':
+            print(messages[-1])
+        elif operation not in _operators:
+            print(messages[7])
+            realisation()
+        else:
+            val_1 = check_number(input(messages[2]))
+            val_2 = check_number(input(messages[3]))
+            if val_1 is None or val_2 is None:
+                print(messages[6])
+                realisation()
+            else:
+                try:
+                    # result = (''.join([str(val_1), operation, str(val_2)]))
+                    # print(eval(result))                                           # Очень небезопасно!!!
+                    result_dict = {'+': val_1 + val_2, '-': val_1 - val_2,          # Это значительно лучше
+                                   '*': val_1 * val_2, '/': val_1 / val_2}
+                    print(f'{messages[4]} {result_dict.get(operation)}')
+                    realisation()
+                except ZeroDivisionError:
+                    print(messages[5])
+    realisation()
+
+
+# служебная функция для проверки введенных данных
+def check_number(string):
+    if string.isdigit():
+        result = int(string)
+    else:
+        try:
+            result = float(string)
+        except ValueError:
+            result = None
+    return result
+
+
+calculate()
