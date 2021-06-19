@@ -74,7 +74,7 @@ def calculator_recur(operation):
         print(f'Ваш результат {number_1 * number_2}')
         calculator_recur(input_operation())
     if operation == '/':
-        if number_2 == 0 and operation == '/':
+        if number_2 == 0:
             print('На ноль делить нельзя!')
             calculator_recur(input_operation())
         else:
