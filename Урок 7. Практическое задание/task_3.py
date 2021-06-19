@@ -36,3 +36,35 @@ for i in
 
 
 """
+
+from statistics import median
+from timeit import timeit
+import random
+
+
+def find_median(lst_obj: list):
+    n = 0
+    avg = len(lst_obj) // 2
+    while n != avg:
+        lst_obj.pop(lst_obj.index(max(lst_obj)))
+        n += 1
+    return max(lst_obj)
+
+
+orig_list = [random.randint(-100, 100) for _ in range(11)]
+print(f"Список с которым работаем {orig_list}")
+
+print(f'Медиана по стандартной функции = {median(orig_list)}')
+print(f'Медиана по нашей функции = {find_median(orig_list)}')
+
+print(f"Скорость нахождения медианы по стандартной функции = {timeit('median(orig_list)', globals=globals())}")
+print(f"Скорость нахождения медианы по нашей функции  = {timeit('find_median(orig_list)', globals=globals())}")
+
+# Скорость нахождения медианы по стандартной функции = 2.342088239
+# Скорость нахождения медианы по нашей функции  = 1.145398754
+"""
+Стандартная функция скорее всего в себя включает еще сортировку
+При данном исходе сложность возрастает до O(NLogN)
+При нашей сортировке мы имеем сложность O(N)
+Из - за этого наша функция и отрабатывает быстрее
+"""

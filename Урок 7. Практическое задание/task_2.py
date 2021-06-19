@@ -13,3 +13,92 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import timeit
+
+import random
+
+
+def merge_sort(lst_obj):
+    if len(lst_obj) > 1:
+
+        center = len(lst_obj) // 2
+
+        left = lst_obj[:center]
+
+        right = lst_obj[center:]
+
+        merge_sort(left)
+
+        merge_sort(right)
+
+        # перестали делить
+
+        # выполняем слияние
+        lst_obj.clear()
+        lst_obj.extend([left.pop(0) if left[0] < right[0] else right.pop(0)
+                        for i in range(len(left)) for n in range(len(right)) if len(left) > 0 and len(right) > 0])
+
+        lst_obj.extend(left if len(left) > 0 else right)
+        return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+
+
+# замеры 10
+print(
+
+    timeit.timeit(
+
+        "merge_sort(orig_list[:])",
+
+        globals=globals(),
+
+        number=1000))
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+
+print(
+
+    timeit.timeit(
+
+        "merge_sort(orig_list[:])",
+
+        globals=globals(),
+
+        number=1000))
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+
+print(
+
+    timeit.timeit(
+
+        "merge_sort(orig_list[:])",
+
+        globals=globals(),
+
+        number=1000))
+
+
+# Замеры алгоритма (пример с урока)
+# 0.07162096200000001
+# 1.008894676
+# 13.969076686000001
+
+# Замеры моего алгоритма
+# 0.08681365699999999
+# 1.447318293
+# 19.70307502
+
+'''
+Попытался сделать через comprehension
+Судя по цифрам - ускорения это не дало (даже в каком то моенте очень замедлило),
+хотя надеялся что за счет формирования ново списка (а не изменения старого) будет прибавка по скорости
+Ориентируясь на пузырьковую сортировку из прошлого задания, можно свободно сказать что сортировка
+слиянием намного эффективнее (экономия по времени существенная)
+'''

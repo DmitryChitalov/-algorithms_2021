@@ -17,3 +17,82 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+import timeit
+
+import random
+
+
+def bubble_sort(lst_obj):
+    n = 0
+
+    while n < len(lst_obj):
+        flag = True     # для второго варианта
+        for i in range(len(lst_obj) - 1, n, -1):
+
+            if lst_obj[i] > lst_obj[i - 1]:
+                lst_obj[i], lst_obj[i - 1] = lst_obj[i - 1], lst_obj[i]
+                flag = False
+        if flag:
+            return lst_obj
+        n += 1
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+
+# замеры 10
+
+print(
+
+    timeit.timeit(
+
+        "bubble_sort(orig_list[:])",
+
+        globals=globals(),
+
+        number=1000))
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+
+print(
+
+    timeit.timeit(
+
+        "bubble_sort(orig_list[:])",
+
+        globals=globals(),
+
+        number=1000))
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+
+print(
+
+    timeit.timeit(
+
+        "bubble_sort(orig_list[:])",
+
+        globals=globals(),
+
+        number=1000))
+
+# Обычный пузырек
+# 0.06407077800000001
+# 3.5972352319999996
+# 118.41415095299999
+
+# Пузырек с флагом
+# 0.041965842999999996
+# 3.485292977
+# 117.02362125500001
+
+"""
+Добавление флага не дало никаких преимуществ
+Преимущество по скорости может быть лишь в том случае, если массив изначально будет отсортирован
+В нашем же случае (max 300 эллементов) вероятность получить отсортированный рандомный массив - крайне мала
+"""
