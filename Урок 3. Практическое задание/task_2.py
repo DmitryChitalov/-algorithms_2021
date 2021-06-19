@@ -18,3 +18,26 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+passwd = 'Ilublugysei'
+
+
+def generate_passwd(passwd):
+    res = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+    return res
+
+
+with open('text.txt', 'w', encoding='UTF-8')as f_objct:
+    f_objct.write(generate_passwd(passwd))
+
+check_passwd = input('Введите пароль повторно: ')
+
+with open('text.txt', 'r', encoding='UTF-8')as f_objct:
+    hash_passwd = f_objct.readline()
+if generate_passwd(passwd) == hash_passwd:
+    print('Вы ввели верный пароль')
+else:
+    print('Пароль не верный: ')
