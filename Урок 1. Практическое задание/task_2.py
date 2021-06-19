@@ -19,3 +19,24 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+def search_min_1(my_list):   # Сложность O(n)
+    min_from_list = my_list[0]    # O(1)
+    for i in my_list: # O(n)+O(n)=O(n)
+            if min_from_list > i: # O(1)
+                min_from_list = i # O(1)
+    return print(f'Минимальное значение в списке = {min_from_list}')
+
+def search_min_2(my_list):   # Сложность O(n^2)
+    min_from_list = my_list[0]  # O(1)
+    for i in my_list: # O(n)
+        for j in my_list: # O(n)
+            if  min_from_list > j : # O(1)
+                min_from_list = j # O(1)
+    return print(f'Минимальное значение в списке = {min_from_list}')
+
+
+my_list = [3,10,11,0,100,4,8,1,12,10,2]
+
+search_min_1(my_list)
+search_min_2(my_list)
