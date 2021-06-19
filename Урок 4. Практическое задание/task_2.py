@@ -11,6 +11,9 @@
 Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
 
+# Здесь не нужна, ибо функцию запускаем 1 раз. Можно остальные числа брать из кэша.
+# Мемозация будет нужна если кэш перезаполнится
+
 from timeit import timeit
 from random import randint
 
@@ -53,6 +56,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
