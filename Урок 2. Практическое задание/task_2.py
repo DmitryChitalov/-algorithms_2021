@@ -18,3 +18,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def separator(number, even, odd):
+    if number == 0:
+        return f"В числе содержится: {even} цифр четных и {odd} цифр нечетных."
+    else:
+        if number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return separator(number // 10, even, odd)
+
+
+if __name__ == "__main__":
+    while True:
+        try:
+            user_answer = int(input("Введите число или для выхода наберите - 0: "))
+            if user_answer < 0:
+                raise ValueError
+            elif user_answer == 0:
+                break
+            print(separator(user_answer, 0, 0))
+        except ValueError:
+            print("Вы вели не число, повторите ввод!")
+
+    print("Спасибо, что воспользовались моей программой!")
+

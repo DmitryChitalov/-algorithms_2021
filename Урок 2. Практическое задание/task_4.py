@@ -12,3 +12,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_elements(n, first_value=1.0):
+    return first_value if n == 1 else first_value + sum_elements(n - 1, first_value / -2)
+
+
+if __name__ == "__main__":
+    while True:
+        try:
+            user_answer = int(input("Введите количество элементов или для выхода наберите - 1111: "))
+            if user_answer < 1:
+                raise ValueError
+            elif user_answer == 1111:
+                break
+            print(sum_elements(user_answer))
+        except ValueError:
+            print("Вы вели некоректную сумму элементов, введите больше 1!")
+
+    print("Спасибо, что воспользовались моей программой!")

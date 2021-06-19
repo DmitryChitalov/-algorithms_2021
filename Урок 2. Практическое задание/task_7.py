@@ -16,3 +16,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equality(n):
+    return n if n == 0 else n + equality(n - 1)
+
+
+if __name__ == "__main__":
+    while True:
+        try:
+            print("Программа, доказывающая равенство - 1+2+...+n = n(n+1)/2")
+            user_answer = int(input("Введите любое натуральное число или для выхода наберите - 0: "))
+            if user_answer < 0:
+                raise ValueError
+            elif user_answer == 0:
+                break
+            else:
+                if equality(user_answer) == user_answer * (user_answer + 1) / 2:
+                    print("Равенство верно")
+                elif equality(user_answer) != user_answer * (user_answer + 1) / 2:
+                    print("Равенство не верно!")
+        except ValueError:
+            print("Вы вели не число, повторите ввод!")
+
+print("Спасибо, что воспользовались моей программой!")

@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def char_ascii(number=32):
+    delimiter = ''
+    if (number - 31) % 10 == 0:
+        delimiter = '\n'
+    if number == 127:
+        return f'{number} - {chr(number)}'
+    else:
+        return f'{number} - {chr(number)} {delimiter}' + char_ascii(number + 1)
+
+
+if __name__ == '__main__':
+    print(char_ascii())
