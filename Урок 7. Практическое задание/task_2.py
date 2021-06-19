@@ -13,3 +13,57 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+
+from random import random
+from timeit import timeit
+
+
+def merge_sort(lst_obj):
+    n = len(lst_obj)
+    if n < 2:
+        return lst_obj
+
+    left = merge_sort(lst_obj[:n // 2])
+    right = merge_sort(lst_obj[n // 2:n])
+
+    i = j = 0
+    result = []
+    while i < len(left) or j < len(right):
+        if not i < len(left):
+            result.append(right[j])
+            j += 1
+        elif not j < len(right):
+            result.append(left[i])
+            i += 1
+        elif left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    return result
+
+
+list_10 = [random() * 50 for _ in range(10)]
+list_100 = [random() * 50 for _ in range(100)]
+list_1000 = [random() * 50 for _ in range(1000)]
+
+print(f'Исходный массив: {list_10}\n'
+      f'Отсортированный массив: {merge_sort(list_10[:])}\n'
+      f'Время сортировки: {timeit("merge_sort(list_10[:])", globals=globals(), number=1000)}')
+print()
+print(f'Исходный массив: {list_100}\n'
+      f'Отсортированный массив: {merge_sort(list_100[:])}\n'
+      f'Время сортировки: {timeit("merge_sort(list_100[:])", globals=globals(), number=1000)}')
+print()
+print(f'Исходный массив: {list_1000}\n'
+      f'Отсортированный массив: {merge_sort(list_1000[:])}\n'
+      f'Время сортировки: {timeit("merge_sort(list_1000[:])", globals=globals(), number=1000)}')
+print()
+
+'''
+Время сортировки: 0.014651999999999998
+Время сортировки: 0.2385601
+Время сортировки: 3.3857476999999996
+'''
