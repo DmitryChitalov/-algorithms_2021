@@ -13,6 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +39,34 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    if type(enter_num) == int:
+        enter_num = list(str(enter_num))
+    if len(enter_num) == 1:
+        return enter_num[0]
+    return enter_num.pop() + revers_4(enter_num)
+
+
+num = 123456789
+
+print('Функция revers_1 -', timeit("revers_1(num)", globals=globals(), number=100000))
+print('Функция revers_2 -', timeit("revers_2(num)", globals=globals(), number=100000))
+print('Функция revers_3 -', timeit("revers_3(num)", globals=globals(), number=100000))
+print('Функция revers_4 -', timeit("revers_4(num)", globals=globals(), number=100000))
+
+
+def prof():
+    for _ in range(10000):
+        revers_1(num)
+        revers_2(num)
+        revers_3(num)
+        revers_4(num)
+
+
+run('prof()')
+
+# добавил вариан с рекурсивной функцией и преобразованием числа в строку
+# работает, ожидаемо, медленней всех остальных
+# ну а самая быстрая, естественно, функция со срезом
