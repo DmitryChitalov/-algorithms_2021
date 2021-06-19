@@ -11,3 +11,21 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from uuid import uuid4
+import hashlib
+
+salt = uuid4().hex
+cash_objc = {}
+
+
+def get_page(url):
+    if cash_objc.get(url):
+        print(f'Данный адрес {url} присутствует в кэше')
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cash_objc[url] = res
+        print(cash_objc)
+
+
+get_page('https://yandex.ru/')
+get_page('https://yandex.ru/')
