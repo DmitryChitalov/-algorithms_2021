@@ -36,3 +36,21 @@ for i in
 
 
 """
+import random
+
+def median_wo_sort(cur_lst):
+    mid = len(cur_lst) // 2
+    while True:
+        max = cur_lst[0]
+        for el in cur_lst:
+            if el > max:
+                max = el
+        cur_lst.remove(max)
+        if mid == 0:
+            return max
+        mid -= 1
+
+num = int(input('Введите число элементов: '))
+orig_list = [random.randint(0, 10) for _ in range(2*num+1)]
+print(orig_list)
+print('Медиана:', median_wo_sort(orig_list[:]))
