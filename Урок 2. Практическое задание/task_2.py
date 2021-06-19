@@ -32,6 +32,7 @@ def count_even_digits(number):
     else:
         return int((number % 10) % 2 == 0) + count_even_digits(number // 10)
 
+
 def count_odd_digits(number):
     if (number // 10) == 0:
         return 0
