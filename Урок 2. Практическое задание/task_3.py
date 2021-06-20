@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def revers_number(string):
+    string_lst = list(string)
+    if len(string_lst) == 1:
+        return str(string_lst.pop())
+    else:
+        result = str(string_lst.pop())
+        return result + revers_number(''.join(string_lst))
+
+
+
+print(revers_number('12350'))
