@@ -25,3 +25,41 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Общая сложность О(n)
+def authorization(users, user_name, user_password):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return "Добро пожаловать! Доступ разрешен"
+            elif value['password'] == user_password \
+                and not value['activation']:
+                return 'Учатная запись не активна! Авторизируйтесь!'
+            elif value['password'] != user_password:
+                return 'Пароль не верный'
+
+
+    return 'Данного пользователя не существует'
+
+
+def authorization2(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password \
+                and users[user_name]['activation']:
+            return 'Добро пожаловать! Доступ разрешен!'
+        elif users[user_name]['password'] == user_password \
+                and not users[user_name]['activation']:
+            return 'Учетная запись не активна! Пройдите активацию!'
+        elif users[user_name]['password'] != user_password:
+            return 'Пароль не верный'
+    else:
+        return 'Данного пользователя не существует'
+
+
+my_users = {'user1': {'password': '11111', 'activation': True},
+            'user2': {'password': '11111', 'activation': False},
+            'user3': {'password': '11111', 'activation': True},
+            'user4': {'password': '11111', 'activation': False}
+            }
+
+
