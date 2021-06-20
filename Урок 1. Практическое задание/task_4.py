@@ -25,3 +25,65 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {
+    'name1': ['pass1', True],
+    'name2': ['pass2', False],
+    'name3': ['pass3', True],
+    'name4': ['pass4', True],
+    'name5': ['pass5', False],
+    'name6': ['pass6', True],
+    'name7': ['pass7', True],
+    'name8': ['pass8', True],
+    'name9': ['pass9', False],
+    'name10': ['pass10', True]
+}
+
+
+# Первый метод через Try-Except тут идёт лишь 2 раза сравнение сравнение по 1 эллементу
+# что являет константной нотацией O(1)
+# Считаю этот метод предпочтительнее, т.к. он быстрее
+def aut(users, name, password):
+    try:
+        if users[name][0] == password:
+            if users[name][1] == True:
+                print('Welcome')
+            else:
+                print('Your account is not activated, please go through activation')
+        else:
+            print('password or login is incorrect')
+    except:
+        print('user not found')
+
+
+aut(users, 'name3', 'pass3')
+aut(users, 'name2', 'pass2')
+aut(users, 'name5555', 'pass3')
+aut(users, 'name7', 'pass777777')
+
+print('=============')
+
+
+# Способ 2
+# перебором всех значений словаря, линейная нотация (n) из за цикла
+
+def autentification(users, name, password):
+    for key, value in users.items():
+        if key == name:
+            if value[0] == password:
+                if value[1] == True:
+                    print('Welcome')
+                    return
+                else:
+                    print('Your account is not activated, please go through activation')
+                    return
+            else:
+                print('password or login is incorrect')
+                return
+    print('user not found')
+
+
+autentification(users, 'name3', 'pass3')
+autentification(users, 'name2', 'pass2')
+autentification(users, 'name5555', 'pass3')
+autentification(users, 'name7', 'pass777777')
