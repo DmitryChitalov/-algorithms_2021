@@ -28,3 +28,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+n = int(input('Сколько всего тарелок? '))
+s = int(input('Сколько тарелок будет в каждой стопке? '))
+
+plates = []
+j = 0
+if n % s == 0:
+    j = n // s
+else:
+    j =  n // s + 1
+
+print(f'j = {j}')
+plates = [StackClass() for i in range(j)]
+k=0
+
+for i in range(n):
+    plates[k].push_in('Тарелка')
+    if (i+1) % s == 0:
+        k += 1
+
+for i in range(j):
+    print(f'размер стопки {i+1}={plates[i].stack_size()}')
+
+
+
+
+
