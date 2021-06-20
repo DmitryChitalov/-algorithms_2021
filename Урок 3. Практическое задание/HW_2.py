@@ -9,21 +9,19 @@ print(hash_pass)
 with open('pass_hash.txt', 'w') as f:  # Записываем в файл
     f.write(hash_pass)
 
-pass_check = input('Введите пароль еще раз:')  # Второй ввод
-hash_pass_check = sha256(pass_check.encode() + salt.encode()).hexdigest()
+
 
 with open('pass_hash.txt', 'r') as f:  # Достаем из файла
     hash_from_file = f.read()
 
 while True:
+    pass_check = input('Введите пароль еще раз:')  # Второй ввод
+    hash_pass_check = sha256(pass_check.encode() + salt.encode()).hexdigest()
     if hash_pass_check == hash_from_file:  # Все верно
         print('Вы ввели верный пароль')
         break
     else:
-        print(
-            'Вы ввели неверный пароль, попробуйте еще раз\n Введите "no", для выхода')  # Зацикливание до вверного ввода
-        # или принудительного выхода
-        pass_check = input('Введите пароль еще раз:')
+        # Зацикливание до вверного ввода или принудительного выхода
+        pass_check = input('Вы ввели неверный пароль, попробуйте еще раз\n Введите "no", для выхода')
         if pass_check == 'no':
             break
-        hash_pass_check = sha256(pass_check.encode()+salt.encode()).hexdigest()
