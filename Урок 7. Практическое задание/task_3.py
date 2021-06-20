@@ -36,3 +36,49 @@ for i in
 
 
 """
+# Прочитал про метод  с пивотами. Реализовал. Сортировка не используется. Очень был сложный момент в скатывание
+# в бесконечную реккурсию, когда оставались одинаковые элементы с одной стороны от пивота, решил с разбрасыванием
+# таких по очереди в разные стороны от пивота. На удивление сложность О(n) Учивая, что рекурсия вызывается от
+# массива, который в среднем вдвое меньше предыдущего получаем последовательность n+ n/2 + n/4 + ... и т.д.
+# матан 1 курс, сумма такого ряда стремится к 2n.
+
+from statistics import median
+from random import randint, choice
+from timeit import timeit
+
+
+def element_array_split(element, my_array):
+    left = []
+    right = []
+    equal_left = True
+    for el in my_array:
+        if el < element:
+            left.append(el)
+        elif el > element:
+            right.append(el)
+        elif el == element and equal_left:
+            left.append(el)
+            equal_left = False
+        else:
+            right.append(el)
+            equal_left = True
+    return left, right
+
+
+def find_median(my_array, median_index):
+    if len(my_array) == 1:
+        return my_array[0]
+    else:
+        left, right = element_array_split(choice(my_array), my_array)
+        if len(left) > median_index:
+            return find_median(left, median_index)
+        else:
+            return find_median(right, median_index-len(left))
+
+
+my_array = [randint(1, 100) for el in range(21)]
+median_index = len(my_array)//2
+print(median(my_array))
+print(find_median(my_array, median_index))
+
+
