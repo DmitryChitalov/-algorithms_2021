@@ -11,3 +11,31 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib, uuid
+
+
+def func_url(url):
+    if url[:8] == 'https://':
+        if kash_url.get(url):
+            print(f'Ссылка "{url}" присутствует в кэше.')
+        else:
+            hash_url = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+            kash_url[url] = hash_url
+    else:
+        print(f'Неверный формат ссылки "{url}".')
+
+
+kash_url = {}
+salt = uuid.uuid4().hex
+n = 1
+
+func_url('https://ru.wikipedia.org/wiki/')
+func_url('https://www.youtube.com/')
+func_url('https://ru.wikipedia.org/wiki/')
+func_url('https://yandex.ru/')
+func_url('test')
+
+for i in kash_url:
+    print(f'\n{n}я ссылка - {i}. Кэш ссылки - {kash_url.get(i)}')
+    n += 1
