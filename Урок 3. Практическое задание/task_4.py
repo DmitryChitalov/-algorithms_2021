@@ -11,3 +11,25 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+from uuid import uuid4
+
+
+salt = uuid4().hex
+cache_list = []
+
+
+def check_cache(url_address):
+    if hashlib.sha256(salt.encode() + url_address.encode()).hexdigest() not in cache_list:
+        cache_list.append(hashlib.sha256(salt.encode() + url_address.encode()).hexdigest())
+
+
+check_cache('https://google.com/')
+check_cache('https://geekbrains.ru/')
+check_cache('https://google.com/')
+
+print(cache_list)
+
+
