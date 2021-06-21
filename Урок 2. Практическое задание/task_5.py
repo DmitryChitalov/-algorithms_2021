@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_table_ascii(num_1, num_2):
+    num_1 = num_1
+    if num_1 == num_2:
+        result = f'{num_1} - {chr(num_1)}  '
+        print(result, end='')
+    else:
+        result = (f'{num_1} - {chr(num_1)}  ', f'{num_1} - {chr(num_1)}  \n')[num_1 % 10 == 0]
+        print(result, end='')
+        num_1 += 1
+        get_table_ascii(num_1, num_2)
+
+
+get_table_ascii(32, 127)
