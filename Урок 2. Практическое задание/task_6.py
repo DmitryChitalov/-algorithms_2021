@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+values_dict = {'count': 10, 'rand': int(random.random()*100)}
+
+
+def get_game():
+    result = int(input('Введите целое число от 0 до 100: \n'))
+    if values_dict['count'] == 1 or result == values_dict['rand']:
+        print(f'Игра окончена! Было загадано число: {values_dict["rand"]}')
+    else:
+        values_dict['count'] -= 1
+        result = (f'Введеное число меньше. Осталось попыток: {values_dict["count"]}',
+                  f'Введеное число больше. Осталось попыток: {values_dict["count"]}')[result > values_dict['rand']]
+        print(result)
+        get_game()
+
+
+get_game()
