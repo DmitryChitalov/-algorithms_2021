@@ -19,3 +19,34 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def search_min1(list_def):
+    """
+    O(n**2)
+    """
+    swapped = True
+    while swapped:
+        swapped = False
+        for i in range(len(list_def) - 1):
+            if list_def[i] > list_def[i + 1]:
+                list_def[i], list_def[i + 1] = list_def[i + 1], list_def[i]
+                swapped = True
+    return list_def[0]
+
+
+def search_min2(list_def):
+    """
+    O(n)
+    """
+    res = list_def[0]
+    for i in list_def:
+        if i < res:
+            res = i
+    return res
+
+
+print(search_min1([222, 4, 6, 7, 89, 23, 33, 3, 5]))
+
+
+print(search_min2([222, 4, 6, 7, 89, 23, 33, 3, 5]))
