@@ -16,3 +16,14 @@
 р
 а
 """
+s = input('Enter some string: ')
+hash_set = set()
+substring_set = set()
+for i in range(len(s)):
+    for j in range(len(s), i, -1):
+        if s[i:j] != s:
+            substring_set.add(s[i:j])
+            hash_set.add(hash(s[i:j]))
+
+
+print(f'there are {len(hash_set)} unique substrings in string "{s}": {substring_set}')

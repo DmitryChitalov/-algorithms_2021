@@ -18,3 +18,26 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+from uuid import uuid4
+import hashlib
+
+salt = uuid4().hex
+
+flag = False
+while flag is not True:
+    passwd = input('Enter your password: ')
+    salt = uuid4().hex
+    with open('file_for_task2.txt', 'w+', encoding='utf-8') as f:
+        f.write(hashlib.sha256(salt.encode() + passwd.encode()).hexdigest())
+        passwd_check = input('Enter your password one more time: ')
+        check_res = hashlib.sha256(salt.encode() + passwd_check.encode()).hexdigest()
+        f.seek(0) # курсор в начало файла
+        if check_res == f.read():
+            print('Your password is correct')
+            flag = True
+            break
+        else:
+            print('The passwords are not equal! Try again')
+
+
+
