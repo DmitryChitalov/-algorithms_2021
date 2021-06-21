@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def convert(a,result=None):
+    if result is None:
+        result = ''
+    if a < 0:
+        return result
+    if a > 0:
+        result += str(a % 10)
+    if a == 0:
+        return result
+    return convert(a//10,result)
+
+a = int(input('Введите число: '))
+print(f'{convert(a)}')
