@@ -11,3 +11,30 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from hashlib import sha256
+
+
+class Cache:
+    def __init__(self):
+        self.memory = {}
+        pass
+
+    def get_hash(self, url):
+        hash_obj = sha256(url.encode() + url.encode()).hexdigest()
+        return hash_obj
+
+    def cache_url(self, url):
+        if self.memory.get(url):
+            return f'Адрес {url} уже находится в кэше'
+        else:
+            hash_obj = self.get_hash(url)
+            self.memory[url] = hash_obj
+            return f'Адрес {url} внесен в кэш: {hash_obj}'
+
+
+a = Cache()
+print(a.cache_url('https://mysite.ru/'))
+print(a.cache_url('https://mysite.ru/'))
+print(a.cache_url('https://mysite_1.ru/'))
+print(a.cache_url('https://mysite_1.ru/'))
