@@ -21,3 +21,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def table_ascii(code):
+    if code <= 127:
+        if code in (41, 51, 61, 71, 81, 91, 101, 111, 121):
+            print(f'{code} - {chr(code)}')
+            return table_ascii(code+1)
+        print(f'{code} - {chr(code)}', end=' ')
+        return table_ascii(code+1)
+
+table_ascii(32)
