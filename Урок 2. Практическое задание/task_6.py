@@ -17,7 +17,7 @@ from random import randint
 
 def game(num, attempts):
     if attempts == 0:
-        print('кончились попытки')
+        print(f'кончились попытки, загаданное число {num}')
         return
     user_num = int(input('Введите число '))
     if num < user_num:
