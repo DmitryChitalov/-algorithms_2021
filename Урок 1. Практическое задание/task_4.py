@@ -25,3 +25,43 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# Cложность функции - линейная O(n)
+def authentication_1(data, user, pswd):
+    for el in data:
+        if el == user:
+            if data[el]['password'] == pswd:
+                if data[el]['activation']:
+                    return print('Аутентификация успешна! Доступ к ресурсу предоставлен!')
+                else:
+                    return print('Учетная запись не активирована! Пройдите активацию!')
+            else:
+                return print('Пароль не верный! Доступ к ресурсу запрещен!')
+    return print(f'Пользователя {user} не существует! Доступ к ресурсу запрещен!')
+
+
+# Cложность функции - константная O(1)
+def authentication_2(data, user, pswd):
+    if  data.get(user):
+        if data[user]['password'] == pswd:
+            if data[user]['activation']:
+                print('Аутентификация успешна! Доступ к ресурсу предоставлен!')
+            else:
+                print('Учетная запись не активирована! Пройдите активацию!')
+        else:
+            print('Пароль не верный! Доступ к ресурсу запрещен!')
+    else:
+        print(f'Пользователя {user} не существует! Доступ к ресурсу запрещен!')
+
+
+"""Второй вариант эффективнее, так как в нем общая сложность константная О(1)"""
+
+
+
+storage_data = {'login1': {'password': '6789', 'activation': False},
+                'login2': {'password': '12345', 'activation': True},
+                'login3': {'password': '1234', 'activation': True},
+                'login4': {'password': '11111', 'activation': False}
+               }
+
+authentication_1(storage_data, 'login1', '6789')
+authentication_2(storage_data, 'login3', '1234')
