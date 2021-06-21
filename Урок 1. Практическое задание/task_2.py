@@ -13,9 +13,26 @@
 Не забудьте указать сложность каждого из двух алгоритмов. Для лучшего закрепления темы
 можете определить и указать сложность еще и у каждого выражения этих двух алгоритмов.
 
-Примечание:
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 
-Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
-Подход должен быть максимально алгоритмическим.
-"""
+def minsearch2(mylist):
+    for a in mylist:                      O(n)
+        min_number = True                 O(1)
+        for b in mylist:                  O(n)
+            if a > b:                     O(1)
+                min_number = False        O(1)
+        if minvalue:                      O(1)
+            return a                      O(1)
+
+my_list = (4, 5, 66, 14, 12, 18, 2)
+print(minsearch2(my_list))
+
+
+def minsearch(list):
+  min_number = list[0]                  O(1)
+  for i in range (1, len(list)):        O(n)
+    if min_number > list[i]:            O(1)
+      min_number = list[i]              O(1)
+  return min_digit                      O(1)
+
+my_list = (4, 5, 66, 14, 12, 18)
+print(minsearch(my_list))
