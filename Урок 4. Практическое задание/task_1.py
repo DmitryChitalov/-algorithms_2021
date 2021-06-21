@@ -13,6 +13,8 @@
 Без аналитики задание не принимается
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -20,3 +22,34 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+if __name__ == '__main__':
+    my_nums = [2, 4, 3, 6, 5, 159, 852, 100]
+    print(timeit('func_1(my_nums)', globals=globals()))  # 1.3090779180056415
+
+    """
+    первый вариант ускорения работы - использовать list comprehension + range
+    исходя из замеров, получается чуточку быстрее
+    """
+
+    def new_func(nums):
+        return [x for x in range(len(nums)) if nums[x] % 2 == 0]
+    print(timeit('new_func(my_nums)', globals=globals()))  # 1.1674400930060074
+
+    """
+    вариант №2 - уйти от range к более быстрой функции, которая сразу вычисляет 
+    индексы (и в целом в настоящий момент более быстрая, чем range)
+    Результат - время работы функции уменьшается
+    """
+
+    def new_func2(nums):
+        return [ind for ind, el in enumerate(nums) if el % 2 == 0]
+    print(timeit('new_func2(my_nums)', globals=globals()))  # 0.9805471510044299
+
+    """
+    во время одного из замеров время работы new_func2 было на порядок ниже (0.098547...)
+    при том же времения работы других функций,
+    но больше одного раза этот показатель не был достигнут    
+    """
+
