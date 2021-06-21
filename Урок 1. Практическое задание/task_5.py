@@ -28,3 +28,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+class  PlateStack:
+    def __init__(self, size):
+        self.elem = []
+        self.size = size
+
+    def __str__(self):
+        return str(self.elem)
+
+    def empt(self):
+        return self.elem == [[]]
+
+    def push(self,elm):
+        if len(self.elem[len(self.elem)-1]) < self.size:
+            self.elem[len(self.elem)-1].append(elm)
+        else:
+            self.elem.append([])
+            self.elem[len(self.elem)-1].append(elm)
+
+    def out(self):
+         result = self.elem[len(self.elem)- 1]
+         [len(self.elem[len(self.elem) - 1])-1]
+
+    def stack_size(self):
+        el_sum = 0
+        for i in self.elem:
+            el_sum += len(i)
+        return el_sum
+
+    def st_count(self):
+        return len(self.elem)
+
+
+if __name__ == '__main__':
+    plate = PlateStack(2)
+    plate.push('pl1')
+    plate.push('pl2')
+    plate.push('pl3')
+    print(plate)
+    
+    
+    
+ # у меня почему-то выдает ошибку:  IndexError: list index out of range
