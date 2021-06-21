@@ -28,3 +28,51 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc(x, y, z):
+    if z == '+':
+        if y > 0:
+            return calc(x, y - 1, z) + 1
+        elif y < 0:
+            return calc(x, y + 1, z) - 1
+        else:
+            return x
+    elif z == '-':
+        if y > 0:
+            return calc(x, y - 1, z) - 1
+        elif y < 0:
+            return calc(x, y + 1, z) + 1
+        else:
+            return x
+    elif z == '*':
+        if x == 1:
+            return y
+        else:
+            return y + calc(x - 1, y, z)
+    elif z == '/':
+        if x < y:
+            return 0
+        else:
+            return 1 + calc(x - y, y, z)
+
+
+op = '+', '-', '*', '/', '0'
+while True:
+    s = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if s == '0':
+        print('Спасибо за внимание.')
+        exit(0)
+    if s not in op:
+        print('Ошибка в знаке! Повторите еще раз.')
+        continue
+    try:
+        a = int(input('Введите первое число: '))
+        b = int(input('Введите второе число: '))
+        if s == '/' and b == 0:
+            print('Делить на ноль нельзя!')
+            continue
+    except ValueError:
+        print('Это не число!')
+    else:
+        print(calc(a, b, s))
