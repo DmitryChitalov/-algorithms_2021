@@ -16,7 +16,6 @@
 а
 """
 
-
 def verify_func(string):
     verify_string = string.lower ()
     string_set = set ()
@@ -24,8 +23,8 @@ def verify_func(string):
     for i in range (len (verify_string)):
         for j in range (len (verify_string) - 1 if i == 0 else len (verify_string), i, -1):
             string_set.add (hash (verify_string[i:j]))
-            print (verify_string[i:j], i, j)
     return len (string_set)
+
 
 
 if __name__ == '__main__':
