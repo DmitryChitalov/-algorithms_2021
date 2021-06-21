@@ -1,30 +1,51 @@
-"""
-Задание 5.
-Задание на закрепление навыков работы со стеком
+class PlateClass:
+    def __init__(self, size):
+        self.elems = []
+        self.size = size
 
-Реализуйте структуру "стопка тарелок".
+    def __str__(self):
+        return str(self.elems)
 
-Мы можем складывать тарелки в стопку и при превышении некоторого значения
-нужно начать складывать тарелки в новую стопку.
+    def inputplates(self, el):
+      if len(self.elems) == 0:
+         self.elems.append([])
+      if len(self.elems[-1]) < self.size:
+         self.elems[-1].append(el)
+      else:
+         self.elems.append([])
+         self.elems[-1].append(el)
 
-Структура должна предусматривать наличие нескольких стеков.
-Создание нового стека происходит при достижении предыдущим стеком порогового значения.
-Реализуйте по аналогии с примером, рассмотренным на уроке, необходимые методы,
-для реализации это структуры, добавьте новые методы (не рассмотренные в примере с урока)
-для реализации этой задачи.
+    def removeplate(self):
+      newplates = self.elems[-1].pop()
+      if len(self.elems[-1])==0:
+          self.elems.pop()
+      return newplates
 
-После реализации структуры, проверьте ее работу на различных сценариях
+    def steckcount(self):
+        return len(self.elems)
+    
+    def platecount(self):
+        if len(self.elems) == 0:
+            return 'Ups, you have no plates.'
+        result = self.size * (len(self.elems)-1) + len(self.elems[-1])
+        return result
 
-Подсказка:
-Отдельне стопки можно реализовать через:
-1) созд-е экземпляров стека (если стопка - класс)
-или
-2) lst = [[], [], [], [],....]
+plates = PlateClass(5)
 
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
+print (plates.platecount())
+plates.inputplates('Plate1')
+plates.inputplates('plate2')
+plates.inputplates('plate3')
+plates.inputplates('plate4')
+plates.inputplates('plate5') 
+plates.inputplates('plate6')
+plates.inputplates('plate7')
+print (plates.steckcount())
+print (plates.platecount())
+print(plates)
 
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
-"""
+print (plates.removeplate())
+print (plates.removeplate())
+print (plates)
+print (plates.steckcount())
+print (plates.platecount())
