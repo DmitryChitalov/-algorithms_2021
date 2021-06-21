@@ -18,3 +18,25 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+from hashlib import sha256
+
+
+def password():
+    with open("task_2.txt", "w+", encoding="utf-8") as pwd_hash:
+        salt = "Криптографическая соль"
+        pepper = "Криптографический перец"
+        pwd = input("Введите пароль: ")
+        hashed_pwd = sha256(pwd.encode() + salt.encode() + pepper.encode()).hexdigest()
+        pwd_hash.write(f"{hashed_pwd}")
+        pwd_hash.seek(0)
+        read_pwd_hash = pwd_hash.read()
+        print(f"В базе данных хранится строка: {read_pwd_hash}")
+        check_pwd = input("Введите пароль ещё раз для проверки: ")
+        check_hashed_pwd = sha256(check_pwd.encode() + salt.encode() + pepper.encode()).hexdigest()
+        if check_hashed_pwd == read_pwd_hash:
+            print("Вы ввели правильный пароль!")
+        else:
+            print("Пароль не верный!")
+
+
+password()

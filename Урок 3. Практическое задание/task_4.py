@@ -11,3 +11,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from hashlib import sha256
+
+cache = {}
+salt = "Salt my cache"
+
+
+def url_cache(url):
+    res = cache.get(url)
+    if res is None:
+        url_hash = sha256(url.encode() + salt.encode()).hexdigest()
+        cache[url] = url_hash
+        print(f"Адрес '{url}' добавлен в кэш!")
+    else:
+        print(f"Адрес '{url}' уже кэширован!")
+
+
+url_cache("gb.ru")
+url_cache("gb.ru")
+print(cache)
