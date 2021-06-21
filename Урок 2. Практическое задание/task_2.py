@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_odd_even(number, even_num, odd_num):
+    if len(number) > 0:
+        check_num = int(number.pop())
+        if check_num % 2 == 0:
+            even_num += 1
+        else:
+            odd_num += 1
+        count_odd_even(number, even_num, odd_num)
+    else:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even_num}, {odd_num})')
+
+
+even_n, odd_n = 0, 0
+num = input('Введите целое число: ')
+count_odd_even(list(num), even_n, odd_n)

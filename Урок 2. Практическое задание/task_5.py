@@ -21,3 +21,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii(string, number):
+    if number < 127:
+        if (number - 1) % 10 != 0:
+            string = f'{string} {number} - {chr(number)}'
+        else:
+            print(f'{string} {number} - {chr(number)}\n')
+            string = ''
+        number +=1
+        ascii(string, number)
+    else:
+        print(f'{string} {number} - {chr(number)}\n')
+        return
+
+
+new_str = ''
+ascii(new_str, 32)
+
+# def ascii(start, end):
+#     print("%4d - %s " % (start, chr(start)), end='')
+#     if (end + start - 158) % 10 == 0:
+#         print()
+#     if start == end:
+#         return True
+#     ascii(start + 1, end)
+#
+#
+# ascii(32, 127)

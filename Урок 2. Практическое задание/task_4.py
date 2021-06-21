@@ -12,3 +12,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_set_sum(n: int, num: float = 1):
+    return num if n == 1 else num + get_set_sum(n=n - 1, num=num / - 2)
+
+
+if __name__ == '__main__':
+    is_complete = False
+
+    while not is_complete:
+        try:
+            user_n = int(input('Ведите количество элементов ряда: (1, -0.5, 0.25, -0.125 ... n):'))
+            assert user_n > 0
+
+            print(f'Колличество элементов ряда: {user_n}, сумма: {get_set_sum(user_n)}')
+            is_complete = True
+        except ValueError:
+            print('Вы ввели строку (((. Исправьтесь')
+        except AssertionError:
+            print('Колличество элементов должно быть больше 0')
