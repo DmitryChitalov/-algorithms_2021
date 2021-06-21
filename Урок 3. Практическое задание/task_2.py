@@ -95,17 +95,6 @@ class Authentication:
 with open('passwords.json') as f_json:
     print(json.load(f_json))
 
-
-# b = {}
-# with open('passwords.json', encoding='utf-8') as f_json:
-#     b = json.load(f_json)
-# b.pop()
-# with open('passwords.json', 'w', encoding='utf-8') as f_json:
-#     json.dump(b, f_json, ensure_ascii=False)
-
-# for i, name in enumerate(b):
-#     print(i, name)
-
 a = Authentication()
 print(a.check_in())
 print(a.log_in())
