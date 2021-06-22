@@ -11,8 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
-
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import Timer
 
 
 def func_1():
@@ -39,5 +38,33 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    m, num, j = 0, 0, 0
+    ar_set = set(array)
+    for i in ar_set:
+        count = array.count(i)
+        if count > m:
+            num, m = i, count
+            del array[j]
+            j += 1
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+array = [1, 3, 1, 3, 4, 5, 1]
 print(func_1())
 print(func_2())
+print(func_3())
+t1 = Timer("func_1()", "from __main__ import func_1, array")
+print(f'Суммарное время 10000 запусков func_1 {t1.timeit(number=10000) * 1000:.3f} мсек')
+print('*' * 6)
+t2 = Timer("func_2()", "from __main__ import func_2, array")
+print(f'Суммарное время 10000 запусков func_2 {t2.timeit(number=10000) * 1000:.3f} мсек')
+print('*' * 6)
+t3 = Timer("func_3()", "from __main__ import func_3, array")
+print(f'Суммарное время 10000 запусков func_3 {t3.timeit(number=10000) * 1000:.3f} мсек')
+'''
+в func_3 алгоритме лучшее время
+за счёт уменьшения числа циклов подсчёта - используя множество вместо списка
+и сокрашения елементов для подсчёта - удаления елемента после подсчёта из списка
+'''
