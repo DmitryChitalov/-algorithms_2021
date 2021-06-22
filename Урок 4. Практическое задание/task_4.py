@@ -12,6 +12,9 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+from cProfile import run
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -38,6 +41,27 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    total = max(array, key=array.count)
+    total_n = array.count(total)
+    return f'Чаще всего встречается число {total}, ' \
+           f'оно появилось в массиве {total_n} раз(а)'
+
+
+print(timeit("func_1()", number=3700000, globals=globals()))
+run('func_1()')
+
+print(timeit("func_2()", number=3700000, globals=globals()))
+run('func_2()')
+
+print(timeit("func_3()", number=3700000, globals=globals()))
+run('func_3()')
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+""" 
+Выводы: В первых двух функциях переборы и сравнения, в третьем варианте используется встроенная функция, 
+которая по идеи должна работать быстрее, но немного уступает первому примеру.
+"""
