@@ -66,5 +66,4 @@ def guess_game(shot=10):
         return guess_game(shot)
 
 
-if __name__ == '__main__':
-    guess_game()
+guess_game()

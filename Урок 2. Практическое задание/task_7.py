@@ -18,14 +18,37 @@
 """
 
 
-def get_set_sum(n: int, current_num=1, total_sum=1):
-    if current_num == n:
-        return total_sum
+# def get_set_sum(n: int, current_num=1, total_sum=1):
+#     if current_num == n:
+#         return total_sum
+#
+#     current_num += 1
+#     total_sum += current_num
+#
+#     return get_set_sum(n, current_num, total_sum)
+#
+#
+# while True:
+#     try:
+#         user_n = int(input('Введите любое натуральное число: '))
+#         assert user_n > 0
+#         break
+#     except ValueError:
+#         print('Вы вместо числа ввели строку (((. Исправьтесь')
+#     except AssertionError:
+#         print('Число должно быть > 0')
+#
+#
+# if __name__ == '__main__':
+#     print(f'1+2+...+{user_n} = {user_n}({user_n}+1)/2\n'
+#           f'{get_set_sum(user_n) == (user_n * (user_n + 1) / 2)}')
+#
+# Пример:
+# для n = 5
+# 1+2+3+4+5 = 5(5+1)/2
 
-    current_num += 1
-    total_sum += current_num
-
-    return get_set_sum(n, current_num, total_sum)
+def recur(n):
+    return n if n < 1 else n + recur(n - 1)
 
 
 while True:
@@ -38,7 +61,5 @@ while True:
     except AssertionError:
         print('Число должно быть > 0')
 
-
-if __name__ == '__main__':
-    print(f'1+2+...+{user_n} = {user_n}({user_n}+1)/2\n'
-          f'{get_set_sum(user_n) == (user_n * (user_n + 1) / 2)}')
+print(f'1+2+...+{user_n} = {user_n}({user_n}+1)/2\n'
+      f'{recur(user_n) == (user_n * (user_n + 1) / 2)}')
