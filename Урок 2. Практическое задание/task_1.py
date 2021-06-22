@@ -28,3 +28,46 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc():
+    operation = input('Введите математическое выражение: ')
+    if operation == '0':
+        return 'Выход'
+    else:
+        if operation in '+-*/':
+            try:
+                number1 = int(input('Введите первое число: '))
+                number2 = int(input('Введите второе число: '))
+
+                if operation == '-':
+                    result = number1 - number2
+                    print(f'Результат {result}')
+                    return calc()
+                elif operation == '+':
+                    result = number1 + number2
+                    print(f'Результат {result}')
+                    return calc()
+                elif operation == '*':
+                    result = number1 * number2
+                    print(f'Результат {result}')
+                    return calc()
+                elif operation == '/':
+                    try:
+                        result = number1 / number2
+                    except ZeroDivisionError:
+                        print('Ошибка. Деление на ноль')
+                    else:
+                        print(f'Результат {result}')
+                    return calc()
+            except ValueError:
+                print('Неправильный ввод.')
+                return calc()
+        else:
+            print('Неправильный ввод.')
+            return calc()
+
+
+calc()
+
+
+

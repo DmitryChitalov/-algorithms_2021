@@ -12,3 +12,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def element(n, i, range_number, sum):
+n = int(input('Введите количество элементов: '))
+
+    if i == n:
+        print(f'Количество элементов - {n}, сумма {sum}')
+    elif i < n:
+        return element(n, i + 1, range_number / -2, sum + range_number)
+
+element()
+
+

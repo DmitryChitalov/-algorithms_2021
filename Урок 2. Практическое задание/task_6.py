@@ -11,3 +11,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from os import urandom as _urandom
+
+
+def random_number():
+    random = int(int.from_bytes(_urandom(7), 'big')) >> 5
+    list = [n for n in range(0, 101)]
+    return list[random % 100]
+
+def recur_m(count, number):
+    print(f'Попытка № {count}')
+    num = int(input('Введите число от 0 до 100: '))
+    if count == 10 or num == number:
+        if num == number:
+            print('Верно')
+        print(f'Загаданное число {number}')
+    else:
+        if num > number:
+            print(f'Ваше число больше загаданного')
+        else:
+            print(f'Ваше число меньше загаданного')
+        recur_m(count+1, number)
+recur_m(1, random_number())

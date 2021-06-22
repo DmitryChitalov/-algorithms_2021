@@ -21,3 +21,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def char_row(ascii_val=32):
+    if ascii_val ==128:
+        return True
+    print(f'{ascii_val:5}: {chr(ascii_val)}', end=' ')
+    if (ascii_val - 31) % 10 == 0:
+        print(f'{ascii_val:5}: {chr(ascii_val)}')
+    char_row(ascii_val + 1)
+
+char_row()
