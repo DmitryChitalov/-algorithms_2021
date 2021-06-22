@@ -21,3 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc(n,stop,count=None,my_str=None):
+    if my_str is None and count is None:
+        my_str=''
+        count = 1
+    if n >= stop:
+        my_str = str(n)+' - '+chr(n)
+        return my_str
+    if count % 10 == 0:
+        my_str =str(n)+' - '+chr(n)+' \n'
+    else:
+        my_str = str(n) + ' - ' + chr(n) + ' '
+    count += 1
+    return my_str+calc(n+1,stop,count)
+
+print(calc(32,127))
