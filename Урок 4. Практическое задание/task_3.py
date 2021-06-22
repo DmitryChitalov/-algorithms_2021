@@ -14,6 +14,10 @@
 Без аналитики задание считается не принятым
 """
 
+from timeit import timeit
+from cProfile import run
+
+enter_num = 1000000
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -24,6 +28,8 @@ def revers_1(enter_num, revers_num=0):
         enter_num //= 10
         return revers_1(enter_num, revers_num)
 
+print(timeit("revers_1(enter_num)", number=3700000, globals=globals()))
+run('revers_1(enter_num)')
 
 def revers_2(enter_num, revers_num=0):
     while enter_num != 0:
@@ -32,8 +38,26 @@ def revers_2(enter_num, revers_num=0):
         enter_num //= 10
     return revers_num
 
+print(timeit("revers_2(enter_num)", number=3700000, globals=globals()))
+run('revers_2(enter_num)')
 
 def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+print(timeit("revers_3(enter_num)", number=3700000, globals=globals()))
+run('revers_3(enter_num)')
+
+def revers_4(enter_num):
+    revers_num = list(str(enter_num))
+    revers_num.reverse()
+    result = int(''.join(revers_num))
+    return result
+
+print(timeit("revers_4(enter_num)", number=3700000, globals=globals()))
+run('revers_4(enter_num)')
+
+"""
+Выводы: 3й вариант выполняется быстрее всех остальных так как используется встроенный механизм срезов.
+"""
