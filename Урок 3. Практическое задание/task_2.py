@@ -20,3 +20,24 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+from hashlib import sha256
+
+
+class Accounts:
+
+    def __init__(self):
+        self.list_login = []
+
+    def registration(self):
+        login = input('Enter login ')
+        password = hashlib.sha256(input('Enter password'))
+        if login in self.list_login:
+            return 1
+
+    def login(self):
+        login = input('Enter login ')
+        password = hashlib.sha256(input('Enter password'))
+        pass
+
