@@ -1,38 +1,23 @@
-"""
-Задание 2.
-
-Реализуйте два алгоритма.
-
-Первый, в виде функции, должен обеспечивать поиск минимального значения для списка.
-В основе алгоритма должно быть сравнение каждого числа со всеми другими элементами списка.
-Сложность такого алгоритма: O(n^2) - квадратичная.
-
-Второй, в виде функции, должен обеспечивать поиск минимального значения для списка.
-Сложность такого алгоритма: O(n) - линейная.
-
-Не забудьте указать сложность каждого из двух алгоритмов. Для лучшего закрепления темы
-можете определить и указать сложность еще и у каждого выражения этих двух алгоритмов.
+# Общая сложность О(n^2)
+def min_search2(new_list):
+    for a in new_list:  # O(n)
+        min_number = True  # O(1)
+        for b in new_list:  # O(n)
+            if a > b:  # O(1)
+                min_number = False  # O(1)
+        if min_number:  # O(1)
+            return a  # O(1)
 
 
-def minsearch2(mylist):
-    for a in mylist:                      O(n)
-        min_number = True                 O(1)
-        for b in mylist:                  O(n)
-            if a > b:                     O(1)
-                min_number = False        O(1)
-        if minvalue:                      O(1)
-            return a                      O(1)
+# Общая сложность O(n)
+def min_search(list):
+    min_number = list[0]  # O(1)
+    for i in range(1, len(list)):  # O(n)
+        if min_number > list[i]:  # O(1)
+            min_number = list[i]  # O(1)
+    return min_number  # O(1)
+
 
 my_list = (4, 5, 66, 14, 12, 18, 2)
-print(minsearch2(my_list))
-
-
-def minsearch(list):
-  min_number = list[0]                  O(1)
-  for i in range (1, len(list)):        O(n)
-    if min_number > list[i]:            O(1)
-      min_number = list[i]              O(1)
-  return min_digit                      O(1)
-
-my_list = (4, 5, 66, 14, 12, 18)
-print(minsearch(my_list))
+print(min_search(my_list))
+print(min_search2(my_list))
