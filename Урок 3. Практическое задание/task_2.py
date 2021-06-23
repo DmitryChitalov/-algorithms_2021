@@ -18,3 +18,34 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+from uuid import uuid4
+
+
+def hash_password(value):
+    salt = "password"
+    return hashlib.sha256(salt.encode("utf-8") + value.encode("utf-8")).hexdigest()
+
+
+
+def password():
+    with open("hash.txt", 'w+', encoding='utf-8') as f:
+        user_answer = input("Введите пароль: ")
+        hash_obj = hash_password(user_answer)
+        print(hash_obj)
+        f.write(hash_obj)
+        check_answer = input("Введите пароль еще раз для проверки: ")
+        hash_obj_1 = hash_password(check_answer)
+        print(hash_obj_1)
+        f.seek(0)
+        if hash_obj_1 == f.read():
+            print("Вы ввели правильный пароль")
+        else:
+            print("Вы ввели не правильный пароль")
+
+
+password()
+"""
+Пробывал добавить соль через uuid4, но при каждом формирование, формировался новый хэш.
+Поэтому заменил на строку.
+"""
