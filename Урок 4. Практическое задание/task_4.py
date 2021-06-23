@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -38,6 +39,30 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    num = max(array, key=array.count)
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {array.count(num)} раз(а)'
+
+def func_4():
+    max = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > max:
+            max = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {max} раз(а)'
+
 
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+print(timeit('func_1()', globals=globals())) # 1.4930899
+print(timeit('func_2()', globals=globals())) # 2.2659271
+print(timeit('func_3()', globals=globals())) # 1.6204144
+print(timeit('func_4()', globals=globals())) # 1.4794782
+
+# Быстрее 4ая реализация
