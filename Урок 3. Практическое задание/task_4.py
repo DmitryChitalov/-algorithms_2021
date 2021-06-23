@@ -11,3 +11,17 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+cash = {}
+while True:
+    url = input("Введите адрес. Пустая строка - завершение работы. ")
+    if not url:
+        break
+    url_hash = hashlib.sha256(url.encode() + url.encode()).hexdigest()
+    if cash.get(url):
+        print (f'Адрес уже есть в кэше')
+    else:
+        cash[url]=url_hash
+        print(f'Адрес добавлен в кэш')
+
