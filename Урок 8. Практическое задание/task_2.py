@@ -19,6 +19,7 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+
     def insert_left(self, new_node):
         try:
             if new_node > self.root:
