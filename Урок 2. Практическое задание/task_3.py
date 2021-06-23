@@ -22,3 +22,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def revers_num(num):
+
+    new_num, numeral = divmod(num, 10)
+    if new_num == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(revers_num(new_num))
+
+print(revers_num(1005030))
