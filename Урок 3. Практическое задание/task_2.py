@@ -4,17 +4,46 @@
 Для этого пароля вам нужно получить хеш, используя функцию sha256
 Для генерации хеша обязательно нужно использовать криптографическую соль
 Обязательно выведите созданный хеш.
-
 Далее программа должна запросить пароль повторно
 Вам нужно проверить, совпадает ли пароль с исходным
-Для проверки необходимо сравнить хеши паролей
-
+Для проверки необходимо сравнить хеши паролей.
+Самый просто вариант хранения хешей - просто в оперативной памяти (в переменных).
 ПРИМЕР:
 Введите пароль: 123
 В базе данных хранится строка: 555a3581d37993843efd4eba1921f1dcaeeafeb855965535d77c55782349444b
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
-
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from hashlib import sha256
+from uuid import uuid4
+import sqlite3
+
+# создаем базу данных, в которой будут храниться хэш пароля и соль для единственного пользователя
+con = sqlite3.connect('passwords.db')
+cur = con.cursor()
+cur.execute('CREATE TABLE passwords (hash VARCHAR NOT NULL, salt VARCHAR NOT NULL)')
+con.commit()
+
+password = input('Введите пароль:\n')
+
+# генерируем соль
+salt = uuid4().hex
+# вычисляем хэш
+hashed_password = sha256(password.encode() + salt.encode()).hexdigest()
+cur.execute(f'INSERT INTO passwords VALUES ("{hashed_password}", "{salt}");')
+con.commit()
+
+check_password = input('Введите пароль еще раз для првоерки:\n')
+# достаем хэш пароля и соль из базы данных
+cur.execute('SELECT hash, salt FROM passwords')
+hashed_password, salt = cur.fetchall()[0]
+
+hashed_check_password = sha256(check_password.encode() + salt.encode()).hexdigest()
+
+if hashed_password == hashed_check_password:
+    print('Пароли совпадают')
+else:
+    print('Пароли не совпадают')

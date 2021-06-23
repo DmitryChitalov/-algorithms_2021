@@ -11,3 +11,23 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from hashlib import sha1
+from uuid import uuid4
+
+
+class Browser():
+    def __init__(self):
+        self.seen = {}
+        self.salt = uuid4().hex
+
+    def browse(self, url):
+        if url not in self.seen:
+            self.seen[url] = sha1(url.encode() + self.salt.encode()).hexdigest()
+
+browser = Browser()
+
+for url in ['mail.ru', 'yandex.ru', 'google.com', 'mail.ru', 'vk.com', 'google.com']:
+    browser.browse(url)
+
+print(browser.seen)

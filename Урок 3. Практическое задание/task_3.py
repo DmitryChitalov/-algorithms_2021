@@ -16,3 +16,17 @@
 р
 а
 """
+
+text = 'papa'
+
+uniques = set()
+for m in range(len(text)):
+    for n in range(len(text) + 1):
+        if n > m:
+            if m == 0 and n == (len(text)):  # чтобы не включить само слово, выполняем эту проверку
+                continue
+            substring = hash(text[m: n])    # без использования hash результат тот же? или я не так понял задание
+            uniques.add(substring)
+
+print(uniques)
+print(len(uniques))
