@@ -67,3 +67,5 @@ print(user_check('user1', 'password1'))
 print(user_check('user2', 'password'))
 print(user_check('user2', 'password2'))
 print(user_check('user7', 'password'))
+
+# Лушее решение - О(1), т.к. оно быстрее.
