@@ -16,41 +16,80 @@ import hashlib
 
 class UrlCache:
     def __init__(self):
-        self.data = set()
+        self.data = dict()
 
-    def add(self, url):
-        self.data.add(self.hash_url(url))
+    def get_content(self, url):
+        """
+        пытаемся получить контент из кэша, если его нет, считываем из БД и добавляем в кэш,
+        затем возвращаем из метода
+        """
+        res = self.data.get(url)
+        if res is None:
+            res = self._read_data()
+            self.add(self._hash_url(url), res)
+        return res
+
+    def add(self, url, res):
+        self.data[url] = res
 
     def get_all(self):
         return self.data
 
     @staticmethod
-    def hash_url(url):
+    def _read_data():
+        """
+        этот метод должен обращаться к БД и возвращать контент оттуда
+        пока что для примера будет возвращать просто 'content'
+        """
+        return 'content'
+
+    @staticmethod
+    def _hash_url(url):
         salt = 'any_salt'
-        return hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        return hashlib.sha1(salt.encode() + url.encode()).hexdigest()
 
 
-cache = UrlCache()
-cache.add('https://google.ru')
-cache.add('https://ya.ru')
-cache.add('https://google.ru')
-cache.add('https://yandex.ru')
-cache.add('https://yandex.ru')
-cache.add('https://yandex.ru')
-cache.add('https://goog.ru')
-cache.add('https://gle.ru')
-cache.add('https://ggle.ru')
-cache.add('https://goge.ru')
-cache.add('https://goole.ru')
-cache.add('https://google.ru')
-cache.add('https://ggle.ru')
-cache.add('https://ya.ru')
-cache.add('https://yandex.ru')
-cache.add('https://google.ru')
-cache.add('https://goo.ru')
-cache.add('https://goge.ru')
-cache.add('https://googe.ru')
-cache.add('https://goo.ru')
+if __name__ == '__main__':
+    cache = UrlCache()
+    content=cache.get_content('https://ya.ru')
+    print(content)
+    content=cache.get_content('https://google.ru')
+    print(content)
+    content=cache.get_content('https://google.ru')
+    print(content)
+    content=cache.get_content('https://yandex.ru')
+    print(content)
+    content=cache.get_content('https://yandex.ru')
+    print(content)
+    content=cache.get_content('https://yandex.ru')
+    print(content)
+    content=cache.get_content('https://goog.ru')
+    print(content)
+    content=cache.get_content('https://gle.ru')
+    print(content)
+    content=cache.get_content('https://ggle.ru')
+    print(content)
+    content=cache.get_content('https://goge.ru')
+    print(content)
+    content=cache.get_content('https://goole.ru')
+    print(content)
+    content=cache.get_content('https://google.ru')
+    print(content)
+    content=cache.get_content('https://ggle.ru')
+    print(content)
+    content=cache.get_content('https://ya.ru')
+    print(content)
+    content=cache.get_content('https://yandex.ru')
+    print(content)
+    content=cache.get_content('https://google.ru')
+    print(content)
+    content=cache.get_content('https://goo.ru')
+    print(content)
+    content=cache.get_content('https://goge.ru')
+    print(content)
+    content=cache.get_content('https://googe.ru')
+    print(content)
+    content=cache.get_content('https://goo.ru')
+    print(content)
 
-
-print(cache.get_all())
+    print(cache.get_all())
