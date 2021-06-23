@@ -1,27 +1,69 @@
-"""
-Задание 4.
+# Решение O(n)
+users = {'user1': {'password': 'password1', 'active_flag': True},
+         'user2': {'password': 'password2', 'active_flag': False},
+         'user3': {'password': 'password3', 'active_flag': True}
+         }
 
-Для этой задачи:
-1) придумайте 2-3 решения (не менее двух)
-2) оцените сложность каждого решения в нотации О-большое
-3) сделайте вывод, какое решение эффективнее и почему
 
-Сама задача:
-Пользователи веб-ресурса проходят аутентификацию.
-В системе хранятся логин, пароль и отметка об активации учетной записи.
+def user_check(username, password):
+    for key, index in users.items():
+        if key == username:
+            if index['password'] == password and index['active_flag']:
+                return f'{username} вошел в систему'
+            elif index['password'] == password and not index['active_flag']:
+                return f'Для {username} необходимо активировать учетную запись'
+            elif index['password'] != password:
+                return f'Для {username} введен неверный пароль'
+    return f'Пользователя {username} не существует'
 
-Нужно реализовать проверку, может ли пользователь быть допущен к ресурсу.
-При этом его учетка должна быть активирована.
-А если нет, то польз-лю нужно предложить ее пройти.
 
-Приложение должно давать ответы на эти вопросы и быть реализовано в виде функции.
-Для реализации хранилища можно применить любой подход,
-который вы придумаете, например, реализовать словарь.
+print(user_check('user1', 'password1'))
+print(user_check('user2', 'password2'))
+print(user_check('user3', 'password3'))
+print(user_check('user', 'password'))
 
-Примечание:
-Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
-через строки документации в самом коде.
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
+# Решение O (1)
+users = {'user1': {'password': 'password1', 'active_flag': True},
+         'user2': {'password': 'password2', 'active_flag': False},
+         'user3': {'password': 'password3', 'active_flag': True}
+         }
 
-Задание творческое. Здесь нет жестких требований к выполнению.
-"""
+
+def user_check(username, password):
+    if username in users:
+        if users[username]['password'] == password and users[username]['active_flag']:
+            return f'Пользователь {username} вошел в систему'
+        if users[username]['password'] != password:
+            return f'Пользователь {username} ввел не верный пароль'
+        if users[username]['password'] == password and not users[username]['active_flag']:
+            return f'Пользователь {username} активируйте учетную запись'
+    return f'Пользователь {username} не зарегистрирован'
+
+
+print(user_check('user1', 'password1'))
+print(user_check('user2', 'password'))
+print(user_check('user2', 'password2'))
+print(user_check('user7', 'password'))
+
+# Еще одно решение O(1)
+users = {'user1': {'password': 'password1', 'active_flag': True},
+         'user2': {'password': 'password2', 'active_flag': False},
+         'user3': {'password': 'password3', 'active_flag': True}
+         }
+
+
+def user_check(username, password):
+    if users.get(username):
+        if users[username]['password'] == password and users[username]['active_flag']:
+            return f'Пользователь {username} вошел в систему'
+        if users[username]['password'] != password:
+            return f'Пользователь {username} ввел не верный пароль'
+        if users[username]['password'] == password and not users[username]['active_flag']:
+            return f'Пользователь {username} активируйте учетную запись'
+    return f'Пользователь {username} не зарегистрирован'
+
+
+print(user_check('user1', 'password1'))
+print(user_check('user2', 'password'))
+print(user_check('user2', 'password2'))
+print(user_check('user7', 'password'))
