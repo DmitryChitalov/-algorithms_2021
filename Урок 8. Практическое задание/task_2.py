@@ -73,7 +73,7 @@ class BinaryTree:
                     tree_obj.right_child = self.right_child
                     self.right_child = tree_obj
                 else:
-                    raise OwnError(f"Правая ветка существует ее корень = {self.left_child.get_root_val} "
+                    raise OwnError(f"Правая ветка существует ее корень = {self.right_child.get_root_val()} "
                                    f"больше нашего  = {new_node}, - сюда не вставить")
         except OwnError as err:
             print(err)
@@ -103,7 +103,10 @@ r.insert_right(40)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.insert_right(12)
+r.get_right_child().set_root_val(12)
+r.insert_right(40)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print(r.get_right_child().get_right_child().get_root_val())
