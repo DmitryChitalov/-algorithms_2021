@@ -1,20 +1,62 @@
-"""
-Задание 6.
-Задание на закрепление навыков работы с очередью
+class QueueClass:
+    def __init__(self):
+        self.elems = []
 
-Реализуйте структуру "доска задач".
+    def __str__(self):
+        return str(self.elems)
 
-Структура должна предусматривать наличие несольких очередей задач, например,
-1) базовой, откуда задачи берутся, решаются и отправляются в список решенных
-2) очередь на доработку, когда нерешенные задачи из первой очереди отправляются
-на корректировку решения
+    def is_empty(self):
+        return self.elems == []
 
-После реализации структуры, проверьте ее работу на различных сценариях
+    def to_queue(self, item):
+        self.elems.insert(0, item)
 
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
+    def from_queue(self):
+        return self.elems.pop()
 
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
+    def size(self):
+        return len(self.elems)
 
-Задание творческое. Здесь нет жестких требований к выполнению.
-"""
+
+class TaskBoard:
+    def __init__(self):
+        self.actual = QueueClass()
+        self.remade = QueueClass()
+        self.done = []
+
+    def input_task(self, item):
+        self.actual.to_queue(item)
+
+    def task_done(self):
+        end_task = self.actual.from_queue()
+        self.done.append(end_task)
+
+    def to_remade(self):
+        remade_task = self.actual.from_queue()
+        self.remade.to_queue(remade_task)
+
+    def actual_print(self):
+        """Вывод задач в актуальном порядке, т.е. в реверсе"""
+        new_str = reversed(self.actual.elems)
+        return list(new_str)
+
+    def to_do_now(self):
+        """Печатает задачу, которую надо выполнить"""
+        return self.actual.elems[-1]
+
+
+my_task_board = TaskBoard()
+my_task_board.input_task('Встань')
+my_task_board.input_task('Иди')
+my_task_board.input_task('Неси добро')
+
+print(my_task_board.actual.elems)
+print(my_task_board.actual_print())
+print(my_task_board.to_do_now())
+
+my_task_board.to_remade()
+my_task_board.task_done()
+
+print(my_task_board.actual.elems)
+print(my_task_board.remade.elems)
+print(my_task_board.done)
