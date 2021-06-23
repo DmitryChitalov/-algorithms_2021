@@ -23,7 +23,6 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-
 def revers_number1(numb):
     #Рекурсия
     rest_numb, numeral = divmod(numb, 10)

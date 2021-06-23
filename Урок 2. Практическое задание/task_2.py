@@ -43,3 +43,4 @@ def count_numb2(n, even=0, odd=0):
 
 n = int(input("Введите число: "))
 count_numb2(n)
+
