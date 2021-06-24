@@ -12,6 +12,10 @@
 Без аналитики задание считается не принятым!
 """
 
+
+from timeit import timeit
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -41,3 +45,21 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+
+def func_3():
+    max_count_num = max(array, key=lambda i: array.count(i))
+    return f'Чаще всего встречается число {max_count_num}, оно появилось в массиве \
+{array.count(max_count_num)} раз(а)'
+
+print(func_3())
+
+
+print(timeit('func_1()', globals=globals(), number=100000))         # 0.46906378400000004
+print(timeit('func_2()', globals=globals(), number=100000))         # 0.6670984759999999
+print(timeit('func_3()', globals=globals(), number=100000))         # 0.8214000460000002
+
+
+# Первая функция работает на базе цикла, поэтому является самой быстрой.
+# Вторая создает новый список и заполняет его, из-за этого выполняется чуть медленнее.
+# Третья, написанная на основе функции max(), наиболее лаконичная, но занимает наибольшее время для выполнения.
