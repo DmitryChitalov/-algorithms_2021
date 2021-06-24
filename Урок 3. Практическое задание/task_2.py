@@ -41,3 +41,4 @@ with open("hash.txt") as file:
         print('Вы ввели правильный пароль')
     else:
         print('Вы ввели не правильный пароль')
+
