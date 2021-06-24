@@ -16,3 +16,16 @@
 р
 а
 """
+
+
+my_string = input('Введите строку, состоящую только из строчных латинских букв: ')
+my_set = set()
+for i in range(len(my_string)):
+    for j in range(i, len(my_string)):
+        if hash(my_string[i:j+1]) not in my_set and my_string[i:j+1] != my_string:
+            print(my_string[i:j+1])
+            my_set.add(hash(my_string[i:j+1]))
+
+print(f'{my_string} - {len(my_set)} уникальных подстрок')
+
+
