@@ -35,5 +35,3 @@ def min_better(in_lst): # Сложность O(N)
         if i < min:
             min = i
     return  min
-
-print(min_better(get_random_lst()))
