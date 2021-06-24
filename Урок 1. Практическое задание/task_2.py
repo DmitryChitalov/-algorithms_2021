@@ -44,11 +44,11 @@ def search_minimal_l(target_list):
 
     minimal_value = target_list[0]  # O(1) - Константная
 
-    for element in target_list:
-        if element < minimal_value:
-            minimal_value = element
+    for element in target_list:  # O(N) - Линейная
+        if element < minimal_value:  # O(1) - Константная
+            minimal_value = element  # O(1) - Константная
 
-    return minimal_value
+    return minimal_value  # O(1) - Константная
 
 
 number_list = [randint(0, 100) for index in range(10)]
