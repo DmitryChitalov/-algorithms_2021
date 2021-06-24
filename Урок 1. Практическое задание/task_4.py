@@ -25,3 +25,47 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def authorization(username, password, user_list):
+    result = {'success': False, 'message': ''}
+
+    user_data = user_list.get(username)
+
+    if user_data is None:
+        result['message'] = "User doesn't exists"
+    elif not user_data.get('active'):
+        result['message'] = "Your account is not activated, please confirm the activation"
+    elif not password == user_data.get('password'):
+        result['message'] = "Invalid password"
+    else:
+        result['success'] = True
+        result['message'] = f'Welcome, {username}!'
+
+    return result
+
+
+users_dict = {
+    'Alexandr': {'password': 'pass', 'active': True},
+    'Maria': {'password': 'pass', 'active': True},
+    'Marina': {'password': 'pass', 'active': True},
+    'Ivan': {'password': 'pass', 'active': False},
+    'Nicola': {'password': 'pass', 'active': True},
+    'Nadya': {'password': 'pass', 'active': True},
+    'Olga': {'password': 'pass', 'active': False}
+}
+print('====================')
+user_doesnt_exist = authorization('Ilya', '123hja123', users_dict)
+print(user_doesnt_exist.get('message'))
+
+print('====================')
+not_active_acc = authorization('Ivan', 'pass', users_dict)
+print(not_active_acc.get('message'))
+
+print('====================')
+wrong_password = authorization('Maria', 'pass11', users_dict)
+print(wrong_password.get('message'))
+
+print('====================')
+success_result = authorization('Alexandr', 'pass', users_dict)
+print(success_result.get('message'))
