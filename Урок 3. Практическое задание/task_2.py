@@ -30,6 +30,7 @@ def hash_pass(passwd, salt = 'c46961d58f3347e89eec769d63d33a58'):
     res = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
     return res
 
+
 conn = sql.connect('lesson3_2.db')
 cur = conn.cursor()
 cur.execute("""DROP TABLE IF EXISTS users;""")
