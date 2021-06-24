@@ -37,6 +37,7 @@ hash_user_pass = hashlib.sha256(salt.encode() + user_pass.encode()).hexdigest()
 print(f'В БД хеш для вашего пароля: {hash_user_pass}')
 # Добавляем хеш и сам пароль в таблицу нашей БД
 cursor.execute('INSERT INTO passwords (hash, password) VALUES (?, ?)', (hash_user_pass, user_pass))
+conn.commit()
 # Выводим значения столбцов, для того, чтобы можно было сравнить хеши
 cursor.execute('SELECT * FROM passwords')
 # Создаем переменную с повторным паролем
