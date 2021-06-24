@@ -22,6 +22,7 @@ class BinaryTree:
     def __init__(self, root_obj='root', weight=0):
         # корень
         self.root = root_obj
+        self.weight = weight
         # левый потомок
         self.left_child = None
         # правый потомок
@@ -85,10 +86,18 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    def get_root_weight(self):
+        return self.weight
+
+    def set_root_weight(self, weight):
+        self.root = weight
+
+
     def insert_auto(self, element, path=''):
-        if not self or element < self.get_root_val():
+        if not self or element.weight < self.get_root_weight():
             self.insert_left(element, f'{path}0')
-        else: self.insert_right(element, f'{path}1')
+        else:
+            self.insert_right(element, f'{path}1')
 
     def get_tree(self, path='', code_table={}):
 
@@ -107,19 +116,24 @@ class BinaryTree:
         return code_table
 
 
-root = BinaryTree(8)
-root.insert_auto(20)
-root.insert_auto(12)
-root.insert_auto(9)
-print(root.get_tree())
+
 
 s = "beep boop beer!"
 count = Counter(s)
 freq_list = sorted(count.items(), key=lambda x: x[1], reverse=True)
-
+haffman_tree = BinaryTree()
+# while len(freq_list) > 1:
+min_1 = freq_list.pop()
+min_2 = freq_list.pop()
+haffman_tree.set_root_weight(min_1[1] + min_2[1])
+haffman_tree.insert_auto(min_1[0])
+haffman_tree.insert_right(min_2[0])
+min_union = (haffman_tree, haffman_tree.weight)
+freq_list.append(min_union)
+freq_list = sorted(count.items(), key=lambda x: x[1], reverse=True)
 # haffman_tree = BinaryTree(0)
 # for item, value in count.items():
 #
-# haffman_tree = BinaryTree(0)
+#
 print(freq_list)
 
