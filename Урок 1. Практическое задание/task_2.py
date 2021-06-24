@@ -19,3 +19,21 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+def min_bad(in_lst): # Сложность O(N^2)
+    new_lst = list(in_lst)
+    n = len(new_lst)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if new_lst[j] > new_lst[j+1] :
+                new_lst[j], new_lst[j+1] = new_lst[j+1], new_lst[j]
+    return  new_lst[0]
+
+
+def min_better(in_lst): # Сложность O(N)
+    min = in_lst[0]
+    for i in in_lst:
+        if i < min:
+            min = i
+    return  min
+
+print(min_better(get_random_lst()))
