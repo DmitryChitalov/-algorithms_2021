@@ -20,3 +20,19 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from random import randint
+
+
+# Генерация тестовых данных
+storage_list = list
+
+company_name_list = ['ООО Буренушка', 'ООО Главдорстрой', 'ООО ЧебурекиCo', 'ООО Новый день', 'ООО Атаман', 'ООО ТК']
+
+for company in company_name_list:
+    company_structure = dict(name=company, profit=randint(0, 15000))
+    storage_list.append(company_structure)
+
+print(storage_list)
+
+
