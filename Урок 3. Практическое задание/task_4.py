@@ -11,3 +11,28 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+url = input('url ')
+
+kash = {}
+
+
+def chek_url(u):
+    hash_u = hashlib.sha256(u.encode()).hexdigest()
+    if hash_u in kash.keys():
+        return True
+    else:
+        return {hash_u: u}
+
+
+chek_url(url)
+
+try:
+    kash.update(chek_url(url))
+except TypeError:
+    print("Такой объект уже есть в кэше")
+
+print(kash)
+
+
