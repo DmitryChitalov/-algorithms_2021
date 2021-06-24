@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(n log n) - линейная-логарифмическая
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(n) - линейная
+    lst_copy.sort()                          # O(n log n) - линейная-логарифмическая
+    for i in range(len(lst_obj) - 1):        # O(n) - линейная
+        if lst_copy[i] == lst_copy[i+1]:     # O(1) - константная
+            return False                     # O(1) - константная
+    return True                              # O(1) - константная
 
 #############################################################################################
 
