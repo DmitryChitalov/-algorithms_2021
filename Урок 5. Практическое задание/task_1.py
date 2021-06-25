@@ -23,3 +23,35 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import defaultdict, Counter
+import statistics
+
+
+def avg_margin_enterprises():
+    margin_enterprises = defaultdict(float)
+    count_enterprises = int(input('Введите количество предприятий для расчета прибыли: '))
+    for i in range(count_enterprises):
+        enterprise = input('Введите название предприятия: ')
+        margin = list(map(int, input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 '
+                                     'квартала): ').split()))
+        margin_enterprises[enterprise] = sum(margin) / 4
+        """
+        не использую среднее значение через функции, т.к. прибыль в определенном квартале могла отсутствовать
+        """
+    avg_marg = statistics.mean(Counter(margin_enterprises).values())
+    print(f'Средняя годовая прибыль всех предприятий: {avg_marg}')
+    above_avg = []
+    lower_avg = []
+    for key, val in margin_enterprises.items():
+        if val > avg_marg:
+            above_avg.append(key)
+        elif val < avg_marg:
+            lower_avg.append(key)
+    print(f'Предприятия, с прибылью выше среднего значения: \n {", ".join(above_avg)}')
+    print(f'Предприятия, с прибылью ниже среднего значения: \n {", ".join(lower_avg)}')
+
+
+if __name__ == '__main__':
+    avg_margin_enterprises()
