@@ -23,6 +23,7 @@ def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
+    # O(n^2)    -   вложенные циклы с O(n)
     while count <= i:
         t = 1
         is_simple = True
