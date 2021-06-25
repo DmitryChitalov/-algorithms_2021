@@ -11,3 +11,23 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib
+from uuid import uuid4
+
+cash = set()
+
+def url_hash(url):
+    if hashlib.sha256(url.encode() + url.encode()).hexdigest() in cash:
+        print(f'{url} => находится в кэш! В кэш не добавлен!')
+    else:
+        print(f'{url} => отсутствует в кэш! В кэш добавлен!')
+        cash.add(hashlib.sha256(url.encode() + url.encode()).hexdigest())
+
+
+
+url_hash('https://github.com/')
+url_hash('https://github.com/')
+url_hash('https://github.com/')
+url_hash('https://gb.ru/lessons/145595/homework')
+url_hash('https://gb.ru/lessons/145595/homework')

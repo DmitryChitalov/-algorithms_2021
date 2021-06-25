@@ -24,21 +24,21 @@
 import hashlib
 from uuid import uuid4
 
-passwd_1 = input('Введите пароль: ')
+def hash_passwd(pwd, slt):
+    return hashlib.sha256(pwd.encode() + slt.encode()).hexdigest()
+
 salt = uuid4().hex
-hash_passwd_1 = hashlib.sha256(passwd_1.encode()+salt.encode()).hexdigest()
-print(hash_passwd_1)
+passwd_1 = input('Введите пароль: ')
 
 with open("hash.txt", 'w') as file:
-    file.write(hash_passwd_1)
-
-passwd_2 = input('Введите пароль еще раз для проверки: ')
-hash_passwd_2 = hashlib.sha256(passwd_2.encode()+salt.encode()).hexdigest()
-print(hash_passwd_2)
+    file.write(hash_passwd(passwd_1, salt))
 
 with open("hash.txt") as file:
-    if hash_passwd_2 == file.read():
-        print('Вы ввели правильный пароль')
-    else:
-        print('Вы ввели не правильный пароль')
+    hsh = file.read()
+    print(f'В файле "hash.txt" хранится строка: {hsh}')
 
+passwd_2 = input('Введите пароль еще раз для проверки: ')
+if hash_passwd(passwd_2, salt) == hsh:
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели не правильный пароль')
