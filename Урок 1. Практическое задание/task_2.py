@@ -19,7 +19,8 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
-def min_bad(in_lst): # Сложность O(N^2)
+def min_bad(in_lst):
+    """ Сложность O(N^2)"""
     new_lst = list(in_lst)
     n = len(new_lst)
     for i in range(n):
@@ -29,7 +30,8 @@ def min_bad(in_lst): # Сложность O(N^2)
     return  new_lst[0]
 
 
-def min_better(in_lst): # Сложность O(N)
+def min_better(in_lst):
+    """ Сложность O(N)"""
     min = in_lst[0]
     for i in in_lst:
         if i < min:
