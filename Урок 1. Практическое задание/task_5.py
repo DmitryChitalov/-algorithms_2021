@@ -28,3 +28,25 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class PlatesStack:
+    def __init__(self):
+        self.platesList = []
+        self.maxPlates = 10
+
+    def is_limit(self):
+        return len(self.platesList) == self.maxPlates
+
+    def push(self, value):
+        if self.is_limit():
+            # Необходимо создать новый стек
+        else:
+            self.platesList.append(value)
+
+    def pop(self):
+        return None
+
+
+
+
