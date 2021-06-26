@@ -46,7 +46,7 @@ class PlatesStack:
 
     def pop(self):
         if not self.is_empty():
-            self.items[-1].pop(0)
+            self.items[-1].pop()
 
     def count_elements(self):
         summ = 0
@@ -60,6 +60,6 @@ if __name__ == '__main__':
     plates = PlatesStack(5)
     for el in range(0, 30):
         plates.push(el)
-    print(plates.count_elements())
+    print(plates.count_elements(), '\n', plates.items)
     plates.pop()
-    print(plates.count_elements())
+    print(plates.count_elements(), '\n', plates.items)
