@@ -20,3 +20,17 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import heapq
+import operator
+
+companies_directory = {'Company_1': 300, 'Company_2': 1200, 'Company_3': 3800, 'Company_4': 1300,
+                       'Company_5': 2300, 'Company_6': 3700, 'Company_7': 4300, 'Company_8': 3500,
+                       'Company_9': 3100, 'Company_10': 3600, 'Company_11': 3300, 'Company_12': 3900}
+
+print(sorted(companies_directory, key=companies_directory.get, reverse=True)[:3])  # O(n log n) Quasilinear time
+# Sorted - т.к здесь получаем обычный список из значений, и сортируем уже по нему, то Big-O будет иметь отношение
+# к классу сложности n log n
+
+print(heapq.nlargest(3, companies_directory.items(), key=operator.itemgetter(1)))   # O(n log) Logarithmic time
+# Второй метод работает по бинарному поиску значений. Соответсвенно Логарифмическая сложность.
