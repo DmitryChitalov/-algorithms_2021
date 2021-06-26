@@ -42,7 +42,7 @@ def rnd_company(num = 100):
 def method_1():
     """ Сложность O(N)"""
     company_lst = list(rnd_company())
-    revenue_lst = [(i,random.randint(0,10000)) for i in range(100)]
+    revenue_lst = [(company_lst[i],random.randint(0,10000)) for i in range(100)]
     top_lst = []
     top_lst.append(revenue_lst[0])
     for el in revenue_lst:
@@ -54,12 +54,12 @@ def method_1():
                 top_lst.append(el)
     print("Три компании с наибольшей выручкой")
     for el in top_lst:
-        print(f'{company_lst[el[0]]}  {el[1]}')
+        print(f'{el[0]}  {el[1]}')
 
 def method_2():
     """Квадратичная сложность"""
     company_lst = list(rnd_company())
-    revenue_lst = [(i,random.randint(0,10000)) for i in range(100)]
+    revenue_lst = [(company_lst[i],random.randint(0,10000)) for i in range(100)]
     n = len(revenue_lst)
     for i in range(n):
         for j in range(0, n-i-1):
@@ -67,7 +67,7 @@ def method_2():
                 revenue_lst[j], revenue_lst[j+1] = revenue_lst[j+1], revenue_lst[j]
     print("Три компании с наибольшей выручкой")
     for el in revenue_lst[len(revenue_lst)-3:]:
-        print(f'{company_lst[el[0]]}  {el[1]}')
+        print(f'{el[0]}  {el[1]}')
 
 method_1()
 method_2()
