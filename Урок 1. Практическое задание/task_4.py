@@ -35,31 +35,40 @@ users_activity = {'user_1': True, 'user_2': True, 'user_3': False, 'user_4': Fal
                   'user_7': False, 'user_8': False, 'user_9': True, 'user_10': True, 'user_11': True, 'user_12': False}
 
 
-def check_access_1(user):
+def check_access_1(user, passwd):
     """
     return O(1) Constant time
     """
     if users_activity.get(user) is not False:  # O(n) Linear Time
-        print(f"{user}, Welcome to aboard!")
+        if users_data.get(user) == passwd:
+            print(f"{user}, Welcome to aboard!")
+        else:
+            print(f"Please, {user}, check the password")
     else:
-        print(f"{user}, Acces denied. Do you want activate your account?")
+        print(f"{user}, Access denied. Do you want activate your account?")
 
 
-def check_access_2(user):
+def check_access_2(user, passwd):
     """
     return O(1) Constant time
     """
-    for key in users_activity.keys():  # O(n) Linear time
-        if key == user:
+    for key_activity in users_activity.keys():  # O(n) Linear time
+        if key_activity == user:
             _active = users_activity.get(user)  # O(1) Constant time
             if _active is False:
                 return f'{user}, Access denied. Do you want activate your account?'
             else:
-                return f'{user}, Welcome to aboard'
+                for key_passwd in users_data.keys():
+                    if key_passwd == user:
+                        _key_passwd = users_data.get(user)
+                        if _key_passwd == passwd:
+                            return f'{user}, Welcome to aboard'
+                        else:
+                            return f'Please, {user}, check your password'
 
 
-check_access_1('user_1')
-check_access_1('user_7')
+check_access_1('user_1', '23442w')
+check_access_1('user_7', 'r22wer')
 
-print(check_access_2('user_1'))
-print(check_access_2('user_7'))
+print(check_access_2('user_1', 'we3432dfwe4'))
+print(check_access_2('user_7', 'fdee21'))
