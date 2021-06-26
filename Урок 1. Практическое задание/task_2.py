@@ -28,11 +28,11 @@ def min_var_1(data: list):
     :return: манимальное значение переданного списка
     """
     min_val = data[0]
-    for i in data:
+    for i in data:                    # O(n^2)
         for j in data:
-            if j < i and j < min_val:
-                min_val = j
-    return min_val
+            if j < i and j < min_val: # O(1)
+                min_val = j           # O(1)
+    return min_val                    # O(1)
 
 
 def min_var_2(data: list):
@@ -41,11 +41,11 @@ def min_var_2(data: list):
     :param data: список входных чисел
     :return: манимальное значение переданного списка
     """
-    min_val = data[0]
-    for i in data[1:]:
-        if i < min_val:
-            min_val = i
-    return min_val
+    min_val = data[0]                # O(1)
+    for i in data[1:]:               # O(n)
+        if i < min_val:              # O(1)
+            min_val = i              # O(1)
+    return min_val                   # O(1)
 
 
 if __name__ == '__main__':

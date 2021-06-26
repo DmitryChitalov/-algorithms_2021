@@ -28,6 +28,10 @@
 
 
 class User:
+    """
+    Класс пользователя, в статических переменных хранится список из всех пользователей
+    и словарь в котором ключи - уникальные логины пользователя
+    """
     users = []
     logins_hash = {}
 
@@ -39,6 +43,10 @@ class User:
         User.logins_hash[login] = self
 
     def activate(self):
+        """
+        Метод активирующий учетную запись, сложность О(1)
+        :return:
+        """
         self.__is_active = True
         print("Запись активирована!")
 
@@ -55,6 +63,11 @@ class User:
         return self.__is_active
 
     def offer_activation(self):
+        """
+        Предложение активации учетной записи, сложность О(1), если допустить
+        ожидаемый размер пользовательского ввода
+        :return:
+        """
         user_answer = input(f"{self.login} Вы хотите активировать запись? (Да/Нет)").lower()
         if user_answer == "да":
             self.activate()
@@ -63,6 +76,13 @@ class User:
 
     @staticmethod
     def slow_check(login, password):
+        """
+        Медленный метод выполняющий поиск пользователя по всему списку пользователей, сложность О(n)
+        так как поиск пролистывает весь список до нахождения соответствий
+        :param login:
+        :param password:
+        :return:
+        """
         for user in User.users:
             if user.login == login and user.password == password:
                 if user.is_active is False:
@@ -76,6 +96,13 @@ class User:
 
     @staticmethod
     def fast_check(login, password):
+        """
+        Бастрый метод поиска пользователя, так как поиск сразу происходит
+        по ключу словаря, сложность О(1)
+        :param login:
+        :param password:
+        :return:
+        """
         user = User.logins_hash.get(login)
         if user is None:
             print("Пользователь с таким логином не найден")
