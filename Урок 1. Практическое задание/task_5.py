@@ -49,10 +49,6 @@ class PlatesStack:
         self.platesList[-1].append(value)
 
     def get(self):
-        # Если текущая стропка пуста, и это не первая стопка, тогда удаляем ее
-        if len(self.platesList[-1]) == 0 and len(self.platesList) > 1:
-            self.platesList.pop()
-
         if len(self.platesList[-1]) == 0:
             returned_value = None
         else:
@@ -66,6 +62,9 @@ class PlatesStack:
 
         if len(self.platesList[-1]) != 0:
             self.platesList[-1].pop()
+
+            if len(self.platesList[-1]) == 0 and len(self.platesList) > 1:
+                self.platesList.pop()
 
 
 current_plates_stack = PlatesStack()
