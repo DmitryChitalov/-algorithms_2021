@@ -11,3 +11,18 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from uuid import uuid4
+cache_dict = {}
+salt = uuid4().hex
+
+def cache_page(url):
+    if url not in cache_dict.keys():
+        cache_dict[url] = hashlib.sha256(salt.encode()+url.encode()).hexdigest()
+    else:
+        print('Страница уже закеширована')
+    return
+
+
+cache_page('http://ya.ru')
+cache_page('http://ya.ru')
