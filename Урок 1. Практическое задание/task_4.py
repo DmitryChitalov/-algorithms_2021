@@ -25,3 +25,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+storage = [['fNaFfKa_14', 'a6dFsh7o', 1], ['Cofee4ek', '123456', 1],
+           ['ЧеЛ_В_НаУшНиКаХ', 'qwerty111', 0], ['ПростоЯ', 'CVsg6DDj', 1],
+           ['Memasyan', 'qweasdzxc', 0], ['сhосо bаbе', '3452672', 0],
+           ['Ketu', 'wewewe', 1], ['ReySer', 'Wdf5Fwr6', 1]]
+
+
+def checking(user_login, user_password, list_storage):
+    for i in list_storage:                                                # О(n)
+        if user_login == i[0] and user_password == i[1] and i[2] == 1:    # О(1)
+            print('Доступ разрешен')                                      # О(1)
+            return True                                                   # О(1)
+        elif user_login == i[0] and user_password == i[1] and i[2] == 0:  # О(1)
+            print('Выполните активацию учетной записи')                   # О(1)
+            return False                                                  # О(1)
+    print('Проверьте правильность ввода пароля и логина')                 # О(1)
+    return False                                                          # О(1)
+
+# Сложность: О(n)
+
+
+checking('ЧеЛ_В_НаУшНиКаХ', 'dsds', storage)
+checking('ЧеЛ_В_НаУшНиКаХ', 'qwerty111', storage)
+checking('ПростоЯ', 'CVsg6DDj', storage)
+checking('}{akep', 'admin', storage)
+
+
+def checking_2(user_login, user_password, list_storage):
+    for i in list_storage:                                                # О(n)
+        for j in i:                                                       # О(n)
+            if j == user_login and i[1] == user_password:                 # О(1)
+                if i[2] == 0:                                             # О(1)
+                    print('Выполните активацию учетной записи')           # О(1)
+                    return False                                          # О(1)
+                else:
+                    print('Доступ разрешен')                              # О(1)
+                    return True                                           # О(1)
+    print('Проверьте правильность ввода пароля и логина')                 # О(1)
+    return False                                                          # О(1)
+
+# Сложность: О(n^2)
+
+# Вывод: первое решение эффективнее по O-нотации
+
+
+checking_2('ЧеЛ_В_НаУшНиКаХ', 'dsds', storage)
+checking_2('ЧеЛ_В_НаУшНиКаХ', 'qwerty111', storage)
+checking_2('ПростоЯ', 'CVsg6DDj', storage)
+checking_2('}{akep', 'admin', storage)
