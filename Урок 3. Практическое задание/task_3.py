@@ -16,3 +16,16 @@
 р
 а
 """
+
+
+def substrings_pass(password):
+    substrings = set()
+    for i in range(len(password)):
+        for j in range(len(password)):
+            substrings.add(password[i:j + 1])
+    substrings.remove(password)
+    substrings.remove("")
+    return set(map(hash, substrings))
+
+
+print(substrings_pass(input("Введите пароль: ")))
