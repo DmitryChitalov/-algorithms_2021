@@ -40,6 +40,18 @@ t2 = Timer("func_1([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])","from 
 print("func_2",t2.timeit(number=1000000),"секунд")
 
 """
+Пробовал реиализовать подсчет времени через
+print(timeit("func_1(nums)",globals=globals(),number=1000000)), не забыв объявить
+nums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+
+но получал следующую ошибку
+
+Traceback (most recent call last):
+  File "C:/Users/miair/PycharmProjects/-algorithms_2021/Урок 4. Практическое задание/task_1.py", line 38, in <module>
+    print(timeit("func_1(nums)",globals=globals(),number=1000000))
+TypeError: 'module' object is not callable
+"""
+"""
 1 замер 
 func_1 11.4445297 секунд
 func_2 9.427707700000001 секунд
