@@ -18,3 +18,31 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from hashlib import sha256
+import csv
+
+def create_account():
+    log = input("Введите логин:")
+    password = input("Введите пароль:")
+    h_pass = sha256(log.encode() + password.encode()).hexdigest()
+    with open("passwords.csv", "a") as f:
+        f.write(f"{log},{h_pass}\n")
+    return h_pass
+
+
+def check_password(login):
+    checked_pass = input("Введите ваш пароль:")
+    with open('passwords.csv', 'r') as p:
+        d = csv.reader(p)
+        for row in d:
+            if row[0] == login:
+                if row[1] == sha256(login.encode() + checked_pass.encode()).hexdigest():
+                    return "Верный пароль"
+                else:
+                    return "Введен неверный пароль!"
+
+print(create_account())
+print(check_password('123'))
+
+
