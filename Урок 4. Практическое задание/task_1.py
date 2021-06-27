@@ -32,21 +32,31 @@ def func_2(nums):
     return [nums[i] for i in range(len(nums)) if nums[i] % 2 == 0]
 
 
-my_nums = [i*i for i in range(100000)]
-stmnts = ['func_1(my_nums)', 'func_1(my_nums)']
+def func_3(nums):
+    return [i[1] for i in enumerate(nums) if i[1] % 2 == 0]
+
+
+my_nums = [i*i for i in range(1000000)]
+stmnts = ['func_1(my_nums)', 'func_2(my_nums)', 'func_3(my_nums)']
 
 for st in stmnts:
-    print(f'{timeit("st", globals=globals(), number=10000000)}')
-
+    print(f'{timeit("st", globals=globals(), number=100000)}')
+print(f'\n')
+print(f'{timeit("func_1(my_nums)", globals=globals(), number=100)}')
+print(f'{timeit("func_2(my_nums)", globals=globals(), number=100)}')
+print(f'{timeit("func_3(my_nums)", globals=globals(), number=100)}')
 """
 В данном случае очень удобно использоваться списковое ключение.
-Но его использование не ускроило, а наоборот, несколько замедлило работу при работе с небольшим списком.
-my_nums = [i*i for i in range(1000)]
-0.2346987
-0.24731000000000003
+В рамках цикал это сработало, а enumerate еще сильнее ускроило работу 
+0.0021687999999999985
+0.0021313000000000026
+0.0020120000000000138
 
-При использовании более длинного списка, ситуация изменилась:
-my_nums = [i*i for i in range(100000)]
-0.21121489999999998
-0.20346799999999998
+Если попробавть замерить скорость не через цикл, то результат следующий:
+во первых не понимаю, почему возросло время выполнения чуть ли не на порядки? 
+во вторых, применение enumerate ухудшает время. Почему так? 
+14.7168798
+13.4118401
+15.849953900000003
+15.849953900000003
 """
