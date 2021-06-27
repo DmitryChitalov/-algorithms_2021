@@ -38,3 +38,34 @@ def hash_pass(data, sal):
 
 
 hash_password = hash_pass(password, salt)
+
+
+# ''' Обязательно усложните задачу! '''
+# import hashlib
+# import os
+# import shutil
+#
+# new_folder = "my_hash_password"  # -> В этом блоке создаем файл для хранения хеша
+# new_file = 'hash'
+# new_path = os.path.join(new_folder, new_file)
+# if not os.path.isdir(new_folder):
+#     os.makedirs(new_folder)
+# else:
+#     shutil.rmtree(new_folder)
+#     os.mkdir(new_folder)
+#
+# my_salt = input('Введите логин: ')  # -> В качестве соли используем логин, чтобы соль была постоянной
+# pswd_1 = input('Введите пароль: ')
+# result_1 = hashlib.sha256(my_salt.encode() + pswd_1.encode()).hexdigest()
+#
+# with open(new_path, 'w', encoding='utf-8') as f:  # -> записываем хеш 1го "соленого" пароля в файл
+#     f.writelines(result_1)
+#
+# pswd_2 = input('Введите пароль еще раз для проверки: ')
+# result_2 = hashlib.sha256(my_salt.encode() + pswd_2.encode()).hexdigest()
+#
+# with open(new_path, 'r', encoding='utf-8') as f:  # -> читаем хеш 1го "соленого" пароля из файла
+#     result_read = f.readline()
+#
+# if result_2 == result_read:  # -> сравниваем хеши "соленых" паролей
+#     print('Вы ввели правильный пароль.')
