@@ -17,9 +17,28 @@
 """
 
 
+from timeit import timeit
+
+
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [nums[i] for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+my_nums = [10, 34, 43, 34454, 4544445654, 56, 43433, 343343, 223, 4345325423, 6356526, 3676537, 625634]
+stmnts = ['func_1(my_nums)', 'func_1(my_nums)']
+
+for st in stmnts:
+    print(timeit("st", globals=globals()))
+
+"""
+В данном случае очень удобно использоваться списковое ключение.
+"""
