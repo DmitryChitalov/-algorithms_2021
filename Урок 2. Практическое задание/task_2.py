@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+res_list = [0, 0]
+
+
+def get_even_odd(number):
+    if number == 0:
+        return 0
+    else:
+        _buf_num = number % 10
+        number = number // 10
+        if _buf_num % 2 == 0:
+            res_list[0] += 1
+        else:
+            res_list[1] += 1
+        return get_even_odd(number)
+
+
+if __name__ == '__main__':
+    get_even_odd(4546755)
+    print(f'Even numbers: {res_list[0]}\nOdd numbers: {res_list[1]}')
