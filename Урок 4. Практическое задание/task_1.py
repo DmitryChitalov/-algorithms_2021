@@ -29,16 +29,24 @@ def func_1(nums):
 
 
 def func_2(nums):
-    new_arr = [nums[i] for i in range(len(nums)) if nums[i] % 2 == 0]
-    return new_arr
+    return [nums[i] for i in range(len(nums)) if nums[i] % 2 == 0]
 
 
-my_nums = [10, 34, 43, 34454, 4544445654, 56, 43433, 343343, 223, 4345325423, 6356526, 3676537, 625634]
+my_nums = [i*i for i in range(100000)]
 stmnts = ['func_1(my_nums)', 'func_1(my_nums)']
 
 for st in stmnts:
-    print(timeit("st", globals=globals()))
+    print(f'{timeit("st", globals=globals(), number=10000000)}')
 
 """
 В данном случае очень удобно использоваться списковое ключение.
+Но его использование не ускроило, а наоборот, несколько замедлило работу при работе с небольшим списком.
+my_nums = [i*i for i in range(1000)]
+0.2346987
+0.24731000000000003
+
+При использовании более длинного списка, ситуация изменилась:
+my_nums = [i*i for i in range(100000)]
+0.21121489999999998
+0.20346799999999998
 """
