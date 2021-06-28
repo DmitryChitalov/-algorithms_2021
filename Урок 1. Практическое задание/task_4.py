@@ -25,3 +25,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+data = {
+    'Sten': ['123', True],
+    'Vik': ['456', True],
+    'Karl': ['789', False],
+    'Sem': ['000', False]
+}
+data2 = {
+    'Mila': ['123', True],
+    'Kate': ['456', True],
+    'Sarah': ['789', False],
+    'Olga': ['000', False]
+}
+
+
+# Сложность O(1)
+def auth_1(name, passw):
+    if name not in data:                                          # O(1) - очень надеюсь что это так, в списке это O(N)
+        return "Пользователь не найден."                                    # O(1)
+    elif passw != data[name][0]:                                            # O(1)
+        return "Пароль не верен. Попробуйте еще раз."                       # O(1)
+    elif data[name][1]:                                                     # O(1)
+        return "Вход разрешен."                                             # O(1)
+    else:
+        return "Учётная запись не активирована. Подтвердите через e-mail."  # O(1)
+
+
+# Сложность O(n)
+def auth_2(name, passw):
+    for i in data2.keys():                                                  # O(n) т.к. цикл
+        if i != name:                                                       # O(1)
+            continue                                                        # O(1)
+        elif passw != data2[i][0]:                                          # O(1)
+            return "Пароль не верен. Попробуйте еще раз."                   # O(1)
+        elif data2[name][1]:                                                # O(1)
+            return "Вход разрешен."                                         # O(1)
+        else:
+            return "Учётная запись не активирована. Подтвердите через e-mail."  # O(1)
+    return "Пользователь не найден."                                        # O(1)
+
+
+print("Введите свой логин и пароль")
+login = input('Логин: ')
+password = input('Пароль: ')
+print(auth_1(login, password))
+print(auth_2(login, password))
+
+"""
+Первое решение эффективнее, т.к. константная сложность лучше линейной
+"""

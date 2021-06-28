@@ -18,3 +18,33 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+
+
+# Общая сложность: O(n**2)
+def min_value(list_temp):
+    min_value_1 = list_temp[0]            # O(1)
+    for v in list_temp:                   # O(n)
+        temporary_min = v                 # O(1)
+        for s in list_temp:               # O(n)
+            if s < v:                     # O(1)
+                temporary_min = s         # O(1)
+        if min_value_1 > temporary_min:   # O(1)
+            min_value_1 = temporary_min   # O(1)
+    return min_value_1                    # O(1)
+
+
+# Общая сложность: O(n)
+def min_value_2(list_temp2):
+    # присваиваем переменной первый элемент списка
+    min_value2 = list_temp2[0]              # O(1)
+    for i in list_temp2:                    # O(n)
+        if i < min_value2:                  # O(1)
+            min_value2 = i                  # O(1)
+    return min_value2                       # O(1)
+
+
+min_v = min_value([8, -90, 6, 4, 3, 5, -360])
+print("Минимальное значение первого алгоритма:", min_v)
+
+min_v_2 = min_value_2([78, -9, -56, -78, 0, 45, 36])
+print("Минимальное значение второго алгоритма:", min_v_2)
