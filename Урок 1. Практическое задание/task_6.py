@@ -28,7 +28,7 @@ class Task:
 
     def __str__(self):
         # return f'Задача: {self.name} (расположение: {self.board})'
-        return f'Задача: {self.name} (расположение: {self.board})'
+        return f'Задача: "{self.name}"'
 
 
 class TaskBoard:
@@ -46,7 +46,7 @@ class TaskBoard:
         view_string = header
 
         if len(table) == 0:
-            view_string = f'{view_string}\n---------- ЗАДАЧИ ОТСУТСВУЮТ ----------'
+            view_string = f'{view_string}\nЗАДАЧИ ОТСУТСВУЮТ'
         else:
             for task_item in enumerate(table):
                 view_string = f'{view_string}\n{task_item[0]}. {str(task_item[1])}'
@@ -75,12 +75,15 @@ class TaskBoard:
         task.queue.remove(task)
 
         # Добавляем ее на целевую доску
-        target_queue = self.__get_table_by_name__(target_queue)
-        task.queue = target_queue
-        target_queue.append(task)
+        target_queue_ref = self.__get_table_by_name__(target_queue)
+        task.queue = target_queue_ref
+        target_queue_ref.append(task)
+        print(f'[!!!] {task} была перемещена в очередь {target_queue}\n')
 
     def del_task(self, task):
+        task.queue.remove(task)
         self.__garbage__.append(task)
+        print(f'[!!!] {task} была перемещена в мусорную корзину\n')
 
     @property
     def todo(self):
@@ -101,12 +104,8 @@ task_1 = task_board.add_task('Создать классы', 'Создать кл
 task_2 = task_board.add_task('Описать тестовые данные', 'Заполнить описание тестовых данных')
 task_3 = task_board.add_task('Pull-Request', 'Приложить пулл реквест к сдаче домашнего задания')
 
-print(task_board.todo)
-print(task_board.in_progress)
-print(task_board.resolved)
-
+print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
 task_board.move_task(task_1, 'in_progress')
-
-print(task_board.todo)
-print(task_board.in_progress)
-print(task_board.resolved)
+print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
+task_board.del_task(task_2)
+print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
