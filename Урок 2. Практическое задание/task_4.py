@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sequence_sum(value, _element=1.0, _sequence_sum=0.0):
+    if value <= 0:
+        print(f'Sum of sequence: {_sequence_sum}')
+    else:
+        return sequence_sum(value - 1, -(_element / 2), _sequence_sum + _element)
+
+
+if __name__ == '__main__':
+    sequence_sum(3)
