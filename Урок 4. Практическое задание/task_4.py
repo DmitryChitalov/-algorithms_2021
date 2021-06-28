@@ -46,7 +46,7 @@ def func_42():
 def func_43():
     elem_3 = max(set(array), key=array.count)
     max_3 = array.count(elem_3)
-    return f'Чаще всего встречается число {max(set(array), key=array.count)}, ' \
+    return f'Чаще всего встречается число {elem_3}, ' \
            f'оно появилось в массиве {max_3} раз(а)'
 
 
