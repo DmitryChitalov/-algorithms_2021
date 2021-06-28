@@ -16,3 +16,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equal_check(number):
+    return number if number == 1 else number + equal_check(number - 1)
+
+
+if __name__ == '__main__':
+    _num = 6
+    print(f'Equality 1+2+..{_num} = {_num}({_num}+1)/2 holds. Result {equal_check(_num)}')
