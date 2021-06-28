@@ -62,4 +62,3 @@ def friends_list():
     friends_lives = ['Серёга', 'Соня', 'Дима']
     friends_lives.sort()
     print(friends_lives)
-

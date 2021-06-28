@@ -26,5 +26,3 @@ for i in range(len(s_string)):
         s_string_set.add(hash(s_string[i:j]))
 
 print(f"{s_string} - {(len(s_string_set))} уникальных подстрок")
-
-

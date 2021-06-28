@@ -28,5 +28,3 @@ def website(url):
 website('https://gb.ru/')
 website('https://www.google.com/')
 website('https://gb.ru/')
-
-
