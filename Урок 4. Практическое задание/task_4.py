@@ -12,10 +12,14 @@
 Без аналитики задание считается не принятым!
 """
 
+
+from timeit import timeit
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
-def func_1():
+def func_41():
     m = 0
     num = 0
     for i in array:
@@ -27,7 +31,7 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+def func_42():
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -39,5 +43,25 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_43():
+    elem_3 = max(set(array), key=array.count)
+    max_3 = array.count(elem_3)
+    return f'Чаще всего встречается число {max(set(array), key=array.count)}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
+print(func_41())
+print(func_42())
+print(func_43())
+
+print(f'{timeit("func_41()", globals=globals(), number=100000)}')
+print(f'{timeit("func_42()", globals=globals(), number=100000)}')
+print(f'{timeit("func_43()", globals=globals(), number=100000)}')
+
+
+"""
+Аналитика:
+первая функция проходится по всем элементам и сохраняет количество вхождений самого частого.
+функция 2 хранит аналитику по всем значениям и с помощью max, вывоид самый частый, что медлнее
+функция 3 самая быстрая, т.к. использует только встроенные функции без циклов
+"""
