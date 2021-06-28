@@ -98,14 +98,15 @@ class TaskBoard:
         return self.__viewstring__('Список решенных задач:', self.__resolved__)
 
 
-task_board = TaskBoard('Доска Scrum-команды')
+if __name__ == '__main__':
+    task_board = TaskBoard('Доска Scrum-команды')
 
-task_1 = task_board.add_task('Создать классы', 'Создать классы, необходимые для работы алгоритма')
-task_2 = task_board.add_task('Описать тестовые данные', 'Заполнить описание тестовых данных')
-task_3 = task_board.add_task('Pull-Request', 'Приложить пулл реквест к сдаче домашнего задания')
+    task_1 = task_board.add_task('Создать классы', 'Создать классы, необходимые для работы алгоритма')
+    task_2 = task_board.add_task('Описать тестовые данные', 'Заполнить описание тестовых данных')
+    task_3 = task_board.add_task('Pull-Request', 'Приложить пулл реквест к сдаче домашнего задания')
 
-print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
-task_board.move_task(task_1, 'in_progress')
-print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
-task_board.del_task(task_2)
-print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
+    print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
+    task_board.move_task(task_1, 'in_progress')
+    print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
+    task_board.del_task(task_2)
+    print(f'{task_board.todo}\n\n{task_board.in_progress}\n\n{task_board.resolved}\n\n')
