@@ -23,3 +23,38 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+'''
+def chr_row(ascii_val=32):
+    if ascii_val == 128:
+        return True
+    print(f' {ascii_val} - {chr(ascii_val)}', end=' ')
+    if (ascii_val - 31) % 10 == 0:
+        print('\n')
+    chr_row(ascii_val + 1)
+
+chr_row()
+'''
+
+def func_recursion_five(start, stop):
+    global my_list
+    if start < stop:
+        start += 1
+        func_recursion_five (start, stop)
+        my_list.insert (0, [start, chr (start)])
+    return my_list
+
+
+def func_five(*args):
+    list: start_number = args
+    func_recursion_five (start_number, (start_number + 10) if start_number < 121 else (start_number + 6))
+    str_var = ''
+    for el in my_list:
+        str_var += ' - '.join (map (str, el)) + ' '
+    my_list.clear ()
+    print (str_var)
+
+
+if __name__ == '__main__':
+    my_list = []
+    for start_number in range (31, 131, 10):
+        func_five (start_number)

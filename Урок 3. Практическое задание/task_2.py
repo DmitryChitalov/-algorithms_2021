@@ -18,3 +18,23 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+from uuid import uuid4
+import hashlib
+import json
+
+
+if __name__ == '__main__':
+    SALT = hashlib.sha256(uuid4 ().hex.encode()).hexdigest()
+    pass_original = json.dumps (SALT
+                                   + hashlib.sha256(
+        input ('Введите пароль ').encode ()).hexdigest (),
+                   indent = 4)
+    print(f'В базе данных хранится строка: {pass_original}')
+    if pass_original == \
+            json.dumps ((SALT + hashlib.sha256(
+                input ('Введите пароль еще раз для проверки: ').encode ()).hexdigest ()),
+                        indent = 4):
+        print ('Вы ввели правильный пароль')
+    else:
+        print ('Пароли не совпадает')

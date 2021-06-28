@@ -21,26 +21,3 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
-def my_func_val(my_dict): # O(N) + O(NlogN) + O(N) + O(N) = O(NlogN)
-    dict_to_list = list(my_dict.items()) # O(N)
-    dict_to_list.sort(key = lambda index: index[1]) # O(NlogN)
-    dict_to_list.reverse() # O(N)
-    return dict_to_list[0:3] # O(N)
-
-def my_func_key(my_dict): # O(N)
-    temp_dict = my_dict.copy() # O(N)
-    temp_list = [[0,0]] # O(1)
-    index = 0 # O(1)
-    for key, values in temp_dict.items(): # O(N)
-        if values > temp_list[index][1]: # O(1)
-            temp_list.append([key, values]) # O(1)
-            index += 1 # O(1)
-        else:
-            temp_list.insert(index, [key, values]) # O(1)
-    return (temp_list[-3:]) # O(N) срез
-
-my_dict = {'Apple': 100000, 'Microsoft': 200000, 'Amazon': 400000, 'Booking': 350000 }
-
-print(my_func_val(my_dict)) # O(NlogN) более сложный, хотя код меньше
-print(my_func_key(my_dict)) # O(N)
-
