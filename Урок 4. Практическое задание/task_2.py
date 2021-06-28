@@ -56,6 +56,7 @@ def memoize(f):
     return decorate
 
 
+
 @memoize
 def recursive_reverse_mem(number):
     if number == 0:
@@ -79,3 +80,45 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+
+print('Не оптимизированная функция recursive_reverse')
+print(
+    timeit(
+        "recursive_reverse(num_100)",
+        setup='from __main__ import recursive_reverse, num_100',
+        number=100000))
+print(
+    timeit(
+        "recursive_reverse(num_1000)",
+        setup='from __main__ import recursive_reverse, num_1000',
+        number=100000))
+print(
+    timeit(
+        "recursive_reverse(num_10000)",
+        setup='from __main__ import recursive_reverse, num_10000',
+        number=100000))
+
+print('Оптимизированная функция recursive_reverse_mem')
+print(
+    timeit(
+        'recursive_reverse_mem(num_100)',
+        setup='from __main__ import recursive_reverse_mem, num_100',
+        number=100000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_1000)',
+        setup='from __main__ import recursive_reverse_mem, num_1000',
+        number=100000))
+print(
+    timeit(
+        'recursive_reverse_mem(num_10000)',
+        setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=100000))
+
+"""
+
+Мемоизация здесь по результатам замеров полезна, значительно сокрощая время выполения кода.
+
+"""
