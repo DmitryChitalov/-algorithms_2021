@@ -16,7 +16,9 @@
 а
 """
 
+
 def verify_func(string):
+    ''' Функция проверки уникальных строк '''
     verify_string = string.lower ()
     string_set = set ()
     print (f'Строка "{verify_string}" имеет длину {len (verify_string)} символов')
@@ -28,5 +30,5 @@ def verify_func(string):
 
 
 if __name__ == '__main__':
-    print (f'Количество уникальных подстрок в этой строке: {verify_func (str (input ("Введите строку: ")))}')
-
+    print (f'Количество уникальных подстрок в этой строке: '
+           f'{verify_func (str (input ("Введите строку: ")))}')
