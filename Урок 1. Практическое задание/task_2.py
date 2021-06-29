@@ -19,3 +19,41 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def min_var_1(data: list):
+    """
+    Функция поиска минимума с квадратичной сложностью
+    :param data: список входных чисел
+    :return: манимальное значение переданного списка
+    """
+    min_val = data[0]
+    for i in data:                    # O(n^2)
+        for j in data:
+            if j < i and j < min_val: # O(1)
+                min_val = j           # O(1)
+    return min_val                    # O(1)
+
+
+def min_var_2(data: list):
+    """
+    Функция поиска минимума с линейной сложностью
+    :param data: список входных чисел
+    :return: манимальное значение переданного списка
+    """
+    min_val = data[0]                # O(1)
+    for i in data[1:]:               # O(n)
+        if i < min_val:              # O(1)
+            min_val = i              # O(1)
+    return min_val                   # O(1)
+
+
+if __name__ == '__main__':
+    import random
+
+    test = random.sample(range(-1000, 1000), 10)
+
+    print(test)
+    print(min(test))
+    print(min_var_1(test))
+    print(min_var_2(test))

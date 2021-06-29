@@ -20,3 +20,62 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import random
+
+
+class Company:
+
+    def __init__(self, name, profit):
+        self.name = name
+        self.profit = profit
+
+    def __str__(self):
+        return f"{self.name} - {self.profit}"
+
+
+company_list = []
+for i in range(1, 10001):
+    company_list.append(Company(f"Company {i}", random.randint(100, 1000000)))
+
+
+def sort_leaders(data: list):
+    """
+    Функция использует стандартную сортировку со сложностью О(n * log(n))
+    Выводит в консоль три самых прибыльных компании
+    """
+    data.sort(key=lambda c: c.profit)
+    for idx in range(1, 4):
+        print(data[-idx])
+
+
+def find_3_leaders(data: list):
+    """
+    Функция выводит в консоль три самых прибыльных компании
+    Компании ищутся прямым перебором списка компаний и решается за 3 прохода, сложность О(n)
+    :param data:
+    :return:
+    """
+    leaders = []
+    index = []
+    max_profit = data[0].profit
+    temp_idx = 0
+    temp_cmp = data[0]
+    for count in range(3):
+        for idx, company in enumerate(data):
+            if company.profit > max_profit and idx not in index:
+                max_profit = company.profit
+                temp_idx = idx
+                temp_cmp = company
+        leaders.append(temp_cmp)
+        index.append(temp_idx)
+        max_profit = 0
+    [print(i) for i in leaders]
+
+
+sort_leaders(company_list)
+print()
+find_3_leaders(company_list)
+
+"""
+Второй должен работать быстрее если в списке больше 1000 компаний ( log(1000) = 3 )
+"""

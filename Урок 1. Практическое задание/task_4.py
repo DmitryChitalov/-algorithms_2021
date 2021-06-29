@@ -25,3 +25,108 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class User:
+    """
+    Класс пользователя, в статических переменных хранится список из всех пользователей
+    и словарь в котором ключи - уникальные логины пользователя
+    """
+    users = []
+    logins_hash = {}
+
+    def __init__(self, login, password):
+        self.__login = login
+        self.__password = password
+        self.__is_active = False
+        User.users.append(self)
+        User.logins_hash[login] = self
+
+    def activate(self):
+        """
+        Метод активирующий учетную запись, сложность О(1)
+        :return:
+        """
+        self.__is_active = True
+        print("Запись активирована!")
+
+    @property
+    def login(self):
+        return self.__login
+
+    @property
+    def password(self):
+        return self.__password
+
+    @property
+    def is_active(self):
+        return self.__is_active
+
+    def offer_activation(self):
+        """
+        Предложение активации учетной записи, сложность О(1), если допустить
+        ожидаемый размер пользовательского ввода
+        :return:
+        """
+        user_answer = input(f"{self.login} Вы хотите активировать запись? (Да/Нет)").lower()
+        if user_answer == "да":
+            self.activate()
+        else:
+            print("Очень жаль(")
+
+    @staticmethod
+    def slow_check(login, password):
+        """
+        Медленный метод выполняющий поиск пользователя по всему списку пользователей, сложность О(n)
+        так как поиск пролистывает весь список до нахождения соответствий
+        :param login:
+        :param password:
+        :return:
+        """
+        for user in User.users:
+            if user.login == login and user.password == password:
+                if user.is_active is False:
+                    user.offer_activation()
+                    if user.is_active is True:
+                        print(f"Привет, {user.login}!")
+                else:
+                    print(f"Привет, {user.login}!")
+                return
+        print("Пользователь с таким логином и(или) паролем не найден")
+
+    @staticmethod
+    def fast_check(login, password):
+        """
+        Бастрый метод поиска пользователя, так как поиск сразу происходит
+        по ключу словаря, сложность О(1)
+        :param login:
+        :param password:
+        :return:
+        """
+        user = User.logins_hash.get(login)
+        if user is None:
+            print("Пользователь с таким логином не найден")
+        else:
+            if user.password == password:
+                if user.is_active is False:
+                    user.offer_activation()
+                    if user.is_active is True:
+                        print(f"Привет, {user.login}!")
+                else:
+                    print(f"Привет, {user.login}!")
+            else:
+                print("Вы ввели неверный пароль")
+
+
+if __name__ == '__main__':
+    u1 = User("Mike", "123")
+    u1.activate()
+    User("John", "123")
+    User("Ann", "qwerty")
+    User("Sara", "password")
+
+    User.slow_check("Mike", "123")
+    User.slow_check("Ann", "qwerty")
+
+    User.fast_check("Sara", "123")
+    User.fast_check("Sara", "password")
