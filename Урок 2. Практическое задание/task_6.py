@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def rec_game(vol, num):
+    answer = int(input('Введите число от 0 до 100:'))
+    if  answer == num or vol == 10:
+        if answer == num:
+            print('Верно')
+        print('Загаданное число:', num)
+
+    else:
+        if answer > num:
+            print('Загаданное число меньше ')
+
+        else:
+            print('Загаданное число больше')
+
+        return rec_game(vol + 1, num)
+
+rec_game(1, random.randint(0,100))
