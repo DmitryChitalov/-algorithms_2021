@@ -28,3 +28,41 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculate(operation, first_int, second_int):
+    return eval(f'{first_int}{operation}{second_int}')
+
+
+def get_operation_list():
+    return ['+', '-', '*', '/']
+
+
+def print_value_error(args):
+    print('Вы ввели строку, а не число')
+
+
+def input_value(description):
+    value = input(f'Введите {description} число:\n')
+    if not value.isdigit():
+        print_value_error()
+        input_value(description)
+    else:
+        return int(value)
+
+
+while True:
+    operation_list = get_operation_list()
+
+    operation = input(f'Введите символ операции {operation_list}, или введите 0 для выхода:\n')
+
+    if operation == '0':
+        break
+    elif operation_list.count(operation) == 0:
+        print(f'Значение {operation} не является разрешенной операцией.')
+        continue
+    else:
+        first_value = input_value('первое')
+        second_value = input_value('второе')
+
+# print(calculate('+', 3, 5))
