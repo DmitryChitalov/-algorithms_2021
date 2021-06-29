@@ -22,3 +22,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def recursion(val,rv):
+    if val // 10 == 0:
+        rv.append(val)
+        return rv
+    rv.append(val % 10)
+    recursion(val // 10,rv)
+
+reverse_val =  []
+val = input('Введите число, которое требуется перевернуть:')
+try:
+    recursion(int(val),reverse_val)
+except TypeError:
+    print("Вы ошиблись при вводе числа. Работа закончена")
+    exit(1)
+else:
+    val = ''
+    for i in reverse_val:
+        val +=  str(i)
+    print(f"Перевернутое число:{val}")
+
