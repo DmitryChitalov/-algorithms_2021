@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse(temp, rev=''):
+    if temp == 0:
+        return print("Перевёрнутое число:", rev)
+    rev += str(temp % 10)
+    reverse(temp // 10, rev)
+
+
+number = input("Введите число: ")
+while not number.isdigit() or number == "0":
+    number = input("Повторите попытку. Введите число: ")
+
+reverse(int(number))

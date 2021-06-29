@@ -28,3 +28,41 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# Логика была чуть изменена. Логично что операция вводится уже после ввода первого числа, а не сразу
+# это как-то не юзабильно что ли.
+# В любом случае это решение должно быть каким-то более простым, пока на ум приходит только
+# ast.literal_eval но я пока не знаю как это реализовать.
+
+
+def calc():
+    print("Калькулятор v. 1.0. Работает только с целыми числами.")
+    first_value = input("Введите первое число: ")
+    if not first_value.isdigit():
+        return print("Это не число."), calc()
+    operation = input("Введите операцию (+, -, /, *) или 0 для выхода из программы: ")
+    while operation not in '+-/*0':
+        operation = input("Такая операция недопустима. Введите операцию (+, -, /, *) или 0 для выхода из программы: ")
+    # условие выхода
+    if operation == '0':
+        return print("Выход из программы завершён")
+    second_value = input("Введите второе число: ")
+    if not second_value.isdigit():
+        return print("Это не число."), calc()
+    else:
+        if operation == "+":
+            print("Сумма двух чисел:", (int(first_value) + int(second_value)))
+        elif operation == "-":
+            print("Разница двух чисел:", (int(first_value) - int(second_value)))
+        elif operation == "*":
+            print("Произведение двух чисел:", (int(first_value) * int(second_value)))
+        elif operation == "/":
+            try:
+                print("Частное двух чисел:", (int(first_value) / int(second_value)))
+            except ZeroDivisionError:
+                print("Делить на ноль нельзя")
+    return calc()
+
+
+if __name__ == '__main__':
+    calc()

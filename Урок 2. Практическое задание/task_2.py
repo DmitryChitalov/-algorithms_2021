@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd(count, even=0, odd=0):
+    if count == 0:
+        return print("Чётных", even, "Нечётных", odd)
+    if count % 2 == 0:
+        return even_odd(count // 10, even + 1, odd)
+    else:
+        return even_odd(count // 10, even, odd + 1)
+
+
+value = input("Введите число: ")
+while not value.isdigit():
+    value = input("Это не число. Введите число: ")
+even_odd(int(value))
