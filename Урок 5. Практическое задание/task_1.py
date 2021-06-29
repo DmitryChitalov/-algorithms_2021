@@ -23,3 +23,30 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+Companies = namedtuple('Companies', 'name first_quarter second_quarter third_quarter fourth_quarter')
+profit_avr = {}
+num_of_comp = int(input('Введите количество компаний'))
+
+for i in range(num_of_comp):
+    companies = Companies(
+        name=input('название'),
+        first_quarter=int(input('Введите значение прибыли для 1 квартала ')),
+        second_quarter=int(input('Введите значение прибыли для 2 квартала ')),
+        third_quarter=int(input('Введите значение прибыли для 3 квартала ')),
+        fourth_quarter=int(input('Введите значение прибыли для 4 квартала ')))
+
+    profit_avr[companies.name] = round((companies.first_quarter +
+                                        companies.second_quarter +
+                                        companies.third_quarter +
+                                        companies.fourth_quarter) / 4, 2)
+
+total_profit_avr = round(sum(profit_avr.values()) / num_of_comp)
+
+for key, values in profit_avr.items():
+    if values > total_profit_avr:
+        print(f'У компании {key} прибыль выше среднего')
+    elif values < total_profit_avr:
+        print(f'У компании {key} прибыль ниже среднего')

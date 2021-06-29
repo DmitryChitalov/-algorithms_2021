@@ -34,3 +34,41 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+import collections
+import functools
+
+
+class HexNumber:
+    def __init__(self, first_number, second_number):
+        self.first_number = first_number
+        self.second_number = second_number
+
+    def __add__(self, other):
+        return list(format(int(''.join(self.first_number), 16) + int(''.join(self.second_number), 16), 'X'))
+
+    def __mul__(self, other):
+        return list(format(int(''.join(self.first_number), 16) * int(''.join(self.second_number), 16), 'X'))
+
+
+hx = HexNumber(input('Введите число в 16-ричном формате.\n'), input('Введите число в 16-ричном формате.\n'))
+print(f'Сумма равна {hx + hx}')
+print(f'Произведение равно {hx * hx}')
+
+
+nums = collections.defaultdict(list)
+for i in range(2):
+    n = input('Введите число в 16-ричном формате.\n')
+    nums[n] = list(n)
+print(nums)
+
+sum_res = sum([int(''.join(val), 16) for val in nums.values()])
+print(hex(sum_res))
+print(f'Сумма = {list(format(sum_res, "X"))}')
+
+mul_res = functools.reduce(lambda n_1, n_2: n_1 * n_2, [int(''.join(val), 16) for val in nums.values()])
+print(f'Произведение = {list(format(mul_res, "X"))}')
+
+
+
