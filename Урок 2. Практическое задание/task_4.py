@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def summa(quantity, a=1.0, counter=0, su=0.0):
+    if quantity <= 0:
+        print("Количество элементов:", counter, " и их сумма:", su)
+    else:
+        return summa(quantity - 1, -(a / 2), counter + 1, su + a)
+
+
+count = input("Введите количество элементов: ")
+# чтобы не получить ошибку по количеству рекурсивных операций
+while not count.isdigit() or int(count) > 995:
+    count = input("Ошибка. Попробуйте снова.")
+
+summa(int(count))
