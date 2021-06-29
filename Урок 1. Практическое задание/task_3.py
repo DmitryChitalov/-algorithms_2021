@@ -20,3 +20,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+profit_dict = {'oblast45': 98000, 'kmz': 120000, 'kzkt': 135000, 'tp': 80000, 'okna45': 93000}
+
+
+def max_3_1(use_dict):
+    """
+    Сложность: O(N*logN)
+    """
+    sorted_keys = sorted(use_dict, key=use_dict.__getitem__, reverse=True)  # O(N*logN)
+    max_profit_dict = {}                                        # O(1)
+    for n in range(0, 3):                                       # O(1) - так как известно, что будет только 3 повтора
+        key = sorted_keys[n]                                    # O(1)
+        value = use_dict[key]                                   # O(1)
+        max_profit_dict.update({key: value})                    # O(1) - на каждой итерации добавляем одно значение
+    print(max_profit_dict)                                      # O(1)
+
+
+def max_3_2(use_dict):
+    """
+    Сложность: O(N)
+    """
+    temp_dict = dict.copy(use_dict)     # O(N)
+    max_profit_dict = {}    # O(1)
+    max_key = 0     # O(1)
+    for i in range(1, 4):   # O(1) - так как известно, что будет только 3 повтора
+        max_value = 0                                   # O(1)
+        for key in temp_dict:                           # O(N) - словарь может быть любой длинны
+            if temp_dict[key] > max_value:              # O(1) - сравниваем два значения
+                max_key = key                           # O(1)
+                max_value = temp_dict[key]              # O(1)
+        max_profit_dict.update({max_key: max_value})    # O(1)
+        temp_dict.pop(max_key)                          # O(N) - выполняется всего 3 раза вне цикла перебора значений
+    print(max_profit_dict)                              # O(1)
+
+
+max_3_1(profit_dict)
+max_3_2(profit_dict)
+
+"""
+Эффективнее будет функция max_3_2, так как имеет линейную сложность, в то время как max_3_1 линейно-логарифмическую
+сложность за счет сортировки.
+"""
