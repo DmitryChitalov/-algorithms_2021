@@ -31,7 +31,10 @@
 
 
 def calculate(operation, first_int, second_int):
-    return eval(f'{first_int}{operation}{second_int}')
+    try:
+        return eval(f'{first_int}{operation}{second_int}')
+    except ZeroDivisionError:
+        return 'ОШИБКА. Деление на 0 невозможно'
 
 
 def get_operation_list():
@@ -65,4 +68,4 @@ while True:
         first_value = input_value('первое')
         second_value = input_value('второе')
 
-# print(calculate('+', 3, 5))
+        print(f'Результат выполнения: {calculate(operation, first_value, second_value)}')
