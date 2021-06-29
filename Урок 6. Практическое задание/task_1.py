@@ -21,6 +21,7 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+from timeit import timeit
 from pympler import asizeof
 from sys import getsizeof
 from memory_profiler import profile
@@ -153,6 +154,7 @@ def func_1(nums):
 
 
 print(func_1(nums))
+print(timeit("func_1(nums)", number=10, globals=globals()))
 
 
 # Оптимизированный код
@@ -167,12 +169,13 @@ def func_1(nums):
 
 
 print(func_1(nums))
-
+print(timeit("func_1(nums)", number=10, globals=globals()))
 # Вывод: В итоге мы сократили использование памяти с 2112 до 320:
 # Библиотека NumPy очень эффективна в использовании памяти, я передал список (массив) фунции array библиотеки NumPy,
 # для сжятия, в итоге получаем объект класса 'numpy.ndarray'
-#
-#
+# по временным затратам оптимизированный код тоже выигрывает
+
+
 # Пример № 4 (Использование Функции MAP )
 # Исходный код
 nums = [random.randint(100, 999) for i in range(100)]
