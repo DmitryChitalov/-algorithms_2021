@@ -13,6 +13,11 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
+
+
+enter_num = int(input("Введите 3-х значное число: "))
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +42,50 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    return str(enter_num)[::-1] or revers_4(enter_num)
+
+
+print(revers_4(enter_num))
+
+
+
+print(
+    timeit(
+        "revers_1(enter_num, revers_num=0)",
+        globals=globals(),
+    )
+)
+
+print(
+    timeit(
+        "revers_2(enter_num, revers_num=0)",
+        globals=globals(),
+    )
+)
+
+print(
+    timeit(
+        "revers_1(enter_num)",
+        globals=globals(),
+    )
+)
+
+print(
+    timeit(
+        "revers_4(enter_num)",
+        globals=globals(),
+    )
+)
+def main():
+    revers_1(enter_num, revers_num=0)
+    revers_2(enter_num, revers_num=0)
+    revers_3(enter_num)
+    revers_4(enter_num)
+
+run('main()')
+
+#Из приведенных примеров в задаче самым быстрым оказался цикл, но метод рекурсии-4 с переводом в строку оказался быстрее()
+# путем упрощения операций присваивания и среза
