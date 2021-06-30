@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(start, stop, counter=1):
+    """Выводит ASCII таблицу по десять элемнтов в ряду"""
+    if start == stop + 1:
+        return
+    print(f"{start} - {chr(start)}\t", end="")
+    if counter == 10:
+        print()
+        counter = 0
+    ascii_table(start + 1, stop, counter + 1)
+
+
+ascii_table(32, 127)

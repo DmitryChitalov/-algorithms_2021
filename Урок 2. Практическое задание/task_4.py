@@ -15,3 +15,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import sys
+
+
+def sum_of_row(n, base=1, sum_of_elems=0):
+    if n == 0:
+        print(f"Сумма элементов ряда равнв: {sum_of_elems}")
+        return
+    sum_of_elems += base
+    sum_of_row(n - 1, base / -2, sum_of_elems)
+
+
+sum_of_row(3)
+sys.setrecursionlimit(10000)
+sum_of_row(1234)

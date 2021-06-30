@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd_counter(num, even_count=0, odd_count=0):
+    """Функция считающая четные и нечетные цифры числа"""
+    if num == 0:
+        print(f"Количество четных и нечетных цифр в числе равно: {(even_count, odd_count)}")
+        return
+    digit = num % 10
+    if digit % 2 == 0:
+        even_count += 1
+    else:
+        odd_count += 1
+    even_odd_counter(num // 10, even_count, odd_count)
+
+
+even_odd_counter(34560)
