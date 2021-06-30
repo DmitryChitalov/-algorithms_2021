@@ -22,3 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def flip_a_number(user_num):
+    def flipping(num):
+        surplus = str(num % 10)
+        if num <= 10:
+            return surplus
+        return surplus + flipping(num // 10)
+    print(f"Перевернутое число: {flipping(user_num)}")
+
+
+flip_a_number(int(input("Введите число, которое требуется перевернуть: ")))

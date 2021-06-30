@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def mapping_to_a_table(comparable=32):
+    if comparable == 128:
+        print()
+    else:
+        print(f"{comparable} - {chr(comparable)}", end=' ')
+        if comparable % 10 == 1:
+            print()
+        return mapping_to_a_table(comparable+1)
+
+
+mapping_to_a_table()

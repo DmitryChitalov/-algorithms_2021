@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def snake_row(user_num_el):
+    def calculation(num_el, elementary=1.0):
+        if num_el == 1:
+            return elementary
+        return elementary + calculation(num_el-1, elementary=-(elementary / 2))
+    print(f"Количество элементов: {user_num_el}, их сумма: {calculation(user_num_el)}")
+
+
+snake_row(int(input("Введите количество элементов: ")))

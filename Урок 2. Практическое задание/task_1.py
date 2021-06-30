@@ -28,3 +28,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def checking_op():
+    """Вспомогательная функция проверки символа оператора"""
+    user_operator = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if user_operator in ('+', '-', '*', '/', '0'):
+        return user_operator
+    print('Вы ошиблись. Введите операцию (+, -, *, / или 0 для выхода):')
+    return checking_op()
+
+
+def simple_calc():
+    operator = checking_op()
+    if operator == '0':
+        print("Калькулятор закончил работу")
+    else:
+        try:
+            num_1 = int(input("Введите первое число: "))
+            num_2 = int(input("Введите второе число: "))
+            if operator == '/':
+                print(f"Ваш результат: {num_1 / num_2}")
+            else:
+                storage = {'+': num_1 + num_2, '-': num_1 - num_2, '*': num_1 * num_2}
+                print(f"Ваш результат: {storage[operator]}")
+        except ZeroDivisionError:
+            print("Деление на 0 недопустимо")
+        except ValueError:
+            print("Калькулятор работает только с числами, вы ввели не число")
+        simple_calc()
+
+
+simple_calc()
