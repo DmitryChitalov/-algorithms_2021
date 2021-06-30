@@ -34,3 +34,27 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+class HexNumber:
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return hex(int(self.value, 16))[2:]
+
+    def __add__(self, other):
+        return HexNumber(hex(int(self.value, 16) + int(other.value, 16)))
+
+    def __mul__(self, other):
+        return HexNumber(hex(int(self.value, 16) * int(other.value, 16)))
+
+
+a = 'A2'
+b = 'C4F'
+
+a = HexNumber(a)
+b = HexNumber(b)
+
+print(f'{a+b}\n'
+      f'{a*b}')
