@@ -23,3 +23,45 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+n = int(input('Введите колличество предприятий:'))
+nam_tup = namedtuple('Firms', 'name qr1 qr2 qr3 qr4')
+firms = []
+
+for i in range(n):
+    fir = nam_tup(input('Введите название фирмы:'),
+                  int(input('Введите прибыль за 1 квартал:')),
+                  int(input('Введите прибыль за 2 квартал:')),
+                  int(input('Введите прибыль за 3 квартал:')),
+                  int(input('Введите прибыль за 4 квартал:')))
+    firms.append(fir)
+
+
+def avg_profit(firms):
+    sum = 0
+    for i in range(len(firms)):
+        sum += firms[i].qr1 + firms[i].qr2 + firms[i].qr3 + firms[i].qr4
+    return sum / n
+
+
+def above_below_avg_profit(firms, avg_prof):
+    above = []
+    below = []
+    for i in range(len(firms)):
+        sum = firms[i].qr1 + firms[i].qr2 + firms[i].qr3 + firms[i].qr4
+        if sum > avg_prof:
+            above.append(firms[i].name)
+        else:
+            below.append(firms[i].name)
+
+    return above, below
+
+
+print(firms[0].qr1 + firms[0].qr2 + firms[0].qr3 + firms[0].qr4)
+avarage_profit = avg_profit(firms)
+above_average, below_average = above_below_avg_profit(firms, avarage_profit)
+print(f'Средняя годовая прибыль: {avarage_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {above_average}')
+print(f'Предприятия, с прибылью ниже среднего значения: {below_average}')
