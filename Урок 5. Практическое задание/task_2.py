@@ -34,3 +34,46 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+# решение через ООП
+
+class HexNumber:
+    def __init__(self, letters):
+        self.letters = letters.upper()
+
+    def __repr__(self):
+        return str(list(self.letters))
+
+    def __add__(self, other):
+        return HexNumber(str(hex(int(self.letters, 16) + int(other.letters, 16)))[2:])
+
+    def __mul__(self, other):
+        return HexNumber(str(hex(int(self.letters, 16) * int(other.letters, 16)))[2:])
+
+first = HexNumber('A2')
+second = HexNumber('C4F')
+
+print(first)
+print(second)
+print(first + second)
+print(first * second)
+
+# решение через collections
+# к сожалению, каким боком тут приплести collections, я так и не придумал.
+# Выполнил только сложение с использованием deque. Признаю, что получилось кривовато.
+
+from collections import deque
+
+def add_numbers(a, b):
+    min_number, max_number = map(deque, sorted([a, b], key=len))
+    while len(min_number) < len(max_number):
+        min_number.appendleft('0')
+
+    order = 0
+    result = 0
+    while min_number:
+        result += (int(min_number.pop(), 16) + int(max_number.pop(), 16)) * 16**order
+        print(result)
+        order += 1
+    print(list(str(hex(result)))[2:])
+
