@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -64,6 +65,8 @@ def recursive_reverse_mem(number):
 
 
 print('Оптимизированная функция recursive_reverse_mem')
+print(num_100)
+print(recursive_reverse_mem(num_100))
 print(
     timeit(
         'recursive_reverse_mem(num_100)',
@@ -79,3 +82,13 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+    В данном примере мемоизация не нужна, потому что функция timeit осуществляет один раз подсчет времени
+заполнения стека рекурсии выбранным числом. Как только стек рекурсии заполнен выбранным числом, происходит
+выполнение тела decorate(*args), т.е. условие "if args in cache:" находится в True и соответственно 
+возвращается значение cache[args], а сама функция recursive_reverse_mem не выполняется ...
+    Таким образом, функция timeit подсчитывает один раз время выполнения реверса числа, а остальные разы 
+(number) в связи с тем что полученное число находится в cache функция recursive_reverse_mem не вызывается декоратором.    
+"""
