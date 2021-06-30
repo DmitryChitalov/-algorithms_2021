@@ -11,3 +11,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def guess_the_number(number=0, trys=10):
+    """Игра "угадай число" """
+    if number == 0:
+        number = randint(1, 1000)
+        print(f"Угадайте число от 1 до 1000 с {trys} попыток!")
+    answer = int(input(f"Осталось попыток - {trys}. Введите Ваш ответ   "))
+    trys -= 1
+    if answer > number:
+        print("Число слишком велико")
+    if answer < number:
+        print("Число слишком мало")
+    if answer == number:
+        print("Вы угадали!!!")
+        return
+    if trys == 0:
+        print(f"Попытки закончились. Првильное число - {number}")
+    guess_the_number(number, trys)
+
+
+guess_the_number()

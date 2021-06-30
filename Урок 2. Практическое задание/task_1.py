@@ -28,3 +28,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class ModExeption(Exception):
+    pass
+
+
+def calculator():
+    mod = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if mod not in ["+", "-", "*", "/", "0"]:
+        raise ModExeption
+    if mod == "0":
+        return
+    try:
+        a = float(input("Введите первое число: "))
+        b = float(input("Введите второе число: "))
+        print("Ваш результат: ", end="")
+        if mod == "+":
+            print(a + b)
+        elif mod == "-":
+            print(a - b)
+        elif mod == "*":
+            print(a * b)
+        elif mod == "/":
+            print(a / b)
+    except ZeroDivisionError:
+        print("Вы поделили на ноль")
+    except ValueError:
+        print("Введите число!")
+    except ModExeption:
+        print("Вы ввели недопустимый оператор")
+    calculator()
+
+
+calculator()
