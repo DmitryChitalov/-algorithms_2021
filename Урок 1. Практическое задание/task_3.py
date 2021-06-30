@@ -20,3 +20,38 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+"""O(n log n)"""
+
+
+def search_max_2(lst):
+    lst.sort(reverse=True)             # O (nlog n)
+    print(lst[0], lst[1], lst[2])      # O (1)
+
+
+"""O(n) - этот алгоритм является эффективнее, т.к. сложность алгоритма - меньше,
+ чем у другого алгоритма"""
+
+
+def search_max(lst):
+    i = 0                                 # O (1)
+    while i < 3:                          # O (1)
+        idx = lst.index(max(lst))         # O (n)
+        print(lst[idx])                   # O (1)
+        lst.remove(lst[idx])              # O (n)
+        i += 1                            # O (1)
+
+
+lst_income = []
+company_1 = {'name': 'google', 'income': 90000000000}
+company_2 = {'name': 'rnb', 'income': 1000000}
+company_3 = {'name': 'netflix', 'income': 40000000}
+company_4 = {'name': 'wind', 'income': 500000}
+company_5 = {'name': 'Yandex', 'income': 8000000}
+lst_income.extend([company_1.get('income'), company_2.get('income'), company_3.get('income'), company_4.get('income'),
+                   company_5.get('income')])
+print(search_max(lst_income))
+print(search_max_2(lst_income))
+
+
