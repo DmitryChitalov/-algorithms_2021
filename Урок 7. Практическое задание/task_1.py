@@ -17,3 +17,53 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+"""
+Доработка алгоритма сортировки "пузырьком" заключалась в следующем: завершение работы алгоритма в случае,
+если за проход по списку не совершается ни одной сортировки. Такое могло произойти только в случае, если
+исходный массив уже был отсортирован, что маловероятно. 
+При измерении скорости работы данных функций, улучшений по времени не обнаружено, следовательно улучшать не надо.
+"""
+from random import randint
+from timeit import timeit
+print('До улучшения')
+arr = [randint(-100, 100) for el in range(10)]
+print(arr)
+def bubble_sort(arr):
+    n = 1
+    while n < len(arr):
+        for i in range(len(arr) - n):
+            if arr[i] < arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        n += 1
+    return arr
+print(bubble_sort(arr))
+
+print(
+    timeit(
+        "bubble_sort(arr[:])",
+        globals=globals(),
+        number=1000))
+
+print('После улучшения')
+arr_2 = [randint(-100, 100) for el in range(10)]
+print(arr_2)
+
+def bubble_sort_new(arr_2):
+    n = 1
+    while n < len(arr_2):
+        c = True
+        for i in range(len(arr_2) - n):
+            if arr_2[i] < arr_2[i + 1]:
+                arr_2[i], arr_2[i + 1] = arr_2[i + 1], arr_2[i]
+                c = False
+        if c:
+            break
+        n += 1
+    return arr_2
+print(bubble_sort_new(arr_2))
+
+print(
+    timeit(
+        "bubble_sort_new(arr_2[:])",
+        globals=globals(),
+        number=1000))
