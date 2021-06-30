@@ -36,3 +36,29 @@ for i in
 
 
 """
+import random
+
+
+def gnome(mask):
+    i = 1
+    while i < len(mask):
+        if mask[i - 1] <= mask[i]:
+            i += 1
+        else:
+            mask[i - 1], mask[i] = mask[i], mask[i - 1]
+            if i > 1:
+                i -= 1
+    return mask
+
+
+n = int(input())
+m = [random.randint(0, 100) for el in range(2 * n + 1)]
+gnome(m)
+print(m)
+
+
+def gnome_sort():
+    return gnome(m)[len(m) // 2]
+
+
+print(gnome_sort())
