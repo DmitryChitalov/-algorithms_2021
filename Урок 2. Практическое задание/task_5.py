@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_ascii(i, n, j=1):
+    if i <= n and j % 10 != 0:
+        print(i, '-', chr(i), end=' ')
+    elif i <= n and j % 10 == 0:
+        print(i, '-', chr(i), end='\n')
+    else:
+        return ''
+    return print_ascii(i+1, n, j+1)
+
+
+print_ascii(32, 127)

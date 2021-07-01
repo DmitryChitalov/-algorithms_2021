@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd(number, even=0, odd=0):
+    if number == 0:
+        return f'Четных цифр - {even}, нечетных - {odd}.'
+    elif number % 2 == 0:
+        return even_odd(number // 10, even + 1, odd)
+    else:
+        return even_odd(number // 10, even, odd + 1)
+
+
+print(even_odd(int(input('Введите число: '))))

@@ -28,3 +28,49 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class MyZeroDivisionError(Exception):
+    def __str__(self):
+        return "Попытка деления на ноль."
+
+
+class ActError(Exception):
+    def __str__(self):
+        return "Необходимо ввести предложенный знак или 0 для выхода."
+
+
+def my_calc():
+    try:
+        act = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if act not in '+-*/0' or len(act) != 1:
+            raise ActError
+    except ActError as error:
+        print(error, 'Ещё попытка.')
+        return my_calc()
+    if act == '0':
+        print('Выход')
+        return
+    try:
+        a = int(input('Введите первое число: '))
+        b = int(input('Введите второе число: '))
+        if b == 0:
+            raise MyZeroDivisionError
+    except MyZeroDivisionError as error:
+        print(error)
+        return my_calc()
+    except ValueError:
+        print('Необходимо ввести число. Попробуйте ещё раз.')
+        return my_calc()
+    if act == '+':
+        print(f'{a} {act} {b} = {a + b}')
+    elif act == '-':
+        print(f'{a} {act} {b} = {a - b}')
+    elif act == '*':
+        print(f'{a} {act} {b} = {a * b}')
+    else:
+        print(f'{a} {act} {b} = {a / b}')
+    return my_calc()
+
+
+my_calc()
