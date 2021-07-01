@@ -20,6 +20,38 @@
 
 Средняя годовая прибыль всех предприятий: 173557.5
 Предприятия, с прибылью выше среднего значения: Фирма_1
-
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import Counter
+
+company_db = Counter()
+company_count = int(input("Введите количество предприятий для расчета прибыли:\n"))
+for i in range(company_count):
+    company_name = input("Введите название предприятия:\n")
+    company_income = input("через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): \n")
+    company_db[company_name] = list(map(int, company_income.split()))
+
+
+average_annual = sum(sum(x) for x in company_db.values()) / company_count
+comp_up_top = 'Предприятия, с прибылью выше среднего значения:'
+comp_down_top = 'Предприятия, с прибылью ниже среднего значения:'
+comp_top = 'Предприятия, с прибылью равной среднему значению:'
+
+
+for i in company_db:
+    comp_up_top_tmp, comp_down_top_tmp, comp_top_tmp = '', '', ''
+    if sum(company_db[i]) > average_annual:
+        comp_up_top_tmp = ' ' + i
+    elif sum(company_db[i]) < average_annual:
+        comp_down_top_tmp = ' ' + i
+    else:
+        comp_top_tmp = ' ' + i
+    comp_up_top += comp_up_top_tmp
+    comp_down_top += comp_down_top_tmp
+    comp_top += comp_top_tmp
+
+
+print(f"Средняя годовая прибыль всех предприятий: {average_annual}")
+print(comp_up_top)
+print(comp_down_top)
+print(comp_top)

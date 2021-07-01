@@ -34,3 +34,39 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+from collections import defaultdict
+
+
+def str_to_hex(s='0'):
+    tmp = ''
+    for i in s:
+        tmp += i
+    return int(tmp, 16)
+
+
+print("Cложения и умножения двух шестнадцатиричных чисел.\n")
+user_num_i = input("Введите первое число.")
+user_num_ii = input("Введите второе число.")
+# 1
+num_dict = defaultdict(str)
+num_dict['i'] = [s.upper() for s in user_num_i]
+num_dict['ii'] = [s.upper() for s in user_num_ii]
+number_sum = [s.upper() for s in str(hex(str_to_hex(num_dict['i']) + str_to_hex(num_dict['ii'])))[2:]]
+number_mult = [s.upper() for s in str(hex(str_to_hex(num_dict['i']) * str_to_hex(num_dict['ii'])))[2:]]
+print(f"Сумма чисел из примера: {number_sum}, произведение - {number_mult}.")
+
+# 2
+class Hexnumber:
+    str_to_num = 1
+    def __init__(self):
+        pass
+
+    def __add__(self):
+        return 1 + 1
+
+    def __mul__(self):
+        return 1 * 1
+
+
