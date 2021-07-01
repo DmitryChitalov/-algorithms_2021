@@ -34,3 +34,52 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import deque
+
+
+# Вариант 1 с использованием collections
+def get_int_from_16(lst):
+    lst = deque(lst)
+    list_of_numbers = deque([str(i) for i in range(10)] + ['A', 'B', 'C', 'D', 'E', 'F'])
+    number = deque()
+    for i in range(len(lst)):
+        if lst[i] == '1' and len(lst) == 1:
+            number.append(1)
+        elif lst[i] == '1' and lst[i + 1] == '0':
+            number.append(16)
+        else:
+            number.append(list_of_numbers.index(lst[i]) * (16 ** i))
+    return sum(number)
+
+
+def calc_hex():
+    num_1 = get_int_from_16(deque(input('Введите первое число в шестнадцатиричном формате: \n').upper()))
+    num_2 = get_int_from_16(deque(input('Введите второе число в шестнадцатиричном формате: \n').upper()))
+    oper = input('Укажите оператор "*" или "+": \n')
+    operations = {'+': num_1 + num_2, '*': num_1 * num_2}
+    result = operations.get(oper)
+    print((hex(result).strip('0x'))[::-1])
+
+
+calc_hex()
+
+
+# Вариант 2 С использованием встроенных инструментов
+def calc_hex_2():
+    num_1 = int(input('Введите первое число в шестнадцатиричном формате: \n'), 16)
+    num_2 = int(input('Введите второе число в шестнадцатиричном формате: \n'), 16)
+    oper = input('Укажите оператор "*" или "+": \n')
+    operations = {'+': num_1 + num_2, '*': num_1 * num_2}
+    result = operations.get(oper)
+    print((hex(result).strip('0x'))[::-1])
+
+
+calc_hex_2()
+
+
+"""
+Результаты замера времени выполнения:
+Выремя выполнения функции calc_hex_2(): 0.004190600000000003
+Выремя выполнения функции calc_hex(): 0.0649981
+"""
