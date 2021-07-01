@@ -16,3 +16,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_n(n):    # Тернарный оператор использовать непривычно, так как после else не пишем return и начинаем с return
+    return n if n == 1 else n + sum_of_n(n-1)
+
+
+def simile_expression():
+    try:
+        n = int(input("Введите число, для которого будем выполнена проверка равенства: "))
+        if sum_of_n(n) == n * (n + 1) / 2:
+            print("Равенство верно")
+    except ValueError:
+        print("Вы должны ввести натрульное число")
+        return simile_expression()
+    except RecursionError:
+        print("Вы ввели слишком большое число и стек вызовов был переполнен, попробуйте ввести число поменьше")
+        return simile_expression()
+
+
+if __name__ == '__main__':
+    simile_expression()

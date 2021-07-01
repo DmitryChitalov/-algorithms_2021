@@ -22,3 +22,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def revers_num(n, reversed_num=str()):
+    rest_from_n = str(n % 10)
+    n = n // 10
+    if n == 0:
+        reversed_num += rest_from_n
+        return f"Перевернутое число: {reversed_num}"
+    else:
+        return revers_num(n=n, reversed_num=reversed_num + rest_from_n)
+
+
+def number_request():   # Добавил функцию для запроса ввода и простейшей проверки вводимого числа
+    try:
+        n = int(input("Введите число, которое требуется перевернуть: "))
+        return n
+    except ValueError:
+        print("Вы должны ввести натрульное число")
+        return number_request()
+
+
+if __name__ == '__main__':
+    print(revers_num(number_request()))
