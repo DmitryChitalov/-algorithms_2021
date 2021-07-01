@@ -11,3 +11,18 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from uuid import uuid4
+import hashlib
+web_cache = set()
+salt = uuid4().hex
+
+
+def url_cache(website):
+    web_cache.add(hashlib.sha256(salt.encode() + website.encode()).hexdigest())
+
+
+url_cache('ya.ru')
+url_cache('ip.net')
+url_cache('ex.com')
+url_cache('ya.ru')
+print(web_cache)
