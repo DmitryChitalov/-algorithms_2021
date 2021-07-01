@@ -36,3 +36,46 @@ for i in
 
 
 """
+import timeit
+import random
+from statistics import median
+
+lst = [random.randint(1, 100) for _ in range(2 * (int(input('Введите длину массива: '))) + 1)]
+lst2 = list(lst[:])
+
+
+def shell_sort(lst):
+    gap = len(lst) // 2
+
+    while gap > 0:
+        for value in range(gap, len(lst)):
+            current_value = lst[value]
+            position = value
+
+            while position >= gap and lst[position - gap] > current_value:
+                lst[position] = lst[position - gap]
+                position -= gap
+                lst[position] = current_value
+
+        gap //= 2
+    return lst
+
+
+lst = shell_sort(lst)
+
+
+def median_lst(list_obj):
+    n = len(list_obj) // 2
+    while n != 0:
+        list_obj.pop(list_obj.index(max(list_obj)))
+        n -= 1
+    return max(list_obj)
+
+
+print('Медиан равен ', median_lst(lst))
+print('Проверка функцией', median(lst2))
+print('Время Шелла ',
+      timeit.timeit(
+          "shell_sort(lst[:])",
+          globals=globals(),
+          number=1000))
