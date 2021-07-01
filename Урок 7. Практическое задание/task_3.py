@@ -52,11 +52,6 @@ def gnome_sort(sort_list):
             i -= 1
     return sort_list
 
-
-def gnome_median(sort_list):
-    return gnome_sort(sort_list)[len(sort_list) // 2]
-
-
 m = int(input('Введите m: '))
 orig_list = [randint(0, 100) for i in range(2 * m + 1)]
 print(f'Исходный массив:\n{orig_list}')
