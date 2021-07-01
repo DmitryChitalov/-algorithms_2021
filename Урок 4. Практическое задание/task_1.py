@@ -15,6 +15,7 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
+from timeit import timeit
 
 
 def func_1(nums):
@@ -23,3 +24,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [idx for num, idx in enumerate(nums) if num % 2 == 0]
+
+
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+print(timeit('func_1(a)', globals=globals()))
+print(timeit('func_2(a)', globals=globals()))
+
+
+""" я переписал код по list comprehension, потому что он более лакончичный и чутьчку быстрее """
