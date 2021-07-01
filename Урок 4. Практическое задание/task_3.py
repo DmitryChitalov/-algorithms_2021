@@ -12,7 +12,7 @@
 И можете предложить еще свой вариант решения!
 Без аналитики задание считается не принятым
 """
-from time import sleep
+
 from timeit import timeit
 from random import randint
 import cProfile
@@ -21,11 +21,10 @@ def revers_1(enter_num, revers_num=0):
     '''Функция переворота числа через рекурсию O(log n)'''
     if enter_num == 0:
         return revers_num
-    else:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-        return revers_1(enter_num, revers_num)
+    num = enter_num % 10
+    revers_num = (revers_num + num / 10) * 10
+    enter_num //= 10
+    return revers_1 (enter_num, revers_num)
 
 
 def revers_2(enter_num, revers_num=0):
