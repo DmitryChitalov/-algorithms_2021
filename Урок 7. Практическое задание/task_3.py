@@ -36,3 +36,17 @@ for i in
 
 
 """
+
+import random
+
+"""____________без сортировки массива_____________________"""
+
+
+def my_median(lst_obj):
+    [lst_obj.remove(max(lst_obj)) for _ in range(len(lst_obj)//2)]
+    return max(lst_obj)
+
+
+orig_list = [random.randint(0, 100) for _ in range(9)]
+print(sorted(orig_list))
+print(my_median(orig_list))
