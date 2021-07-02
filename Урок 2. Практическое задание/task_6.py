@@ -11,3 +11,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+dig = random.randint(0, 100)
+print('Я загадал число от 0 до 100, угадай за 10 попыток:')
+
+def puzzle(num, tries=10):
+    try:
+        user_num = int(input(f'Осталось попыток: {tries}, введите число: '))
+    except:
+        puzzle(num, tries)
+
+    if user_num == num:
+        return print('Поздравляю, получилось!')
+    else:
+        tries -= 1
+        if tries < 0:
+            return print(f'Попытки кончились, загаданное число: {num}')
+        if user_num > num:
+            print('Слишком много!')
+        if user_num < num:
+            print('Слишком мало!')
+        return puzzle(num, tries)
+
+
+puzzle(dig)

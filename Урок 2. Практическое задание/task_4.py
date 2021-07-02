@@ -15,3 +15,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def summ_row(n: int = 0):
+    if n == 0:
+        try:
+            n = int(input('Введите количество членов ряда: '))
+            summ_row(n)
+        except:
+            return summ_row()
+    if n == 1:
+        return 1
+    if n > 1:
+        return pow(-1, (n-1)) * pow(0.5, (n - 1)) + summ_row(n-1)
+
+
+print(summ_row(1))
+print(summ_row(2))
+print(summ_row(3))
+print(summ_row(4))
+print(summ_row(5))
+print(summ_row(0))
+print(summ_row())
