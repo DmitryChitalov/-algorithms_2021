@@ -40,12 +40,13 @@ from collections import deque
 
 # Вариант 1 с использованием collections
 def get_int_from_16(lst):
+    lst.reverse()
     lst = deque(lst)
     list_of_numbers = deque([str(i) for i in range(10)] + ['A', 'B', 'C', 'D', 'E', 'F'])
     number = deque()
     for i in range(len(lst)):
         if lst[i] == '1' and len(lst) == 1:
-            number.append(1)
+            number.append(list_of_numbers.index(lst[i]) * (16 ** i))
         elif lst[i] == '1' and lst[i + 1] == '0':
             number.append(16)
         else:
@@ -59,7 +60,7 @@ def calc_hex():
     oper = input('Укажите оператор "*" или "+": \n')
     operations = {'+': num_1 + num_2, '*': num_1 * num_2}
     result = operations.get(oper)
-    print((hex(result).strip('0x'))[::-1])
+    print(hex(result).strip('0x'))
 
 
 calc_hex()
@@ -72,7 +73,7 @@ def calc_hex_2():
     oper = input('Укажите оператор "*" или "+": \n')
     operations = {'+': num_1 + num_2, '*': num_1 * num_2}
     result = operations.get(oper)
-    print((hex(result).strip('0x'))[::-1])
+    print(hex(result).strip('0x'))
 
 
 calc_hex_2()
