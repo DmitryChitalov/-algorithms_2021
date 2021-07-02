@@ -24,6 +24,7 @@ def even_odd(num):
     odds = 0
     if num == 0:
         return evens, odds
+    else:
 
 
 print(even_odd(0))
