@@ -18,22 +18,11 @@
 """
 
 
-def sum_of_n(n):    # Тернарный оператор использовать непривычно, так как после else не пишем return и начинаем с return
-    return n if n == 1 else n + sum_of_n(n-1)
-
-
-def simile_expression():
-    try:
-        n = int(input("Введите число, для которого будем выполнена проверка равенства: "))
-        if sum_of_n(n) == n * (n + 1) / 2:
-            print("Равенство верно")
-    except ValueError:
-        print("Вы должны ввести натрульное число")
-        return simile_expression()
-    except RecursionError:
-        print("Вы ввели слишком большое число и стек вызовов был переполнен, попробуйте ввести число поменьше")
-        return simile_expression()
+def sum_of_n(number):
+    return number if number == 1 else number + sum_of_n(number-1)
 
 
 if __name__ == '__main__':
-    simile_expression()
+    n = int(input("Введите число, для которого будем выполнена проверка равенства: 1+2+...+n = n(n+1)/2\n"))
+    if sum_of_n(n) == n * (n + 1) / 2:
+        print("Равенство верно")
