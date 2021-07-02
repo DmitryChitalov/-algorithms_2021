@@ -28,3 +28,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc(a=None, d1=None, d2=None):
+    if not a:
+        a = input(f"Введите операцию (+, -, *, / или 0 для выхода): ")
+        if a == 0:
+            return f"Выход из калькулятора...\n"
+        if a not in ['+','-','*','/']:
+            print(f"Вы ввели некорректный знак, попробуйте заново!\n")
+            return calc()
+    if not d1:
+        d1 = input("Введите первое число: ")
+        if not d1.isdigit():
+            return calc(a=a)
+    if not d2:
+        d2 = input("Введите второе число: ")
+        if not d2.isdigit():
+            return calc(a=a, d1=d1)
+    if a == '/':
+        if float(d2) == 0:
+            print(f"Деление на ноль!\n")
+            return calc(a=a, d1=d1)
+        print(f"Результат: {float(d1)/float(d2)}")
+        return calc()
+    if a == '+':
+        print(f"Результат: {float(d1)+float(d2)}")
+        return calc()
+    if a == '-':
+        print(f"Результат: {float(d1)-float(d2)}")
+        return calc()
+    if a == '*':
+        print(f"Результат: {float(d1)*float(d2)}")
+        return calc()
+
+
+if __name__ == "__main__":
+    calc()
