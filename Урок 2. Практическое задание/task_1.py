@@ -42,8 +42,7 @@ def calc(operation='', first='', second=''):
 
     if oper not in ('+', '-', '*', '/'):
         print('Неверная операция!')
-        calc()
-        return
+        return calc()
 
     try:
         if first == '':
@@ -53,8 +52,8 @@ def calc(operation='', first='', second=''):
             print('первое число = ', first_dig)
     except:
         print('Неверно, введите число')
-        calc(oper)
-        return
+        return calc(oper)
+
     try:
         if second == '':
             second_dig = int(input('Введите второе число: '))
@@ -63,17 +62,15 @@ def calc(operation='', first='', second=''):
             print('второе число = ', second_dig)
     except:
         print('Неверно, введите число')
-        calc(oper, first_dig)
-        return
+        return calc(oper, first_dig)
 
     if oper == '/' and second_dig == 0:
         print('На ноль делить нельзя!')
-        calc(oper, first_dig)
-        return
+        return calc(oper, first_dig)
 
     print('Результат: ', eval(str(first_dig) + oper + str(second_dig)))
-    calc()
-    return
+    return calc()
+
 
 
 calc()
