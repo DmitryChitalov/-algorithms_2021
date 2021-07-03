@@ -16,3 +16,13 @@
 р
 а
 """
+
+
+def hashing_substrings(input_string):
+    length = len(input_string)
+    my_set = {hash(input_string[i:j + 1]) for i in range(length) for j in range(i, length)}
+    my_set.discard(hash(input_string))  # удаление хэша самой строки, тк в вашем примере ее нет.
+    print(f"В данной строке {len(my_set)} уникальных подстрок")
+
+
+hashing_substrings('papa')

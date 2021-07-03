@@ -11,3 +11,20 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from uuid import uuid4
+
+my_cache = dict()
+
+
+def cache_n_hash(some_url, some_cache):
+    if some_url in some_cache:
+        return some_cache[some_url]
+    else:
+        salt = uuid4().hex
+        some_cache[some_url] = [(hashlib.sha256((some_url + salt).encode())).hexdigest(), salt]
+
+
+cache_n_hash('https://gb.ru/courses', my_cache)
+cache_n_hash('https://gb.ru/courses', my_cache)
+cache_n_hash('https://gb.ru/lessons/150238', my_cache)
