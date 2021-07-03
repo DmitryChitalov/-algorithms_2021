@@ -23,3 +23,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+from statistics import mean
+
+Companies = namedtuple('Companies', 'name income')
+income_average = {}
+companies_less_average_income = []
+companies_above_average_income = []
+
+companies_count = int(input('Введите количество предприятий для расчета прибыли: '))
+
+for i in range(companies_count):
+    company_name = input('Введите название предприятия: ')
+
+    company_income = list(map(int, input(
+        'Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split()))
+    company = Companies(company_name, company_income)
+    income_average[company.name] = round(mean(company.income))
+
+income_average_total = sum(income_average.values()) / companies_count
+
+for key, value in income_average.items():
+    if value < income_average_total:
+        companies_less_average_income.append(key)
+    elif value > income_average_total:
+        companies_above_average_income.append(key)
+
+print()
+print(f'Средняя годовая прибыль всех предприятий: {income_average_total}')
+print(f'Предприятия, с прибылью выше среднего значения: {companies_above_average_income}')
+print(f'Предприятия, с прибылью ниже среднего значения: {companies_less_average_income}')
