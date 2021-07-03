@@ -28,3 +28,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def calc():
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода)")
+
+    if operation == 0:
+        print('Вы вышли из программы')
+
+    else:
+        if operation in "+-/*":
+            try:
+                a = int(input("Первое число"))
+                b = int(input("Второе число"))
+                if operation == '+':
+                    n = a + b
+                    print(n)
+
+                elif operation == '-':
+                    n = a - b
+                    print(n)
+                elif operation == '/':
+                    try:
+                        n = a / b
+                    except ZeroDivisionError:
+                        print("Don't break the law")
+                    else:
+                        print(n)
+                elif operation == '*':
+                    n = a * b
+                    print(n)
+            except ValueError:
+                print("stop")
