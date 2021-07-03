@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def random_num(try_count, numb):
+    print(f"Ваша {try_count} попытка")
+    user_answer = int(input("Введите число от 0 до 100:"))
+    if try_count >= 10 and user_answer == numb:
+        print("Вы угадали")
+    else:
+        if user_answer > numb:
+            print("Вы не угадали, число слишком большое")
+            random_num(try_count + 1, numb)
+        else:
+            if user_answer < numb:
+                print("Вы не угадали, число слишком маленькое")
+                random_num(try_count + 1, numb)
+
+
+random_num(1, random.randint(0, 100))
