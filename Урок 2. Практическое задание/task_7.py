@@ -16,3 +16,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum(n):
+    return n if n <= 1 else n + get_sum(n - 1)
+
+
+def get_sum_by_formula(n):
+    return int(n * (n + 1) / 2)
+
+
+user_number = int(input('Введите целое число: '))
+print(f'Сумма чисел для множества 1+2+...+n равна: {get_sum(user_number)}')
+print(f'Сумма чисел для того же множества по формуле n(n+1)/2 равна: {get_sum_by_formula(user_number)}')
