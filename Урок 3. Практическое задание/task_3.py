@@ -16,3 +16,15 @@
 р
 а
 """
+
+unique_value = set()
+input_word = input("Введите слова для анализа ")
+while input_word.isdigit():
+    input_word = input("Это не слово. Введите слова для анализа ")
+
+for s in range(len(input_word)):
+    for n in range(s + 1, len(input_word) + 1):
+        if input_word[s:n] != input_word:
+            unique_value.add(hash(input_word[s:n]))
+
+print(f'В слове "{input_word}" - {len(unique_value)} уникальных подстрок.')
