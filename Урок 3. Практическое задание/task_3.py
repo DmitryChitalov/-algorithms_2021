@@ -16,3 +16,14 @@
 р
 а
 """
+
+
+def find_unique_substring(string):
+    res = set()
+    for i in range(1, len(string)):
+        res.add(hash(string[i:]))
+        res.add(hash(string[::-1][i:]))
+    return len(res)
+
+
+print(f'Количество уникальных подстрок: {find_unique_substring("sfdhgsfdhhssfh")}')
