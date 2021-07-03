@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+number = random.randint(0, 100)
+print(number)
+count = 10
+
+
+def guess_num(num):
+    global count
+    congratulation = f'Поздравляем, вы угадали. Это было число {number}'
+    regret = f'К сожалению, вы не угадали. Это было число {number}'
+    var_ = int(input(f'угадайте загаданное число от 0 до 100. У вас {count} попыток'))
+    count -= 1
+    if var_ == num:
+        return congratulation
+    elif count == 0:
+        return regret
+    else:
+        return guess_num(num)
+
+
+print(guess_num(number))

@@ -28,3 +28,64 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class NotRightOperException(Exception):
+
+    def __str__(self):
+        return f'Введите только указанные операторы'
+
+
+class NoStrException(Exception):
+
+    def __str__(self):
+        return f'Вводите только числа'
+
+
+def calculator():
+    try:
+        operator = input('Введите операцию +, -, * или /')
+        if (operator != '+') and (operator != '-') and (operator != '*') and (operator != '/'):
+            raise NotRightOperException
+    except NotRightOperException as e:
+        print(e)
+        operator = input('Введите операцию +, -, * или /')
+
+    try:
+        first_operand = input('Введите первое число')
+        if not first_operand.isdigit():
+            raise NoStrException
+    except NoStrException as e:
+        print(e)
+        first_operand = input('Введите первое число')
+    else:
+        first_operand = int(first_operand)
+
+    try:
+        second_operand = input('Введите второе число')
+        if not second_operand.isdigit():
+            raise NoStrException
+    except NoStrException as e:
+        print(e)
+        second_operand = input('Введите второе число')
+    except ZeroDivisionError as e:
+        print(f'{e}. 0 вводить нельзя!')
+        second_operand = input('Введите второе число')
+    else:
+        second_operand = int(second_operand)
+
+    if operator == '+':
+        print(first_operand + second_operand)
+    elif operator == '-':
+        print(first_operand - second_operand)
+    elif operator == '/':
+        print(first_operand / second_operand)
+    elif operator == '*':
+        print(first_operand * second_operand)
+    return calculator()
+
+    calculator()
+
+
+calculator()
+
