@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def cnt_chet(val, cnt_ch, cnt_nch):
+    if val == 0:
+        print(f"Количество четных и нечетных цифр в числе равно: {cnt_ch}, {cnt_nch}")
+    else:
+        ost = val % 10
+        if ost % 2 == 0:
+            cnt_ch += 1
+        else:
+            cnt_nch += 1
+        cnt_chet((val // 10), cnt_ch, cnt_nch)
+
+
+a = int(input('Введите число: '))
+print(cnt_chet(a, 0, 0))
