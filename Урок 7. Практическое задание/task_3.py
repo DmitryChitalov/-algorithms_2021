@@ -40,3 +40,32 @@ for i in
 
 
 """
+from random import randint
+
+
+def gnome(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+m = int(input('Введите число\n'))
+spam = [randint(-100, 100) for _ in range(2 * m + 1)]
+print(spam)
+# 1
+print(gnome(spam[:]))
+print(f'#1 Медиана массива {gnome(spam[:])[len(spam) // 2]}')
+print(f'Индекс медианы в отсортированном массиве = {m}')
+
+# 2
+for _ in range(m):
+    spam.remove(max(spam))
+    spam.remove(min(spam))
+
+print(f'#2 Медиана массива {spam}')
