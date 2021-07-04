@@ -16,3 +16,9 @@
 р
 а
 """
+def get_hash_set(in_str):
+    """Returns substring hash set"""
+    return set(hash(in_str[i:j]) for i in range(len(in_str)) for j in range(len(in_str)))
+
+print(f"Во введенной строке {len(get_hash_set(input('Введите строку для работы:')))} уникальных подстрок.")
+"""Учитывая свойства множества в Питоне операция ввычисления хэша абсолютно лишняя."""

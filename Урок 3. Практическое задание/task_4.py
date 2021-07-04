@@ -11,3 +11,31 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+def cache(func):
+    """Cache decorator"""
+    salt = "AA"
+    cache_dict = {}
+    def wrap(*args):
+        """Wrapper function"""
+        nonlocal cache_dict
+        nonlocal salt
+        url = str(*args)
+        key = hash(salt + url)
+        if key not in cache_dict:
+            cache_dict[key] = func(url)
+            print(f'Страница {url} добавлена в кэш')
+        return cache_dict[key]
+    return wrap
+
+@cache
+def get_url(url):
+    """Placeholder for future realization"""
+    return url
+
+print(get_url('ya.ru'))
+print(get_url('vk.ru'))
+print(get_url('ok.ru'))
+print(get_url('ya.ru'))
+print(get_url('vk.ru'))
+print(get_url('ok.ru'))
