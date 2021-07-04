@@ -11,11 +11,10 @@
 то будет показываться профилировка при каждом новом вызове функции внутри рекурсии.
 Решить это можно, если рекурсию оберунть еще одной функцией
 """
-from collections import namedtuple
-from recordclass import recordclass
+
+
 from timeit import default_timer
 import memory_profiler
-from random import randint
 
 
 def decor(func):
