@@ -34,3 +34,29 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+class HexNumber:
+    def __init__(self, number):
+        self.number = list(number)
+
+    @staticmethod
+    def get_number(value):
+        return int('0x' + ''.join(value), 16)
+
+    def __add__(self, other):
+        result = self.get_number(self.number) + self.get_number(other.number)
+        return hex(result)[2:].upper()
+
+    def __mul__(self, other):
+        result = self.get_number(self.number) * self.get_number(other.number)
+        return hex(result)[2:].upper()
+
+    def __str__(self):
+        return ''.join(self.number)
+
+
+numb_one = HexNumber(input('Введите первое шестнадцатиричное число: '))
+numb_two = HexNumber(input('Введите второе шестнадцатиричное число: '))
+print(f'Сумма введеных вами шестнадцатиричных числе равна: {numb_one + numb_two}, '
+      f'Произведение введеных вами шестнадцатиричных числе равно: {numb_one * numb_two}')
