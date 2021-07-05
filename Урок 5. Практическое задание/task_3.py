@@ -11,3 +11,23 @@ deque – это обобщение стеков и очередей.
 
 Не забудьте, что сравнивать, например, можно операцию appendleft дека и insert списка и т.д.
 """
+from collections import deque
+from timeit import timeit
+
+create_deque = deque([x for x in range(100)])
+create_list = [x for x in range(100)]
+
+print(f'Пункт 1')
+print(f'Создание очереди: ', timeit(f'create_list', globals=globals(), number=10000000))
+print(f'Создание простого списка: ', timeit(f'create_deque', globals=globals(), number=10000000))
+
+print(f'Пункт 2')
+print(f'Использование insert в списке: ', timeit(f'create_list.insert(0,1)', globals=globals(), number=100000))
+print(f'Использование append в очереди: ', timeit(f'create_deque.append(1)', globals=globals(), number=100000))
+print(f'Использование appendleft в очереди: ', timeit(f'create_deque.appendleft(1)', globals=globals(), number=100000))
+print(f'Использование pop в списке: ', timeit(f'create_list.pop()', globals=globals(), number=100000))
+print(f'Использование pop в очереди: ', timeit(f'create_deque.pop()', globals=globals(), number=100000))
+print(f'Использование popleft в очереди: ', timeit(f'create_deque.popleft()', globals=globals(), number=100000))
+
+# Проведенные замеры показывают что создание списка происходит быстрее, чем очереди. А insert списка происходит дольше,
+# чем appendleft очереди, тоже самое наблюдается при использовании операции pop

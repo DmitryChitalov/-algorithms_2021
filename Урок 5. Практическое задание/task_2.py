@@ -34,3 +34,33 @@ hx = HexNumber
 hx + hx
 hex()
 """
+# 1. вариант
+from collections import defaultdict
+from functools import reduce
+
+nums = defaultdict(list)
+nums[1] = "A2"
+nums[2] = "C4F"
+
+sum_nums = reduce(lambda x, y: int("".join(x), 16) + int("".join(y), 16), nums.values())
+mul_nums = reduce(lambda x, y: int("".join(x), 16) * int("".join(y), 16), nums.values())
+
+print("Сумма чисел - ", list('%X' % sum_nums))
+print("Произведение - ", list('%X' % mul_nums))
+
+# 2. вариант
+class HexNumber:
+    def __init__(self, num):
+        self.num = num
+
+    def __add__(self, other):
+        return HexNumber(format((self.num + other.num), 'X'))
+
+    def __mul__(self, other):
+        return HexNumber(format((self.num * other.num), 'X'))
+
+    def __str__(self):
+        return f'{list(self.num)}'
+
+print(f'Сумма чисел - {HexNumber(int("A2", 16))+HexNumber(int("C4F", 16))}')
+print(f'Произведение - {HexNumber(int("A2", 16))*HexNumber(int("C4F", 16))}')
