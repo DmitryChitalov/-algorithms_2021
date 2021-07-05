@@ -11,3 +11,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+cache_url = {}
+
+
+def cache_page(url):
+    if cache_url.get(url):
+        print(f'Адрес: {url} есть в кэше')
+    else:
+        cache_url[url] = hashlib.sha256(salt.encode() +
+                                        url.encode()).hexdigest()
+        print(cache_url)
+
+
+cache_page('https://yandex.ru')
+cache_page('https://yandex.ru')
+cache_page('https://yahoo.ru')
