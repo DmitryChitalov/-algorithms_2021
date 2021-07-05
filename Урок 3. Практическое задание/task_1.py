@@ -19,3 +19,42 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+import timeit
+
+
+def measure_exec_time(func):
+    def wrapper(n):
+        start = timeit.default_timer()
+        func(n)
+        end = timeit.default_timer()
+        print(end-start)
+    return wrapper
+
+
+@measure_exec_time
+def fill_list(n):  # O(N)
+    my_list = []
+    i = 1
+    while i <= n:
+        my_list.append(i)
+        i += 1
+    return my_list
+
+@measure_exec_time
+def fill_dict(n):  #O(N)
+    my_dict = {}
+    i = 1
+    while i <= n:
+        my_dict.update({str(i): i})
+        i += 1
+    return my_dict
+
+fill_list(1000)
+fill_dict(1000)
+fill_list(10000)
+fill_dict(10000)
+fill_list(100000)
+fill_dict(100000)
+'''
+    Как и ожидалось, заполнение словаря в 4,5 раза медленнее. При изменении 
+'''
