@@ -23,6 +23,7 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
 from collections import namedtuple
 
 one_company_profit_lst = list()

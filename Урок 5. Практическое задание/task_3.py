@@ -11,6 +11,7 @@ deque – это обобщение стеков и очередей.
 
 Не забудьте, что сравнивать, например, можно операцию appendleft дека и insert списка и т.д.
 """
+
 from collections import deque
 from timeit import timeit
 

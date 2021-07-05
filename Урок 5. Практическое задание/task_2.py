@@ -34,6 +34,7 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
 # 1. вариант
 from collections import defaultdict
 from functools import reduce
