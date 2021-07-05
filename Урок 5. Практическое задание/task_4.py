@@ -15,7 +15,6 @@ ord_dict = OrderedDict([(i, i) for i in range(10)])
 def get_usual_dict(key):
     return usual_dict.get(key)
 
-
 def get_ord_dict(key):
     return ord_dict.get(key)
 

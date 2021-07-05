@@ -62,5 +62,6 @@ class HexNumber:
     def __str__(self):
         return f'{list(self.num)}'
 
+
 print(f'Сумма чисел - {HexNumber(int("A2", 16))+HexNumber(int("C4F", 16))}')
 print(f'Произведение - {HexNumber(int("A2", 16))*HexNumber(int("C4F", 16))}')
