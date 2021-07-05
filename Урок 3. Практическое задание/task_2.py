@@ -20,3 +20,31 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+
+
+def hashing(log, pas):
+    salt_hash = hashlib.sha256(log.encode() + pas.encode()).hexdigest()
+    print(salt_hash)
+    with open('hashes.csv', 'a', encoding='utf-8') as f:
+        f.write(salt_hash)
+
+
+def checking(log, pas):
+    salt_hash = hashlib.sha256(log.encode() + pas.encode()).hexdigest()
+    print(salt_hash)
+    with open('hashes.csv', 'r', encoding='utf-8') as f:
+        hashes = f.read()
+    if salt_hash in hashes:
+        print('Вы ввели правильный пароль.')
+    else:
+        print('Ошибка. Вы ввели неверный пароль.')
+
+
+login1 = input('Введите логин для регистрации: ')
+password1 = input('Введите пароль: ')
+hashing(login1, password1)
+
+login2 = input('Введите логин для входа: ')
+password2 = input('Введите пароль для проверки: ')
+checking(login2, password2)
