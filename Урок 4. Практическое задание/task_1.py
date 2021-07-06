@@ -28,15 +28,16 @@ def func_1(nums):
 
 
 def func_2(nums):
-    yield (i for i in nums if i % 2 == 0)
-
-def func_3(nums):
     return [i for i in nums if i % 2 == 0]
 
 
-arr_basic = [i for i in range(100000)]
+arr_basic = [i for i in range(1000)]
 
 print(timeit('func_1(arr_basic)', globals=globals(), number=1000))
 print(timeit('func_2(arr_basic)', globals=globals(), number=1000))
-print(timeit('func_3(arr_basic)', globals=globals(), number=1000))
 
+"""
+Функция №2 оптимизарованна. Она выполняется быстрее т.к. это не цикл а 
+list comprehension (не генератор). генератор не возвращаеет список, а 
+хратит инструкция для вычисления в памяти.
+"""
