@@ -19,3 +19,11 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+def srch(nums):
+    for i in nums:
+        min_srch = True
+        for u in nums:
+            if i > u:
+                min_srch = False
+            if min_srch:
+                return i
