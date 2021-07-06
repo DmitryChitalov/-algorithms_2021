@@ -46,7 +46,8 @@ import timeit
 def del_max(lst_obj):
     for _ in range(m):
         lst_obj.remove(max(lst_obj))
-    return f'Для массива {a} значение медианы равно {max(lst_obj)}, индекс медианы равен {m}'
+    med = max(lst_obj)
+    return f'Для массива {a} значение медианы равно {med}, индекс медианы равен {a.index(med)}'
 
 
 def gnom_sort(lst_obj):
