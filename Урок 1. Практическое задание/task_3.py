@@ -20,3 +20,34 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company = {
+    'DHL': 1500000,
+    'DPD': 2000000,
+    'SBR': 2500000,
+    'OTP': 3000000,
+    'OMZ': 3500000,
+    'BP': 4000000,
+    'SHELL': 4500000
+}
+
+#сложность O(n^2)
+def srch1(comp):
+    for i in range(len(comp)):
+        down = i
+        for u in range(i + 1, len(comp)):
+            if comp[u][1] > comp[down][1]:
+                down = u
+        comp[i], comp[down] = comp[down], comp[i]
+    return comp[0:4]
+
+
+print(company)
+lst = list(company.items())
+print(lst)
+for i in srch1(lst):
+    print(f'компания {i[0]} получает {i[1]}$ прибыли в год')
+
+#честно говоря делал по аналогии вторго задания
+
+
