@@ -18,3 +18,34 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+from hashlib import sha256
+
+
+def make_hash(login, password):
+    return sha256(login.encode() + password.encode()).hexdigest()
+
+
+def reg():
+    print("Регистрация")
+    login = input('Введите логин:')
+    password = input('Введите пароль:')
+    with open('hash_file.txt', 'w+') as file:
+        file.write(make_hash(login, password))
+
+
+def log_in():
+    print('Авторизация')
+    login = input('Введите логин:')
+    password = input('Введите пароль:')
+    test_hash = make_hash(login, password)
+    file = open('hash_file.txt', 'r')
+    real_hash = file.read()
+    if test_hash == real_hash:
+        print('Вы вошли')
+    else:
+        print('Проверьте логин и пароль')
+    file.close()
+
+
+reg()
+log_in()
