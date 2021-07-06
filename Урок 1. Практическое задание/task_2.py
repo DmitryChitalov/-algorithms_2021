@@ -20,10 +20,16 @@
 Подход должен быть максимально алгоритмическим.
 """
 def srch(nums):
-    for i in nums:
-        min_srch = True
+    for i in range(len(nums)):
+        min_srch = False
         for u in nums:
-            if i > u:
-                min_srch = False
+            if i+1 > u:
+                min_srch = True
             if min_srch:
                 return i
+
+n = [5,646,84,3,2,88,56,4,6,15,33,21,5,34]
+
+print(srch(n))
+
+
