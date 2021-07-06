@@ -11,3 +11,19 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from hashlib import sha256
+import uuid
+
+salt = uuid.uuid4().hex
+url_hash = {}
+
+def get_hash_url(url):
+    if url_hash.get(url):
+        print(f'Адрес {url} уже есть в кэше')
+    else:
+        hash_obj = sha256(salt.encode() + url.encode()).hexdigest()
+        url_hash[url] = hash_obj
+        print(url_hash)
+
+get_hash_url('https://github.com')
+get_hash_url('https://github.com')
