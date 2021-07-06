@@ -103,34 +103,3 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(17)
 print(r.get_right_child().get_root_val())
-
-# # добавить левого потомка
-# def insert_left(self, new_node):
-#     # если у узла нет левого потомка
-#     if self.left_child == None:
-#         # тогда узел просто вставляется в дерево
-#         # формируется новое поддерево
-#         self.left_child = BinaryTree(new_node)
-#     # если у узла есть левый потомок
-#     else:
-#         # тогда вставляем новый узел
-#         tree_obj = BinaryTree(new_node)
-#         # и спускаем имеющегося потомка на один уровень ниже
-#         tree_obj.left_child = self.left_child
-#         self.left_child = tree_obj
-#
-#
-# # добавить правого потомка
-# def insert_right(self, new_node):
-#     # если у узла нет правого потомка
-#     if self.right_child == None:
-#         # тогда узел просто вставляется в дерево
-#         # формируется новое поддерево
-#         self.right_child = BinaryTree(new_node)
-#     # если у узла есть правый потомок
-#     else:
-#         # тогда вставляем новый узел
-#         tree_obj = BinaryTree(new_node)
-#         # и спускаем имеющегося потомка на один уровень ниже
-#         tree_obj.right_child = self.right_child
-#         self.right_child = tree_obj
