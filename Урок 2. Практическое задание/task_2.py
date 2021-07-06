@@ -19,5 +19,28 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def split_int():
-    return 1
+
+def even_odd(numbers, even, odd):
+    this_number = numbers % 10
+
+    if this_number == 0 or this_number % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+
+    if len(str(numbers)) > 1:
+        next_numbers = numbers // 10
+        return even_odd(next_numbers, even, odd)
+
+    return even, odd
+
+
+while True:
+    try:
+        value = int(input('Введите число:\n'))
+        break
+    except ValueError:
+        print('Вы ввели строку, а не число')
+
+print(f'Количество четных и нечетных цифр в числе равно: {even_odd(value, 0, 0)}')
+
