@@ -50,4 +50,40 @@ for i in srch1(lst):
 
 #честно говоря делал по аналогии вторго задания
 
+#Сложность O(n log n)
+def srch2(sum, low, high):
+    central = sum[(low + high) // 2]
+    i = low - 1
+    j = high + 1
+    while True:
+        i += 1
+        while sum[i] < central:
+            i += 1
+        j -= 1
+        while sum[j] > central:
+            j -= 1
+        if i >= j:
+            return j
+        sum[i], sum[j] = sum[j], sum[i]
 
+#сложность рекурсии O(n)
+def sort(sum):
+    def re_sort(items, low, high):
+        if low < high:
+            split_index = srch2(items, low, high)
+            re_sort(items, low, split_index)
+            re_sort(items, split_index + 1, high)
+
+    re_sort(sum, 0, len(sum) - 1)
+
+
+end_list = []
+
+for o in company.values():
+    end_list.append(o)
+
+sort(end_list)
+for o in end_list[-3:]:
+    print(f'компания {list(company.keys())[list(company.values()).index(o)]} заработала за год {o}$')
+
+    
