@@ -17,3 +17,66 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+import random
+import timeit
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n > len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_1(lst_obj):
+    n = 1
+    stop = 1
+    while n > len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                stop = 1
+            else:
+                stop += 1
+        if stop == len(lst_obj):
+            return lst_obj
+        n += 1
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+print(timeit.timeit("bubble_sort(orig_list[:])", globals=globals(), number=100))
+
+print(timeit.timeit("bubble_sort_1(orig_list[:])", globals=globals(), number=100))
+
+print("Исходный массив!")
+print(orig_list)
+print("Отсортированный массив!")
+print(bubble_sort(orig_list[:]))
+
+"""
+bubble_sort - функция с обратной сортировкой.
+bubble_sort_1 - оптимизированная функция.
+Время работы функции на 10 эллементах:
+функция bubble_sort составила - 0.003090200000000043 сек.
+функция bubble_sort_1 составила - 0.0031610999999999723 сек.
+Время работы функции на 100 эллементах:
+функция bubble_sort составила - 0.32610110000000003 сек.
+функция bubble_sort_1 составила - 0.2916884999999999 сек.
+Время работы функции на 1000 эллементах:
+функция bubble_sort составила - 27.4961508 сек.
+функция bubble_sort_1 составила - 30.5579778 сек.
+Добавил вариант оптимизации, как указано в задании. Но с флагом стало на 10% медление, чем было без флага.
+Если брать сортировку по возсрастанию то цифры такие:
+Время работы функции на 1000 эллементах:
+функция bubble_sort составила - 0.0007223000000000646 сек.
+функция bubble_sort_1 составила - 0.0007762000000000047 сек.
+Время выполнения гораздо быстрее, но разница в 10% так же сохранилась...
+Поэтому я считаю, что такая доработка не нужна, т.к. увеличелось количество операций и с этим 
+увелилось время работы самой функции...
+"""
