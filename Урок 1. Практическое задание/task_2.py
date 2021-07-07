@@ -19,3 +19,37 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def get_min_1(lst_obj):
+    """ Поиск минимального значения для списка. Квадратичная сложность.
+        Сложность: O(1) + O(N) * O(1) * O(1) * O(N) * O(1) * O(1) * O(1) + O(1) = O(n^2)
+    """
+    min_value = temp_value = lst_obj[0]     # O(1)
+    for i in lst_obj:                       # O(N)
+        if min_value > temp_value:          # O(1)
+            min_value = temp_value          # O(1)
+        for j in lst_obj:                   # O(N)
+            if i > j:                       # O(1)
+                temp_value = j              # O(1)
+            else:
+                temp_value = i              # O(1)
+
+    return min_value                        # O(1)
+
+
+def get_min_2(lst_obj):
+    """ Поиск минимального значения для списка. Линейная сложность.
+    Сложность: O(1) + O(N) * O(1) * O(1) + O(1) = O(N)
+    """
+    min_value = lst_obj[0]  # O(1)
+    for x in lst_obj:       # O(N)
+        if min_value > x:   # O(1)
+            min_value = x   # O(1)
+    return min_value        # O(1)
+
+
+tst_list = [1, -30, 5, 7, 0, -5, -10]
+print(get_min_1(tst_list))
+print(get_min_2(tst_list))
+
