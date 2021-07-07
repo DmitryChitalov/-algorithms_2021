@@ -8,11 +8,24 @@
 рара - 6 уникальных подстрок
 рар
 ра
-ар
-ара
 р
+ара
+ар
 а
 """
+
+#Были попытки решить через while, но с обрезкой потерпел крах
+
+word = ('рара')
+set_word = set()
+print(type(word))
+
+for i in range(len(word)):
+    for j in range(i + 1, len(word) + 1):
+        if word[i:j] != word:
+            set_word.add(hash(word[i:j]))
+print(set_word)
+
 
 
 
