@@ -19,3 +19,35 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+from random import randint
+
+
+# Квадратичная сложность (n**2 + 2)
+def min_lst_val(lst):
+    for value in lst:  # O(n)
+        minimum = True  # O(1)
+        for j in lst:  # O(n)
+            if value > j:  # O(1)
+                minimum = False  # O(1)
+        if minimum:  # O(1)
+            return value  # O(1)
+
+
+# Линейная сложность (n + 3)
+def less_lst_val(lst):
+    minimum = lst[0]  # O(1)
+    for value in lst:  # O(n)
+        if value < minimum:  # O(1)
+            minimum = value  # O(1)
+    return minimum  # O(1)
+
+
+# Проверка работы программы
+my_lst = []
+for i in range(10):
+    my_lst.append(randint(0, 100))
+print(my_lst)
+
+print(min_lst_val(my_lst))
+print(less_lst_val(my_lst))
