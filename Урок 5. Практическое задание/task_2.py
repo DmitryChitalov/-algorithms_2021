@@ -36,6 +36,7 @@ hex()
 """
 
 from collections import deque
+from memory_profiler import profile
 
 
 # Вариант 1 с использованием collections
@@ -67,6 +68,7 @@ calc_hex()
 
 
 # Вариант 2 С использованием встроенных инструментов
+@profile
 def calc_hex_2():
     num_1 = int(input('Введите первое число в шестнадцатиричном формате: \n'), 16)
     num_2 = int(input('Введите второе число в шестнадцатиричном формате: \n'), 16)
