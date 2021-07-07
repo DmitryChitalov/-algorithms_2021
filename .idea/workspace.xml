@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ede0477d-c3e3-4975-b02c-e007c94234a0" name="Default Changelist" comment="" />
+    <list default="true" id="ede0477d-c3e3-4975-b02c-e007c94234a0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 2. Практическое задание/task_2.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,16 +18,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="cc19eb65-7af2-400a-b570-d04645b411f8" />
-        <option name="url" value="https://github.com/avolkov-git/-algorithms_2021.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
   <component name="ProjectId" id="1udVOH8JxW1veXYmhYIWc2Otgmw" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -77,7 +71,8 @@
       <workItem from="1625308417305" duration="35000" />
       <workItem from="1625308454557" duration="22000" />
       <workItem from="1625308499617" duration="42000" />
-      <workItem from="1625487511311" duration="51000" />
+      <workItem from="1625308543151" duration="182000" />
+      <workItem from="1625308728114" duration="1246000" />
     </task>
     <servers />
   </component>
@@ -97,10 +92,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/learnToAlg$task_2.coverage" NAME="task-2 Coverage Results" MODIFIED="1624877881906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pythonGeneralCourse/lesson-7" />
-    <SUITE FILE_PATH="coverage/learnToAlg$task_3.coverage" NAME="task-3 Coverage Results" MODIFIED="1624885244135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../pythonGeneralCourse/lesson-7" />
-    <SUITE FILE_PATH="coverage/learnToAlg$task_1.coverage" NAME="task_1 Coverage Results" MODIFIED="1624961674909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Урок 2. Практическое задание" />
     <SUITE FILE_PATH="coverage/learnToAlgorithms$task_1.coverage" NAME="task_1 Coverage Results" MODIFIED="1624995659084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Урок 2. Практическое задание" />
-    <SUITE FILE_PATH="coverage/learnToAlg$task_6.coverage" NAME="task_6 Coverage Results" MODIFIED="1624887963672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Урок 1. Практическое задание" />
   </component>
 </project>
