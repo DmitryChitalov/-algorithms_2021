@@ -18,9 +18,7 @@
 
 
 def element_sum(this_value, element_count):
-    if element_count == 0:
-        return 0
-    return this_value + element_sum(this_value / 2 * -1, element_count - 1)
+    return 0 if element_count == 0 else this_value + element_sum(this_value / 2 * -1, element_count - 1)
 
 
 while True:
