@@ -106,23 +106,86 @@ def heap_sort(nums):
         nums[i], nums[0] = nums[0], nums[i]
         heapify(nums, i, 0)
 
+"""
+Тут пока что для меня мощное колдунство 
+"""
+def quickselect_median(l, pivot_fn=random.choice):
+    if len(l) % 2 == 1:
+        return quickselect(l, len(l) / 2, pivot_fn)
+    else:
+        return 0.5 * (quickselect(l, len(l) / 2 - 1, pivot_fn) +
+                      quickselect(l, len(l) / 2, pivot_fn))
+
+
+def quickselect(l, k, pivot_fn):
+    """
+    Выбираем k-тый элемент в списке l (с нулевой базой)
+    :param l: список числовых данных
+    :param k: индекс
+    :param pivot_fn: функция выбора pivot, по умолчанию выбирает случайно
+    :return: k-тый элемент l
+    """
+    if len(l) == 1:
+        assert k == 0
+        return l[0]
+
+    pivot = pivot_fn(l)
+
+    lows = [el for el in l if el < pivot]
+    highs = [el for el in l if el > pivot]
+    pivots = [el for el in l if el == pivot]
+
+    if k < len(lows):
+        return quickselect(lows, k, pivot_fn)
+    elif k < len(lows) + len(pivots):
+        # Нам повезло и мы угадали медиану
+        return pivots[0]
+    else:
+        return quickselect(highs, k - len(lows) - len(pivots), pivot_fn)
+
 
 m = int(input('Число элементов массива 2m+1, введите m: '))
 orig_list = [random.randint(1, 1000) for _ in range(2*m+1)]
-print(f'Медиана проверка: {median(orig_list)}\n')
+
+print(f'Через statistics.median: '
+      f'{timeit.timeit("median(orig_list[:])", globals=globals(), number=1000)}\n'
+      f'Медиана {median(orig_list)}\n')
 
 print(f'Через сортировку Шелла: '
       f'{timeit.timeit("shell(orig_list[:])", globals=globals(), number=1000)}\n'
       f'Медиана {shell(orig_list[:])[m]}\n')
 
-# print(f'Через сортировку Гномью: '
-#       f'{timeit.timeit("gnome(orig_list[:])", globals=globals(), number=1000)}\n'
-#       f'Медиана {gnome(orig_list[:])[m]}\n')
+print(f'Через сортировку Гномью: '
+      f'{timeit.timeit("gnome(orig_list[:])", globals=globals(), number=1000)}\n'
+      f'Медиана {gnome(orig_list[:])[m]}\n')
 
-# print(f'Через сортировку Кучей: '
-#       f'{timeit.timeit("heap_sort(orig_list[:])", globals=globals(), number=1000)}\n')
-# new_list = orig_list.copy()
-# heap_sort(new_list)
-# print(f'Медиана {new_list[m]}\n')
+print(f'Через сортировку Кучей: '
+      f'{timeit.timeit("heap_sort(orig_list[:])", globals=globals(), number=1000)}\n')
+new_list = orig_list.copy()
+heap_sort(new_list)
+print(f'Медиана {new_list[m]}\n')
 
+print(f'Через алгоритм деления списка: '
+      f'{timeit.timeit("quickselect_median(orig_list[:])", globals=globals(), number=1000)}\n'
+      f'Медиана {quickselect_median(orig_list[:])}\n')
 
+"""
+Аналитика:
+Число элементов массива 2m+1, введите m: 999
+Через statistics.median: 0.21788469999999993
+Медиана 518
+
+Через сортировку Шелла: 4.6542225
+Медиана 518
+
+Через сортировку Гномью: 385.97015369999997
+Медиана 499
+
+Через сортировку Кучей: 8.2476057
+Медиана 518
+
+Через алгоритм деления списка: 0.9118621000000005
+Медиана 518
+
+Поиск с помощью рекурисвных методов гораздо эффективнее. Отдельно "удивила" Гномья сортировка.
+"""
