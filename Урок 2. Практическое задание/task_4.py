@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def element_sum(this_value, element_count):
+    if element_count == 0:
+        return 0
+    return this_value + element_sum(this_value / 2 * -1, element_count - 1)
+
+
+while True:
+    try:
+        value = int(input('Введите количество элементов:\n'))
+        break
+    except ValueError:
+        print('Вы ввели строку, а не число')
+
+print(f'Количество элементов: {value}, их сумма: {element_sum(1, value)}')
