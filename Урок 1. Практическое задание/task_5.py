@@ -28,63 +28,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+class PlateStacks:
+    def __init__(self):
+        self.elems = [[]]
+        self.max_plate = 3
+        self.cur_stack = 0
 
-
-
-class PlateStackClass:
-    def __init__(self, max_size):
-        self.elems = []
-        self.max_size = max_size    # размер стопки
-
-    def __str__(self):
-        return str(self.elems)
-
-    def is_empty(self):
+    def empty(self):
         return self.elems == [[]]
 
-    def push_in(self, el):
-        """Предполагаем, что верхний элемент стека находится в конце списка
-        если размер стопки равен пороговому значению то создается новая стопка
-        и туда кладется значние"""
-        if len(self.elems[len(self.elems)-1]) < self.max_size:
-            self.elems[len(self.elems)-1].append(el)
-        else:
+    def put_plate(self, el):
+        if len(self.elems[self.cur_stack]) == self.max_plate:
             self.elems.append([])
-            self.elems[len(self.elems) - 1].append(el)
+            self.cur_stack += 1
+            self.elems[self.cur_stack].append(el)
+        else:
+            self.elems[self.cur_stack].append(el)
 
-    def pop_out(self):
-        """Берем тарелку из крайней стопки, если она пустая удаляем ее"""
-        result = self.elems[len(self.elems) - 1].pop()
-        if len(self.elems[len(self.elems) - 1]) == 0:
+    def del_plate(self):
+        rem_plates = self.elems[self.cur_stack].pop()
+        if len(self.elems[self.cur_stack]) == 0:
             self.elems.pop()
-        return result
+            self.cur_stack -= 1
+        return rem_plates
 
-    def get_val(self):
-        return self.elems[len(self.elems) - 1]
-        [len(self.elems[len(self.elems) - 1])-1]
+    def all_plates(self):
+        plates = self.max_plate * (len(self.elems) - 1) + len(self.elems[self.cur_stack])
+        return plates
 
     def stack_size(self):
-        """Общее количество тарелок"""
-        elem_sum = 0
-        for stack in self.elems:
-            elem_sum += len(stack)
-        return elem_sum
-
-    def stack_count(self):
-        """Количество стоек"""
-        return len(self.elems)
-
+        return len(self.elems[self.cur_stack])
 
 if __name__ == '__main__':
-    plates = PlateStackClass(3)
-    plates.push_in('Plate1')
-    plates.push_in('Plate2')
-    plates.push_in('Plate3')
-    plates.push_in('Plate4')
-    plates.push_in('Plate5')
-    print(plates)
-    print(plates.pop_out())
-    print(plates.get_val())
-    print(plates.stack_size())
-    print(plates.stack_count())
-    print(plates)
+    stacks = PlateStacks()
+    print(stacks.empty())
+    stacks.put_plate(1)
+    stacks.put_plate(2)
+    stacks.put_plate(3)
+    print(stacks.empty())
+    print(stacks.stack_size())
+    stacks.put_plate(4)
+    print(stacks.stack_size())
+    stacks.del_plate()
+    print(stacks.stack_size())

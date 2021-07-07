@@ -31,6 +31,7 @@ for key in company_profit:                                # O(n)
             top_company_profit = {key : profit[i]}        # O(1)
             print(top_company_profit)                     # O(1)
 
+
 # 2 решение
 # Сложность:O(n^6)
 company_profit = {"ICBC":38, "ExxonMobil":45, "PetroChina":18, "Chevron":26, "Citigroup":8}

@@ -36,7 +36,6 @@ class QueueClass:
     def size(self):
         return len(self.elems)
 
-
 class TaskBoard:
     def __init__(self):
         self.cur_queue = QueueClass()    # Базоваяя очередь

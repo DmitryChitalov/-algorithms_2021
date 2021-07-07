@@ -40,7 +40,6 @@ def authorization1(users, user_name, user_password):
 
     return "Данного пользователя не существует"
 
-
 # общая сложность O(1)
 def authorization2(users, user_name, user_password):
     if users.get(user_name):
@@ -69,13 +68,6 @@ my_users = {'user1': {'password': '11111', 'activation': True},
 
 print(authorization2(my_users, 'user6', '1111'))
 
-def authorization3(collection, city):
-    if city in collection.values():  # если есть среди значений словаря collection
-        for name in collection.keys(): # переберите все ключи словаря
-            if friends[name] == city:  # если соответствующее ключу значение равно city
-                print('В городе ' + city + ' живёт ' + name + '.')
-    else:
-        print('Пока никого.')
 
 passwords = {
     'user1': '11111',
@@ -83,6 +75,4 @@ passwords = {
     'user3': '11111',
     'user4': '11111'
 }
-print(authorization3(my_users, 'user6', '1111'))
-
-is_anyone_in(friends, 'Хабаровск')
+print(authorization2(my_users, 'user6', '1111'))

@@ -19,6 +19,7 @@
 ф-ции min() и sort() не исп-ем!
 """
 # Сложность:O(n^2)
+
 def min_list(lst):
     for i in range(0, len(lst) - 1):            # O(n)
         for j in range(i + 1, len(lst)):        # O(n)
