@@ -15,6 +15,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="cc19eb65-7af2-400a-b570-d04645b411f8" />
+        <option name="url" value="https://github.com/avolkov-git/-algorithms_2021.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="ProjectId" id="1udVOH8JxW1veXYmhYIWc2Otgmw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -69,6 +77,7 @@
       <workItem from="1625308417305" duration="35000" />
       <workItem from="1625308454557" duration="22000" />
       <workItem from="1625308499617" duration="42000" />
+      <workItem from="1625487511311" duration="51000" />
     </task>
     <servers />
   </component>
