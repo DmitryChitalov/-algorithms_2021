@@ -48,15 +48,16 @@ average = total_profit / number_of_interprises
 print(f'Cредняя годовая прибыль всех предприятий {average}')
 print(all_companies)
 
-print("Предприятия с прибылью выше среднего заработка за год!")
+
 for comp in all_companies:
     if comp.profit > average:
+        print("Предприятия с прибылью выше среднего заработка за год!")
+        print(f'Компания {comp.name} заработала {comp.profit}')
+    elif comp.profit < average:
+        print("Предприятия с прибылью ниже среднего заработка за год!")
         print(f'Компания {comp.name} заработала {comp.profit}')
 
-print("Предприятия с прибылью ниже среднего заработка за год!")
-for comp in all_companies:
-    if comp.profit < average:
-        print(f'Компания {comp.name} заработала {comp.profit}')
+
 
 
 
