@@ -21,7 +21,6 @@ b) выполните набор операций и со списком, и с�
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
 
-
 import time
 import random
 
@@ -32,6 +31,7 @@ def time_of_func(func):
         res = func(*args)
         print(f"Время выполнения вункции \"{func.__name__}\" = {time.perf_counter_ns() - start_time}")
         return res
+
     return wrapper
 
 
@@ -141,6 +141,7 @@ def add_list_end(lst: list):
 def add_list_append(lst: list):
     lst.append(random.random())
 
+
 @time_of_func
 def pop_list_begin(lst: list):
     lst.pop(0)
@@ -155,9 +156,11 @@ def pop_list_middle(lst: list):
 def pop_list_end(lst: list):
     lst.pop()
 
+
 @time_of_func
 def add_dict(dct: dict):
     dct[random.random()] = random.random()
+
 
 @time_of_func
 def pop_dict_elem(dct: dict):
