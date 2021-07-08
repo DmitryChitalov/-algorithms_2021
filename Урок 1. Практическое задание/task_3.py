@@ -20,3 +20,67 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Словарь для сортировки.
+company_profits = dict(huawei=2000.78, mercedes=1000.34, adidas=700.24, puma=350.28, ecco=468.47, kia=987.27,
+                       yandex=1500.47, google=5000.45, asus=3500.79, logitech=1300.49, microsoft=7896.14,
+                       samsung=2598.46, xiaomi=1398.47, apple=4698.41)
+
+
+def get_max_profit_company_1(counter, corp_profits):
+    """ Вариант первый. Используем встроенную функцию сортировки sorted.
+        Сложность: O(n log n)
+    """
+
+    if counter == 0:  # O(1)
+        counter = len(corp_profits)  # O(1)
+
+    sorted_dict = dict(sorted(corp_profits.items(), key=lambda item: item[1], reverse=True))  # O(n log n)
+    count = int()  # O(1)
+    sort_dict = dict()  # O(1)
+    for k, v in sorted_dict.items():  # O(N)
+
+        if count == counter:  # O(1)
+            break
+
+        sort_dict[k] = v  # O(1)
+        count += 1  # O(1)
+
+    return sort_dict  # O(1)
+
+
+# Вывод 1-го варианта.
+print(f"Var 1 sort_dict: {get_max_profit_company_1(3, company_profits)}")
+
+
+# Далее 2-е функции второго варианта.
+def find_max_from_dict(dict_obj):
+    """ Функция позволяющая найти максимальное значение переданного value словаря.
+        Сложность: O(N).
+    """
+    max_item_val = list(dict_obj.items())[0]  # O(N)
+    for x in list(dict_obj.items()):  # O(N)
+        if max_item_val[1] < x[1]:  # O(1)
+            max_item_val = tuple(x)  # O(1)
+
+    return max_item_val  # O(1)
+
+
+def get_max_profit_company_2(counter, corp_profits):
+    """ Основная функция, возвращает counter элементов отсортированного по убыванию value словаря.
+        Сложность: похоже, что O(N^2). Но я сомневаюсь. Возможно в цикле нужно считать O(N) * O(N) * O(N) = O(N^3).
+        Выводы: Логарифмическая сложность предпочтительнее, чем квадратичная или кубическая. 
+    """
+    if counter == 0:  # O(1)
+        counter = len(corp_profits)  # O(1)
+
+    sort_dict = dict()  # O(1)
+    for _ in range(counter):  # O(N)
+        max_value = find_max_from_dict(corp_profits)  # O(N)
+        sort_dict[max_value[0]] = corp_profits.pop(max_value[0])  # O(1) + O(N)
+
+    return sort_dict  # O(1)
+
+
+# Вывод 2-го варианта.
+print(f"Var 2 sort_dict: {get_max_profit_company_2(3, company_profits)}")
