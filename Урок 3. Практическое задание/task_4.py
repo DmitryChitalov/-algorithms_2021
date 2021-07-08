@@ -11,3 +11,28 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from uuid import uuid4
+import hashlib
+
+salt = uuid4().hex
+cache_obj = {}
+
+
+def get_page(url):
+    if cache_obj.get(url):
+        print(f'Данный адрес: {url} присутствует в кэше')
+        n_y = input('Хотите ли проверить что-то еще? "+" - да, "-" - нет: ')
+        if n_y == '+':
+            return get_page(input('Введите ссылку для проверки: '))
+        elif n_y == '-':
+            pass
+        else:
+            print('Неизвестная команда')
+            pass
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache_obj[url] = res
+        print(f'Страница внесена:\n{cache_obj}')
+        return get_page(url)
+
+get_page(input('Введите ссылку для проверки: '))
