@@ -17,6 +17,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -40,4 +41,48 @@ def simple(i):
 
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
+
+
 print(simple(i))
+
+
+# def reshat_eratosfen(num):
+#     a = [x for x in range(num+1)]
+#     a[1] = 0
+#     i = 2
+#     while i < num:
+#         if a[i] != 0:
+#             j = i + i
+#             while j <= num:
+#                 a[j] = 0
+#                 j += i
+#         i += 1
+#     a = sorted(list(set(a)))
+#     a.remove(0)
+#     return a[-1]
+
+
+
+def my_func(num):   # квадратичное
+    if num == 1:    # константное
+        return 2    # константное
+    prime = [2, 3]  # константное
+    while len(prime) < num:     # линейное
+        candidate = prime[-1] + 2   # константное
+        iter = len(prime) + 1   # константное
+        while iter > len(prime):    # линейное
+            i = 0                   # константное
+            while i < len(prime):   # линейное
+                if candidate % prime[i] == 0:   # константное
+                    break   # константное
+                i += 1      # константное
+            else:       # константное
+                prime.append(candidate) # константное
+            candidate += 2  # константное
+    return prime[-1]    # константное
+
+print(my_func(i))
+
+# print(timeit('simple(i)', globals=globals()))
+# print(timeit('my_func(i)', globals=globals()))
+# print(timeit('reshat_eratosfen(71)', globals=globals()))
