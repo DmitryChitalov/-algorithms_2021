@@ -20,3 +20,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+#1 O(NlogN)
+coin = { 'Apple': 100, 'Samsung': 99, 'Sony': 98, 'Xiaomi': 97}
+def min_cin(coin):
+    delit = min(coin, key=coin.get)
+    del coin[delit]
+    print(coin)
+min_cin(coin)
+
+#2 O(N)
+coin2 = { 'Apple': 100, 'Samsung': 99, 'Sony': 98, 'Xiaomi': 97}
+def min_cin1(coin2):
+    list_coin2 = dict(coin2)
+    ch_max = {}
+    for i in range(3):
+        max_max = max(list_coin2.items(), key = lambda i: i[1])
+        del list_coin2[max_max[0]]
+        ch_max[max_max[0]] = max_max[1]
+    return ch_max
+min_cin1(coin2)
