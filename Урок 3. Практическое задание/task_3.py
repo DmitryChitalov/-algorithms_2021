@@ -16,3 +16,18 @@
 р
 а
 """
+import hashlib
+
+hashing = set()
+string = input('Введите строку, состоящую только из строчных латинских букв: ')
+
+for i in range(len(string)):
+    for j in range(i + 1, len(string) + 1):
+        if string[i:j] != string:
+            hashing.add(hashlib.sha256(string[i:j].encode()).hexdigest())
+
+print(f'Количество элементов в множестве: {len(hashing)}')
+k = 0
+for i in hashing:
+    k += 1
+    print(f'{k}. {i}')
