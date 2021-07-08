@@ -28,3 +28,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def addition():
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
+    print(f'Результат: {a + b}')
+def subtract():
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
+    print(f'Результат: {a - b}')
+def multiply():
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
+    print(f'Результат: {a * b}')
+def division():
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
+    if b == 0:
+        print('Делить на 0 нельзя!')
+        return division()
+    else:
+        print(f'Результат: {a / b}')
+
+end = True
+while end:
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign == '0':
+        end = False
+        print('Завершение')
+    elif sign == '+':
+        addition()
+    elif sign == '-':
+        subtract()
+    elif sign == '*':
+        multiply()
+    elif sign == '/':
+        division()
+    else:
+        print('Такого знака нет')
