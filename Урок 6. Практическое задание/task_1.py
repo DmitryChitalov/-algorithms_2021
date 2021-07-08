@@ -21,3 +21,84 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+import sys
+
+def show_size(x, level=0):
+    size_par = sys.getsizeof(x)
+    print('\t' * level, f'type={type(x)}, size={size_par}, object={x}')
+    if hasattr(x, '__iter__'):
+        if hasattr(x, 'items'):
+            for key, value in x.items():
+                show_size(key, level + 1)
+                size_par = size_par + sys.getsizeof(key)
+                show_size(value, level + 1)
+                size_par = size_par + sys.getsizeof(value)
+        elif not isinstance(x, str):
+            for item in x:
+                show_size(item, level + 1)
+                size_par = size_par + sys.getsizeof(item)
+    return size_par
+
+"""
+1. Узнайте у пользователя число n. Найдите сумму чисел n + nn + nnn. 
+"""
+
+n = input('Введите число:')
+n = int(n) + int((n+n)) + int((n+n+n))
+print(n)
+
+sum_member = sys.getsizeof(n)
+print('В программе задействовано байт памяти: {}'.format(sum_member))
+########
+a = input('Введите число:')
+b = int(a) + int((a+a)) + int((a+a+a))
+print(b)
+
+sum_member = sys.getsizeof(a) + sys.getsizeof(b)
+print('В программе задействовано байт памяти: {}'.format(sum_member))
+
+"""
+В 1 программе задействовано меньше памяти, т.к. там одна переменная.
+Введите число:3
+369
+В программе задействовано байт памяти: 28
+Введите число:3
+369
+В программе задействовано байт памяти: 78
+"""
+#######################################################################################
+"""
+2. Пользователь вводит целое положительное число. 
+Найдите самую большую цифру в числе.
+"""
+
+n = int(input('Введите целое положительное число:'))
+m = 0
+while n != 0:
+    if n%10 > m:
+        m = n%10
+    n = n//10
+print(m)
+
+sum_member = sys.getsizeof(n) + sys.getsizeof(m)
+print('В программе задействовано байт памяти: {}'.format(sum_member))
+
+####
+
+i = input('Введите целое положительное число:')
+ls = max(list(map(int, i)))
+print(ls)
+
+sum_member = sys.getsizeof(i) + sys.getsizeof(ls)
+print('В программе задействовано байт памяти: {}'.format(sum_member))
+
+"""
+В 1 программе задействовано меньше памяти, т.к. задействованы арифметические действия.
+Введите целое положительное число:123
+3
+В программе задействовано байт памяти: 52
+Введите целое положительное число:123
+3
+В программе задействовано байт памяти: 80
+"""
