@@ -11,6 +11,7 @@
 Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
 
+# мемоизация не нужна, т.к. вызывается 1 раз
 from timeit import timeit
 from random import randint
 
@@ -79,3 +80,4 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
