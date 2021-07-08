@@ -18,3 +18,26 @@
 
 ф-ции min() и sort() не исп-ем!
 """
+spis = [2, 5, 10, 11, 15, 0]
+def min_ch(spis):
+    k = 10**10
+    for i in spis:
+        for j in spis:
+            if i < j and i < k:
+                k = i
+            elif j < i and j < k:
+                k = j
+    print(k)
+min_ch(spis)
+
+#Второй, в виде функции, должен обеспечивать поиск минимального значения для списка.
+#Сложность такого алгоритма: O(n) - линейная.
+
+spis = [2, 5, 10, 11, 15, 0]
+def min_ch(spis):
+    k = 10**10
+    for i in spis:
+        if k > i:
+            k = i
+    print(k)
+min_ch(spis)
