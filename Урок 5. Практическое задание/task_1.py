@@ -23,3 +23,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+my_var = "Company"
+n = int(input("Введите количество предприятий: "))
+companies = namedtuple(my_var, "name period_1 period_2 period_3 period_4")
+profit_aver = {}
+
+for i in range(n):
+    company = companies(
+        name=input("\nВведите название предприятия: "), period_1=int(
+            input("Введите прибыль за 1 квартал: ")), period_2=int(
+            input("Введите прибыль за 2 квартал: ")), period_3=int(
+            input("Введите прибыль за 3 квартал: ")), period_4=int(
+            input("Введите прибыль за 4 квартал: ")))
+
+    profit_aver[company.name] = (
+        company.period_1 + company.period_2 +
+        company.period_3 + company.period_4) / 4
+
+total_aver = 0
+for value in profit_aver.values():
+    total_aver += value
+total_aver = total_aver / n
+
+print(f'\nСредняя годовая прибыль всех предприятий: {total_aver}')
+
+for key, value in profit_aver.items():
+    if value > total_aver:
+        print(f"Предприятия, с прибылью выше среднего значения: {key}")
+    elif value < total_aver:
+        print(f"Предприятия, с прибылью ниже среднего значения: {key}")
+    elif value == total_aver:
+        print(f"{key}: предприятия равны ")
+
