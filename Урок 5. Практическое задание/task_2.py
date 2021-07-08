@@ -34,3 +34,20 @@ hx = HexNumber
 hx + hx
 hex()
 """
+def summation(h1, h2):
+    return list(hex(int(''.join(h1), 16) + int(''.join(h2), 16)))[2:]
+
+def multiplication(h1, h2):
+    return list(hex(int(''.join(h1), 16) * int(''.join(h2), 16)))[2:]
+
+h1 = list(input('Введите первое шестнадцатиричное число: '))
+h2 = list(input('Введите второе шестнадцатиричное число: '))
+action = input('Нужно выбрать действие.\nЕсли хотите сложить, то введите "+", если хотите умножить - "*": ')
+
+if action == '+':
+    print(f'Сумма чисел: {summation(h1, h2)}')
+elif action == '*':
+    print(f'Умножение чисел: {multiplication(h1, h2)}')
+else:
+    print('Такого выбора нет')
+    pass
