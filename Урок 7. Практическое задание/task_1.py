@@ -17,3 +17,52 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import timeit
+import random
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:  # по убыванию
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort2(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        c = 0
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                c += 1
+        if not c:
+            return lst_obj
+        n += 1
+
+
+list1 = [random.randint(-100, 100) for _ in range(50)]
+list2 = list1.copy()  # помню! )
+print('Одномерный целочисленный массив:              ', end=' ')
+print(list1)
+print('Отсортированный по убыванию без доработки:    ', end=' ')
+print(timeit.timeit('bubble_sort(list1)', globals=globals(), number=10000), bubble_sort(list1))
+print('Отсортированный по убыванию c доработкой:     ', end=' ')
+print(timeit.timeit('bubble_sort2(list2)', globals=globals(), number=10000), bubble_sort2(list2))
+print('Уже отсортированный по убыванию c доработкой: ', end=' ')
+print(timeit.timeit('bubble_sort2(list1)', globals=globals(), number=10000), bubble_sort2(list1))
+print('')
+
+# Для меня доработка произвела двоякое впечатление: либо оптимизация функции bubble_sort2(lst_obj) реально выдает
+# замечательные результаты, то ли у меня в коде ошибка. В чем доработка: ввел переменную с = 0, в условии
+# if lst_obj[i] < lst_obj[i + 1]: добавил счетчик c += 1. На следующем шаге проверяю условие, если оно срабатывает -
+# выхожу сразу. И вот результаты:
+#
+# Отсортированный по убыванию без доработки:     1.1263873150000001  [96, 96, 92, 84, 79, 79, 72, ...
+# Отсортированный по убыванию c доработкой:      0.04111323499999986 [96, 96, 92, 84, 79, 79, 72, ...
+# Уже отсортированный по убыванию c доработкой:  0.04026254100000015 [96, 96, 92, 84, 79, 79, 72, ...
+#
+# Доработка в моем случае дала положительные результаты.
