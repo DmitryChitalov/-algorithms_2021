@@ -28,3 +28,7 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+stacks_count = int(input("Укажите количество стопок тарелок"))
+pate_count = int(input("укажите количество в тарелок стопке"))
+stack = [['_'] * pate_count for i in range(stacks_count)]
+print(stack)
