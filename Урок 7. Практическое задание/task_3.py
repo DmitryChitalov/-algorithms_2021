@@ -76,26 +76,36 @@ def sorted_median(my_list):  # O(n log n)
 
 
 m = int(input('Введите натуральное число m: '))
-my_list1 = [int(random() * 100 + 1) for _ in range(int(2 * m + 1))]
-my_list2 = my_list1.copy()
-my_list3 = my_list1.copy()
-print('Медиана:', my_list1[m])
-print('Замер на массиве shell_median(my_list) ', timeit('shell_median(my_list1)', globals=globals(), number=100000))
-print('Медиана:', my_list2[m])
-print('Замер на массиве gnome_median(my_list) ', timeit('gnome_median(my_list2)', globals=globals(), number=100000))
-print('Медиана:', my_list3[m])
-print('Замер на массиве sorted_median(my_list)', timeit('sorted_median(my_list3)', globals=globals(), number=100000))
+
+list1 = [int(random() * 100 + 1) for _ in range(int(2 * m + 1))]
+
+print(f'Медиана: {shell_median(list1[:])}')
+print('Замер на массиве shell_median(list1[:]) ',
+      timeit('shell_median(list1[:])', globals=globals(), number=1000))
+
+list2 = [int(random() * 100 + 1) for _ in range(int(2 * m + 1))]
+print(f'Медиана: {gnome_median(list2[:])}')
+print('Замер на массиве gnome_median(list2[:]) ',
+      timeit('gnome_median(list2[:])', globals=globals(), number=1000))
+
+list3 = [int(random() * 100 + 1) for _ in range(int(2 * m + 1))]
+print(f'Медиана: {sorted_median(list3[:])}')
+print('Замер на массиве sorted_median(list3[:])',
+      timeit('sorted_median(list3[:])', globals=globals(), number=1000))
 
 # В массивах были найдены медианы, и получились следующие результаты в секундах:
 #
 # Введите натуральное число m: >? 100
-# Медиана: 66
-# Замер на массиве shell_median(my_list)  12.315112509
-# Медиана: 66
-# Замер на массиве gnome_median(my_list)  2.139394009
-# Медиана: 66
-# Замер на массиве sorted_median(my_list) 0.8699387429999987
+# Медиана: 51
+# Замер на массиве shell_median(list1[:])  0.24466927400000005
+# Медиана: 50
+# Замер на массиве gnome_median(list2[:])  3.5955689299999998
+# Медиана: 53
+# Замер на массиве sorted_median(list3[:]) 0.009550433999999441
 #
-# Как и ожидалось, лучший результат поиска медианы дала функция sorted_median(my_list). Совершенно ясно,
+# Как и ожидалось, лучший результат поиска медианы дала функция sorted_median(list3[:]). Совершенно ясно,
 # что внутренняя функция работает быстрее (O(n log n)), чем внешняя. Две других функции (O(n^2)) оказались более
-# медленными. Правда Гномья сортировка тоже выдает неплохие результаты.
+# медленными. Гномья сортировка выдает самые плохие результаты.
+#
+# В чем ошибка: timeit('sorted_median(list3) был неправильно определен, нужно
+#               timeit('sorted_median(list3[:])
