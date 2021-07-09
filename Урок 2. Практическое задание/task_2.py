@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def even_odd_counter(number, even=0, odd=0):
+    if number == 0:
+        print(f"Во введённом числе {even} чётных и {odd} нечётных цифр.")
+    else:
+        current_number = number % 10
+        number = number // 10
+        if current_number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd_counter(number, even, odd)
+
+number = int(input("Введите число: "))
+even_odd_counter(number)
