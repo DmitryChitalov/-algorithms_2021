@@ -28,3 +28,45 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def polka(self):
+        return self.elems
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]  # Размер полки с тарлеками
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, elem):  # Полка заполнена - новый массив(полка) + тарелка. Иначе + тарелка
+        if self.is_empty() or len(self.get_val()) >= 5:  # Полка вмещает 5 тарелок
+            self.elems.append([])
+            self.get_val().append(elem)
+        else:
+            self.get_val().append(elem)
+
+    def pop_out(self):
+        self.get_val().pop()
+        if self.get_val() == []:
+            del self.elems[len(self.elems) - 1]
+
+
+SC_OBJ = StackClass()
+for i in range(21):
+    SC_OBJ.push_in(i)
+print(SC_OBJ.polka())
+
+for i in range(2):
+    SC_OBJ.pop_out()
+print(SC_OBJ.polka())
+
+print(SC_OBJ.is_empty())
+
+for i in range(19):
+    SC_OBJ.pop_out()
+print(SC_OBJ.is_empty())
