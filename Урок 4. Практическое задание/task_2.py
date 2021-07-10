@@ -11,9 +11,18 @@
 Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
 
+
 from timeit import timeit
 from random import randint
 
+
+"""
+мне кажется, что дело в том что при большом количестве запусков функции 
+внутри timein кэш очень быстро заполняется, что повышает вероятность 
+того что число следующее случайное число повторится, но что-то анализ мою идею
+не подтверждает, а на большее я что-то не дохожу
+
+"""
 
 def recursive_reverse(number):
     if number == 0:
@@ -24,23 +33,29 @@ def recursive_reverse(number):
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
+num_10000000 = randint(100000000, 10000000000000000)
 
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=100))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=100))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=100))
+print(
+    timeit(
+        "recursive_reverse(num_10000000)",
+        setup='from __main__ import recursive_reverse, num_10000000',
+        number=10))
 
 
 def memoize(f):
@@ -68,14 +83,19 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=100))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=100))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=100))
+print(
+    timeit(
+        'recursive_reverse_mem(num_10000000)',
+        setup='from __main__ import recursive_reverse_mem, num_10000000',
+        number=10))
