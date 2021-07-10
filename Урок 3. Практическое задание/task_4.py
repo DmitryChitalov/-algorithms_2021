@@ -11,3 +11,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+from uuid import uuid4
+
+
+def cache_web(site, cache_table):
+    if cache_table.get(site):
+        print(f'Адрес {site} уже кеширован')
+    else:
+        cache_table[site] = hashlib.sha256(uuid4().hex.encode() + site.encode()).hexdigest()
+        print(cache_table)
+
+
+cache = {}
+
+cache_web("google.com", cache)
+cache_web("stackoverflow.com", cache)
+cache_web("google.com", cache)
