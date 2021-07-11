@@ -17,6 +17,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -39,5 +40,24 @@ def simple(i):
     return n
 
 
+def sieve(n):
+    n = int(n)
+    a = []
+    for i in range(n + 1):
+        a.append(i)
+    a[1] = 0
+    i = 2
+    while i <= n:
+        if a[i] != 0:
+            j = i + i
+            while j <= n:
+                a[j] = 0
+                j = j + i
+        i += 1
+    a = set(a)
+    a.remove(0)
+    return a
+
 i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+print(simple(i), timeit('simple(i)', globals=globals()))
+print(sieve(i), timeit('sieve(i)', globals=globals()))
