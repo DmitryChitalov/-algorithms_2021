@@ -25,3 +25,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {'Mike': ['HASH123', 'Yes'], 'Nike': ['HASH321', 'No'], 'Tom': ['HASH213', 'No'],
+         'Den': ['HASH012', 'Yes'],'Pop': ['HASH123', 'No']}
+
+
+# Первый способ
+# Сложность O(1)
+
+def check_active_profile(name_user):
+    if users[name_user][1] == 'Yes':                                                        # O(1)
+        print('Вход для польователя: ', name_user, ' разрешен')                             # O(1)
+    elif users[name_user][1] == 'No':                                                       # O(1)
+        print('Вход для польователя: ', name_user, ' запрещен. Пройдите аутентификацию!')   # O(1)
+
+
+check_active_profile('Tom')
+
+# Второй способ
+# Сложность O(n)
+
+def check_active_profile_2(name_user):
+    for key, value in users.items():                                                                # O(n)
+        if key == name_user:                                                                        # O(1)
+            if value[1] == 'Yes':                                                                   # O(1)
+                print('Вход для польователя: ', name_user, ' разрешен')                             # O(1)
+            elif value[1] == 'No':                                                                  # O(1)
+                print('Вход для польователя: ', name_user, ' запрещен. Пройдите аутентификацию!')   # O(1)
+
+
+check_active_profile_2('Mike')
+
+
+"""
+Вывод: Первый способ выполняется быстрее , так как у всех алгоритмов константная сложность,
+общая сложность = O(1), в отличии от Второго способа в котором 'СЛОЖНОСТЬ' является O(n)
+"""
