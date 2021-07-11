@@ -40,7 +40,7 @@ class DequeClass:
 
 def pal_checker(string):
     dc_obj = DequeClass()
-    string = string.replace(' ', '')
+    string = string.replace(' ', '').lower()
 
     for el in string:
         dc_obj.add_to_rear(el)
@@ -56,4 +56,7 @@ def pal_checker(string):
     return still_equal
 
 
-print(pal_checker("до  во д"))
+print(pal_checker("до во д"))
+print(pal_checker('Аргентина манит негра'))
+print(pal_checker('Яд яд дядя'))
+print(pal_checker('Морда казака за кадром'))
