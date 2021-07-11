@@ -37,50 +37,66 @@ class QueueClass:
         return len(self.elems)
 
 
-class TaskBoard:
+class TaskBoard(QueueClass):
     def __init__(self):
-        self.cur_queue = QueueClass()    # Базоваяя очередь
-        self.revision_queue = QueueClass()   # очередь на доработку
-        self.log = []  # Список решенных задач
+        super().__init__()
+        self.base_queue = QueueClass()
+        self.revision_queue = QueueClass()
+        self.solved_list = []
 
-    def resolve_task(self):
-        """Закрываем текущую задачу и добавляем в лог"""
-        task = self.cur_queue.from_queue()
-        self.log.append(task)
+    def put_to_queue(self, task):
+        self.base_queue.to_queue(task)
 
-    def to_revision_task(self):
-        """Отправляем текущую задачу на доработку"""
-        task = self.cur_queue.from_queue()
-        self.revision_queue.to_queue(task)
+    def close_to_done(self):
+        self.solved_list.append(self.base_queue.from_queue())
 
-    def to_current_queue(self, item):
-        """Добавляем задачу в текущие"""
-        self.cur_queue.to_queue(item)
+    def put_to_revision(self):
+        self.base_queue.to_queue(self.revision_queue.from_queue())
 
-    def from_revision(self):
-        """Возвращаем задачу из доработки в текущую очередь"""
-        task = self.revision_queue.from_queue()
-        self.cur_queue.to_queue(task)
+    def get_base_task(self):
+        return self.base_queue.elems[self.base_queue.size() - 1]
 
-    def current_task(self):
-        """Текущая задача"""
-        return self.cur_queue.elems[len(self.cur_queue.elems) - 1]
+    def get_revision_task(self):
+        return self.revision_queue.elems[self.revision_queue.size() - 1]
 
-    def current_revision(self):
-        """Задача в доработке"""
-        return self.revision_queue.elems[len(self.revision_queue.elems) - 1]
+    def base_to_work(self):
+        self.revision_queue.to_queue(self.base_queue.from_queue())
+
+    def base_to_done(self):
+        self.base_queue.to_queue(self.revision_queue.from_queue())
 
 
 if __name__ == '__main__':
     task_board = TaskBoard()
-    task_board.to_current_queue("Task1")
-    task_board.to_current_queue("Task2")
-    task_board.to_current_queue("Task3")
-    print(task_board.cur_queue.elems)
-    print(task_board.current_task())
-    task_board.to_revision_task()
-    task_board.resolve_task()
-    task_board.from_revision()
-    print(task_board.cur_queue.elems)
-    print(task_board.current_task())
-    print(task_board.log)
+
+    # Заполняю очередь задач
+    task_board.base_queue.to_queue('Задача 1')
+    task_board.base_queue.to_queue('Задача 2')
+    task_board.base_queue.to_queue('Задача 3')
+    task_board.base_queue.to_queue('Задача 4')
+    task_board.base_queue.to_queue('Задача 5')
+
+    # Изначально все задачи находятся в базовой очереди
+    print('Задачи в базовой очереди:     ', task_board.base_queue.elems)
+    print('Задачи в очереди на доработку:', task_board.revision_queue.elems)
+    print('Список выполненных задач:     ', task_board.solved_list, '\n')
+
+    # Задачи "Задача 2, Задача 1" перемещаю очередь на доработку, задачу "Задача 3" накрываю
+    task_board.base_to_work()
+    task_board.base_to_work()
+    task_board.close_to_done()
+
+    # Обновленный список двух очередей
+    print('Задачи в базовой очереди:     ', task_board.base_queue.elems)
+    print('Задачи в очереди на доработку:', task_board.revision_queue.elems)
+    print('Список выполненных задач:     ', task_board.solved_list, '\n')
+
+    # Закрываю "Задача 4, Задача 5", теперь там [], задачи в очереди на доработку все также находятся
+    # в "Задача 2, Задача 1"
+    task_board.close_to_done()
+    task_board.close_to_done()
+
+    # Обновленный список двух очередей
+    print('Задачи в базовой очереди:     ', task_board.base_queue.elems)
+    print('Задачи в очереди на доработку:', task_board.revision_queue.elems)
+    print('Список выполненных задач:     ', task_board.solved_list)
