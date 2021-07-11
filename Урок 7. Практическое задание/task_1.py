@@ -17,3 +17,63 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i+1], lst_obj[i] = lst_obj[i], lst_obj[i+1]
+        n += 1
+    return lst_obj
+
+
+lst = [randint(-100, 100) for _ in range(100)]
+print(lst)
+print(bubble_sort(lst))
+
+print(timeit(
+    "bubble_sort(lst[:])",
+    globals=globals(),
+    number=10000
+))
+
+def bubble_sort2(lst_obj):
+    last_item = len(lst_obj) - 1
+    for i in range(0, last_item):
+        for j in range(0, last_item):
+            if lst_obj[j] < lst_obj[j+1]:
+                lst_obj[j], lst_obj[j+1] = lst_obj[j+1], lst_obj[j]
+    return lst_obj
+
+print(bubble_sort2(lst))
+
+print(timeit(
+    "bubble_sort(lst[:])",
+    globals=globals(),
+    number=10000
+))
+
+
+def bubble_sort_opt(lst_obj):
+    flag = True
+    iter_counter = 0
+    while flag:
+        for i in range(len(lst_obj) - iter_counter - 1):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                flag = True
+        iter_counter += 1
+    return lst_obj
+
+print(timeit(
+    "bubble_sort_opt(lst[:])",
+    globals=globals(),
+    number=10000
+))
+
+
+"""Реализовал самый простой способ сортировки пузырьком, разницы нет, сложность остается n**2"""
