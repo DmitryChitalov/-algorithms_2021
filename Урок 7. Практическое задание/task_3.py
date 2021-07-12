@@ -40,3 +40,27 @@ for i in
 
 
 """
+m = int(input('Введите значение m = '))
+
+from random import randint
+
+lst = [randint(0, 100) for x in range(m * 2 + 1)]
+print(f'Исходный массив - {lst}')
+
+
+def shell_sort(lst_obj):
+    gap = len(lst_obj) // 2
+    while gap > 0:
+        for i in range(gap, len(lst_obj)):
+            temp = lst_obj[i]
+            j = i
+            while j >= gap and lst_obj[j - gap] > temp:
+                lst_obj[j] = lst_obj[j - gap]
+                j = j - gap
+            lst_obj[j] = temp
+        gap = gap // 2
+    return lst_obj
+
+
+print(f'Отсортированный - {shell_sort(lst.copy())}')
+print(f'Медиана - {shell_sort(lst.copy())[m]}')
