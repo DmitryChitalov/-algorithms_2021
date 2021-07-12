@@ -23,3 +23,39 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import defaultdict
+
+
+def check(v):
+    temp = (v.split(" "))
+    for i in temp:
+        if not i.isdigit() or len(temp) != 4:
+            print("Ошибка ввода данных. Введены не 4 числа.")
+            exit()
+        else:
+            continue
+    return [int(item) for item in temp]
+
+
+comp_year = defaultdict(int)
+
+number = (input('Введите число компаний: '))
+while not number.isdigit():
+    number = (input('Введите число компаний: '))
+
+for i in range(int(number)):
+    name_company = input('Введите имя Компании: ')
+    profit_company = input('Введите через пробел прибыль данной организации за каждый квартал: ')
+    s = check(profit_company)
+    comp_year[name_company] = sum(s) / len(s)
+
+average_profit_all = sum(comp_year.values()) / int(number)
+print(f'Средняя годовая прибыль всех организаций: ', average_profit_all)
+
+for items, value in comp_year.items():
+    print(f'Средняя прибыль {items} {value} рублей')
+    if comp_year[items] > average_profit_all:
+        print(f'Организация, чья прибыль выше средней: ', items)
+    else:
+        print(f'Организация, чья прибыль ниже средней: ', items)
