@@ -39,16 +39,14 @@ print(max_profit)                                                           # O(
 
 
 # Второй способ:
-# Сложность O (n**2)
+# Сложность O (n)
 
-global max_value                                                            # O(1)
-global key_max_value                                                        # O(1)
 
 max_profit_2 = {}                                                           # O(1)
-while len(max_profit_2) < 3:                                                # O(n)
+while len(max_profit_2) < 3:                                                # O(1)
     max_value = 0                                                           # O(1)
     for key, value in profit_company.items():                               # O(n)
-        if max_value < value:                                               # O(len(max_value))
+        if max_value < value:                                               # O(1)
             max_value = value                                               # O(1)
             key_max_value = key                                             # O(1)
     max_value = profit_company.pop(key_max_value)                           # O(1)

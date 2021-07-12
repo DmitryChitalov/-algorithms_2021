@@ -22,40 +22,69 @@
 """
 
 class StackClass:
-    def __init__(self):
-        self.elems = [[],[],[],[],[]]
+    def __init__(self, max_size):
+        self.elems = [[]]
+        self.max_size = max_size
 
     def push_in(self, el):
         """Предполагаем, что верхний элемент стека находится в конце списка"""
-        for i in range(0, len(self.elems) - 1, 1):
-            if len(self.elems[i]) < 5:
-                self.elems[i].append(el)
-                break
+        # if len(self.elems) < self.max_size:
+        #     self.elems.append(el)
+        # elif len(self.elems) == self.max_size:
+        #     self.elems.append([])
+        #     self.elems[len(self.elems) - 1].append(el)
+        if len(self.elems[len(self.elems) - 1]) <= self.max_size:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(el)
+
+        # def push_in(self, el):
+        #     """Предполагаем, что верхний элемент стека находится в конце списка"""
+        #     for i in range(0, len(self.elems) - 1, 1):
+        #         if len(self.elems[i]) < self.max_size:
+        #             self.elems[i].append(el)
+        #             break
 
     def pop_out(self):
-        return self.elems.pop()
+        result = self.elems[len(self.elems) - 1].pop()
+        if len(self.elems[len(self.elems) - 1]) == 0:
+            self.elems.pop()
+        return result
 
     def get_val(self):
         return self.elems[len(self.elems) - 1]
 
     def stack_size(self):
+        elem_sum = 0
+        for stack in self.elems:
+            elem_sum += len(stack)
+        return elem_sum
+
+    def stack_count(self):
         return len(self.elems)
 
-class Stack:
-    def __init__(self):
-        self.stack = []
-        self.max = None
+    def __str__(self):
+        return str(self.elems)
 
-    def push(self, item):
-        self.stack.append(item)
-        if len(self.stack) == 1 or item > self.max:
-            self.max = item
+
 
 if __name__ == '__main__':
-    stack_1 = StackClass()
+
+
+    stack_1 = StackClass(5)
+    print(len(stack_1.elems))
+
     i = 0
-    while i < 18:
-        stack_1.push_in(1+i)
+    while i < 40:
+        stack_1.push_in(i)
+        i += 1
+
+    print(stack_1.elems)
+
+    i = 0
+    while i < 48:
+        stack_1.pop_out()
         i += 1
 
     print(stack_1.elems)
