@@ -25,3 +25,41 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+user_db = {'usr1': {'p': 123, 'a': 0}, 'usr2': {'p': 111, 'a': 1}, 'usr3': {'p': 333, 'a': 1}}
+
+
+# Тут сложность кностантная. О(1)
+def check_consistency(login, pwd):
+    if user_db[login]['p'] == pwd and user_db[login]['a']:
+        # Нет ошибки, можно входить
+        return 'Welcome to the hell!'
+    elif user_db[login]['p'] != pwd:
+        # Ошибка пароля
+        return 'Error, password incorrect'
+    elif user_db[login]['p'] == pwd and not user_db[login]['a']:
+        # Не активирована учетка
+        return 'Your login is not activated. Please, activate it just now or go away.'  # o(1)
+    else:
+        # Нет такого пользователя.
+        return 'Ooops, who are you?'  # 0(1)
+
+
+# Вариант 1 - перебираем всех пользователей (Безусловно кривой алгоритм)
+# Тут сложность линейная - так как мы не знаем объем словаря.
+def v1(l, p):
+    for x in user_db.keys():
+        if l == x:
+            print(check_consistency(l, p))
+
+
+# Сразу дергаем нашу фунуцию.
+# Так как функция - константная сложность, то и слоджность тут O(1)
+def v2(l, p):
+    print(check_consistency(l, p))
+
+
+v1('usr1', 12)
+v1('usr1', 123)
+v1('usr2', 111)
+v2('usr3', 333)
