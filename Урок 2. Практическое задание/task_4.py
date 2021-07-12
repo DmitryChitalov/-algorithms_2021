@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+number = 1
+summ_number = 0
+
+def get_sum_number(number):
+    # базовый случай!!!
+    global summ_number, count
+    if count == 0:
+        return summ_number
+    else:
+        # шаг рекурсии
+        count = count - 1
+        summ_number += number
+        return get_sum_number(number/(-2))
+
+count = int(input('Введите количество элементов: '))
+print(get_sum_number(number))

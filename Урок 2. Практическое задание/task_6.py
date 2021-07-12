@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+n = random.randint(0, 100)
+print(n)
+i = 10
+
+def get_guess():
+    global i
+    ask = int(input('Введите загаданное число от 0 до 100: '))
+    if ask == n or i == 0:
+        return f'Игра окончена, верное число {n}'
+    elif ask < n:
+        print('Введите число больше!')
+        i -= 1
+        return get_guess()
+    else:
+        print('Введите число меньше!')
+        i -= 1
+        return get_guess()
+
+print(get_guess())
