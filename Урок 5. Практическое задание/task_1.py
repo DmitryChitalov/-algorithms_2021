@@ -31,12 +31,21 @@ company = namedtuple('Firms', 'name qr1 qr2 qr3 qr4')
 firms = []
 
 for i in range(company_count):
+<<<<<<< HEAD
     COMPANY = company(input('Название фирмы:'),
                   int(input('Прибыль за 1 квартал:')),
                   int(input('Прибыль за 2 квартал:')),
                   int(input('Прибыль за 3 квартал:')),
                   int(input('Прибыль за 4 квартал:')))
     firms.append(COMPANY)
+=======
+    fir = company(input('Введите название фирмы:'),
+                  int(input('Введите прибыль за 1 квартал:')),
+                  int(input('Введите прибыль за 2 квартал:')),
+                  int(input('Введите прибыль за 3 квартал:')),
+                  int(input('Введите прибыль за 4 квартал:')))
+    firms.append(fir)
+>>>>>>> origin/lesson5
 
 
 def avg_profit(firms):
@@ -62,5 +71,9 @@ def above_below_avg_profit(firms, avg_prof):
 avarage_profit = avg_profit(firms)
 above_average, below_average = above_below_avg_profit(firms, avarage_profit)
 print(f'Средняя годовая прибыль: {avarage_profit}')
+<<<<<<< HEAD
 print(f'Предприятия {above_average} с прибылью выше среднего значения: {above_average}')
+=======
+print(f'Предприятия, с прибылью выше среднего значения: {above_average}')
+>>>>>>> origin/lesson5
 print(f'Предприятия, с прибылью ниже среднего значения: {below_average}')

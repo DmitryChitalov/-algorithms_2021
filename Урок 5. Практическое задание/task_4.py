@@ -10,21 +10,21 @@ from timeit import timeit
 from collections import OrderedDict
 
 
-def input_dct_1(n):  # Сложность O(n)
+def input_dct_1(n):
     dct1 = dict()
     for i in range(n):
         dct1[i] = i
     return dct1
 
 
-def input_odct_1(n):  # Сложность O(n)
+def input_odct_1(n):
     odct1 = OrderedDict()
     for i in range(n):
         odct1[i] = i
     return odct1
 
 
-def input_dct_2():  # Сложность O(n^2)
+def input_dct_2():
     dct2 = dict()
     for i in dct1:
         for j in dct1:
@@ -32,7 +32,7 @@ def input_dct_2():  # Сложность O(n^2)
     return dct2
 
 
-def input_odct_2():  # Сложность O(n^2)
+def input_odct_2():
     odct2 = OrderedDict()
     for i in dct1:
         for j in dct1:
@@ -101,5 +101,6 @@ print(timeit("odct1_get2(k)", globals=globals(), number=1000000))          # 0.2
 print(timeit("dct1_get_key(v)", globals=globals(), number=100000))         # 0.38950718800000006
 print(timeit("odct1_get_key(v)", globals=globals(), number=100000))        # 0.646991485
 
-# Все операции с обычным словарем выполняются быстрее, чем аналогичные операции с OrderedDict.
-# Cмысла исп-ть OrderedDict в Python 3.6 и более поздних версиях НЕТ.
+
+
+#Смысла использовать в более поздних версиях нет

@@ -48,7 +48,11 @@ def var_1():
     resul = hex(sum([int(''.join(number), 16) for number in numbers.values()]))[2:].upper()
     mul = hex(reduce(lambda a, b: a * b, [int(''.join(number), 16) for number in numbers.values()]))[2:].upper()
 
+<<<<<<< HEAD
     print(f'Сумма чисел : {list(resul)}')
+=======
+    print(f'Сумма чисел составляет: {list(resul)}')
+>>>>>>> origin/lesson5
     print(f'Произведение чисел: {list(mul)}')
 
 var_1()
