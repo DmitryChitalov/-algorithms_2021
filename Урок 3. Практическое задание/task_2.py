@@ -28,7 +28,8 @@ from tempfile import TemporaryFile, TemporaryDirectory
 def sqlite3_connect():
 
     with TemporaryDirectory() as tmpdirname:
-        connect = sqlite.connect(f'{tmpdirname}/volkovan_task2.py')
+        # connect = sqlite.connect(f'{tmpdirname}\'volkovan_task2.db')
+        connect = sqlite.connect(f'./volkovan_task2.db')
         cursor = connect.cursor()
 
         cursor.execute('CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT, salt TEXT)')
