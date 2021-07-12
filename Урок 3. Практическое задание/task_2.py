@@ -25,7 +25,6 @@
 import sqlite3 as sqlite
 from hashlib import sha256
 from uuid import uuid4
-from string import ascii_lowercase
 
 
 def sqlite3_connect(database_path):
