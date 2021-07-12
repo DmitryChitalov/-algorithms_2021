@@ -16,9 +16,9 @@ def check_1(lst_obj):
     """Функция должна создать множество из списка.
     Алгоритм 3:
     Создать множество из списка
-    Сложность: O(n).
+    Сложность: O(len(lst_obj).
     """
-    lst_to_set = set(lst_obj)  # O(n)
+    lst_to_set = set(lst_obj)  # O(len(lst_obj))
     return lst_to_set  # O(1)
 
 
