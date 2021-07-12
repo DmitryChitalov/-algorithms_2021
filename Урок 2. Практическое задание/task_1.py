@@ -31,6 +31,12 @@
 
 
 def check_input(input_string, is_operation=False):
+    """
+    Проверка введенных параметров.
+    :param input_string:
+    :param is_operation:
+    :return:
+    """
     if input_string == "0" and is_operation:
         exit()
     elif input_string == "+" or input_string == "-" or input_string == "*" or input_string == "/":
@@ -43,6 +49,13 @@ def check_input(input_string, is_operation=False):
 
 
 def calc(operation, first_number, second_number):
+    """
+    Функция - калькулятор.
+    :param operation:
+    :param first_number:
+    :param second_number:
+    :return:
+    """
     if operation == "+":
         return first_number + second_number
     elif operation == "-":
@@ -58,6 +71,10 @@ def calc(operation, first_number, second_number):
 
 
 def main_calc():
+    """
+    Основная рекурсивная функция.
+    :return:
+    """
     operation = (input("Введите операцию (+, -, *, / или 0 для выхода): \n")).lower()
     if check_input(operation, True):
         first_number = input("Введите первое число: \n")
