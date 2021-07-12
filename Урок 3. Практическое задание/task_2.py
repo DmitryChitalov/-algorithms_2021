@@ -20,3 +20,23 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import sqlite3 as sqlite
+from tempfile import TemporaryFile, TemporaryDirectory
+
+
+def sqlite3_connect():
+
+    with TemporaryDirectory() as tmpdirname:
+        connect = sqlite.connect(f'{tmpdirname}/volkovan_task2.py')
+        cursor = connect.cursor()
+
+        cursor.execute('CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT, salt TEXT)')
+
+
+def registration():
+    return 1
+
+
+if __name__ == '__main__':
+    sqlite3_connect()
