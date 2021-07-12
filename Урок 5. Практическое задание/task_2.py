@@ -34,3 +34,66 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from pympler import asizeof
+from collections import defaultdict
+
+
+def fill_list(value):
+    numbers = defaultdict(list)
+    numbers[value] = list(value)
+    return numbers
+
+
+def sum_values(number_1, number_2):
+    return list(format(int("".join(number_1.keys()), 16) + int("".join(number_2.keys()), 16), 'X'))
+
+
+def composition_numbers(number_1, number_2):
+    return list(format(int("".join(number_1.keys()), 16) * int("".join(number_2.keys()), 16), 'X'))
+
+
+val1 = fill_list("A2")
+val2 = fill_list("C4F")
+
+print(f"Сумма {list(val1.values())[0]} и {list(val2.values())[0]} равняется: {sum_values(val1, val2)}")
+print(f"Произведение {list(val1.values())[0]} и {list(val2.values())[0]} равняется: {composition_numbers(val1, val2)}")
+del val1, val2
+
+
+print("Реализация на ООП")
+
+
+class HexNumber:
+    __slots__ = ["first", "second"]     # с их использованием занимаемая память стала 424 вместо 640
+
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
+
+    def to_str1(self):
+        return "".join(self.first)
+
+    def to_str2(self):
+        return "".join(self.second)
+
+    def __add__(self, other):
+        s = list(hex(int(self.to_str1(), 16) + int(other.to_str2(), 16)))[2:]
+        return [f.upper() for f in s]
+
+    def __mul__(self, other):
+        s2 = list(hex(int(self.to_str1(), 16) * int(other.to_str2(), 16)))[2:]
+        return [f.upper() for f in s2]
+
+
+hex_1 = list(input('Введите первое шестнадцетиричное число : '))
+hex_2 = list(input('Введите второе шестнадцетиричное число : '))
+
+a = HexNumber(hex_1, hex_2)
+
+print("Сумма двух чисел равна: ", a + a)
+print("Произведение двух чисел равно: ", a * a)
+print("Память : ", asizeof.asizeof(a))
+del a
+
+
+
