@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def create_arr(values_left, arr=[]):
+    if values_left > 0:
+        if len(arr) == 0:
+            arr.append(1)
+        else:
+            arr.append(arr[len(arr) - 1] / -2)
+        values_left = values_left - 1
+        create_arr(values_left, arr)
+    else:
+        print(f'Элементов: {len(arr)}, на сумму: {(sum(el for el in arr))}')
+
+
+# Запускаем нашу рекурсию.
+try:
+    inp = int(input('Введите количество элементов: '))
+    create_arr(inp)
+except:
+    print('Введите число!')

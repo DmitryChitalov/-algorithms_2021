@@ -16,3 +16,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def incrementer(v=5):
+    if v == 1:
+        return 1
+    else:
+        return v + incrementer(v - 1)
+
+
+def check_data(value=5):
+    print(f'Решаем уравнение вида: 1+2+..+n = n*(n+1)/2 где n = {value}')
+    l_side = incrementer(value)
+    r_side = value * (value + 1) / 2
+    print(f'Левая часть : {l_side}')
+    print(f'Правая часть: {r_side}')
+    if l_side == r_side:
+        print('Знаения равны!')
+
+
+check_data(15)

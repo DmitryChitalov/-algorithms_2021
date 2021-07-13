@@ -18,3 +18,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check(num_in, div_val=0, mod_val=0):
+    if num_in > 0:
+        if num_in % 10 % 2 == 0:
+            div_val += 1
+        else:
+            mod_val += 1
+        check(num_in // 10, div_val, mod_val)
+    else:
+        print(f'Количество четных и нечетных цифр в числе равно: ({div_val}, {mod_val})')
+
+
+def main(att=3):
+    try:
+        x = int(input('Введите произвольное число: '))
+        check(x)
+    except:
+        att -= 1
+        print(f'Вы точно ввели число? Попробуйте еще раз... (Попыток осталось: {att}) ')
+        main(att)
+
+
+main(3)
