@@ -47,8 +47,8 @@ class Tree:
         try:
             if self.root is not None:
                 return self._find(val, self.root)
-        except Exception as e:
-            return f"Value {val}, not find in tree"
+        except ValueError:
+            print(f"Value {val}, not find in tree")
 
 
     def _find(self, val, node):
@@ -83,7 +83,7 @@ tree.add(2)
 tree.print_tree()
 print(tree.find(3).v)
 print(tree.find(10))
-tree.find(10)
+tree.find(120)
 tree.delete_tree()
 tree.print_tree()
 
