@@ -97,7 +97,7 @@ class Table:
             f = 'Стол пустой.\n'
         else:
             for x in range(len(self.place)):
-                f = f + (f'Стопка: {x + 1} содержит тарелок {self.place[x].plate_count} шт.\n')
+                f = f + f'Стопка: {x + 1} содержит тарелок {self.place[x].plate_count} шт.\n'
         return f
 
 
