@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+def min(lst):
+    min_val = lst[0]  # O(1)
+    for e in lst:  # O(n)
+        if min_val > e:  # O(1)
+            min_val = e  # O(1)
+    return min_val  # O(1)
+
+
+
+def min_alt(lst):
+    min_val = lst[0]
+    for e in lst:
+        for el in lst:
+            if e > el:
+                if el < min_val:
+                    min_val = el
+    return min_val
+
+
+lst = [99, 9, 5, 99, 8, 11, -1, 32, 555, 6, 22, 5, 56236, 6]
+print(min(lst))
+print(min_alt(lst))
