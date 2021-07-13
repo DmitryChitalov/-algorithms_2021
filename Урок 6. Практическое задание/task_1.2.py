@@ -1,33 +1,27 @@
-"""
-Задание 3 *.
-Сделать профилировку для скриптов с рекурсией и сделать описание,
-можно ли так профилировать и есть ли 'подводные камни' в профилировании?
-Придумать как это решить!
-Есть очень простое решение
-"""
-from memory_profiler import profile
+from task_1 import memory_time_profiler
 
-@profile
+
+@memory_time_profiler
 def profiler_recursion(num, even=0, odd=0):
     def even_odd_num_1(num, even=0, odd=0):
         if num > 0:
             if num % 2 == 0:
-                even +=1
+                even += 1
             else:
-                odd +=1
+                odd += 1
             num = num // 10
             return even_odd_num_1(num, even, odd)
         else:
             return print(f'В вашем числе: четных {even}, нечетных {odd}')
 
 
-@profile
+@memory_time_profiler
 def even_odd_num_2(num, even=0, odd=0):
     while num > 0:
         if num % 2 == 0:
             even += 1
         else:
-            odd +=1
+            odd += 1
         num = num // 10
 
 

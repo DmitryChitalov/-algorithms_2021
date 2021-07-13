@@ -13,11 +13,25 @@
 или с текущего курса Алгоритмов
 
 Результаты профилирования добавьте в виде комментариев к коду.
-Обязательно сделайте аналитику (что с памятью в ваших скриптах, в чем ваша оптимизация и т.д.)
+Обязательно сделайте аналитику (что с памятью в ваших скриптах, в чем ваша
+оптимизация и т.д.)
 
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 
-Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
-С одновременным замером времени (timeit.default_timer())!
+Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из
+memory_profiler, С одновременным замером времени (timeit.default_timer())!
 """
+from memory_profiler import memory_usage
+from timeit import default_timer
+
+
+def memory_time_profiler(func):
+    def data(*args, **kwargs):
+        m_start, t_start = memory_usage(), default_timer()
+        result = func(*args, **kwargs)
+        m_stop, t_stop = memory_usage(), default_timer()
+        m_res, t_res = (m_stop[0] - m_start[0]), (t_stop - t_start)
+        return result, f'Использовано памяти: {m_res:0.6f} , выполнено за: ' \
+                       f'{t_res}'
+    return data
