@@ -9,6 +9,9 @@
 
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
+class UserRaise(Exception):
+    def __init__(self, text):
+        self.text = text
 
 class BinaryTree:
     def __init__(self, root_obj):
@@ -27,6 +30,11 @@ class BinaryTree:
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
+        try:
+            if new_node > self.root:
+                raise UserRaise("Ошибка значения левого ребенка, должно быть меньше родителя")
+        except UserRaise as e:
+            print(f'Ошибка: {e}')
         else:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
@@ -42,6 +50,11 @@ class BinaryTree:
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
+        try:
+            if new_node < self.root:
+                raise UserRaise("Ошибка значения правого ребенка, должно быть больше родителя")
+        except UserRaise as e:
+            print(f'Ошибка: {e}')
         else:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
@@ -77,3 +90,8 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print('-' * 200)
+r.insert_left(4)
+r.left_child.insert_left(2)
+r.left_child.insert_right(6)
+print(r)
