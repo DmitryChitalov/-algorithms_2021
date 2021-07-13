@@ -76,7 +76,7 @@ class Table:
 
     def rem_plates(self, count):
         for x in range(count):
-            if self.get_last_pos != None:
+            if self.get_last_pos is None:
                 self.get_last_pos.remove_plate()
                 if self.get_last_pos.plate_count == 0:
                     self.place.pop()

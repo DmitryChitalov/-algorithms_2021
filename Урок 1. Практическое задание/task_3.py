@@ -20,3 +20,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# O(n) # Линейный метод - обходим словарь три раза убирая из него максимальный найденный элемент
+def method1(in_dict):
+    k = 0                                      # O(1)
+    s_dict = in_dict.copy()                    # O(n)
+    while k < 3:                               # O(1)
+        c_max = list(s_dict.items())[0][1]     # O(n)
+        c_name = list(s_dict.items())[0][0]    # O(1)
+        for i in s_dict:                       # O(n)
+            if c_max < s_dict[i]:              # O(1)
+                c_max = s_dict[i]              # O(1)
+                c_name = i                     # O(1)
+        print(c_name, s_dict.pop(c_name))      # O(1)
+        k += 1                                 # O(1)
+
+
+# O(n**2) Тут алгоритм медленнее - из-за того что мы сравниваем каждый раз все элементы между собой.
+def method2(in_dict):
+    k = 0                                  # O(1)
+    s_dict = in_dict.copy()                # O(n)
+    while k < 3:                           # O(1)
+        for i in s_dict:                   # O(n)
+            c_max = True                   # O(1)
+            for j in s_dict:               # O(n)
+                if s_dict[i] < s_dict[j]:  # O(1)
+                    c_max = False          # O(1)
+            if c_max:                      # O(1)
+                print(i, s_dict.pop(i))    # O(1)
+                break                      # O(1)
+        k += 1                             # O(1)
+
+
+companies = {"гугл": 15413513, "яндекс": 1513311, "мейл": 100, "амазон": 153135466, "браззерс": 88166661, "али экспресс": 111111}
+method1(companies) # более шустрый метод.
+method2(companies)
