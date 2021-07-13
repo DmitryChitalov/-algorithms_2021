@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+from random import randint
+
+
+# алгоритм первый O(n^2)
+def find_min1(lst):
+    for i in lst:  # O(n)
+        min_num = True  # O(1)
+        for j in lst:  # O(n)
+            if j < i:  # O(1)
+                min_num = False  # O(1)
+        if min_num:  # O(1)
+            return i  # O(1)
+
+
+# алгоритм второй O(n)
+def find_min2(lst):
+    min_num = lst[0]  # O(1)
+    for i in lst:  # O(n)
+        if i < min_num:  # O(1)
+            min_num = i  # O(1)
+    return min_num  # O(1)
+
+
+numbers = [randint(0, 100) for i in range(10)]
+print(numbers)
+print(find_min1(numbers))
+print(find_min2(numbers))

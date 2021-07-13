@@ -25,3 +25,49 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# сложность O(1)
+def authentication1(users, login, password):
+    if users.get(login):
+        if users[login]['password'] == password:
+            if users[login]['activation']:
+                return 'Предоставлен доступ к ресурсу.'
+            else:
+                return 'Учетная запись не активирована, пройдите активацию.'
+        else:
+            return 'Неверный пароль.'
+    return 'Логин введен неверно.'
+
+
+# сложность O(n)
+def authentication2(users, login, password):
+    for key, value in users.items():
+        if key == login:
+            if value['password'] == password:
+                if value['activation']:
+                    return 'Предоставлен доступ к ресурсу.'
+                else:
+                    return 'Учетная запись не активирована, пройдите активацию.'
+            else:
+                return 'Неверный пароль.'
+    return 'Логин введен неверно.'
+
+
+users_dict = {'user1': {'password': '123', 'activation': True},
+              'user2': {'password': '1234', 'activation': False},
+              'user3': {'password': '12345', 'activation': False},
+              'user4': {'password': '123456', 'activation': True},
+              'user5': {'password': '1234567', 'activation': True}
+              }
+
+print(authentication1(users_dict, 'user', '000'))
+print(authentication1(users_dict, 'user1', '123'))
+print(authentication1(users_dict, 'user3', 'qwerty'))
+print(authentication1(users_dict, 'user3', '12345'))
+print(authentication2(users_dict, 'user', '000'))
+print(authentication2(users_dict, 'user1', '123'))
+print(authentication2(users_dict, 'user3', 'qwerty'))
+print(authentication2(users_dict, 'user3', '12345'))
+
+# решение со сложностью O(1) эффективнее, так как не использует цикл
