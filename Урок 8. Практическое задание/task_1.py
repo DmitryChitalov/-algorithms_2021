@@ -44,21 +44,21 @@ class Tree:
                 node.r = Node(val)
 
     def find(self, val):
-        if self.root is not None:
-            return self._find(val, self.root)
-        else:
-            return None
+        try:
+            if self.root is not None:
+                return self._find(val, self.root)
+        except Exception as e:
+            print(f"Value {val}, not find in tree\n")
+
 
     def _find(self, val, node):
-        try:
-            if val == node.v:
-                return node
-            elif (val < node.v and node.l is not None):
-                return self._find(val, node.l)
-            elif (val > node.v and node.r is not None):
-                return self._find(val, node.r)
-        except Exception as e:
-            print(e)
+        if val == node.v:
+            return node
+        elif (val < node.v and node.l is not None):
+            return self._find(val, node.l)
+        elif (val > node.v and node.r is not None):
+            return self._find(val, node.r)
+
 
     def delete_tree(self):
         self.root = None
@@ -83,6 +83,7 @@ tree.add(2)
 tree.print_tree()
 print(tree.find(3).v)
 print(tree.find(10))
+tree.find(10)
 tree.delete_tree()
 tree.print_tree()
 
