@@ -48,7 +48,7 @@ class Tree:
             if self.root is not None:
                 return self._find(val, self.root)
         except Exception as e:
-            print(f"Value {val}, not find in tree\n")
+            return f"Value {val}, not find in tree"
 
 
     def _find(self, val, node):
