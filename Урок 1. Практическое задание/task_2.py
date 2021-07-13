@@ -19,3 +19,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def find_min_value(my_list):  # Сложность: O(n)
+    one_value = my_list[0]
+    for i in my_list:
+        if i < one_value:
+            one_value = i
+    return one_value
+
+
+def find_min_value_2(my_list):  # Сложность: O(n^2)
+    min_value = 0
+    for i in my_list:
+        for j in my_list:
+            if j < i:
+                min_value = j
+    return min_value
+
+
+test_list = [9, 2, 5, 8, 1]
+
+print(find_min_value(test_list))
+print(find_min_value_2(test_list))
