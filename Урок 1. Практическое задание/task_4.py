@@ -25,3 +25,37 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# 1) Сложность O(1)
+def checking(name_user, passw_user):
+    if users.get(name_user):
+        if users[name_user]['password'] == passw_user and users[name_user]['status']:
+            return 'Вход'
+        elif users[name_user]['password'] == passw_user and not users[name_user]['status']:
+            return 'Не активна'
+        elif users[name_user]['password'] != passw_user:
+            return 'Пароль не верный'
+    else:
+        return 'Нет пользователя'
+
+
+# 2) Сложность O(n)
+
+def checking_1(name_user, passw_user):
+    if name_user in users:
+        if users[name_user]['password'] == passw_user and users[name_user]['status']:
+            return 'Вход'
+        elif users[name_user]['password'] == passw_user and not users[name_user]['status']:
+            return 'Не активна'
+        elif users[name_user]['password'] != passw_user:
+            return 'Пароль не верный'
+    else:
+        return 'Нет пользователя'
+
+
+users = {'vlad': {'password': '1234', 'status': True},
+         'mir': {'password': '1532', 'status': False}}
+print(checking_1('mir', '1234'))
+
+#  Однозначно константная сложность эффективнее, поскольку она не проверяет словарь на наличие.
