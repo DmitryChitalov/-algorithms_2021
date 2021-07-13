@@ -26,3 +26,46 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'user_1': {'password': '1234', 'activated': True},
+         'user_2': {'password': '2345', 'activated': True},
+         'user_3': {'password': '3456', 'activated': False},
+         'user_4': {'password': '4567', 'activated': True},
+         'user_5': {'password': '5678', 'activated': False},
+         'user_6': {'password': '6789', 'activated': False},
+         'user_7': {'password': '7890', 'activated': True}}
+
+
+def authentication_1(users_dict, user_login, user_password):  # Сложность  O(n)
+    for u, i in users_dict.items():
+        if u == user_login:
+            if (i.get('password') == user_password) and i.get('activated'):
+                return 'Доступ разрешён!'
+            elif (i.get('password') == user_password) and not i.get('activated'):
+                return 'В доступе отказано! Активируйте учётную запись!'
+        else:
+            return 'В доступе отказано! Не верный пароль.'
+    else:
+        return 'В доступе отказано! Не верный логин.'
+
+
+def authentication_2(users_dict, user_login, user_password):  # Сложность  O(n^2)
+    for u in users_dict.keys():
+        if u == user_login:
+            for i in users_dict.values():
+                if (i.get('password') == user_password) and i.get('activated'):
+                    return 'Доступ разрешён!'
+                elif (i.get('password') == user_password) and not i.get('activated'):
+                    return 'В доступе отказано! Активируйте учётную запись!'
+            else:
+                return 'В доступе отказано! Не верный пароль.'
+    else:
+        return 'В доступе отказано! Не верный логин.'
+
+
+
+print(authentication_1(users, 'user_1', '1234'))
+print(authentication_2(users, 'user_1', '1234'))
+print(authentication_2(users, 'user_3', '3456'))
+
+#  Первое решение эффективней, т.к. сложность его решения в нотации О-большое меньше.
