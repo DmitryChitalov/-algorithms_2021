@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_number_series(input_number):
+    return None
+
+
+number = int(input("Введите количество элементов: \n"))
+print(f"Вы ввели: {number}\n")
+
+first = 1
+sum_el = 0
+for _ in range(number):
+    print(first)
+    sum_el = sum_el + first
+    first = first * -0.5
+
+print(sum_el)

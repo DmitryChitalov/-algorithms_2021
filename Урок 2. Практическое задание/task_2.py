@@ -40,8 +40,7 @@ def get_even_odd_from_number(input_number, even=0, odd=0):
         return get_even_odd_from_number(input_number, even, odd)
 
 
-input_num = input("Введите число: \n")
-input_num = int(input_num)
-print("Вы ввели: ", input_num)
-x = get_even_odd_from_number(input_num)
+number = int(input("Введите число: \n"))
+print("Вы ввели: ", number)
+x = get_even_odd_from_number(number)
 print(f"Количество четных и нечетных цифр в числе равно: {x}\n")
