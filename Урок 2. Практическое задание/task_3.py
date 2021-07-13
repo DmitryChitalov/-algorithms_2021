@@ -22,3 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def reverse(n, reversed_n=''):
+    if n == 0:
+        return f'{reversed_n}'
+    else:
+        reversed_n += str(n % 10)
+        return reverse(n // 10, reversed_n)
+
+
+print(reverse(44332))
+print(reverse(12340))
+print(reverse(789))
