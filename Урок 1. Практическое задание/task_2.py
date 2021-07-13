@@ -19,3 +19,38 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+
+def func_1(in_lst):
+    """O(n^2)"""
+    flag = True                                                         # O(1)
+
+    while flag:                                                         # O(n)
+        flag = False                                                    # O(1)
+        for i in range(len(in_lst) - 1):                                # O(n)
+            if in_lst[i] > in_lst[i + 1]:                               # O(1)
+                in_lst[i], in_lst[i + 1] = in_lst[i + 1], in_lst[i]     # O(1)
+                flag = True                                             # O(1)
+
+    return in_lst[0]                                                    # O(1)
+
+
+def func_2(in_lst):
+    """O(n)"""
+    min_value = in_lst[0]   # O(1)
+
+    for i in in_lst:        # O(n)
+        if i < min_value:   # O(1)
+            min_value = i   # O(1)
+
+    return min_value        # O(1)
+
+
+for j in (50, 500, 1000, 5000, 10000):
+    # Из 100000 чисел возьмем 'j' случайно выбранных
+    # Всего 10 тыс. чисел
+    lst = random.sample(range(-100000, 100000), j)
+
+print(func_1(lst))
+print(func_2(lst))
