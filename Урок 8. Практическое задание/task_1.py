@@ -50,12 +50,15 @@ class Tree:
             return None
 
     def _find(self, val, node):
-        if val == node.v:
-            return node
-        elif (val < node.v and node.l is not None):
-            return self._find(val, node.l)
-        elif (val > node.v and node.r is not None):
-            return self._find(val, node.r)
+        try:
+            if val == node.v:
+                return node
+            elif (val < node.v and node.l is not None):
+                return self._find(val, node.l)
+            elif (val > node.v and node.r is not None):
+                return self._find(val, node.r)
+        except Exception as e:
+            print(e)
 
     def delete_tree(self):
         self.root = None
@@ -82,3 +85,8 @@ print(tree.find(3).v)
 print(tree.find(10))
 tree.delete_tree()
 tree.print_tree()
+
+
+"""
+Добавление происходит через сравнение элементов. Мне нравится рекурсивный метод здесь и принцип ноды.
+"""
