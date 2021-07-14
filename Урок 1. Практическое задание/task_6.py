@@ -18,3 +18,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# FIFO
+class Queue:
+    def __init__(self, name):
+        self.items = []
+        self.__name = name
+
+    def queue_in(self, item):
+        # Всегда ставим задачу пришедшую последней - в начало очереди
+        self.items.insert(0,item)
+
+    def queue_out(self):
+        # Просто берем последний элемент списка, а это самая первая задача.
+        return self.items.pop()
+
+    def __str__(self):
+        return f'Очередь "{self.__name}": {self.items}'
+
+
+new = Queue('Новые задачи')
+working = Queue('Задачи в работе')
+done = Queue('Выполненные задачи')
+rework = Queue('Задачи на доработку')
+
+new.queue_in('Сделать хороший отчет')
+new.queue_in('Сделать хороший отчет - 2')
+new.queue_in('Добавить обработку загрузки данных')
+new.queue_in('Создать новую страницу веб-сайта')
+new.queue_in('Запилить выгрузку данных')
+
+working.queue_in(new.queue_out())
+working.queue_in(new.queue_out())
+working.queue_in(new.queue_out())
+rework.queue_in(working.queue_out())
+done.queue_in(working.queue_out())
+
+print(new)
+print(working)
+print(done)
+print(rework)

@@ -19,3 +19,28 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# O(n^2)
+def min_list(some_list):
+    for x in some_list:
+        val_min = True
+        for y in some_list:
+            if x > y:
+                val_min = False
+        if val_min:
+            return x
+
+
+# O(n)
+def min_list_fast(some_list):
+    t = some_list[0]
+    for x in some_list:
+        if t > x:
+            t = x
+    return t
+
+
+lst = [10, 51, 61, 122, 67, 11, 33, 6, 11, 6, 22, 19, 31, 532]
+print(min_list(lst))
+print(min_list_fast(lst))
