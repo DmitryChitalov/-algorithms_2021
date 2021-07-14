@@ -15,7 +15,7 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
-
+from timeit import timeit,Timer
 
 def func_1(nums):
     new_arr = []
@@ -23,3 +23,57 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    new_arr = []
+    for num,value in enumerate(nums,1):
+        if value % 2 == 0:
+            new_arr.append(num)
+    return new_arr
+
+
+nums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+print(f'func_1 {timeit("func_1(nums)",globals = globals(), number = 1000000)} sec')
+print(f'func_2 {timeit("func_2(nums)",globals = globals(), number = 1000000)} sec')
+
+
+"""
+1 замер 
+func_1 8.1298485 sec
+func_2 6.7580747 sec
+2 замер 
+func_1 7.539393 sec
+func_2 6.688165000000001 sec
+3 замер
+func_1 7.1294566 sec
+func_2 6.9817289 sec
+4 замер
+func_1 8.256797599999999 sec
+func_2 8.4286802 sec
+5 замер
+func_1 6.9847575 sec
+func_2 6.526850800000001 sec
+6 замер
+func_1 7.2696689 sec
+func_2 6.3607971999999995 sec
+7 замер
+func_1 8.3803932 sec
+func_2 7.673043299999998 sec
+8 замер
+func_1 7.0057522 sec
+func_2 7.999252600000001 sec
+9 замер
+func_1 8.011754499999999 sec
+func_2 7.7970086 sec
+10 замер
+func_1 7.1100379 sec
+func_2 6.6949106 sec
+
+В исходном варианте алгоритма с циклом for при каждой итерации цикла проход 
+по списку range(len(nums)) каждый раз начинается с нулевого элемента до i-го.
+А когда мы используем enumerate() на i-ом шаге enumerate() возвращает нам 
+кортеж из номера элемента = i и его значения. После чего эта пара удаляется
+и следующая итерация цикла поисходит не с нулевого элемента, а с элемента
+i+1. 
+"""

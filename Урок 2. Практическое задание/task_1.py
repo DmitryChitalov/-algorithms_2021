@@ -28,3 +28,49 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc():
+    correct = False
+    digit1 = 0
+    digit2 = 0
+    while correct == False:
+        operation=input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if operation == "0":
+            break
+        if operation not in '+-*/0':
+            print('Неверный ввод операции')
+        else:
+            while True:
+                try:
+                    digit1 = int(input('Введите первое число: '))
+                    digit2 = int(input('Введите второе число: '))
+                    if digit2 == 0 and operation == '/':
+                        print('При деление знаменатель должен быть больше 0. Повторите ввод')
+                        correct_del_0 = False
+                        while correct_del_0 == False:
+                            digit2 = int(input('Введите второе число: '))
+                            if digit2 == 0:
+                                print('При деление знаменатель должен быть больше 0. Повторите ввод')
+                            else:
+                                correct_del_0 = True
+                    break
+                except  ValueError:
+                    print('Неверный формат чисел')
+            correct = True
+
+    if operation == "+":
+        print(f'{digit1}+{digit2}={digit1 + digit2}')
+        return calc()
+    elif operation == "-":
+        print(f'{digit1}-{digit2}={digit1 - digit2}')
+        return calc()
+    elif operation == "*":
+        print(f'{digit1}*{digit2}={digit1 * digit2}')
+        return calc()
+    elif operation == "/":
+        print(f'{digit1}/{digit2}={digit1 / digit2}')
+        return calc()
+    return
+
+
+calc()

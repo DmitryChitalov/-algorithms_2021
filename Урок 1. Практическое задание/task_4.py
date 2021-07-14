@@ -25,3 +25,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+users_dict={'Иванов':['qwerty',1],'Петров':['asdf',1],'Сидоров':['zxcv',0],'Михайлов':['qwer',0]}
+
+
+
+
+def auth1(name,password):                                                              # Сложность O(1)
+    if name in users_dict.keys():                                                      # O(1)
+        if password in users_dict[name]:                                               # O(1)
+            if users_dict[name][-1] == 1:                                              # O(1)
+                print('Поздравляю! Вы авторизовались')                                 # O(1)
+            else:                                                                      # O(1)
+                print('Ошибка! Ваша учетная запись не активирована.\n'                 # O(1) 
+                      'Ранее Вам было выслано письмо для активации учетной записи.')   # O(1)
+        else:                                                                          # O(1)
+            print('Пароль не верный')                                                  # O(1)
+    else:                                                                              # O(1)
+        return print('Пользователь не найден!')                                        # O(1)
+    return                                                                             # O(1)
+
+
+def auth2(name,password):                                                              # Сложность O(n)
+    status = 0                                                                         # O(1)
+    for n in users_dict.keys():                                                        # O(n)
+        if name == n and password == users_dict[n][-2] and users_dict[n][-1] == 1:     # O(1)
+            print('Поздравляю! Вы авторизовались')                                     # O(1)
+            status = 1                                                                 # O(1)
+        elif name == n and password == users_dict[n][-2] and users_dict[n][-1] == 0:   # O(1)
+            print('Ошибка! Ваша учетная запись не активирована.\n'                     # O(1) 
+                    'Ранее Вам было выслано письмо для активации учетной записи.')     # O(1)
+            status = 1                                                                 # O(1)
+    if status == 0:                                                                    # O(1)
+        print('Пароль не верный')                                                      # O(1)
+    return                                                                             # O(1)
+
+name = input('Введите логин: ')
+password = input('Введите пароль: ')
+auth1(name,password)
+
+
+name = input('Введите логин: ')
+password = input('Введите пароль: ')
+auth2(name,password)
+
+#Первый метод имеет константную сложность. В нем используются простые конструкции ветвления
+#при помощи if. Во втором же способе используется цикл, имеющий линейную сложность
