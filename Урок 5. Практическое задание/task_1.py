@@ -23,3 +23,18 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+import collections
+
+
+corp = collections.defaultdict(int)
+count = int(input('Введите количество предприятий: '))
+for i in range(count):
+    name = input('Введите название предприятия: ')
+    profit = input('Введите прибыль за каждый квартал через пробел: ')
+    sum_profit = sum([int(x) for x in profit.split()])
+    corp[name] = sum_profit
+mean = int(sum(corp.values()) / len(corp))
+
+print('Средняя прибыль:', mean)
+print('Предприятия с прибылью выше среднего:', ', '.join([x for x in corp.keys() if corp[x] > mean]))
+print('Предприятия с прибылью ниже среднего:', ', '.join([x for x in corp.keys() if corp[x] < mean]))
