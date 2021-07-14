@@ -23,3 +23,35 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+
+def calculator_of_profits():
+    n = int(input("Введите количество предприятий для расчета прибыли: "))
+
+    profit_avg = {}
+    firms = namedtuple(
+        "Firms",
+        "name profit")
+
+    for i in range(n):
+        name = input("Введите название предприятия: ")
+        profit = [int(i) for i in input("Введите прибыли через пробел: ").split(" ")]
+        firm = firms(name, profit)
+
+        profit_avg[firm.name] = sum(firm.profit) / len(firm.profit)
+
+    total_avg = sum(profit_avg.values()) / n
+
+    print(f"Средняя годовая прибыль всех предприятий: {total_avg}")
+
+    for key, val in profit_avg.items():
+        if val > total_avg:
+            print(f"{key} - прибыль выше среднего")
+        elif val < total_avg:
+            print(f"{key} - прибыль ниже среднего")
+        elif val == total_avg:
+            print(f"{key} - средняя прибыль")
+
+calculator_of_profits()
