@@ -16,3 +16,21 @@
 р
 а
 """
+from hashlib import sha256
+
+
+# Срезаем и сразу наполняем список
+def parse_string(line):
+    my_set = set()
+    for i in range(len(line)):
+        for x in range(i, len(line) + 1):
+            # Проверяем сразу граничные условия - строка целиком не нужна, и пустые срезы - тоже.
+            if len(line[i:x]) != 0 and len(line[i:x]) != len(line):
+                my_set.add(sha256(line[i:x].encode()).hexdigest())
+    return my_set
+
+
+in_text = 'papa'
+st = parse_string(in_text)
+# print('\n'.join(st))
+print(f'{in_text} - {len(st)} уникальных подстрок')

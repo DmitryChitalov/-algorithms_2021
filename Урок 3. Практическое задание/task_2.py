@@ -34,6 +34,7 @@ def write_data(login, pass_hash):
     cursor.execute("""update or ignore logins set hash_data = ? where login = ?""", [pass_hash, login])
     conn.commit()
 
+
 def read_data(login):
     conn = sqlite3.connect("passwd.tmp")
     cursor = conn.cursor()
@@ -44,8 +45,8 @@ def read_data(login):
 
 def login():
     user = input('Введите логин: ')
-    passw = input('Введите пароль: ')
-    write_data(user, sha256(user.encode() + passw.encode()).hexdigest())
+    password = input('Введите пароль: ')
+    write_data(user, sha256(user.encode() + password.encode()).hexdigest())
     return user
 
 

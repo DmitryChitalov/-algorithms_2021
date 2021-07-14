@@ -22,6 +22,7 @@ b) выполните набор операций и со списком, и с�
 
 import time
 
+
 def decor(func):
     def wrapper(*args):
         start_time = time.time()
@@ -29,6 +30,7 @@ def decor(func):
         end_time = time.time()
         print(f'Для {str(func).split(" ")[1]} ожидание составило: {end_time - start_time} сек.')
         return ret
+
     return wrapper
 
 
@@ -74,7 +76,7 @@ def rm_dict(dct, k):
 @decor
 def rm_list(lst, k):
     try:
-        list(lst).remove(k) # O(n)
+        list(lst).remove(k)  # O(n)
         return True
     except:
         return False
