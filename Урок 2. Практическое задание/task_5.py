@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def to_ascii(chr_code=32):
+    if chr_code == 128:
+        return
+    else:
+        print(f"{str(chr_code)} - {chr(chr_code)}", end=' ')
+        if chr_code % 10 == 1:
+            print('\n', end='')
+        to_ascii(chr_code + 1)
+
+
+to_ascii()

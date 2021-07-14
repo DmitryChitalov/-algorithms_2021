@@ -15,3 +15,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def computation(num):
+    """
+    previous - предыдущий элемент.
+    regular - настоящий элемент, получамый делением на два предыдущего и сменой знака
+    interim_sum - предварительная сумма
+    n_sum - искомая сума n элементов заданной последовательности
+    """
+    if num == 1:
+        return 1, 1
+    else:
+        previous, interim_sum = computation(num-1)
+        regular = previous/(-2)
+        n_sum = interim_sum + regular
+        return regular, n_sum
+
+
+def result():
+    try:
+        num = int(input('Введите количество элементов: '))
+        print(f'Количество элементов: {num}, их сумма: {computation(num)[1]}')
+    except ValueError:
+        print('Необходимо ввести число.')
+        result()
+
+
+result()
