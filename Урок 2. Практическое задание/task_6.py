@@ -11,3 +11,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def game(hid_number, count=10):
+    if count == 0:
+        print(f'\nЧисло {hid_number} не угадано!')
+        return
+    else:
+        u_num = int(input(f'Отгадайте число от 0 до 100!\nУ вас {count} попыток.\n: '))
+
+        if hid_number != u_num:
+            if count > 1:
+                print(f'Ваше число меньше загаданного' if hid_number > u_num else f'Ваше число больше загаданного')
+            game(hid_number, count-1)
+        else:
+            print(f'\nВы угадали! Это число - {hid_number}')
+            return
+
+
+def start():
+    hid_number = randint(0, 100)
+    game(hid_number)
+
+
+start()

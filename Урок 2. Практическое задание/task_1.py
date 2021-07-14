@@ -28,3 +28,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc():
+    operation = input('Выберете операцию (*, +, -, /), ноль - выход:')
+    if operation == '0':
+        return
+    if operation in '-+*/':
+        try:
+            a = int(input('Введите первое число:'))
+            b = int(input('Введите второе число:'))
+            operation_dict = {'*': a * b, '+': a + b, '-': a - b, '/': a / b}
+            print(f'{a} {operation} {b} = {operation_dict[operation]}')  # Используя словарь ухожу от сравнений.
+        except ZeroDivisionError:
+            print('На ноль делить нельзя!')
+        except ValueError:
+            print('Необходимо вводить числа.')
+    else:
+        print('Вы ввели неверную операцию, доступны только : *, +, -, /')
+    calc()
+
+
+calc()

@@ -16,3 +16,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_num(num):
+    return 1 if num == 1 else sum_num(num - 1) + num
+
+
+def test(n):
+    print(True if sum_num(n) == (n * (n + 1) / 2) else False)
+
+
+test(7)
