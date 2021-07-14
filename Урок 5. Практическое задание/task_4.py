@@ -20,7 +20,6 @@ def fill_1(dt: dict):
 
 
 def fill_2(odt: OrderedDict):  
-    odt = [()]
     for i in range(100):
         odt[i] = i
     print(odt)
