@@ -34,3 +34,24 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+class HexNumber:
+
+    def __init__(self, name):
+        self.name = list(name)
+        self._operand = ''.join(self.name)
+
+    def __add__(self, other):
+        return f'результат сложения шестнадцатиричных чисел равняется: ' \
+               f'{list(hex(int(self._operand, base=16) + int(other._operand, base=16)).upper()[2:])}'
+
+    def __mul__(self, other):
+        return f'результат умножения шестнадцатиричных чисел равняется: ' \
+               f'{list(hex(int(self._operand, base=16) * int(other._operand, base=16)).upper()[2:])}'
+
+
+hn_1 = HexNumber('A2')
+hn_2 = HexNumber('C4F')
+print(hn_1 + hn_2)
+print(hn_1 * hn_2)
