@@ -21,3 +21,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def printer(from_char, to_char, arr=[], fi=True):
+    # Добавлено - чтобы принудительно очистить arr в случае нового запуска.
+    if fi:
+        arr = []
+    if from_char <= to_char:
+        arr.append(f'{from_char} - {chr(from_char)}')
+        if len(arr) % 10 == 0:
+            arr.append('\n')
+        from_char += 1
+        printer(from_char, to_char, arr, False)
+    else:
+        print(*arr)
+
+
+printer(32, 127)
