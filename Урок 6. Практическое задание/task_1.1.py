@@ -8,7 +8,7 @@ from numpy import array
 
 
 @memory_time_profiler
-def num_1():           # цикл
+def num_1():           # обычный цикл
     new_list_1 = []
     for i in range(1, 10000, 2):
         i = i ** 3
@@ -31,9 +31,9 @@ def num_4():        # использование встроенной функц
     return list(map(int, [i ** 3 for i in range(1, 10000, 2)]))
 
 
-print(num_3())
-print(num_2())
 print(num_1())
+print(num_2())
+print(num_3())
 print(num_4())
 
 """
