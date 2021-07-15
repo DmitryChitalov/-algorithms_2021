@@ -12,14 +12,30 @@
 Без аналитики задание считается не принятым!
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+import timeit
+from random import randint
 
 
-def func_1():
+# Для замеров производительности - добавим декоратор.
+def decor(func):
+    def wrapper(*args):
+        start_time = timeit.default_timer()
+        ret = func(*args)
+        print(
+            f'Для {str(func).split(" ")[1]} ожидание составило: {int((timeit.default_timer() - start_time) * 1000)} мс.')
+        return ret
+
+    return wrapper
+
+
+# Исходная функция 1
+@decor
+def func_1(array=[]):
     m = 0
     num = 0
+    # Тут проходится каждый элемент списка и считается его число.
     for i in array:
-        count = array.count(i)
+        count = array.count(i) # Подсчет количества совпадений - замедляет алгоритм.
         if count > m:
             m = count
             num = i
@@ -27,17 +43,40 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+# Исходная функция 2
+@decor
+def func_2(array=[]):
     new_array = []
     for el in array:
+        # тут обходим список и получаем значения элементов, сохраняя в другой список, алгоритм потребит много памяти,
+        # т.к. создаст список такой же длины хранящий суммы элементов исходного списка.
         count2 = array.count(el)
         new_array.append(count2)
-
     max_2 = max(new_array)
+    # и получаем элемент по индесу максимального из второго.
     elem = array[new_array.index(max_2)]
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+# Тут мы пользуемся тем, что словать сам умеет следить за своей целостностью, поэтому просто кладем в него элементы
+# массива, сразу подсчитывая их.
+@decor
+def func_3(a=[], d={}):
+    for i in a:
+        d[i] = d.get(i, 0) + 1
+    # Сортируем словарь по возрастанию количества, и срезаем с него последний элемент, там - и будет наш ответ.
+    v, c = sorted(d.items(), key=lambda item: item[1])[::-1][0]
+    return f'Чаще всего встречается число {v}, ' \
+           f'оно появилось в массиве {c} раз(а)'
+
+
+# Немного усложним массив - сделаем его более масштабным.
+array = []
+for el in range(10000):
+    array.append(randint(1, 9))
+
+# вызовем все три варианта.
+print(func_1(array))
+print(func_2(array))
+print(func_3(array))

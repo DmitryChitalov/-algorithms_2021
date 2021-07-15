@@ -17,12 +17,15 @@
 """
 import timeit
 
+
 def decor(func):
     def wrapper(*args):
         start_time = timeit.default_timer()
         ret = func(*args)
-        print(f'Для {str(func).split(" ")[1]} ожидание составило: {int((timeit.default_timer() - start_time)*1000)} мс.')
+        print(
+            f'Для {str(func).split(" ")[1]} ожидание составило: {int((timeit.default_timer() - start_time) * 1000)} мс.')
         return ret
+
     return wrapper
 
 
@@ -45,4 +48,4 @@ def func_2(nums):
 
 
 # Timeit внутри декоратора.
-[func([el for el in range(0,19999999)]) for func in (decor(func_1),decor(func_2))]
+[func([el for el in range(0, 19999999)]) for func in (decor(func_1), decor(func_2))]
