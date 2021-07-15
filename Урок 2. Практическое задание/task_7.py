@@ -20,7 +20,8 @@
 
 def check(n):
     if n == 1:
-        return n
+        if n == n*(n+1)/2:
+            return n
     else:
         return n + check(n - 1)
 
