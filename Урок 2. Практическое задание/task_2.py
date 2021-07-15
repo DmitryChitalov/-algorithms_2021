@@ -20,12 +20,11 @@
 """
 
 
-even=odd=0
 
-def get_ev_od(numbers):
+
+def get_ev_od(numbers, even = 0, odd = 0):
     """Простая рекурсия"""
     # базовый случай!!!
-    global even, odd
     if numbers == 0:
         return even, odd
     else:
@@ -34,8 +33,7 @@ def get_ev_od(numbers):
             even += 1
         else:
             odd += 1
-        return get_ev_od(numbers // 10)
+        return get_ev_od(numbers // 10, even, odd)
 
-# lambda (x // 10) : (even += 1) if (x % 2 == 0) else (odd += 1)
 
 print(get_ev_od(34560))

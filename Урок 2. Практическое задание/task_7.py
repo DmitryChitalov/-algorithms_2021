@@ -17,15 +17,12 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-summ_number = 0
 
-def get_range_number(count):
-    global summ_number
+def get_range_number(count, summ_number = 0):
     if count == 0:
         return summ_number
     else:
-        summ_number = summ_number + count
-        return get_range_number(count - 1)
+        return get_range_number(count - 1, summ_number + count)
 
 count = 5
 print(get_range_number(count) == count * (count + 1 ) / 2)

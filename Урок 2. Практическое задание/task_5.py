@@ -21,17 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-tab_chr = ''
 
-def show_chr(i):
-    global tab_chr
+def show_chr(i, tab_chr = ''):
     if i == 128:
         return tab_chr
     elif i % 10 == 1:
-        tab_chr = tab_chr + f'{i} - {chr(i)}\n'
-        return show_chr(i+1)
+        #tab_chr = tab_chr + f'{i} - {chr(i)}\n'
+        return show_chr(i+1, tab_chr + f' {i} - {chr(i)}\n')
     else:
-        tab_chr = tab_chr + f'{i} - {chr(i)}'
-        return show_chr(i+1)
+        #tab_chr = tab_chr + f'{i} - {chr(i)}'
+        return show_chr(i+1, tab_chr + f' {i} - {chr(i)}')
 
 print(show_chr(32))
