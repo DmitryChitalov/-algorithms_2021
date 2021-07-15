@@ -47,14 +47,14 @@ class MyDatabaseConnector:
         Создание/Пересоздание таблицы.
         """
         sql = """drop TABLE IF EXISTS credentials;
-                 CREATE TABLE IF NOT EXISTS credentials(
+                 CREATE TABLE credentials(
                         id INTEGER NOT NULL UNIQUE,
                         user_name	TEXT,
                         password_hash	TEXT,
                         PRIMARY KEY(id)
                  );
                  drop INDEX IF EXISTS index_of_user_name;
-                 CREATE UNIQUE INDEX IF NOT EXISTS index_of_user_name ON credentials(user_name);"""
+                 CREATE UNIQUE INDEX index_of_user_name ON credentials(user_name);"""
         try:
             self.cursor.executescript(sql).fetchall()
         except sqlite3.Error as e:
