@@ -26,5 +26,5 @@ def get_set_with_hash(string):
 
 
 my_string = 'papa'
-hash_set = get_set(my_string)
+hash_set = get_set_with_hash(my_string)
 print(f"Строка {my_string} содержит {len(hash_set)} уникальных подстрок")
