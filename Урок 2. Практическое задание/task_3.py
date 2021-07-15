@@ -45,4 +45,8 @@ print(f"Вы ввели: {number}\n")
 revs_number = get_revers_number(number)
 print(f"Перевернутое число: {revs_number}")
 
+""" 
+Точно, вы говорили о ведущим нуле. Забыл, жара. Исправлено.
+"""
+
 
