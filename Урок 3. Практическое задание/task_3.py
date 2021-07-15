@@ -19,7 +19,7 @@
 import hashlib
 
 
-def get_set(string):
+def get_set_with_hash(string):
     string = ''.join(string.split())
     return {hashlib.sha256(string[i:j].encode()).hexdigest() for i in range(len(string)) for j in
             range(i + 1, len(string) + 1) if len(string[i:j]) != len(string)}
