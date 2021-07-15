@@ -108,9 +108,7 @@ def insert_list(list_len, step):
 print(append_list(100000, 1))
 print(insert_list(100000, 1))
 
-"""
-Вывод: Генерация list через append в конец списка, быстрее чем через insert в нулевую позицию. 
-"""
+""" Вывод: Генерация list через append в конец списка, быстрее чем через insert в нулевую позицию."""
 
 
 @calc_timing
@@ -186,6 +184,7 @@ def list_sort(test_list, reverse):
     return test_list.sort(reverse=reverse)
 
 
+# List.
 tst_lst = [i + 1 for i in range(0, 100000, 1)]  # O(N).
 print(list_clear(tst_lst))
 
@@ -212,5 +211,36 @@ print(list_reverse(tst_lst))
 tst_lst = [i + 1 for i in range(0, 100000, 1)]  # O(N).
 print(list_sort(tst_lst, True))
 
-# tst_dict = {i + 1: i for i in range(0, 100000, 1)}  # O(N).
 
+# Dict.
+
+@calc_timing
+def dict_clear(test_dict):
+    """
+    Removes all the elements from the dictionary.
+    """
+    return test_dict.clear()
+
+
+@calc_timing
+def dict_copy(test_dict):
+    """
+    Returns a copy of the dictionary.
+    """
+    test_dict_copy = test_dict.copy()
+    return test_dict_copy
+
+
+
+
+"""
+fromkeys()	Returns a dictionary with the specified keys and value
+get()	Returns the value of the specified key
+items()	Returns a list containing a tuple for each key value pair
+keys()	Returns a list containing the dictionary's keys
+pop()	Removes the element with the specified key
+popitem()	Removes the last inserted key-value pair
+setdefault()	Returns the value of the specified key. If the key does not exist: insert the key, with the specified value
+update()	Updates the dictionary with the specified key-value pairs
+values()	Returns a list of all the values in the dictionary
+"""
