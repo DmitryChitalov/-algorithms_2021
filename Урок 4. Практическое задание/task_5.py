@@ -39,5 +39,26 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+# def
+def e_cieve(n, offset = 1, ls=[]):
+    arr = [*filter(lambda x: x != 0, ls)]
+    if len(arr) == n:
+        return arr
+    else:
+        if offset == 2 and len(arr) == 0:
+            ls.append(2)
+        else:
+            for el in arr:
+                if offset % el == 0 or offset % 2 == 0 or offset == el:
+                    ls.append(0)
+                    break
+                else:
+                    ls.append(offset)
+                    break
+    return e_cieve(n, offset+1, ls)
+
+print(simple(5))
+print(e_cieve(5))
+
+#i = int(input('Введите порядковый номер искомого простого числа: '))
+#print(simple(i))
