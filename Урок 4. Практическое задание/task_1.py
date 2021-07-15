@@ -34,7 +34,7 @@ def func_2(nums):
 
 nums_list = [i for i in range(0, 100)]
 
-print(timeit('func_1(nums_list)', globals=globals()))
-print(timeit('func_2(nums_list)', globals=globals()))
+print(f'Предложенная реализация: {timeit("func_1(nums_list)", globals=globals())}')
+print(f'Реализация через LC: {timeit("func_2(nums_list)", globals=globals())}')
 
 """Реализация алгоритма черех лист комприхеншн дает прирост к скорости и более компактный вариант написания"""
