@@ -102,6 +102,7 @@ class MyDatabaseConnector:
 m_sql = MyDatabaseConnector()
 m_sql.create_table()
 
+# Имя пользователя должно быть уникальным. Делаем соль из имени пользователя.
 salt = "user1"
 
 password = input("Введите пароль: \n")
