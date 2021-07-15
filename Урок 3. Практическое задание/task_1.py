@@ -303,6 +303,7 @@ def get_new_dict(elements_count):
     return {i + 1: i for i in range(0, elements_count)}
 
 
+# БУдем работать с миллионом записей.
 el_count = 1000000
 
 # 1.a. Заполнение списка и словаря.
@@ -387,7 +388,7 @@ print(dict_sort(get_new_dict(el_count)))
 3) Pop:
 (0.0, 'list_pop')
 (0.0, 'dict_pop')
-Оба по нулям. Возможно нужно брать больше элементов, что бы увидеть разницу. У обоих сложносто O(1).
+Оба по нулям. У обоих сложносто O(1).
 
 4) Sort:
 (0.008093118667602539, 'list_sort')
