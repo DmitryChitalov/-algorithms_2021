@@ -3,7 +3,8 @@
 Реализуйте скрипт "Кэширование веб-страниц"
 
 Функция должна принимать url-адрес и проверять
-есть ли в кэше соответствующая страница, если нет, то вносить ее в кэш
+есть ли в кэше соответствующая страница, если есть, получаем
+если нет, то вносить ее в кэш
 
 Подсказка: задачу решите обязательно с применением 'соленого' хеширования и хеш-таблиц
 Можете условжнить задачу, реализовав ее через ООП
@@ -16,10 +17,16 @@ web_cache_hash = {}
 
 
 class MyWebCache:
+
     def __init__(self):
         self.salt = 'my_salt'
 
     def chk_cache(self, url):
+        """
+
+        :param url: web page address to check
+        calc_hash: hash computation
+        """
         calc_hash = sha256(self.salt.encode() + url.encode()).hexdigest()
         if calc_hash not in web_cache_hash.keys():
             web_cache_hash[calc_hash] = url
