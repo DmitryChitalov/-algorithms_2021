@@ -27,9 +27,7 @@ class URLCache:
         if not self.__cache.get(value):
             __salt = uuid4().hex
             __value = value + __salt
-            __value_hash = sha256(__value.encode('utf-8'))
-            __value_hexdig = __value_hash.hexdigest()
-
+            __value_hexdig = sha256(__value.encode('utf-8')).hexdigest()
             self.__cache[value] = __value_hexdig
 
         return self.__cache[value]
@@ -52,7 +50,6 @@ for u in urls:
 print([f"{k}: {v};" for k, v in url_cache.get_cache().items()])
 
 url_cache.clear_cash()
-
 
 
 
