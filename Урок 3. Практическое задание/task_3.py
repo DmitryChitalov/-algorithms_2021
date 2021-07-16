@@ -16,3 +16,19 @@
 р
 а
 """
+
+
+def generator(in_str):
+    h_dict = {}
+    for a in range(0, len(in_str)-1):
+        for b in range(a+1, len(in_str) if a == 0 else len(in_str) + 1):
+            sub_str = in_str[a: b]
+            hsh = hash(sub_str)
+            if hsh not in h_dict:
+                h_dict[hsh] = sub_str
+    print(f'Количество уникальных подстрок в слове {in_str}: {len(h_dict)}')
+    for k in h_dict.values():
+        print(k)
+
+
+generator('papa')

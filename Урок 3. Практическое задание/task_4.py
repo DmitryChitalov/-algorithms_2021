@@ -11,3 +11,26 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from hashlib import sha256
+web_cache_hash = {}
+
+
+class MyWebCache:
+    def __init__(self):
+        self.salt = 'my_salt'
+
+    def chk_cache(self, url):
+        calc_hash = sha256(self.salt.encode() + url.encode()).hexdigest()
+        if calc_hash not in web_cache_hash.keys():
+            web_cache_hash[calc_hash] = url
+            print(f'{url} - добавлен в кэш.')
+        else:
+            print(f'{url} - уже присутствует в кэше.')
+
+
+cache = MyWebCache()
+
+cache.chk_cache('https://habr.com/ru/post/196560/')
+cache.chk_cache('http://www.chaneru.com/Roku/HLS/X264_Settings.htm#no-8x8dct')
+cache.chk_cache('http://www.chaneru.com/Roku/HLS/X264_Settings.htm#no-8x8dct')
+print(web_cache_hash)
