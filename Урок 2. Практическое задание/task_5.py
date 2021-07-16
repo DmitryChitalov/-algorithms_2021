@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_symbols(number=32):
+    if number == 128:
+        return 0
+    else:
+        print(f'{number} - {chr(number)}', end=' ')
+        if (number - 31) % 10 == 0:
+            print('\n')
+        return ascii_symbols(number + 1)
+
+
+ascii_symbols()
