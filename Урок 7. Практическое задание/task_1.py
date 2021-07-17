@@ -17,3 +17,71 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+from random import randrange
+from timeit import timeit
+
+
+def bubble_sort_original(list_for_sort):
+    n = 1
+    while n < len(list_for_sort):
+        for i in range(len(list_for_sort) - n):
+            if list_for_sort[i] < list_for_sort[i + 1]:
+                list_for_sort[i], list_for_sort[i + 1] = list_for_sort[i + 1], list_for_sort[i]
+        n += 1
+    return list_for_sort
+
+
+def bubble_sort_version_2(list_for_sort):
+    n = 1
+    while n < len(list_for_sort):
+        count = 0
+        for i in range(len(list_for_sort) - n):
+            if list_for_sort[i] < list_for_sort[i + 1]:
+                list_for_sort[i], list_for_sort[i + 1] = list_for_sort[i + 1], list_for_sort[i]
+                count += 1     # Доработка
+        if count == 0:
+            return f'Отсортированный по убыванию список c учётом доработки: {list_for_sort}'
+        n += 1
+
+
+def tim_sorted(list_for_sort):
+    return sorted(list_for_sort, reverse=True)
+
+
+k = int(input('Введите количество элементов списка: '))
+source_list = [randrange(-100, 100) for _ in range(k)]
+print(f'Исходный список: {source_list}')
+print("*" * 30)
+
+print(f'Отсортированный по убыванию список: {bubble_sort_original(source_list[:])}')
+print(bubble_sort_version_2(source_list[:]))
+print(f'Отсортированный список тимсортед : {tim_sorted(source_list[:])}')
+print("*" * 30)
+
+print('Оригинальная функция')
+print(timeit('bubble_sort_original(source_list[:])', globals=globals(), number=10000))
+print('Функция с доработкой')
+print(timeit('bubble_sort_version_2(source_list[:])', globals=globals(), number=10000))
+
+# было интресно сколько по времени занимает стандартная сортировка
+print('Стандартная функция')
+print(timeit('tim_sorted(source_list[:])', globals=globals(), number=10000))
+"""
+Введите количество элементов списка: 50
+Исходный список: [23, 68, 11, 30, -52, 29, 6, -51, 30, -78, 21, 86, -64, 98, -75, 1, -13, 43, 67, -45, 12, -63, -99, -80, 7, -49, -45, 97, 89, 64, -13, -94, 98, 79, -83, 70, -65, 70, -87, 48, -5, 61, 36, -43, 90, -61, 35, 17, 73, 9]
+******************************
+Отсортированный по убыванию список: [98, 98, 97, 90, 89, 86, 79, 73, 70, 70, 68, 67, 64, 61, 48, 43, 36, 35, 30, 30, 29, 23, 21, 17, 12, 11, 9, 7, 6, 1, -5, -13, -13, -43, -45, -45, -49, -51, -52, -61, -63, -64, -65, -75, -78, -80, -83, -87, -94, -99]
+Отсортированный по убыванию список c учётом доработки: [98, 98, 97, 90, 89, 86, 79, 73, 70, 70, 68, 67, 64, 61, 48, 43, 36, 35, 30, 30, 29, 23, 21, 17, 12, 11, 9, 7, 6, 1, -5, -13, -13, -43, -45, -45, -49, -51, -52, -61, -63, -64, -65, -75, -78, -80, -83, -87, -94, -99]
+Отсортированный список тимсортед : [98, 98, 97, 90, 89, 86, 79, 73, 70, 70, 68, 67, 64, 61, 48, 43, 36, 35, 30, 30, 29, 23, 21, 17, 12, 11, 9, 7, 6, 1, -5, -13, -13, -43, -45, -45, -49, -51, -52, -61, -63, -64, -65, -75, -78, -80, -83, -87, -94, -99]
+******************************
+Оригинальная функция
+1.1877328999999999
+Функция с доработкой
+1.3026646999999998
+Стандартная функция
+0.011640500000000387
+
+Не помогает доработка, независимот от длины списка. Время выполнения всегда больше. 
+Станадартная вне конкуренции.
+
+"""

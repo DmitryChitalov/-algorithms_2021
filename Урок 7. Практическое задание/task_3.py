@@ -40,3 +40,27 @@ for i in
 
 
 """
+from random import random
+
+
+# сортировка Шелла
+def shell(seq, median):
+    inc = len(seq) // 2
+    while inc:
+        for i, el in enumerate(seq):
+            while i >= inc and seq[i - inc] > el:
+                seq[i] = seq[i - inc]
+                i -= inc
+            seq[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    median = seq[median]
+    return seq, median
+
+
+m = int(input('Введите натуральное число : '))
+num_list = [int(random() * 500 + 1) for _ in range(int(2 * m + 1))]
+print(f'Оригинальный список: {num_list}')
+print("*" * 30)
+result = shell(num_list[:], m)
+print(f'Отсортированный список: {result[0]}, Медиана: {result[1]}')
+

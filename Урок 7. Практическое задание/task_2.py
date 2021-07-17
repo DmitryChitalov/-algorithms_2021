@@ -13,3 +13,61 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+from random import uniform, random
+from timeit import timeit
+from operator import lt
+
+# https://webdevblog.ru/sortirovka-sliyaniem-merge-sort-v-python/
+
+
+def merge_sort(s, compare=lt):
+    if len(s) < 2:
+        return s[:]
+    else:
+        middle = int(len(s) / 2)
+        left = merge_sort(s[:middle], compare)
+        right = merge_sort(s[middle:], compare)
+        return merge(left, right, compare)
+
+
+def merge(left, right, compare):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if compare(left[i], right[j]):
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    return result
+
+
+k = int(input('Введите количество элементов списка: '))
+source_list = [uniform(0, 50) for _ in range(k)]
+print(f'Исходный список: {source_list}')
+print(f'Отсортированный список: {merge_sort(source_list[:])}')
+
+for line in (10, 100, 1000, 10000):
+    source_list = [uniform(0, 50) for _ in range(line)]
+    time = timeit('merge_sort(source_list[:])', globals=globals(), number=500)
+    print(f"Длинна массива {line} время исполнения :", time)
+
+
+"""
+Введите количество элементов списка: 5
+Исходный список: [37.28589377542435, 26.239614021822273, 15.494790878576403, 27.348942518583797, 22.657410498347524]
+Отсортированный список: [15.494790878576403, 22.657410498347524, 26.239614021822273, 27.348942518583797, 37.28589377542435]
+Длинна массива 10 время исполнения : 0.005347800000000014
+Длинна массива 100 время исполнения : 0.08141810000000005   --- дольше в 15,24 раза
+Длинна массива 1000 время исполнения : 1.111472             ----- дольше в 13,65 раза
+Длинна массива 10000 время исполнения : 14.716353599999998 ----- дольше в 13,24 раза 
+
+Таким образом получается, чем больше размер списка для сортировки тем эффективнее данная сортировка.
+"""
