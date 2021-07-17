@@ -25,13 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d125f39f-2338-47b0-b7d6-21319308fae8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/nginx_logs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" afterDir="false" />
-    </list>
+    <list default="true" id="d125f39f-2338-47b0-b7d6-21319308fae8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +49,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python.task_2">
+  <component name="RunManager" selected="Python.task_1">
     <configuration name="task_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="-algorithms_2021" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -163,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_2" />
         <item itemvalue="Python.task_1" />
+        <item itemvalue="Python.task_2" />
         <item itemvalue="Python.task_7" />
         <item itemvalue="Python.task_6" />
         <item itemvalue="Python.task_5 (1)" />
@@ -210,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625249045698</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="task 1,2">
+      <created>1626530992788</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1626530992788</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,25 +243,26 @@
     <MESSAGE value="p" />
     <MESSAGE value="to local" />
     <MESSAGE value="All done" />
-    <option name="LAST_COMMIT_MESSAGE" value="All done" />
+    <MESSAGE value="task 1,2" />
+    <option name="LAST_COMMIT_MESSAGE" value="task 1,2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="949" height="285" key="GridCell.Tab.0.bottom" timestamp="1626530587303">
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom" timestamp="1626530711769">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="949" height="285" key="GridCell.Tab.0.bottom/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
-    <state width="949" height="285" key="GridCell.Tab.0.center" timestamp="1626530587303">
+    <state width="1899" height="285" key="GridCell.Tab.0.bottom/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530711769" />
+    <state width="1899" height="285" key="GridCell.Tab.0.center" timestamp="1626530711769">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="949" height="285" key="GridCell.Tab.0.center/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
-    <state width="949" height="285" key="GridCell.Tab.0.left" timestamp="1626530587303">
+    <state width="1899" height="285" key="GridCell.Tab.0.center/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530711769" />
+    <state width="1899" height="285" key="GridCell.Tab.0.left" timestamp="1626530711769">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="949" height="285" key="GridCell.Tab.0.left/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
-    <state width="949" height="285" key="GridCell.Tab.0.right" timestamp="1626530587303">
+    <state width="1899" height="285" key="GridCell.Tab.0.left/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530711769" />
+    <state width="1899" height="285" key="GridCell.Tab.0.right" timestamp="1626530711769">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="949" height="285" key="GridCell.Tab.0.right/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
+    <state width="1899" height="285" key="GridCell.Tab.0.right/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530711769" />
     <state width="949" height="352" key="GridCell.Tab.1.bottom" timestamp="1626530169372">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
