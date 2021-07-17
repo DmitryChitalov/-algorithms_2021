@@ -20,12 +20,18 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:Lesson2" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Lesson6" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d125f39f-2338-47b0-b7d6-21319308fae8" name="Default Changelist" comment="" />
+    <list default="true" id="d125f39f-2338-47b0-b7d6-21319308fae8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/nginx_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,8 +55,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python.task_4">
-    <configuration name="task_4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.task_2">
+    <configuration name="task_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="-algorithms_2021" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -58,11 +64,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 6. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 6. Практическое задание/task_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="-algorithms_2021" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 6. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 6. Практическое задание/task_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -136,10 +163,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1" />
         <item itemvalue="Python.task_7" />
         <item itemvalue="Python.task_6" />
         <item itemvalue="Python.task_5 (1)" />
-        <item itemvalue="Python.task_4" />
       </list>
     </recent_temporary>
   </component>
@@ -196,7 +224,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Lesson2" />
+                        <option value="Lesson6" />
                       </list>
                     </value>
                   </entry>
@@ -217,42 +245,46 @@
     <option name="LAST_COMMIT_MESSAGE" value="All done" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="352" key="GridCell.Tab.0.bottom" timestamp="1625254761192">
+    <state width="949" height="285" key="GridCell.Tab.0.bottom" timestamp="1626530587303">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.0.bottom/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.0.center" timestamp="1625254761192">
+    <state width="949" height="285" key="GridCell.Tab.0.bottom/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
+    <state width="949" height="285" key="GridCell.Tab.0.center" timestamp="1626530587303">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.0.center/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.0.left" timestamp="1625254761192">
+    <state width="949" height="285" key="GridCell.Tab.0.center/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
+    <state width="949" height="285" key="GridCell.Tab.0.left" timestamp="1626530587303">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.0.left/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.0.right" timestamp="1625254761192">
+    <state width="949" height="285" key="GridCell.Tab.0.left/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
+    <state width="949" height="285" key="GridCell.Tab.0.right" timestamp="1626530587303">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.0.right/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.1.bottom" timestamp="1625254761192">
+    <state width="949" height="285" key="GridCell.Tab.0.right/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530587303" />
+    <state width="949" height="352" key="GridCell.Tab.1.bottom" timestamp="1626530169372">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.bottom/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.1.center" timestamp="1625254761192">
+    <state width="949" height="352" key="GridCell.Tab.1.bottom/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530169372" />
+    <state width="949" height="352" key="GridCell.Tab.1.center" timestamp="1626530169372">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.center/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.1.left" timestamp="1625254761192">
+    <state width="949" height="352" key="GridCell.Tab.1.center/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530169372" />
+    <state width="949" height="352" key="GridCell.Tab.1.left" timestamp="1626530169372">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.left/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
-    <state width="1899" height="352" key="GridCell.Tab.1.right" timestamp="1625254761192">
+    <state width="949" height="352" key="GridCell.Tab.1.left/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530169372" />
+    <state width="949" height="352" key="GridCell.Tab.1.right" timestamp="1626530169372">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1899" height="352" key="GridCell.Tab.1.right/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625254761192" />
+    <state width="949" height="352" key="GridCell.Tab.1.right/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626530169372" />
     <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1625249055058">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="258" key="Vcs.Push.Dialog.v2/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1625249055058" />
+    <state x="758" y="203" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1626520632586">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="758" y="203" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/1920.0.1600.1170/0.0.1920.1050@0.0.1920.1050" timestamp="1626520632586" />
     <state x="769" y="439" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1625233350648">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
