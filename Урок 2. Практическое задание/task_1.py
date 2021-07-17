@@ -28,3 +28,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_up():
+    try:
+        operation = input('Введите операцию (+,-,*,/ или 0 для выхода): ')
+        if operation not in '0+/*-':
+            raise ValueError
+    except ValueError:
+        print('вы ввели не правильную операцию')
+        return count_up()
+    if operation in '+-*/':
+        try:
+            first_number = int(input('Введите первое число: '))
+            second_number = int(input('Введите второе число: '))
+        except ValueError:
+            print('Вы ввели не число')
+            return count_up()
+        if operation == '+':
+            print(f'Ваш результат: {first_number + second_number}')
+            return count_up()
+        elif operation == '-':
+            print(f'Ваш результат: {first_number - second_number}')
+            return count_up()
+        elif operation == '*':
+            print(f'Ваш результат: {first_number * second_number}')
+            return count_up()
+        elif operation == '/':
+            try:
+                print(f'Ваш результат: {first_number / second_number}')
+            except ZeroDivisionError:
+                print('На ноль делить нельзя')
+                return count_up()
+    elif operation == '0':
+        print('Выход')
+
+
+count_up()

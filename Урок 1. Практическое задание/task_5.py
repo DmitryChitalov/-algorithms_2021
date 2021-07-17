@@ -68,4 +68,4 @@ if __name__ == '__main__':
     for i in range(20):
         stack_1.push_in(i)
 
-    print(len(stack_1.elem))
+    print(stack_1.stack_count())

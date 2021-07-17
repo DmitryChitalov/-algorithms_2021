@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def asci_cod(i=1, asc=32, tab_asc=''):
+    if asc == 128:
+        return tab_asc
+    else:
+        if i == 10:
+            return asci_cod(1, asc + 1, tab_asc + f'{asc} - {chr(asc)}\n')
+        else:
+            return asci_cod(i + 1, asc + 1, tab_asc + f' {asc} - {chr(asc)}')
+
+
+print(asci_cod())

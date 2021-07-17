@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def bin_search(number, attempts=1):
+    try:
+        numeral = int(input('Угадайте число: '))
+    except ValueError:
+        print(f'Это не число! Вы использовали {attempts} попытку')
+        return bin_search(number, attempts + 1)
+    if numeral == number:
+        return f'Угадали использовано {attempts} попыток'
+    elif attempts == 10:
+        return f'Закончились попытки! Число {number} '
+    else:
+        if numeral > number:
+            print('Число меньше')
+        else:
+            print('Число больше')
+        return bin_search(number, attempts + 1)
+
+
+print(bin_search(random.randint(0, 100)))
