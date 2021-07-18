@@ -12,3 +12,20 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def recursive_sum(n, num=-2.0):
+    num = num / -2
+    n -= 1
+    if n <= 0:
+        return num
+    else:
+        return num + recursive_sum(n, num)
+
+
+try:
+    number = int(input('Введите кол-во элементов: '))
+    print(f'Кол-во элементов равно: {number}, их сумма равна: {recursive_sum(number)}')
+except ValueError:
+    print('Вы ввели строку вместо числа. Введите число!')
+
