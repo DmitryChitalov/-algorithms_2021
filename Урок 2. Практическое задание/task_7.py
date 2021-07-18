@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def num_recourse_sum(number, counter=0):
+    counter += 1
+    if counter == number:
+        return number
+    else:
+        return counter + num_recourse_sum(number, counter)
+
+
+try:
+    user_num = int(input('Введите число: '))
+    if num_recourse_sum(user_num) == user_num * (user_num + 1) / 2:
+        print("Равенство: 1+2+...+n = n(n+1)/2 выполняется для любого n")
+    else:
+        print("Равенство: 1+2+...+n = n(n+1)/2 не выполняется для любого n")
+except ValueError:
+    print('Вы ввели строку вместо числа. Введите число')
+
+    
