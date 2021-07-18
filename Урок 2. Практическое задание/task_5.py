@@ -23,3 +23,16 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def code_symbol(code=32):
+    if code == 128:
+        return True
+    print(f'{code} - {chr(code)}', end=', ')
+
+    if (code - 1) % 10 == 0:
+        print('\n')
+    code_symbol(code + 1)
+
+
+print(code_symbol())
+
