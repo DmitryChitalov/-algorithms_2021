@@ -16,3 +16,13 @@
 р
 а
 """
+
+str_start = 'papa'
+
+
+def sum_unique():
+    set_res = set(str_start[i:j] for i in range(len(str_start)) for j in range(i + 1, len(str_start) + 1) if len(str_start[i:j]) != len(str_start))
+    return len(set_res)
+
+
+print(sum_unique())
