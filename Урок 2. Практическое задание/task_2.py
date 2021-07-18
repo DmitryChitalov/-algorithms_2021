@@ -18,3 +18,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def special_counter(number, even=0, uneven=0):
+    if number == 0:
+        return f'Кол-во чётных цифр в числе равно {even}, кол-во нечётных - {uneven}'
+    else:
+        digit = number % 10
+        number = number // 10
+        if digit % 2 == 0:
+            even += 1
+            return special_counter(number, even, uneven)
+        else:
+            uneven += 1
+            return special_counter(number, even, uneven)
+
+
+try:
+    numb = int(input('Введите любое число: '))
+    print(special_counter(numb))
+except ValueError:
+    print('Вы ввели строку вместо числа')
+
