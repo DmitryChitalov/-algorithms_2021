@@ -11,3 +11,25 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+
+
+def guess_number(number, counter=10):
+    try:
+        user_answer = int(input('Введите число от 0 до 100: '))
+        counter -= 1
+        if counter < 0:
+            print(f'У Вас закончились попытки. Загаданное число равно: {number}')
+        elif user_answer == number:
+            print(f'Верно, загаданное число равно: {number}! Вы отгадали число за {10 - counter} попыток')
+        elif user_answer > number:
+            print('Вы ввели слишком большое число. Загаданное число меньше.')
+            return guess_number(number, counter)
+        elif user_answer < number:
+            print('Вы ввели слишком маленькое число. Загаданное число больше.')
+            return guess_number(number, counter)
+    except ValueError:
+        print('Вы ввели строку вместо числа. Введите число')
+
+
+guess_number(random.randint(1, 100))
+
