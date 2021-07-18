@@ -40,3 +40,37 @@ for i in
 
 
 """
+from random import randint
+
+
+# функция для генерации массива с простейщей проверкой введеного значения
+def massive_creation():
+    num = int(input('Введите размер массива, это обязательно должно быть нечетное положительное число: '))
+    if num % 2 == 1 and num > 0:
+        new_lst = [randint(0, 100) for x in range(num)]
+        return new_lst
+    else:
+        print("Вы ввели число, не подходящее под условие")
+        return massive_creation()
+
+
+# Функция ищет медиану
+def median_searching(some_lst):
+    temp_lst = some_lst.copy()
+    m = int((len(temp_lst) - 1) / 2)
+    for i in range(m):
+        temp_lst.remove(max(temp_lst))
+    return max(temp_lst)
+
+
+generated_lst = massive_creation()
+print(generated_lst)
+print(median_searching(generated_lst))
+
+"""
+Как по мне разумнее спрашивать у пользователя размер массива, проверяя, чтобы он был нечетным, а не m из формулы 2m + 1.
+Так как итоговая функция не даст создать массив из четного числа элементов, то уже m ищем исходя из размера итогового
+массива, который 100% будет нечетным.
+Также проверку на нечетность размера массива можно было включить в функцию поиска медианы, но с учетом генерации списка
+функцией это излишне.
+"""
