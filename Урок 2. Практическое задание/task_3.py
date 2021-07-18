@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def number_back(num, num_over=''):
+    if num == 0:
+        print(f'Перевернутое число: {num_over}')
+    else:
+        number_back(num // 10, num_over + str(num % 10))
+
+
+try:
+    number_back(int(input('Введите число: ')))
+except:
+    print(f'Ввели не правильное число! Попробуйте еще раз!')
+    number_back(int(input('Введите число: ')))
