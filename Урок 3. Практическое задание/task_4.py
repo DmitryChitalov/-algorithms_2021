@@ -11,3 +11,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from uuid import uuid4
+
+
+class Cash:
+    def __init__(self):
+        self.url = {}
+
+    def check_cash(self,url):
+        salt = uuid4().hex
+        url_hash = hashlib.sha256(salt.encode() +  url.encode()).hexdigest()
+        self.url.setdefault(url,url_hash)
+        return f'Запись Hash по ключу {url}'
+url = 'https://gb.ru/lessons/150346'
+
+urls = Cash()
+print(urls.check_cash(url))
+
+print(urls.url)
