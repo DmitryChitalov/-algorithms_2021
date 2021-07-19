@@ -22,21 +22,55 @@ new_lts
 
 arr[m]
 
-
-from statistics import median
-
-[3, 4, 3, 3, 5, 3, 3]
-
-left = []
-right = []
-
-left == right and
-
-for i in
-    for
-    left == right
-    left.clear()
-    right.clear()
-
-
 """
+import random
+from statistics import median
+from timeit import timeit
+
+m = int(input('Введите количество элементов '))
+my_lst = [random.randint(1, 100) for i in range(2 * m + 1)]
+copy_lst = my_lst[:]
+print('Исходный список ', my_lst[:])
+
+
+# СОРТИРОВКА ШЕЛЛА
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+# БЕЗ СОРТИРОВКИ
+
+def without_sort(_data: list) -> list:
+    center = len(_data) // 2
+    for i in range(center):
+        _data.remove(max(_data))
+    return max(_data)
+
+
+new_lst = shell(my_lst[:])
+print('Отсортированный список методом Шелла', new_lst[:])
+print('Время сортировки Шелла составило: ',
+      timeit(
+          "shell(my_lst[:])",
+          globals=globals(),
+          number=1000))
+
+print('Время функции без сортировки составило: ',
+      timeit(
+          "without_sort(my_lst[:])",
+          globals=globals(),
+          number=1000))
+
+my_median = new_lst[m]
+print('Найденная медиана списка с помощью сортировки Шелла равна ', my_median)
+print('Найденная медиана списка без помощи сортировки',
+      without_sort(my_lst[:]))
+print('Медиана, найденная встроенной функцией равна ', median(my_lst[:]))
