@@ -26,50 +26,53 @@ from uuid import uuid4
 import hashlib
 
 
-us_pass = input('Введите пароль: ')
+class DbHash:
+    def __init__(self):
+        self.conn = sqlite3.connect("test_al.db")
+        self.cursor = self.conn.cursor()
 
-salt = uuid4().hex
+    def create_table(self):
+        self.cursor.execute("DROP TABLE IF EXISTS users;")
+        self.cursor.execute("CREATE TABLE users(u_login varchar(255), password_hash varchar(255))")
 
-passwd = hashlib.sha256(salt.encode() + us_pass.encode()).hexdigest()
+    def create_hash(self):
+        login = input('Введите логин: ')
+        us_pass = input('Введите пароль: ')
+        hash_passwd = hashlib.sha256(login.encode() + us_pass.encode()).hexdigest()
+        return login, hash_passwd
 
-# cursor.execute("""INSERT INTO users(password_hash)
-#                   VALUES (passwd)
-#                 """)
+    def sql_insert(self):
 
-print(passwd)
+        login, hash_pass = self.create_hash()
 
+        insert_log_hash = 'INSERT INTO users(u_login, password_hash) VALUES(?,?)'
+        log_hash = (login, hash_pass)
+        try:
+            self.cursor.execute(insert_log_hash, log_hash)
+        except sqlite3.IntegrityError:
+            print('Такой login уже существует. Войдите в систему или введите другой login.')
+        else:
+            self.conn.commit()
+            print('Вы зарегестрированы')
 
-conn = sqlite3.connect("test_al.db")
-cursor = conn.cursor()
+    def log_in(self):
 
-cursor.execute("""DROP TABLE IF EXISTS users
-                """)
-cursor.execute("""CREATE TABLE users
-                   (id primary_key AUTO_INCREMENT, password_hash text)
-                """)
+        login, hash_pass = self.create_hash()
 
+        select_log_hash = 'SELECT password_hash FROM users WHERE u_login = ?'
 
-def sql_insert(conn, password_hash):
+        self.cursor.execute(select_log_hash, (login,))
 
+        db_hash = self.cursor.fetchone()
+        db_hash = str(*db_hash)
 
-    cursor.execute('INSERT INTO users(id, password_hash) VALUES(?,?)', password_hash)
+        if hash_pass == db_hash:
+            print('Вы ввели правильный пароль')
+        else:
+            print('Вы ввели неправильный пароль')
 
-    conn.commit()
+data_base_1 = DbHash()
+data_base_1.create_table()
+data_base_1.sql_insert()
+data_base_1.log_in()
 
-password_hash = (1, passwd)
-
-sql_insert(conn, password_hash)
-
-select_passwd = cursor.execute("SELECT password_hash FROM users WHERE id = 1")
-
-result = cursor.fetchone()
-passwd_2 = str(*result)
-
-us_pass = input('Введите пароль для потдверждения: ')
-
-passwd_3 = hashlib.sha256(salt.encode() + us_pass.encode()).hexdigest()
-
-if passwd_2 == passwd_3:
-    print('Вы ввели правильный пароль')
-else:
-    print('Вы ввели неправильный пароль')
