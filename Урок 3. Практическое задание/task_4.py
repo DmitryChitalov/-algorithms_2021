@@ -12,3 +12,26 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+from hashlib import sha256
+from uuid import uuid4
+
+salt = uuid4().hex
+urls = {}
+
+
+def my_urls(url):
+    if urls.get(url):
+        print(f'Адрес: {url} уже в кэше.')
+    else:
+        res = sha256(salt.encode() + url.encode()).hexdigest()
+        urls[url] = res
+
+
+my_urls('https://gb.ru/lessons/150346/homework')
+my_urls('https://gb.ru/lessons/150346/homework')
+print(urls)
+my_urls('https://gb.ru')
+print(urls)
+my_urls('https://gb.ru')
