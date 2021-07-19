@@ -10,70 +10,55 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
-class BinaryTree:
+
+class Node:
     def __init__(self, root_obj):
         # корень
-        self.root = root_obj
+        self.root_obj = root_obj
         # левый потомок
         self.left_child = None
         # правый потомок
         self.right_child = None
 
-    # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+
+class BinaryTree:
+
+    def __init__(self):
+        self.root = None
+
+    def insert_node(self, root, element):
+        if self.root is None:
+            self.root = Node(element)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            if root is None:
+                root = Node(element)
+            elif root.root_obj < element:
+                root.right_child = self.insert_node(root.right_child, element)
+            elif root.root_obj > element:
+                root.left_child = self.insert_node(root.left_child, element)
+        return root
 
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
-
-    # метод доступа к правому потомку
-    def get_right_child(self):
-        return self.right_child
-
-    # метод доступа к левому потомку
-    def get_left_child(self):
-        return self.left_child
-
-    # метод установки корня
-    def set_root_val(self, obj):
-        self.root = obj
-
-    # метод доступа к корню
-    def get_root_val(self):
-        return self.root
+    def print_tree(self, root):
+        if root is not None:
+            print(root.root_obj)
+            if root.left_child is not None:
+                self.print_tree(root.left_child)
+            if root.right_child is not None:
+                self.print_tree(root.right_child)
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+b_tree = BinaryTree()
+b_tree.insert_node(b_tree.root, 20)
+b_tree.insert_node(b_tree.root, 25)
+b_tree.insert_node(b_tree.root, 2)
+b_tree.insert_node(b_tree.root, 3)
+b_tree.insert_node(b_tree.root, 22)
+b_tree.insert_node(b_tree.root, 23)
+b_tree.insert_node(b_tree.root, 12)
+b_tree.insert_node(b_tree.root, 4)
+b_tree.insert_node(b_tree.root, 18)
+b_tree.insert_node(b_tree.root, 17)
+b_tree.insert_node(b_tree.root, 50)
+b_tree.insert_node(b_tree.root, 1)
+b_tree.insert_node(b_tree.root, 9)
+b_tree.print_tree(b_tree.root)
