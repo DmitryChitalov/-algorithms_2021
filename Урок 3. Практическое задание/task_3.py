@@ -17,3 +17,20 @@
 """
 
 # hash?
+
+
+from hashlib import sha256
+
+my_set = set()
+
+
+def unique_count(string):
+    for i in range(len(string)):
+        for j in range(len(string)):
+            if string[i:j+1] != string and string[i:j+1] != '':
+                my_set.add(sha256(string[i:j+1].encode()).hexdigest())
+    print(my_set)
+    return my_set
+
+
+print(f'Кол-во уникальных подстрок: {len(unique_count("papa"))}')
