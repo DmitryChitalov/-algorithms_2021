@@ -18,7 +18,23 @@
 и сделайте обоснование результатам.
 """
 
+import timeit
+from random import randint
 
+
+# Для замеров производительности - добавим декоратор.
+def decor(func):
+    def wrapper(*args):
+        start_time = timeit.default_timer()
+        ret = func(*args)
+        print(
+            f'Для {str(func).split(" ")[1]} [{args}] ожидание составило: {int((timeit.default_timer() - start_time) * 1000)} мс. Ответ функции: {ret}')
+        return ret
+
+    return wrapper
+
+
+@decor
 def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
@@ -39,26 +55,40 @@ def simple(i):
     return n
 
 
-# def
-def e_cieve(n, offset = 1, ls=[]):
-    arr = [*filter(lambda x: x != 0, ls)]
-    if len(arr) == n:
-        return arr
-    else:
-        if offset == 2 and len(arr) == 0:
-            ls.append(2)
-        else:
-            for el in arr:
-                if offset % el == 0 or offset % 2 == 0 or offset == el:
-                    ls.append(0)
-                    break
-                else:
-                    ls.append(offset)
-                    break
-    return e_cieve(n, offset+1, ls)
+@decor
+def e_cieve(i):
+    ls = []
+    n = i * 15
+    cieve = set(range(2, n+1))
+    while cieve:
+        prime = min(cieve)
+        cieve -= set(range(prime, n+1, prime))
+        ls.append(prime)
+    return max(ls[0:i])
 
-print(simple(5))
-print(e_cieve(5))
 
-#i = int(input('Введите порядковый номер искомого простого числа: '))
-#print(simple(i))
+simple(10)
+e_cieve(10)
+simple(100)
+e_cieve(100)
+simple(1000)
+e_cieve(1000)
+simple(5000)
+e_cieve(5000)
+
+
+'''
+Наивный алгоритм проигрывает в скрости на больших объемах чисел. Решето начинает сильно отрываться по скорости на 
+больших диапазонах. При этом, код функции решета - не оптимален, оно заполняется избыточно.
+
+Для simple [(10,)] ожидание составило: 0 мс. Ответ функции: 29
+Для e_cieve [(10,)] ожидание составило: 0 мс. Ответ функции: 29
+Для simple [(100,)] ожидание составило: 2 мс. Ответ функции: 541
+Для e_cieve [(100,)] ожидание составило: 2 мс. Ответ функции: 541
+Для simple [(1000,)] ожидание составило: 384 мс. Ответ функции: 7919
+Для e_cieve [(1000,)] ожидание составило: 84 мс. Ответ функции: 7919
+Для simple [(5000,)] ожидание составило: 11757 мс. Ответ функции: 48611
+Для e_cieve [(5000,)] ожидание составило: 2528 мс. Ответ функции: 48611
+
+
+'''
