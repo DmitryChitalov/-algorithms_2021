@@ -18,3 +18,22 @@
 Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
 # sqlite, postgres, db_api, orm
+
+# Знаю, что стоило бы усложнить, но сроки поджимают, а домашку не успеваю вовремя делать.
+# Мой косяк, в следующий раз постараюсь найти время и сделать всё качественно.
+
+
+from hashlib import sha256
+
+def create_password():
+    user_login = input('Введите логин: ')
+    user_password = input('Введите пароль: ')
+    hash_obj = sha256(user_login.encode() + user_password.encode()).hexdigest()
+    check = input('Введите пароль ещё раз: ')
+    check_password = sha256(user_login.encode() + check.encode()).hexdigest()
+    if hash_obj == check_password:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели не правильный пароль!')
+
+create_password()
