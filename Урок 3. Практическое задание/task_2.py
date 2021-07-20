@@ -20,3 +20,42 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import hashlib
+import sqlite3
+
+conn = sqlite3.connect('users.sqlite')
+cur = conn.cursor()
+cur.execute("""CREATE TABLE IF NOT EXISTS user_info(
+    login INT PRIMARY KEY,
+    password VARCHAR(255));
+    """)
+conn.commit()
+
+
+def set_password(login):
+    passwd = input('Введите пароль: ')
+    res = hashlib.sha256(login.encode() + passwd.encode()).hexdigest()
+    cur.execute("INSERT INTO user_info (login, password) VALUES (?, ?)", (login, res))
+    conn.commit()
+    cur.execute("SELECT password FROM user_info WHERE login = ?", (login,))
+    result = cur.fetchone()
+    print(f'В базе данных хранится строка: {result[0]}')
+
+
+def auth(login):
+    password = input('Введите пароль еще раз для проверки: ')
+    check = hashlib.sha256(login.encode() + password.encode()).hexdigest()
+    cur.execute("SELECT password FROM user_info WHERE login = ?", (login,))
+    result = cur.fetchone()
+    if result[0] == check:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Пароль неверен')
+
+
+set_password('user1')
+auth('user1')
+set_password('user2')
+auth('user2')
+conn.close()
