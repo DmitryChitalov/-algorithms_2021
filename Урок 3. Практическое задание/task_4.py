@@ -25,7 +25,7 @@ class MainCache:
         if not self.url_for_cache.get(url):
             self.url_for_cache[url] = hashlib.sha256(self.salt.encode('utf-8') + url.encode('utf-8')).hexdigest()
         else:
-            print(f'данная страница "{url}" уже добавлена в кеш')
+            print(f'данная страница "{url}" уже добавлена в кеш ')
 
 
 cache = MainCache()

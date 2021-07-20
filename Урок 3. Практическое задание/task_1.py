@@ -76,5 +76,5 @@ print(dict_add(test_dict))  # 0.08363580703735352 Словарь заполня�
 print(list_find(test_list))  # 0.004428863525390625
 print(dict_find(test_dict))  # 2.6226043701171875e-06 ~(0,00000262)
 # Поиск по словарю быстрее из-за хеша
-print(list_clear(test_list))  # 0.009126424789428711
+print(list_clear(test_list))  # 0.009126424789428511
 print(dict_clear(test_dict))  # 0.008687973022460938

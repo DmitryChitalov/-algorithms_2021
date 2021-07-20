@@ -61,7 +61,7 @@ def login():
     if password_to_hash == result[0]:
         return f'Вы ввели правильный пароль'
     else:
-        return f'Неверный пароль'
+        return f'Неверный пароль '
 
 # create_base()
 # login_in()
