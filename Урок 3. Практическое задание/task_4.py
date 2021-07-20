@@ -11,3 +11,25 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+
+
+class MainCache:
+    def __init__(self):
+        self.url_for_cache = {}
+        self.salt = 'saltsalt'
+
+    def add_cache(self, url):
+        if not self.url_for_cache.get(url):
+            self.url_for_cache[url] = hashlib.sha256(self.salt.encode('utf-8') + url.encode('utf-8')).hexdigest()
+        else:
+            print(f'данная страница "{url}" уже добавлена в кеш')
+
+
+cache = MainCache()
+cache.add_cache('https://www.yandex.ru')
+cache.add_cache('https://www.google.com')
+cache.add_cache('https://www.google.com')
+print(cache.url_for_cache)
