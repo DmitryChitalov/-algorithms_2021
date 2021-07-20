@@ -40,3 +40,25 @@ for i in
 
 
 """
+import random
+import statistics
+
+def  create_array():
+    """Create data"""
+    return list(random.randint(0,100) for i in range(int(input('Введите число m:'))*2+1))
+
+def quick_sort(in_lst):
+    """Quick sort"""
+    if len(in_lst) < 2:
+        return in_lst
+    less = [i for i in in_lst[1:] if i <= in_lst[0]]
+    big = [i for i in in_lst[1:] if i > in_lst[0]]
+    return quick_sort(less) + [in_lst[0]] + quick_sort(big)
+
+lst = create_array()
+print('Исходный массив:')
+print(lst)
+print('Отсортированный массив:')
+print(quick_sort(lst))
+print(f'Медиана:{quick_sort(lst)[len(lst)//2]}')
+print(f'Медиана, посчитанная модулем statistics:{statistics.median(lst)}')
