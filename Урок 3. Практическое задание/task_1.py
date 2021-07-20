@@ -35,37 +35,37 @@ def decor_time(func):
 
 
 @decor_time
-def list_add(list_add):
+def list_add(list_add): # O(1)
     list_temp = []
     for i in list_add:
-        list_temp.append(i)
+        list_temp.append(i) # O(1)
 
 
 @decor_time
-def dict_add(dict_add):
+def dict_add(dict_add): # O(1)
     dict_temp = {}
     for key, value in dict_add.items():
-        dict_temp[key] = value
+        dict_temp[key] = value # O(1)
 
 
 @decor_time
-def list_find(list_find):
-    list_find.index(100000)
+def list_find(list_find): # O(n)
+    list_find.index(100000) # O(n)
 
 
 @decor_time
-def dict_find(dict_find):
-    dict_find.get(100000, 0)
+def dict_find(dict_find): # O(n)
+    dict_find.get(100000, 0) # O(n)
 
 
 @decor_time
-def list_clear(list_clear):
-    return list_clear.clear()
+def list_clear(list_clear): # O(1)
+    return list_clear.clear()#  O(1)
 
 
 @decor_time
-def dict_clear(dict_clear):
-    return dict_clear.clear()
+def dict_clear(dict_clear): # O(1)
+    return dict_clear.clear() # O(1)
 
 
 test_dict = dict((int(n), int(n)) for n in range(10000000))
