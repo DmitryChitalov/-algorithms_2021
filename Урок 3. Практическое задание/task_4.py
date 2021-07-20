@@ -9,3 +9,20 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+
+
+from hashlib import sha256
+
+cache = {}
+salt = 'some salt'
+
+
+def cache_url(url):
+    if url in cache.keys():
+        print(f'Адрес: {url} уже присутствует в кэше!')
+    else:
+        cache[url] = sha256(salt.encode() + url.encode()).hexdigest()
+
+
+cache_url('https://www.python.org')
+cache_url('https://www.python.org')
