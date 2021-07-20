@@ -27,15 +27,29 @@ def memory_usage_decor(func):
 def compose_list():
     multiplier = 10
     returned_value = []
-    for index in range(100000):
+    for index in range(500000):
         returned_value.append(index ** multiplier)
     return returned_value
 
 
+"""
+Один из вариантов оптимизации и времени - использование Cython. Cython позволяет писать обычный Python-код с некоторыми 
+незначительными модификациями, который затем напрямую транслируется в C-код.
+В результате использования Cython можно получить не только снизить потребление ресурсов ОЗУ, но так же заметно ускорить 
+время выполнения кода. Для тестирования был взят цикл, заполняющий список с 500000 итераций. В результате использования
+Cython получилось сократить объем потребляемой памяти в 10 раз
+
+30.81640625 30036912
+3.94921875 3801008
+"""
 base_cycle_result, mu_base_cycle = compose_list()
 print(mu_base_cycle, asizeof.asizeof(base_cycle_result))
 
+cython_mu_start = memory_usage()
 cython_cycle_result = cython_task_2.compose_list()
+cython_mu_finish = memory_usage()
+cython_mu_diff = cython_mu_start[0] - cython_mu_finish[0]
+print(cython_mu_diff, asizeof.asizeof(cython_cycle_result))
 
 """
 Ниже приведен пример оптимизации времени заполнения массива с Numba. Понимаю, что не по теме, но для себя сохраню его 
