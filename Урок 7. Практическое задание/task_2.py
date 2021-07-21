@@ -26,8 +26,6 @@ def merge_sort_recurs(lst_obj):  # исходный алгоритм - реку�
         merge_sort_recurs(left)
         merge_sort_recurs(right)
 
-        # перестали делить
-        # выполняем слияние
         i, j, k = 0, 0, 0
 
         while i < len(left) and j < len(right):
