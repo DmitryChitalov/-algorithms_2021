@@ -40,3 +40,21 @@ for i in
 
 
 """
+from statistics import median
+from random import randint
+
+
+def median_array(array: list):
+    left = []
+    right = []
+    picked = array[len(array) // 2]
+
+
+
+m = int(input('Введите параметр m: '))
+arr = [randint(0, 10) for n in range(2 * m + 1)]
+print(arr)
+print(median(arr))
+print(median_array(arr))
+print(median([7, 8, 3, 1, 6, 4, 4]))
+median_array([7, 8, 3, 1, 6, 4, 4])
