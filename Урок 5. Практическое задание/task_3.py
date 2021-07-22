@@ -194,7 +194,7 @@ def get_new_deque(elements_count):
 
 print("filling_list: ", timeit(stmt="filling_list(el_count)", globals=globals(), number=10000))
 print("filling_deque: ", timeit(stmt="filling_deque(el_count)", globals=globals(), number=10000))
-"""
+
 # List.
 print("get_val_from_list: ", timeit(stmt="get_val_from_list(get_new_list(el_count), 37)", globals=globals(),
                                     number=1000))
@@ -216,7 +216,7 @@ print("deque_popleft: ", timeit(stmt="deque_popleft(get_new_deque(el_count))", g
 print("deque_extend: ", timeit(stmt="deque_extend(get_new_deque(el_count), get_new_deque(el_count))",
                                globals=globals(), number=1000))
 print("deque_extend_left: ", timeit(stmt="deque_extend_left(get_new_deque(el_count), get_new_deque(el_count))",
-                                    globals=globals(), number=1000))"""
+                                    globals=globals(), number=1000))
 
 """
 > 1) создайте простой список (list) и очередь (deque). Сделайте замеры и оцените что заполняется быстрее.
