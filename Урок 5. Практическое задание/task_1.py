@@ -39,7 +39,7 @@ def get_org_params():
         org_name = input("Введите название предприятия: ")
         print(org_name)
         year_profit = input("Через пробел введите прибыль данного предприятия за каждый "
-                            "квартал(Всего 4 квартала): \n")
+                            "квартал(Всего 4 квартала): ")
         print(year_profit)
         org_list.append(
             org(
