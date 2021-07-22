@@ -23,5 +23,45 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
-## Test Commit
-## MMMMMM
+from collections import namedtuple
+
+
+def get_org_params():
+    org = namedtuple('Organizations', 'id name year_profit')
+    org_list = list()
+    org_count = int(input("Введите количество предприятий для расчета прибыли: "))
+    print(org_count)
+
+    if org_count == 0:
+        return
+
+    for x in range(org_count):
+        org_name = input("Введите название предприятия: ")
+        print(org_name)
+        year_profit = input("Через пробел введите прибыль данного предприятия за каждый "
+                            "квартал(Всего 4 квартала): \n")
+        print(year_profit)
+        org_list.append(
+            org(
+                id=x + 1,
+                name=org_name,
+                year_profit=sum([int(e) if e.isdigit() else e for e in year_profit.split(" ")])
+            )
+        )
+
+    return org_list
+
+
+def calc_avg_profit(org_data):
+    return sum([x.year_profit for x in org_data]) / len(org_data)
+
+
+orgs = get_org_params()
+if orgs:
+    avg_p = calc_avg_profit(orgs)
+    print(f"Средняя годовая прибыль всех предприятий: {avg_p}")
+    print("Предприятия, с прибылью выше среднего значения: ", *[x.name for x in orgs if x.year_profit > avg_p])
+    print("Предприятия, с прибылью ниже среднего значения: ", *[x.name for x in orgs if x.year_profit < avg_p])
+else:
+    print("С данными что-то не так!")
+
