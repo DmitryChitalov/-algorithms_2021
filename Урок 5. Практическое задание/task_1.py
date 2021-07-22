@@ -27,6 +27,10 @@ from collections import namedtuple
 
 
 def get_org_params():
+    """
+    Сбор данных по организациям от пользователя.
+    :return: namedtuple
+    """
     org = namedtuple('Organizations', 'id name year_profit')
     org_list = list()
     org_count = int(input("Введите количество предприятий для расчета прибыли: "))
@@ -53,6 +57,11 @@ def get_org_params():
 
 
 def calc_avg_profit(org_data):
+    """
+    Рассчёт средней годовой прибыли всех предприятий.
+    :param org_data:
+    :return: int
+    """
     return sum([x.year_profit for x in org_data]) / len(org_data)
 
 
