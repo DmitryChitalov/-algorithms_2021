@@ -10,6 +10,13 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
+class InputValueError(Exception):
+    def __str__(self):
+        return f'{InputValueError.__name__}: Вы попытались вставить значение ' \
+               f'не в тот узел'
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,7 +28,13 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
+        try:
+            if (new_node > self.root) or (
+                    self.get_right_child() != None and new_node > self.get_right_child().get_root_val()):
+                raise InputValueError
+        except InputValueError as e:
+            print(e)
+            # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -36,7 +49,13 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
+        try:
+            if (new_node < self.root) or (
+                    self.get_left_child() != None and new_node < self.get_left_child().get_root_val()):
+                raise InputValueError
+        except InputValueError as e:
+            print(e)
+            # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -66,14 +85,34 @@ class BinaryTree:
         return self.root
 
 
+# ВАЛИДНЫЕ ЗНАЧЕНИЯ
+# r = BinaryTree(8)
+# print(r.get_root_val())
+# print(r.get_left_child())
+# r.insert_left(4)
+# print(r.get_left_child())
+# print(r.get_left_child().get_root_val())
+# r.insert_right(12)
+# print(r.get_right_child())
+# print(r.get_right_child().get_root_val())
+# r.get_right_child().set_root_val(16)
+# print(r.get_right_child().get_root_val())
+
+# НЕВАЛИДНЫЕ ЗНАЧЕНИЯ
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+r.insert_left(12)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
-r.insert_right(12)
+r.insert_right(4)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+'''
+1. Сделал валидацию входящих значений для правого и левого потомков через
+try, except.
+2. Проверил код на валидных значениях.
+3. Проверил код на невалидных значениях.
+'''
