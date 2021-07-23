@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,17 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+'''
+Не оптимизированная функция recursive_reverse
+0.020795014
+0.024466038999999995
+0.04851436999999997
+Оптимизированная функция recursive_reverse_mem
+0.0017779119999999926
+0.0016984260000000306
+0.001818437000000006
+Выводы:
+использование меморизации здесь бесмысленно, так как функция вызывается один раз, и число, сохраненное в кэше, 
+больше не используется.
+'''
