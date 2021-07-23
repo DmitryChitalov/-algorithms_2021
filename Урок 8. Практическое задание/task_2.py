@@ -34,9 +34,9 @@ class BinaryTree:
             tree_obj = BinaryTree(new_node, parent=self)
             # и спускаем имеющегося потомка на один уровень ниже
             if self.left_child.get_root_val() >= new_node:
-                tree_obj.right_child = self.right_child
+                tree_obj.right_child = self.left_child
             else:
-                tree_obj.left_child = self.right_child
+                tree_obj.left_child = self.left_child
             self.left_child = tree_obj
 
     # добавить правого потомка - сделаем тоже приватным
