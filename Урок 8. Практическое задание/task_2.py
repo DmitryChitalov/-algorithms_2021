@@ -21,44 +21,48 @@ class BinaryTree:
         self.right_child = None
 
     def insert(self, new_node):
-        if new_node > self.root:
-            if self.right_child is not None:
-                if new_node < self.right_child.get_root_val():
-                    tree_obj = BinaryTree(new_node)
-                    tree_obj.right_child = self.right_child
-                    self.right_child = tree_obj
-                    print(f'Вставил {new_node} после {self.root}')
-                elif new_node > self.right_child.get_root_val():
-                    if self.right_child.right_child is None:
-                        self.right_child.right_child = BinaryTree(new_node)
-                        print(f'Вставил {new_node} после {self.right_child.get_root_val()}')
+        try:
+            if new_node > self.root:
+                if self.right_child is not None:
+                    if new_node < self.right_child.get_root_val():
+                        tree_obj = BinaryTree(new_node)
+                        tree_obj.right_child = self.right_child
+                        self.right_child = tree_obj
+                        print(f'Вставил {new_node} после {self.root}')
+                    elif new_node > self.right_child.get_root_val():
+                        if self.right_child.right_child is None:
+                            self.right_child.right_child = BinaryTree(new_node)
+                            print(f'Вставил {new_node} после {self.right_child.get_root_val()}')
+                        else:
+                            self.right_child.insert(new_node)
                     else:
-                        self.right_child.insert(new_node)
+                        print(f'Узел уже существует')
                 else:
-                    print(f'Узел уже существует')
-            else:
-                self.right_child = BinaryTree(new_node)
-                print(f'Вставил {new_node} после {self.root}!')
-        elif new_node < self.root:
-            if self.left_child is not None:
-                if new_node > self.left_child.get_root_val():
-                    tree_obj = BinaryTree(new_node)
-                    tree_obj.left_child = self.left_child
-                    self.left_child = tree_obj
-                    print(f'Вставил {new_node} после {self.root}')
-                elif new_node < self.left_child.get_root_val():
-                    if self.left_child.left_child is None:
-                        self.left_child.left_child = BinaryTree(new_node)
-                        print(f'Вставил {new_node} после {self.left_child.get_root_val()}')
+                    self.right_child = BinaryTree(new_node)
+                    print(f'Вставил {new_node} после {self.root}!')
+            elif new_node < self.root:
+                if self.left_child is not None:
+                    if new_node > self.left_child.get_root_val():
+                        tree_obj = BinaryTree(new_node)
+                        tree_obj.left_child = self.left_child
+                        self.left_child = tree_obj
+                        print(f'Вставил {new_node} после {self.root}')
+                    elif new_node < self.left_child.get_root_val():
+                        if self.left_child.left_child is None:
+                            self.left_child.left_child = BinaryTree(new_node)
+                            print(f'Вставил {new_node} после {self.left_child.get_root_val()}')
+                        else:
+                            self.left_child.insert(new_node)
                     else:
-                        self.left_child.insert(new_node)
+                        print(f'Узел уже существует')
                 else:
-                    print(f'Узел уже существует')
+                    self.left_child = BinaryTree(new_node)
+                    print(f'Вставил {new_node} после {self.root}!')
             else:
-                self.left_child = BinaryTree(new_node)
-                print(f'Вставил {new_node} после {self.root}!')
-        else:
-            print(f'Узел уже существует')
+                print(f'Узел уже существует')
+        except TypeError as e:
+            print(f'{type(new_node)} - недопустимый тип для ввода!')
+
     # добавить левого потомка
     def insert_left(self, new_node) -> object:
         # если у узла нет левого потомка
@@ -150,6 +154,8 @@ print(r2.get_left_child().get_left_child().get_left_child().get_left_child().get
 r2.insert(6)
 r2.insert(8)
 r2.insert(40)
+r2.insert('abab')
+
 
 # Добавил универсальный инсерт слева и справа, который валидирует по значению
 # (если больше вставляет справа, если меньше слева)
