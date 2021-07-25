@@ -28,3 +28,24 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+
+def sum_mul_defaultdict():
+    default_dict = defaultdict(list)
+    first_num_key = input('Введите первое первое число в шестнадцатиричной системе: ')
+    second_num_key = input('Введите второе первое число в шестнадцатиричной системе: ')
+    # first_num_key = 'A2'
+    # second_num_key = 'C4F'
+    first_num_val = hex(int(first_num_key, 16))[2:]
+    default_dict[first_num_key] = list(first_num_val.upper())
+    second_num_val = hex(int(second_num_key, 16))[2:]
+    default_dict[second_num_key] = list(second_num_val.upper())
+    sum_sec_num = hex(int(first_num_key, 16) + int(second_num_key, 16))[2:]
+    default_dict['sum_sec_num'] = list(sum_sec_num.upper())
+    mul_sec_num = hex(int(first_num_key, 16) * int(second_num_key, 16))[2:]
+    default_dict['mul_sec_num'] = list(mul_sec_num.upper())
+    return f'Сумма чисел: {default_dict["sum_sec_num"]}\n' \
+           f'Произведение чисел: {default_dict["mul_sec_num"]}\n' \
+           f'Словарь: {default_dict}'
+
+print(sum_mul_defaultdict())
