@@ -12,36 +12,25 @@
 Без аналитики задание считается не принятым
 """
 
-from timeit import timeit
-from random import randint
+# функциия, оснащённая декоратором меморизации даёт значительное уменьшение времени только в случае подсчёта этого самого времени.
+# Например, у нас есть какое-то число, проведя над ним операцию единожды, оно попадает в кэш,
+# и если при вызове timeit у нас number > 1, то при повторном проведении операции, перевёрнутое число просто достаётся из кэша.
+# Попробуем поставить number=1, и зададим не рандомное число, а какое-нибудь очень огромное, для того чтобы наглядно увидеть время (без экспоненты)
+# Как мы видим, при одноразовом использовании каждой из фуекций, функция без меморизации показывает резульаты даже с меньшим временем
 
+from timeit import timeit
 
 def recursive_reverse(number):
     if number == 0:
         return str(number % 10)
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
-
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
-
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        "recursive_reverse(10 ** 100)",
+        globals=globals(),
+        number=1))
 
 
 def memoize(f):
@@ -64,19 +53,32 @@ def recursive_reverse_mem(number):
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
-print('Оптимизированная функция recursive_reverse_mem')
+print('"Оптимизированная" функция recursive_reverse_mem')
+
 print(
     timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        'recursive_reverse_mem(10 ** 100)',
+        globals=globals(),
+        number=1))
+
+
+# Мой скромный вариант оптимизации. Не знаю, на сколько он хорош, но благодаря тому, что я ушла от рекурсии, я значительно уменьшила время выполнения.
+
+print('My_func')
+
+
+def my_func(number):
+    n = -1
+    my_str = ''
+    str_list = [i for i in str(number)]
+    for j in range(len(str_list)):
+        my_str += str_list[n]
+        n -= 1
+    return my_str
+
+
 print(
     timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        'my_func(10 ** 100)',
+        globals=globals(),
+        number=1))
