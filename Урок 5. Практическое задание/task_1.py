@@ -23,3 +23,26 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import defaultdict
+
+companies = defaultdict(int)
+n = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(n):
+    name = input('Введите название предприятия: ')
+    profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+    companies[name] = sum([int(x) for x in profit.split(' ')])
+
+
+def average_profit():
+    common = 0
+    for value in companies.values():
+        common += value
+    avg = common / n
+    print(f'Средняя годовая прибыль всех предприятий: {avg}')
+    above = ','.join([key for key in companies.keys() if companies[key] > avg])
+    print(f'Предприятия, с прибылью выше среднего значения: {above}')
+    below = ','.join([key for key in companies.keys() if companies[key] < avg])
+    print(f'Предприятия, с прибылью ниже среднего значения: {below}')
+
+
+average_profit()
