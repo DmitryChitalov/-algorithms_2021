@@ -33,3 +33,24 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+from collections import defaultdict
+
+
+def mult_and_sum():
+    numbers = defaultdict(list)
+    fst_num, sec_num = input("Введите два шестнадцатиричных числа через пробел: ").split()
+    numbers[fst_num] = list(fst_num)
+    numbers[sec_num] = list(sec_num)
+    my_sum = 0
+    my_mult = 1
+
+    for i in numbers.values():
+        my_sum += (int(''.join(i), 16))
+        my_mult *= int(''.join(i), 16)
+
+    print(f'Сумма введённых чисел равна {list(str(hex(my_sum))[2:])}')
+    print(f'Произведение введённых чисел равна {list(str(hex(my_mult))[2:])}')
+
+
+mult_and_sum()
