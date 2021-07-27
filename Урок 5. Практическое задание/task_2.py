@@ -34,3 +34,36 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+# from collections import defaultdict
+
+#
+# arr_list = defaultdict(list)
+#
+# for i in range(2):
+#     arr_list[i + 1] = list(input(f'Введите {i + 1} число: '))
+# print(arr_list)
+#
+# a = list(hex(int(''.join(arr_list[1]), 16) + int(''.join(arr_list[2]), 16))[2:].upper())
+# b = list(hex(int(''.join(arr_list[1]), 16) * int(''.join(arr_list[2]), 16))[2:].upper())
+# print(f'Сумма чисел из примера: {a}')
+# print(f'Произведение - {b}')
+
+
+class HexClass:
+    def __init__(self, number):
+        self.number = number
+
+    def __add__(self, other):
+        return list(hex(int(self.number, 16) + int(other.number, 16))[2:].upper())
+
+    def __mul__(self, other):
+        return list(hex(int(self.number, 16) * int(other.number, 16))[2:].upper())
+
+
+name_1 = HexClass(input(f'Введите 1 число: '))
+name_2 = HexClass(input(f'Введите 2 число: '))
+
+print(name_1 + name_2)
+print(name_1 * name_2)
