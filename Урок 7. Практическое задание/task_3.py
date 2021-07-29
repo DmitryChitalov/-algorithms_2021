@@ -62,11 +62,14 @@ med_index = orig_list
 print("Оригинальный список: ")
 print(*orig_list)
 
-print("Медиана из модуля statistics: ", median(orig_list))
+print("Медиана из модуля statistics (для проверки): ", median(orig_list))
 
-# Если я правильно понял задание и мне не нужно писать руками функцию max.
-for _ in range(int(len(orig_list) / 2)):
-    orig_list.remove(max(orig_list))
+"""
+Если я правильно понял задание и мне не нужно писать руками функцию max.
+Проходим половину списка, удаляя максимальные значения.
+Решение, уверен, тормозное. Сложностью не меньше O(N^2). 
+Дешевле отсортировать список.
+"""
+[orig_list.remove(max(orig_list)) for _ in range(int(len(orig_list) / 2))]
 
 print("Медиана полученная удалением максимальных элементов: ", max(orig_list))
-
