@@ -13,3 +13,62 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import operator
+from numpy import random
+from timeit import timeit
+
+
+# Мне больше нравится немного иная реализация
+
+
+def merge(left, right, compare):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if compare(left[i], right[j]):
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    return result
+
+
+def merge_sort(li, compare=operator.lt):
+    if len(li) < 2:
+        return li[:]
+    else:
+        middle = int(len(li) / 2)
+        left = merge_sort(li[:middle], compare)
+        right = merge_sort(li[middle:], compare)
+        return merge(left, right, compare)
+
+
+"""
+Для массива длиной 100 получаем: 0.21122590000000052
+Для массива длиной 1000 получаем: 2.7202404000000007
+Для массива длиной 10000 получаем: 35.5193933
+Время исполнения при росте списка растет, конечно, драматически
+Пример вывода массивов
+
+Исходный массив: [14.7448459  40.08385573 16.04337236 15.55396906  6.32254937 40.83413661 8.10774206  6.151312   
+27.98887438 34.5061699 ] 
+Отсортированный массив: [6.151311999202264, 6.322549370090491, 8.107742063891083, 
+14.744845896607057, 15.553969059864414, 16.043372357447456, 27.98887438078468, 34.50616989983337, 40.083855732723215, 
+40.83413660575556] 
+
+"""
+
+if __name__ == '__main__':
+    my = list(map(int, input('Введите длины списков через пробел: ').split()))
+    for i in my:
+        ms = random.uniform(0.0, 50.0, size=i)
+        print(f'Для массива длиной {i} получаем: {timeit("merge_sort(ms[:])", globals=globals(), number=1000)} \n'
+              f'Исходный массив: {ms} \n'
+              f'Отсортированный массив: {merge_sort(ms[:])}')
