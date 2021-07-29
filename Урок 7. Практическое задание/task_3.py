@@ -40,3 +40,20 @@ for i in
 
 
 """
+import random
+
+
+def get_data_from_user() -> list:
+    while True:
+        el_count = input("Список строится по формуле 2m + 1. Введите m: ")
+        print(el_count)
+        if el_count.isdigit():
+            el_count = int(el_count)
+            break
+        else:
+            print("Вы ввели что-то не то. Заходим на новый круг!")
+
+    return [random.randint(0, 50) for _ in range(2 * el_count + 1)]
+
+
+print(*get_data_from_user())
