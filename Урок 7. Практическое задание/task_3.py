@@ -41,6 +41,7 @@ for i in
 
 """
 import random
+from statistics import median
 
 
 def get_data_from_user() -> list:
@@ -56,4 +57,16 @@ def get_data_from_user() -> list:
     return [random.randint(0, 50) for _ in range(2 * el_count + 1)]
 
 
-print(*get_data_from_user())
+orig_list = get_data_from_user()
+med_index = orig_list
+print("Оригинальный список: ")
+print(*orig_list)
+
+print("Медиана из модуля statistics: ", median(orig_list))
+
+# Если я правильно понял задание и мне не нужно писать руками функцию max.
+for _ in range(int(len(orig_list) / 2)):
+    orig_list.remove(max(orig_list))
+
+print("Медиана полученная удалением максимальных элементов: ", max(orig_list))
+
