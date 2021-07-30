@@ -12,6 +12,11 @@
 Без аналитики задание считается не принятым
 """
 
+'''Меморизация для решения через рекурсию не актуальна, хоть 0.06466064399999999 без против 0.002370541000000004 
+с меморизацией. Дело в том, что меморизация ускоряет работу для указанного количества запусков, 
+а не для единичного (первого). Все действительно необходимые данные имеют констанные значения после первого запуска.
+Ниже код слегка изменён и дополнен комментариями.'''
+
 from timeit import timeit
 from random import randint
 
@@ -31,12 +36,12 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=1))  # 1.05810000000095e-05
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=2))  # 9.215999999992452e-06
 print(
     timeit(
         "recursive_reverse(num_10000)",
@@ -69,12 +74,14 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=1))  # 1.2287999999999188e-05 даже большее значение, чем для неоптимизированной функции
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=2))  # 1.2628999999986235e-05 тут уже наглядно видно, что меморизация обращается к прежним данным,
+# поэтому время для выполнения двух запусков сокращается, если поставить number=1, то замер вновь будет больше, чем для
+# неоптимизированной функции
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
