@@ -33,3 +33,49 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+
+
+class HexNumber:
+
+    def __init__(self, number):
+        def is_hex(s):
+            try:
+                int(s, 16)
+                return True
+            except ValueError:
+                return False
+
+        while is_hex(number) is not True:
+            print(f'Введённые данные не являются числом из 16-ой системы счисления!')
+            number = input(f'Введённые число, принадлежащее 16-ой системе счисления: ')
+
+        self.number = int(number, 16)
+
+    def __str__(self):
+        return str([x for x in hex(self.number)[2:]]).upper()
+
+    def __add__(self, other):
+        result = hex(self.number + other.number)
+        return HexNumber(result)
+
+    def __mul__(self, other):
+        result = hex(self.number * other.number)
+        return HexNumber(result)
+
+
+print(HexNumber('A2') + HexNumber('C4F'))
+print(HexNumber('A2') * HexNumber('C4F'))
+
+
+def hex_num(num1, num2):
+
+    hex_dict = defaultdict(list, num1=[x for x in num1], num2=[x for x in num2])
+
+    addition = [x for x in hex(int(num1, 16) + int(num2, 16))[2:].upper()]
+    multi = [x for x in hex(int(num1, 16) * int(num2, 16))[2:].upper()]
+    print(f'Сумма числа {hex_dict["num1"]} и числа {hex_dict["num2"]} равно {addition}\n'
+          f'Произведение числа {hex_dict["num1"]} и числа {hex_dict["num2"]} равно {multi}')
+
+
+hex_num('A2', 'C4F')
