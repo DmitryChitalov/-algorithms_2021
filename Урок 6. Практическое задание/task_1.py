@@ -69,7 +69,8 @@ def static_info():
 
 # 11.1
 class Data:
-    """ К сожалению после использования слотов заняло 0.25454 Mib, но до использования
+    """
+    К сожалению после использования слотов заняло 0.25454 Mib, но до использования
     слотов было 0.21818 Mib, я не понимаю почему
     """
     __slots__ = ['day', 'month', 'year']
@@ -93,16 +94,28 @@ class Data:
             raise ValueError(f'Date entered incorrectly: {obj.day}-{obj.month}-{obj.year}')
 
 
-# work_str = '02-02-2021'
-# if __name__ == '__main__':
-#     one = Data.parsing_info(work_str)
-#     print(sys.getsizeof(one))
-#     try:
-#         Data.chek_info(one)
-#     except ValueError as err:
-#         print(err)
-#     else:
-#         print(f'This good date: {work_str}')
+work_str = '02-02-2021'
+if __name__ == '__main__':
+    one = Data.parsing_info(work_str)
+    print(sys.getsizeof(one))
+    print(asizeof.asizeof(one))
+    """ 
+    без слотов: 
+    sys.getsizeof(one) - 48
+    asizeof.asizeof(one) - 384
+    с использованием слотов:
+    sys.getsizeof(one) - 56
+    asizeof.asizeof(one) - 120
+    Вопрос чемотличается getsizeof от asizeof? они оба возвращают размер обекта в байтах 
+    написанно что asizeof возвращает комбинированный размер но если ему верить то слоты 
+    дают значительный прирост в свободной памяти
+    """
+    try:
+        Data.chek_info(one)
+    except ValueError as err:
+        print(err)
+    else:
+        print(f'This good date: {work_str}')
 
 
 # 5.4

@@ -37,6 +37,25 @@ for i in
     left == right
     left.clear()
     right.clear()
-
-
 """
+import random
+
+
+def gnome(data):
+    j = (len(data)-1) // 2
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data[j]
+
+
+if __name__ == '__main__':
+    natural_number = int(input('Please enter number natural: '))
+    orig_lst = [random.randint(0, 50) for _ in range(2*natural_number + 1)]
+    print(orig_lst)
+    print(gnome(orig_lst))
