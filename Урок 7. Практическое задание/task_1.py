@@ -17,3 +17,42 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import random
+from timeit import timeit
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] > lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble(arr):
+    n = 1
+    flag = True
+    while flag:
+        for i in range(len(arr) - n):
+            if arr[i] < arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                flag = True
+            else:
+                flag = False
+        n += 1
+    return arr
+
+
+lst = [random.randint(-100, 99) for i in range(100)]
+print(lst)
+print(bubble(lst))
+print('Без доработки', timeit('bubble_sort(lst)', globals=globals(), number=100))
+print('С доработкой', timeit('bubble(lst)', globals=globals(), number=100))
+#  [-100; 100)-это полуинтервал  поэтому 100 не включаем
+# Без доработки 0.05824250000000001
+# С доработкой 0.0015777000000000013
+
+# Я сделал выполнять цикл если True,
+# и если список не меняется то False и оставшиеся разы проходить не надо
