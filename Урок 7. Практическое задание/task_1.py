@@ -48,11 +48,11 @@ def bubble(arr):
 lst = [random.randint(-100, 99) for i in range(100)]
 print(lst)
 print(bubble(lst))
-print('Без доработки', timeit('bubble_sort(lst)', globals=globals(), number=100))
-print('С доработкой', timeit('bubble(lst)', globals=globals(), number=100))
+print('Без доработки', timeit('bubble_sort(lst[:])', globals=globals(), number=100))
+print('С доработкой', timeit('bubble(lst[:])', globals=globals(), number=100))
 #  [-100; 100)-это полуинтервал  поэтому 100 не включаем
-# Без доработки 0.05824250000000001
-# С доработкой 0.0015777000000000013
-
+# Без доработки 0.11696900000000002
+# С доработкой 0.0008438000000000057
+# Передал копию и  поменялись показатели
 # Я сделал выполнять цикл если True,
 # и если список не меняется то False и оставшиеся разы проходить не надо
