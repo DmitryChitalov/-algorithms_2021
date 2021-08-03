@@ -45,3 +45,31 @@ for i in
 
 
 """
+
+from random import randint
+from statistics import median
+
+
+def max_value(lst_obj):
+    max_val = lst_obj[0]
+    for i in lst_obj:
+        if max_val < i:
+            max_val = i
+    return max_val
+# Я так поняла, функцию max не следовало использовать, иначе это было бы слишком просто,
+# поэтому я создала собственную функцию для нахождения максимального значения.
+
+
+def find_median(list_obj):
+    for j in range(len(list_obj) // 2):
+        list_obj.remove(max_value(list_obj))
+    return max_value(list_obj)
+
+
+my_list = [randint(1, 100) for _ in range(randint(1, 10) * 2 + 1)]
+
+if find_median(my_list[:]) == median(my_list[:]):
+    print(f"Массив: {my_list}\nЕго медиана: {find_median(my_list[:])}")
+else:
+    print("В коде допущена ошибка")
+    
