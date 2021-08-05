@@ -113,5 +113,6 @@ if __name__ == '__main__':
     huffman_str = encode_str(text, char_frequency, codes)
     origin_str = decode_str(huffman_str, char_frequency, codes)
 
-    print("Кордированая строка: " + huffman_str)
-    print("Оригинальная строка: " + origin_str)
+    print("Оригинальная строка: " + text)
+    print("Кодированная строка: " + huffman_str)
+    print("Раскодированная строка: " + origin_str)
