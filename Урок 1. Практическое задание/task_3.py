@@ -37,7 +37,7 @@ def check_profit_2(dict_obj):
     """ Сложность функции O(NlogN),
     данная функция имеет линейно-логарифмическую сложность,
     поэтому она предпочтительнее функции check_profit_1, имеющей квадратичную сложность"""
-    result = sorted(dict_obj, key=dict_obj.get, reverse=True) # O(NlogN)
-    return result[:3]
+    result = sorted(dict_obj, key=dict_obj.get, reverse=True)   # O(NlogN)
+    return result[:3]   # O(1)
 
 
