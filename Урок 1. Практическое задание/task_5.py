@@ -28,3 +28,80 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.main_stack = []
+        self.elems = []
+
+    def is_empty(self):
+        return self.main_stack == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в начале списка"""
+        if len(self.elems) >= 5:
+            self.main_stack.insert(0, self.elems)
+            self.elems = []
+            self.elems.insert(0, el)
+        else:
+            self.elems.insert(0, el)
+
+    def pop_out(self):
+        if len(self.elems) == 0:
+            self.elems = self.main_stack[0]
+            self.main_stack.pop(0)
+            return self.elems.pop(0)
+        else:
+            return self.elems.pop(0)
+
+    def get_val(self):
+        return self.elems[0]
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def main_stack_size(self):
+        return len(self.main_stack)
+
+    def show_stack(self):
+        return self.elems
+
+    def show_main_stack(self):
+        return self.main_stack
+
+
+SC_OBJ = StackClass()
+
+print(SC_OBJ.is_empty())
+
+SC_OBJ.push_in(10)
+SC_OBJ.push_in('code')
+SC_OBJ.push_in(False)
+SC_OBJ.push_in(5.5)
+SC_OBJ.push_in(78)
+SC_OBJ.push_in(95)
+SC_OBJ.push_in(95)
+
+print(SC_OBJ.get_val())
+print(SC_OBJ.stack_size())
+print(SC_OBJ.main_stack_size())
+
+SC_OBJ.pop_out()
+SC_OBJ.pop_out()
+SC_OBJ.pop_out()
+SC_OBJ.pop_out()
+
+print(SC_OBJ.stack_size())
+print(SC_OBJ.main_stack_size())
+print(SC_OBJ.get_val())
+
+print(SC_OBJ.show_stack())
+
+SC_OBJ.push_in(5.5)
+SC_OBJ.push_in(78)
+SC_OBJ.push_in(95)
+SC_OBJ.push_in(95)
+
+
+print(SC_OBJ.show_main_stack())
