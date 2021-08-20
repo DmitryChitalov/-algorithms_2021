@@ -20,3 +20,37 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def check_profit_1(dict_obj):
+    """ Сложность функции O(N**2)"""
+    sorted_values = sorted(dict_obj.values(), reverse=True)  # O(NlogN)
+    result = []  # O(1)
+    for i in sorted_values:  # O(N)
+        for j in dict_obj.keys():  # O(N)
+            if dict_obj[j] == i:  # O(1)
+                result.append(j)  # O(1)
+    return result[:3]  # O(1)
+
+
+def check_profit_2(dict_obj):
+    """ Сложность функции O(NlogN),
+    данная функция имеет линейно-логарифмическую сложность,
+    поэтому она предпочтительнее функции check_profit_1, имеющей квадратичную сложность"""
+    result = sorted(dict_obj, key=dict_obj.get, reverse=True) # O(NlogN)
+    return result[:3]
+
+
+
+
+
+
+
+
+
+
+test_dict = {"asd": 5, "two": 8, "three": 1, "four": 3}
+
+print(check_profit_1(test_dict))
+print(check_profit_2(test_dict))
+
