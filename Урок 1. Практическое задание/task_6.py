@@ -18,3 +18,36 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+class DashboardClass:
+    def __init__(self):
+        self.base_task_que = []
+        self.extra_task_que = []
+        self.complited_tasks = []
+
+    def get_task_from_base_que(self):
+        # if
+        task = self.base_task_que.pop()
+        print(f"Задача: {task} -  решается...")
+        state = input("Вы решили задачу? Введите 1/0: ")
+        # password = input('Введите пароль:').encode('utf-8')
+        print(state)
+
+        if state:
+            print("Задача решена!\n")
+            self.complited_tasks.append(task)
+        else:
+            print("Задача нерешена и отправлена на доработку.\n")
+            self.extra_task_que.append(task)
+    def set_tasks(self, task_name):
+        self.base_task_que.append(task_name)
+
+if __name__ == '__main__':
+    DEBUG = 1
+    MyDashboard = DashboardClass()
+
+    task1 = 'отправить на проверку задание 1'
+    task2 = 'решить задание 1'
+    MyDashboard.set_tasks(task1)
+    MyDashboard.set_tasks(task2)
+    MyDashboard.get_task_from_base_que()
+    MyDashboard.get_task_from_base_que()
