@@ -41,16 +41,3 @@ def check_profit_2(dict_obj):
     return result[:3]
 
 
-
-
-
-
-
-
-
-
-test_dict = {"asd": 5, "two": 8, "three": 1, "four": 3}
-
-print(check_profit_1(test_dict))
-print(check_profit_2(test_dict))
-
