@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+test_lst = [4, 7, 9, 6, 3]
+
+
+def search_min_1(lst_obj):     # O(n^2)
+    min_value = 0              # O(1)
+    for i in lst_obj:          # O(n)
+        for j in lst_obj:      # O(n), вложенный цикл O(n) * O(n) = O(n^2)
+            if j <= i:         # O(1)
+                min_value = j  # O(1)
+    return min_value           # O(1)
+
+
+def search_min_2(lst):       # O(n)
+    min_value = lst[0]       # O(1)
+    for num in lst[1:]:      # O(n)
+        if num < min_value:  # O(1)
+            min_value = num  # O(1)
+    return min_value         # O(1)
+
+
+print(search_min_1(test_lst))
+print(search_min_2(test_lst))
