@@ -19,3 +19,49 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+
+def min_value_1(lst):
+    """Функция должна вернуть минимальное значение из списка
+
+    Алгоритм 1:
+    Сравнить каждое число со всеми элементами списка.
+    Сложность: O(n^2)
+    """
+    for val in lst:  # O(n)
+        val_is_min = True
+        for other_val in lst:  # O(n)
+            if val > other_val:
+                val_is_min = False  # O(1)
+        if val_is_min:
+            return val
+    return None
+
+
+def min_value_2(lst):
+    """Функция должна вернуть минимальное значение из списка
+
+    Алгоритм 2:
+    Сравнить каждый элемент списка с минимальным значением.
+    Если элемент меньше - установить новое минимальное значение
+    Сложность: O(n)
+    """
+    if len(lst) > 0:
+        min_val = lst[0]
+    else:
+        return None
+    for val in lst:  # O(n)
+        if val < min_val:
+            min_val = val  # O(1)
+    return min_val
+
+
+CNT = 10
+
+rand_lst = random.sample(range(-100000, 100000), CNT)
+
+print(rand_lst)
+print(min_value_1(rand_lst))
+print(min_value_2(rand_lst))
