@@ -18,3 +18,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class QueueClass:
+    """
+    Доска задач
+    """
+
+    def __init__(self):
+        self.resolved = []
+        self.base_queue = []
+        self.revision_queue = []
+
+    def to_base_queue(self, item):
+        """
+        Добавление задачи в базовую очередь задач
+        """
+        self.base_queue.insert(0, item)
+
+    def from_base_queue(self):
+        """
+        Перемещение задачи из базового списка в список решенных
+        """
+        self.resolved.append(self.base_queue.pop())
+
+    def in_base_to_revision(self):
+        """
+        Перемещение задачи в список на доработку
+        """
+        self.revision_queue.insert(0, self.base_queue.pop())
+
+queue = QueueClass()
+queue.to_base_queue(1)
+queue.to_base_queue(2)
+queue.to_base_queue(3)
+queue.from_base_queue()
+queue.to_base_queue(4)
+queue.in_base_to_revision()
+queue.to_base_queue(5)
+print(f'Список задач {queue.base_queue}')
+print(f'Списрк задач на дороботке {queue.revision_queue}')
+print(f'Список решенных задач {queue.resolved}')

@@ -28,3 +28,48 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Stack:
+    """
+    Стопка тарелок
+    """
+
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        """
+        Добвыление тарелки в стопку.
+        Максимальная стопка 5 тарелок.
+        """
+        new_list = []
+        if len(self.stack) == 0:
+            self.stack.append(new_list)
+        if len(self.stack[len(self.stack) - 1]) < 5:
+            self.stack[len(self.stack) - 1].append(item)
+        else:
+            new_list.append(item)
+            self.stack.append(new_list)
+
+    def pop(self):
+        """
+        Удаление последней добавленой тарелки
+        """
+        if not self.stack:
+            self.stack = 'Стопка пустая'
+        else:
+            self.stack[len(self.stack) - 1].pop()
+            if not self.stack[len(self.stack) - 1]:
+                self.stack.pop()
+
+s = Stack()
+s.push(1)
+s.push(2)
+s.push(3)
+s.push(4)
+s.push(5)
+s.push(6)
+print(s.stack)
+s.pop()
+print(s.stack)

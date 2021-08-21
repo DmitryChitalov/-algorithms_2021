@@ -25,3 +25,48 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def auth(user, users_list):
+    """
+    Вариант 1
+    Хранение данных в списке
+    Сложность : O(N)
+    """
+    for value in users_list:  # O(N)
+        if user[0] == value[0] and user[1] == value[1]:  # O(1)
+            if value[2] == False:  # O(1)
+                return f'{user[0]} активируйте учетную запись'  # O(1)
+            return f'{user[0]} допущен к ресурсу'  # O(1)
+    return f'{user[0]} не допущен к ресурсу'  # O(1)
+
+users_list = [['user_1', 'password_1', True],
+              ['user_2', 'password_2', True],
+              ['user_3', 'password_3', False]]
+
+users_list_2 = {'user_1': {'password': 'password_1', 'activated': True},
+                'user_2': {'password': 'password_2', 'activated': True},
+                'user_3': {'password': 'password_3', 'activated': False}}
+
+
+def auth_2(user, users_list_2):
+    """
+    Вариант 2
+    Хранение данных в словаре
+    Сложность : 0(1)
+    """
+    if not users_list_2.get(user[0]):  # O(1)
+        return f'{user[0]} не допущен к ресурсу'  # O(1)
+    if not users_list_2.get(user[0]).get('activated'):  # O(1)
+        return f'{user[0]} активируйте учетную запись'  # O(1)
+    return f'{user[0]} допущен к ресурсу'  # O(1)
+
+
+user = ['user_3', 'password_3']
+print(auth(user, users_list))
+print(auth_2(user, users_list_2))
+"""
+Решение 2 эффективние, так как его сложность меньше чем в решение 1. 
+В данном случе хранение данных в словаре
+эффективнее чем в списке
+"""
