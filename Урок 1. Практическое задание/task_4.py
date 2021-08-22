@@ -25,3 +25,70 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def check_user_1(login, password):
+    """
+    Проверяем существует ли login в словаре обращаяь по ключу, если нет
+    то выдаем сообщение, далее
+    проверяем соотетствие пароля, если нет то выдаем сообщение, далее
+    проверяем состояния активации учетной записи, если False, то
+    выводим сообщение с предложением активировать учетную запись
+
+    Сложность: O(1).
+    """
+    if not USERS.get(login):
+        answer = 'Пользователь не найден.'
+    elif USERS.get(login).get('password') != password:
+        answer = 'Неверный пароль.'
+    elif not USERS.get(login).get('activated'):
+        answer = 'Учетная запись не активирована. Активируйте учетную запись.'
+    else:
+        answer = 'Добро пожаловать!'
+    return answer
+
+
+def check_user_2(login, password):
+    """
+    Перебираем каждый элемент словаря, если находится совпадение логина,
+    проверяем соотетствие пароля, если нет то выдаем сообщение, далее
+    проверяем состояния активации учетной записи, если False, то
+    выводим сообщение с предложением активировать учетную запись
+    Если в результате перебора соответсвующий логин не найден, то
+    выводим сообщение об этом.
+
+    Сложность: 0(n)
+    """
+    login_ok = False  # если логин найден, то = 1
+    answer = 'something is going wrong'
+    for key, value in USERS.items():  # 0(n)
+        if key == login:  # 0(1)
+            login_ok = True  # 0(1)
+            if password == value['password']:  # 0(1)
+                if value['activated']:  # 0(1)
+                    answer = 'Добро пожаовать.'  # 0(1)
+                else:
+                    answer = 'Учетная запись не активирована. ' \
+                             'Активируйте учетную запись.'  # 0(1)
+            else:
+                answer = 'Неверный пароль.'  # 0(1)
+    if not login_ok:  # 0(1)
+        answer = 'Пользователь не найден.'  # 0(1)
+    return answer  # 0(1)
+
+
+USERS = {
+    'alex': {'password': '12498', 'activated': True},
+    'julia': {'password': '1as468498', 'activated': False},
+    'petya': {'password': 'sdsa5as95', 'activated': True}
+}
+
+for k, v in USERS.items():
+    print(check_user_1(k, v['password']))
+
+print("#" * 50)
+
+for k, v in USERS.items():
+    print(check_user_2(k, v['password']))
+
+#  Первое решение эффективнее потому что в нем мы не перебираем каждый элемент словаря
