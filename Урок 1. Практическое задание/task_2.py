@@ -12,7 +12,11 @@ def min_value(my_list):  # 0(n^2)
     Сложность такого алгоритма: O(n^2) - квадратичная.
     """
     minimum_value = my_list[0]  # 0(1)
-    for number in my_list:  # 0(n^2)
+    for number in my_list:  # 0(n)
+        """
+        я думал что сложность считается не на выражение for in, а на весь блок.
+        т.е. учитывается все, что выполняется в for in. я посчитал до этого O(N)*O(N)+O(1)+O(1)
+        """
         for num in my_list:  # 0(n)
             if number <= num and number < minimum_value:  # 0(1)
                 minimum_value = number  # 0(1)

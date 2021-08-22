@@ -42,7 +42,8 @@ def three_best_company_2(company):
     three_best_company = []  # O(1)
     for i in range(3):  # O(1)
         max_value = 0  # O(1)
-        for key, value in company.items():  # O(N^2)
+        for key, value in company.items():  # O(N)
+            # Также как и у задании 2, я думал, что сложность считается на все что выполняется в for in
             if value > max_value and key not in three_best_company:  # O(N)
                 max_value = value  # O(1)
                 best_company = key  # O(1)
