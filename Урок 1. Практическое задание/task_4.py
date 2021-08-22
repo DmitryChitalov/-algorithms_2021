@@ -25,3 +25,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+"""
+Первое решение эффективнее. Несмотря на то, что сложность в данной ситуации одинаковая, 
+словари по умолчанию работают быстрее, т.к.  доступ к элементу получают по ключу, а не по позиции.
+"""
+
+# 1 O(n^2)
+
+users = {'Apple45': 'password'}
+login_u = input('Ваше имя: ')
+password_u = input('Ваш пароль: ')
+if login_u in users.keys():
+    expected_password = users[login_u]
+    if expected_password == password_u:
+        print('Приветствую тебя!')
+    else:
+        print('Неверный пароль или имя пользователя!')
+
+else:
+    print('Ваше имя пользователя не найдено, хотите пройти регистрацию?')
+
+# 2 O(n^2)
+
+users = [
+    {'name': 'Kirill', 'password': '1234'},
+    {'name': 'Lena', 'password': '5678'},
+]
+user_list = []
+for i in range(len(users)):
+    user_list.append(users[i]['name'])
+
+
+def log_check():
+    name_input = input("Пожалуйста, введите имя пользователя: ")
+    if name_input in user_list:
+        dict_index = user_list.index(name_input)
+        password_input = input("Пожалуйста, введите пароль:")
+        if password_input == users[dict_index]['password']:
+            print('Приветствую тебя!')
+        else:
+            print('Неверный пароль или имя пользователя!')
+    else:
+        print('Ваше имя пользователя не найдено, хотите пройти регистрацию?')
+
+
+while True:
+    log_check()

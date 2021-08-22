@@ -20,3 +20,23 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+"""Первое решение эффективнее, т.к. время исполнения кода меньше."""
+
+
+# 1 О(n)
+
+from collections import Counter
+
+company = {'A': 3.75, 'B': 44.2, 'C': 12.4, 'D': 44.5, 'E': 10.1}
+count = Counter(company)
+
+print(count.most_common(3))
+
+# 2 O(n*log(n))
+
+company = {'A': 3.75, 'B': 44.2, 'C': 12.4, 'D': 44.5, 'E': 10.1}
+income = sorted(list(company.items()), key=lambda tup: tup[1], reverse=True)[:3]
+print(income)
+
+
