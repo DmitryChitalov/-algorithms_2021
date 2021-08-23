@@ -28,3 +28,76 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def new_stack():
+    name_list = ['second_stack', 'third_stack', 'fourth_stack']
+    for name in name_list:
+        globals()[name] = StackOfPlates()
+
+
+class StackOfPlates:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def is_full(self):
+        if len(self.elems) == 5:
+            new_stack()
+            return True
+        else:
+            return False
+
+
+first_stack = StackOfPlates()
+
+print(first_stack.is_empty())
+
+first_stack.push_in('plate_one')
+first_stack.push_in('plate_two')
+first_stack.push_in('plate_three')
+first_stack.push_in('plate_four')
+
+print(first_stack.get_val())
+
+print(first_stack.stack_size())
+
+print(first_stack.is_empty())
+
+first_stack.push_in('plate_five')
+
+print(first_stack.pop_out())
+
+
+print(first_stack.pop_out())
+
+print(first_stack.stack_size())
+
+print(first_stack.is_full())
+
+first_stack.push_in('plate_four')
+first_stack.push_in('plate_five')
+
+print(first_stack.is_full())
+
+print(first_stack.elems)
+
+first_stack.push_in('plate_six')
+
+print(first_stack.elems)
+
+print(second_stack.elems)
