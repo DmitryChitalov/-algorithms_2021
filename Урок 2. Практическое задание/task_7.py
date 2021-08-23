@@ -28,5 +28,5 @@ def calc(num):
 number = int(input('Введите любое число: '))
 if calc(number) == (number * (number + 1) / 2):
     print("Выражение 1+2+...+n = n(n+1)/2  - Верно")
-if calc(number) != (number * (number + 1) / 2):
+else:
     print("Выражение 1+2+...+n = n(n+1)/2  - Не верно")

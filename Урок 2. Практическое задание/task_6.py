@@ -22,10 +22,10 @@ def guess_number(num, count):
     intended = int(input('введите число: '))
     if num == intended:
         return f'Вы угадали! Загаданное число: {intended}'
-    if num < intended:
+    elif  num < intended:
         print(f'Меньше! Осталось попыток: {count - 1}')
         return guess_number(num, count - 1)
-    if num > intended:
+    else:
         print(f'Больше! Осталось попыток: {count - 1}')
         return guess_number(num, count - 1)
 
