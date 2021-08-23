@@ -11,3 +11,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+number = randint(0, 100)
+
+
+def game(guesses=1):
+    print(f'Попытка № {guesses}')
+    try:
+        user_num = int(input('Введите число от 1 до 100: '))
+        if guesses < 10:
+            if user_num == number:
+                print('Вы угадали')
+                exit()
+            elif user_num > number:
+                print('Ваше число больше загаданного')
+                return game(guesses + 1)
+            elif user_num < number:
+                print('Ваше число меньше загаданного')
+                return game(guesses + 1)
+        else:
+            print('У вас закончились попытки')
+            exit()
+    except ValueError:
+        print('Необходимо ввести число')
+        return game(guesses)
+
+
+game()
