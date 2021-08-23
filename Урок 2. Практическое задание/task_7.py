@@ -21,8 +21,7 @@
 def calc(num):
     if num == 1:
         return num
-    else:
-        return num + calc(num - 1)
+    return num + calc(num - 1)
 
 
 number = int(input('Введите любое число: '))
