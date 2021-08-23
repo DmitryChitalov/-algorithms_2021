@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd_numbers(number, even=0, odd=0):
+    if number == 0:                                                 # базовый случай
+        return f'Четных чисел: {even} \nНечетных чисел: {odd}'
+    else:
+        el = number % 10
+        if el % 2 != 0:
+            odd += 1
+            return even_odd_numbers(number // 10, even, odd)        # шаг рекурсии
+        else:
+            even += 1
+            return even_odd_numbers(number // 10, even, odd)        # шаг рекурсии
+
+
+print(even_odd_numbers(3451315453656521316518460))

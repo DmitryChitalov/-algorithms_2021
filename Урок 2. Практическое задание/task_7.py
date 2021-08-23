@@ -16,3 +16,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc(num):
+    if num == 1:
+        return num
+    else:
+        return num + calc(num - 1)
+
+
+number = int(input('Введите любое число: '))
+if calc(number) == (number * (number + 1) / 2):
+    print("Выражение 1+2+...+n = n(n+1)/2  - Верно")
+if calc(number) != (number * (number + 1) / 2):
+    print("Выражение 1+2+...+n = n(n+1)/2  - Не верно")
