@@ -25,3 +25,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users = {
+    'user1': ['pass1', 'active'],
+    'user2': ['pass2', 'non-active'],
+    'user3': ['pass3', 'active'],
+    'user4': ['pass4', 'non-active'],
+}
+
+
+def check_user(login, password):
+    """
+    Время работы алгоритма составит O(N).
+    """
+    if login not in users:  # O(N)
+        return 'Invalid logn.'  # O(1)
+    if users[login][0] != password:  # O(1)
+        return 'Incorrect password.'  # O(1)
+    if users[login][1] == 'non-active':  # O(1)
+        return 'Please, activate you account.'  # O(1)
+    return 'Success.'  # O(1)
+
+
+print(check_user('user1', 'pass1'))
+print(check_user('user2', 'pass2'))
+print(check_user('user3', 'pass3'))
+print(check_user('user4', 'pass1'))
+print(check_user('user5', 'pass1'))
+print('-' * 30)
+
+
+def check_user1(login, password):
+    """
+    Время работы алгоритма составит O(1). Данный алгоритм будет более эффективным так как позволяет
+    нам получить преимущество от работы со словарем, и проверить вхождение элемента без обхода.
+    """
+    if users[login]:  # O(1)
+        return 'Invalid logn.'  # O(1)
+    if users[login][0] != password:  # O(1)
+        return 'Incorrect password.'  # O(1)
+    if users[login][1] == 'non-active':  # O(1)
+        return 'Please, activate you account.'  # O(1)
+    return 'Success.'  # O(1)
+
+
+print(check_user('user1', 'pass1'))
+print(check_user('user2', 'pass2'))
+print(check_user('user3', 'pass3'))
+print(check_user('user4', 'pass1'))
+print(check_user('user5', 'pass1'))

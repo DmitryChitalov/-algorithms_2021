@@ -20,3 +20,42 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+companies = {
+    'first': 12000,
+    'second': 13000,
+    'third': 1000,
+    'fourth': 100,
+    'fifth': 10,
+    'sixth': 150000
+}
+def find_max_profit(dct):
+    """
+    Сложность решения составит O(nlogn)
+    """
+    companies_list = list(dct.items())  # O(n)
+    companies_list.sort(key=lambda i: i[1]) # O(nlogn)
+    return companies_list[-3:]
+
+print(find_max_profit(companies))
+
+def find_max_profit_2(dct):
+    """
+    Сложность алгоритма составляет: O(N) + O(N^2 + N^2) = O(N^2)
+    Первое решение с использованием встроенной функции является наиболее эффективным так как позволяет
+    оптимизировать количество операций, необходимых для сортировки, а так же не требует выделения дополнительной
+    памяти для создания переменных.
+    """
+    profit_tiers = []   # O(1)
+    list_work = list(dct.items())   # O(N)
+    for k in dct:   # O(N)
+        max = -float('inf') # O(1)
+        for el in list_work:    # O(N)
+            if max < el[1]: #O(1)
+                max = el[1] # O(1)
+                cp_name = el[0] # O(1)
+        profit_tiers.append((cp_name, max)) # O(1)
+        list_work.remove((cp_name, max)) # O(N)
+
+
+    return profit_tiers[:3]
+print(find_max_profit_2(companies))
