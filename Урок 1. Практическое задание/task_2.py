@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+random_numbers = [random.randint(0, 100) for i in range(10)]
+
+
+# O(n^2) - квадратичная
+def minimal_value_quadratic_algorithm(lst):
+    for i in lst:
+        min_value = True
+        for j in lst:
+            if i > j:
+                min_value = False
+        if min_value:
+            return i
+
+
+# O(n) - линейная
+def minimum_value_linear_algorithm(lst):
+    min_value = lst[0]
+    for i in lst:
+        if i < min_value:
+            min_value = i
+    return min_value
+
+
+print(minimal_value_quadratic_algorithm(random_numbers))
+print(minimum_value_linear_algorithm(random_numbers))
