@@ -22,14 +22,19 @@
 """
 
 
+##############################################################################
 def get_companies_with_max_profit_1(companies, cnt):
     """
     найдем компанию с максимальной прибылью, удалим ее из списка
     после этого можно найти следующую компанию с максимальной прибылью и так далее
 
-    хоть cnt и передается в функцию как параметр, но его считаем всегда определенной, то есть константой
+    хоть cnt и передается в функцию как параметр, но его считаем всегда определенной (константой)
 
     Сложность O(n)
+
+    функция get_companies_with_max_profit_1 эффективнее, чем get_companies_with_max_profit_2
+    потому что обладает меньшей сложность. Для первой функции сложность O(n), а для второй - O(n^2)
+    Таким образом первая функция будет совершать меньше операций, а вторая больше.
     """
 
     local_companies = list(companies)  # создаем локальну копию, чтобы не менять входной объект
@@ -49,12 +54,13 @@ def get_companies_with_max_profit_1(companies, cnt):
     return max_profit_companies
 
 
+##############################################################################
 def get_companies_with_max_profit_2(companies, cnt):
     """
     перебираем элементы массива и сравниваем с другими элементами массива, определяя сортировку
     берем нужное количество элементов срезом
 
-    хоть cnt и передается в функцию как параметр, но его считаем всегда определенной, то есть константой
+    хоть cnt и передается в функцию как параметр, но его считаем всегда определенной (константой)
 
     Сложность O(n^2)
     """
@@ -69,16 +75,19 @@ def get_companies_with_max_profit_2(companies, cnt):
         company_weight = 0  # позиция компании в общем рейтинге
 
         for j in range(i, len(companies)):  # O(n)
-            if companies[i]['profit'] == companies[j]['profit'] and i > j:  # обработаем случай равенства
+
+            # обработаем случай равенства
+            if companies[i]['profit'] == companies[j]['profit'] and i > j:
                 companies_weight += 1
-            if companies[i]['profit'] > companies[j]['profit']:
+            elif companies[i]['profit'] > companies[j]['profit']:
                 company_weight += 1
 
         companies_weight[company_weight] = companies[i]
 
-    return companies[-cnt:]  # O(1) ??? todo
+    return companies[-cnt:]  # O(n)
 
 
+##############################################################################
 company_list = [
     {'name': 'Company 1', 'profit': 1000},
     {'name': 'Company 2', 'profit': 2000},
@@ -91,5 +100,5 @@ company_list = [
     {'name': 'Company 9', 'profit': 8000}
 ]
 
-print('', get_companies_with_max_profit_1(company_list, 3))
-print('', get_companies_with_max_profit_2(company_list, 3))
+print('get_companies_with_max_profit_1: ', get_companies_with_max_profit_1(company_list, 3))
+print('get_companies_with_max_profit_2: ', get_companies_with_max_profit_2(company_list, 3))
