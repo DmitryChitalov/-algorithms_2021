@@ -34,29 +34,34 @@ def by_value(item):
 max_profit = {}                                                             # O(1)
 i = 0                                                                       # O(1)
 for k, v in sorted(profit_company.items(), key=by_value, reverse=True):     # O(n + n log n)
-    if i < 3:                                                               # O(len(i)
+    if i < 3:                                                               # O(1)
         max_profit.setdefault(k, v)                                         # O(1)
     i = i + 1                                                               # O(1)
 print(max_profit)                                                           # O(1)
 
 
 # Второй способ:
-# Сложность O (n**2)
+# Сложность O(n^2)
 
-global max_value                                                            # O(1)
-global key_max_value                                                        # O(1)
+m_dict = dict(Audi=1500, Mercedes=4000, Volvo=2000, BMW=1000, Renault=3000)
 
-max_profit_2 = {}                                                           # O(1)
-while len(max_profit_2) < 3:                                                # O(n)
-    max_value = 0                                                           # O(1)
-    for key, value in profit_company.items():                               # O(n)
-        if max_value < value:                                               # O(len(max_value))
-            max_value = value                                               # O(1)
-            key_max_value = key                                             # O(1)
-    max_value = profit_company.pop(key_max_value)                           # O(1)
-    max_profit_2.setdefault(key_max_value, max_value)                       # O(1)
+val_list = []
 
-print(max_profit_2)
+for v in m_dict.values():              # O(n)
+    val_list.append(v)                  # O(n)
+
+val_list.sort()                         # NlogN
+val_list = val_list[-3:]                # O(n)
+
+new_dict = {}                           # O(1)
+
+for i in range(3):                      # O(1)
+    for k, v in m_dict.items():        # O(n)
+        if v in val_list:               # O(n)
+            new_dict[k] = v             # O(1)
+
+for key, val in new_dict.items():
+    print(f'{key}: {val}')
 
 # Вывод: Первый способ выполняется быстрее так как самым "тяжелым" алгоритмом,
 # является функция SORT() = O (n log n)
