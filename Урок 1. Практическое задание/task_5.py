@@ -28,3 +28,67 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import random
+
+
+class StackClass:
+    def __init__(self):
+        self.elem = [[]]
+        self.size = 10
+
+    def is_empty(self):
+        return self.elem == [[]]
+
+    def push_in(self, el):
+        if len(self.elem[len(self.elem)-1]) < self.size:
+            self.elem[len(self.elem)-1].append(el)
+        else:
+            self.elem.append([])
+            StackClass.push_in(self, el)
+
+    def pop_out(self):
+        if len(StackClass.stack_val(self)) != 0:
+            last_elem = self.elem[len(self.elem)-1].pop()
+            if len(self.elem[len(self.elem)-1]) == 0:
+                self.elem.pop()
+            return last_elem
+        else:
+            return None
+
+    def stack_val(self):
+        stacks = []
+        for el in self.elem:
+            stacks.append(el)
+        return stacks
+
+    def stack_size(self):
+        return len(StackClass.stack_val(self))
+
+
+SC_OBJ = StackClass()
+
+print(SC_OBJ.is_empty())  # -> стек пустой
+
+# наполняем стек
+for i in random.sample(range(1, 100), 20):
+    SC_OBJ.push_in(i)
+# получаем все элементы из стэка
+print(SC_OBJ.stack_val())
+
+# узнаем размер стека
+print(SC_OBJ.stack_size())
+
+print(SC_OBJ.is_empty())  # -> стек уже непустой
+
+# кладем еще один элемент в стек
+SC_OBJ.push_in(4)
+print(SC_OBJ.stack_val())
+print(SC_OBJ.stack_size())
+# убираем элемент с вершины стека и возвращаем его значение
+print(SC_OBJ.pop_out())
+
+# снова убираем элемент с вершины стека и возвращаем его значение
+print(SC_OBJ.pop_out())
+
+# вновь узнаем размер стека
+print(SC_OBJ.stack_size())

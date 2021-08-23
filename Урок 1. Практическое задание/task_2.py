@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+obj_list = random.sample(range(1, 100), 10)
+print(obj_list)
+
+
+def min_number_1(obj_lst):  # O(n^2)
+    for i in obj_lst:
+        lst = 1
+        for item in obj_lst:
+            if i > item:
+                lst = 0
+        if lst:
+            return i
+
+
+def min_number_2(obj_lst):  # O(n)
+    lst = obj_lst[0]
+    for i in obj_lst:
+        if i < lst:
+            lst = i
+    return lst
+
+
+print(min_number_1(obj_list))
+print(min_number_2(obj_list))
