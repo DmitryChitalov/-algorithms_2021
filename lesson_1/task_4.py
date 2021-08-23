@@ -39,8 +39,11 @@ def authentication_1(storage, login, password):
 
     current_user_data = {}
 
-    for i, user_data in enumerate(storage):
-        if user_data['login'] == login and user_data['password'] == md5(password.encode('utf-8')).hexdigest():
+    for _, user_data in enumerate(storage):
+        if (
+                user_data['login'] == login and
+                user_data['password'] == md5(password.encode('utf-8')).hexdigest()
+        ):
             current_user_data = user_data
             break
 
@@ -56,11 +59,13 @@ def authentication_1(storage, login, password):
 ##############################################################################
 def authentication_2(storage, login, password):
     """
-    Переберем п
+    Соберем словать из данных, которые мы имеем и попробуем найти этот словать в хранилище
+
+    Сложнсоть O(n)
     """
     test_user_data = {
         'login': login,
-        'password': password,
+        'password': md5(password.encode('utf-8')).hexdigest(),
         'is_activated': True
     }
 
@@ -89,3 +94,6 @@ print('не активирован: ', authentication_1(user_storage, 'customer'
 print('успех: ', authentication_2(user_storage, 'admin', 'admin'))
 print('не успех: ', authentication_2(user_storage, 'customer', 'admin'))
 print('не активирован: ', authentication_2(user_storage, 'customer', 'customer'))
+
+# authentication_1 и authentication_2 имеют одинаковую сложность O(n)
+# к сожалению я не смог придумать случая, когда сложность была бы другой

@@ -31,10 +31,6 @@ def get_companies_with_max_profit_1(companies, cnt):
     хоть cnt и передается в функцию как параметр, но его считаем всегда определенной (константой)
 
     Сложность O(n)
-
-    функция get_companies_with_max_profit_1 эффективнее, чем get_companies_with_max_profit_2
-    потому что обладает меньшей сложность. Для первой функции сложность O(n), а для второй - O(n^2)
-    Таким образом первая функция будет совершать меньше операций, а вторая больше.
     """
 
     local_companies = list(companies)  # создаем локальну копию, чтобы не менять входной объект
@@ -102,3 +98,7 @@ company_list = [
 
 print('get_companies_with_max_profit_1: ', get_companies_with_max_profit_1(company_list, 3))
 print('get_companies_with_max_profit_2: ', get_companies_with_max_profit_2(company_list, 3))
+
+# функция get_companies_with_max_profit_1 эффективнее, чем get_companies_with_max_profit_2
+# потому что обладает меньшей сложность. Для первой функции сложность O(n), а для второй - O(n^2)
+# Таким образом первая функция будет совершать меньше операций, а вторая больше.
