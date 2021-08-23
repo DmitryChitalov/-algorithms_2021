@@ -24,23 +24,42 @@
 def get_min_1(lst):
     """
     перебираем массив, используя каждый элемент для сравнения со всеми остальными
-    если все остальные элементы массива меньше - возвращаем результат
+    если все остальные элементы массива больше текущего - наименьший найден, возвращаем результат
+    если найден элемент, меньше текущего - перебирать дальше не нужно, берем следующий элемент
 
     Сложность: O(n^2)
     """
-    for i in range(len(lst)):  # O(n)
+    for i, current_item in enumerate(lst):  # O(n)
 
-        i_is_min = True  # O(1)
+        current_is_min = True  # O(1)
 
         for j in range(i + 1, len(lst)):  # O(n)
-            if lst[i] > lst[j]:  # O(1)
-                i_is_min = False  # O(1)
+            if current_item > lst[j]:  # O(1)
+                current_is_min = False  # O(1)
                 break
 
-        if i_is_min:  # O(1)
-            return lst[i]  # O(1)
+        if current_is_min:  # O(1)
+            return current_item  # O(1)
+
+
+def get_min_2(lst):
+    """
+    перебираем все эелменты массива, сравнивая каждый элемент с текущим минимальным значением
+    если элемент массива меньше текущего минимального, меняем текущее минимальное
+
+    Сложность: O(n)
+    """
+
+    min_item = lst[0]  # 0(1)
+
+    for _, current_item in enumerate(lst):  # O(n)
+        if current_item < min_item:  # O(1)
+            min_item = current_item  # O(1)
+
+    return min_item  # O(1)
 
 
 items = [11, 10, 2, 9, 3, 8, 4, 7, 5, 6]
 
-print(get_min_1(items))
+print('Минимальный элемент get_min_1: ', get_min_1(items))
+print('Минимальный элемент get_min_2: ', get_min_2(items))
