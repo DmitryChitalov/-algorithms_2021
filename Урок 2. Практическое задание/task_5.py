@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sim(first_, last_, sim_per_line, pos=0):
+    """Функция возвращает таблицу кодов символов и самих символов
+    от first_ до last_ по sim_per_line в линию"""
+    res = f'{first_} - {chr(first_)} '
+    if pos // sim_per_line:
+        res = '\n' + res
+        pos = 0
+    if first_ == last_:
+        return res
+    return res + sim(first_ + 1, last_, sim_per_line, pos + 1)
+
+
+print(sim(32, 127, 10))

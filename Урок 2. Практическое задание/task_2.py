@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def cnt(num, even_=0, odd_=0):
+    """Функция подсчитывает каоличество четных и нечетных цифр в числе"""
+    if num % 2:
+        odd_ += 1
+    else:
+        even_ += 1
+    return (even_, odd_) if num < 10 else cnt(num // 10, even_, odd_)
+
+
+user_num = int(input('Enter number: '))
+even, odd = cnt(user_num)
+print(f'В числе {user_num}\nчетных цифр: {even}\nнечетных цифр: {odd}')
