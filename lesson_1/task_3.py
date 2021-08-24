@@ -28,15 +28,13 @@ def get_companies_with_max_profit_1(companies, cnt):
     найдем компанию с максимальной прибылью, удалим ее из списка
     после этого можно найти следующую компанию с максимальной прибылью и так далее
 
-    хоть cnt и передается в функцию как параметр, но его считаем всегда определенной (константой)
-
-    Сложность O(n)
+    Сложность O(n^2)
     """
 
     local_companies = list(companies)  # создаем локальну копию, чтобы не менять входной объект
     max_profit_companies = []
 
-    for _ in range(cnt):  # O(1) - считаем, что cnt всегда задано
+    for _ in range(cnt):  # O(n)
 
         max_profit = {'profit': local_companies[0]['profit'], 'company_index': 0}
 
@@ -56,8 +54,6 @@ def get_companies_with_max_profit_2(companies, cnt):
     перебираем элементы массива и сравниваем с другими элементами массива, определяя сортировку
     берем нужное количество элементов срезом
 
-    хоть cnt и передается в функцию как параметр, но его считаем всегда определенной (константой)
-
     Сложность O(n^2)
     """
 
@@ -70,22 +66,64 @@ def get_companies_with_max_profit_2(companies, cnt):
 
         company_weight = 0  # позиция компании в общем рейтинге
 
-        for j in range(i, len(companies)):  # O(n)
+        for j in range(len(companies)):  # O(n)
 
             # обработаем случай равенства
             if companies[i]['profit'] == companies[j]['profit'] and i > j:
-                companies_weight += 1
+                company_weight += 1
             elif companies[i]['profit'] > companies[j]['profit']:
                 company_weight += 1
 
         companies_weight[company_weight] = companies[i]
 
-    return companies[-cnt:]  # O(n)
+    return companies_weight[-cnt:]  # O(n)
+
+
+##############################################################################
+def get_companies_with_max_profit_3(companies, cnt):
+    """
+    цикл в цикле в цикле
+    по количеству нужных элементов осуществляем сортировку элементов массива
+    и каждый раз берем самый большой элемент
+
+    Сложность O(n^3)
+    """
+
+    result = []
+
+    for _ in range(cnt):  # O(n)
+
+        companies_weight = []
+        map_index = []
+
+        for i in range(len(companies)):
+            companies_weight.append({})
+            map_index.append(0)
+
+        for i in range(len(companies)):  # O(n)
+
+            company_weight = 0  # позиция компании в общем рейтинге
+
+            for j in range(len(companies)):  # O(n)
+
+                # обработаем случай равенства
+                if companies[i]['profit'] == companies[j]['profit'] and i > j:
+                    company_weight += 1
+                elif companies[i]['profit'] > companies[j]['profit']:
+                    company_weight += 1
+
+            map_index[company_weight] = i
+            companies_weight[company_weight] = companies[i]
+
+        result.append(companies_weight[-1])
+        companies.pop(map_index[-1])
+
+    return result
 
 
 ##############################################################################
 company_list = [
-    {'name': 'Company 1', 'profit': 1000},
+    {'name': 'Company 1', 'profit': 9000},
     {'name': 'Company 2', 'profit': 2000},
     {'name': 'Company 3', 'profit': 3000},
     {'name': 'Company 4', 'profit': 3000},
@@ -98,7 +136,7 @@ company_list = [
 
 print('get_companies_with_max_profit_1: ', get_companies_with_max_profit_1(company_list, 3))
 print('get_companies_with_max_profit_2: ', get_companies_with_max_profit_2(company_list, 3))
+print('get_companies_with_max_profit_3: ', get_companies_with_max_profit_3(company_list, 3))
 
-# функция get_companies_with_max_profit_1 эффективнее, чем get_companies_with_max_profit_2
-# потому что обладает меньшей сложность. Для первой функции сложность O(n), а для второй - O(n^2)
-# Таким образом первая функция будет совершать меньше операций, а вторая больше.
+# функции get_companies_with_max_profit_2 и get_companies_with_max_profit_2 эффективнее get_companies_with_max_profit_3
+# потому что обладают меньшей сложность. Для первой функции сложность O(n^2), для второй - O(n^2), для третьей O(n^3)
