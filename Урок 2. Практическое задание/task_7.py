@@ -16,3 +16,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_equality(n, counter=0, result=0):
+    if counter == n + 1:
+        print(f'left side = {result}, right side = {(n + 1) * n / 2}')
+        return result == (n + 1) * n / 2
+    else:
+        result += counter
+        counter += 1
+        return check_equality(n, counter, result)
+
+
+print(check_equality(5))
