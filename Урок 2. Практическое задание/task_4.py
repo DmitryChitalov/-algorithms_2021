@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_series(count_el, el=1.00, summ=1):
+    if count_el == 1:
+        return summ
+    else:
+        el = el / 2 * -1
+        summ += el
+        return sum_series(count_el-1, el, summ)
+
+
+try:
+    t_count = int(input('Введите количество элементов: '))
+    print(f'Количество элементов: {t_count}, их сумма: {sum_series(t_count)}')
+except ValueError:
+    print('Вы ввели не корректное число!')
