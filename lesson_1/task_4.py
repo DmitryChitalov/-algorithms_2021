@@ -95,5 +95,39 @@ print('успех: ', authentication_2(user_storage, 'admin', 'admin'))
 print('не успех: ', authentication_2(user_storage, 'customer', 'admin'))
 print('не активирован: ', authentication_2(user_storage, 'customer', 'customer'))
 
+new_user_storage = {
+    'admin': {
+        'password': '21232f297a57a5a743894a0e4a801fc3',
+        'is_activated': True
+    },
+    'manager': {
+        'password': '1d0258c2440a8d19e716292b231e3190',
+        'is_activated': True
+    },
+    'customer': {
+        'password': '91ec1f9324753048c0096d036a694f86',
+        'is_activated': False
+    },
+}
+
+
+def authentication_3(storage, login, password):
+    """
+    Сложность O(n)
+    """
+    if storage[login]['password'] != md5(password.encode('utf-8')).hexdigest():
+        return 'Пользователь не найден или пароль не верен!'
+
+    if not storage[login]['is_activated']:
+        return 'Для доступа к ресурсы, пожалуйста, пройдите активацию!'
+
+    return 'Пользовате имеет доступ к ресурсу!'
+
+
+print('успех: ', authentication_3(new_user_storage, 'admin', 'admin'))
+print('не успех: ', authentication_3(new_user_storage, 'customer', 'admin'))
+print('не активирован: ', authentication_3(new_user_storage, 'customer', 'customer'))
+
 # authentication_1 и authentication_2 имеют одинаковую сложность O(n)
-# к сожалению я не смог придумать случая, когда сложность была бы другой
+# чтобы построить алгоритм со сложностью 0(n) нужно переделать хранилище
+# authentication_3 имеет сложность 0(1)
