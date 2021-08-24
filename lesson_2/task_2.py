@@ -38,6 +38,15 @@ def sum_odd_even(number):
     return odd, even
 
 
-print(sum_odd_even(123))
-print(sum_odd_even(13579))
-print(sum_odd_even(24680))
+print(123, sum_odd_even(123))
+print(13579, sum_odd_even(13579))
+print(24680, sum_odd_even(24680))
+
+while True:
+    try:
+        number = int(input('Введите число: '))
+    except ValueError:
+        print('Вы ввели не натуральное число! Повторите ввод!')
+        continue
+
+    print('Количество нечетных и четных цифр в числе равно: ', sum_odd_even(number))
