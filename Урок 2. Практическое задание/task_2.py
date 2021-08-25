@@ -18,3 +18,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# операции % - взятие остатка от деления
+#		 и // - целая часть
+def input_digit():
+    try:
+        number = abs(int(input("Введите число: ")))
+    except ValueError:
+        return input_digit()
+    return number
+
+def count_num_recursion_3(number, count_even=0, count_odd=0):
+	if number == 0:
+		return count_even, count_odd
+	else:
+		if number % 2 == 0:
+			count_even += 1
+		else:
+			count_odd += 1
+		return count_num_recursion_3(number//10, count_even, count_odd)
+
+
+number_inp = input_digit()
+print("Количество четных и нечетных цифр в числе равно:", count_num_recursion_3(number_inp))
+
+
+def count_num_for_cycle(number):
+	# решение через цикл (просто для себя оставила)
+	count_even, count_odd = 0, 0
+	# print("number", number)
+	while number != 0:
+		num = number % 2
+		# print("num", num)
+		if num == 0:
+			count_even += 1
+			# print("count_even", count_even)
+		else:
+			count_odd += 1
+		number = number // 10
+	return count_even, count_odd
+# print(count_num_for_cycle(number_inp))
+# print(99003%10 )
