@@ -21,7 +21,8 @@
 
 
 def asc_table(val=32, table=''):
-    return table if val == 128 else asc_table(val+1, table+'\n' if val%10==2 else (table+f'{val} - {chr(val)} '))
+    return table if val == 128 else asc_table(val+1,
+                                              table+'\n' if val % 10 == 2 else (table+f'{val} - {chr(val)} '))
 
 
 print(asc_table())

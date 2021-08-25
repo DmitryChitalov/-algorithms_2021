@@ -16,11 +16,15 @@
 
 
 def comparison(n, tmp, res_1=1, res_2=1):
+
     if n == 1:
-        return res_1 == tmp*(tmp+1)/2
+        return res_1
     res_1 += res_2
     return comparison(n-1, tmp, res_1+1, res_2+1)
 
 
-num = int(input('Введите число для сравнения - '))
-print(comparison(num, num))
+try:
+    num = int(input('Введите число для сравнения - '))
+    print(comparison(num, num) == num*(num+1)/2)
+except ValueError:
+    print('Не число')

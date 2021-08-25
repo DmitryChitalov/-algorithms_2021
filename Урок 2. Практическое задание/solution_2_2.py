@@ -22,8 +22,3 @@ def digit_count(num, tmp_1=0, tmp_2=0):
 
 
 print(digit_count(int(input('Введите число: '))))
-
-
-
-
-

@@ -17,5 +17,8 @@ def sum_digits(num, tmp=1.0, sum=0.0):
     return num < 0 and sum or sum_digits(num - 1, (tmp / 2) * -1, sum + tmp)
 
 
-number = int(input('Введите количество элементов: '))
-print(sum_digits(number-1))
+try:
+    number = int(input('Введите количество элементов: '))
+    print(sum_digits(number-1))
+except ValueError:
+    print('Не число')

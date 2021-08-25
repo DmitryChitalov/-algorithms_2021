@@ -31,34 +31,41 @@
 
 
 def calculate(res=1.0):
-    try:
-        operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-        if operator.isdigit() and int(operator) == 0:
-            return 'Выход'
-        elif operator in ('+', '-', '*', '/'):
-            value_1 = int(input('Введите первое число - '))
-            value_2 = int(input('Введите второе число - '))
-            if operator == '+':
-                print(value_1+value_2)
-                calculate(value_1+value_2)
-            elif operator == '-':
-                print(value_1-value_2)
-                calculate(value_1-value_2)
-            elif operator == '*':
-                print(value_1*value_2)
-                calculate(value_1*value_2)
-            elif operator == '/' and value_2 == 0:
-                print('На ноль делить нельзя')
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operator.isdigit() and int(operator) == 0:
+        return 'Выход'
+    else:
+        if operator in ('+', '-', '*', '/'):
+            try:
+                value_1 = int(input('Введите первое число - '))
+                value_2 = int(input('Введите второе число - '))
+
+                if operator == '+':
+                    print(value_1+value_2)
+                    calculate(value_1+value_2)
+
+                elif operator == '-':
+                    print(value_1-value_2)
+                    calculate(value_1-value_2)
+
+                elif operator == '*':
+                    print(value_1*value_2)
+                    calculate(value_1*value_2)
+
+                elif operator == '/':
+                    try:
+                        print(value_1/value_2)
+                    except ZeroDivisionError:
+                        print('Делить на ноль нельзя')
+                    finally:
+                        calculate()
+
+            except ValueError:
+                print('Вы вместо числа ввели строку (((. Исправьтесь')
                 calculate()
-            elif operator == '/':
-                print(value_1/value_2)
-                calculate(value_1/value_2)
         else:
-            print('Введен некорректный знак')
+            print('Введен неверный знак')
             calculate()
-    except ValueError:
-        print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
-        calculate()
     return 'Выход'
 
 
