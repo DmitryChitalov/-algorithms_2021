@@ -28,3 +28,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+    value = input('Please enter an operation "+" "-" "*" "/"\n'
+                  'or "0" to exit and push "enter"\n')
+    if value != '0':
+        if value not in '+-*/' or value == '':
+            print('You entered an invalid type try again\n')
+            return calculator()
+        try:
+            first_num = float(input('Please enter first number'))
+            second_num = float(input('Please enter second number'))
+            if value == '+':
+                print(f'Result: {first_num + second_num}')
+                return calculator()
+            if value == '-':
+                print(f'Result: {first_num - second_num}')
+                return calculator()
+            if value == '*':
+                print(f'Result: {first_num * second_num}')
+                return calculator()
+            if value == '/':
+                try:
+                    print(f'Result: {first_num / second_num}')
+                except ZeroDivisionError:
+                    print('Error: "ZeroDivisionError"\n')
+                return calculator()
+        except ValueError:
+            print('Error: "You entered an invalid type try again"\n')
+            return calculator()
+    exit()
+
+
+calculator()

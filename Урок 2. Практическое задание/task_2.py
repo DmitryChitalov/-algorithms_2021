@@ -18,3 +18,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def enter_number():
+    try:
+        val = abs(int(input('Please enter some number\n')))
+    except ValueError:
+        print("Error you've entered incorrect value")
+        return enter_number()
+    return val
+
+
+def count_figures(numeral, count_1=0, count_2=0):
+    if numeral != 0:
+        if numeral % 2 == 0:
+            count_1 += 1
+        else:
+            count_2 += 1
+        return count_figures(numeral // 10, count_1, count_2)
+    return print(f'Number of even numbers = {count_1}\nNumber of uneven numbers = {count_2}')
+
+
+number = enter_number()
+count_figures(number)

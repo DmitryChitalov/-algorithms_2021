@@ -16,3 +16,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def enter_number():
+    try:
+        val = abs(int(input('Please enter some number\n')))
+    except ValueError:
+        print("Error you've entered incorrect value")
+        return enter_number()
+    return val
+
+
+def formula(n):
+    if n == 1:
+        return n
+    else:
+        return n + formula(n - 1)
+    
+
+number = enter_number()
+if float(formula(number)) == number * (number + 1) / 2:
+    print('True')
+else:
+    print('False')
