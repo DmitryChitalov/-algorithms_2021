@@ -18,7 +18,9 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-init = int(input("Введите число: "))
+
+
+# init = int(input("Введите число: "))
 
 
 def func1(test_int, odd=0, even=0):
@@ -37,4 +39,8 @@ def func1(test_int, odd=0, even=0):
         return func1(test_int // 10, odd, even)
 
 
-print(func1(init))
+try:
+    numb = int(input('Введите любое число: '))
+    print(func1(numb))
+except ValueError:
+    print('Вы ввели строку вместо числа')

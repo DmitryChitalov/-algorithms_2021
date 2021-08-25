@@ -18,14 +18,11 @@
 """
 
 
-def check_equality(n, counter=0, result=0):
-    if counter == n + 1:
-        print(f'left side = {result}, right side = {(n + 1) * n / 2}')
-        return result == (n + 1) * n / 2
+def recur_method(numb):
+    if numb == 1:
+        return numb
     else:
-        result += counter
-        counter += 1
-        return check_equality(n, counter, result)
+        return recur_method(numb - 1) + numb
 
 
-print(check_equality(5))
+print(recur_method(10))
