@@ -25,3 +25,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+user_information = {'berserk_1': ('qwerty1234', True),
+                    'king_of_geeks': ('Asdfgh321', False)}
+
+
+"""
+Первый вариант: O(n)
+так как максимальную величина сложности определяется здесь циклом for.
+Условнуе ветки имеют сложность константную
+"""
+
+
+def check_user(dict_in, user, password):
+    for key, val in dict_in.items():
+        if key == user:
+            if password == val[0]:
+                if val[1]:
+                    return 'Добро пожаловать!'
+                else:
+                    return 'Учетная запись неактивирована!'
+            else:
+                return 'Неверный пароль!'
+    return 'Пользователь не найден!'
+
+
+"""
+Второй вариант: O(1)
+Здесь используется метод get(), который имеет константную сложность.
+
+Естественно данный вариант будет эффективней первого.
+"""
+
+
+def check_user_2(dict_in, user, password):
+    if dict_in.get(user):
+        if password == dict_in[user][0] and dict_in[user][1]:
+            return 'Добро пожаловать!'
+        elif password != dict_in[user][0]:
+            return 'Неверный пароль!'
+        else:
+            return 'Учетная запись неактивирована!'
+    else:
+        return 'Пользователь не найден!'
+
+
+print(check_user_2(user_information, 'berserk_1', 'qwerty1234'))
+print(check_user_2(user_information, 'king_of_geeks', 'qwerty1234'))
+print(check_user_2(user_information, 'king_of_geeks', 'Asdfgh321'))
