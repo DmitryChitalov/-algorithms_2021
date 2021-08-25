@@ -15,6 +15,24 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 
+class Plates:
+    def __init__(self):
+        self.stack = [[]]
+
+    def push_in(self, elements):
+        if len(self.stack[-1]) < 10:
+            self.stack[-1].append(elements)
+        else:
+            self.stack.append([])
+            self.stack[-1].append(elements)
+
+    def pop_from(self):
+        if len(self.stack[-1]) == 0:
+            self.stack.pop()
+            self.stack[-1].pop()
+        else:
+            self.stack[-1].pop()
+
 Подсказка:
 Отдельне стопки можно реализовать через:
 1) созд-е экземпляров стека (если стопка - класс)
