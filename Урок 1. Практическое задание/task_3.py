@@ -20,3 +20,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# O(n log n)
+comp_stor = {
+    'huawei': 2000,
+    'intel': 800,
+    'amd': 1200,
+    'nvidia': 1500,
+    'apple': 300
+    }
+all_income = [income for income in comp_stor.values()] # O(n)
+all_income.sort() # O(n log n)
+print(all_income[-1:-4:-1])
+
+
+#####################################################################################################
+""" Если O(7n) = O(n), то выходит, это решение является более эффективным, так как его
+сложность O(n) и оно "slower-growing" (английские слова взяты с просторов интернета)
+"""
+
+# O(n)
+comp_stor = {
+    'huawei': 2000,
+    'intel': 800,
+    'amd': 1200,
+    'nvidia': 1500,
+    'apple': 300
+    }
+
+all_income = [income for income in comp_stor.values()] # O(n)
+top_1 = max(all_income)  # O(n)
+all_income.remove(top_1) # O(n)
+top_2 = max(all_income)  # O(n)
+all_income.remove(top_2) # O(n)
+top_3 = max(all_income)  # O(n)
+all_income.remove(top_3) # O(n)
+print(top_1, top_2, top_3)
