@@ -22,3 +22,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def enter_number():
+    try:
+        val = abs(int(input('Please enter some number\n')))
+    except ValueError:
+        print("Error you've entered incorrect value")
+        return enter_number()
+    return val
+
+
+def reverse_numeral(numeral, result=''):
+    if numeral != 0:
+        result = result + str(numeral % 10)
+        return reverse_numeral(numeral // 10, result)
+    return print(result)
+
+
+number = enter_number()
+reverse_numeral(number)

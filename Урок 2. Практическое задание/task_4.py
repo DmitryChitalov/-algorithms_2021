@@ -15,3 +15,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def enter_number():
+    try:
+        val = abs(int(input('Please enter some number\n')))
+    except ValueError:
+        print("Error you've entered incorrect value")
+        return enter_number()
+    return val
+
+
+def sum_numbers(vol, num=1, sum_num=0):
+    if vol != 0:
+        sum_num += num
+        num /= -2
+        return sum_numbers(vol - 1, num, sum_num)
+    return print(sum_num)
+
+
+number = enter_number()
+sum_numbers(number)
