@@ -25,3 +25,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users_bases = {'oleg': {'password': 123, 'active_mod': 1}, 'olga': {'password': 321, 'act': 0}}
+
+
+# 1.Вариант - сложность O(N)
+
+def get_check_user(user_bases, user, user_password):
+    for key, val in user_bases.items():  # O(n)
+        if key == user:  # O(1)
+            if val['password'] == user_password and val['active_mod'] == 1:  # O(1)
+                return print(f'Успешная авторизация')  # O(1)
+            elif val['password'] == user_password and val['active_mod'] == 0:  # O(1)
+                return print(f'Вам необходимо пройти авторизацию!')  # O(1)
+            else:
+                return print(f'Пароль неверный!')  # O(1)
+        else:
+            return print(f'Пользователь не найдем!')  # O(1)
+
+
+# 2.Вариант - сложность O(1)
+
+def get_check_user2(user_bases, user, user_password):
+    if user_bases.get(user) is None:  # O(1)
+        return print(f'Пользователь не найдем!')  # O(1)
+    else:
+        if user_bases[user]['password'] == user_password and user_bases[user]['active_mod'] == 1:  # O(1)
+            return print(f'Успешная авторизация')  # O(1)
+        elif user_bases[user]['password'] == user_password and user_bases[user]['active_mod'] == 0:  # O(1)
+            return print(f'Вам необходимо пройти авторизацию!')  # O(1)
+        else:
+            return print(f'Пароль неверный!')  # O(1)
+
+
+"""Вариант 2 являтся более оптимальным, т.к отсутсвует перебор по циклу, а поиск идет по ключ - значение, т.е
+используется хэш таблица  
+"""
