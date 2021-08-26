@@ -22,3 +22,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_reverse(num):
+    """Функция разворачивает число в обратную сторону"""
+    if num < 10 or num == 0:
+        digit = num % 10
+        return str(digit)
+    else:
+        return str(my_reverse(num % 10)) + str(my_reverse(num//10))
+
+
+user_number = int(input('Введите число: '))
+
+rev_number = my_reverse(user_number)
+print('Перевернутое число: ', rev_number)

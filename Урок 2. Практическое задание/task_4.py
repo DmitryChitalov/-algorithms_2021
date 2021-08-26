@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_mod(num, a):
+	"""Функция которая делит единицу на -2 заданное число раз"""
+	if num == 0:
+		return a
+	else:
+		num = num-1
+		return a + my_mod(num, a/(-2))
+
+
+user_number = round(int(input('Введите количество элементов: ')))
+# my_sum, a = my_mod(num=user_number, 1)
+my_sum = my_mod(user_number-1, 1)
+print(1, 'Количество элементов: ', user_number, 'их сумма: ', my_sum)

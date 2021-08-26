@@ -28,3 +28,46 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+"""Решение"""
+
+
+def my_is_type(num_1, num_2):
+	"""функция для проверки типа вводимых пользователем чисел
+	Если пользлователь вводит не число
+	"""
+	if float.is_integer(float(num_1)) and float.is_integer(float(num_2)):
+		return int(num_1), int(num_2)
+	elif type(float(num_1)) is float or type(float(num_1)) is float:
+		return float(num_1), float(num_2)
+	else:
+		print('Необходимо вводить числа типов int, float')
+		num_1 = input('Введите первое число: ')
+		num_2 = input('Введите второе число: ')
+		my_is_type(num_1, num_2)
+
+
+def my_calc(operator):
+	if operator == '0':
+		print('Работа калькулятора завершена')
+	else:
+		num_a = input('Введите первое число типа int, float: ')
+		num_b = input('Введите второе число типа int, float: ')
+		num_a, num_b = my_is_type(num_a, num_b)
+		if operator == '*':
+			print(num_a * num_b)
+		elif operator == '/':
+			print(num_a / num_b)
+		elif operator == '+':
+			print(num_a + num_b)
+		elif operator == '-':
+			print(num_a - num_b)
+		else:
+			print('Тип действия не поддерживается')
+		operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+		my_calc(operator)
+
+
+first_calc = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+my_calc(first_calc)
