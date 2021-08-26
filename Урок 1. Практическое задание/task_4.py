@@ -33,16 +33,18 @@ users = {
     'Clint': {'passwd': 77777, 'activated': True}
 }
 
-""" Вариант 1. Сложность О(n) (за счет цикла). Затратный по времени. """
-
 
 def auth_1(users_file, user_name, user_passwd):
-    for k, v in users_file.items():
-        if k == user_name and v['passwd'] == user_passwd and v['activated']:
+    """
+    Вариант 1. Сложность О(n) (за счет цикла). Более Затратный по времени,
+    чем Вариант 2, соответственно менее предпочтительный
+    """
+    for key, val in users_file.items():
+        if key == user_name and val['passwd'] == user_passwd and val['activated']:
             return f'Добро пожаловать {user_name}!'
-        elif k == user_name and v['passwd'] != user_passwd:
+        elif key == user_name and val['passwd'] != user_passwd:
             return f'{user_name}, Вы ввели не правильный пароль'
-        elif k == user_name and v['passwd'] == user_passwd and not v['activated']:
+        elif key == user_name and val['passwd'] == user_passwd and not val['activated']:
             return f'{user_name}, Ваша запись еще не активирована'
 
     return f'{user_name}, Ваc нет в системе. Зарегистрируйтесь или До свидания!'
@@ -54,13 +56,13 @@ u3 = auth_1(users, 'John', 77777)
 
 print(u1, u2, u3, sep='\n')
 
-""" 
-Вариант 2. Сложность О(1) (за счет хэша). Предпочтительный вариант.
-Решение подсмотрел (идею) 
-"""
 
-
-def auth_1(users_file, user_name, user_passwd):
+def auth_2(users_file, user_name, user_passwd):
+    """
+    Вариант 2. Сложность О(1) (за счет хэша в словаре). Менее затратный
+    по времени. Предпочтительный вариант.
+    Решение подсмотрел (идею)
+    """
     if users_file.get(user_name) and users_file[user_name]['passwd'] == user_passwd \
             and users_file[user_name]['activated']:
         return f'Добро пожаловать {user_name}!'
