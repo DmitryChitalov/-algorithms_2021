@@ -30,7 +30,7 @@ def hash_generator(password=input('Введите пароль: ')):
 
 with open('hash.txt', 'w+', encoding='utf-8') as f:
     f.write(hash_generator())
-    f.seek(0)  # Возвращаю указатель на начало строки.
+    f.seek(0)
     for line in f.readlines():
         print('Успешная авторизация!' if hash_generator(password=input('Введите пароль еще раз: ')) in line else
               'Неверно! Введен неправильный пароль.')
