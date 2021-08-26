@@ -47,6 +47,13 @@ class TaskBoard:
         self.task = self.reserv_que.pop_from()
         self.resolved.append(self.task)
 
+
+if __name__ == '__main__':
+    tasks_for_reserve = TaskBoard()
+    tasks_for_resolve = TaskBoard()
+    tasks_for_reserve.to_reserve()
+    tasks_for_resolve.resolve_task()
+
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 
 Задание творческое. Здесь нет жестких требований к выполнению.

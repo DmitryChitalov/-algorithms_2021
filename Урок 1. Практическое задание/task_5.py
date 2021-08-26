@@ -33,6 +33,16 @@ class Plates:
         else:
             self.stack[-1].pop()
 
+            
+if __name__ == '__main__':
+    elements_in = Plates()
+    for i in range(12):
+        elements_in.push_in(i)
+
+    print(elements_in.stack)
+    elements_in.pop_from()
+    print(elements_in.stack)
+
 Подсказка:
 Отдельне стопки можно реализовать через:
 1) созд-е экземпляров стека (если стопка - класс)
