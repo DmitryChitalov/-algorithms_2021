@@ -20,3 +20,17 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+
+
+def hash_generator(password=input('Введите пароль: ')):
+    salt = 'login'
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+
+with open('hash.txt', 'w+', encoding='utf-8') as f:
+    f.write(hash_generator())
+    f.seek(0)  # Возвращаю указатель на начало строки.
+    for line in f.readlines():
+        print('Успешная авторизация!' if hash_generator(password=input('Введите пароль еще раз: ')) in line else
+              'Неверно! Введен неправильный пароль.')
