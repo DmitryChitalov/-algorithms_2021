@@ -22,3 +22,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+request = int(input('Введите число, которое требуется перевернуть: '))
+
+
+def inverted_numbers(nums):
+    return str(nums) if nums < 10 else str(nums % 10) + inverted_numbers(nums // 10)
+
+
+print(f'Перевернутое число: {inverted_numbers(request)}')
