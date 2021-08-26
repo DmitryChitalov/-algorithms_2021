@@ -12,3 +12,30 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+from uuid import uuid4
+
+
+class UrlCache:
+    def __init__(self):
+        self.url_cache = {}
+
+    def check_url(self, url):
+        if url in self.url_cache.values():
+            return url
+        else:
+            salt = uuid4().hex
+            url_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+            self.url_cache[url_hash] = url
+            return 'Url добавлен в кэш'
+
+
+url = UrlCache()
+
+print(url.check_url('google.com'))
+print(url.check_url('yandex.ru'))
+
+print(url.check_url('google.com'))
+
+print(url.url_cache)
+
