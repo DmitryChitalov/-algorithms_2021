@@ -16,3 +16,14 @@
 р
 а
 """
+
+some_string = input('Введите строку')
+some_set = set()
+
+for i in range(len(some_string)):
+    for j in range(i + 1, len(some_string) + 1):
+        el = hash(some_string[i:j])
+        if el != hash(some_string):
+            some_set.add(el)
+
+print(len(some_set))
