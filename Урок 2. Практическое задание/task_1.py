@@ -28,3 +28,47 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class WrongOperation(Exception):
+    """
+        Исключение при неерной операции
+    """
+    def __init__(self):
+        super(WrongOperation, self).__init__()
+        self.text = 'Вы ввели неверный знак.'
+
+    def __str__(self):
+        return self.text
+
+
+def calc_rec():
+    """
+    Рекурсивный калькулятор
+    """
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода):")
+    operations = {'+': lambda val1, val2: val1 + val2,
+                  '-': lambda val1, val2: val1 - val2,
+                  '*': lambda val1, val2: val1 * val2,
+                  '/': lambda val1, val2: val1 / val2,
+                  }
+    if operation == '0':
+        return None
+    try:
+        if operation not in operations.keys():
+            raise WrongOperation
+        arg1 = int(input("Введите первое число:"))
+        arg2 = int(input("Введите второе число:"))
+        print(operations[operation](arg1, arg2))
+    except ValueError:
+        print("Вы ввели не число.")
+        return calc_rec()
+    except ZeroDivisionError:
+        print("Делить на 0 нельзя!")
+    except WrongOperation as wrong_operation:
+        print(wrong_operation)
+
+    return calc_rec()
+
+
+calc_rec()

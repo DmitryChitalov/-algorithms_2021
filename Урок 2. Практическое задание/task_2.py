@@ -18,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd_recursive(int_number, even=0, odd=0):
+    """
+    Функция считает количество четных и нечетных цифр в числе.
+    :param int_number: целое число
+    :param even: сумма четных чисел
+    :param odd: сумма нечетных чисел
+    :return: (even, odd)
+    """
+    if not int_number:
+        return even, odd
+    last_digit = int_number % 10
+    if last_digit % 2:
+        odd += 1
+    else:
+        even += 1
+    return even_odd_recursive(int_number // 10, even, odd)
+
+
+NUMBER = int(input("Введите чисо: "))
+print(f'Количество четных и нечетных цифр в числе равно: {even_odd_recursive(NUMBER)}')
