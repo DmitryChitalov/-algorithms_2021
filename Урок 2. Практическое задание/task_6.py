@@ -30,7 +30,10 @@ def guess_num(num, cnt=0):
         print('Поздравляю, вы угадали.')
         return 1
     if cnt < 9:
-        print(f'Попробуйте еще раз. Осталось {9 - cnt} попыток.')
+        if users_take > num:
+            print(f'Загаданное число меньше.Попробуйте еще раз. Осталось {9 - cnt} попыток.')
+        if users_take < num:
+            print(f'Загаданное число больше.Попробуйте еще раз. Осталось {9 - cnt} попыток.')
     guess_num(num, cnt + 1)
 
 
