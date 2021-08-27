@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def sum_of_els(n):
+    if n == 1:
+        return 1
+    if n % 2 == 0:
+        return (1 / (-2 ** (n-1))) + sum_of_els(n - 1)
+    if n % 2 == 1:
+        return (1 / (2 ** (n-1))) + sum_of_els(n - 1)
+
+
+
+
+print(sum_of_els(2))
+print(sum_of_els(3))
+print(sum_of_els(4))
+print(sum_of_els(5))
