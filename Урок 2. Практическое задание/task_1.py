@@ -28,3 +28,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def operation_recur():
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation == '0':
+        print("Введен 0. Программа завершена пользователем.")
+        return True
+    elif operation in ['+', '-', '*', '/']:
+        a = input("Введите первое число: ")
+        if a.isdigit():
+            b = input("Введите второе число: ")
+            if operation == '/' and b == '0':
+                print("Невозможно делить на ноль.")
+                # return operation_recur()
+            elif b.isdigit():
+                res = eval(a + operation + b)
+                print("Ваш результат: ", res)
+            else:
+                print("Вы ввели строку, а не число((. Повторите ввод.")
+        else:
+            print("Вы ввели строку, а не число((. Повторите ввод.")
+        return operation_recur()
+    else:
+        print("Ошбака ввода. повторите ввод операции.")
+        return operation_recur()
+
+
+operation_recur()
+

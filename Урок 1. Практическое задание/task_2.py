@@ -19,3 +19,24 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+def find_min_1(lst):  # сложность алгорима - квадратичная. O(n^2)
+    elem_min = lst[0]
+    for index in range(len(lst)): # O(n)
+        for elem_second in lst[index + 1 : ]: # O(n-1)
+            if lst[index] > elem_second:
+                elem_min = elem_second
+    return elem_min
+
+def find_min_2(lst):  # сложность алгоритма - линейная
+    elem_min = lst[0]
+    for index in range(len(lst)-1): # O(n)
+        if lst[index] > lst[index+1]: # коснтанта
+                elem_min = lst[index+1] 
+    return elem_min
+
+N = 20
+lst = [i for i in range(N)]
+# print(lst)
+
+print(f'ф-ция 1, min = {find_min_1(lst)}')
+print(f'ф-ция 2, min = {find_min_2(lst)}')
