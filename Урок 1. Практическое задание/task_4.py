@@ -30,45 +30,45 @@
 
 # system_info_dict = {'login': [password, activ_boolean]}
 system_info_dict = {'Alex': ['qwerty', 1],
-				'Sam': ['q', 0],
-				'Sveta': ['qw', 1]
-				}
+                'Sam': ['q', 0],
+                'Sveta': ['qw', 1]
+                }
 
 
 def authorization(system_info, login, password):  # O(1) - константная сложность
-	try:
-		value_list = system_info.get(login)  # O(1) 
-		# print(value_list)
-		print('Проверка...\n')
-		if password == value_list[0]:
-			print('Авторизация пройдена')
-			if value_list[1]:
-				print('Вы допущены к ресурсу\n')
-			else:
-				print('Выша учетка не активирована. \nПожалуйста, пройдите активацию вашей учетной записи.\n')
-		else:
-			print('Неверный пароль\n')
-	# except:
-	# 	print("Логина нету в базе")
-	except Exception as e:
-	    print(f"Логина нету в базе, ошибка: {e}")
+    try:
+        value_list = system_info.get(login)  # O(1) 
+        # print(value_list)
+        print('Проверка...\n')
+        if password == value_list[0]:
+            print('Авторизация пройдена')
+            if value_list[1]:
+                print('Вы допущены к ресурсу\n')
+            else:
+                print('Выша учетка не активирована. \nПожалуйста, пройдите активацию вашей учетной записи.\n')
+        else:
+            print('Неверный пароль\n')
+    # except:
+    #   print("Логина нету в базе")
+    except Exception as e:
+        print(f"Логина нету в базе, ошибка: {e}")
 
 
 def authorization_2(system_info, login, password):  # O(n) - линейная
-	print('Проверка...')
-	for key, value in system_info.items():  # O(n)
-		if key == login:
-			if password == value[0]:
-				print('Авторизация пройдена')
-				if value[1]:
-					print('Вы допущены к ресурсу\n')
-				else:
-					print('Выша учетка не активирована. \nПожалуйста, пройдите активацию вашей учетной записи.\n')
-				break
-			else:
-				print('Неверный пароль\n')
-	else:
-		print('Вы не зарегестрированы\n')
+    print('Проверка...')
+    for key, value in system_info.items():  # O(n)
+        if key == login:
+            if password == value[0]:
+                print('Авторизация пройдена')
+                if value[1]:
+                    print('Вы допущены к ресурсу\n')
+                else:
+                    print('Выша учетка не активирована. \nПожалуйста, пройдите активацию вашей учетной записи.\n')
+                break
+            else:
+                print('Неверный пароль\n')
+    else:
+        print('Вы не зарегестрированы\n')
 
 
 user_login = 'Sveta'

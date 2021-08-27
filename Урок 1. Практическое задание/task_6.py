@@ -43,11 +43,12 @@ class DashboardClass:
 
 if __name__ == '__main__':
     DEBUG = 1
-    MyDashboard = DashboardClass()
+    my_dashboard = DashboardClass()  # my_dashboard - по пеп 8 имена ф-ций, переменных 
+        # и экземпляров класса должны быть в стиле нижний регистр и нижние подчеркивания при необходимости.
 
     task1 = 'отправить на проверку задание 1'
     task2 = 'решить задание 1'
-    MyDashboard.set_tasks(task1)
-    MyDashboard.set_tasks(task2)
-    MyDashboard.get_task_from_base_que()
-    MyDashboard.get_task_from_base_que()
+    my_dashboard.set_tasks(task1)
+    my_dashboard.set_tasks(task2)
+    my_dashboard.get_task_from_base_que()
+    my_dashboard.get_task_from_base_que()
