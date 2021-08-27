@@ -14,7 +14,6 @@
 import random
 
 num = random.randrange(0, 100)
-print(num)
 
 
 def guess_num(num, cnt=0):

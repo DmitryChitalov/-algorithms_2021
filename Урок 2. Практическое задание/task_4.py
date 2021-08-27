@@ -26,7 +26,5 @@ def sum_of_els(n):
 
 
 
-print(sum_of_els(2))
-print(sum_of_els(3))
-print(sum_of_els(4))
-print(sum_of_els(5))
+num_of_els = int(input('Введите количество элементов: '))
+print(sum_of_els(num_of_els))
