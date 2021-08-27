@@ -16,3 +16,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_equality(number, user_num=0):
+    if number == 0:
+        return user_num
+    else:
+        user_num = user_num + number
+        number -= 1
+    return check_equality(number, user_num)
+
+
+num = int(input('Введите натуральное число: '))
+if check_equality(num) == ((num * (num + 1)) / 2):
+    print('Равенство 1+2+...+n = n(n+1)/2 является верным')
+else:
+    print('Равенство 1+2+...+n = n(n+1)/2 является неверным')
