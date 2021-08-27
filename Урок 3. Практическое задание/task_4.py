@@ -22,7 +22,8 @@ import uuid
 
 def url_check(table_cache, url, salt):
     my_hash = hashlib.sha256(url.encode('utf-8') + salt.encode('utf-8'))
-    table_cache[my_hash.hexdigest()] = url
+    if not table_cache.get(my_hash.hexdigest()):
+        table_cache[my_hash.hexdigest()] = url
     return my_hash.hexdigest()
 
 

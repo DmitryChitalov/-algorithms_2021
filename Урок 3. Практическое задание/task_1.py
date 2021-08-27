@@ -34,11 +34,17 @@ def what_time(func):
 
 @what_time
 def update_list(lst, element):  # O(N)
+    """
+    Операция вставки в начало списка имеет линейную сложность и выполняется медленнее
+    """
     lst.insert(0, element)
 
 
 @what_time
 def update_dict(dct, key, val):  # O(1)
+    """
+    Операция вставки в словарь имеет сложность O(1) и выполняется быстрее
+    """
     dct[key] = val
 
 
