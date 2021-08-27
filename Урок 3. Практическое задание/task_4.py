@@ -15,3 +15,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib
+import uuid
+
+
+def url_check(table_cache, url, salt):
+    my_hash = hashlib.sha256(url.encode('utf-8') + salt.encode('utf-8'))
+    table_cache[my_hash.hexdigest()] = url
+    return my_hash.hexdigest()
+
+
+MY_ID = str(uuid.uuid1())
+my_table = {}
+url_check(my_table, 'mail.ru', MY_ID)
+print(my_table)
+url_check(my_table, 'ya.ru', MY_ID)
+print(my_table)
+url_check(my_table, 'mail.ru', MY_ID)
+print(my_table)

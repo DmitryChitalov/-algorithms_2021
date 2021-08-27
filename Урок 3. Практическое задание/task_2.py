@@ -20,3 +20,26 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import hashlib
+import uuid
+import json
+
+my_dict = {}
+MY_ID = str(uuid.uuid1())
+in_str = input('Введите пароль: ')
+my_hash = hashlib.sha256(in_str.encode('utf-8') + MY_ID.encode('utf-8'))
+my_dict[in_str] = my_hash.hexdigest()
+with open('data.txt', 'w', encoding='utf-8') as outfile:
+    json.dump(my_dict, outfile)
+print('Пароль сохранен в базу')
+
+my_new_dict = {}
+new_str = input('Введите пароль еще раз для проверки: ')
+new_hash = hashlib.sha256(new_str.encode('utf-8') + MY_ID.encode('utf-8'))
+with open('data.txt', 'r', encoding='utf-8') as infile:
+    my_new_dict = json.load(infile)
+my_hash = my_new_dict['123']
+print(f'В базе данных хранится строка: {my_hash}')
+if new_hash.hexdigest() == my_hash:
+    print('Вы ввели правильный пароль')
