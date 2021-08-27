@@ -42,7 +42,7 @@ print(min_val_check([234, 754, 146, 954, 432]))
 def lst_min_val(lst):
     min_val = lst[0]         # O(1)
     for val in lst:          # O(n)
-        if val < min_val:    # O(n)
+        if val < min_val:    # O(1)
             min_val = val    # O(1)
     return min_val           # O(1)
 
