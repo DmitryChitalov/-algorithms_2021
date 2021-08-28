@@ -27,48 +27,38 @@
 """
 
 """
-Первое решение эффективнее. Несмотря на то, что сложность в данной ситуации одинаковая, 
-словари по умолчанию работают быстрее, т.к.  доступ к элементу получают по ключу, а не по позиции.
+Первое решение эффективнее, т.к. алгоритм имеет константную сложность.
 """
 
-# 1 O(n^2)
+# 1 O(1)
 
-users = {'Apple45': 'password'}
-login_u = input('Ваше имя: ')
-password_u = input('Ваш пароль: ')
-if login_u in users.keys():
-    expected_password = users[login_u]
-    if expected_password == password_u:
+
+users = {'Apple45': ['password', 'YES'], 'Pineapple': ['password2', 'NO']}
+
+
+def check_profile(user_name):
+    if users[user_name][1] == 'YES':                   #O(1)
         print('Приветствую тебя!')
-    else:
+    elif users[user_name][1] == 'NO':                  #O(1)
         print('Неверный пароль или имя пользователя!')
 
-else:
-    print('Ваше имя пользователя не найдено, хотите пройти регистрацию?')
 
-# 2 O(n^2)
+check_profile('Pineapple')                             #O(1)
 
-users = [
-    {'name': 'Kirill', 'password': '1234'},
-    {'name': 'Lena', 'password': '5678'},
-]
-user_list = []
-for i in range(len(users)):
-    user_list.append(users[i]['name'])
+# 2 O(n)
 
 
-def log_check():
-    name_input = input("Пожалуйста, введите имя пользователя: ")
-    if name_input in user_list:
-        dict_index = user_list.index(name_input)
-        password_input = input("Пожалуйста, введите пароль:")
-        if password_input == users[dict_index]['password']:
-            print('Приветствую тебя!')
-        else:
-            print('Неверный пароль или имя пользователя!')
-    else:
-        print('Ваше имя пользователя не найдено, хотите пройти регистрацию?')
+users = {'Apple45': ['password', 'YES'], 'Pineapple': ['password2', 'NO']}
 
 
-while True:
-    log_check()
+def check_profile(user_name):
+    for key, value in users.items():                           #O(n)
+        if key == user_name:                                   #O(1)
+            if value[1] == 'YES':  # O(1)                      #O(1)
+                print('Приветствую тебя!')
+            elif value[1] == 'NO':  # O(1)                     #O(1)
+                print('Неверный пароль или имя пользователя!')
+
+
+check_profile('Apple45')                                       #O(1)
+
