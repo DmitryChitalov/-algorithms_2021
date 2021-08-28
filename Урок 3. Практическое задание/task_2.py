@@ -1,3 +1,4 @@
+
 """
 Задание 2.
 Ваша программа должна запрашивать пароль
@@ -20,3 +21,24 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+from uuid import uuid4
+
+
+def add_password():
+    password = input('Введите пароль: ')
+    salt = uuid4().hex
+    pass_hash = hashlib.sha3_256(salt.encode() + password.encode())
+    print(type(pass_hash))
+    pass_hash = pass_hash.hexdigest()
+    with open('passwords.txt', 'w') as f:
+        f.write(pass_hash)
+    res = input('Введите пароль еще раз: ')
+    with open('passwords.txt') as f:
+        pass_hash = f.readline()
+    new_res = hashlib.sha3_256(salt.encode() + res.encode()).hexdigest()
+
+    print(new_res == pass_hash)
+
+
+add_password()
