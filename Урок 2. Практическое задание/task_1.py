@@ -28,3 +28,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc_2_num():
+    act = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if act == '0':
+        return print('Вы вышли из программы!')
+    else:
+        try:
+            num_1 = int(input('Введите число 1: '))
+            num_2 = int(input('Введите число 2: '))
+            if act == '+':
+                print(num_1 + num_2)
+            elif act == '-':
+                print(num_1 - num_2)
+            elif act == '*':
+                print(num_1 * num_2)
+            elif act == '/':
+                try:
+                    print(num_1 / num_2)
+                except ZeroDivisionError:
+                    print('Деление на 0. Не в это раз...')
+        except ValueError:
+            print('В следующей раз рекомендуем ввести число!')
+        return calc_2_num()
+
+
+calc_2_num()
