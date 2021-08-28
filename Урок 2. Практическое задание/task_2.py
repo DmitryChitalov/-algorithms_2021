@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def chet_nechet(val, even, uneven):
+    if val == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even, uneven}'
+    if val % 2 == 0:
+        return chet_nechet(val // 10, even + 1, uneven)
+    else:
+        return chet_nechet(val // 10, even, uneven + 1)
+
+
+print(chet_nechet((int(input('Введите натуральное число: '))), 0, 0))
