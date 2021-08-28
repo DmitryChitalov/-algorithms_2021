@@ -89,7 +89,7 @@ def add_dict_elem(dct, el):
     return dct
 
 
-LENGTH = 100000
+LENGTH = 10000000
 
 print('Демонстрация работоспособности:')
 print(fill_list(10))
@@ -98,20 +98,24 @@ print(fill_dict(10, 0))
 print('Засечка времени заполнения на больших объемах:')
 my_list = fill_list(LENGTH)
 my_dict = fill_dict(LENGTH, 0)
-# Заполнение списка и словаря выполняется одинаково
+# Заполнение списка и словаря выполняется примерно одинаково, но в пользу списка,
+# т.к. для словаря тратится время на создание hash-таблицы
 
 print('Засечка времени получения элемента:')
-my_list_elem = get_list_elem(my_list, 10000)
-my_dict_elem = get_dict_elem(my_dict, 10000)
+my_list_elem = get_list_elem(my_list, 100000)
+my_dict_elem = get_dict_elem(my_dict, 100000)
+# Получение элемента списка по индексу и словаря по ключу выполняется примерно одинаково
 
 print('Засечка времени удаления элемента:')
-my_list = del_list_elem(my_list, 5000)
-my_dict = del_dict_elem(my_dict, 5000)
+my_list = del_list_elem(my_list, 50000)
+my_dict = del_dict_elem(my_dict, 50000)
+# Удаление элемента списка по индексу и словаря по ключу - выигрыш по скорости у словаря
 
 print('Создаем список и словарь, которые добавим к основным:')
-my_list_2 = fill_list(10000)
-my_dict_2 = fill_dict(10000, LENGTH)
+my_list_2 = fill_list(1000000)
+my_dict_2 = fill_dict(1000000, LENGTH)
 
 print('Засечка времени добавления элемента:')
 my_list = add_list_elem(my_list, my_list_2)
 my_dict = add_dict_elem(my_dict, my_dict_2)
+# Добавление нескольких значений в список и словарь - выигрыш в пользу словаря
