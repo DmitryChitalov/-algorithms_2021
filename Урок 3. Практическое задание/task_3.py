@@ -16,3 +16,12 @@
 р
 а
 """
+
+vol = 'papa'
+
+my_set = set()
+for i in range(len(vol)):
+    for j in range(len(vol[i:])):
+        if hash(vol[i:j+1]) != 0:
+            my_set.add(hash(vol[i:j+1]))
+print(f'{vol} - {len(my_set)} уникальных подстрок')
