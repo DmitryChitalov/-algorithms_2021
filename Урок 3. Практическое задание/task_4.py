@@ -12,3 +12,34 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+from hashlib import sha256
+
+
+class Cash:
+    def __init__(self):
+        self.bd_url = {}
+        self.__salt = 'Соль'
+
+    def add_url(self, url):
+        url_h = sha256(self.__salt.encode() + url.encode()).hexdigest()
+        if url_h not in self.bd_url.values():
+            self.bd_url[url] = url_h
+            print(f'{url} добавлен в кеш')
+        else:
+            print(f'{url} - уже в кеше')
+
+    def show_cash(self):
+        print('Содержимое кеша:')
+        for item in self.bd_url:
+            print(item)
+
+
+new_cash = Cash()
+new_cash.add_url('https://mail.ru/')
+new_cash.add_url('https://yandex.ru/')
+new_cash.add_url('https://www.rambler.ru/')
+
+
+new_cash.show_cash()
