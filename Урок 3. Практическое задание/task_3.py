@@ -16,3 +16,19 @@
 р
 а
 """
+
+
+def unique_checker(*args):
+    s = set()
+    count = 0
+    for string in args:
+        h = hash(string)
+        if h in s:
+            count -= 1
+        else:
+            s.add(h)
+            count += 1
+    print(f'В строке {count} уникальных строк')
+
+
+unique_checker('pop', 'pap', 'pop', 'pap')

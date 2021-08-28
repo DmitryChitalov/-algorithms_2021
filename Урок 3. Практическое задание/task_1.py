@@ -19,3 +19,48 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+import time
+import functools
+
+
+def estimation(func):
+    @functools.wraps(func)
+    def wrapped(*args, **kwargs):
+        start = time.time()
+        res = func(*args, **kwargs)
+        end = time.time()
+        print('Время выполнения функции -', end - start)
+        return res
+
+    return wrapped
+
+
+@estimation
+def dictionary(val: int):
+    return {el: str(el) for el in range(val)}  # O(n)
+
+
+@estimation
+def list_create(val: int):
+    return [el for el in range(val)]  # O(n)
+
+
+@estimation
+def list_append(my_list: list, val: int):
+    my_list.append(val)  # O(1)
+
+
+@estimation
+def dict_append(my_dict: dict, key: int, val: str):
+    my_dict[key] = val  # O(1)
+
+
+d = dictionary(100000)
+l_new = list_create(100000)
+dict_append(d, 100000000000, 'val')
+list_append(l_new, 10)
+# несмотря на одну и ту же сложность алгоритмов, намного
+# медленнее заполняется словарь
+# скорее всего это связано с тем, что словарь - это хэш-таблица
+# поэтому заполнение требует больше ресурсов времени, нежели
+# список с функцией append
