@@ -19,3 +19,71 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+from time import time
+from random import randint
+
+
+def timer(function):                # O(1)
+    def wrapper(value):
+        start_time = time()
+        result = function(value)
+        print(f' - {round(time() - start_time, 3)} сек.')
+        return result
+    return wrapper
+
+
+@timer
+def get_list(number):       #O(n)
+    print(f'Наполнение списка {number} элементами.', end=' ')
+    result = [el for el in range(number)]
+    return result
+
+
+@timer
+def get_dict(number):       # O(n)
+    print(f'Наполнение словаря {number} элементами.', end=' ')
+    result = {el: el for el in range(number)}
+    return result
+
+
+number_of_elements = 1000000
+my_list = get_list(number_of_elements)  # 0.047 сек.
+my_dict = get_dict(number_of_elements)  # 0.085 сек.
+# Медленнее происходит заполнение словаря из-за создания хешей
+
+
+@timer
+def get_value_from_list(some_list: list):       # O(1)
+    print('Получение индекса рандомного числа в списке.', end=' ')
+    some_list.index(randint(0, number_of_elements))
+
+
+@timer
+def get_value_from_dict(some_dict: dict):       # O(1)
+    print('Поиск рандомного числа по ключу в словаре.', end=' ')
+    some_dict.get(randint(0, number_of_elements))
+
+
+get_value_from_list(my_list)  # 0.016 сек.  O(1)
+get_value_from_dict(my_dict)  # 0.0 сек.    O(1)
+# Поиск в словаре происходит быстрее благодаря хешам, сложность - константная
+# В списке сложность поиска элемента - линейная
+
+
+@timer
+def clear_list(some_list: list):    # O(1)
+    print('Очищение списка.', end=' ')
+    some_list.clear()
+
+
+@timer
+def clear_dict(some_dict: dict):    # O(1)
+    print('Очищение словаря.', end=' ')
+    some_dict.clear()
+
+
+clear_list(my_list)  # 0.0 сек.  O(1)    аналог l = []
+clear_dict(my_dict)  # 0.016 сек.  O(1)  аналогично s = {} или s = dict()
+# Cловарь будет очищаться дольше из-за удаления хешей. Время константное
