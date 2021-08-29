@@ -21,3 +21,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_print():
+    start = 32
+    while start != 128:
+        if (start - 1) % 10 == 0:
+            print('\n')
+        else:
+            print(f'{start} - {chr(start)}', end=' ')
+        start += 1
+
+
+def ascii_print_recurs(start=32):
+    if start == 128:
+        return
+    else:
+        if (start - 1) % 10 == 0:
+            print(f'\n{start} - {chr(start)}', end=' ')
+            ascii_print_recurs(start + 1)
+        else:
+            print(f'{start} - {chr(start)}', end=' ')
+            ascii_print_recurs(start + 1)
+
+
+# ascii_print()
+ascii_print_recurs()
+

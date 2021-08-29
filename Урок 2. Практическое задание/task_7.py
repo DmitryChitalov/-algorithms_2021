@@ -16,3 +16,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# n = int(input('Введите натуральное число: '))
+# left = 1
+# right = n*(n + 1) / 2
+# while n != 1:
+#     left += n
+#     n -= 1
+#
+# print(left)
+#
+# if left == right:
+#     print('Равенство!')
+
+
+def gen_left_recurs(n):
+    if n == 1:
+        return n
+    else:
+        return gen_left_recurs(n - 1) + n
+
+
+number = int(input('Введите натуральное число: '))
+right = number * (number + 1) / 2
+
+if gen_left_recurs(number) == right:
+    print('Выражения равны!')
+
+
+
+
