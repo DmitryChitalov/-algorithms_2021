@@ -15,3 +15,29 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+import json
+
+
+def exist_or_not(url):
+    """
+    Функия выводит адрес сайте если он есть в кэше,
+    если нет, то заносит хеш и адрес сайта в базу
+    """
+    salt = url[:int(len(url) / 2)]
+    url_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    try:
+        with open('urls.json') as file:
+            urls = json.load(file)
+            if urls.get(url_hash):
+                print(url)
+            else:
+                urls[url_hash] = url
+                with open('urls.json', 'w') as file_w:
+                    json.dump(urls, file_w)
+    except FileNotFoundError:
+        with open('urls.json', 'w') as file_w:
+            json.dump({url_hash: url}, file_w)
+
+
+exist_or_not('google.com')
