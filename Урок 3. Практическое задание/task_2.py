@@ -20,3 +20,34 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+import pickle
+
+# Вврдим логон и пароль
+login = input('Введите логин: ')
+password = input('Введите пароль: ')
+# (Соль в виде логина + пароль) хэшируем
+hash_obj = hashlib.sha256(login.encode() + password.encode())
+password_hash = hash_obj.hexdigest()
+print(password_hash)
+# Данные (словарь) в байтах пишем в файл
+data = {login: password_hash}
+with open('password_file.txt', 'wb') as pf:
+    pickle.dump(data, pf)
+
+# Повторно врдим логон и пароль
+login1 = input('Введите логин: ')
+password1 = input('Введите пароль: ')
+# Читаем данные из файла, переводим из байтов в словарь и делаем проверку.
+with open('password_file.txt', 'rb') as pf:
+    dic = pickle.load(pf)
+    print(dic)
+    if login1 and (hashlib.sha256(login1.encode() + password1.encode())).hexdigest() == dic[login1]:
+        print(f'Приветствую {login1}! Вы ввели правильный пароль')
+    else:
+        print('Вы ввели не правильный пароль!')
+
+
+
+
+
