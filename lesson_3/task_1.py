@@ -25,11 +25,11 @@ from random import randint
 
 
 def time_logger(func):
-    def inner(storage):
+    def inner(*args, **kwargs):
         start_time = time()
-        result = func(storage)
+        result = func(*args, **kwargs)
         ent_time = time()
-        print(f'Время работы функции {func} составило {ent_time - start_time}')
+        print(f'Время работы функции {func.__name__} составило {ent_time - start_time}')
         return result
 
     return inner
@@ -43,7 +43,7 @@ def fill_dict(dict_for_fill):
 
 @time_logger
 def fill_list(list_for_fill):
-    for i in range(100000):
+    for _ in range(100000):
         list_for_fill.append(randint(0, 100000))  # сложность .append константная O(1)
 
 
@@ -56,12 +56,12 @@ def test_dict_read(dict_to_test):
 @time_logger
 def test_dict_update(dict_to_test):
     for i in range(len(dict_to_test)):
-        dict_to_test[i] += 1  # O(1)
+        dict_to_test[i] = 'test'  # O(1)
 
 
 @time_logger
 def test_dict_remove(dict_to_test):
-    for i in range(len(dict_to_test)):
+    for i in range(20000, 30000):
         dict_to_test.pop(i)  # O(1)
 
 
@@ -74,13 +74,13 @@ def test_list_read(list_to_test):
 @time_logger
 def test_list_update(list_to_test):
     for i in range(len(list_to_test)):
-        list_to_test[i] += 1  # O(1)
+        list_to_test[i] = 'test'  # O(1)
 
 
 @time_logger
 def test_list_remove(list_to_test):
-    for i in range(len(list_to_test) - 1, 0, -1):
-        list_to_test.pop(i)  # O(1)
+    for i in range(20000, 30000):
+        list_to_test.pop(i)  # O(n)
 
 
 random_numbers_dict = {}
@@ -90,11 +90,11 @@ fill_dict(random_numbers_dict)
 fill_list(random_numbers_list)
 
 """
-Время работы функции <function fill_dict at 0x7ffbb81354c0> составило 0.8702378273010254
-Время работы функции <function fill_list at 0x7ffbb81355e0> составило 0.8394103050231934
+Время работы функции fill_dict составило 0.0969991683959961
+Время работы функции fill_list составило 0.09162187576293945
 
 Мы видим, что времена работы функций практически совпадают - это подтверждает равенство алгоритмических сложностей
-Однако в случае работы со списком время работы меньше, это происходит из-за накладных расходов по вычислению хешей
+Однако в случае работы со списком время работы несколько меньше, это происходит из-за накладных расходов по вычислению хешей
 """
 
 test_dict_read(random_numbers_dict)
@@ -107,10 +107,13 @@ test_dict_remove(random_numbers_dict)
 test_list_remove(random_numbers_list)
 
 """
-Время работы функции <function test_dict_read at 0x7fa478135700> составило 0.052471160888671875
-Время работы функции <function test_list_read at 0x7fa478135a60> составило 0.04150986671447754
-Время работы функции <function test_dict_update at 0x7fa478135820> составило 0.11693596839904785
-Время работы функции <function test_list_update at 0x7fa478135b80> составило 0.08494210243225098
-Время работы функции <function test_dict_remove at 0x7fa478135940> составило 0.10662388801574707
-Время работы функции <function test_list_remove at 0x7fa478135ca0> составило 0.07581901550292969
+Время работы функции test_dict_read составило 0.007003307342529297
+Время работы функции test_list_read составило 0.0039980411529541016
+Время работы функции test_dict_update составило 0.0069658756256103516
+Время работы функции test_list_update составило 0.005000591278076172
+Время работы функции test_dict_remove составило 0.0010006427764892578
+Время работы функции test_list_remove составило 0.16703534126281738
+
+Операция удаления из середины списка занимает намного больше времени, чем операция удаления из середины словаря
+Остальные операции работают примерно одинаково
 """

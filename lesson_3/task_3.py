@@ -16,3 +16,20 @@
 р
 а
 """
+
+
+def get_unique_sub_string_count(word):
+    """
+    получить количество уникальных подстрок
+    """
+
+    sub_words = set()
+
+    for i in range(len(word)):
+        for j in range(i + 1, len(word) + 1):
+            sub_words.add(hash(word[i:j]))
+
+    return len(sub_words.difference({hash(word)}))
+
+
+print(get_unique_sub_string_count('papa'))

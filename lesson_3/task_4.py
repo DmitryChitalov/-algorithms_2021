@@ -17,16 +17,17 @@
 """
 
 from hashlib import sha256
+from uuid import uuid4
 
 
 class UrlCash:
-    SALT = b'my_salt'
 
     def __init__(self):
         self.urls = {}
+        self.salt = str(uuid4()).encode('utf-8')
 
     def hash(self, url):
-        return sha256(url.encode('utf-8') + self.SALT).hexdigest()
+        return sha256(url.encode('utf-8') + self.salt).hexdigest()
 
     def cash(self, url):
         if self.urls.get(self.hash(url)):

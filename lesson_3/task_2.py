@@ -23,6 +23,7 @@
 
 import hashlib
 import json
+import uuid
 
 
 def hash_password(password, salt):
@@ -40,28 +41,41 @@ class Storage:
     def __init__(self, filename):
         self.filename = filename
         with open(self.filename, 'r', encoding='utf-8') as file:
-            self.data = set(json.load(file))
+            self.data = json.load(file)
 
-    def save(self, password):
+    def save(self, login, password, salt):
         """
         сохранить пароль (будут сохраняться только уникальные пароли)
         """
-        self.data.add(password)
+        self.data[login] = {'password': password, 'salt': salt}
         with open(self.filename, 'w', encoding='utf-8') as file:
-            json.dump(list(self.data), file)
+            json.dump(self.data, file)
+
+    def check_user(self, login, password):
+        if login not in self.data:
+            return False
+
+        user_password = self.data[login]['password']
+        user_salt = self.data[login]['salt']
+
+        return hash_password(password, user_salt) == user_password
 
 
 storage = Storage('storage.json')
-SALT = 'my_salt'
+salt = str(uuid.uuid4())
 
+print('Регистрация')
+user_login = input('Введите логин: ')
 user_password = input('Введите пароль: ')
-storage.save(hash_password(user_password, SALT))
+storage.save(user_login, hash_password(user_password, salt), salt)
 
-print(f'В базе данных хранится строка: {hash_password(user_password, SALT)}')
+print(f'В базе данных хранится строка: {hash_password(user_password, salt)}')
 
-password_retry = input('Введите пароль еще раз для проверки: ')
+print('Авторизация')
+user_retry_login = input('Введите логин: ')
+user_retry_password = input('Введите пароль: ')
 
-if hash_password(user_password, SALT) == hash_password(password_retry, SALT):
-    print('Вы ввели правильный пароль!')
+if storage.check_user(user_retry_login, user_password):
+    print('Вы успешно авторизованы!')
 else:
-    print('Вы ввели не правильный пароль!')
+    print('Произошла ошибка авторизации!')
