@@ -21,3 +21,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def show_tab(i, tab_chr=''):
+    if i == 128:
+        return tab_chr
+    elif i % 10 == 1:
+        return show_tab(i+1, tab_chr + f' {i} - {chr(i)}\n')
+    else:
+        return show_tab(i+1, tab_chr + f' {i} - {chr(i)}')
+
+
+print(show_tab(32))
+
+
+def show_tab(i, tab_chr=''):
+    if i == 128:
+        return tab_chr
+    elif i % 10 == 1:
+        return show_tab(i+1, tab_chr + f' {i} - {hex(i)}\n')
+    else:
+        return show_tab(i+1, tab_chr + f' {i} - {hex(i)}')
+
+
+print(show_tab(32))

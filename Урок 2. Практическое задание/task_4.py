@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_row(count, s_num=0, number=1):
+    if count == 0:
+        return s_num
+    else:
+        return sum_of_row(count - 1, s_num + number, number / (-2))
+
+
+count = int(input('Введите количество элементов: '))
+print(sum_of_row(count))
