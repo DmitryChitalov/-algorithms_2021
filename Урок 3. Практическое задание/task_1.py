@@ -1,4 +1,3 @@
-
 """
 Задание 1.
 
@@ -48,17 +47,19 @@ def list_create(val: int):
 
 @estimation
 def list_append(my_list: list, val: int):
-    my_list.append(val)  # O(1)
+    for i in range(1000000):
+        my_list.append(val)  # O(1)
 
 
 @estimation
-def dict_append(my_dict: dict, key: int, val: str):
-    my_dict[key] = val  # O(1)
+def dict_append(my_dict: dict, val: str):
+    for i in range(1000000):
+        my_dict[i] = val  # O(1)
 
 
-d = dictionary(100000)
-l_new = list_create(100000)
-dict_append(d, 100000000000, 'val')
+d = dictionary(1000000)
+l_new = list_create(1000000)
+dict_append(d, 'val')
 list_append(l_new, 10)
 # несмотря на одну и ту же сложность алгоритмов, намного
 # медленнее заполняется словарь

@@ -28,7 +28,7 @@ def unique_checker(*args):
         else:
             s.add(h)
             count += 1
-    print(f'В строке {count} уникальных строк')
+    print(f'В списке строк {count} уникальных строк')
 
 
-unique_checker('pop', 'pap', 'pop', 'pap')
+unique_checker('papa')
