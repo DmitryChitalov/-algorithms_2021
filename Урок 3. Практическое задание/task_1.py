@@ -32,7 +32,7 @@ def func_time(func):
         start = time.time()
         func(*args)
         end = time.time()
-        return end - start
+        print(f'Время выполнения {end - start}')
     return wrapper
 
 
@@ -43,7 +43,7 @@ class MyList:
 
     def append(self, *args):
         """
-        Функция добавления элемента в конец списка
+        Функция добавления элемента в список
         Сложность О(1)
         """
         self.my_list.append(args[0])
@@ -51,17 +51,18 @@ class MyList:
     @func_time
     def insert(self, idx, obj):
         """
-        Вставка элемента в список по индексу
+        Вставка элемента
         :param obj: вставляемый объект
         :param idx: индекс куда вставляем
         Сложность: 0(n)
         """
         self.my_list.insert(idx, obj)
 
-    def pop(self, *args):
-        """Удаление элемента по индексу
+    @func_time
+    def del_by_value(self, val):
+        """Удаление элемента по значению
         Сложность: O(n)"""
-        self.my_list.pop(args[0])
+        self.my_list.remove(val)
 
 
 class MyDict:
@@ -69,17 +70,27 @@ class MyDict:
     def __init__(self):
         self.my_dict = dict()
 
-    def insert(self, key, value):
+    def append(self, key, value):
         """Функция добавления элемента в словарь
         Сложность О(1)"""
         self.my_dict[key] = value
 
-    def pop(self, *args):
+    @func_time
+    def insert(self, key, value):
+        """Функция вставки элемента в словарь
+        Сложность О(1)"""
+        self.append(key, value)
+
+    @func_time
+    def del_by_value(self, val):
         """
-        Удаляет элемент словаря по ключу
-        Сложность: O(1)
+        Удаляет элемент словаря по значению
+        Сложность: O(n)
         """
-        self.my_dict.pop(args[0])
+        for key, value in self.my_dict.items():
+            if val == value:
+                del self.my_dict[key]
+                break
 
 
 @func_time
@@ -94,28 +105,34 @@ def fill_data(func, quantity):
 
 
 # Задание а)
-
-ADD = 10000000
+# По сложноти функции одинаковые, но по замерам времени выигрывает соварь
+# я считаю, что это связано с тем, что список это упорядоченый тип данных
+# и перед добавлением в конец списка сначала вычисляется длина списка
+# как сказано в документации: "list.append(x)
+# Add an item to the end of the list. Equivalent to a[len(a):] = [x]."
+ADD = 1000000
+print(f'Добавление {ADD} элементов в список:')
 NEW_LIST = MyList()
-NEW_DICT = MyDict()
-print('Время добавления в конец списка методом append:', fill_data(NEW_LIST.append, ADD))  # O(1)
-del NEW_LIST.my_list[:]
-print('Время вставки в список методом insert:', fill_data(NEW_LIST.insert, ADD))  # O(n)
-print('Время вставки в словарь методом insert (dict[key]=value)',
-      fill_data(NEW_DICT.insert, ADD))  # O(1)
+fill_data(NEW_LIST.append, ADD)
 
-# Время добавления в конец списка методом append: 2.2842061519622803
-# Время вставки в список методом insert: 5.665892839431763
-# Время вставки в словарь методом insert (dict[key]=value) 2.0209035873413086
-# Добавление в словарь быстрее всего потому что он хэш таблица и сложность операции 0(1)
+print(f'Добавление {ADD} элементов в словарь:')
+NEW_DICT = MyDict()
+fill_data(NEW_DICT.append, ADD)
 
 # Задание б)
-DEL = 500
-print('Время удаления элементов из списка методом pop(i) по индексу:',
-      fill_data(NEW_LIST.pop, DEL))  # O(n)
-print('Время удаления элементов из словаря методом pop():', fill_data(NEW_DICT.pop, DEL))  # O(1)
+# Удаление элемента по его значению, по сложности функции равносильны,
+# но по времени словарь сильно проигрывает, думаю что время тратится
+# на генерацию списка кортежей "for key, value in self.my_dict.items():"
+DEL_ELEM = 500000
+print(f'Удаление элемента из списка по значению {DEL_ELEM}:')
+NEW_LIST.del_by_value(DEL_ELEM)
+print(f'Удаление элемента из словаря по значению {DEL_ELEM}:')
+NEW_DICT.del_by_value(DEL_ELEM)
 
-# Время удаления элементов из списка методом pop(i) по индексу: 7.247708797454834
-# Время удаления элементов из словаря методом pop(): 0.00012540817260742188
-# Словарь быстрее т.к. сложность алгоритма константая, а удаление элемента из
-# списка по индексу - линейная
+# Вставка
+# вставка в словарь имеет сложноть 0(1), а в список 0(n),
+# по времени спиок также проирывает
+print('Вставка элемента в список: ')
+NEW_LIST.insert(3, 'вставка')
+print('Вставка элемента в словарь: ')
+NEW_DICT.insert('вставка', 'вставка')
