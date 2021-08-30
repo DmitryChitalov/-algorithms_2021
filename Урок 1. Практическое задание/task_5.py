@@ -43,9 +43,12 @@ class StackClass:
             self.elems[len(self.elems) - 1].append(el)
 
     def pop_out(self):
-        result = self.elems[len(self.elems) - 1].pop()
-        if len(self.elems[len(self.elems) - 1]) == 0:
-            self.elems.pop()
+        if len(self.elems) == 0:
+            result = False
+        else:
+            result = self.elems[len(self.elems) - 1].pop()
+            if len(self.elems[len(self.elems) - 1]) == 0:
+                self.elems.pop()
         return result
 
     def get_val(self):
@@ -66,19 +69,11 @@ class StackClass:
 
 if __name__ == '__main__':
 
-    stack_1 = StackClass(5)
-    print(len(stack_1.elems))
-
+    stack_1 = StackClass(4)
     i = 0
-    while i < 10:
+    while i < 11:
         stack_1.push_in(i)
         i += 1
 
     print(stack_1.elems)
 
-    i = 0
-    while i < 15:
-        stack_1.pop_out()
-        i += 1
-
-    print(stack_1.elems)
