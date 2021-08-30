@@ -23,31 +23,39 @@
 import hashlib
 import pickle
 
-# Вврдим логон и пароль
-login = input('Введите логин: ')
-password = input('Введите пароль: ')
-# (Соль в виде логина + пароль) хэшируем
-hash_obj = hashlib.sha256(login.encode() + password.encode())
-password_hash = hash_obj.hexdigest()
-print(password_hash)
-# Данные (словарь) в байтах пишем в файл
-data = {login: password_hash}
-with open('password_file.txt', 'wb') as pf:
-    pickle.dump(data, pf)
 
-# Повторно врдим логон и пароль
-login1 = input('Введите логин: ')
-password1 = input('Введите пароль: ')
-# Читаем данные из файла, переводим из байтов в словарь и делаем проверку.
-with open('password_file.txt', 'rb') as pf:
-    dic = pickle.load(pf)
-    print(dic)
+# Регистрируемся
+def sign_in_func():
+    # Вврдим логон и пароль
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    # (Соль в виде логина и пароль) хэшируем
+    hash_obj = hashlib.sha256(login.encode() + password.encode())
+    password_hash = hash_obj.hexdigest()
+    print(password_hash)  # Печатаю для себя
+    # Данные (словарь) в байтах пишем в файл
+    data = {login: password_hash}
+    with open('password_file.txt', 'wb') as pf:
+        pickle.dump(data, pf)
+
+
+# Логинимся
+def log_in_func():
+    login1 = input('Введите логин: ')
+    password1 = input('Введите пароль: ')
+    # Читаем данные из файла, переводим из байтов в словарь и делаем проверку.
+    with open('password_file.txt', 'rb') as pf:
+        dic = pickle.load(pf)
+        print(dic)  # Печатаю просто для себя
     if login1 and (hashlib.sha256(login1.encode() + password1.encode())).hexdigest() == dic[login1]:
         print(f'Приветствую {login1}! Вы ввели правильный пароль')
     else:
         print('Вы ввели не правильный пароль!')
 
 
+if __name__ == '__main__':
+    sign_in_func()
+    log_in_func()
 
 
 
