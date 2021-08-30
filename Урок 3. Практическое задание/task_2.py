@@ -53,7 +53,7 @@ print(f'В базе данных хранится строка: {PASSWORD_HASH}'
 CHECK_PASS = input('Введите пароль еще раз для проверки: ')
 CHECK_HASH = create_hash(CHECK_PASS, SALT)
 
-if PASSWORDS.find_one({'hash': CHECK_HASH}):
+if PASSWORDS.count_documents({'hash': CHECK_HASH}):
     print('Вы ввели правильный пароль')
 else:
     print('Вы ввели неверный пароль')
