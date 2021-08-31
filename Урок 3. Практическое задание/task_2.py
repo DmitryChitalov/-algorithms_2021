@@ -26,38 +26,43 @@ from hashlib import sha256
 
 class HashedPasses:
     def __init__(self, db):
-        self.salt = b'selfsalted'
         self.connection = sqlite3.connect(db)
         self.cursor = self.connection.cursor( )
 
-    def __check_pass(self):
-        password = input('Введите пароль для проверки: ')
-        self.cursor.execute('select hash from pass_hash where pass = :password', {'password': password})
+    def register(self, login, password):
+        try:
+            self.cursor.execute('insert into pass_hash values (:login, :pass_hash)',
+                                {'login': login,
+                                 'pass_hash': HashedPasses.hash_pass(login, password)})
+            self.connection.commit( )
+            print('Успешная регистрация.')
+        except sqlite3.IntegrityError:
+            print('Данный логин уже занят.')
+
+    def login(self, login, password):
+        self.cursor.execute('select hash from pass_hash where login = :login', {'login': login})
         result = self.cursor.fetchall( )
         try:
-            if sha256(self.salt + password.encode('utf-8')).hexdigest( ) == result[0][0]:
-                print('Вы ввели правильный пароль')
+            if HashedPasses.hash_pass(login, password) == result[0][0]:
+                print('Успешная авторизация.')
+            else:
+                print('Был введён неверный пароль.')
         except IndexError:
-            print('Данного пароля нет в базе данных.')
-            return None
+            print('Такого пользователя не существует.')
 
-    def __add_pass(self):
+    @staticmethod
+    def hash_pass(login, password):
+        return sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest( )
+
+
+if __name__ == '__main__':
+    AUTHORIZATION_BASE = HashedPasses('LOGIN_PASS.db')
+    action = input('У вас уже имеется аккаунт?(Да/Нет) ')
+    if action.lower( ) == 'да':
+        login = input('Введите имя пользователя: ')
         password = input('Введите пароль: ')
-        password_hash = sha256(self.salt + password.encode('utf-8')).hexdigest( )
-        print(f'В базе данных хранится строка: {password_hash}')
-        self.cursor.execute('insert into pass_hash values (:hash, :pass)',
-                            {'hash': password_hash,
-                             'pass': password})
-        self.connection.commit( )
-
-    def truncate_table(self):
-        self.connection.execute('delete from pass_hash')
-        self.connection.commit( )
-
-    def task_scenarion(self):
-        self.__add_pass( )
-        self.__check_pass( )
-
-
-test1 = HashedPasses('task_3_db.db')
-test1.task_scenarion( )
+        AUTHORIZATION_BASE.login(login, password)
+    if action.lower( ) == 'нет':
+        login = input('Введите имя пользователя: ')
+        password = input('Введите пароль: ')
+        AUTHORIZATION_BASE.register(login, password)
