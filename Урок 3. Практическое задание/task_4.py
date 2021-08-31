@@ -15,3 +15,25 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from uuid import uuid4
+import hashlib
+
+
+def hash(salt, url):
+    return hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+
+
+cache = {}
+salt = uuid4().hex
+url = 1
+while url != '0':
+    url = input('Введите URL: ')
+    if url == '0':
+        break
+    hash_url = hash(salt, url)
+    if cache.get(hash_url):
+        print(f'"{cache.get(hash_url)}" есть в кэше')
+    else:
+        cache[hash_url] = url
+        print(f'"{cache[hash_url]}" внесён в кэш.')
