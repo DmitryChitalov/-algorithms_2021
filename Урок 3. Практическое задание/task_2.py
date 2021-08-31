@@ -20,3 +20,23 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import hashlib
+from uuid import uuid4
+
+
+with open('DB.txt', 'a', encoding='utf-8') as f:
+    password = input('Please enter your password: ')
+    salt = uuid4().hex
+    f.write(hashlib.sha256(salt.encode() + password.encode()).hexdigest())
+
+with open('DB.txt', 'r') as f:
+    datebase = f.read()
+    print(f'Datebase has this hash: {datebase}')
+    password_2 = input('Please enter your password again: ')
+    hash_psswd_2 = hashlib.sha256(salt.encode() + password_2.encode()).hexdigest()
+    if datebase == hash_psswd_2:
+        print('Password is correct')
+    else:
+        print('Password is incorrect')
+

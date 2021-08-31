@@ -16,3 +16,18 @@
 р
 а
 """
+
+S = 'papa'
+hash_obj = hash(S)
+some_set = {hash_obj,}
+some_list = []
+
+for i in range(len(S)):
+    for j in range(i+1, len(S)+1):
+        hash_str = hash(S[i:j])
+        if hash_str not in some_set:
+            some_set.add(hash_str)
+            some_list.append(S[i:j])
+
+print(some_list)
+
