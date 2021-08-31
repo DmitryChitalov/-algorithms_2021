@@ -42,10 +42,10 @@ print(
         setup='from __main__ import recursive_reverse, num_10000',
         number=10000))
 
+cache = {}
+
 
 def memoize(f):
-    cache = {}
-
     def decorate(*args):
 
         if args in cache:
@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,12 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+print(cache)
+"""
+Мне стало интересно посмотреть, что из себя представляет кэш
+Самой сути мемоизации я не особо увидела, потому что каждый раз
+мы просто создаем новое значение  в хэш таблице, не обращаясь к старым
+Да, решение быстрое, но во-первых мы теряем память, во-вторых - с таким же успехом
+можно было просто создавать словарь без проверок. С мемоизацией тут мало общего 
+"""
