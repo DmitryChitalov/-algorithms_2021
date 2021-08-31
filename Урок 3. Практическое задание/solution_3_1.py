@@ -32,9 +32,8 @@ def profile(f):
 @profile
 def create_list_1(n):
     """
-    Минимальное время выполнения, потому что скрипту необходимо только перебрать значения и последовательно
-    вставлять в конец списка
-    O(n)
+    Маленькое время создания, так как новые элементы вставляются в конец списка
+    O(1)
     :param n:
     :return:
     """
@@ -44,19 +43,22 @@ def create_list_1(n):
 @profile
 def create_list_2(n):
     """
-    Время работы скрипта увеличилось, так как необходимо еще вычислить i
+    Эллементы вставляются в начало списка сдвигая уже существующие, в связи с этим врем создания увеличивается
     O(n)
     :param n:
     :return:
     """
-    return [i+i for i in range(n)]
+    lst = []
+    for i in range(n):
+        lst.insert(0, i)
+    return lst
 
 
 @profile
 def create_dict_1(n):
     """
-    Время создания словаря, по сравнению со списком, увеличено, это компенсируется скоростью чтения
-    O(n)
+    Словарь создается быстро
+    O(1)
     :param n:
     :return:
     """
@@ -65,51 +67,53 @@ def create_dict_1(n):
 
 @profile
 def create_dict_2(n):
+    d = {}
+    for i in range(n):
+        d[i] = i
+    return d
+
+
+@profile
+def change_list(n):
     """
-    Так же наблюдается увеличение времени работы, так как скрипт усложняется вычислением значения i
     O(n)
+    Чтение списка заметно выше, по сравнению со словарем, так как в списке скрипту приходится последовательно
+    перебирать занчения
     :param n:
     :return:
     """
-    return {i: i+i for i in range(n)}
+    for i in range(1000):
+        n.pop(i)
+    for j in range(100):
+        n[j] = n[j + 1]
 
 
 @profile
-def read_list(n):
+def change_dict(n):
     """
-    Даже взятие по индексу проигрывает словарю, про обычный поиск можно даже не писать,
-    опять же мы нашли случайный элемент в списке, а не значение 9999999:)
-    Если мы хотим увеличить скорость по отношению к обычному поиску,
-    то надо воспользоваться бинарным поиском.
     O(1)
     :param n:
     :return:
     """
-    return n
+    for i in range(1000):
+        n.pop(i)
+    for j in range(101, 202):
+        n[j] = 'fill'
 
 
-@profile
-def read_dict(n):
-    """
-    Преимущество словаря заключается в быстром чтении из него, независимо от количества элементов
-    O(1)
-    :param n:
-    :return:
-    """
-    return n.get(9999999)
-
-
-val = 10000000
+val = 10000
+print('-'*30)
 print('Создание списков')
 crt_lst = create_list_1(val)
 create_list_2(val)
-
+print('-'*30)
 print('Создание словарей')
 crt_dct = create_dict_1(val)
 create_dict_2(val)
-
+print('-'*30)
 print('Чтение списка')
-read_list(crt_lst)
-
+change_list(crt_lst)
+print('-'*30)
 print('Чтение словаря')
-read_dict(crt_dct)
+change_dict(crt_dct)
+print('-'*30)

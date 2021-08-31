@@ -22,11 +22,15 @@ from uuid import uuid4
 """
 
 
+def to_hash(val, salt):
+    return hashlib.sha256(val.hexdigest().encode() + salt.encode()).hexdigest()
+
+
 def valid_pass(n, slt):
-    res = hashlib.sha256(n.hexdigest().encode() + slt.encode()).hexdigest()
+    res = to_hash(n, slt)
     print(res)
     check_pswrd = hashlib.sha256(input('Повторите пароль - ').encode())
-    res_check = hashlib.sha256(check_pswrd.hexdigest().encode() + slt.encode()).hexdigest()
+    res_check = to_hash(check_pswrd, slt)
     if res == res_check:
         con = pymysql.connect(host="localhost", user="root", password="*******", db="******")
         with con:

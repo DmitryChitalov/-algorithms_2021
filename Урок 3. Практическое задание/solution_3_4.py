@@ -15,12 +15,16 @@ from uuid import uuid4
 """
 
 
+def get_func(val, url):
+    return hashlib.sha256(val.encode() + url.get(val).encode()).hexdigest()
+
+
 def cache_url(n, url_st, url_slt):
     tmp = n
     n = hashlib.sha256(n.encode()).hexdigest()
     try:
-        if hashlib.sha256(n.encode() + url_slt.get(n).encode()).hexdigest() in url_st:
-            return f'Вы зашли на сайт - {url_st.get(hashlib.sha256(n.encode() + url_slt.get(n).encode()).hexdigest())}'
+        if get_func(n, url_slt) in url_st:
+            return f'Вы зашли на сайт - {url_st.get(get_func(n, url_slt))}'
     except AttributeError:
         print('Сайт отсутствует в кеше')
     finally:
