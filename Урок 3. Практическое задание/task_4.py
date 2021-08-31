@@ -12,3 +12,22 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+from uuid import uuid4
+
+
+def cash_web(url):
+    salt = uuid4().hex.encode()
+    hash_url = hashlib.sha256(salt + url.encode()).hexdigest()
+    if url in dic.values():
+        return 'Такой url-адрес уже есть.'
+    else:
+        dic.update({hash_url: url})
+        return dic
+
+
+dic = {}
+while len(dic) != 3:
+    print(cash_web(input('Введите url-адрес: ')))
