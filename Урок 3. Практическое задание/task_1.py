@@ -19,3 +19,51 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+from time import time
+from datetime import timedelta
+
+import random
+
+
+def log_time(func):  # O(1)
+    def wrapper(*args, **kwargs):
+        start_time = time()
+        result = func(*args, **kwargs)
+        end_time = time()
+        print(f"Время выполнения ф-ции {func.__name__} составило: {timedelta(seconds=end_time - start_time)}")
+        return result
+    return wrapper
+
+
+@log_time
+def full_list(count):
+    new_list = []
+    for idx in range(count):
+        new_list.append(random.randint(0, 100))
+
+@log_time
+def fill_list(count):  # O(n)
+    new_list = [random.randint(0, 100) for _ in range(count)]
+
+@log_time
+def fill_dict(count):  # O(n)
+    return {idx: random.randint(0, 100) for idx in range(count)}
+
+
+full_list(100000)
+fill_list(100000)
+fill_dict(100000)
+
+'''
+Время выполнения ф-ции full_list составило: 0:00:00.204481
+Время выполнения ф-ции fill_list составило: 0:00:00.139124
+Время выполнения ф-ции fill_dict составило: 0:00:00.179278
+
+При одинаковом числе элементов, быстрее всех заполнился словарь через генератор списков - List Comprehension, 
+далее по сложности заполнение словаря full_dict, 
+и самое долгое full_list, с доабвлением элемента в конец списка через append()
+
+'''
+
+# @log_time
+# def list_append(list):
