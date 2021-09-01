@@ -2,7 +2,6 @@
 5.	Вывести на экран коды и символы таблицы ASCII, начиная с символа
 под номером 32 и заканчивая 127-м включительно.
 Вывод выполнить в табличной форме: по десять пар "код-символ" в каждой строке.
-
 Пример:
 32 -   33 - ! 34 - " 35 - # 36 - $ 37 - % 38 - & 39 - ' 40 - ( 41 - )
 42 - * 43 - + 44 - , 45 - - 46 - . 47 - / 48 - 0 49 - 1 50 - 2 51 - 3
@@ -14,10 +13,35 @@
 102 - f 103 - g 104 - h 105 - i 106 - j 107 - k 108 - l 109 - m 110 - n 111 - o
 112 - p 113 - q 114 - r 115 - s 116 - t 117 - u 118 - v 119 - w 120 - x 121 - y
 122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
-
 Подсказка:
 Допускается исп-е встроенных ф-ций, в частности, chr()
-
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sim(first_, last_, sim_per_line, pos=0):
+    """Функция возвращает таблицу кодов символов и самих символов
+    от first_ до last_ по sim_per_line в линию"""
+    res = f'{first_} - {chr(first_)} '
+    if pos // sim_per_line:
+        res = '\n' + res
+        pos = 0
+    if first_ == last_:
+        return res
+    return res + sim(first_ + 1, last_, sim_per_line, pos + 1)
+
+
+print(sim(32, 127, 10))
+
+def codes(first_num, string_):
+    if first_num > 127:
+        return string_
+    else:
+        if first_num % 10 == 1:
+            return codes(first_num + 1, string_ + f'{first_num} - {chr(first_num)} \n')
+        else:
+            return codes(first_num + 1, string_ + f'{first_num} - {chr(first_num)} ')
+
+
+print(codes(32, ''))
