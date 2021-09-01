@@ -6,15 +6,12 @@
 в качестве знака операции. Если пользователь вводит неверный знак
 (не '0', '+', '-', '*', '/'), то программа должна сообщать ему об ошибке и
 снова запрашивать знак операции.
-
 Также сообщать пользователю о невозможности деления на ноль,
 если он ввел 0 в качестве делителя.
-
 Подсказка:
 Вариант исполнения:
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
-
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
 Введите первое число: 214
@@ -24,7 +21,49 @@
 Введите первое число: вп
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
-
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    return x / y
+
+def calc():
+    try:
+        choice = input('Enter choice(+, -, *, / or 0 for exit): ')
+
+        while choice != '0':
+            num1 = float(input('Enter first number: '))
+            num2 = float(input('Enter second number: '))
+            try:
+                if choice == '+':
+                    print(num1, "+", num2, "=", add(num1, num2))
+                    return calc()
+                elif choice == '-':
+                    print(num1, "-", num2, "=", subtract(num1, num2))
+                    return calc()
+                elif choice == '*':
+                    print(num1, "*", num2, "=", multiply(num1, num2))
+                    return calc()
+                elif choice == '/':
+                    print(num1, "/", num2, "=", divide(num1, num2))
+                    return calc()
+            except ZeroDivisionError:
+                print()
+
+        return 'Good Bye'
+    except KeyError:
+        print('Error wrong operation')
+        return calc()
+
+
+print(calc())
