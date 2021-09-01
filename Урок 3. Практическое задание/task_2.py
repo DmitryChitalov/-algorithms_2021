@@ -20,3 +20,40 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+
+
+def check_user(user):
+    with open('db.txt') as f:
+        user_list = {line.strip('\n').split(':').pop(0): line.strip('\n').split(':').pop(1) for line in f}
+        if user_list.get(user) is None:
+            return user
+        else:
+            user_password = input('Вы уже есть в базе, введите пароль: ')
+            if user_list.get(user) == hashlib.sha256(user.encode() + user_password.encode()).hexdigest():
+                print('Успешная авторизация')
+            else:
+                print('Пароль введен неверно')
+
+
+def add_bd_user(user_login, hash_password):
+    with open('db.txt', 'a') as f:
+        f.write(f'\n{user_login}:{hash_password}')
+        print(f'Операция завершилась успешно. В базе данных хранится строка: {hash_password}')
+
+    if hashlib.sha256(user_login.encode() + input('Введите пароль повторно: ').encode()).hexdigest() == hash_password:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Пароли не совпадают')
+
+
+def reg_user():
+    user_login = check_user(input('Введите логин: '))
+    if user_login is not None:
+        user_password = input('Введите пароль: ')
+        hash_password = hashlib.sha256(user_login.encode() + user_password.encode()).hexdigest()
+        add_bd_user(user_login, hash_password)
+
+
+reg_user()
+

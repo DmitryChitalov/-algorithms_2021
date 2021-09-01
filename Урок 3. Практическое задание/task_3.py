@@ -16,3 +16,17 @@
 р
 а
 """
+
+
+def find_substring(user_string):
+    substring = set()
+    for i in range(len(user_string)):
+        for j in range(i + 1, len(user_string) + 1):
+            if user_string[i:j] != user_string:
+                substring.add(hash(user_string[i:j]))
+    print(f'{substring}')
+    print(f'{user_string} - {len(substring)} уникальных подстрок.')
+
+
+u_string = 'papa'
+find_substring(u_string)
