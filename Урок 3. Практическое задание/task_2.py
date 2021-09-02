@@ -20,8 +20,53 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
 
-def do_smth():
-    login = input("Введите пароль: ")
+# список все алгоритмов, доступных в системе
+# print(hashlib.algorithms_available)
+# существующие алгоритмы модуля
+# print(hashlib.algorithms_guaranteed)
 
-    return login, hash_smth
+
+salt = 'do crazy stuff'
+filename = 'saved_pass.txt'
+
+
+def save_to_file(hash):
+    # open(filename, "x")
+    with open(filename, "r+") as f:
+        data = f.read()
+        print(data)
+        f.seek(0)
+        f.write(str(hash))
+        # f.truncate()
+        print(data)
+
+def ask_password():
+    hash_pass = hashlib.sha256(input("Введите пароль: ").encode() + salt.encode())
+    save_to_file(hash_pass)
+    return hash_pass
+
+def read_file():
+    with open(filename, "r") as f:
+        data = str(f.read())
+        print("Data in file:", data)
+        # f.seek(0)
+        return data
+
+
+def ask_password_again():
+    hash_1 = read_file()
+    hash_2 = hashlib.sha256(input("Введите пароль повторно   : ").encode() + salt.encode())
+    print(hash_1, hash_2)
+    print(type(hash_1), type(hash_2))
+    if str(hash_2) == hash_1:
+        print("Вы ввели правильный пароль")
+    else:
+        print("Пароли отличаются!")
+
+
+# print(f'Созданный хеш: {ask_password()}')
+
+ask_password()
+ask_password_again()
