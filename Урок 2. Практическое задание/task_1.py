@@ -50,7 +50,7 @@ def calc_2_num():
                 except ZeroDivisionError:
                     print('Деление на 0. Не в это раз...')
         except ValueError:
-            print('В следующей раз рекомендуем ввести число!')
+            print('В следующий раз рекомендуем ввести число!')
         return calc_2_num()
 
 

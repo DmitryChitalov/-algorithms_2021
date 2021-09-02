@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from math import pow
+
+
+def sum_n(n):
+    if n == 1:
+        return 1
+    else:
+        result = (1 / (pow(2, (n - 1))) * pow(-1, (n-1)))
+        return result + sum_n(n - 1)
+
+
+num = int(input('Введите число элемнтов последовательности: '))
+print(sum_n(num))
+# print(sum_n(3))
+# print(sum_n(2))
+# print(sum_n(1))
