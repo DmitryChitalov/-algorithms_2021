@@ -30,17 +30,22 @@ def password_hash(password, salt='соль'):
     return sha256(salt.encode() + password.encode()).hexdigest()
 
 
-password = input("Введиде пароль")
+def getting_password():
+    """
+    Функция запроса пароля
+    """
+
+    password = input("Введиде пароль")
+    return password
+
 
 with open('passwords.txt', 'w') as f:
-    f.write(password_hash(password))
-
-password_double = input("Введиде пароль повторно")
+    f.write(password_hash(getting_password()))
 
 with open('passwords.txt', 'r') as f:
     password_in_file = f.read()
 
-if password_hash(password_double) == password_in_file:
+if password_hash(getting_password()) == password_in_file:
     print("Вы ввели правильный пароль")
 else:
     print("Вы ввели не правильный пароль")
