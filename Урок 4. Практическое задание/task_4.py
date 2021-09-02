@@ -12,6 +12,8 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +41,28 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    '''
+    ускорение состоит в том, что проход идет не по исходному списку, а сразу по уникальному
+    множеству. для извлечения количества записей в списке используется оптимизированная
+    функция count()
+    '''
+    numbers = set(array)
+    max_val = None
+    max_num = None
+    for number in numbers:
+        cnt = array.count(number)
+        if max_val is None or cnt > max_val:
+            max_val = cnt
+            max_num = number
+    return f'Чаще всего встречается число {max_num}, ' \
+           f'оно появилось в массиве {max_val} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1", globals=globals()))
+print(timeit("func_2", globals=globals()))
+print(timeit("func_3", globals=globals()))

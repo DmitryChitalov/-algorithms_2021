@@ -52,7 +52,9 @@ def memoize(f):
             return cache[args]
         else:
             cache[args] = f(*args)
+            print(cache)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +81,11 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+'''
+В рамках одного запуска значения аргументов в кэше уникально.
+Но при нескольких запусках функции словарь кэша не обнуляется,
+следовательно при определенном совпадении эти значения могут быть использованы при 
+следующем запуске функции.
+Если запусков будет довольно много, то мемоизация целесообразна.
+'''
