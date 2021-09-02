@@ -49,3 +49,5 @@ if password_hash(getting_password()) == password_in_file:
     print("Вы ввели правильный пароль")
 else:
     print("Вы ввели не правильный пароль")
+
+
