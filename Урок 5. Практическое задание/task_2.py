@@ -63,7 +63,7 @@ class HexNumber:
         return list(hex(self.number * other.number))
 
 if __name__ == '__main__':
-    #print(hex_calc())
+    print(hex_calc())
 
     a1 = HexNumber('A2')
     a2 = HexNumber('C4F')
