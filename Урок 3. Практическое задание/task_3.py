@@ -16,3 +16,19 @@
 р
 а
 """
+
+import hashlib
+
+text = 'abcabc'
+sub_str = []
+sub_str_hash = set()
+for i in range(len(text)):
+    for j in range(i + 1, len(text) + 1):
+        if text[i:j] != text:
+            sub_str.append(text[i:j])
+print(f'Все подстроки: {sub_str}')
+print(f'Количество подстрок = {len(sub_str)}')
+for el in sub_str:
+    sub_str_hash.add(hashlib.sha256(el.encode()).hexdigest())
+print(f'Количество уникальных подстрок = {len(sub_str_hash)}')
+
