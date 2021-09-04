@@ -16,6 +16,11 @@
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
 
+import timeit
+
+
+nums = [i for i in range(10000)]
+
 
 def func_1(nums):
     new_arr = []
@@ -23,3 +28,18 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+print(timeit.timeit('func_1(nums)', globals=globals(), number=1000))
+
+
+def mod_func_1(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+print(timeit.timeit('mod_func_1(nums)', globals=globals(), number=1000))
+
+"""
+Вывод: Для оптимизации кода стоит использовать list comprehension, согласно замерам это снизит время его выполнения 
+приблизительно на 20 %.
+"""
