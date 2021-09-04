@@ -16,3 +16,18 @@
 р
 а
 """
+
+uniq_string = ""
+
+
+def substring(string):
+    for i in range(len(string)):
+        for j in range(i, len(string)):
+            if not string[i:j + 1] == string:
+                uniq_string.add(hash(string[i:j + 1]))
+    return f'{string} - {len(uniq_string)} подстрок'
+
+
+string = "papa"
+uniq_string = set(uniq_string)
+print(substring(string))
