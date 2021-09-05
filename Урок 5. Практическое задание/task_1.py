@@ -42,19 +42,23 @@ def company(valued):
         dic.update({named: all_info.income_for_1_year})
         valued -= 1
 
-    lst_max = []
-    lst_min = []
-    for value in dic.values():
+    str_max = ''
+    str_min = ''
+    for key, value in dic.items():
         if value > round(sum(dic.values())/2):
-            lst_max.append()
+            if len(str_max) != 0:
+                str_max = str_max + f', {key}'
+            else:
+                str_max = str_max + key
         else:
-            lst_min.append(value)
+            if len(str_min) != 0:
+                str_min = str_min + f', {key}'
+            else:
+                str_min = str_min + key
 
-    return print(lst_max, lst_min)
+    return f'Средняя годовая прибыль всех предприятий: {round(sum(dic.values()) / 2)}\n' \
+           f'Предприятия, с прибылью выше среднего значения: {str_max}\n' \
+           f'Предприятия, с прибылью ниже среднего значения: {str_min}'
 
 
 print(company(int(input('Введите количество предприятий для расчета прибыли: '))))
-
-# return f'Средняя годовая прибыль всех предприятий: {round(sum(dic.values()) / 2)}\n' \
-#        f'Предприятия, с прибылью выше среднего значения: {value}\n' \
-#        f'Предприятия, с прибылью ниже среднего значения: {value}'

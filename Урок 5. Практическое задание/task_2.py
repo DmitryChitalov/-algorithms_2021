@@ -20,17 +20,36 @@ __add__
 Сумма чисел из примера: [‘C’, ‘F’, ‘1’]
 Произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
 
+
 1. вариант
 defaultdict(list)
 int(, 16)
 reduce
-
-2. вариант
-class HexNumber:
-    __add__
-    __mul__
-
-hx = HexNumber
-hx + hx
-hex()
+defaultdict(list)
 """
+#Проблема defaultdict в том, что, вдруг пользователь введет 2 одинаковых числа, тогда defaultdict запишет под один
+#ключ(так как числа одинаковые) 2 значения.
+import collections
+from functools import reduce
+
+
+defdict = collections.defaultdict(list)
+
+
+def reducer_func(el_prev, el):
+    # el_prev — предшествующий элемент
+    # el — текущий элемент
+    return el_prev + el
+
+
+user = input('Введите 2 шестнадцатиричных числа: ').split()
+
+defdict[user[0]].append(list(user[0]))
+defdict[user[1]].append(list(user[1]))
+
+for value in defdict.values():
+    for i in range(len(value)):
+        # print(list(hex(int(value[i][i], 16))))
+        print(reduce(reducer_func, list(hex(int(value[i][i], 16)).upper())))
+
+print(defdict)
