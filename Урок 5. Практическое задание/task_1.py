@@ -23,3 +23,58 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import namedtuple
+
+
+def enter_number(quarter):
+    try:
+        val = abs(int(input(f'Please enter profit {quarter} quarter\n')))
+    except ValueError:
+        print("Error: you've entered incorrect value")
+        return enter_number(quarter)
+    return val
+
+
+def profit():
+    cnt = 1
+    number = []
+    for i in range(4):
+        number.append(enter_number(cnt))
+        cnt += 1
+    return number
+
+
+def cnt_company():
+    try:
+        cnt = abs(int(input('Enter the number of companies to calculate profit\n')))
+    except ValueError:
+        print("Error: you've entered incorrect value")
+        return cnt_company()
+    return cnt
+
+
+def company():
+    cnt = cnt_company()
+    cases = {}
+    avr_profit = 0
+    for i in range(cnt):
+        name = input('Please enter name of company\n')
+        profit_firm = profit()
+        companies = namedtuple(f'{name}', 'first, second, third, fourth')
+        case = companies(first=profit_firm[0], second=profit_firm[1], third=profit_firm[2], fourth=profit_firm[3])
+        cases[name] = case
+    for i in cases.values():
+        avr_profit += sum(i)
+    avr_profit /= cnt
+    print(f'Average profit of companies: {avr_profit}')
+    for key, val in cases.items():
+        if sum(val) > avr_profit:
+            print(f'Companies with above average profit: {key}')
+    for key, val in cases.items():
+        if sum(val) < avr_profit:
+            print(f'Companies with below average profit: {key}')
+
+
+company()

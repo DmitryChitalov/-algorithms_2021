@@ -34,3 +34,35 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+from collections import defaultdict
+
+
+a = 'A2'
+b = 'C4F'
+def_dict = defaultdict(list)
+def_dict[a] = list(a)
+def_dict[b] = list(b)
+x = int(''.join((str(i) for i in def_dict[a])), 16) + int(''.join((str(i) for i in def_dict[b])), 16)
+y = int(''.join((str(i) for i in def_dict[a])), 16) * int(''.join((str(i) for i in def_dict[b])), 16)
+def_dict['sum'] = list(hex(x).upper())[2:]
+def_dict['mul'] = list(hex(y).upper())[2:]
+print(def_dict)
+
+
+class HexNumber:
+    def __init__(self, vol):
+        self.vol = vol
+
+    def __add__(self, other):
+        return hex(int(self.vol, 16) + int(other.vol, 16)).upper()[2:]
+
+    def __mul__(self, other):
+        return hex(int(self.vol, 16) * int(other.vol, 16)).upper()[2:]
+
+
+vol_1 = HexNumber('A2')
+vol_2 = HexNumber('C4F')
+print(f'sum = {vol_1 + vol_2}')
+print(f'mul = {vol_1 * vol_2}')
