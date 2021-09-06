@@ -35,27 +35,24 @@ hx + hx
 hex()
 """
 
-from collections import defaultdict
+
+class HexNumber:
+    def __init__(self, val: str):
+        self.val = val
+
+    def __add__(self, other):
+        return HexNumber(hex(int(self.val, 16) + int(other.val, 16)))
+
+    def __mul__(self, other):
+        return HexNumber(hex(int(self.val, 16) * int(other.val, 16)))
+
+    def __repr__(self):
+        return str(self.val)[2:]
 
 
-def hex_sum(numbers):
-    my_sum = 0
-    for val in numbers.values():
-        my_sum += int(''.join(val), 16)
-    return str(hex(my_sum))[2:]
-
-
-def hex_mult(numbers):
-    my_mult = 1
-    for val in numbers.values():
-        my_mult *= int(''.join(val), 16)
-    return str(hex(my_mult))[2:]
-
-
-numbers = defaultdict(list)
 fst_num, sec_num = input("Введите два шестнадцатиричных числа через пробел: ").split()
-numbers[fst_num] = list(fst_num)
-numbers[sec_num] = list(sec_num)
+num_1 = HexNumber(fst_num)
+num_2 = HexNumber(sec_num)
 
-print(f'Сумма введённых чисел равна {list(hex_sum(numbers))}')
-print(f'Произведение введённых чисел равно {list(hex_mult(numbers))}')
+print(f'Сумма введённых чисел равна {list(str(num_1 + num_2))}')
+print(f'Произведение введённых чисел равно {list(str(num_1 * num_2))}')
