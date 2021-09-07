@@ -35,36 +35,33 @@ filename = 'saved_pass.txt'
 def save_to_file(hash):
     # open(filename, "x")
     with open(filename, "r+") as f:
-        data = f.read()
-        print(data)
         f.seek(0)
         f.write(str(hash))
-        # f.truncate()
-        print(data)
 
 def ask_password():
     hash_pass = hashlib.sha256(input("Введите пароль: ").encode() + salt.encode())
-    save_to_file(hash_pass)
+    save_to_file(hash_pass.hexdigest())
     return hash_pass
 
 def read_file():
     with open(filename, "r") as f:
         data = str(f.read())
-        print("Data in file:", data)
-        # f.seek(0)
+        # print("Data in file:", data)
         return data
 
 
 def ask_password_again():
     hash_1 = read_file()
     hash_2 = hashlib.sha256(input("Введите пароль повторно   : ").encode() + salt.encode())
-    print(hash_1, hash_2)
-    print(type(hash_1), type(hash_2))
-    if str(hash_2) == hash_1:
+    print(f'{hash_1} , \n{hash_2.hexdigest()}')
+    # print(type(hash_1), type(hash_2))
+    if str(hash_2.hexdigest()) == hash_1:
         print("Вы ввели правильный пароль")
     else:
         print("Пароли отличаются!")
 
+# попробуйте сделать так - В ф-ии ask_password() добавте в строку
+# save_to_file(hash_pass.hexdigest()) , а в def ask_password_again() - if str(hash_2.hexdigest()) == hash_1
 
 # print(f'Созданный хеш: {ask_password()}')
 
