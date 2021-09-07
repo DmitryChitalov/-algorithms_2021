@@ -35,4 +35,23 @@ hx + hx
 hex()
 """
 
+from collections import defaultdict
 
+
+def multiplication_and_sum():
+    numbers = defaultdict(list)
+    first_num, second_num = input('Введите два шестнадцатиричных числа: ').split()
+    numbers[first_num] = list(first_num)
+    numbers[second_num] = list(second_num)
+    my_sum = 0
+    my_multiplication = 1
+
+    for i in numbers.values():
+        my_sum += (int(''.join(i), 16))
+        my_multiplication *= int(''.join(i), 16)
+
+    print(f'Сумма введенных чисел: {list(str(hex(my_sum)).upper()[2:])}')
+    print(f'Произведение введенных чисел: {list(str(hex(my_multiplication)).upper()[2:])}')
+
+
+multiplication_and_sum()
