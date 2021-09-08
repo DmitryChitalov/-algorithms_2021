@@ -2,7 +2,6 @@
 5.	Вывести на экран коды и символы таблицы ASCII, начиная с символа
 под номером 32 и заканчивая 127-м включительно.
 Вывод выполнить в табличной форме: по десять пар "код-символ" в каждой строке.
-
 Пример:
 32 -   33 - ! 34 - " 35 - # 36 - $ 37 - % 38 - & 39 - ' 40 - ( 41 - )
 42 - * 43 - + 44 - , 45 - - 46 - . 47 - / 48 - 0 49 - 1 50 - 2 51 - 3
@@ -14,10 +13,27 @@
 102 - f 103 - g 104 - h 105 - i 106 - j 107 - k 108 - l 109 - m 110 - n 111 - o
 112 - p 113 - q 114 - r 115 - s 116 - t 117 - u 118 - v 119 - w 120 - x 121 - y
 122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
-
 Подсказка:
 Допускается исп-е встроенных ф-ций, в частности, chr()
-
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def write_symbols(current_number = 32, help_str = '' , curent_column = 1 ,end_number = 127):
+    if curent_column == 10:
+        help_str += str(current_number) + ' - ' + chr(current_number) + ' '
+        print(help_str)
+        current_number += 1
+        write_symbols(current_number)
+    elif current_number == end_number:
+        help_str += str(current_number) + ' - ' + chr(current_number) + ' '
+        print(help_str)
+        return
+    else:
+        help_str += str(current_number) + ' - ' + chr(current_number) + ' '
+        current_number +=1
+        curent_column +=1
+        write_symbols(current_number, help_str, curent_column)
+
+
+write_symbols()
