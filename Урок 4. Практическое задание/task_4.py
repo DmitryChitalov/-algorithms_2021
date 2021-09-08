@@ -11,6 +11,8 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
+from collections import Counter
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +41,36 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    el = max(array, key=lambda num: array.count(num))
+    return f'Чаще всего встречается число {el}, ' \
+           f'оно появилось в массиве {array.count(el)} раз(а)'
+
+
+def func_4():
+    el = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {el[0][0]}, ' \
+           f'оно появилось в массиве {el[0][1]} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+print(timeit("func_1()", globals=globals()))
+print(timeit("func_2()", globals=globals()))
+print(timeit("func_3()", globals=globals()))
+print(timeit("func_4()", globals=globals()))
+
+
+"""
+Аналитика:
+
+Самая быстрая функция - func_1, т.к. используется цикл и значения сохраняются в переменные. 
+Функция func_2 медленней из-за создания массива и использования функции max() + цикл.
+Функция func_3 медленная за счёт max() + lambda в параметре, но лаконичная. 
+Функция func_4 самая медленная.
+
+
+
+"""

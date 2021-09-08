@@ -13,6 +13,7 @@
 
 from timeit import timeit
 from random import randint
+from cProfile import run
 
 
 def recursive_reverse(number):
@@ -41,6 +42,10 @@ print(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
         number=10000))
+
+run("recursive_reverse(num_100)")
+run("recursive_reverse(num_1000)")
+run("recursive_reverse(num_10000)")
 
 
 def memoize(f):
@@ -79,3 +84,19 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+run('recursive_reverse_mem(num_100)')
+run('recursive_reverse_mem(num_1000)')
+run('recursive_reverse_mem(num_10000)')
+
+"""
+Аналитика:
+
+Функция с мемоизацией эффективней т.к. с увеличением числа, передаваемого аргументом в функцию, количество вызовов 
+функции не меняется, а при обычной рекурсии при увеличении числа, передаваемого аргументом в функцию, количество 
+вызовов функции растёт сильно.
+Однако функция с мемоизацией будет использовать много оперативной памяти для сохранения кэша.
+
+"""
+
+
