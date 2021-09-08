@@ -34,3 +34,50 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+# Решение с помощью ООП:
+class HexNumber:
+    def __init__(self, val):
+        self.val = val
+
+    def __str__(self):
+        return str(self.val)[2:]
+
+    def __add__(self, other):
+        return HexNumber(hex(int(self.val, 16) + int(other.val, 16)))
+
+    def __mul__(self, other):
+        return HexNumber(hex(int(self.val, 16) * int(other.val, 16)))
+
+
+num_1 = HexNumber(input("Введите 1-е шестнадцатиричное число: "))
+num_2 = HexNumber(input("Введите 2-е шестнадцатиричное число: "))
+print(f'Сумма чисел из примера: {list(str(num_1 + num_2).upper())}')
+print(f'Произведение - {list(str(num_1 * num_2).upper())}')
+
+# Решение с помощью коллекций:
+from collections import defaultdict
+
+
+def hexsumm(dic):
+    res = 0
+    for key in dic.keys():
+        res += int(key, 16)
+    return hex(res)[2:]
+
+
+def hexmul(dic):
+    res = 1
+    for key in dic.keys():
+        res *= int(key, 16)
+    return hex(res)[2:]
+
+
+num_1 = input("Введите 1-е шестнадцатиричное число: ")
+num_2 = input("Введите 2-е шестнадцатиричное число: ")
+nums = defaultdict(list)
+nums[num_1] = list(num_1)
+nums[num_2] = list(num_2)
+print(f'Сумма чисел из примера: {list(hexsumm(nums).upper())}')
+print(f'Произведение - {list(hexmul(nums).upper())}')
