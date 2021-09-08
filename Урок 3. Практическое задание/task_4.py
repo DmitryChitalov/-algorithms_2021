@@ -12,3 +12,15 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+salt = 'do crazy stuff'
+
+import hashlib
+
+dict_kesh = {}
+def func(url):
+    hash_url = hashlib.sha256(url.encode() + salt.encode())
+    if hash_url not in dict_kesh:
+        dict_kesh[hash_url] = url
+
+url = 'https://gb.ru/lessons/158162'
+func(url)

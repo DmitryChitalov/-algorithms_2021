@@ -52,7 +52,7 @@ def read_file():
 
 def ask_password_again():
     hash_1 = read_file()
-    hash_2 = hashlib.sha256(input("Введите пароль повторно   : ").encode() + salt.encode())
+    hash_2 = hashlib.sha256(input("Введите пароль повторно: ").encode() + salt.encode())
     print(f'{hash_1} , \n{hash_2.hexdigest()}')
     # print(type(hash_1), type(hash_2))
     if str(hash_2.hexdigest()) == hash_1:
