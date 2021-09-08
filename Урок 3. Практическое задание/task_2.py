@@ -36,8 +36,8 @@ def user_password(pas, salt, db):
 
 user_password(password, sal, pass_db)
 
-pass_check = input("Введите пароль еще раз для проверки: ").encode('utf-8')
-user_password(pass_check, sal, pass_db)
+password = input("Введите пароль еще раз для проверки: ").encode('utf-8')
+user_password(password, sal, pass_db)
 pass_db.close()
 
 check = open('hash_file_lesson_3.txt', 'r')

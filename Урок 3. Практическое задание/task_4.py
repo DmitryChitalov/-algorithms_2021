@@ -15,25 +15,26 @@
 import hashlib
 from uuid import uuid4
 
+salt = uuid4().hex
 
 class WebCash:
     def __init__(self):
         self.urls = {}
 
     def hash_1(self, url):
-        salt = uuid4().hex
         hash_u = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
-        return hash_u
+        if self.urls.get(hash_u):
+            print(f"{url} уже существует")
+        else:
+            self.urls[hash_u] = url
 
-    def cash_1(self, url):
-        hash_u = self.hash_1(url)
-        self.urls.setdefault(url, hash_u)
+    def cash_1(self):
+        for key, value in self.urls.items():
+            print(f"{key} : {value}")
 
 
-url_1 = 'https://gb.ru/education'
+url_1 = WebCash()
 
-url_check = WebCash()
+url_1.hash_1('https://gb.ru/education')
 
-url_check.cash_1(url_1)
-
-print(url_check.urls)
+url_1.cash_1()
