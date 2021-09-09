@@ -40,3 +40,25 @@ for i in
 
 
 """
+import random
+from statistics import median
+
+
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+M = int(input("Введите число M: "))
+orig_list = [random.randint(0, 100) for _ in range(2 * M + 1)]
+print(orig_list)
+sort_list = shell(orig_list[:])
+print('медиана из сортировки', sort_list[M])
+print('медиана из статистики', median(orig_list))
