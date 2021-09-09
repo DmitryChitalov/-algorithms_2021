@@ -23,3 +23,44 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def average_annual_income():
+    count = int(input('Введите количество предприятий для расчета прибыли: '))
+    INFO = namedtuple('Company', 'name income')
+    aver_ann_inc = {}
+    total_aver = 0
+    higher_inc = []
+    lower_inc = []
+    aver_inc = []
+    for i in range(count):
+        COMP_INFO = INFO(
+            name=input('Введите название предприятия: '),
+            income=input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+        )
+
+        aver_ann_inc[COMP_INFO.name] = \
+            (int(COMP_INFO.income.split(' ')[0]) + int(COMP_INFO.income.split(' ')[1])
+             + int(COMP_INFO.income.split(' ')[2]) + int(COMP_INFO.income.split(' ')[3])) / 4
+
+    for val in aver_ann_inc.values():
+        total_aver += val
+    total_aver = total_aver / count
+
+    print(f'Средняя годовая прибыль всех предприятий: {total_aver}')
+
+    for k, v in aver_ann_inc.items():
+        if v > total_aver:
+            higher_inc.append(k)
+        elif v < total_aver:
+            lower_inc.append(k)
+        else:
+            aver_inc.append(k)
+
+    print(f'Предприятия, с прибылью выше среднего значения: {higher_inc}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {lower_inc}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {aver_inc}')
+
+
+average_annual_income()
