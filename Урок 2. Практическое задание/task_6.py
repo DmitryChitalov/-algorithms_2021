@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def recursion(n, tries=10):
+    res = int(input('Введите число: '))
+    if res < n:
+        print('Больше')
+    elif res > n:
+        print('Меньше')
+    else:
+        return 'Поздравляю! Вы угадали!'
+    if tries == 1:
+        return f'Вы проиграли, загаданное число - {n}'
+    return recursion(n, tries - 1)
+
+
+number = randint(1, 100)
+print(recursion(number))
