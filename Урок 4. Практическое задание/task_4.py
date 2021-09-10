@@ -12,14 +12,17 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
+# Функция находит число и количество его вхождений в список. Затем сравнивает с количеством вхождений других чисел.
 def func_1():
     m = 0
     num = 0
-    for i in array:
-        count = array.count(i)
+    for i in array:  # O(n)
+        count = array.count(i)  # O(n)
         if count > m:
             m = count
             num = i
@@ -27,10 +30,13 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
+# Функция сначала создаёт список из количества вхождений каждого числа, потом находит максимальное число вхождений и
+# по этому числу находит элемент из исходного списка. Сложность func_1() и func_2() одинаковая, но func_2() тратит
+# время на добавление элементов в новый массив.
 def func_2():
     new_array = []
-    for el in array:
-        count2 = array.count(el)
+    for el in array:  # O(n)
+        count2 = array.count(el)  # O(n)
         new_array.append(count2)
 
     max_2 = max(new_array)
@@ -39,5 +45,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+# Используется встроенная функция max() с минимальным количеством операций. Поэтому скорость выполнения самая высокая.
+def func_3():
+    num = max(array, key=array.count)
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {array.count(num)} раз(а)'
+
+
 print(func_1())
+print(timeit("func_1()", globals=globals()))
+
 print(func_2())
+print(timeit("func_2()", globals=globals()))
+
+print(func_3())
+print(timeit("func_3()", globals=globals()))
+
+"""
+func_1()    1.3210208 seconds
+func_2()    1.6749252 seconds
+func_3()    1.2479318 seconds
+"""
