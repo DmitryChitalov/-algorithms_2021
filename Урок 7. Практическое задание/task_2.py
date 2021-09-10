@@ -56,13 +56,13 @@ def merge_sort(array):
 
 print(merge_sort(some_list[:]))
 
-print(timeit('merge_sort(some_list)',
+print(timeit('merge_sort(some_list[:])',
       setup='some_list = [random.random() * 50 for _ in range(0, 10)]', globals=globals(), number=1000))
 # 0.024291398000000353
-print(timeit('merge_sort(some_list)',
+print(timeit('merge_sort(some_list[:])',
       setup='some_list = [random.random() * 50 for _ in range(0, 100)]', globals=globals(), number=1000))
 # 0.4178041829999999
-print(timeit('merge_sort(some_list)',
+print(timeit('merge_sort(some_list[:])',
       setup='some_list = [random.random() * 50 for _ in range(0, 1000)]', globals=globals(), number=1000))
 # 6.016083912999999
 
