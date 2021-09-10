@@ -34,3 +34,4 @@ while url != '0':
     else:
         cache[hash_url] = url
         print(f'"{cache[hash_url]}" внесён в кэш.')
+

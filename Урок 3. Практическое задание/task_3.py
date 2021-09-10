@@ -31,3 +31,4 @@ print(f'Количество подстрок = {len(sub_str)}')
 for el in sub_str:
     sub_str_hash.add(hashlib.sha256(el.encode()).hexdigest())
 print(f'Количество уникальных подстрок = {len(sub_str_hash)}')
+

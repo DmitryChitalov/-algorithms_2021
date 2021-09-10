@@ -112,3 +112,4 @@ print(f'Добавление элемента словаря:\n{dict_add(new_dic
 print(f'Добавление элемента списка:\n{list_add(new_list, 2000)}{delimiter}')
 print(f'Удаление элемента словаря:\n{dict_del(new_dict, 2000)}{delimiter}')
 print(f'Удаление элемента списка:\n{list_del(new_list, 2000)}{delimiter}')
+
