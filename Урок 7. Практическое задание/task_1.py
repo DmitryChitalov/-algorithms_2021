@@ -46,8 +46,11 @@ def bubble_sort_improved(lst_obj):
     return lst_obj
 
 
+print(some_list)
+print(bubble_sort_improved(some_list[:]))
+
 print(timeit('bubble_sort(some_list[:])', globals=globals(), number=10000))  # 11.417191205
 print(timeit('bubble_sort_improved(some_list[:])', globals=globals(), number=10000))  # 11.78306
 
-# Смысла в данном улучшении нет, так как цикл прерывается только когда массив уже полностью отсорирован
+# Смысла в данном улучшении нет, так как цикл прерывается только когда массив уже полностью отсорирован,
 # вероятность этого близка к нулю
