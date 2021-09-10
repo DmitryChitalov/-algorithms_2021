@@ -40,3 +40,60 @@ for i in
 
 
 """
+import random
+from statistics import median
+from timeit import timeit
+
+# Решение с гномьей сортировкой
+m = int(input('Введите число: '))
+lst_obj = [random.randint(0, 100) for _ in range(0, 2 * m + 1)]
+print(lst_obj)
+
+
+def with_sort(lst):
+    data = lst
+
+    def gnome(data):
+        i, size = 1, len(data)
+        while i < size:
+            if data[i - 1] <= data[i]:
+                i += 1
+            else:
+                data[i - 1], data[i] = data[i], data[i - 1]
+                if i > 1:
+                    i -= 1
+        return data
+
+    gnome(data)
+    return data[m]
+
+
+print(with_sort(lst_obj))
+print(median(lst_obj))
+
+# Решение без сортировки исходного массива
+m = int(input('Введите число: '))
+lst_obj = [random.randint(0, 100) for _ in range(0, 2 * m + 1)]
+print(lst_obj)
+
+
+def my_median(lst):
+    i = 1
+    while i <= m:
+        lst.remove(max(lst))
+        i += 1
+    return max(lst)
+
+
+print(my_median(lst_obj[:]))
+print(median(lst_obj))
+
+print('С сортировкой')  # 0.796556029 Самое медленное время выполнения
+print(timeit('with_sort(lst[:])', setup='lst = [random.randint(0, 100) for _ in range(0, 2 * 10 + 1)]',
+             globals=globals(), number=10000))
+print('Без сортировки')  # 0.04169495400000045 Среднее время выполнения, более простой и читаемый код
+print(timeit('my_median(lst[:])', setup='lst = [random.randint(0, 100) for _ in range(0, 2 * 10 + 1)]',
+             globals=globals(), number=10000))
+print('Медиана')  # 0.014758260999999884 Оптимальный вариант, время выполнения кода минимально
+print(timeit('median(lst[:])', setup='lst = [random.randint(0, 100) for _ in range(0, 2 * 10 + 1)]',
+             globals=globals(), number=10000))
