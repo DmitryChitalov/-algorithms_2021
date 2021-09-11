@@ -40,3 +40,73 @@ for i in
 
 
 """
+
+import timeit
+import random
+from statistics import median
+m = int(input())
+orig_list = [random.randint(-100, 100) for _ in range(2 * m + 1)]
+
+
+def without_sorting(lst):
+    for _ in range(len(lst) // 2):
+        lst.remove(max(lst))
+    return max(lst)
+
+
+def heap(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+    if l < n and arr[i] < arr[l]:
+        largest = l
+    if r < n and arr[largest] < arr[r]:
+        largest = r
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heap(arr, n, largest)
+
+
+def heap_sort(arr):
+    n = len(arr)
+    for i in range(n, -1, -1):
+        heap(arr, n, i)
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heap(arr, i, 0)
+    return arr[m]
+
+
+print(without_sorting(orig_list[:]))
+print(heap_sort(orig_list[:]))
+print(median(orig_list[:]))
+print(
+    timeit.timeit(
+        "without_sorting(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+print(
+    timeit.timeit(
+        "heap_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+print(
+    timeit.timeit(
+        "median(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+"""
+Work time of the functions:
+                 | m = 5                 | m = 50                | m = 500
+without_sorting  | 0.002399700000001559  | 0.08377720000000011   | 7.881510299999999
+heap_sort        | 0.015935400000000044  | 0.25404410000000066   | 4.6418623
+median           | 0.0005316000000004095 | 0.0034479000000002813 | 0.08312399999999798
+"""
+"""
+Поиск медианы без сортировки более эффективен при малых входных данных,
+тогда как поиск через сортировку кучей будет быстрее при большом колличестве
+элементов в массиве. В данном примере при len(orig_list) > 800. 
+"""

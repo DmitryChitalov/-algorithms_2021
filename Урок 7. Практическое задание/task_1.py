@@ -17,3 +17,55 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+
+import timeit
+import random
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+# orig_list = sorted(orig_list, reverse=True)
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        x = 0
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                x += 1
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        if x == 0:
+            return lst_obj
+        n += 1
+    return lst_obj
+
+
+print(
+    timeit.timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+print(orig_list)
+print(bubble_sort(orig_list))
+
+"""
+Work time of the original version:
+
+sorted array                       |   unsorted array
+range(10) - 0.006143899999999997   |   0.008924800000000004
+range(100) - 0.3614471             |   0.9810443
+range(1000) - 39.2319552           |   75.1901219
+
+Work time of the update version:
+
+sorted array                       |   unsorted array
+range(10) - 0.0010862000000000024  |   0.0086141
+range(100) - 0.007624199999999998  |   0.9669119
+range(1000) - 0.0827794            |   75.3811226
+"""
+"""
+В доработке функции была добавлена проверка, если проход по массиву
+не разу не удовлетворил if условию (массив отсортирован изначалино)
+то "х" останеться False и функция вернет изначалиный вариант массива.
+И как видно из замеров доработка силино помогла если в функцию будет
+передан отсортированный массив, иначе время работы функции неизменится. 
+"""
