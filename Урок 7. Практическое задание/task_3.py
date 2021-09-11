@@ -40,3 +40,47 @@ for i in
 
 
 """
+
+import numpy as np
+from statistics import median
+import timeit
+
+
+def gnome(lst):
+    i, size = 1, len(lst)
+    while i < size:
+        if lst[i - 1] <= lst[i]:
+            i += 1
+        else:
+            lst[i - 1], lst[i] = lst[i], lst[i - 1]
+            if i > 1:
+                i -= 1
+    return lst
+
+
+def get_mediana(lst):
+    [lst.remove(max(lst)) for _ in range(len(lst) // 2)]
+    return max(lst)
+
+
+m = int(input('Введите параметр m: '))
+arr = np.random.randint(0, 100, 2 * m + 1)
+print(arr)
+print(f'Медиана from statistics = {median(arr)}')
+arr2 = gnome(arr.tolist())
+print(f'Медиана после гномьей сортировки = {arr2[m]}')
+print(f'Медиана без сортировки = {get_mediana(arr.tolist())}')
+print('Замеры:')
+print(
+    f'Медиана определенная при помощи гномьей сортировки: {timeit.timeit("gnome(arr[:])", globals=globals(), number=10000)}')
+print(
+    f'Медиана определенная без сортировки: {timeit.timeit("get_mediana(arr[:].tolist())", globals=globals(), number=10000)}')
+
+# Результаты при m = 10:
+# Медиана определенная при помощи гномьей сортировки: 0.11803377300000006
+# Медиана определенная без сортировки: 0.16317730699999977
+# Результаты при m = 100:
+# Медиана определенная при помощи гномьей сортировки: 0.9974919
+# Медиана определенная без сортировки: 9.440666997000001
+# Определение медианы быстрее с помощью сортировки, при том, что гномья сортировка не самая быстрая,
+# особенно на большом количестве элементов
