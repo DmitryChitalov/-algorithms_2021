@@ -42,7 +42,7 @@ for i in
 """
 from statistics import median
 from random import randint
-
+from timeit import timeit
 
 def find_median(Arr):
     stat_median = median(Arr)
@@ -89,9 +89,12 @@ if __name__ == '__main__':
         if not median(TEST) == find_median(TEST) == heapSort(TEST)[size]:
             print('Ошибка')
 
-    size = int(input( ))
+    size = int(input('Введите размер массива:' ))
     TEST = [randint(-100, 100) for _ in range(2 * size + 1)]
 
     print(median(TEST[:]))
+    print(timeit('median(TEST[:])', globals=globals(), number=1000))    # 0.008326000000000056
     print(find_median(TEST[:]))
+    print(timeit('find_median(TEST[:])', globals=globals(), number=1000))   # 0.20960599999999996
     print(heapSort(TEST[:])[size])
+    print(timeit('heapSort(TEST[:])[size]', globals=globals(), number=1000))    # 0.4140047
