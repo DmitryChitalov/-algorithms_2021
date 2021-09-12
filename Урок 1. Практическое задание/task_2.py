@@ -19,3 +19,31 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+import random
+
+
+# O(n^2)
+def min_el_n2(l):
+    min = l[0]                  # O(1)
+    for i in range(len(l)):     # O(n)
+        for el in l:            # O(n)
+            if el < min:        # O(1)
+                min = el        # O(1)
+    return min                  # O(1)
+
+
+# O(n)
+def min_el_n(l):
+    min = l[0]                  # O(1)
+    for el in l:                # O(n)
+        if el < min:            # O(1)
+            min = el            # O(1)
+    return min                  # O(1)
+
+
+lst = random.sample(range(100), 20)
+print(lst)
+print(min_el_n2(lst))
+print(min_el_n(lst))

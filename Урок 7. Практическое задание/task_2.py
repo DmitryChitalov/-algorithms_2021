@@ -13,3 +13,55 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import timeit
+import random
+import operator
+
+
+def merge_sort(L, compare=operator.lt):
+    if len(L) < 2:
+        return L[:]
+    else:
+        middle = int(len(L) / 2)
+        left = merge_sort(L[:middle], compare)
+        right = merge_sort(L[middle:], compare)
+        return merge(left, right, compare)
+
+
+def merge(left, right, compare):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if compare(left[i], right[j]):
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    return result
+
+
+n = int(input('Введите число элементов: '))
+orig_list = [random.random() * 50 for _ in range(n)]
+print(f'Исходный - {orig_list}')
+print(f'Отсортированный - {merge_sort(orig_list[:])}')
+print(timeit.timeit("merge_sort(orig_list[:])", globals=globals(), number=1000))
+
+"""
+Введите число элементов: 10
+Исходный - [32.35434847117763, 2.8437389415399417, 39.94506160651452, 11.802926368219957, 11.901507574869747, 36.88469275522595, 30.76612038422919, 42.65220715640133, 43.78150338681021, 39.53637928871536]
+Отсортированный - [2.8437389415399417, 11.802926368219957, 11.901507574869747, 30.76612038422919, 32.35434847117763, 36.88469275522595, 39.53637928871536, 39.94506160651452, 42.65220715640133, 43.78150338681021]
+0.012445099999999876
+
+Введите число элементов: 100
+0.20440190000000014
+
+Введите число элементов: 1000
+2.9196286
+"""

@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursion(n, even=0, uneven=0):
+    if n % 2:
+        uneven += 1
+    else:
+        even += 1
+    return (f'Количество чётных и нечётных цифр в числе равно: '
+            f'{even, uneven}') if n < 10 else recursion(n // 10, even, uneven)
+
+
+number = int(input('Введите число: '))
+print(recursion(number))
