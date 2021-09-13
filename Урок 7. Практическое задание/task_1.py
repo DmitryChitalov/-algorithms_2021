@@ -48,7 +48,10 @@ print(ARR)
 print(bubble_sort_reverse(ARR))
 
 print(timeit("bubble_sort_reverse(ARR)", globals=globals()))    # 0.7598002
-print(timeit("bubble_non_flagged(ARR1)", globals=globals()))     # 3.5343288000000004
+print(timeit("bubble_non_flagged(ARR)", globals=globals()))     # 3.5343288000000004
+
+print(timeit("bubble_sort_reverse(ARR1[:])", globals=globals()))    # 5.420648900000001
+print(timeit("bubble_non_flagged(ARR1[:])", globals=globals()))     # 5.236858099999999
 """
 Даже на таком небольшом массиве мы видим, что установка флага позволяет ускорить сортировку в 5 раз.
 Если увеличить количество элементов массива до 100 и не изменять параметр 'number' функции timeit, 
@@ -56,4 +59,5 @@ print(timeit("bubble_non_flagged(ARR1)", globals=globals()))     # 3.53432880000
 что массив уже был ею отсортирован и продолжает совершать обходы.
 С другой стороны, вероятность того, что в реальной жизни нам попадется уже отсортированный массив данных стремится к 0,
 следовательно, на практике такая доработка не будет нести большого смысла.
+Оптимизация с флагом не улучшает результат для заранее не отсортированного массива.
 """

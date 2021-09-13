@@ -54,3 +54,16 @@ print(f'Отсортированный: {merge_sort(TEST_ARR)} \n'
       f'Время выполнения: {timeit("merge_sort(TEST_ARR[:])", globals=globals( ), number=100)}')
 
 print(merge_sort(TEST_ARR) == sorted(TEST_ARR))
+"""
+length = 10
+Время выполнения: 0.0010407999999999529
+
+length = 100
+Время выполнения: 0.01464410000000016
+
+length = 1000
+Время выполнения: 0.20396879999999995
+
+length = 10000
+Время выполнения: 2.7872477
+"""

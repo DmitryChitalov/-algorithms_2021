@@ -69,7 +69,7 @@ def heapify(arr, n, i):
         heapify(arr, n, largest)
 
 
-def heapSort(arr):
+def heap_sort(arr):
     n = len(arr)
 
     for i in range(n, -1, -1):
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     for i in range(100):
         size = randint(0, 100)
         TEST = [randint(-100, 100) for _ in range(2 * size + 1)]
-        if not median(TEST) == find_median(TEST) == heapSort(TEST)[size]:
+        if not median(TEST) == find_median(TEST) == heap_sort(TEST)[size]:
             print('Ошибка')
 
     size = int(input('Введите размер массива:' ))
@@ -96,5 +96,27 @@ if __name__ == '__main__':
     print(timeit('median(TEST[:])', globals=globals(), number=1000))    # 0.008326000000000056
     print(find_median(TEST[:]))
     print(timeit('find_median(TEST[:])', globals=globals(), number=1000))   # 0.20960599999999996
-    print(heapSort(TEST[:])[size])
-    print(timeit('heapSort(TEST[:])[size]', globals=globals(), number=1000))    # 0.4140047
+    print(heap_sort(TEST[:])[size])
+    print(timeit('heap_sort(TEST[:])[size]', globals=globals(), number=1000))    # 0.4140047
+
+"""
+m = 10
+median - 0.0006209999999999827
+find_median - 0.004766000000000048
+heap_sort - 0.025450399999999984
+
+m = 100
+median - 0.005480699999999894
+find_median - 0.20648179999999994
+heap_sort - 0.4035204000000001
+
+m = 1000
+median - 0.1449145999999999
+find_median - 20.301026900000004
+heap_sort - 6.271150500000001
+
+На рассмотренных размерах данных функция median модуля statistics была самой эффективной.
+На маленьких данных функция find_median показывала лучший результат, чем поиск медианы при помощи сортировки кучей.
+Однако по мере роста данных, количество перестановок, требуемое в find_median возрастает, следовательно, функция становится
+медленней.
+"""
