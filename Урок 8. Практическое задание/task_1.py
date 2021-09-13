@@ -89,6 +89,12 @@ def haffman_tree(s):
 
 
 def my_haffman_tree(s):
+    '''
+    переделал построение дерева с дека на обычнй список, получил скорость хоже на 20 процентов,
+    по памяти получилось так же на любой длине строки
+    0.1048603
+    0.1278903
+    '''
     counter = Counter(s)
     sorted_elements = list(sorted(counter.items(), key=lambda item: item[1]))
 
