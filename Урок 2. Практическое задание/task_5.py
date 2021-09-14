@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursion(n=32, length=10, step=1):
+    pair = f'{n} - {chr(n)} '
+    if step // length:
+        pair += '\n'
+        step = 0
+    return pair if n == 127 else pair + recursion(n + 1, length, step + 1)
+
+
+print(recursion())
