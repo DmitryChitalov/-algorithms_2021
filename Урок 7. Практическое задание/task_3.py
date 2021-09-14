@@ -40,3 +40,24 @@ for i in
 
 
 """
+
+import random
+
+m = int(input('Введите значение: '))
+
+random_list = [random.randint(0, 10) for i in range(2 * m + 1)]
+print(random_list)
+lst_max = []
+lst_min = []
+main = random_list.pop(m)
+print(random_list)
+print(main)
+
+for el in random_list:
+    if el > main:
+        lst_max.append(el)
+    elif el <= main:
+        lst_min.append(el)
+
+lst_min.append(main)
+print(lst_min + lst_max)
