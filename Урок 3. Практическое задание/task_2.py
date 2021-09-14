@@ -23,19 +23,29 @@
 import hashlib
 from uuid import uuid4
 
+salt = uuid4().hex
+
+
+def pass_hash():
+    passw = input('Введите пароль: ')
+    gen_hash = hashlib.sha256(salt.encode() + passw.encode('utf-8')).hexdigest()
+    return passw, gen_hash
+
+
+def pass_save():
+    hash_to_save = pass_hash()
+    hash_log = open("hash_log.txt", "w", encoding="utf-8")
+    hash_log.write(hash_to_save[1])
+    hash_log.close()
+
 
 def password_validator():
-    passw = input('Введите пароль: ')
-    salt = uuid4().hex
-    hash_log = open("hash_log.txt", "w", encoding="utf-8")
-    hash_log.write(hashlib.sha256(salt.encode() + passw.encode('utf-8')).hexdigest())
-    hash_log.close()
+    pass_save()
     try_count = 3
     while try_count != 0:
-        passw_2 = input('Введите пароль: ')
-        res_2 = hashlib.sha256(salt.encode() + passw_2.encode('utf-8')).hexdigest()
+        passw, hash_check = pass_hash()
         read = open("hash_log.txt", "r", encoding="utf-8")
-        if read.readline() == res_2:
+        if read.readline() == hash_check:
             print('Вы ввели правильный пароль!')
             read.close()
             break
