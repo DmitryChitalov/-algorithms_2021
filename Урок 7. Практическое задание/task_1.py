@@ -47,9 +47,9 @@ def bubble_reverse_sort_2(lst_obj):
     return lst_obj
 
 
-my_array_10 = [randrange(-100, 101) for _ in range(10)]
-my_array_100 = [randrange(-100, 101) for _ in range(100)]
-my_array_1000 = [randrange(-100, 101) for _ in range(1000)]
+my_array_10 = [randrange(-100, 100) for _ in range(10)]
+my_array_100 = [randrange(-100, 100) for _ in range(100)]
+my_array_1000 = [randrange(-100, 100) for _ in range(1000)]
 
 print('Исходный масив: ')
 print(my_array_10)
