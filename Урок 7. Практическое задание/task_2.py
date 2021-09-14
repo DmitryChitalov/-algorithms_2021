@@ -13,3 +13,57 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+from timeit import timeit
+from random import uniform
+
+
+def merge_sort(alist, start, end):
+    if end - start > 1:
+        mid = (start + end) // 2
+        merge_sort(alist, start, mid)
+        merge_sort(alist, mid, end)
+        merge_list(alist, start, mid, end)
+
+
+def merge_list(alist, start, mid, end):
+    left = alist[start:mid]
+    right = alist[mid:end]
+    k = start
+    i = 0
+    j = 0
+    while (start + i < mid and mid + j < end):
+        if (left[i] <= right[j]):
+            alist[k] = left[i]
+            i = i + 1
+        else:
+            alist[k] = right[j]
+            j = j + 1
+        k = k + 1
+    if start + i < mid:
+        while k < end:
+            alist[k] = left[i]
+            i = i + 1
+            k = k + 1
+    else:
+        while k < end:
+            alist[k] = right[j]
+            j = j + 1
+            k = k + 1
+
+
+alist = int(input('Введите число элементов: '))
+my_list = [uniform(0, 50) for i in range(alist)]
+print(f'Исходный - {my_list}')
+merge_sort(my_list, 0, len(my_list))
+print(f'Отсортированный - {my_list}')
+print(timeit("merge_sort(my_list[:],0, len(my_list))", globals=globals(), number=1000))
+"""
+Введите число элементов: 10
+Исходный - [27.116076679402873, 8.368574588708693, 44.13410638388166, 1.370789183619614, 41.059033434029416, 18.570663954533188, 45.593585200211976, 26.268348778251426, 0.9093011001291451, 45.37018025579447]
+Отсортированный - [0.9093011001291451, 1.370789183619614, 8.368574588708693, 18.570663954533188, 26.268348778251426, 27.116076679402873, 41.059033434029416, 44.13410638388166, 45.37018025579447, 45.593585200211976]
+0.05775796200032346
+Введите число элементов: 100
+1.032745018001151
+Введите число элементов: 1000
+12.88353258799907
+"""
