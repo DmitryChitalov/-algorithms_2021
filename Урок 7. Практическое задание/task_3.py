@@ -21,8 +21,7 @@ my_lst
 new_lts
 
 arr[m]
-
-
+----------------------------------------------------------------
 from statistics import median
 
 [3, 4, 3, 3, 5, 3, 3]
@@ -37,6 +36,31 @@ for i in
     left == right
     left.clear()
     right.clear()
-
-
 """
+import random
+from statistics import median
+
+# решение 1: отсортировать и взять m элемент массива
+# Гномья - не реализовывала
+
+m = int(input("Введите значение m: "))
+list_for_input = [random.randint(0, 99) for _ in range(2 * m + 1)]
+
+# решение 2: удалить из массива половину максимальных элементов
+
+
+def find_median(list):  # O(n^2)
+    for i in range(m):  # O(n^2)
+        list.remove(max(list))  # O(n)
+        # или
+        # max_elem = max(list) # O(n)
+        # list.remove(max_elem) # O(n)
+    return max(list)
+
+
+my_median = find_median(list_for_input[:])
+print("Исходный массив", list_for_input)
+print("Отсортированный ", sorted(list_for_input[:]))
+print(my_median)
+
+print("Выполним проверку верно ли нашли медиану. Медиана =", median(list_for_input[:]))
