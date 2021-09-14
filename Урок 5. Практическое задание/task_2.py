@@ -34,3 +34,45 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+
+from collections import defaultdict
+
+#defaultdict
+
+
+new_dict = defaultdict(list)
+
+new_dict[1] = list(input('Введите первое число: '))
+new_dict[2] = list(input('Введите второе число: '))
+print(new_dict)
+
+c = hex(int(''.join(str(i) for i in new_dict[1]), 16) + int(''.join(str(i) for i in new_dict[2]), 16))
+d = hex(int(''.join(str(i) for i in new_dict[1]), 16) * int(''.join(str(i) for i in new_dict[2]), 16))
+print(f'Сумма: {list(c[2:].upper())}')
+print(f'Произведение: {list(d[2:].upper())}')
+
+
+
+#ОПП
+
+class Number:
+    def __init__(self, num):
+        self.num = num
+
+    def __add__(self, other):
+        return hex(int(self.num, 16) + int(other.num, 16)).upper()[2:]
+
+    def __mul__(self, other):
+        return hex(int(self.num, 16) * int(other.num, 16)).upper()[2:]
+
+a = input('Введите первое число: ')
+b = input('Введите второе число: ')
+a = Number(a)
+b = Number(b)
+c = a + b
+d = a * b
+
+print(f'Сумма: {list(c)}')
+print(f'Произведение: {list(d)}')
