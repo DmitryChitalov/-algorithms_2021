@@ -38,8 +38,13 @@ def save_to_file(hash):
         f.seek(0)
         f.write(str(hash))
 
-def ask_password():
-    hash_pass = hashlib.sha256(input("Введите пароль: ").encode() + salt.encode())
+def ask_password(text):
+    return hashlib.sha256(input(text).encode() + salt.encode())
+
+def ask_password_first():
+    # вынесла в отдельную ф-цию, по вашему замечанию
+    hash_pass = ask_password('Введите пароль:')
+    # hash_pass = hashlib.sha256(input("Введите пароль: ").encode() + salt.encode())
     save_to_file(hash_pass.hexdigest())
     return hash_pass
 
@@ -52,7 +57,8 @@ def read_file():
 
 def ask_password_again():
     hash_1 = read_file()
-    hash_2 = hashlib.sha256(input("Введите пароль повторно: ").encode() + salt.encode())
+    hash_2 = ask_password('Введите пароль повторно: ')
+    # hash_2 = hashlib.sha256(input("Введите пароль повторно: ").encode() + salt.encode())
     print(f'{hash_1} , \n{hash_2.hexdigest()}')
     # print(type(hash_1), type(hash_2))
     if str(hash_2.hexdigest()) == hash_1:
@@ -60,10 +66,7 @@ def ask_password_again():
     else:
         print("Пароли отличаются!")
 
-# попробуйте сделать так - В ф-ии ask_password() добавте в строку
-# save_to_file(hash_pass.hexdigest()) , а в def ask_password_again() - if str(hash_2.hexdigest()) == hash_1
 
 # print(f'Созданный хеш: {ask_password()}')
-
-ask_password()
+ask_password_first()
 ask_password_again()
