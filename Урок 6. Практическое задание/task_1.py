@@ -23,10 +23,11 @@
 """
 
 from pympler import asizeof
-
+from timeit import timeit
+from random import randint
+from numpy import array
 
 #__slots__
-
 
 class Road:
     def __init__(self, length, width):
@@ -71,8 +72,6 @@ asizeof.asizeof = 128 с использования __slots__
 
 #NumPy
 
-from random import randint
-from numpy import array
 
 def recursive_reverse(number):
     if number == 0:
@@ -105,7 +104,6 @@ asizeof.asizeof = 200120 с использования array
 
 
 #yield
-from timeit import timeit
 
 
 def func_1(nums):
