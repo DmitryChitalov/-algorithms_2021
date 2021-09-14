@@ -28,3 +28,38 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def operation_func():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign == '0':
+        return print('Выход')
+    elif sign in '+-*/':
+        try:
+            num_1 = int(input('Введите первое число: '))
+            num_2 = int(input('Введите второе число: '))
+            if sign == '+':
+                print(f'Ваш результат {num_1 + num_2}')
+                return operation_func()
+            if sign == '-':
+                print(f'Ваш результат {num_1 - num_2}')
+                return operation_func()
+            if sign == '*':
+                print(f'Ваш результат {num_1 * num_2}')
+                return operation_func()
+            if sign == '/':
+                if num_2 == 0:
+                    print('Делить на ноль нельзя')
+                    return operation_func()
+                else:
+                    print(f'Ваш результат {num_1 / num_2}')
+                    return operation_func()
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+            return operation_func()
+    else:
+        print('Введен неверный знак')
+        return operation_func()
+
+
+operation_func()

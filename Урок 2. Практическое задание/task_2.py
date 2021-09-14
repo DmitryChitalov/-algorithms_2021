@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def num_check(some_num, count_1=0, count_2=0):
+    if some_num == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({count_1}, {count_2})')
+    else:
+        num = some_num % 10
+        some_num = some_num // 10
+        if num % 2 == 0:
+            count_1 += 1
+        else:
+            count_2 += 1
+        return num_check(some_num, count_1, count_2)
+
+
+my_num = int(input('Введите число: '))
+num_check(my_num)

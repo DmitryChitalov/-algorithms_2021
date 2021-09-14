@@ -11,3 +11,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def num_game(num, count=10):
+    try:
+        check = int(input('Угадайте число от 0 до 100: '))
+        if check == num:
+            return f'Вы выиграли! Это число {num}'
+        elif count == 0:
+            return 'Вы проиграли. Закончились попытки!'
+        else:
+            if check < num:
+                count = count - 1
+                print(f'Вы ввели слишком маленькое число. Осталось попыток {count}')
+                return num_game(num, count)
+            else:
+                count = count - 1
+                print(f'Вы ввели слишком большое число. Осталось попыток {count}')
+                return num_game(num, count)
+
+    except ValueError:
+        print('Вы ввели не число. Попробуйте еще раз')
+        return num_game(num)
+
+
+print(num_game(random.randint(0, 100)))
