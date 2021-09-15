@@ -15,25 +15,47 @@
 """
 
 
-def revers_1(enter_num, revers_num=0):
-    if enter_num == 0:
-        return revers_num
+from timeit import timeit
+from cProfile import run
+
+
+def revers_1(num, rev=0):
+    if num == 0:
+        return rev
     else:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-        return revers_1(enter_num, revers_num)
+        numb = num % 10
+        rev = (num + numb / 10) * 10
+        num //= 10
+        return revers_1(num, rev)
 
 
-def revers_2(enter_num, revers_num=0):
-    while enter_num != 0:
-        num = enter_num % 10
-        revers_num = (revers_num + num / 10) * 10
-        enter_num //= 10
-    return revers_num
+def revers_2(num, rev=0):
+    while num != 0:
+        numb = num % 10
+        rev = (rev + numb / 10) * 10
+        num //= 10
+    return rev
 
 
-def revers_3(enter_num):
-    enter_num = str(enter_num)
-    revers_num = enter_num[::-1]
-    return revers_num
+def revers_3(num):
+    num = str(num)
+    rev = num[::-1]
+    return rev
+
+
+def revers_4(enter_num):
+    return int(''.join(reversed(str(enter_num))))
+
+
+numb = 12345
+
+print(timeit('revers_1(numb)', number=10000, globals=globals()))
+print(timeit('revers_2(numb)', number=10000, globals=globals()))
+print(timeit('revers_3(numb)', number=10000, globals=globals()))
+print(timeit('revers_4(numb)', number=10000, globals=globals()))
+
+
+run('revers_1(numb)')
+run('revers_2(numb)')
+run('revers_3(numb)')
+run('revers_4(numb)')

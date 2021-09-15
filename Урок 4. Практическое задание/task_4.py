@@ -12,7 +12,9 @@
 Без аналитики задание считается не принятым!
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import timeit
+
+array = [1, 2, 3, 4, 5, 1]
 
 
 def func_1():
@@ -23,21 +25,32 @@ def func_1():
         if count > m:
             m = count
             num = i
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {m} раз(а)'
+    return f'The most common number: {num}, ' \
+           f'it has appeared in the array {m} times'
 
 
 def func_2():
     new_array = []
-    for el in array:
-        count2 = array.count(el)
-        new_array.append(count2)
+    for elem in array:
+        count = array.count(elem)
+        new_array.append(count)
+    m = max(new_array)
+    num = array[new_array.index(m)]
+    return f'The most common number: {num}, ' \
+           f'it has appeared in the array {m} times'
 
-    max_2 = max(new_array)
-    elem = array[new_array.index(max_2)]
-    return f'Чаще всего встречается число {elem}, ' \
-           f'оно появилось в массиве {max_2} раз(а)'
+def func_3():
+    num = max(array, key=array.count)
+    m = array.count(num)
+    return f'The most common number: {num}, ' \
+           f'it has appeared in the array {m} times'
 
 
 print(func_1())
+print(timeit("func_1()", globals=globals(), number=1000))
+
 print(func_2())
+print(timeit("func_2()", globals=globals(), number=1000))
+
+print(func_3())
+print(timeit("func_3()", globals=globals(), number=1000))
