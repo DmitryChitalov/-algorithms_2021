@@ -41,6 +41,7 @@ for i in
 
 """
 import random
+from timeit import timeit
 
 
 def quick_sort(lst):
@@ -58,10 +59,19 @@ def quick_sort(lst):
 if __name__ == '__main__':
     m = int(input('Введите число "m": '))
     test_list = [random.randint(-100, 100) for _ in range(2 * m + 1)]
-    result = quick_sort(test_list)
-    print(f'Sorted list: {result}, median: {result[m]}')
-
+    # print(f'quick_sort: {timeit("quick_sort(test_list)", globals=globals(), number=10000)}')
+    print(f'sorted: {timeit("sorted(test_list)", globals=globals(), number=10000)}')
+    print(f'Медиана: {quick_sort(test_list)[m]}')
 """
-Введите число "m": 5
-Sorted list: [-82, -45, -37, -35, -35, -25, 6, 8, 15, 71, 74], median: -25
+Без сортировки решить задачу не получилось.
+Провел сравнения сортировки по Хоару и встроенной функции sorted.
+Замеры делались отдельно.
+Встроенная функция sorted значительно быстрее (т.к. "под капотом" у нее
+более быстрый C++)
+
+
+Введите число "m": 100
+quick_sort: 3.885599599999999
+sorted: 0.07710120000000131
+Медиана: 2
 """
