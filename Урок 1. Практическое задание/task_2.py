@@ -16,7 +16,7 @@ def minimal(lst_obj):
             if lst_obj[i] > lst_obj[i + 1]:  # O(1)
                 lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]  # O(1)
         n += 1  # O(1)
-    return print(lst_obj[0])  # O(1)
+    return print(lst_obj)  # O(1)
 
 
 """
@@ -26,10 +26,11 @@ def minimal(lst_obj):
 
 
 def minimum(lst_obj):
-    for i in range(len(lst_obj) - 1):  # O(N)
-        if lst_obj[i] > lst_obj[i + 1]:  # O(1)
-            lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]  # O(1)
-    return print(lst_obj[0])  # O(1)
+    ln = lst_obj[0]  # O(1)
+    for i in lst_obj:  # O(N)
+        if i < ln:  # O(1)
+            ln = i  # O(1)
+    return print(ln)  # O(1)
 
 
 """
@@ -42,6 +43,7 @@ def minimum(lst_obj):
 """
 ########################################################################################
 
-lst = [3, 10, 4, 0, 7, 1, 8]
+lst = [3, 10, -4, 0, 7, 1, 8]
+lst_copy = lst[:]
 minimal(lst)  # O(n^2)
-minimum(lst)  # O(n)
+minimum(lst_copy)  # O(n)
