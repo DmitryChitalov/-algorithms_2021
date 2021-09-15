@@ -17,3 +17,69 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+import timeit
+import random
+
+
+def bubble_sort(lst_obj):
+    for i in range(len(lst_obj)-1):
+        c = 0
+        for j in range(len(lst_obj)-i-1):
+            if lst_obj[j] < lst_obj[j+1]:
+                lst_obj[j], lst_obj[j+1] = lst_obj[j+1], lst_obj[j]
+                c += 1
+        if c == 0:
+            break
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+print(bubble_sort(orig_list[:]))
+
+# замеры 10
+print(
+    timeit.timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(
+    timeit.timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(
+    timeit.timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+"""
+Оригинал из готового набора:
+0.006286199999999999
+0.5073614000000001
+59.4498426
+
+Без счетчика замен (уже с сортировкой по убыванию):
+0.005232900000000002
+0.434876
+58.2793305
+
+Со счетчиком замен (уже с сортировкой по убыванию):
+0.005886100000000002
+0.5065083
+66.1254653
+
+Очевидно оптимизация со счетчиком не удалась, так как инкримент и дальнейшая проверка на больших массивах
+только отнимает дополнительное время. Замеры были произведены несколько раз и всегда сортировка со счетчиком 
+работает медленее.
+"""
+
