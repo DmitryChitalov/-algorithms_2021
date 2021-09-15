@@ -23,3 +23,22 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import namedtuple
+
+devs = []
+numb_of_devs = int(input('Enter the number of developments: '))
+for i in range(numb_of_devs):
+    dev = namedtuple('report', 'name income1 income2 income3 income4 full_income')
+    name_of_dev = input('Enter the name of development: ')
+    income_of_dev = input('Enter the profit of this development for each quarter, separated by a space (Total 4 quarters): ')
+    devel = dev(name_of_dev, *income_of_dev.split(), sum(map(int, income_of_dev.split())))
+    devs.append(devel)
+
+income_middle = sum(Company.full_income for Company in devs) / len(devs)
+print(f"Average annual profit of all enterprises: {income_middle}")
+print("Developments with above average profit: ")
+print(*(Company.name for Company in devs if Company.full_income >= income_middle))
+print("Developments with below average profit: ")
+print(*(Company.name for Company in devs if Company.full_income < income_middle))

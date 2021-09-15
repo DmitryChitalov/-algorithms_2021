@@ -34,3 +34,41 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+from functools import reduce
+
+dic = defaultdict(list)
+first = input('Enter the first number: ')
+second = input('Enter the second number: ')
+
+dic[first] = list(first)
+dic[second] = list(second)
+
+
+def hex_calc(first, second):
+    res_summ = hex(int(first, 16) + int(second, 16)).replace('0x', '').upper()
+    res_prod = hex(int(first, 16) * int(second, 16)).replace('0x', '').upper()
+    dic[res_summ] = list(res_summ)
+    dic[res_prod] = list(res_prod)
+    return f'The sum of the numbers: {dic[res_summ]}\nThe product of the numbers: {dic[res_prod]}'
+
+
+print(reduce(hex_calc, [first, second]))
+
+
+class HexNumber:
+    def __init__(self, value):
+        self.value = int(value, 16)
+
+    def __add__(self, other):
+        return hex(self.value + other.value).replace('0x', '').upper()
+
+    def __mul__(self, other):
+        return hex(self.value * other.value).replace('0x', '').upper()
+
+
+a = HexNumber(first)
+b = HexNumber(second)
+
+print(f'The sum of the numbers: {a + b}\nThe product of the numbers: {a * b}')
