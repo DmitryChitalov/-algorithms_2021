@@ -50,7 +50,11 @@ try:
     orig_list = [uniform(0, 50) for _ in range(int(input('Введите число элементов: ')))]
     print('Исходный -', orig_list)
     print('Отсортированный -', merge_sort(orig_list[:]))
-
+    """
+    Данный вид сортировки является одним из лучших по времени исполнения, это подтвержадется замерами,
+    недостатком данного скрипта является затратность по памяти, так как возникает необходимость
+    держать в памяти промежуточные массивы.
+    """
     print(timeit("merge_sort(orig_list[:])", globals=globals(), number=10))
     print(timeit("merge_sort(orig_list[:])", globals=globals(), number=100))
     print(timeit("merge_sort(orig_list[:])", globals=globals(), number=1000))

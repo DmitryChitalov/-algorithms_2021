@@ -42,20 +42,23 @@ def sort_shell(arr):
 
 
 def med(arr, num):
-    while num > 1:
+    while num > 0:
         arr.remove(min(arr))
         num -= 1
     return min(arr)
 
 
 try:
+    """
+    Понял ошибку, переделал
+    """
     m = int(input('Введите число: '))
-    orig_array = [randint(0, 1000) for _ in range(2*m-+1)]
+    orig_array = [randint(0, 1000) for _ in range(2*m+1)]
 
     print(median(orig_array[:]))  # при помощи statistics.median
 
     print(med(orig_array[:], m))  # при помощи функции min
 
-    print(sort_shell(orig_array[:])[len(orig_array[:])//2])  # при помощи сортировки Шелла
+    print(sort_shell(orig_array[:])[m])  # при помощи сортировки Шелла
 except ValueError:
     print('Необходимо ввести число')
