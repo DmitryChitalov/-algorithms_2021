@@ -76,19 +76,19 @@ my_lst = [randint(-1000, 1000) for _ in range(2 * m + 1)]
 print(f'1000 измерений при длинне списка {len(my_lst)}')
 print(f'Моя функция {timeit("my_median(my_lst[:])", globals=globals(), number=1000)}')
 print(f'Моя функция {timeit("median(my_lst[:])", globals=globals(), number=1000)}')
-print(f'Моя функция {timeit("shell_sort(my_lst[:])", globals=globals(), number=1000)}')
+print(f'Моя функция {timeit("shell_sort(my_lst[:])[m]", globals=globals(), number=1000)}')
 m = 100
 my_lst = [randint(-1000, 1000) for _ in range(2 * m + 1)]
 print(f'1000 измерений при длинне списка {len(my_lst)}')
 print(f'Моя функция {timeit("my_median(my_lst[:])", globals=globals(), number=1000)}')
 print(f'Моя функция {timeit("median(my_lst[:])", globals=globals(), number=1000)}')
-print(f'Моя функция {timeit("shell_sort(my_lst[:])", globals=globals(), number=1000)}')
+print(f'Моя функция {timeit("shell_sort(my_lst[:])[m]", globals=globals(), number=1000)}')
 m = 500
 my_lst = [randint(-1000, 1000) for _ in range(2 * m + 1)]
 print(f'1000 измерений при длинне списка {len(my_lst)}')
 print(f'Моя функция {timeit("my_median(my_lst[:])", globals=globals(), number=1000)}')
 print(f'Моя функция {timeit("median(my_lst[:])", globals=globals(), number=1000)}')
-print(f'Моя функция {timeit("shell_sort(my_lst[:])", globals=globals(), number=1000)}')
+print(f'Моя функция {timeit("shell_sort(my_lst[:])[m]", globals=globals(), number=1000)}')
 """
 1000 измерений при длинне списка 21
 Моя функция 0.0568206
