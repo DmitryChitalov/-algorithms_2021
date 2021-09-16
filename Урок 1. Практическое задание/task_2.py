@@ -16,7 +16,7 @@ def minimal(lst_obj):
             if lst_obj[i] > lst_obj[i + 1]:  # O(1)
                 lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]  # O(1)
         n += 1  # O(1)
-    return print(lst_obj)  # O(1)
+    return print(lst_obj[0])  # O(1)
 
 
 """
