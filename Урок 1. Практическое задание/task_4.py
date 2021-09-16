@@ -26,8 +26,8 @@ users = {'user_1': {'login': 'Vasya_1', 'password': '12345', 'activated': True},
 который вы придумаете, например, реализовать словарь.
 """
 
-
-# Алгоритмическая сложность функции:  O(1) сложность кода: O(N)
+# Решение 1
+# Алгоритмическая сложность функции:  O(1)
 def check_pass(user, pas):
     if users[user]['password'] == pas and users[user]['activated'] is True:  # O(1)
         print('Добро пожаловать')  # O(1)
@@ -39,12 +39,12 @@ def check_pass(user, pas):
 
 password = '12345'  # можно использовать input() O(1)
 for i in range(len(users)):  # O(N)
-    check_pass(f'user_{i + 1}', password)  # O(1)
+    check_pass(f'user_{i + 1}', password)  # Проверяем работу функции с помощью цикла, сложность: O(1)
 
 print('\n')
 
-
-# Алгоритмическая сложность функции:  O(n^2) сложность кода: O(n^3)
+# Решение 2
+# Алгоритмическая сложность функции:  O(n^2)
 def hard_check_pass(user, pas):
     for key_1, values_1 in users.items():  # O(N)
         if key_1 == user:  # O(1)
@@ -59,7 +59,7 @@ def hard_check_pass(user, pas):
 
 
 for i in range(len(users)):  # O(N)
-    hard_check_pass(f'user_{i + 1}', password)  # O(n^2)
+    hard_check_pass(f'user_{i + 1}', password)  # Проверяем работу функции с помощью цикла, сложность: O(n^2)
 """
 Примечание:
 Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить

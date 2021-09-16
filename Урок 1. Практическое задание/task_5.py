@@ -59,14 +59,14 @@ class StackPlates:
         return len(self.elems)
 
 
-Plt_1 = StackPlates(10)
+plt = StackPlates(10)
 
 for i in range(30):
-    Plt_1.push_in(i)
+    plt.push_in(i)
 
-print(Plt_1.pop_out())
-print(Plt_1.n)
-print(Plt_1.elems)
+print(plt.pop_out())
+print(plt.n)
+print(plt.elems)
 for i in range(30):
-    Plt_1.push_in(i)
-print(Plt_1.elems)
+    plt.push_in(i)
+print(plt.elems)

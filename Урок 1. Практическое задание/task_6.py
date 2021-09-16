@@ -42,17 +42,17 @@ class TaskBoard:
         return len(self.task) + len(self.task_refine)
 
 
-Tb_1 = TaskBoard()
+tb = TaskBoard()
 
 for i in range(1, 20):
-    Tb_1.add_task(f'Task_{i}')
+    tb.add_task(f'Task_{i}')
 
 for i in range(5):
-    Tb_1.done()
+    tb.done()
 
 for i in range(5):
-    Tb_1.refine()
+    tb.refine()
 
-print(f'All task after Tb_1.done and Tb_1.refine: {", ".join(Tb_1.task)}')
-print(f'All refine task: {", ".join(Tb_1.task_refine)}')
-print(f'All done task: {", ".join(Tb_1.task_done)}')
+print(f'All task after Tb_1.done and Tb_1.refine: {", ".join(tb.task)}')
+print(f'All refine task: {", ".join(tb.task_refine)}')
+print(f'All done task: {", ".join(tb.task_done)}')
