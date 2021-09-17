@@ -35,7 +35,7 @@ company = {
 }
 
 # 1 решение
-def top_comp(company):                                  # O(N^2)
+def top_comp(company: dict):                            # O(N^2)
     lst = list(company.keys())                          # O(1)
     for i in range(len(lst)-1):                         # O(N)
         for j in range(len(lst)-i-1):                   # O(N^2)
@@ -47,14 +47,14 @@ def top_comp(company):                                  # O(N^2)
 print(top_comp(company))
 
 # 2 решение
-def top_3(company):
+def top_3(company: dict):
     return [company[i] for i in sorted(company.keys(), reverse=True)[0:3]] # O(N log N)
 
 print(top_3(company))
 
 # 3 решение
 
-def top_top_3(company):                     # O(N)
+def top_top_3(company: dict):               # O(N)
     lst = list(company.keys())              # O(1)
     for i in range(len(lst)-3):             # O(N)
         lst.remove(min(lst))                # O(N)

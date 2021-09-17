@@ -62,11 +62,11 @@ class Stack:
             self.shelf.append(self.stack.copy())
             self.stack.clear()
 
-    def get_shelf(self, y):
-        return self.shelf + self.stack
+    def __str__(self):
+        return f'{self.shelf + self.stack}'
 
 plate = Stack()
-plate.get_max(5)
+plate.get_max(6)
 plate.push(1)
 plate.push(1)
 plate.push(1)
@@ -75,6 +75,5 @@ plate.push(1)
 plate.push(1)
 plate.push(1)
 plate.push(1)
-print(plate.stack)
-print(plate.shelf)
-print(plate.get_shelf(1))
+
+print(plate)

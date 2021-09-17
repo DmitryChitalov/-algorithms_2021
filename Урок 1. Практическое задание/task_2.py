@@ -20,7 +20,7 @@
 Подход должен быть максимально алгоритмическим.
 """
 
-def min_num(lst):                                       # O(N^2)
+def min_num(lst: list):                                 # O(N^2)
     for i in range(len(lst)-1):                         # O(N)
         for j in range(len(lst)-i-1):                   # O(N^2)
             if lst[j] > lst[j+1]:                       # O(1)
@@ -28,7 +28,7 @@ def min_num(lst):                                       # O(N^2)
     return lst[0]                                       # O(1)
 
 
-def min_find(lst):                  # O(N)
+def min_find(lst: list):            # O(N)
     min_i = 0                       # O(1)
     for i in range(1, len(lst)):    # O(N)
         if lst[i] < lst[min_i]:     # O(1)

@@ -29,12 +29,10 @@ class TaskBoard():
         self.base.append(name)
 
     def during(self, name):
-        self.in_progress.append(name)
-        self.base.pop(self.base.index(name))
+        self.in_progress.append(self.base.pop(self.base.index(name)))
 
     def complete(self, name):
-        self.completed.append(name)
-        self.in_progress.pop(self.in_progress.index(name))
+        self.completed.append(self.in_progress.pop(self.in_progress.index(name)))
 
     def __str__(self):
         return f'Базовые:{self.base} \nВ процессе: {self.in_progress} \nВыполненные задачи: {self.completed}'
