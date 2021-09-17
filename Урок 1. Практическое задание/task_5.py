@@ -28,3 +28,19 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+n = int(input())
+plates = []
+shelf = []
+max = 6
+count = 0
+
+while count != n:
+    plates.append('_')
+    count += 1
+    if count % max == 0:
+        shelf.append(plates.copy())
+        plates.clear()
+shelf.append(plates)
+
+print(shelf)
