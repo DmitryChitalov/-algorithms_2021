@@ -37,7 +37,7 @@ code_table = {}
 
 
 def haffman_code(tree, path=''):
-    if type(tree.get_left()) != Tree and type(tree.get_right()) != HaffmanTree:
+    if type(tree.get_left()) != Tree and type(tree.get_right()) != Tree:
         code_table[tree.get_left()] = f'{path}0'
         code_table[tree.get_right()] = f'{path}1'
     elif type(tree.get_left()) != Tree:
