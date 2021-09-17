@@ -28,6 +28,7 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# 1 способ
 
 n = int(input())
 plates = []
@@ -44,3 +45,36 @@ while count != n:
 shelf.append(plates)
 
 print(shelf)
+
+# 2 способ через классы
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.max = None
+        self.shelf = []
+
+    def get_max(self, m):
+        self.max = m
+
+    def push(self, item):
+        self.stack.append('_')
+        if len(self.stack) == self.max:
+            self.shelf.append(self.stack.copy())
+            self.stack.clear()
+
+    def get_shelf(self, y):
+        return self.shelf + self.stack
+
+plate = Stack()
+plate.get_max(5)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+print(plate.stack)
+print(plate.shelf)
+print(plate.get_shelf(1))
