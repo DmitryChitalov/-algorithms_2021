@@ -19,3 +19,32 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+from random import randint as ran
+
+
+list_random = [ran(1, 101) for el in range(100)]
+
+
+def func_min_1(list_x):  # O(n^2)
+    x = list_x[0]           # !1!
+    for i in list_x:        # !n!
+        for el in list_x:   # !n!
+            if i > el:      # !1!
+                if el < x:  # !1!
+                    x = el  # !1!
+    return x  # !1!
+
+
+def func_min_2(list_x):    # O(n)
+    x = list_x[0]           # !1!
+    for i in list_x[1:]:    # !n!
+        if x > i:           # !1!
+            x = i           # !1!
+    return x                # !1!
+
+
+if __name__ == '__main__':
+    print(min(list_random) == func_min_1(list_random))
+    print(min(list_random) == func_min_2(list_random))

@@ -20,3 +20,34 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+company_profit = {'a': 11, 'b': 2, 'c': 73, 'd': 7, 'e': 5, 'f': 6}
+
+
+def func_1(dict_x):                   # O(n log n)
+    x = sorted(dict_x, key=dict_x.get)  # !n log n!
+    return [x[-1], x[-2], x[-3]]        # !1!
+
+
+def func_2(dict_x):                   # O(n)
+    list_x = []                         # !1!
+    for el in range(3):                 # !1!
+        x = 0                           # !1!
+        y = None                        # !1!
+        for i in dict_x:                # !n!
+            if dict_x[i] > x:           # !n!
+                x = dict_x[i]           # !1!
+                y = i                   # !1!
+        list_x.append(y)                # !1!
+        dict_x.pop(y)                   # !1!
+    return list_x                       # !1!
+
+
+if __name__ == '__main__':
+    company = func_1(company_profit)
+
+    for i in range(len(company)):
+        print(f'Место {i+1} по прибыли заняла компания {company[i]}.')
+
+# при увеличении словаря быстрее будет работать func 2
