@@ -40,3 +40,35 @@ for i in
 
 
 """
+
+import numpy as np
+from statistics import median
+import timeit
+
+
+def func1(lst):
+    i, size = 1, len(lst)
+    while i < size:
+        if lst[i - 1] <= lst[i]:
+            i += 1
+        else:
+            lst[i - 1], lst[i] = lst[i], lst[i - 1]
+            if i > 1:
+                i -= 1
+    return lst
+
+
+def func2(lst):
+    [lst.remove(max(lst)) for _ in range(len(lst) // 2)]
+    return max(lst)
+
+
+m = int(input('Enter m: '))
+arr = np.random.randint(0, 100, 2 * m + 1)
+print(arr)
+print(f'Median: = {median(arr)}')
+arr2 = func1(arr.tolist())
+print(f'Median after sorting = {arr2[m]}')
+print(f'Median without sorting  = {func2(arr.tolist())}')
+print(f'Median after sorting: {timeit.timeit("func1(arr[:])", globals=globals(), number=10000)}')
+print(f'Median without sorting: {timeit.timeit("func2(arr[:].tolist())", globals=globals(), number=10000)}')
