@@ -54,8 +54,8 @@ print(top_3(company))
 
 # 3 решение
 
-def top_top_3(company: dict):               # O(N)
-    lst = list(company.keys())              # O(1)
+def top_top_3(company: dict):               # O(N^2)
+    lst = list(company.keys())              # O(N)
     for i in range(len(lst)-3):             # O(N)
         lst.remove(min(lst))                # O(N)
 

@@ -65,7 +65,7 @@ def login_2(user:dict):                                     # O(1)
 print(login_2(user))
 
 # 3 решение
-def login_3(user: dict):                        # O(N)
+def login_3(user: dict):                        # O(1)
     if user['activation'] == True:              # O(1)
         if account == user:                     # O(N)
             return 'ОК'                         # O(1)

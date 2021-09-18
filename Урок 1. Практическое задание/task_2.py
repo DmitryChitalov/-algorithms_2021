@@ -22,7 +22,7 @@
 
 def min_num(lst: list):                                 # O(N^2)
     for i in range(len(lst)-1):                         # O(N)
-        for j in range(len(lst)-i-1):                   # O(N^2)
+        for j in range(len(lst)-i-1):                   # O(N)
             if lst[j] > lst[j+1]:                       # O(1)
                 lst[j], lst[j+1] = lst[j+1], lst[j]     # O(1)
     return lst[0]                                       # O(1)
