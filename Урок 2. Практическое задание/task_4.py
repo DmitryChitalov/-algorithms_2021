@@ -17,11 +17,11 @@
 """
 
 
-def summa(n: int, base=1.0):
+def sum_ma(n: int, base=1.0):
     if n == 0:
         return n
-    return base - summa(n - 1, base / 2)
+    return base - sum_ma(n - 1, base / 2)
 
 
 step = int(input('Введите натуральное число: '))
-print(summa(step))
+print(sum_ma(step))

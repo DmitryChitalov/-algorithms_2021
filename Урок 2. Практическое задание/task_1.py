@@ -33,6 +33,10 @@
 def calc(operation: str):
     if operation == '0':
         return
+    elif operation not in ('+', '-', '*', '/'):
+        print('Неверная операция')
+        new_operation = input('Введите операцию ')
+        calc(new_operation)
     try:
         res = None
         first_num = int(input('Введите первое число: '))
@@ -52,8 +56,6 @@ def calc(operation: str):
                 print('Деление на ноль')
             else:
                 res = first_num / second_num
-        else:
-            print('Неверная операция')
         if res:
             print('Ваш результат', res)
     finally:

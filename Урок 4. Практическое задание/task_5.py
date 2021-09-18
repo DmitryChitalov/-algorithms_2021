@@ -38,6 +38,22 @@ def simple(i):
         n += 1
     return n
 
+def optimized(num):
+    l = list(range(num+1))
+    l[1] = 0
+    i = 2
+    while i <= num:
+        if l[i] != 0:
+            j = i + i
+            while j <= num:
+                l[j] = 0
+                j = j + i
+        i += 1
+    s = set(l)
+    s.remove(0)
+    print(s)
+
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+optimized(i)
