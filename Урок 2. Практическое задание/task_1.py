@@ -28,3 +28,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class MyError(Exception):
+    def __init__(self, text):
+        self.text = text
+
+
+def calculator():
+    try:
+        operator = input('Введите операцию (+, -, *, / или 0 для выхода):')
+        if operator != '+' and operator != '-' and operator != '*' and operator != '/' and operator != '0':
+            raise MyError('Вы ввели неправельный оператор. Попробуйте еше раз.')
+        elif operator == '0':
+            print('Программа завершена.')
+            return 0
+
+        first_digit = float(input('Введите первое число: '))
+        second_digit = float(input('Введите второе число: '))
+        print(eval(f'{first_digit} {operator} {second_digit}'))
+
+    except MyError as me:
+        print(me)
+    except ValueError:
+        print('Некоректно введенно число. Попробуйте заного')
+    except ZeroDivisionError:
+        print('На ноль делить нельзя. Попробуйте заного.')
+    calculator()
+
+
+calculator()

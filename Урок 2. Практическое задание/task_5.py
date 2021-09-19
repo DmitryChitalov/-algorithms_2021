@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table(sign=32, dec_count=1):
+
+    if sign >= 127:
+        return f'{sign} - {chr(sign)}'
+    elif dec_count % 10 != 0:
+        return f'{sign} - {chr(sign)} {table(sign + 1, dec_count + 1)}'
+    else:
+        return f'{sign} - {chr(sign)}\n{table(sign + 1, dec_count + 1)}'
+
+
+print(table())
