@@ -19,3 +19,22 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# Первый вариант: O(n^2)
+def min_each(list_obj):
+    min_num = None               # O(1)
+    for n in list_obj:           # O(n)
+        for i in list_obj:       # O(n)
+            if i < n:            # O(1)
+                min_num = i      # O(1)
+    return min_num               # O(1)
+
+
+# Второй вариант: O(n)
+def min_linear(list_num):
+    num_x = None                 # O(1)
+    for k in list_num:           # O(n)
+        if k < num_x:            # O(1)
+            num_x = k            # O(1)
+    return num_x                 # O(1)

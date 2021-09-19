@@ -28,3 +28,42 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Plate:
+    def __init__(self):
+        self.elem = [[]]
+
+    def push_in(self, el):
+        if len(self.elem[-1]) >= 10:
+            self.elem.append([el])
+        else:
+            self.elem[-1].append(el)
+
+    def pull_out(self):
+        return self.elem[len(self.elem) - 1].pop()
+
+    def get_val(self):
+        return self.elem[-1][-1]
+
+    def stack_size(self):
+        return (len(self.elem) - 1) * 10 + len(self.elem[-1])
+
+    def count_stack(self):
+        return len(self.elem)
+
+
+# Создадим объект класса.
+obj_1 = Plate()
+
+# Заплним стек цифрами от 0 до 36.
+for i in range(37):
+    obj_1.push_in(i)
+
+
+print(f'Последний элемент в стеке: {obj_1.get_val()}')
+print(f'Размер  стека: {obj_1.stack_size()}')
+print(f'Выташим послений элемент: {obj_1.pull_out()}')
+print(f'Проверим опять последний элемент в стеке: {obj_1.get_val()}')
+print(f'И проверим размер стека: {obj_1.stack_size()}')
+print(f'Проверим колличество стопок: {obj_1.count_stack()}')
