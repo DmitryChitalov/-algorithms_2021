@@ -40,7 +40,7 @@ def get_input():
     while not (ch in VALID_SIGNS and len(ch) == COMMAND_LEN):
         ch = input('Введите операцию (+, -, *, / или 0 для выхода): ')
     if ch == ZERO:
-        exit(0)  # будем считать, что нам не важно откуда мы завершаем программу
+        return ch, 0, 0
     while not (one.isnumeric() and two.isnumeric() and
                (not (ch == DIV and int(two) == 0))):
         one = input("Введите первое число: ")
@@ -50,6 +50,9 @@ def get_input():
 
 def command_recursion():
     cmd, one, two = get_input()
+    if cmd == ZERO:
+        print('Bye!')
+        return
     print('Ваш результат:',
           one + two if cmd == ADD else
           one - two if cmd == SUB else
