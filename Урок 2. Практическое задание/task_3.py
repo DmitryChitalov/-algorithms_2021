@@ -22,3 +22,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from random import randint as ran
+
+
+def func(num_x, str_x=''):
+    if not num_x:
+        print(f'Перевернутое число: {str_x}')
+    else:
+        str_x += str(num_x % 10)
+        func(num_x//10, str_x)
+
+
+if __name__ == '__main__':
+    num = ran(100, 1000000000)
+    print(num)
+    func(num)
