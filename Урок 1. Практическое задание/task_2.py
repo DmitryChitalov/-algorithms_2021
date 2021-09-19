@@ -19,3 +19,25 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+my_list = [0, 11, -10, 100, 22, -3, 40, 50, -5, 12]
+min_num_1 = my_list[0]
+min_num_2 = my_list[0]
+
+# 1 алгоритм, сложность O(n^2)
+for i in my_list:
+    k = 0
+    for z in my_list:
+        if i < z:
+            k += 1
+            if k == len(my_list)-1:
+                min_num_1 = i
+print(min_num_1)
+
+# 2 алгоритм, сложность O(n)
+for i in my_list:
+    if min_num_2 > i:
+        min_num_2 = i
+print(min_num_2)
+
+

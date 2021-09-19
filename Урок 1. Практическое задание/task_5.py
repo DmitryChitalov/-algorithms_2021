@@ -28,3 +28,69 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+class StackClass:
+
+    def __init__(self, num_st):
+        self.elems = [[]]
+        self.index = -1
+        self.num_st = num_st
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        if len(self.elems[0]) >= self.num_st:
+            self.elems.insert(0, [])
+        self.elems[0].append(el)
+
+    def pop_out(self):
+        return self.elems[0].pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1][0]
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def __iter__(self):
+        for i in self.elems[::-1]:
+            yield i
+
+    def __next__(self):
+        if self.index < len(self.elems):
+            self.index += 1
+            return self.elems[self.index]
+        raise StopIteration
+
+# Немного измененый пример, показанный на лекции, дополнительно получает на вход число (количетсво мест в одной стопке).
+# Соответственно с этим числом регулируется вместимость одной "стопки тарелок".
+SC_OBJ = StackClass(4)
+
+# Наполняем стек.
+SC_OBJ.push_in('1 тарелка')
+SC_OBJ.push_in(10)
+SC_OBJ.push_in('code')
+SC_OBJ.push_in(False)
+SC_OBJ.push_in(5.5)
+SC_OBJ.push_in(5.6)
+SC_OBJ.push_in(5.8)
+SC_OBJ.push_in('her')
+SC_OBJ.push_in('Последняя тарелка')
+
+# Вывод всех стопок.
+for i in SC_OBJ:
+    print(i)
+
+# Вывод всех элементов.
+for i in SC_OBJ:
+    for z in i:
+        print(z)
+
+print(SC_OBJ.get_val())  # первый элемент первой стопки
+print(SC_OBJ.pop_out())  # последний элемент крайней стопки
+
+# Если можно, я хотел бы задать дополнительный вопрос, как можно реализовывать индекс в классах?
+# В интернете я пока не нашел информации, только что нужно использовать __getitem__, но не конкрентный
+# пример. Если это возможно, можете мне в общих чертах бъяснить, как, или дать ссылку, где я смогу узнать об этом.
