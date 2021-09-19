@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_num(num, one_num=1, s_num=0):
+    # Базовый случай
+    if int(num) == 0:
+        return print(s_num)
+    # Шаг рекурсии
+    else:
+        s_num += one_num
+        one_num /= -2
+        return sum_num(int(num) - 1, one_num, s_num)
+
+
+number = input('Введите количество элементов: ')
+
+sum_num(number)
