@@ -24,8 +24,10 @@
 
 
 def pr_ascii(begin=32, n=1, strocke=''):
+    # Базовый случай
     if begin == 128:
         return print(strocke)
+    # Шаг рекурсии
     else:
         if n % 10 == 0:
             strocke += f'{begin} - {chr(begin)}\n'
