@@ -22,9 +22,9 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: O(len(...))   - зависит от размера итерируемой структуры.
+    Сложность: O(n) - линейная.
     """
-    lst_to_set = set(lst_obj)  # O(len(...))   - зависит от размера итерируемой структуры
+    lst_to_set = set(lst_obj)  # O(n) - линейная
     return lst_to_set  # О(1)
 
 
@@ -55,10 +55,10 @@ def check_3(lst_obj):
 
     Сложность: O(2n + n log n + 1) = O(n log n)
     """
-    lst_copy = list(lst_obj)                 # O(len(..)) - заивисит от длины аргумента, но можно принять как О(n)
+    lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(n log n)
     for i in range(len(lst_obj) - 1):        # O(n)
-        if lst_copy[i] == lst_copy[i+1]:     # O(1) если числовой или О(len(s), если текстовый
+        if lst_copy[i] == lst_copy[i+1]:     # O(1) если числовой или О(n), если сравниваем массивы или текст
             return False                     # O(1)
     return True                              # O(1)
 

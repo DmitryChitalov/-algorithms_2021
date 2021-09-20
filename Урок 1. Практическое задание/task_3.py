@@ -46,7 +46,7 @@ print(*company_list1[:3], sep='\n')                     # O(n)
 print('*' * 5, 'Вариант 2. Добавление Топ-3 максимумов в результаты и исключение из исходного списка найденного')
 company_list2 = dc(company_list)                        # скорее всего тут О(n)
 res_top = list()
-for top in range(3):                                    # О(3) - тут конкретно 3 прохода
+for top in range(3):                                    # О(1) - нельзя писать О(3)
     pos_max = 0
     for pos, i in enumerate(company_list2):             # O(n)
         pos_max = pos if i[1] > company_list2[pos_max][1] else pos_max  # O(1)
