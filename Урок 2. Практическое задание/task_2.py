@@ -36,6 +36,7 @@ def evenodd(val, sumevens=0, sumodds=0) -> tuple:
 
 if __name__ == '__main__':
 
-    randlist = {random.randint(10000000, 99999999) for x in range(3)}
+    # randlist = {random.randint(10000000, 99999999) for x in range(3)}
+    randlist = [1234567890, 1111111111, 2222222223]
     for v in randlist:
         print(f'for digit {v} result as', 'even {}, odd {}'.format(*evenodd(v)))
