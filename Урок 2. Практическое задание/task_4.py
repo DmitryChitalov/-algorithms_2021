@@ -15,3 +15,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def crazy_sum(num):
+    if num == 1:
+        return 1
+    else:
+        return crazy_sum(num - 1) + \
+               (  1 / (2 ** (num - 1)) if num % 2 else \
+                 -1 / (2 ** (num - 1)))
+
+
+if __name__ == '__main__':
+    print(f'for {3} iterations crazy_sum is {crazy_sum(3)}')
+    print(f'for {4} iterations crazy_sum is {crazy_sum(4)}')
+
+'''
+for 3 iterations crazy_sum is 0.75
+for 4 iterations crazy_sum is 0.625
+'''
