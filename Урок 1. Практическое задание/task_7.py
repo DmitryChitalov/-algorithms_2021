@@ -51,7 +51,6 @@ def pal_checker(string):
         last = dc_obj.remove_from_rear()
         if first != last:
             still_equal = False
-
     return still_equal
 
 
