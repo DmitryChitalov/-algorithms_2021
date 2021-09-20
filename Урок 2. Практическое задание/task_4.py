@@ -27,10 +27,12 @@ def crazy_sum(num):
 
 
 if __name__ == '__main__':
-    print(f'for {3} iterations crazy_sum is {crazy_sum(3)}')
-    print(f'for {4} iterations crazy_sum is {crazy_sum(4)}')
+    n = int(input('How many CRAZY iterations you need: '))
+    print(f'for {n} iterations crazy_sum is {crazy_sum(n)}')
 
 '''
+How many CRAZY iterations you need: 3
 for 3 iterations crazy_sum is 0.75
+How many CRAZY iterations you need: 4
 for 4 iterations crazy_sum is 0.625
 '''
