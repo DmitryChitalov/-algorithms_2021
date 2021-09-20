@@ -51,7 +51,7 @@ def get_input():
 def command_recursion():
     cmd, one, two = get_input()
     if cmd == ZERO:
-        print('Bye!')
+        print('Good Bye!')
         return
     print('Ваш результат:',
           one + two if cmd == ADD else
