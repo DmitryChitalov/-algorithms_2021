@@ -19,7 +19,7 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
-class StackClass:
+class QueueClass:
     def __init__(self):
         self.elems = [[], [], []]
         self.index = -1
@@ -65,9 +65,9 @@ class StackClass:
         raise StopIteration
 
 
-SC_OBJ = StackClass()
+SC_OBJ = Tasks()
 
-# наполняем стек
+# наполняем очередь
 
 SC_OBJ.new_push_in('code1')
 SC_OBJ.new_push_in('mode2')
@@ -81,11 +81,11 @@ SC_OBJ.new_push_in('rode7')
 for i in SC_OBJ:
     print(i)
 print()
-# отправляем заадачи в список решенных
+# отправляем задачи в список решенных
 SC_OBJ.task_solved()
 SC_OBJ.task_solved()
 
-# отправляем задачу в спиоск на доработку
+# отправляем задачу в список на доработку
 SC_OBJ.task_unsolved()
 SC_OBJ.task_unsolved()
 

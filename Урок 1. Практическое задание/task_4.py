@@ -25,3 +25,45 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users = {'megalord': ['1234', 0], 'doser': ['1111', 0], 'pumpa95': ['9999', 1]}
+
+# 1 функция - линейная сложность, O(n).
+def check_users(login, password):
+    if login in users and password in users[login]:
+        if users[login][1] == 0:
+            return 'Пожалуйста,в ближайшее время активируйте учетную запись.'
+        else:
+            return 'Вход выполнен.'
+    else:
+        return 'Неверный пароль или логин.'
+
+print(check_users('megalord', '1234'))
+print(check_users('pumpa95', '9999'))
+print(check_users('megalord', '1231'))
+print(check_users('megalorda', '1231'))
+print()
+
+# вторая функция - квадратичная сложность O(n^2).
+def check_users_2(login, password):
+    num = 0
+    for i in users:
+        num += 1
+        for z in users[i]:
+            if login == i:
+                if password == z:
+                    if users[login][1] == 1:
+                        return 'Вход выполнен.'
+                    else:
+                        return 'Пожалуйста,в ближайшее время активируйте учетную запись.'
+                else:
+                    return 'Неверный пароль.'
+            elif num == len(users):
+                return 'Неверный логин.'
+
+print(check_users_2('megalord', '1234'))
+print(check_users_2('pumpa95', '9999'))
+print(check_users_2('megalord', '1231'))
+print(check_users_2('megalorda', '1231'))
+
+# Первая функция эффективней, так как в ней по очереди осуществляются два поиска, во второй же используются
+# два цикла один в другом, из-за чего ее сложность становится квадратичной.
