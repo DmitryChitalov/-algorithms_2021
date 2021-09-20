@@ -72,7 +72,7 @@ MyTask.add_to_base_qu([7, 'Закрыть проект'])
 MyTask.show_qu()
 
 # 2. Предположим, что прошли проверку 4 задачи, но 1-3 не прошли
-print("2. Прошли проверку 4 задачи, но 1-3 не прошли")
+print("2. Прошли проверку 4 задачи, но 1, 3 не прошли")
 MyTask.pop_task_from_base(False)
 MyTask.pop_task_from_base(True)
 MyTask.pop_task_from_base(False)
