@@ -65,7 +65,7 @@ class QueueClass:
         raise StopIteration
 
 
-SC_OBJ = Tasks()
+SC_OBJ = QueueClass()
 
 # наполняем очередь
 
