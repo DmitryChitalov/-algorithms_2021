@@ -21,3 +21,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ASCII(number=31, count=0, result=''):
+    if count == 10:
+        print(result)
+        result = ''
+        count = 0
+    if number == 128:
+        print(result)
+        return
+    count += 1
+    number += 1
+    result += f'{number} - {chr(number)} '
+    return ASCII(number, count, result)
+
+
+if __name__ == '__main__':
+    ASCII()

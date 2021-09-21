@@ -15,3 +15,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculate(n, number=1, sum=0):
+    if n == 0:
+        return sum
+    sum += number
+    n -= 1
+    return calculate(n, -(number / 2), sum)
+
+
+if __name__ == '__main__':
+    print('Вывод:', calculate(int(input('Введите n: '))))

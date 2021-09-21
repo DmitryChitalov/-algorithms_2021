@@ -16,3 +16,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def is_equal(n, sum=0, result=-1):
+
+    if result == -1:
+        result = n * (n + 1) / 2
+
+    if n == 0:
+        if sum == result:
+            return True
+        return False
+
+    sum += n
+    n -= 1
+
+    return is_equal(n, sum, result)
+
+
+if __name__ == '__main__':
+    print(is_equal(int(input('Введите n: '))))

@@ -22,3 +22,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reversing(number, memory=''):
+    if number < 10:
+        return memory + f'{number}'
+    memory += f'{number % 10}'
+    return reversing(number // 10, memory)
+
+
+if __name__ == '__main__':
+    print('Повернутое число:', reversing(int(input('Введите число: '))))

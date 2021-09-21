@@ -28,3 +28,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+
+    sign = input('Введите арифметический знак: + - * / или 0. ')
+
+    if sign == '0':
+        return
+
+    try:
+        first_num = int(input('Введите первое число: '))
+        second_num = int(input('Введите второе число: '))
+
+        if sign == '/' and second_num == 0:
+            print('На ноль делить нельзя!')
+            return
+
+        if sign == '+':
+            result = first_num + second_num
+            print('Результат:', result, '\n')
+        elif sign == '-':
+            result = first_num - second_num
+            print('Результат:', result, '\n')
+        elif sign == '*':
+            result = first_num * second_num
+            print('Результат:', result, '\n')
+        elif sign == '/':
+            result = first_num / second_num
+            print('Результат:', result, '\n')
+        else:
+            print('Введите один из допустимых арифметических знаков: + - * / или 0.')
+
+    except ValueError:
+        print('Введите число.')
+
+    return calculator()
+
+
+if __name__ == '__main__':
+    calculator()
