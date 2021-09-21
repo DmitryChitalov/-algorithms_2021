@@ -16,7 +16,7 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def summ_row(n, count = 0, num = 1.0, summ = 0.0):
+def summ_row(n: int, count=0, num=1.0, summ=0.0):
     if count == n:
         print(f'Количество элементов: {n}, их сумма: {summ}')
     else:

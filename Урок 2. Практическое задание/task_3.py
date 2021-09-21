@@ -23,7 +23,7 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def reversal(n, count = ''):
+def reversal(n: int, count=''):
     if n == 0:
         print(f'Перевернутое число: {count}')
     else:

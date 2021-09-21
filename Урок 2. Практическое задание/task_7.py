@@ -17,16 +17,14 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def natural(n, count=0, summ=0, summ_str=''):
-    if count == n:
-        if summ == n * (n + 1) / 2:
-            print(f'{summ_str[:-1]} = {n}({n}+1)/2 = {summ}')
-        else:
-            print('Неверно')
-    else:
-        count += 1
-        summ_str += f'{count}+'
-        summ += count
-        return natural(n, count, summ, summ_str)
+def natural(n: int):
+    if n == 1:
+        return n
+    return natural(n - 1) + n
 
-natural(5)
+n = 5
+
+if natural(n) == n * (n + 1) / 2:
+    print(f'Для n = {n}\n{natural(n)} = {n}({n}+1)/2')
+else:
+    print('Неверно')

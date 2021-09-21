@@ -22,7 +22,7 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def table_ascii(n = 32, count = 0):
+def table_ascii(n=32, count=0):
     if n == 128:
         print()
     elif count == 10:
