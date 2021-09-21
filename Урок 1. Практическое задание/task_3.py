@@ -20,3 +20,36 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company = {
+    1: 'company_1',
+    2: 'company_2',
+    3: 'company_3',
+    4: 'company_4',
+    5: 'company_5',
+    6: 'company_6',
+    7: 'company_7',
+    8: 'company_8',
+    9: 'company_9',
+    10: 'company_10'
+}
+
+# 1 вариант
+
+def var1(company: dict):                    # O(n^2)
+    lst = list(company.keys())
+    for i in range(len(lst) - 1):
+        for x in range(len(lst) - i - 1):
+            if lst[x] < lst[x + 1]:
+                lst[x], lst[x + 1] = lst[x + 1], lst[x]
+        return [company[i] for i in lst[0:3]]
+
+
+print(var1(company))
+
+
+def var2(company: dict):                       # O(n log n)
+    return [company[i] for i in sorted(company.keys(), reverse=True)[0:3]]
+
+
+print(var2(company))
