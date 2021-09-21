@@ -16,3 +16,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equality(n):
+    return 0 if n == 0 else n + equality(n-1)
+
+
+test_num = int(input())
+print(equality(test_num) == test_num * (test_num + 1) / 2)

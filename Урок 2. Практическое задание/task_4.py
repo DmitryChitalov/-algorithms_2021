@@ -15,3 +15,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def row_numbers(n, start=1):
+    return 0 if n == 0 else start + row_numbers(n-1, start/-2)
+
+
+print("Сумма первых 3 элементов:", row_numbers(3))
+test_num = int(input('Введите количество элементов: '))
+print(f'Количество элементов: {test_num}, их сумма: {row_numbers(test_num)}')

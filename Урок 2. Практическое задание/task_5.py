@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_ASCII(start=32, k=0):
+    if start == 128:
+        return ''
+    if k == 10:
+        print()
+        k = 0
+    print(start, '-', chr(start), end=' ')
+    return table_ASCII(start+1, k+1)
+
+
+print(table_ASCII())

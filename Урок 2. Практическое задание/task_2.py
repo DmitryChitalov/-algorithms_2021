@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def various_numbers(n, even=0, odd=0):
+    if n == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even,odd}.'
+    return various_numbers(n // 10, even + 1, odd) if (n % 10) % 2 == 0 else various_numbers(n // 10, even, odd + 1)
+
+
+print(various_numbers(123))
+test_num = int(input('Введите число: '))
+print(various_numbers(test_num))
