@@ -21,26 +21,26 @@ secret_value = random.randint(0, 101)
 
 def process(counter: int) -> None:
     if counter:
-        while True:
-            try:
-                value = int(input('Введите число от 0 до 100: '))
-                if value > 100:
-                    raise ValueError()
-            except ValueError:
-                print ('Неверное число!')
-            else: break
+        try:
+            value = int(input('Введите число от 0 до 100: '))
+            if value > 100:
+                raise ValueError()
+        except ValueError:
+            process(counter)
 
         if value < secret_value:
-            print (f'Ваше число меньше, осталось {counter - 1} попыток')
+            print(f'Ваше число меньше, осталось {counter - 1} попыток')
             process(counter - 1)
+
         elif value > secret_value:
-            print (f'Ваше число больше, осталось {counter - 1} попыток')
+            print(f'Ваше число больше, осталось {counter - 1} попыток')
             process(counter - 1)
+
         else:
             print('Вы угадали! ')
+
     else:
         print(f'Загаданное число {secret_value}')
-
 
 
 def main():

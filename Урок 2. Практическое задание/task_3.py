@@ -25,17 +25,16 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+
 def process(value: int) -> str:
-    return str(value % 10) + process(value // 10) if value else ''
+    return f'{value % 10}{process(value // 10)}' if value else ''
 
 
 def main():
-    while True:
-        try:
-            print(f"Перевернутое число: {process(int(input('Введите натуральное число: ')))}")
-        except ValueError:
-            pass
-        else: break
+    try:
+        print(f"Перевернутое число: {process(int(input('Введите натуральное число: ')))}")
+    except ValueError:
+        print('Введены неверные данные.')
 
 
 if __name__ == '__main__':

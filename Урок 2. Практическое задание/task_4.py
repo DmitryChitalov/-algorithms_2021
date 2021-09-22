@@ -18,18 +18,18 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+
 def process(value: float, counter: int) -> float:
-    return value + process((value / 2) * -1, counter - 1) if counter else 0
+    return value + process(value / -2, counter - 1) if counter else 0
 
 
 def main():
-    while True:
-        try:
-            counter = int(input("Введите количество элементов: "))
-            print(f'Количество элементов: {counter}, их сумма: {process(1.0, counter)}')
-        except ValueError:
-            pass
-        else: break
+    try:
+        counter = int(input("Введите количество элементов: "))
+        print(f'Количество элементов: {counter}, их сумма: {process(1.0, counter)}')
+    except ValueError:
+        print('Введены неверные данные.')
+
 
 if __name__ == '__main__':
     main()

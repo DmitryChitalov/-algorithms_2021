@@ -21,6 +21,7 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+
 def process(value: int) -> tuple:
     even, not_even = 0, 0
 
@@ -36,14 +37,11 @@ def process(value: int) -> tuple:
 
 
 def main():
-    while True:
-        try:
-            result = process(int(input('Введите число: ')))
-        except ValueError:
-            pass
-        else: break
-
-    print(f'Четные: {result[0]}\nНечетные: {result[1]}')
+    try:
+        result = process(int(input('Введите число: ')))
+        print(f'Четные: {result[0]}\nНечетные: {result[1]}')
+    except ValueError:
+        print('Введены неверные данные.')
 
 
 if __name__ == '__main__':

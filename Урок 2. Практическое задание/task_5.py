@@ -24,8 +24,9 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+
 def process(symbol: int, counter: int = 1) -> None:
-    if (symbol < 128):
+    if symbol < 128:
         print(f'{symbol} - {chr(symbol)} ', end='\n' if counter % 10 == 0 else '')
         process(symbol + 1, counter + 1)
 

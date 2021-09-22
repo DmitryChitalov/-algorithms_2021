@@ -19,6 +19,7 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+
 def propcess_left_side(value: int) -> int:
     return value + propcess_left_side(value - 1) if value > 0 else 0
 
@@ -28,14 +29,12 @@ def propcess_right_side(value: int) -> int:
 
 
 def main():
-    while True:
-        try:
-            value = int(input('Введите число: '))
-        except ValueError:
-            pass
-        else: break
-
-    print(f"{'+'.join([str(x) for x in range(1, value + 1)])} {'=' if propcess_left_side(value) == propcess_right_side(value) else '!='} {value}({value}+1)/2")
+    try:
+        value = int(input('Введите число: '))
+        result_symbol = '=' if propcess_left_side(value) == propcess_right_side(value) else '!='
+        print(f"{'+'.join([str(x) for x in range(1, value + 1)])} {result_symbol} {value}({value}+1)/2")
+    except ValueError:
+        print('Введены неверные данные.')
 
 
 if __name__ == '__main__':
