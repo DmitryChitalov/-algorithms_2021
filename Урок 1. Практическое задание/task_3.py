@@ -20,3 +20,56 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+base_company = {
+    'Romashka': 100000,
+    'Astra': 150000,
+    'Rose': 125000,
+    'Pion': -10000,
+    'Tulpan': 300000,
+    'Сhrysanthemum': 600000
+}
+
+
+def profit_of_three(base_com):  # O(N**2)
+    lst_profit = [i for i in base_com.values()]  # O(N)
+    n = len(lst_profit) - 1  # O(N)
+    for i in lst_profit:  # O(N)
+        for j in range(0, n):  # O(N**2)
+            if lst_profit[j] > lst_profit[j + 1]:  # O(1)
+                temp = lst_profit[j]  # O(1)
+                lst_profit[j] = lst_profit[j + 1]  # O(1)
+                lst_profit[j + 1] = temp  # O(1)
+        n -= 1  # O(1)
+
+    # print(lst_profit)
+    # print(lst_profit[:-4:-1])
+
+    lst_company = []
+    for k, v in base_company.items():
+        if v in lst_profit[:-4:-1]:
+            lst_company.append(k)
+
+    return lst_company
+
+
+def profit_of_three_2(base_com):  # O(NLogN)
+
+    lst_profit = [i for i in base_com.values()]  # O(N)
+    lst_profit.sort(reverse=True)  # O(NLogN)
+    lst_company = [k for k, v in base_company.items() if v in lst_profit[:3]]  # O(N)
+
+    return lst_company
+
+
+print(profit_of_three(base_company))
+
+print('*' * 20)
+
+print(profit_of_three_2(base_company))
+
+'''
+Решение вторым способом будет быстрее так, как его сложноть в нотации "О-большое" равна
+NLogN, сложность первого способа N**2 ("пузырьковая сортировка"),
+ что занимает значительно больше времени.
+'''
