@@ -1,20 +1,43 @@
-"""
-Задание 6.
-Задание на закрепление навыков работы с очередью
+class QueueClass:
+    def __init__(self):
+        self.base = []
+        self.revision = []
+        self.resolve = []
 
-Реализуйте структуру "доска задач".
+    def is_empty(self):
+        return f'Основная очередь пуста: {self.base == []} \n' \
+               f'Очередь на доработку пуста: {self.revision == []}'
 
-Структура должна предусматривать наличие несольких очередей задач, например,
-1) базовой, откуда задачи берутся, решаются и отправляются в список решенных
-2) очередь на доработку, когда нерешенные задачи из первой очереди отправляются
-на корректировку решения
+    def to_base(self, item):
+        self.base.insert(0, item)
 
-После реализации структуры, проверьте ее работу на различных сценариях
+    def to_revision(self):
+        self.revision.insert(0, self.base.pop())
 
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
+    def from_base(self):
+        self.resolve.insert(0, self.base.pop())
+        return self.resolve
 
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
+    def from_revision(self):
+        self.resolve.insert(0, self.revision.pop())
+        return self.resolve
 
-Задание творческое. Здесь нет жестких требований к выполнению.
-"""
+    def size(self):
+        return f'Base queue: {len(self.base)} \n'\
+               f'Resolved queue: {len(self.resolve)} \n'\
+               f'Revision queue: {len(self.revision)}'
+
+
+if __name__ == '__main__':
+    test = QueueClass()
+    print(test.is_empty())
+
+    test.to_base('my_obj')
+    test.to_base(5)
+    test.to_base(True)
+    test.to_revision()
+
+    print(test.is_empty())
+    print(test.size())
+    print(test.from_base())
+    print(test.size())
