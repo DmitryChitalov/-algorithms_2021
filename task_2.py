@@ -41,4 +41,4 @@ def search_min_2(some_list):
 
 
 if __name__ == '__main__':
-    print(search_min([1, 2, 3]), search_min_2[4, 5, 6])
+    print(search_min([1, 2, 3]), search_min_2([4, 5, 6]))
