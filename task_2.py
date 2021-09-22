@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculate(number, even=0, odd=0):
+
+    if (number % 10) % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+
+    if number < 10:
+        return even, odd
+
+    return calculate(number // 10, even, odd)
+
+
+if __name__ == '__main__':
+    print('Количество четных и нечетных чисел равно:', calculate(int(input('Введите число: '))))

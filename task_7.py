@@ -16,3 +16,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculate(n, result=0):
+    
+    if n == 0:
+        return result
+    
+    result += n
+    n -= 1
+
+    return calculate(n, result)
+
+
+def comparison(n):
+    if (n * (n + 1) / 2) == calculate(n):
+        print('Они совпадают!')
+    else:
+        print('Они не равны!')
+
+
+if __name__ == '__main__':
+    comparison(5)
