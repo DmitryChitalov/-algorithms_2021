@@ -21,3 +21,45 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies_profit_per_year = {
+    'Yandex': 1004,
+    'Google': 3121,
+    'Apple': 2567,
+    'Microsoft': 1780,
+    'Samsung': 1593,
+    'LG': 504,
+    'Sony': 677,
+    'Huawei': 2981,
+    'Xiaomi': 1216
+}
+##################################################
+#Вариант 1 - сложнолсть O(n log n)
+def max_profit(rnd_dict):
+    rich_companies = list(sorted(companies_profit_per_year.items(), key=lambda el: (el[1], el[0]), reverse=True)) #O(n log n)
+    return rich_companies[:3] # O(1)
+
+
+print(max_profit(companies_profit_per_year))
+
+###################################################
+#Вариант 2 - сложность O(n log n)
+
+lst_v = []
+
+
+def the_highest_profit(rnd_dict):
+    val = rnd_dict.values()
+    a = lst_v
+    for elements in val:               # O(1)
+        lst_v.append(elements)         # O(1)
+        a.sort()                       # O(n log n)
+    return a[-3:]                      # O(1)
+
+
+b = the_highest_profit(companies_profit_per_year)
+
+for c, d in companies_profit_per_year.items():
+    for el in b:
+        if d == el:
+            print(f'{c}: {d}')
