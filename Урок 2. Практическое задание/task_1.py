@@ -28,3 +28,98 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# Вынес выполнение операций отдельно, чтобы код был далее был понятнее
+
+
+def my_oper(oper_sign, first_val, second_val):
+    """ Выполнение операции вынес в отдельную функцию для удобства"""
+    if oper_sign == '+':
+        oper_result = first_val + second_val
+    elif oper_sign == '-':
+        oper_result = first_val - second_val
+    elif oper_sign == '*':
+        oper_result = first_val * second_val
+    elif oper_sign == '/':
+        oper_result = first_val / second_val
+    return oper_result
+
+
+# --- Вариант 1 (для сдачи). Решение с рекурсией и полным выполнением условий задачи
+def best_recursion(oper_sign=None):
+    """ Если в аргумент функции подается знак, то пользователь вводит сразу значения,
+     поэтому input для знака сделан к конце кода"""
+    # Если в функцию сразу передан знак, то проверяем его наличие в списке допустимых
+    correct_sign = ['+', '-', '*', '/', '0']
+    msg_err_input = 'Вы вместо трехзначного числа ввели строку (((. Исправьтесь'
+    # Просим ввести пользователя корректный знак, если он не был передан в функцию
+    while oper_sign not in correct_sign:
+        oper_sign = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if oper_sign == '0':
+        return 'Good luck!'
+    while True:
+        try:
+            first_val = float(input('Введите первое число: '))
+            break
+        except ValueError:
+            print(msg_err_input)
+    while True:
+        try:
+            second_val = float(input('Введите второе число: '))
+            if oper_sign == '/' and round(second_val, 4) == 0:  # округлил вещ. число для сравнения
+                print('Введите значение отличное от 0!')
+            else:
+                break
+        except ValueError:
+            print(msg_err_input)
+    result = my_oper(oper_sign, first_val, second_val)
+    print(f'Результат операции: {round(result, 4)}')
+    return best_recursion()
+
+# Проверка:
+
+# Запускаем созданную функцию без знака или заранее можно указать знак операции
+print(best_recursion())
+# или так:
+# print(best_recursion('+'))
+
+
+# --- Вариант предв. Решение с рекурсией простое и без полной проверки по условиям задачи
+"""
+def my_recursion():
+    oper_sign = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if oper_sign == '0':
+        return 'Good luck!'
+    first_val = float(input('Введите первое число:'))
+    while True:
+        second_val = float(input('Введите второе число:'))
+        if second_val != 0:
+            break
+        print('Введите значение отличное от 0!')
+    result = my_oper(oper_sign, first_val, second_val)
+    print(f'Результат операции: {round(result, 2)}')
+    return my_recursion()
+
+
+# Запускаем созданную функцию
+print(my_recursion())
+
+"""
+
+# Решение с циклом, но без полной проверки по условию задачи:
+
+"""
+while True:
+    oper_sign = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if oper_sign == '0':
+            print('Good luck!')
+        break
+    first_val = float(input('Введите первое число:'))
+    while True:
+        second_val = float(input('Введите второе число:'))
+        if second_val != 0:
+            break
+        print('Введите значение отличное от 0!')
+    oper_result = my_oper(oper_sign, first_val, second_val)
+    print(f'Результат операции: {round(oper_result, 2)}')
+"""
