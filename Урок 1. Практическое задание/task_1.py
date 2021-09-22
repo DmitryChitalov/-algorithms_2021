@@ -29,9 +29,11 @@ def check_1(lst_obj):
 
     Сложность: !!!.
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(n)
+    return lst_to_set  # O(1)
 
+# T(n) = O(n) + O(1)
+# O(n)
 
 #############################################################################################
 def check_2(lst_obj):
@@ -44,11 +46,13 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
+            return False                   # O(1)
+    return True                            # O(1)
 
+# T(n) = O(n) + O(n) + O(1) + O(1) = 2O(n) + 2O(1)
+# O(n)
 
 #############################################################################################
 def check_3(lst_obj):
@@ -60,20 +64,25 @@ def check_3(lst_obj):
 
     Сложность: !!!
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(n)
+    lst_copy.sort()                          # O(n log n)
+    for i in range(len(lst_obj) - 1):        # O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
+            return False                     # O(1)
+    return True                              # O(1)
+
+# T(n) = O(n) + O(n log n) + + O(n) O(1) + O(1) + O(1) = O(n log n) + 2O(n) + 3O(1)
+# O(n log n)
 
 #############################################################################################
 
 
-for j in (50, 500, 1000, 5000, 1000):
+for j in (50, 500, 1000, 5000, 1000):                         # O(n)
     # Из 100000 чисел возьмем 'j' случайно выбранных
     # Всего 10 тыс. чисел
-    lst = random.sample(range(-100000, 100000), j)
+    lst = random.sample(range(-100000, 100000), j)            # O(n)
+
+# O(n)
 
 print(check_1(lst))
 print(check_2(lst))
