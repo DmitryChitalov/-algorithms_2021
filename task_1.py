@@ -41,6 +41,7 @@ def calculator():
         first_num = int(input('Введите первое число: '))
         second_num = int(input('Введите второе число: '))
 
+        #ВАЛИДАЦИЯ ДЕЛЕНИЯ НА НОЛЬ
         if sign == '/' and second_num == 0:
             print('На ноль делить нельзя!')
             return

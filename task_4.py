@@ -17,12 +17,12 @@
 """
 
 
-def calculate(n, number=1, sum=0):
+def calculate(n, number=1, result=0):
     if n == 0:
-        return sum
-    sum += number
+        return result
+    result += number
     n -= 1
-    return calculate(n, -(number / 2), sum)
+    return calculate(n, -(number / 2), result)
 
 
 if __name__ == '__main__':

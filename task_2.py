@@ -22,17 +22,13 @@
 
 def calculate(number, even=0, odd=0):
 
-    if number < 10:
-        if number % 2 == 0:
-            even += 1
-        else:
-            odd += 1
-        return even, odd
-
     if (number % 10) % 2 == 0:
         even += 1
     else:
         odd += 1
+
+    if number < 10:
+        return even, odd
 
     return calculate(number // 10, even, odd)
 

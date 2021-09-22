@@ -18,21 +18,23 @@
 """
 
 
-def is_equal(n, sum=0, result=-1):
-
-    if result == -1:
-        result = n * (n + 1) / 2
-
+def calculate(n, result=0):
+    
     if n == 0:
-        if sum == result:
-            return True
-        return False
-
-    sum += n
+        return result
+    
+    result += n
     n -= 1
 
-    return is_equal(n, sum, result)
+    return calculate(n, result)
+
+
+def comparison(n):
+    if (n * (n + 1) / 2) == calculate(n):
+        print('Они совпадают!')
+    else:
+        print('Они не равны!')
 
 
 if __name__ == '__main__':
-    print(is_equal(int(input('Введите n: '))))
+    comparison(5)

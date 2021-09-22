@@ -23,7 +23,7 @@
 """
 
 
-def ASCII(number=31, count=0, result=''):
+def table_ascii(number=31, count=0, result=''):
     if count == 10:
         print(result)
         result = ''
@@ -34,8 +34,8 @@ def ASCII(number=31, count=0, result=''):
     count += 1
     number += 1
     result += f'{number} - {chr(number)} '
-    return ASCII(number, count, result)
+    return table_ascii(number, count, result)
 
 
 if __name__ == '__main__':
-    ASCII()
+    table_ascii()
