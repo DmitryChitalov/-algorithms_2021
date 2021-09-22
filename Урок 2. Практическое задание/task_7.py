@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 7.	Напишите программу, доказывающую или проверяющую, что для множества
 натуральных чисел выполняется равенство: 1+2+...+n = n(n+1)/2,
@@ -16,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def propcess_left_side(value: int) -> int:
+    return value + propcess_left_side(value - 1) if value > 0 else 0
+
+
+def propcess_right_side(value: int) -> int:
+    return int(value * (value + 1) / 2)
+
+
+def main():
+    while True:
+        try:
+            value = int(input('Введите число: '))
+        except ValueError:
+            pass
+        else: break
+
+    print(f"{'+'.join([str(x) for x in range(1, value + 1)])} {'=' if propcess_left_side(value) == propcess_right_side(value) else '!='} {value}({value}+1)/2")
+
+
+if __name__ == '__main__':
+    main()
