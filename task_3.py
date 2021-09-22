@@ -44,8 +44,8 @@ def find_top_3_company_two(some_dict):
 
     for i in range(len(value_list) - 1):                                             # O(n)
         for j in range(len(value_list) - i - 1):                                     # O(n)
-            if value_list[j] < value_list[j + 1]:                                    # O(n)
-                value_list[j], value_list[j + 1] = value_list[j + 1], value_list[j]  # O(n)
+            if value_list[j] < value_list[j + 1]:                                    # O(1)
+                value_list[j], value_list[j + 1] = value_list[j + 1], value_list[j]  # O(1)
 
     result = []                         # O(1)
     for el in value_list:               # O(n)
@@ -57,7 +57,7 @@ def find_top_3_company_two(some_dict):
 
     return result  # O(1)
 
-    # По итогу, как я понимаю: O(n^4)
+    # По итогу, как я понимаю: O(n^2)
 
     # Вывод: используйте встроенные функции и будет вам счастье.
 

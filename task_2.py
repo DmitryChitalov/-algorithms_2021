@@ -8,26 +8,8 @@
 Сложность такого алгоритма: O(n^2) - квадратичная.
 
 
-def search_min(some_list):
-    min_num = some_list[0]          # O(1)
-    for el_one in some_list:        # O(n)
-        for el_two in some_list:    # O(n)
-            if el_one < el_two:     # O(1)
-                min_num = el_one    # O(1)
-    return min_num                  # O(1)
-
-
-
 Второй, в виде функции, должен обеспечивать поиск минимального значения для списка.
 Сложность такого алгоритма: O(n) - линейная.
-
-
-def search_min(some_list):
-    min_num = some_list[0]   # O(1)
-    for el in some_list:     # O(n)
-        if el < min_num:     # O(1)
-            min_num = el     # O(1)
-    return min_num           # O(1)
 
 
 Не забудьте указать сложность каждого из двух алгоритмов. Для лучшего закрепления темы
@@ -39,3 +21,24 @@ def search_min(some_list):
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def search_min(some_list):
+    min_num = some_list[0]          # O(1)
+    for el_one in some_list:        # O(n)
+        for el_two in some_list:    # O(n)
+            if el_one < el_two:     # O(1)
+                min_num = el_one    # O(1)
+    return min_num                  # O(1)
+
+
+def search_min_2(some_list):
+    min_num = some_list[0]   # O(1)
+    for el in some_list:     # O(n)
+        if el < min_num:     # O(1)
+            min_num = el     # O(1)
+    return min_num           # O(1)
+
+
+if __name__ == '__main__':
+    print(search_min([1, 2, 3]), search_min_2[4, 5, 6])
