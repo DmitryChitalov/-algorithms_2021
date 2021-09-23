@@ -22,3 +22,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def inverter(number):
+    residual, digit = divmod(number, 10)
+    if residual == 0:
+        return str(digit)
+    else:
+        return str(digit) + inverter(residual)
+
+
+if __name__ == "__main__":
+    my_number = int(input("Введите число:\n"))
+    try:
+        print(inverter(my_number))
+    except ValueError:
+        print("Нужно ввести число")
