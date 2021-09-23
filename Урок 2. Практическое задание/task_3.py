@@ -22,3 +22,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rec(num,new_num=''):
+    d = len(str(num))
+    div = ['0' for i in range(d - 1)]
+    div = int(f'1{"".join(div)}')
+    first_num = num // div
+    new_num += str(first_num)
+    if len(str(num)) == 1:
+        print(new_num[::-1])
+    else:
+        num = num % div
+        return rec(num,new_num)
+
+rec(12340)
