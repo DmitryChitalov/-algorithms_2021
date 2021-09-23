@@ -28,3 +28,45 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def operation(symbol):
+
+    if symbol == '0':
+        print('Вы вышли из программы.')
+        exit()
+    elif symbol in ['+', '-', '*', '/']:
+        return symbol
+    else:
+        return operation(input('Вы ввели неизвестную операцию. Введите операцию (+, -, *, / или 0 для выхода): '))
+
+
+def check_number(num):
+
+    if num.isdigit():
+        if operator == '/' and num == '0':
+            return check_number(input('Делить на "0" нельзя, введите другое число, отличное от "0": '))
+        return num
+    else:
+        return check_number(input('Вы ввели НЕ число! Введите число: '))
+
+
+operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+operator = operation(operator)
+
+a = input('Введите первое число: ')
+a = check_number(a)
+
+b = input('Введите второе число: ')
+b = check_number(b)
+
+
+if operator == '+':
+    print(f'Результат: сумма {a} и {b} = {float(a) + float(b):.2f}')
+elif operator == '-':
+    print(f'Результат: разность {a} и {b} = {float(a) - float(b):.2f}')
+elif operator == '*':
+    print(f'Результат: произведение {a} и {b} = {float(a) * float(b):.2f}')
+elif operator == '/':
+    print(f'Результат: деление {a} на {b} = {float(a) / float(b):.2f}')
+

@@ -11,3 +11,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def guess_the_number(number, count=1):
+    global a
+    str_a = f'-> Введите целое число от 1 до 100: '
+    # print(f'Счетчик: {count}')
+
+    if number == a and count <= 10:
+        return print(f'Вы угадали это число: {number}')
+    elif count == 10:
+        print(f'    Число попыток закончилось ({count})')
+    elif number > a:
+        count += 1
+        print(f'Введенное число больше загаданного')
+        return guess_the_number(int(input(str_a)), count)
+    elif number < a:
+        count += 1
+        print(f'Введенное число меньше загаданного')
+        return guess_the_number(int(input(str_a)), count)
+
+
+a = randint(1, 100)
+print(f'Вам предстоит угадать число от 1 до 100')
+# print(f'Загаданное число: {a}')
+b = int(input('-> Введите целое число от 1 до 100: '))
+guess_the_number(b)
+
+'''Валидность введенных данных не проверяю, считаем, что данные вводятся верно по условию.'''
