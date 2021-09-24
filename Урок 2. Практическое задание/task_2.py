@@ -18,3 +18,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def number_check(_num, digit_1=0, digit_2=0):
+    if _num == 0:
+        return print(f'The quantity of even and odd digit in number is equally : ({digit_1}, {digit_2})')
+    else:
+        num = _num % 10
+        _num = _num // 10
+        if num % 2 == 0:
+            digit_1 += 1
+        else:
+            digit_2 += 1
+        return number_check(_num, digit_1, digit_2)
+
+
+my_num = int(input('Please enter a number: '))
+number_check(my_num)
