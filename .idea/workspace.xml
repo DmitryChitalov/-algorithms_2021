@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f68dc7dc-6e6c-4847-b90a-ae2b6581665d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/algorithms_2021.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 1. Практическое задание/task_6.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 1. Практическое задание/task_6.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python.task_5 (1)">
+  <component name="RunManager" selected="Python.task_2 (1)">
     <configuration name="task_2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="algorithms_2021" />
       <option name="INTERPRETER_OPTIONS" value="" />
