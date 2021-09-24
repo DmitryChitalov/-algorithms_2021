@@ -24,7 +24,7 @@
 """
 
 
-def rec(num,new_num=''):
+def rec(num, new_num=''):
     d = len(str(num))
     div = ['0' for i in range(d - 1)]
     div = int(f'1{"".join(div)}')
@@ -34,6 +34,7 @@ def rec(num,new_num=''):
         print(new_num[::-1])
     else:
         num = num % div
-        return rec(num,new_num)
+        return rec(num, new_num)
+
 
 rec(12340)

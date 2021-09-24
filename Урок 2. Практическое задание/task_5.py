@@ -21,15 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
 # print(chr())
 
-def rec(num, enumerator = 0):
+def rec(num, enumerator=0):
     if num == 128:
         return 'все'
     else:
-        if enumerator in [10,20,30,40,50,60,70,80,90]:
+        if enumerator in [10, 20, 30, 40, 50, 60, 70, 80, 90]:
             print(f'{num} - {chr(num)}')
         else:
-            print(f'{num} - {chr(num)}',end=' ')
-        return rec(num+1,enumerator+1)
+            print(f'{num} - {chr(num)}', end=' ')
+        return rec(num + 1, enumerator + 1)
+
+
 rec(32)
