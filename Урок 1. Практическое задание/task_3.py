@@ -33,9 +33,9 @@ base_company = {
 
 def profit_of_three(base_com):  # O(N**2)
     lst_profit = [i for i in base_com.values()]  # O(N)
-    n = len(lst_profit) - 1  # O(N)
+    n = len(lst_profit) - 1  # O(N) --> O(1)
     for i in lst_profit:  # O(N)
-        for j in range(0, n):  # O(N**2)
+        for j in range(0, n):  # O(N**2) --> O(N), записал итог работы 2х циклов
             if lst_profit[j] > lst_profit[j + 1]:  # O(1)
                 temp = lst_profit[j]  # O(1)
                 lst_profit[j] = lst_profit[j + 1]  # O(1)

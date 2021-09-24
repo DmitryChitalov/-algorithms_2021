@@ -22,9 +22,9 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: O(N**2).
+    Сложность: O(N).
     """
-    lst_to_set = set(lst_obj)  # O(N**2)
+    lst_to_set = set(lst_obj)  # O(N**2) --> O(N)
     return lst_to_set  # O(1)
 
 
@@ -37,7 +37,7 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: O(N).
+    Сложность: O(N). --> O(N)*O(N) итоговая, конечно же, O(N**2)
     """
     for j in range(len(lst_obj)):          # O(len(lst_obj))
         if lst_obj[j] in lst_obj[j+1:]:    # O(len(lst_obj[j+1 : N])
@@ -55,9 +55,9 @@ def check_3(lst_obj):
 
     Сложность: O(NlogN)
     """
-    lst_copy = list(lst_obj)                 # O(len(lst_obj))
+    lst_copy = list(lst_obj)                 # O(len(lst_obj)) --> O(N) N=len(lst_obj)
     lst_copy.sort()                          # O(NlogN)
-    for i in range(len(lst_obj) - 1):        # O(1)
+    for i in range(len(lst_obj) - 1):        # O(1) --> O(N) Спешка
         if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
     return True                              # O(1)

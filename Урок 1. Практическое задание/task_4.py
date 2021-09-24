@@ -25,3 +25,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# O(N)
+
+
+def check_autorization(users, user, password):
+    for k, v in users.items():
+        if k == user:
+            if v['password'] == password:
+                if v['activation']:
+                    return f'Доступ открыт.'
+                else:
+                    return f'Активируйте учетную запись.'
+            else:
+                return f'Неверный пароль!'
+
+    return f'Такого пользователя нет.'
+
+########################################################
+
+# O(1)
+
+
+def check_autorization_2(users, user, password):
+    if users.get(user):
+        if users[user]['password'] == password and users[user]['activation']:
+            return f'Доступ открыт.'
+        elif users[user]['password'] == password and not users[user]['activation']:
+            return f'Активируйте учетную запись.'
+        elif users[user]['password'] != password:
+            return f'Неверный пароль!'
+    return f'Такого пользователя нет.'
+
+
+users_tbl = {
+        'Andrey': {'password': '1', 'activation': True},
+        'Ivan': {'password': '2', 'activation': False},
+        'Vasiliy': {'password': '3', 'activation': True}
+}
+
+print(check_autorization(users_tbl, 'Andrey', '1'))
+print(check_autorization_2(users_tbl, 'Ivan', '2'))
+print(check_autorization(users_tbl, 'Sergey', '1'))
+print(check_autorization(users_tbl, 'Andrey', '2'))
+
+''' 
+Решение вторым способом будет быстрее так, как имеет константную сложность и не зависит от количества
+пользователей в словаре. 
+ '''
