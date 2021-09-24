@@ -19,22 +19,28 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
-d = [3,2,3,4,5,6,1,8,2,10]
+d = [3, 2, 3, 4, 5, 6, 1, 8, 2, 10]
 
-def min1(list):                 # Общая сложность: T = 6 + 2n = 2n
-    v = list[0]                 # O(1)
-    for i in range(len(d)):     # T = 2n + 1 =  1n + 1 = 1n
-        if v >= d[i]:               # O(1) + O(1) = 2
-            v = d[i]                    # O(1)
-    print(v)                    # O(1)
+
+def min1(list):  # Общая сложность: T = 6 + 2n = 2n
+    v = list[0]  # O(1)
+    for i in range(len(d)):  # T = 2n + 1 =  1n + 1 = 1n
+        if v >= d[i]:  # O(1) + O(1) = 2
+            v = d[i]  # O(1)
+    print(v)  # O(1)
+
+
 min1(d)
 
-def min2(list):                             # Общая сложность: T = 6 + n**2 = n**2
-    v = list[0]                             # O(1)
-    for num1 in list:                       # T = n**2
-        for c in range(len(list)):              # n + 1 + 1 = n
-            num2 = list[c]                          # 1
-            if num1 > num2 and num1 < v:            #  1 + 1 + 1 = 3
-                v = num2                                # 1
-    print(v)                                # O(1)
+
+def min2(list):  # Общая сложность: T = 6 + n**2 = n**2
+    v = list[0]  # O(1)
+    for num1 in list:  # T = n**2
+        for c in range(len(list)):  # n + 1 + 1 = n
+            num2 = list[c]  # 1
+            if num1 > num2 and num1 < v:  # 1 + 1 + 1 = 3
+                v = num2  # 1
+    print(v)  # O(1)
+
+
 min2(d)
