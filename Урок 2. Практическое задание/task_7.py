@@ -16,3 +16,48 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import re
+RE_Nat_number = re.compile(r'^\d+$')
+
+
+def get_left_expression(n, sum = 0):
+    if n != 1:
+        sum += n
+        return get_left_expression(n-1, sum)
+    else:
+        return sum + n
+
+def get_right_expression(n):
+    return int(n*(n+1)/2)
+
+
+def input_number():
+    num = input(
+'''\nДля выхода - символ "X"\n
+Доказываем равенство 1+2+...+n = n*(n+1)/2
+        
+Введите количество элементов n: ''')
+
+    if RE_Nat_number.fullmatch(num):
+        num = int(num)
+        l = get_left_expression(num)
+        r = get_right_expression(num)
+        print(f'\nКоличество элементов: {num}'
+              f'\nзначение  левой части выражения '
+              f'(1+2+...+n): {l}'
+              f'\nзначение правой части выражения '
+              f'(n*(n+1)/2): {r}')
+
+        not_str = ' ' if l == r else ' не '
+        print(f'\nЛевая и правая части равенства -{not_str}равны друг другу!')
+
+    elif num.lower() == 'x' or num.lower() == 'х':
+        exit()
+
+    else:
+        print(f'"{num}" - не натуральное число, исправьтесь.\n')
+        input_number()
+
+
+if __name__ == '__main__':
+    input_number()

@@ -18,3 +18,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import re
+
+RE_Nat_number = re.compile(r'^\d+$')
+
+# number = 45131256
+# even - 3
+# odd  - 5
+
+def get_digits_count(num, even=0, odd=0):
+    if num == 0:
+        return(even, odd)
+    else:
+        if (num % 10) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return get_digits_count(num // 10, even, odd)
+
+# print((count_digits(number)))
+
+
+def input_number():
+    number = input('Введите натуральное число\n'
+                   '(Для выхода - символ "X")\n')
+
+    if RE_Nat_number.fullmatch(number):
+        print('Ваше число содержит:\n\t- чётных цифр:  \t{}\n\t- нечётных цифр:\t{}'.format(
+            *get_digits_count(int(number))))
+
+    elif number.lower() == 'x' or number.lower() == 'х' :
+        exit()
+
+    else:
+        print(f'"{number}" - не натуральное число, исправьтесь.\n')
+        input_number()
+
+
+if __name__ == '__main__':
+    input_number()

@@ -15,3 +15,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import re
+RE_Nat_number = re.compile(r'^\d+$')
+
+
+def do_n_half(n, sum = 0):
+    if n == 1:
+        return sum + 1/(-2)**(n-1)
+    else:
+        return do_n_half(n-1, sum + 1/(-2)**(n-1))
+
+
+def input_number():
+    number = input('\n(Для выхода - символ "X")'
+                   '\nВведите количество элементов: ')
+
+    if RE_Nat_number.fullmatch(number):
+        print(f'\nКоличество элементов: {number}, их сумма: {do_n_half(int(number))}')
+
+    elif number.lower() == 'x' or number.lower() == 'х':
+        exit()
+
+    else:
+        print(f'"{number}" - не натуральное число, исправьтесь.\n')
+        input_number()
+
+
+if __name__ == '__main__':
+    input_number()
