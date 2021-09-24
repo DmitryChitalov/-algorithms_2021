@@ -20,3 +20,46 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from uuid import uuid4
+import hashlib
+import sqlite3
+
+# 1 простой вариант
+salt = uuid4().hex
+passw = '123'
+
+base_passw = hashlib.sha256(salt.encode() + passw.encode()).hexdigest()
+print(base_passw)
+
+def login_1():
+    if hashlib.sha256(salt.encode() + input('Введите пароль: ').encode()).hexdigest() == base_passw:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели неправильный пароль')
+
+login_1()
+
+
+# 2 вариант через БД
+conn = sqlite3.connect("mydatabase.db")
+cursor = conn.cursor()
+cursor.execute("DROP TABLE IF EXISTS users;")
+cursor.execute("""CREATE TABLE users
+                  (password_hash VARCHAR(100))
+               """)
+cursor.execute(f"""INSERT INTO users
+                  VALUES ('{base_passw}')
+                  """)
+
+sql_pass = cursor.execute("SELECT password_hash FROM users;").fetchone()[0]
+conn.close()
+print(sql_pass)
+
+def login_2():
+    if hashlib.sha256(salt.encode() + input('Введите пароль: ').encode()).hexdigest() == sql_pass:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели неправильный пароль')
+
+login_2()

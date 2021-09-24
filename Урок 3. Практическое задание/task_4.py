@@ -15,3 +15,24 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from uuid import uuid4
+import hashlib
+
+salt = uuid4().hex
+
+class Page():
+
+    def __init__(self, url):
+        self.url = url
+
+    def get_cache(self):
+        dict_cache = {}
+        dict_cache.setdefault(self.url, hashlib.sha256(salt.encode() + self.url.encode()).hexdigest())
+        return dict_cache
+
+page_1 = Page('geekbrains.ru')
+page_2 = Page('github.com')
+
+print(page_1.get_cache())
+print(page_2.get_cache())

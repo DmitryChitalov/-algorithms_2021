@@ -16,3 +16,14 @@
 р
 а
 """
+
+s = 'papa'
+
+def uniq(s: str, set_ = set()):
+    if len(s) != 1:
+        set_.add(hash(s[:-1]))
+        set_.add(hash(s[1:]))
+        return uniq(s[:-1], set_)
+    return f'{len(set_)} уникальных подстрок'
+
+print(f'{s} - {uniq(s)}')
