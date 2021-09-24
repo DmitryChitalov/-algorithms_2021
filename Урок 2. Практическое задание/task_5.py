@@ -23,8 +23,6 @@
 """
 
 
-# print(chr())
-
 def rec(num, enumerator=0):
     if num == 128:
         return 'все'
