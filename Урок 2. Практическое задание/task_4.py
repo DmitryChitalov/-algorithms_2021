@@ -12,3 +12,18 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+<<<<<<< 9cc3dfed95c8b84cd33355135898a9760fe23a70
+=======
+
+
+def sum_(n):
+    def sum_n(el, num=1):
+        if el <= 0:
+            return 0
+        else:
+            return num + sum_n(el - 1, -num / 2)
+    print(f'The quantity of elements: {n}, the amount of elements: {sum_n(n)}')
+
+
+sum_(int(input('Please enter the number of elements: ')))
+>>>>>>> Task 4 completed
