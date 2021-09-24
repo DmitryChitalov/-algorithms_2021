@@ -17,14 +17,40 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
-
-Пример:
-Введите операцию (+, -, *, / или 0 для выхода): +
-Введите первое число: 214
-Введите второе число: 234
-Ваш результат 448
-Введите операцию (+, -, *, / или 0 для выхода): -
-Введите первое число: вп
-Вы вместо трехзначного числа ввели строку (((. Исправьтесь
-Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def programme():
+    sign = input('Please choose an action: +, -, *, / or enter 0 for exit): ')
+    if sign == '0':
+        return print('Exit')
+    elif sign in '+-*/':
+        try:
+            num_1 = int(input('Enter the first number: '))
+            num_2 = int(input('Enter the second number: '))
+            if sign == '+':
+                print(f'Your result is {num_1 + num_2}')
+                return programme()
+            if sign == '-':
+                print(f'Your result is {num_1 - num_2}')
+                return programme()
+            if sign == '*':
+                print(f'Your result is {num_1 * num_2}')
+                return programme()
+            if sign == '/':
+                if num_2 == 0:
+                    print('Zero division is impossible!')
+                    return programme()
+                else:
+                    print(f'Your result is {num_1 / num_2}')
+                    return programme()
+        except ValueError:
+            print('You entered str-class, but you need int-class. Please adjust it!')
+            return programme()
+    else:
+        print('The sign is incorrect!')
+        return programme()
+
+
+programme()
+
+
