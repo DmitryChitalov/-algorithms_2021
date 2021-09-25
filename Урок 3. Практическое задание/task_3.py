@@ -10,9 +10,24 @@
 рара - 6 уникальных подстрок
 
 рар
-ра
+ра!
 ар
-ара
+ара!
 р
-а
+а!
 """
+
+
+# воспользовался встроенной функцией hash
+def leng_substr(world):
+    my_set = set()
+    for i in range(len(world)):
+        for z in range(i, len(world)):
+            my_set.add(hash(world[i:z + 1]))
+    my_set.remove(hash(world))
+    return len(my_set)
+
+
+my_str = 'papa'
+print(leng_substr(my_str))
+print(leng_substr(input('Введите слово: ')))

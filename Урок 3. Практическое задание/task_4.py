@@ -15,3 +15,21 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+m = 'vk.com'
+cache = {}
+
+
+def page_caching(site):
+    salt = '9f7ca7161a8e45908faaef224089d445'
+    hash_site = hashlib.sha256(site.encode()+salt.encode()).hexdigest()
+    if cache.get(hash_site):
+        return cache[hash_site]
+    else:
+        cache[hash_site] = cache.get(hash_site, site)
+        return site
+
+
+print(page_caching(m))
+print(page_caching(m))
