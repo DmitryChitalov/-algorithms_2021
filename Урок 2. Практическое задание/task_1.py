@@ -28,3 +28,38 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc_recursion() -> None:
+    """
+    Рекурсивная функция калькулятор
+    :return: None
+    """
+    available_oprations = ('+', '-', '*', '/')
+    operation = input("Введите знак операции (+, -, *, / или 0 для выхода): ")
+    if operation == '0':
+        print("Всего доброго! До свидания!")
+        return
+    elif operation in available_oprations:
+        op1 = float(input("Введите первый операнд: "))
+        op2 = float(input("Введите второй операнд: "))
+
+        if operation == '+':
+            print(f"{op1} + {op2} = {op1 + op2}")
+        elif operation == '-':
+            print(f"{op1} - {op2} = {op1 - op2}")
+        elif operation == '*':
+            print(f"{op1} * {op2} = {op1 * op2}")
+        else:
+            if operation == '/' and op2 == 0.0:
+                print("На ноль делить нельзя!")
+            else:
+                print(f"{op1} / {op2} = {op1 / op2}")
+    else:
+        print(f"Я не знаю операцию {operation}. Используйте только знакомые мне операции, пожалуйста!")
+
+    calc_recursion()
+
+
+if __name__ == '__main__':
+    calc_recursion()

@@ -16,3 +16,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_sequence(num: int) -> int:
+    if num == 0:
+        return num
+    else:
+        return num + sum_of_sequence(num-1)
+
+
+if __name__ == '__main__':
+    try:
+        num = int(input("Введите количество элементов последовательности (натуральное число): "))
+        sum1 = sum_of_sequence(num)
+        sum2 = int(num * (num + 1) / 2)
+        print(f"Raw sum of numbers is {sum1}")
+        print(f"The Sum of the sequence according to the formula is {sum2}")
+        print("The formula is correct!" if sum1 == sum2 else "The formula is wrong!")
+    except ValueError as ex:
+        print("I need a number!")

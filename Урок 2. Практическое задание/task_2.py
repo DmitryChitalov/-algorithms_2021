@@ -18,3 +18,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def num_counter_recursion(number: int) -> dict:
+    counter = {"odd": 0, "even": 0}
+    if number == 0:
+        return counter
+    if (number % 10) % 2 == 0:
+        counter['even'] += 1
+    else:
+        counter['odd'] += 1
+    next_dig = num_counter_recursion(number//10)
+    counter['even'] += next_dig['even']
+    counter['odd'] += next_dig['odd']
+    return counter
+
+
+if __name__ == '__main__':
+    num = -1
+    while num != '0':
+        num = input("Введите число (0 for exit): ")
+        if num.isdigit():
+            print(num_counter_recursion(int(num)))
+        else:
+            print("Мне нужно натуральное число!")
+            continue

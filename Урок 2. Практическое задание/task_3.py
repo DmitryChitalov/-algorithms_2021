@@ -22,3 +22,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from pprint import pprint
+
+
+def revers_number(number: int) -> str:
+    if number == 0:
+        return ''
+    return f"{number % 10}{revers_number(number // 10)}"
+
+
+if __name__ == '__main__':
+    # TODO: Куда развить: добавить обработку случая, когда число не целое.
+    num = -1
+    while num != 0:
+        sig = 1
+        try:
+            num = int(input("Введите число (0 for exit): "))
+            if num < 0:
+                sig = -1
+            reversed_num = revers_number(num * sig)
+            print(reversed_num if sig > 0 else f"{reversed_num}-")
+        except Exception as ex:
+            pprint(ex.args)
