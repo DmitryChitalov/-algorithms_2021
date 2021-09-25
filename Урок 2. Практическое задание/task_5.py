@@ -27,7 +27,7 @@ def rec(num, enumerator=0):
     if num == 128:
         return 'все'
     else:
-        if enumerator in [10, 20, 30, 40, 50, 60, 70, 80, 90]:
+        if num % 10 == 0:
             print(f'{num} - {chr(num)}')
         else:
             print(f'{num} - {chr(num)}', end=' ')
