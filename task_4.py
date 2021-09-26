@@ -15,3 +15,34 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+
+
+class Pages:
+
+    def __init__(self):
+        self.cache = {}
+        self.salt = 'Я люблю солить <3'
+
+    def create_hash(self, url):
+        return hashlib.sha256(self.salt.encode() + url.encode()).hexdigest()
+
+    def add_in_cache(self, url):
+        print('Добавлено в кэш.')
+        self.cache[self.create_hash(url)] = url
+
+    def find_in_cache(self, url):
+        if self.cache.get(self.create_hash(url)):
+            print(self.cache[self.create_hash(url)])
+        else:
+            self.add_in_cache(url)
+
+
+if __name__ == '__main__':
+    a = Pages()
+    a.find_in_cache('https://www.spotify.com/us/')
+    a.find_in_cache('https://www.spotify.com/us/')
+    a.find_in_cache('https://vk.com/')
+    print(a.cache)

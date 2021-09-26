@@ -20,3 +20,36 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+import hashlib
+
+
+def check_password():
+    salt = 'Я люблю солить хеши <3'
+    first_password = hashlib.sha256(salt.encode() + input('Введите пароль: ').encode('utf-8'))
+    print(first_password.hexdigest())
+    second_password = hashlib.sha256(salt.encode() + input('Введите пароль повторно: ').encode('utf-8'))
+    if first_password.hexdigest() == second_password.hexdigest():
+        print('Вы ввели правильный пароль.')
+    else:
+        print('Вы ввели неправильный пароль.')
+
+
+def check_password_upgrade():
+    salt = 'Я люблю солить хеши <3'
+    with open('password.txt', 'w', encoding='utf-8') as file:
+        phash = hashlib.sha256(salt.encode() + input('Введите пароль: ').encode('utf-8'))
+        print(phash.hexdigest())
+        file.write(phash.hexdigest())
+    second_password = hashlib.sha256(salt.encode() + input('Введите пароль повторно: ').encode('utf-8')).hexdigest()
+    with open('password.txt', 'r', encoding='utf-8') as file:
+        if file.readline() == second_password:
+            print('Вы ввели правильный пароль.')
+        else:
+            print('Вы ввели неправильный пароль.')
+
+
+if __name__ == '__main__':
+    check_password()
+    check_password_upgrade()
