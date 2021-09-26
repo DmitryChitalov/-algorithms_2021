@@ -30,6 +30,7 @@ print("Подключение выполнено!")
 passwd = input('Введите пароль: ')
 salt = 'login_user'
 hash_obj = hashlib.sha256(passwd.encode('utf-8') + salt.encode('utf-8'))
+print(hash_obj.hexdigest())
 # 3b2aded5e8d001845710769929773d9c3fa579615eb2e1897b1da5841437ce32 (if passwd == 'password')
 try:
     # SQL
