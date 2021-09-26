@@ -6,7 +6,7 @@
 есть ли в кэше соответствующая страница, если есть, получаем
 если нет, то вносить ее в кэш
 
-хеш-url : url
+url : хеш-url
 
 
 Подсказка: задачу решите обязательно с применением 'соленого' хеширования и хеш-таблиц
@@ -15,3 +15,15 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+url_dict = {}
+salt = 'login'
+def add_url(dct: dict, ur: str):
+    if dct.get(ur) is None:
+        dct.setdefault(ur, hashlib.sha256(ur.encode() + salt.encode()).hexdigest())
+        return f'Хеш url {ur} занесен'
+    else:
+        return dct.get(ur)
+
+print(add_url(url_dict, r'https://yandex.ru/'))
