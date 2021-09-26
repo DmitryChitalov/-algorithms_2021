@@ -53,3 +53,4 @@ try:
     print('Вы ввели правильный пароль')
 finally:
     connection.close()
+    print('Сессия завершена')
