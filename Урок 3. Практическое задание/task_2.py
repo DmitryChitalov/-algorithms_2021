@@ -29,11 +29,14 @@ import sqlite3
 salt = uuid4().hex
 passw = '123'
 
-base_passw = hashlib.sha256(salt.encode() + passw.encode()).hexdigest()
+def get_hash(p):
+    return hashlib.sha256(salt.encode() + p.encode()).hexdigest()
+
+base_passw = get_hash(passw)
 print(base_passw)
 
 def login_1():
-    if hashlib.sha256(salt.encode() + input('Введите пароль: ').encode()).hexdigest() == base_passw:
+    if get_hash(input('Введите пароль: ')) == base_passw:
         print('Вы ввели правильный пароль')
     else:
         print('Вы ввели неправильный пароль')
@@ -57,7 +60,7 @@ conn.close()
 print(sql_pass)
 
 def login_2():
-    if hashlib.sha256(salt.encode() + input('Введите пароль: ').encode()).hexdigest() == sql_pass:
+    if get_hash(input('Введите пароль: ')) == sql_pass:
         print('Вы ввели правильный пароль')
     else:
         print('Вы ввели неправильный пароль')

@@ -20,6 +20,7 @@ from uuid import uuid4
 import hashlib
 
 salt = uuid4().hex
+dict_cache = {}
 
 class Page():
 
@@ -27,12 +28,15 @@ class Page():
         self.url = url
 
     def get_cache(self):
-        dict_cache = {}
-        dict_cache.setdefault(self.url, hashlib.sha256(salt.encode() + self.url.encode()).hexdigest())
-        return dict_cache
+        if dict_cache.get(self.url):
+            print(f'{self.url} уже есть в кэше')
+        else:
+            dict_cache.setdefault(self.url, hashlib.sha256(salt.encode() + self.url.encode()).hexdigest())
 
 page_1 = Page('geekbrains.ru')
 page_2 = Page('github.com')
+page_3 = Page('github.com')
 
-print(page_1.get_cache())
-print(page_2.get_cache())
+page_1.get_cache()
+page_2.get_cache()
+page_3.get_cache()
