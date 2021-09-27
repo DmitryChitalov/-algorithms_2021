@@ -23,35 +23,54 @@
 import hashlib
 import pymysql.cursors
 
-# Подключиться к базе данных.
-connection = pymysql.connect(host='localhost', user='root', password='*****', db='user_pass', charset='utf8mb4')
-print("Подключение выполнено!")
 
-passwd = input('Введите пароль: ')
-salt = 'login_user'
-hash_obj = hashlib.sha256(passwd.encode('utf-8') + salt.encode('utf-8'))
-print(hash_obj.hexdigest())
-# 3b2aded5e8d001845710769929773d9c3fa579615eb2e1897b1da5841437ce32 (if passwd == 'password')
-try:
-    # SQL
-    cursor = connection.cursor()
-    sql = f"INSERT into user_password (hash_pas) VALUES ('{hash_obj.hexdigest()}')"  # Сохраняем хэш в столбец с паролем
-    cursor.execute(sql)
-    connection.commit()
-    print('Регистрация завершена')
-    # SQL
-    sql_check = "SELECT hash_pas FROM user_password"
-    # Выполнить команду запроса (Execute Query).
-    cursor.execute(sql_check)
-    all_pas = []
-    for row in cursor:
-        all_pas.extend(row)
-    passwd_1 = input('Повторите пароль: ')
-    hash_obj_1 = hashlib.sha256(passwd_1.encode('utf-8') + salt.encode('utf-8'))
-    while hash_obj_1.hexdigest() not in all_pas:
-        passwd_1 = input('Вы не верно ввели пароль, попробуйте еще раз: ')
-        hash_obj_1 = hashlib.sha256(passwd_1.encode('utf-8') + salt.encode('utf-8'))
-    print('Вы ввели правильный пароль')
-finally:
-    connection.close()
-    print('Сессия завершена')
+# Подключиться к базе данных.
+
+
+class Network:
+    connection = pymysql.connect(host='localhost', user='root', password='*****', db='user_pass',
+                                 charset='utf8mb4')
+
+    def login(self):
+        try:
+            passwd = input('Введите пароль для регистрации: ')
+            salt = 'login_user'
+            hash_obj = hashlib.sha256((passwd + salt).encode('utf-8'))
+            # Сохраняем хэш в столбец с паролем
+            cursor = self.connection.cursor()
+            sql = f"INSERT into user_password (hash_pas) VALUES ('{hash_obj.hexdigest()}')"
+            cursor.execute(sql)
+            self.connection.commit()
+            print('Регистрация завершена')
+            print(f'Сохраненный хеш: {hash_obj.hexdigest()}')
+        except Exception as exp:
+            print(f'Регистрация не удалась, ошибка {exp}')
+
+    def register(self):
+        try:
+            cursor = self.connection.cursor()
+            salt = 'login_user'
+            sql_check = "SELECT hash_pas FROM user_password"  # Выполняем Select запрос для получения хешей паролей
+            # Выполнить команду запроса (Execute Query).
+            cursor.execute(sql_check)
+            all_pas = [row[0] for row in cursor]  # Создаем список со всеми хешами паролей
+
+            passwd = input('Введите пароль: ')
+            hash_obj = hashlib.sha256((passwd + salt).encode('utf-8'))
+            # Выполняется цикл, пока пароль не совпадет
+            while hash_obj.hexdigest() not in all_pas:
+                passwd = input('Вы не верно ввели пароль, попробуйте еще раз: ')
+                hash_obj = hashlib.sha256((passwd + salt).encode('utf-8'))
+            print('Вы ввели правильный пароль')
+        except Exception as exp:
+            print(f'Регистрация не удалась, ошибка {exp}')
+
+    def close_session(self):
+        self.connection.close()
+
+
+net = Network()
+
+net.login()
+net.register()
+net.close_session()
