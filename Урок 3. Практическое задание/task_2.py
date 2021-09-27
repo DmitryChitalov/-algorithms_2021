@@ -68,7 +68,6 @@ class Network:
     def close_session(self):
         self.connection.close()
 
-
 net = Network()
 
 net.login()
