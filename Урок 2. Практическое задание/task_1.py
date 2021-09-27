@@ -31,29 +31,38 @@
 
 def calculate():
     action = input('Укажите операцию (" - ", " + ", " * ", " / ") или введите "0" для выхода из программы: ')
-    first_number = int(input('Введите первое число: '))
-    second_number = int(input('Введите второе число: '))
-    while action != "0":
-        try:
-            if action == "+":
-                print(first_number + second_number)
-            elif action == "-":
-                print(first_number - second_number)
-            elif action == "*":
-                print(first_number * second_number)
-            elif action == "/":
-                print(first_number / second_number)
-            elif action == "0":
-                break
-            else:
-                raise ValueError("Выберите команду из списка.")
-        except:
-            ValueError("Выберите команду из списка.")
-            print("Выберите команду из списка.")
-        finally:
-            calculate()
-    return
-
+    if action == '0':
+        return 'Выход'
+    else:
+        if action in "+-*/":
+            try:
+                num1 = int(input('Введите первое число: '))
+                num2 = int(input('Введите второе число'))
+                if action = '+':
+                    result = num1 + num2
+                    print(result)
+                    calculate()
+                elif action = '-':
+                    result = num1 - num2
+                    print(result)
+                    calculate()
+                elif action = '*':
+                    result = num1 * num2
+                    print(result)
+                    calculate()
+                elif action = '/':
+                    if action != 0:
+                        result = num1 / num2
+                        print(result)
+                    else:
+                        print('Делить на ноль нельзя!')
+                    return calculate()
+            except ValueError:
+                print('Введите число!')
+                return calculate()
+        else:
+            print('Введен неверный символ.')
+            return calculate()
 
 calculate()
 
