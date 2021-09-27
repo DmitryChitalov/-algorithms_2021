@@ -25,12 +25,16 @@
 import hashlib
 
 
-def check_password():
+def create_hash(some_str):
     salt = 'Я люблю солить хеши <3'
-    first_password = hashlib.sha256(salt.encode() + input('Введите пароль: ').encode('utf-8'))
-    print(first_password.hexdigest())
-    second_password = hashlib.sha256(salt.encode() + input('Введите пароль повторно: ').encode('utf-8'))
-    if first_password.hexdigest() == second_password.hexdigest():
+    return hashlib.sha256(salt.encode() + some_str.encode('utf-8')).hexdigest()
+
+
+def check_password():
+    first_password = create_hash(input('Введите пароль: '))
+    print(first_password)
+    second_password = create_hash(input('Введите пароль повторно: '))
+    if first_password == second_password:
         print('Вы ввели правильный пароль.')
     else:
         print('Вы ввели неправильный пароль.')
@@ -39,10 +43,10 @@ def check_password():
 def check_password_upgrade():
     salt = 'Я люблю солить хеши <3'
     with open('password.txt', 'w', encoding='utf-8') as file:
-        phash = hashlib.sha256(salt.encode() + input('Введите пароль: ').encode('utf-8'))
-        print(phash.hexdigest())
-        file.write(phash.hexdigest())
-    second_password = hashlib.sha256(salt.encode() + input('Введите пароль повторно: ').encode('utf-8')).hexdigest()
+        phash = create_hash(input('Введите пароль: '))
+        print(phash)
+        file.write(phash)
+    second_password = create_hash(input('Введите пароль повторно: '))
     with open('password.txt', 'r', encoding='utf-8') as file:
         if file.readline() == second_password:
             print('Вы ввели правильный пароль.')

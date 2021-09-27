@@ -34,61 +34,46 @@ def time_of_function(function):
 
 
 @time_of_function
-def filling_list(n=100):
-    #Сложность: O(n).
-    name = [x for x in range(n)]
-    print('Filling list: ', end='')
-    return name
+def filling_list():
+    #Сложность: O(1).
+    result = []
+    for num in range(10000):
+        result.append(num)
+    return result
 
 
 @time_of_function
-def filling_dict(n=100):
-    #Сложность: O(n).
-    name = {x:x for x in range(n)}
-    print('Filling dict: ', end='')
-    return name
+def filling_dict():
+    #Сложность: O(1).
+    result = {}
+    for num in range(10000):
+        result[num] = num
+    return result
 
 
 @time_of_function
-def read_list(some_list):
-    #Сложность: O(n^2).
-    [some_list.index(el) for el in some_list]
-    print('List read: ', end='')
+def change_list(some_list):
+    #Сложность O(1)
+    for el in range(9999, 9000, -1):
+        some_list.pop(el)
+    for el in range(9000):
+        some_list[el] = some_list[el + 1]
 
 
 @time_of_function
-def read_dict(some_dict):
-    # Сложность: O(n).
-    [some_dict.get(el) for el in some_dict]
-    print('Dict read: ', end='')
-
-
-@time_of_function
-def delete_list(some_list):
-    # Сложность O(n).
-    for idx in range(len(some_list), -1):
-        some_list.pop(idx)
-    print('List delete: ', end='')
-
-
-@time_of_function
-def delete_dict(some_dict):
-    # Сложность: O(n).
-    for key in range(len(some_dict), -1):
+def change_dict(some_dict):
+    #Сложность O(1).
+    for key in range(9999, 9000, -1):
         some_dict.pop(key)
-    print('Dict delete: ', end='')
+    for key in range(9001):
+        some_dict[key] = 'update'
 
 
-# При заполнении словарь немного или много быстрее.
-# При чтении словарь гораздо быстрее, из-за того, что разная сложность функций.
-# При удалении примерно равны.
-# PS: Эти значения скорости постоянно скачат, что сбивает с толку.
+#Изменив алгоритмы и увеличив количество элементов получил результат:
+#1) Списки заполняются быстрее словарей;
+#2) Операции изменения быстрее реализованы в словарях.
 
 
 if __name__ == '__main__':
-    some_list = filling_list()
-    some_dict = filling_dict()
-    read_list(some_list)
-    read_dict(some_dict)
-    delete_list(some_list)
-    delete_dict(some_dict)
+    change_list(filling_list())
+    change_dict(filling_dict())
