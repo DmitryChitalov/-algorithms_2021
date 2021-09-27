@@ -69,51 +69,56 @@ def fill_dict(size: int) -> dict:
     return {i: i * 10 for i in range(size)}     # O(n)
 
 
-@func_timer(1000)
+@func_timer(100000)
 def list_append(lst: list):
     element = len(lst)                      # O(1)
     lst.append(element * 10)                # O(1)
     lst.append((element + 1) * 10)          # O(1)
 
 
-@func_timer(1000)
+@func_timer(10000)
 def list_popi(lst: list):
-    i = randrange(len(lst))    # O(1)
-    res = lst.pop(i)  # O(n)
+    # i = randrange(len(lst))    # O(1)
+    res = lst.pop()  # O(1)
     return res
 
 
-@func_timer(1000)
+@func_timer(100000)
 def list_get(lst: list):
-    i = randrange(len(lst))   # O(1)
-    return lst[i]     # O(1)
+    # i = randrange(len(lst))   # O(1)
+    return lst[1000]     # O(1)
 
 
-@func_timer(1000)
+@func_timer(100000)
 def dict_append(dct: dict):
     element = len(dct)                     # O(1)
     dct[element] = element * 10            # O(1)
     dct[element + 1] = (element + 1) * 10  # O(1)
 
 
-@func_timer(1000)
+@func_timer(10000)
 def dict_popi(dct: dict):
-    key = list(dct.keys())[randrange(len(dct.keys()))]    # O(n)
-    return dct.pop(key)                                   # O(1)
+    # Проблема с расхождением теории с практикой в этой строке.
+    # Проблема в том, что я создаю список для выбора случайного ключа
+    # key = list(dct.keys())[randrange(len(dct.keys()))]  # O(n)
+    return dct.popitem()                                # O(1)
 
 
-@func_timer(1000)
+@func_timer(100000)
 def dict_get(dct: dict):
-    key = list(dct.keys())[randrange(len(dct.keys()))]    # O(n)
-    return dct.get(key)                                   # O(1)
+    # Проблема с расхождением теории с практикой в этой строке.
+    # Проблема в том, что я создаю список для выбора случайного ключа
+    # key = list(dct.keys())[randrange(len(dct.keys()))]    # O(n)
+    # key = randrange(iter(dct))
+    return dct.get(1000)                                   # O(1)
 
 
 if __name__ == '__main__':
-    lst = fill_list(1000)
+    lst = fill_list(100000)
     # Weighted average execution time of the<function fill_list at 0x000002B1040854C0> function is 4.669475555419922e-05
     # Arithmetic mean execution time of the <function fill_list at 0x000002B1040854C0> function is 4.669475555419922e-05
 
-    dct = fill_dict(1000)
+    dct = fill_dict(100000)
     # Weighted average execution time of the<function fill_dict at 0x000002B11449F310> function is 0.0001225006580352783
     # Arithmetic mean execution time of the <function fill_dict at 0x000002B11449F310> function is 0.0001225006580352783
 
@@ -173,4 +178,19 @@ if __name__ == '__main__':
     Duration of 1000 operations for <function dict_popi at 0x000001E378E99EE0> function: 0.0156705379486084 sec
     Duration of 1000 operations for <function list_get at 0x000001E378E99CA0> function: 0.0 sec
     Duration of 1000 operations for <function dict_get at 0x000001E378E9F040> function: 0.031230449676513672 sec   
+    
+    
+    ===== Данные после исправления кода ======
+    Duration of 1000 operations for <function fill_list at 0x0000021804A99820> function: 3.904294729232788 sec
+    Duration of 1000 operations for <function fill_dict at 0x0000021804A99940> function: 10.729747772216797 sec
+    Duration of 100000 operations for <function list_append at 0x0000021804A99A60> function: 0.030739307403564453 sec
+    Duration of 100000 operations for <function dict_append at 0x0000021804A99DC0> function: 0.028804302215576172 sec
+    Duration of 10000 operations for <function list_popi at 0x0000021804A99B80> function: 0.0023076534271240234 sec
+    Duration of 10000 operations for <function dict_popi at 0x0000021804A99EE0> function: 0.0 sec
+    Duration of 100000 operations for <function list_get at 0x0000021804A99CA0> function: 0.010366201400756836 sec
+    Duration of 100000 operations for <function dict_get at 0x0000021804A9F040> function: 0.010378599166870117 sec
+    
+    Здесь мы уже видим, что словарь либо сопоставим со списком по скорости выполнения операций (кроме создания), 
+    либо немного или даже заметно быстрее списка, как, например, при добавлении элемента или в операции pop, где список
+    выполнил операцию так быстро, что нам не хватило разрешения используемого таймера на выбранном количестве повторений
     """
