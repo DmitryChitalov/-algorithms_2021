@@ -15,3 +15,23 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+cache_object ={}
+
+
+def get_page(url):
+    if cache_object.get(url):
+        print(f'{url} is present in cache')
+    else:
+        result = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        cache_object[url] = result
+        print(cache_object)
+
+
+get_page('https://github.com')
+
