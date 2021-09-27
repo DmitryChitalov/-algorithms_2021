@@ -34,31 +34,70 @@ def timing(func):
 
 @timing
 def fill_list(num):
-    return [i for i in range(num)]          # O(n)
+    return [i for i in range(num)]  # O(n)
 
 
 @timing
 def fill_dict(num):
-    return {i: i for i in range(num)}       # O(n)
+    return {i: i for i in range(num)}  # O(n)
+
+
+@timing
+def insert_list(num):
+    res = list()                # O(1)
+    while num:                  # O(n^2)
+        res.insert(0, num)      # O(n)
+        num -= 1                # O(1)
+    return num
+
+
+@timing
+def insert_dict(num):
+    d = dict()
+    while num:                  # O(n)
+        d[num] = num            # O(1)
+        num -= 1                # O(1)
+    return d
+
+
+@timing
+def delete_list(l: list):
+    ln = len(l)                 # O(1)
+    while ln:                   # O(n)
+        l.pop(0)                # O(1)
+        ln = len(l)             # O(1)
+
+
+@timing
+def delete_dict(d: dict):
+    k = list(d.keys())          # O(n)
+    for idx in k:               # O(n)
+        del d[idx]              # O(1)
 
 
 @timing
 def operate_list(src: list):
-    for i in range(len(src)):               # O(n)
-        src[i] = hash(src[i])               # O(1)
+    for i in range(len(src)):  # O(n)
+        src[i] = hash(src[i])  # O(1)
 
 
 @timing
 def operate_dict(src: dict):
-    for i in src.keys():                    # O(n)
-        src[i] = hash(src[i])               # O(1)
+    for i in src.keys():  # O(n)
+        src[i] = hash(src[i])  # O(1)
 
 
 if __name__ == '__main__':
-    cnt = 1000000
+    cnt = 100000
     print(f'Заполняем список и словарь {cnt} элементами')
     l = fill_list(cnt)
     d = fill_dict(cnt)
+    print(f'Вставляем в список и словарь {cnt} элементов')
+    insert_list(cnt)
+    insert_dict(cnt)
+    print(f'Удаляем из списка и словаря {cnt} элементов')
+    delete_list(l)
+    delete_dict(d)
     print(f'Выполняем операции над списком и словарем из {cnt} элементов')
     operate_list(l)
     operate_dict(d)
@@ -71,11 +110,21 @@ if __name__ == '__main__':
 - конкретным набором операций над объектами (другие операции покажут иные результаты)
 - большее время при выполнении линейных операций над словарем объясняется необходимостью
 поиска хэша ключа в словаре.
+- время не всех операций над словарем и списком очевидно с первого взгляда даже при одинаковой сложности
+требуются замеры.
+- в общем случае большинство операций со СЛОВАРЕМ выполняются на ПОРЯДКИ (как минимум кратно) быстрее.
+PS: спасибо за требование доработать ДЗ.))
 
-Заполняем список и словарь 1000000 элементами
-Время выполнения: 0.1702 секунд
-Время выполнения: 0.3459 секунд
-Выполняем операции над списком и словарем из 1000000 элементов
-Время выполнения: 0.2846 секунд
-Время выполнения: 0.3746 секунд
+Заполняем список и словарь 100000 элементами
+Время выполнения: 0.0141 секунд
+Время выполнения: 0.0521 секунд
+Вставляем в список и словарь 100000 элементов
+Время выполнения: 5.9469 секунд
+Время выполнения: 0.0423 секунд
+Удаляем из списка и словаря 100000 элементов
+Время выполнения: 13.2057 секунд
+Время выполнения: 0.0175 секунд
+Выполняем операции над списком и словарем из 100000 элементов
+Время выполнения: 0.0000 секунд
+Время выполнения: 0.0007 секунд
 '''

@@ -26,43 +26,40 @@ from uuid import uuid4
 import pymysql
 
 SALT = uuid4().hex
-# CONNECTION = {'host': 'localhost',
-#               'user': 'root',
-#               'password': '',
-#               'database': 'mysql',
-#               'charset': 'utf8mb4',
-#               'cursorclass': 'pymysql.cursors.DictCursor'
-#               }
+
+
+def salted_hash(pw: str, slt=SALT) -> str:
+    return hashlib.sha256(pw.encode() + slt.encode()).hexdigest()
 
 
 def password_memory(salt=SALT) -> str:
     print('ЧЕРЕЗ ПАМЯТЬ'.center(40, '*'))
     p = input('Введите пароль: ')
-    hashed_pass = hashlib.sha256(p.encode() + salt.encode()).hexdigest()
+    hashed_pass = salted_hash(p)
     p = input('Введите пароль еще раз для проверки: ')
     return 'Вы ввели правильный пароль' \
-        if hashlib.sha256(p.encode() + salt.encode()).hexdigest() == hashed_pass \
+        if salted_hash(p) == hashed_pass \
         else 'Пароль не верный'
 
 
 def password_file(salt=SALT, name='passwd.txt'):
     print('ЧЕРЕЗ ФАЙЛ'.center(40, '*'))
     p = input('Введите пароль: ')
-    hashed_pass = hashlib.sha256(p.encode() + salt.encode()).hexdigest()
+    hashed_pass = salted_hash(p)
     with open(name, 'w') as f:
         f.write(hashed_pass)
     p = input('Введите пароль еще раз для проверки: ')
     with open(name, 'r') as f:
         hashed_pass = f.readline()
     return 'Вы ввели правильный пароль' \
-        if hashlib.sha256(p.encode() + salt.encode()).hexdigest() == hashed_pass \
+        if salted_hash(p) == hashed_pass \
         else 'Пароль не верный'
 
 
 def passwd_db(salt=SALT):
     print('ЧЕРЕЗ MARIA-DB'.center(40, '*'))
     p = input('Введите пароль: ')
-    hashed_pass = hashlib.sha256(p.encode() + salt.encode()).hexdigest()
+    hashed_pass = salted_hash(p)
     con = pymysql.connect(host='localhost', user='root', password='', database='pythontest')
     with  con:
         cur = con.cursor()
@@ -77,7 +74,7 @@ def passwd_db(salt=SALT):
         cur.execute('SELECT pw FROM task2')
         res = cur.fetchone()[0]
     return 'Вы ввели правильный пароль' \
-        if hashlib.sha256(p.encode() + salt.encode()).hexdigest() == res \
+        if salted_hash(p) == res \
         else 'Пароль не верный'
 
 
