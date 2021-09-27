@@ -52,9 +52,29 @@ def add_to_dict(dct: dict, *args):  # O(n)
 add_to_lst(lst_obj, *[i for i in range(1000000)])  # Время выполнения функции "add_to_lst" 0.12
 add_to_dict(dict_obj, *[i for i in range(1000000)])  # Время выполнения функции "add_to_dict" 0.31
 
+
 ###################################################################################################################
+# Часть b наборы операций для списка и словаря
+
+@timer
+def set_operation_list():  # Набор операций со списком
+    for i in range(1000):
+        lst_obj.append(i)
+        lst_obj.copy()
+        lst_obj.pop()
+
+
+@timer
+def set_operation_dict():  # Набор операций со словарем
+    for i in range(1000):
+        dict_obj.setdefault(i, i)
+        dict_obj.copy()
+        dict_obj.pop(i)
+
+
+set_operation_list()  # Время выполнения функции "set_operation_list" 14.32
+set_operation_dict()  # Время выполнения функции "set_operation_dict" 39.47
 '''
 Вывод: При одинаковой сложности алгоритма время заполнения словоря больше времени заполнения словаря
 что связано с необходимостью дополнительного хеширования для объекта - словарь
 '''
-
