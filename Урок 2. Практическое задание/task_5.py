@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ord_chr_tbl(el_in_row=0, start=32, finish=127):
+    if start == finish + 1: return
+    el_in_row = (el_in_row) + 1 if el_in_row < 10 else 0
+    print('%s - %s' % (start, chr(start)), end=('\n' if el_in_row == 10 else ' '))
+    return ord_chr_tbl(el_in_row, start + 1)
+
+
+ord_chr_tbl()
+

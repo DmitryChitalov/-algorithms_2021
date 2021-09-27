@@ -15,3 +15,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def progression_sum(repeat_number, seq_start=1, seq_sum=0):
+    if repeat_number > 0:
+        repeat_number -= 1
+        seq_sum += seq_start + progression_sum(repeat_number, seq_start / -2, seq_sum)
+    return seq_sum
+
+
+print(progression_sum(3, 2))
