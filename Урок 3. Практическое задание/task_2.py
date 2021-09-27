@@ -20,3 +20,34 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from uuid import uuid4
+import hashlib
+
+
+def authorization():
+    user_name = input('Ведите Ваше имя: ')
+    password = input('Введите пароль: ')
+    salt = uuid4().hex
+    password_hash = hashlib.sha256(password.encode(encoding='UTF-8') + salt.encode(encoding='UTF-8')).hexdigest()
+    return user_name, password_hash, salt
+
+
+def authentication():
+    user_name = input('Ведите Ваше имя: ')
+    password = input('Введите пароль: ')
+    salt = a[2]
+    password_hash = hashlib.sha256(password.encode(encoding='UTF-8') + salt.encode(encoding='UTF-8')).hexdigest()
+    if a[1] == password_hash:
+        print(f'Доступ открыт')
+        return user_name, password_hash
+    else:
+        print(f'Неверный пароль!')
+
+
+a = authorization()
+print(a)
+# authentication()
+print(authentication())
+
+'''Очень хотел успеть созранять в файл, думал про *.json, но времени совсем не хватает.'''
