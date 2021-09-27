@@ -38,19 +38,22 @@ class UserAuthenticator:
         self.__db_password = cfg.get_config['MongoDB']['password']
 
     def create_password(self):
-        pwd_hash = sha256(f"lesson03task_2@{input('Введите пароль: ')}".encode('utf-8')).hexdigest()
+        pwd_hash = self.__create_hash(input('Введите пароль: '))
         print(f"Полученный хеш: {pwd_hash}")
         if self.__find_hash(pwd_hash):
             print("Пароль уже есть в БД.")
         else:
             self.__save_to_db(pwd_hash)
-        repwd_hash = sha256(f"lesson03task_2@{input('Введите пароль повторно: ')}".encode('utf-8')).hexdigest()
+        repwd_hash = self.__create_hash(input('Введите пароль повторно: '))
         if pwd_hash == repwd_hash:
             print("Введённые пароли совпадают")
         else:
             print("Введённые пароли не совпадают!")
             print(f"pwd_hash: {pwd_hash}")
             print(f"repwd_hash: {repwd_hash}")
+
+    def __create_hash(self, string: str, solt: str = 'lesson03task_2') -> str:
+        return sha256(f"{solt}@{string}".encode('utf-8')).hexdigest()
 
     def __save_to_db(self, password):
         with MongoClient(host=self.__db_host,

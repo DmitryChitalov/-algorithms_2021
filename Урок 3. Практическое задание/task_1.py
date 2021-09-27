@@ -22,6 +22,8 @@ b) выполните набор операций и со списком, и с�
 
 from random import randrange
 from pprint import pprint
+from time import time
+from numpy import average, mean
 
 
 def func_timer(n: int = 1):
@@ -34,25 +36,24 @@ def func_timer(n: int = 1):
     """
     def func_decorator(func):
 
-        from time import time
-        from numpy import average, mean
-        from pprint import pprint
-
         def wrapper(*args, **kwargs):
             durations = []
             result = None
             try:
+                start = time()
                 for i in range(n):
-                    start = time()
+                    # start = time()
                     result = func(*args, **kwargs)
-                    stop = time()
-                    durations.append(stop - start)
+                    # stop = time()
+                    # durations.append(stop - start)
+                stop = time()
+                print(f"Duration of {n} operations for {func} function: {stop - start} sec")
             except IndexError as ex:
                 print("Looks like you tried to make too many measures for an iterable, which has no enough elements")
                 pprint(ex.args)
 
-            print(f"Weighted average execution time of the {func} function is {average(durations)}")
-            print(f"Arithmetic mean execution time of the {func} function is {mean(durations)}")
+            # print(f"Weighted average execution time of the {func} function is {average(durations)}")
+            # print(f"Arithmetic mean execution time of the {func} function is {mean(durations)}")
             return result
         return wrapper
     return func_decorator
@@ -98,13 +99,13 @@ def dict_append(dct: dict):
 @func_timer(1000)
 def dict_popi(dct: dict):
     key = list(dct.keys())[randrange(len(dct.keys()))]    # O(n)
-    return dct.pop(key)               # O(1)
+    return dct.pop(key)                                   # O(1)
 
 
 @func_timer(1000)
 def dict_get(dct: dict):
     key = list(dct.keys())[randrange(len(dct.keys()))]    # O(n)
-    return dct.get(key)               # O(1)
+    return dct.get(key)                                   # O(1)
 
 
 if __name__ == '__main__':
@@ -130,6 +131,10 @@ if __name__ == '__main__':
     # Weighted average exec-n time of the<function dict_append at 0x000001DFCB55BE50> function is 1.5640974044799803e-05
     # Arithmetic mean exec-n time of the <function dict_append at 0x000001DFCB55BE50> function is 1.5640974044799803e-05
 
+    # ###############
+    # Вопреки ожиданиям и здесь список оказывается быстрее.
+    # ###############
+
     list_popi(lst)
     # Weighted average execution time of the <function list_popi at 0x000001DFCB55BC10> function is 0.0
     # Arithmetic mean execution time of the <function list_popi at 0x000001DFCB55BC10> function is 0.0
@@ -137,6 +142,10 @@ if __name__ == '__main__':
     dict_popi(dct)
     # Weighted average execution time of the<function dict_popi at 0x000001DFCB55BF70> function is 3.748607635498047e-05
     # Arithmetic mean execution time of the <function dict_popi at 0x000001DFCB55BF70> function is 3.748607635498047e-05
+
+    # ###############
+    # Снова список оказывается быстрее.
+    # ###############
 
     list_get(lst)
     # Weighted average execution time of the <function list_get at 0x000001DFCB55BD30> function is 0.0
@@ -146,7 +155,22 @@ if __name__ == '__main__':
     # Weighted average execution time of the <function dict_get at 0x000001DFCB5620D0> function is 3.125e-05
     # Arithmetic mean execution time of the <function dict_get at 0x000001DFCB5620D0> function is 3.125e-05
 
+    # ###############
+    # И даже получить элемент списка получилось быстрее.
+    # ###############
+
     """
     Общий вывод: согласно полученным данным, получается, что список, пусть незначительно, но всё же быстрее словаря 
-    во многих операциях. Хотя изначально это не кажется очевидным, но ожидаемым при создании структур.
+    во всех операциях. Хотя изначально это не кажется очевидным, но ожидаемым при создании структур. Можно предположить,
+    что по каким-то причинам именно на списке замер не работает, но это как-то натянуто. Тот же результат получен и при 
+    измерении времени n выполнений каждой функции. Теория ошибается? Вряд ли. Вот только объяснить результат не могу ((
+    
+    Duration of 1000 operations for <function fill_list at 0x000001E378E99820> function: 0.06077766418457031 sec
+    Duration of 1000 operations for <function fill_dict at 0x000001E378E99940> function: 0.10306930541992188 sec
+    Duration of 1000 operations for <function list_append at 0x000001E378E99A60> function: 0.0 sec
+    Duration of 1000 operations for <function dict_append at 0x000001E378E99DC0> function: 0.0 sec
+    Duration of 1000 operations for <function list_popi at 0x000001E378E99B80> function: 0.010024309158325195 sec
+    Duration of 1000 operations for <function dict_popi at 0x000001E378E99EE0> function: 0.0156705379486084 sec
+    Duration of 1000 operations for <function list_get at 0x000001E378E99CA0> function: 0.0 sec
+    Duration of 1000 operations for <function dict_get at 0x000001E378E9F040> function: 0.031230449676513672 sec   
     """
