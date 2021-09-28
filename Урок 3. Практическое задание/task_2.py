@@ -20,3 +20,27 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import hashlib
+from random import randint as ran
+
+
+def pas_save():
+    salt = str(ran(100, 1000))
+    x = input('Entered password ')
+    x = hashlib.sha256(x.encode('utf-8') + salt.encode('utf-8'))
+    with open('file_password.txt', 'w') as file:
+        file.write(x.hexdigest())
+    return salt
+
+
+def pas_ver(salt_x):
+    y = input('Entered password ')
+    y = hashlib.sha256(y.encode('utf-8') + salt_x.encode('utf-8')).hexdigest()
+    with open('file_password.txt', 'r') as file:
+        x = file.read()
+        return x == y
+
+
+if __name__ == '__main__':
+    print('Вы ввели правильный пароль.') if pas_ver(pas_save()) else print('Вы ввели неправельный пароль.')
