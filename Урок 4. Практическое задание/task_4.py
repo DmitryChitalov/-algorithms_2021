@@ -50,10 +50,13 @@ print(timeit('func_2()', globals=globals()))
 
 # Своя функция для поиска числа, встречающегося в массиве чаще всего
 def func_3():
-    return max(array, key=array.count)
+    a = max(array, key=array.count)
+    return f'Чаще всего встречается число {a}, ' \
+           f'оно появилось в массиве {array.count(a)} раз(а)'
 
 
 # Профилировка своей функции с помощью timeit
+print(func_3())
 print(timeit('func_3()', globals=globals()))
 
 '''
