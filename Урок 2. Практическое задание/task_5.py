@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def show_ascii(cur: int = 32) -> None:
+    if cur == 128:
+        return
+    print(f"{cur:3}: '{chr(cur)}'", end='\t')
+    if cur % 10 == 1:
+        print()
+    show_ascii(cur+1)
+
+
+if __name__ == '__main__':
+    show_ascii()
