@@ -37,7 +37,7 @@ s = input('Введите строку, состоящую из строчных
 
 def unique_substrings(string):
     lst_st_f = [string[i:j] for i in range(len(string)) for j in range(i + 1, len(string) + 1) if string[i:j] != string]
-    st_hash_f = {hash(i) for i in lst_st}
+    st_hash_f = {hash(i) for i in lst_st_f}
     return lst_st_f, st_hash_f
 
 

@@ -25,24 +25,30 @@ from uuid import uuid4
 import hashlib
 
 
-def authorization():
+def name_password_input():
     user_name = input('Ведите Ваше имя: ')
     password = input('Введите пароль: ')
+    return user_name, password
+
+
+def calculation_hash(password, salt):
+    return hashlib.sha256(password.encode(encoding='UTF-8') + salt.encode(encoding='UTF-8')).hexdigest()
+
+
+def authorization():
+    user_name, password = name_password_input()
     salt = uuid4().hex
-    password_hash = hashlib.sha256(password.encode(encoding='UTF-8') + salt.encode(encoding='UTF-8')).hexdigest()
-    return user_name, password_hash, salt
+    return user_name, calculation_hash(password, salt), salt
 
 
 def authentication():
-    user_name = input('Ведите Ваше имя: ')
-    password = input('Введите пароль: ')
+    user_name, password = name_password_input()
     salt = a[2]
-    password_hash = hashlib.sha256(password.encode(encoding='UTF-8') + salt.encode(encoding='UTF-8')).hexdigest()
-    if a[1] == password_hash:
+    if a[1] == calculation_hash(password, salt) and user_name == a[0]:
         print(f'Доступ открыт')
-        return user_name, password_hash
     else:
-        print(f'Неверный пароль!')
+        print(f'Неверное имя пользователя или пароль!')
+        authentication()
 
 
 a = authorization()
