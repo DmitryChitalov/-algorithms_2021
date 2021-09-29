@@ -25,3 +25,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {'user_1': ['password_1', True],
+         'user_2': ['password_2', False],
+         'user_3': ['password_3', True],
+         'user_4': ['password_4', True],
+         'user_5': ['password_5', False],
+         'user_6': ['password_6', False], }
+
+
+def is_activate_1(users):
+    login = input('Введите логин: ')
+    if login in users:
+        password = input('Введите пароль: ')
+        if password == users[login][0]:
+            if users[login][1]:
+                print('Доступ разрешен.')
+            else:
+                print('Доступ запрещён, необходимо активировать учётную запись')
+        else:
+            print('Неверный пароль')
+    else:
+        print('Такого пользователя не существует')
+
+
+''' Сложность О(n) проверка наличия'''
+
+
+def is_activate_2(users):
+    login = input('Введите логин: ')
+    for i in users:
+        if i == login:
+            password = input('Введите пароль: ')
+            if password == users[login][0]:
+                if users[login][1]:
+                    print('Доступ разрешен.')
+                    break
+                else:
+                    print('Доступ запрещён, необходимо активировать учётную запись')
+                    break
+            else:
+                print('Неверный пароль')
+                break
+    else:
+        print('Такого пользователя не существует')
+'''Сложность O(n**2) т.к в цикл вложены условия'''
+'''Первое решение предпочтительнее'''
+
+is_activate_1(users)
+is_activate_2(users)

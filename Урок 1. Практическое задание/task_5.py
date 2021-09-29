@@ -28,3 +28,57 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.first_stack = []
+        self.second_stack = []
+        self.third_stack = []
+
+    def add_elem(self, elem):
+        if len(self.first_stack) < 5:
+            self.first_stack.append(elem)
+        elif len(self.second_stack) < 5:
+            self.second_stack.append(elem)
+        elif len(self.third_stack) < 5:
+            self.third_stack.append(elem)
+        else:
+            print('Стек переполнен')
+
+    def show_stack(self):
+        print(self.first_stack, self.second_stack, self.third_stack, sep='\n')
+
+    def pop_out(self, num_stack):
+        if num_stack == 1 and self.first_stack:
+            return self.first_stack.pop()
+        elif num_stack == 2 and self.second_stack:
+            return self.second_stack.pop()
+        elif num_stack == 3 and self.third_stack:
+            return self.third_stack.pop()
+        else:
+            return 'Unknow'
+
+
+obj = StackClass()  # объект содержит 3 стека
+obj.show_stack()
+obj.add_elem('dvfsd')
+obj.add_elem('rg')
+obj.add_elem(5)
+obj.add_elem(False)
+obj.add_elem(456)
+obj.add_elem(123.45)
+obj.add_elem('vfvf')
+obj.show_stack()
+# наполнили объект, при достежении 5 значений в первом стеке заполняется второй
+print(obj.pop_out(1))
+# забираем объект с первого стека
+print(obj.pop_out(2))
+# можно забрать со второго стека
+
+obj.show_stack()
+
+obj.add_elem(obj.pop_out(2))
+# можно перенести с одного стека на другой(на первый, если он не заполнен)
+
+obj.show_stack()
