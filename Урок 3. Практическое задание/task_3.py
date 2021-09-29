@@ -1,18 +1,16 @@
-"""
-Задание 3.
-Определить количество различных (уникальных) подстрок с использованием хеш-функции.
-Дана строка S длиной N, состоящая только из строчных латинских букв.
+from hashlib import sha256
 
-Подсказка: примените вычисление хешей для подстрок с помощью хеш-функций и множества
-Можно воспользоваться ф-цией hash() (см. материалы к уроку)
 
-Пример:
-рара - 6 уникальных подстрок
+def uniq_substrings(result_set, target_string):
+    for i in range(len(target_string) + 1):
+        for j in range(i, len(target_string) + 1):
+            substring = target_string[i:j]
+            if len(substring) > 0 and len(substring) != len(target_string):
+                my_hash = sha256(substring.encode('utf-8'))
+                result_set.add(my_hash.hexdigest())
+    return len(result_set)
 
-рар
-ра
-ар
-ара
-р
-а
-"""
+
+if __name__ == '__main__':
+    string_set = set()
+    print(uniq_substrings(string_set, 'papa'))
