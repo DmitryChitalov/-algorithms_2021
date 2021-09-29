@@ -18,4 +18,30 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
 class Turn:
+    def __init__(self):
+        self.tasks = []
+        self.debagging = []
+        self.compleated = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def finish(self):
+        self.compleated.append(self.tasks.pop(0))
+
+    def debagging(self):
+        self.debagging.append(self.tasks.pop(0))
+
+    def show(self):
+        print(f'tasks: {self.tasks}', f'debagging: {self.debagging}', f'compleated: {self.compleated}', sep='\n')
+
+
+
+
+
+if __name__ == '__main__':
+    obj = Turn()
+    obj.show()
