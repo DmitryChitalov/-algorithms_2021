@@ -11,11 +11,13 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
+from collections import Counter
 
-array = [1, 3, 1, 3, 4, 5, 1]
+array = [1, 2, 3, 3, 4, 5, 6, 7, 8, 9, 3, 1, 3, 4, 5, 1, 3, 3, 3]
+array2 = array * 3
 
-
-def func_1():
+def func_1(array):
     m = 0
     num = 0
     for i in array:
@@ -27,7 +29,7 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+def func_2(array):
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -39,5 +41,60 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3(array):
+    my_dict = {}
+    for i in array:
+        my_dict[i] = my_dict.get(i, 0) + 1
+    num = max(my_dict, key=lambda x: my_dict[x])
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {my_dict[num]} раз(а)'
+
+
+def func_4(array):
+    b = Counter(array).most_common(1)
+    return f'Чаще всего встречается число {b[0][0]}, ' \
+           f'оно появилось в массиве {b[0][1]} раз(а)'
+
+
+print(func_1(array))
+print(func_2(array))
+print(func_3(array))
+print(func_4(array))
+
+print(f'1 тест, {len(array)} элементов.')
+print('func_1', timeit("func_1(array)",setup='from __main__ import func_1, array',number=10000))
+# от 0.0375511 до 0.0407031
+print('func_2',timeit("func_2(array)",setup='from __main__ import func_2, array',number=10000))
+# от 0.0483795 до 0.0493379
+print('func_3',timeit("func_3(array)",setup='from __main__ import func_3, array',number=10000))
+# 0.0257253 до 0.0289777
+print('func_4',timeit("func_4(array)",setup='from __main__ import func_4, array',number=10000))
+# 0.0278236 до 0.0291915
+"""
+Было проведено 2 теста с разным количеством входящих данных.
+Первый тест с списком из 19 эелментов (array).
+Чаще всего наиболее быстро с задачей справляется функция func_3, использующая для подсчета количества вхождений 
+элементов словарь.
+На втором месте по скорости функция func_4, использующая встроенную библиотеку collections модуль Counter.
+На третьем месте func_1, за один перебор определяющая элемент, встречающийся наибольшее число раз.
+На последнем месте func_2, создающая новый список, и заполняющая его количеством встречающихся элементов. Ее время самое
+большое, так как она создает второй список таких же размеров, как и входящий, при больших значениях списка время
+увеличилось бы еще сильнее.
+"""
+print(f'2 тест, {len(array2)} элементов.')
+print('func_1', timeit("func_1(array2)",setup='from __main__ import func_1, array2',number=10000))
+# от 0.252400 до 0.2637329
+print('func_2',timeit("func_2(array2)",setup='from __main__ import func_2, array2',number=10000))
+# от 0.2701134 до 0.2847007
+print('func_3',timeit("func_3(array2)",setup='from __main__ import func_3, array2',number=10000))
+# 0.04591129 до 0.0518132
+print('func_4',timeit("func_4(array2)",setup='from __main__ import func_4, array2',number=10000))
+# 0.0357803 до 0.0376197
+"""
+Второй тест с списком из 57 эелментов (array2).
+На первое место по скорости вышла функция func_4 с заметным отрывом. Импортированный модуль, специализированный
+для решения таких задач, справляетя быстрее вручную написанных функций.
+На втором месте по скорости функция func_3, на создание и перебор словаря тратится меньше времени,чем перебор по списку.
+На третьем месте func_1, за один перебор определяющая элемент, встречающийся наибольшее число раз.
+На последнем месте остается func_2.
+"""

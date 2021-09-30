@@ -18,6 +18,10 @@
 и сделайте обоснование результатам.
 """
 
+from timeit import timeit
+
+i, i1, i2 = 10, 100, 1000
+
 
 def simple(i):
     """Без использования «Решета Эратосфена»"""
@@ -39,5 +43,51 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
+def sieve_erato(i):
+    a = []
+    k = 2
+    while i > len(a):
+        b = True
+        for z in a:
+            if k % z == 0:
+                b = False
+                break
+        if b:
+            a.append(k)
+        k += 1
+    return a.pop()
+
+
+print('simple(i)', timeit("simple(i)",setup='from __main__ import simple, i',number=1))
+# среднее 0.0000135
+print('simple(i1)',timeit("simple(i1)",setup='from __main__ import simple, i1',number=1))
+# среднее 0.0012385
+print('simple(i2)',timeit("simple(i2)",setup='from __main__ import simple, i2',number=1))
+#  среднее 0.2073637
 print(simple(i))
+print(simple(i1))
+print(simple(i2))
+print()
+
+print('sieve_erato(i)', timeit("sieve_erato(i)",setup='from __main__ import sieve_erato, i',number=1))
+# среднее 0.0000083
+print('sieve_erato(i1)',timeit("sieve_erato(i1)",setup='from __main__ import sieve_erato, i1',number=1))
+# среднее 0.0001883
+print('sieve_erato(i2)',timeit("sieve_erato(i2)",setup='from __main__ import sieve_erato, i2',number=1))
+# среднее 0.0150128
+print(sieve_erato(i))
+print(sieve_erato(i1))
+print(sieve_erato(i2))
+
+"""
+Первая функция выполняет задание намного дольше, чем вторая. Как я понимаю, сложность обоих функций квадратичная O(n^2).
+Однако время выполнения у нее гораздо дольше, из-за того что каждое раз для числа (n) она начинает проверку на делимость
+с 1 (t), и при каждом следующем цикле увеличивает всего на 1, проверяя потенциальное простое число на делимость всех
+предшествующих чисел. Эта проверка излишняя, так как если оно не разделось на 2, то значит не разделится и на все
+последующие четные числа, если не разделилось на три, то не разделится на 6, 9, и тд.
+Во второй функции, по алгоритму Эратосфена, потенциальное простое число прохоидт проверку на делимость только от уже 
+известных простых чисел, в которые входят все предществующие минимальные делители. Если оно делится на одно из них, 
+значит, оно непростое, и мы переходим к следующему, если нет, значит простое, добавляем его к делителям и переходим
+к следующему числу.
+Это существенно сокращает время выполнения, особенно на больших числах. 
+"""
