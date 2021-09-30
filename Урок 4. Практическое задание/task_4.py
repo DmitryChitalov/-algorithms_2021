@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+from collections import defaultdict, Counter
+from timeit import timeit
+
 """
 Задание 4.
 
@@ -14,7 +19,9 @@
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
-
+'''
+O(n)
+'''
 def func_1():
     m = 0
     num = 0
@@ -26,7 +33,10 @@ def func_1():
     return f'Чаще всего встречается число {num}, ' \
            f'оно появилось в массиве {m} раз(а)'
 
-
+'''
+O(n^2)
+В цикле вызывается метод count, медленнее первого
+'''
 def func_2():
     new_array = []
     for el in array:
@@ -38,6 +48,28 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+'''
+O(n)
+Используем встроенные функции
+'''
+def func_3():
+    elem = max(array, key=array.count)
+    count = array.count(elem)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {count} раз(а)'
+
+
+print(f"func_1: {timeit('func_1()', number=100000, globals=globals())}")
+print(f"func_2: {timeit('func_2()', number=100000, globals=globals())}")
+print(f"func_3: {timeit('func_3()', number=100000, globals=globals())}")
+
+
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+'''
+Написать вункцю с самым быстрым исполнением не получилось
+
+'''
