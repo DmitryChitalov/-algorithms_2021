@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9aa9a8c-2a6f-4efe-b433-81564568c2fd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 3. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 3. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 3. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Урок 4. Практическое задание/task_5.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 4. Практическое задание/task_5.py" afterDir="false" />
-    </list>
+    <list default="true" id="a9aa9a8c-2a6f-4efe-b433-81564568c2fd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,16 +171,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Урок 4. Практическое задание/task_5.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
