@@ -28,7 +28,7 @@ def min_1(list): # линейная
             min_num = i
     return min_num
 
-def min_2(list): # квадратичная
+def min_2(list):  # квадратичная
     for i in list:
         flag = True
         for j in list:
