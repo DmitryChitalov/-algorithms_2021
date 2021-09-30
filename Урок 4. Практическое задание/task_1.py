@@ -17,9 +17,35 @@
 """
 
 
+from timeit import timeit
+
+
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in nums if nums[i] % 2 == 0]
+
+
+def func_3(nums):
+    return list((i for i in nums if nums[i] % 2 == 0))
+
+
+my_list = [i for i in range(100)]
+n = 100000
+print(timeit("func_1(my_list)", number=n, globals=globals()))
+print(timeit("func_2(my_list)", number=n, globals=globals()))
+print(timeit("func_3(my_list)", number=n, globals=globals()))
+
+'''
+Смаое оптимальное время получилось у func_2, которая была реализованна с помощью list comprehensions. По моему мнению, 
+у LC лучшее время выполнение из-за оптимизации встроенных функций и минимального колличества операций (создание 
+пустого массива, счетчика, определения длинны массива).
+В функции func_3 мы имеем минимальный выйгрыш по времени, за счет уменьшения колличества операций, при малых значениях 
+n разницы с func_1 можно сказать нет.
+'''
