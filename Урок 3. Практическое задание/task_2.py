@@ -2,7 +2,8 @@ from uuid import uuid4
 from hashlib import sha256
 
 
-def hash_password(user_input, salt):
+def hash_password(salt):
+    user_input = input("Введите пароль: ")
     return sha256(salt.encode() + user_input.encode('utf-8')).hexdigest()
 
 
@@ -19,8 +20,9 @@ def get_password():
 
 if __name__ == '__main__':
     secret = uuid4().hex
-    write_password(hash_password(input("Введите пароль: "), secret))
-    second_input = hash_password(input("Введите пароль еще раз для проверки: "), secret)
+    write_password(hash_password(secret))
+    second_input = hash_password(secret)
+
     if get_password() == second_input:
         print("Вы ввели правильный пароль!")
     else:
