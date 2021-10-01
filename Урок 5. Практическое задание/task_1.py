@@ -23,3 +23,56 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from statistics import mean
+from collections import namedtuple
+
+
+def get_avg_profit():
+    n = int(input("Введите количество предприятий для расчета прибыли: "))
+    companies = namedtuple("Company", "name period_1 period_2 period_3 period_4")
+    profit_aver = {}
+
+    for i in range(n):
+        company = companies
+        company.name = input("Введите название предприятия: ")
+        quarterly_profit = input("через пробел введите прибыль данного предприятия"
+                                 "за каждый квартал(Всего 4 квартала):\n").split(' ')
+        company.period_1 = int(quarterly_profit[0])
+        company.period_2 = int(quarterly_profit[1])
+        company.period_3 = int(quarterly_profit[2])
+        company.period_4 = int(quarterly_profit[3])
+
+        profit_aver[company.name] = (
+            company.period_1 + company.period_2 +
+            company.period_3 + company.period_4) / 4
+
+    avg_profit = mean(profit_aver.values())
+
+    print(f'Средняя годовая прибыль всех предприятий: {avg_profit}')
+    print(f"Предприятия, с прибылью выше среднего значения: "
+          f"{', '.join([el for el in profit_aver.keys() if profit_aver[el] > avg_profit])}.")
+    print(f"Предприятия, с прибылью ниже среднего значения: "
+          f"{', '.join([el for el in profit_aver.keys() if profit_aver[el] < avg_profit])}.")
+    print(f"Предприятия, с прибылью равной среднему значению: "
+          f"{', '.join([el for el in profit_aver.keys() if profit_aver[el] == avg_profit])}.")
+
+
+if __name__ == '__main__':
+    get_avg_profit()
+
+'''Введите количество предприятий для расчета прибыли: 3
+Введите название предприятия: Фирма 1
+через пробел введите прибыль данного предприятияза каждый квартал(Всего 4 квартала):
+1 2 3 4 
+Введите название предприятия: Фирма 2
+через пробел введите прибыль данного предприятияза каждый квартал(Всего 4 квартала):
+5 5 5 5
+Введите название предприятия: Фирма 3
+через пробел введите прибыль данного предприятияза каждый квартал(Всего 4 квартала):
+9 8 7 6
+Средняя годовая прибыль всех предприятий: 5.0
+Предприятия, с прибылью выше среднего значения: Фирма 3.
+Предприятия, с прибылью ниже среднего значения: Фирма 1.
+Предприятия, с прибылью равной среднему значению: Фирма 2.
+'''
