@@ -18,25 +18,25 @@
 
 import timeit
 
-my_list = list(range(3000))
+my_list = list(range(1000))
 
 
-def func_1(nums):
+def func_1():
     new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
+    for i in range(len(my_list)):
+        if my_list[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
 
 
-t1 = timeit.timeit(stmt='func_1(my_list)', setup='from __main__ import func_1, my_list')
+t1 = timeit.timeit('func_1()', globals=globals())
 print('func_1', t1, 'seconds')  # В среднем: на 1000 элементов 55 секунд, на 2000 - 117 сек, на 3000 - 164 сек
 
 
-def func_2(nums):
+def func_2():
     new_arr = []
     z = 0
-    for i in nums:
+    for i in my_list:
         if i % 2 == 0:
             new_arr.append(z)
             z += 1
@@ -45,15 +45,15 @@ def func_2(nums):
     return new_arr
 
 
-t2 = timeit.timeit(stmt='func_2(my_list)', setup='from __main__ import func_2, my_list')
+t2 = timeit.timeit('func_2()', globals=globals())
 print('func_2', t2, 'seconds')  # В среднем: на 1000 элементов 60 секунд, на 2000 - 120 ,на 3000 - 191 сек
 
 
-def func_3(nums):
-    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+def func_3():
+    return [i for i in range(len(my_list)) if my_list[i] % 2 == 0]
 
 
-t3 = timeit.timeit(stmt='func_3(my_list)', setup='from __main__ import func_3, my_list')
+t3 = timeit.timeit('func_3()',globals=globals())
 print('func_3', t3, 'seconds')  # В среднем: на 1000 элементов 46 секунд, на 2000 - 96 сек, на 3000 - 139 сек
 
 '''''
