@@ -39,7 +39,7 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # !!!
+    for j in range(len(lst_obj)):          # !!!!
         if lst_obj[j] in lst_obj[j+1:]:    # !!!
             return False                   # !!!
     return True                            # !!!
