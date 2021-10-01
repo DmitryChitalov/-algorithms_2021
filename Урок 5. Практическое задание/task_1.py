@@ -23,3 +23,26 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import defaultdict, deque
+
+num_company = int(input('Введите количество предприятий для расчета прибыли: '))
+company_dict = defaultdict(int)
+for i in range(num_company):
+    name_company = input('Введите название предприятия: ')
+    profit = input('Через пробел введите прибыль данного предприятия за каждый квартал (Всего 4 квартала): ')
+    profit_comp = sum(list(map(int, profit.split(' '))))
+    company_dict[name_company] = profit_comp
+
+average_profit = sum(company_dict.values())/len(company_dict)
+above_avr_comp = deque([])
+below_average = deque([])
+
+for key, val in company_dict.items():
+    if val > average_profit:
+        above_avr_comp.append(key)
+    else:
+        below_average.append(key)
+
+print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {" ".join(above_avr_comp)}')
+print(f'Предприятия, с прибылью ниже среднего значения: {" ".join(below_average)}')
