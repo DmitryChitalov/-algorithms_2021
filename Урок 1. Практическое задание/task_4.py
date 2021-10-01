@@ -25,3 +25,31 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+def check_user_act(users):
+    a = users  #  O(1)
+    for i in range(len(a)):#  O(n)
+        if a[i][2] == 0:#  O(1)
+            print(a[i][0], ", Ваша учетная запись не активирована:")#  O(1)
+            a[i][2] = input('Введите код активации - "1":')#  O(1)
+        elif a[i][2] == 1:#  O(1)
+            print("Вы активировали учетную запись!")#  O(1)
+        elif a[i][2] != 1:#  O(1)
+            print("Ваша учетная запись не активирована.")#  O(1)
+    return#  O(1)
+
+users = [
+    ['Sidoroff', 'jZC2WuCGJzMZ', 0],
+    ['Petroff','Jvb7KKe',1],
+    ['Parkinson','KjzTFxy',0],
+    ['Ivanoff','EPg4uTQE',0],
+    ['Brumfield','YqlFbFXnLMQ',0],
+    ['Grimsell','YDAEky0GAIY',1],
+    ['Jeste','mFNt7M',1],
+    ['Anten','rMctXIt',0],
+    ['Staresmeare','UQKTzzuCNHrz',1],
+    ['Sorsby','sBK7v9B',1]
+]
+
+check_user_act(users)
+
