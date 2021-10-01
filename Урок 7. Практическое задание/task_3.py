@@ -40,3 +40,75 @@ for i in
 
 
 """
+from statistics import median
+import timeit
+import random
+
+
+def shell(lst_obj):
+    inc = len(lst_obj) // 2
+    while inc:
+        for i, el in enumerate(lst_obj):
+            while i >= inc and lst_obj[i - inc] > el:
+                lst_obj[i] = lst_obj[i - inc]
+                i -= inc
+            lst_obj[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return lst_obj
+
+
+def without_sort(lst_obj):
+    temp = lst_obj
+    for i in range(len(lst_obj) // 2):
+        temp.remove(max(temp))
+    return max(temp)
+
+
+m = int(input('Введите m: '))
+orig_list = [random.randint(0, 100) for _ in range(2 * m + 1)]
+
+print(f'Исходный -        {orig_list}\nОтсортированный - {shell(orig_list[:])}'
+      f'\n\nМедиана (Shell): {shell(orig_list[:])[m]}'
+      f'\n{timeit.timeit("shell(orig_list[:])", globals=globals(), number=1000)}\n'
+      )
+
+print(f'Медиана (Без сортирвки): {without_sort(orig_list[:])}'
+      f'\n{timeit.timeit("without_sort(orig_list[:])", globals=globals(), number=1000)}\n'
+      )
+
+print(f'Медиана (median()): {median(orig_list[:])}'
+      f'\n{timeit.timeit("median(orig_list[:])", globals=globals(), number=1000)}\n'
+      )
+"""
+Введите m: 10
+Исходный -        [22, 98, 41, 70, 87, 49, 30, 56, 16, 66, 23, 42, 80, 50, 40, 59, 95, 43, 98, 38, 96]
+Отсортированный - [16, 22, 23, 30, 38, 40, 41, 42, 43, 49, 50, 56, 59, 66, 70, 80, 87, 95, 96, 98, 98]
+
+Медиана (Shell): 50
+0.018513526000000002
+
+Медиана (Без сортирвки): 50
+0.007410158999999972
+
+Медиана (median()): 50
+0.0013079880000002042
+
+
+Введите m: 1000
+Исходный -        [41, 80, 75, 98, 86, 49, 36, 93, 36, 26, 72, 32, 9, 11, 89, 90, 20, 35, 3, 11, 67, 87, 99, 83, 71,...]
+Отсортированный - [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...]
+
+Медиана (Shell): 49
+6.123702035
+
+Медиана (Без сортирвки): 49
+44.571036821999996
+
+Медиана (median()): 49
+0.3512790030000019
+
+Самый быстрый метод нахождения медианы с использование встроенной функции (median()), на втором месте 
+нахождение медианы с предварительной сортировкой массива (shell). И на последнем месте 
+метод без сортировки, путем удалениия половины максимальных элементов в массиве (without_sort())
+(при каждом удалении элемента, массив перестраивается, что занимает достаточно времени).
+"""

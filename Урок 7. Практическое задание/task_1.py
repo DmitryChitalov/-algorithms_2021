@@ -17,3 +17,67 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import timeit
+import random
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_opt(lst_obj):
+    n = 1
+    flag = 1
+    while flag:
+        flag = 0
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                flag = 1
+        n += 1
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+print(f'Исходный массив:        {orig_list}\nОтсортированный массив: {bubble_sort(orig_list[:])}'
+      f'\nБез оптимизации: {timeit.timeit("bubble_sort(orig_list[:])", globals=globals(), number=1000)}'
+      f'\nC оптимизацией:  {timeit.timeit("bubble_sort_opt(orig_list[:])", globals=globals(), number=1000)}\n'
+      )
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+print(f'Исходный массив:        {orig_list}\nОтсортированный массив: {bubble_sort(orig_list[:])}'
+      f'\nБез оптимизации: {timeit.timeit("bubble_sort(orig_list[:])", globals=globals(), number=1000)}'
+      f'\nC оптимизацией:  {timeit.timeit("bubble_sort_opt(orig_list[:])", globals=globals(), number=1000)}\n'
+      )
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+print(f'Исходный массив:        {orig_list}\nОтсортированный массив: {bubble_sort(orig_list[:])}'
+      f'\nБез оптимизации: {timeit.timeit("bubble_sort(orig_list[:])", globals=globals(), number=1000)}'
+      f'\nC оптимизацией:  {timeit.timeit("bubble_sort_opt(orig_list[:])", globals=globals(), number=1000)}\n'
+      )
+
+"""
+Исходный массив:        [26, 23, -73, 17, 41, 62, 72, -100, 27, -6]
+Отсортированный массив: [72, 62, 41, 27, 26, 23, 17, -6, -73, -100]
+Без оптимизации: 0.0212402
+C оптимизацией:  0.02277549999999999
+
+Исходный массив:        [-1, 57, 27, -26, 62, 25, -59, 94, 81, 14, 92, -85, -93, 54, 26, -83, 2, -47, -33, -23, ...]
+Отсортированный массив: [100, 95, 94, 92, 92, 91, 88, 87, 85, 85, 83, 81, 81, 70, 66, 63, 62, 61, 58, 57, 56, 54,...]
+Без оптимизации: 1.7100648
+C оптимизацией:  1.5454231999999999
+
+Исходный массив:        [-73, -44, 56, 5, -18, -60, -96, -58, -48, 78, 9, -76, 2, 10, 82, 61, -37, -47, -52, -26,...]
+Отсортированный массив: [100, 100, 100, 99, 99, 99, 99, 99, 98, 98, 98, 98, 98, 97, 97, 97, 97, 97, 97, 97, 97, 96,...]
+Без оптимизации: 170.6179103
+C оптимизацией:  168.04299529999997
+
+Обобого смысла в использовании флага нет т. к. вероятность получить при генерации массива
+уже отсортированный массив очень низкая.
+"""
