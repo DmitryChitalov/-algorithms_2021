@@ -42,10 +42,16 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-def func_3():
-    num = sorted([(i, array.count(i)) for i in set(array)], key=lambda x: x[1])[-1]
-    return f'Чаще всего встречается число {num[0]}, ' \
-           f'оно появилось в массиве {num[1]} раз(а)'
+# def func_3():
+#     num = max([(i, array.count(i)) for i in set(array)], key=lambda x: x[1])
+#     return f'Чаще всего встречается число {num[0]}, ' \
+#            f'оно появилось в массиве {num[1]} раз(а)'
+
+
+def func_3():  # Конечно же подсмотрел во вчерашнем разборе дз
+    num = max(array, key=array.count)
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {array.count(num)} раз(а)'
 
 
 def func_4():

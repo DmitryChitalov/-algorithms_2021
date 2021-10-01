@@ -23,7 +23,7 @@ setup = 'numbers = [i for i in range(100)]'
 # numbers = [i for i in range(100)]
 
 
-def func_1(nums):
+def func_1(nums):  # O(N)
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
@@ -31,7 +31,7 @@ def func_1(nums):
     return new_arr
 
 
-def func_2(nums):
+def func_2(nums):  # O(N)
     new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]  # <range_iterator object at 0x00...>
     return new_arr
 
@@ -53,3 +53,11 @@ print(timeit('func_1(numbers)', globals=globals(), setup=setup))
 print(timeit('func_2(numbers)', globals=globals(), setup=setup))
 # print(func_3(numbers))
 print(timeit('func_3(numbers)', globals=globals(), setup=setup))
+
+'''
+number = default (1000000)
+func_1(numbers): 6.5598286
+func_2(numbers): 5.5329189
+Прирост 16%
+List comprehension работает быстрее, чем итератор через цикл
+'''
