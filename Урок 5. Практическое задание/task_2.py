@@ -67,17 +67,23 @@ class Hexnumber2:
     def __str__(self):
         return f'{self.first}'
 
+
 class Hexnumber3:
     def l_to_num(self, l):
         return int(''.join(l), BASE16)
+
     def __init__(self, first):
         self.first = list(first)
+
     def __add__(self, other):
         return list("%X" % (self.l_to_num(self.first) + self.l_to_num(other.first)))
+
     def __mul__(self, other):
         return list("%X" % (self.l_to_num(self.first) * self.l_to_num(other.first)))
+
     def __str__(self):
         return f'{self.first}'
+
 
 def main1():
     x = Hexnumber('A2')
@@ -97,6 +103,8 @@ def main2():
     print('x*y:', x * y)
     x += y
     print('x (x+=y):', x)
+
+
 def main3():
     x = Hexnumber3('A2')
     y = Hexnumber3('C4F')
