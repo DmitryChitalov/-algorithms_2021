@@ -75,7 +75,7 @@ class Conv():
         return f'{list(f"{self.number + other.number:X}")}'
 
     def __mul__(self, other):
-        return f'{list(f"{self.number + other.number:X}")}'
+        return f'{list(f"{self.number * other.number:X}")}'
 
 
 first_cls = Conv(first_num)
