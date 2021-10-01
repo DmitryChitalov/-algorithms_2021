@@ -34,3 +34,52 @@ hx = HexNumber
 hx + hx
 hex()
 """
+# Решение вариантом 1
+from collections import defaultdict
+
+first_num = list(input('Введите 1-е слогаемое: '))  # Сохраняем введеные значения как массив
+second_num = list(input('Введите 2-е слогаемое: '))  # Сохраняем введеные значения как массив
+
+
+# Функция для перевода числа в 16 систему исчисления
+def convert_to_10(num_lst: list):
+    alphabet = "0123456789ABCDEF"
+    dict_num = defaultdict(int)
+    for val, key in enumerate(alphabet):
+        dict_num[key] = val
+    # Формула для перевода числа из 16 в 10 систему
+    numbers = sum([dict_num[el] * (16 ** (len(num_lst) - (num_lst.index(el) + 1))) for el in num_lst])
+    return numbers
+
+
+# Использование функции hex() через f-строку (сохранение результата в виде массива)
+lst_sum = list(f"{convert_to_10(first_num) + convert_to_10(second_num) :X}")
+lst_mul = list(f"{convert_to_10(first_num) * convert_to_10(second_num) :X}")
+# Вывод результатов
+print(f'Сумма чисел из примера: {lst_sum}')
+print(f'Произведение - {lst_mul}')
+
+
+# Решение вариантом 2, через ООП (Используя функцию, написанную выше)
+
+class Conv():
+    def __init__(self, num_lst: list):
+        alphabet = "0123456789ABCDEF"
+        dict_num = defaultdict(int)
+        for val, key in enumerate(alphabet):
+            dict_num[key] = val
+        # Формула для перевода числа из 16 в 10 систему
+        self.number = sum([dict_num[el] * (16 ** (len(num_lst) - (num_lst.index(el) + 1))) for el in num_lst])
+
+    def __add__(self, other):
+        return f'{list(f"{self.number + other.number:X}")}'
+
+    def __mul__(self, other):
+        return f'{list(f"{self.number + other.number:X}")}'
+
+
+first_cls = Conv(first_num)
+sec_cls = Conv(second_num)
+print('---------------------Решение через ООП---------------------')
+print(f'Сумма чисел из примера: {first_cls + sec_cls}')
+print(f'Произведение - {first_cls * sec_cls}')
