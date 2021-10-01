@@ -11,3 +11,46 @@ deque – это обобщение стеков и очередей.
 
 В первую очередь необходимо выполнить замеры для ф-ций appendleft, popleft, extendleft дека и для их аналогов у списков.
 """
+from collections import deque
+from timeit import timeit
+
+lst_obj = []
+deq_obj = deque([])
+
+
+# Функция, заполняющая объект
+def appends(obj):
+    for i in range(1000):
+        obj.append(i)
+
+
+# Замер заполнения списка
+print(timeit('appends(lst_obj)', number=100000, globals=globals()))  # 12.1161710
+
+# Замер заполнения дека
+print(timeit('appends(deq_obj)', number=100000, globals=globals()))  # 15.3122153
+
+# Замер операции вставки в начало для списка и дека
+print('Операция вставки в начало для списка')
+print(timeit('lst_obj.insert(0, 123)', number=30000, globals=globals()))  # 0.24985
+print('Операция вставки в начало для дека')
+print(timeit('deq_obj.appendleft(123)', number=30000, globals=globals()))  # 0.00209
+
+# Замер операции распаковки в начало для списка и дека
+print('Операция распаковки в начало для списка')
+print(timeit('lst_obj[:0] = [i for i in range(10)]', number=30000, globals=globals()))  # 2.47370
+print('Операция распаковки в начало для дека')
+print(timeit('deq_obj.extendleft([i for i in range(10)])', number=30000, globals=globals()))  # 0.03273
+
+# Замер операции удаления первого элемента для списка и дека
+print('Операция вытаскивания элемента из начала списка')
+print(timeit('lst_obj.pop(0)', number=30000, globals=globals()))  # 10.697268
+print('Операция вытаскивания элемента из начала дека')
+print(timeit('deq_obj.popleft()', number=30000, globals=globals()))  # 0.0025786
+
+'''
+Аналитика:
+Для повседневных задач достаточно использовать списки, деки же выгоднее использовать,
+когда необходимо часто работать с началом массива (Вставка, распаковка и удаление)
+Однако операция вставки в конец массива быстрее выполняется у списка, чем у дека
+'''
