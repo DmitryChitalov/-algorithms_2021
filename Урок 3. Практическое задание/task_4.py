@@ -15,3 +15,30 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib
+from uuid import uuid4
+
+
+cache = {}
+
+salt = uuid4().hex
+
+
+def get_page(url):
+    if cache.get(url):
+        print(f'Получение страницы из кэша... {url} {cache[url]}')
+        return cache[url]
+    else:
+        res = hashlib.sha256(salt.encode() + url.encode('utf-8')).hexdigest()
+        print(f'Получение страницы с сервера... {url} {res}')
+        cache[url] = res
+        return res
+
+
+if __name__ == '__main__':
+    get_page("https://www.kinopoisk.ru/film/758178/")
+    get_page("https://www.kinopoisk.ru/film/758178/")
+    get_page("https://www.kinopoisk.ru/series/949000/")
+    get_page("https://www.kinopoisk.ru/series/949000/")
+    get_page("https://www.kinopoisk.ru/series/949000/")
