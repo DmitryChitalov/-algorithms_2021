@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+from collections import namedtuple
+
 """
 1.	Пользователь вводит данные о количестве предприятий, их наименования и прибыль
 за 4 квартала (т.е. 4 отдельных числа) для каждого предприятия.
@@ -23,3 +27,31 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+Company = namedtuple('Company', ['name', 'profit'])
+
+
+def get_company() -> Company:
+    return Company(
+        name=input(f'Введите название предприятия: '),
+        profit=sum(map(int, input(f'Введите прибыль предприятия через пробел: ').split()))
+    )
+
+
+def main():
+    count = int(input('Введите количество предприятий: '))
+    companys = [get_company() for _ in range(count)]
+    avg_profit = sum([x.profit for x in companys]) / count
+
+    avg_max_companys = ", ".join([x.name for x in list(filter(lambda x: float(x.profit) > avg_profit, companys))])
+    avg_min_companys = ", ".join([x.name for x in list(filter(lambda x: float(x.profit) < avg_profit, companys))])
+
+    print(
+        f"Средняя годовая прибыль всех предприятий: {avg_profit}\n"
+        f"Предприятия, с прибылью выше среднего значения: {avg_max_companys}\n"
+        f"Предприятия, с прибылью ниже среднего значения: {avg_min_companys}\n"
+    )
+
+
+if __name__ == '__main__':
+    main()
