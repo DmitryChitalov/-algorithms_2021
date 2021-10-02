@@ -1,3 +1,5 @@
+from timeit import timeit
+
 """
 Задание 4.
 
@@ -41,3 +43,22 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+
+def func_3():
+    return f'Чаще всего встречается число {max(array, key=array.count)}, ' \
+           f'оно появилось в массиве {array.count(max(array, key=array.count))} раз(а)'
+
+
+print(func_1())
+print(func_2())
+print(func_3())
+
+print(timeit('func_1()', globals=globals(), number=1000000))
+print(timeit('func_2()', globals=globals(), number=1000000))
+print(timeit('func_3()', globals=globals(), number=1000000))
+
+"""
+Несмотря на отсутсвие в коде встроеной функции и визуальную величину кода, самой быстрой функцией в данном задании будет 
+функция 1. Остальные функции отрабатывают в 1,5 - 2 раза дольше.
+"""
