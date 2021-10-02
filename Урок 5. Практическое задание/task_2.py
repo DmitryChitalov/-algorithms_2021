@@ -69,8 +69,11 @@ class Hexnumber2:
 
 
 class Hexnumber3:
-    def l_to_num(self, l):
-        return int(''.join(l), BASE16)
+    def l_to_num(self, l):  # для тренировки перепишем int(num, BASE16)
+        return sum(['0123456789ABCDEF'.index(x[1]) * pow(BASE16, x[0]) for x in enumerate(l[::-1])])
+
+    # def l_to_num(self, l):
+    #     return int(''.join(l), BASE16)
 
     def __init__(self, first):
         self.first = list(first)
