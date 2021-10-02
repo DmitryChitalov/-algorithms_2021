@@ -25,7 +25,8 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
-
+# общая сложность О(n)
+'''
 def check_user_act(users):
     a = users  #  O(1)
     for i in range(len(a)):#  O(n)
@@ -52,4 +53,22 @@ users = [
 ]
 
 check_user_act(users)
+'''
+# Вариант со словарем, общая сложность O(1)
+
+
+def check_user_act1(user, login, password):
+    if user.get(login):
+        if user[login]['password'] == password \
+                and user[login]['activate']:
+            return "Вход к ресурсу открыт, добро пожаловать!"
+        elif user[login]['password'] != password:
+            return "Пароль не подходит!"
+        elif user[login]['password'] == password \
+                and not user[login]['activate']:
+            return "Выполните активацию учетной записи!"
+    else:
+        return "Пользователь не авторизован или не существует"
+
+
 
