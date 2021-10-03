@@ -11,8 +11,12 @@
 
 Без аналитики задание считается не принятым!
 """
+from collections import Counter
+from timeit import timeit
+from random import randint
 
-array = [1, 3, 1, 3, 4, 5, 1]
+
+array = [randint(1, 100) for i in range(20)]
 
 
 def func_1():
@@ -39,5 +43,17 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    num = max(array, key=array.count)
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {array.count(num)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(f'Время выполнения функции func_1: {timeit(stmt="func_1()", globals=globals())}')
+print(f'Время выполнения функции func_2: {timeit(stmt="func_2()", globals=globals())}')
+print(f'Время выполнения функции func_3: {timeit(stmt="func_3()", globals=globals())}')
+
+# func_3 работает быстрее используется меньше операций
