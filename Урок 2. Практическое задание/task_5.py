@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def result_chr(i, tab_chr=''):
+    if i == 128:
+        return tab_chr
+    elif i % 10 == 1:
+        return result_chr(i + 1, tab_chr + f' {i} - {chr(i)}\n')
+    else:
+        return result_chr(i + 1, tab_chr + f' {i} - {chr(i)}')
+
+
+print(result_chr(32))
