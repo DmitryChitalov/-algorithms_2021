@@ -22,10 +22,10 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(len(lst_obj).
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # 0(len(lst_obj))
+    return lst_to_set  # 0(1)
 
 
 #############################################################################################
@@ -37,12 +37,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(n**2).
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # 0(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # 0(1+n)
+            return False                   # 0(1)
+    return True                            # 0(1)
 
 
 #############################################################################################
@@ -53,14 +53,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(n log n)
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # 0((lst_obj))
+    lst_copy.sort()                          # 0(n log n)
+    for i in range(len(lst_obj) - 1):        # 0(n)
+        if lst_copy[i] == lst_copy[i+1]:     # 0(1)
+            return False                     # 0(1)
+    return True                              # 0(1)
 
 #############################################################################################
 

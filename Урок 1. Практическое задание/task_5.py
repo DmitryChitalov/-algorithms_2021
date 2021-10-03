@@ -28,3 +28,43 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class ClassStack:
+    def __init__(self):
+        self.elements = [[], [], [], [], []]
+
+    def push_in(self, el):
+        for i in range(0, len(self.elements) - 1, 1):
+            if len(self.elements[i]) < 5:
+                self.elements[i].append(el)
+                break
+
+    def pop_out(self):
+        return self.elements.pop()
+
+    def get_val(self):
+        return self.elements[len(self.elements) - 1]
+
+    def stack_size(self):
+        return len(self.elements)
+
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.max = None
+
+    def push(self, item):
+        self.stack.append(item)
+        if len(self.stack) == 1 or item > self.max:
+            self.max = item
+
+
+if __name__ == '__main__':
+    stack_1 = ClassStack()
+    i = 0
+    while i < 18:
+        stack_1.push_in(1+i)
+        i += 1
+    print(stack_1.elements)
