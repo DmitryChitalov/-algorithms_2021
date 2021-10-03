@@ -48,7 +48,7 @@ def check_login(profiles, name, password):
     else:
         return 'Не верный логин'
 
-
+# O(N)
 print(check_login(profiles, 'Sergey', '0000'))
 
 
@@ -63,5 +63,5 @@ def check_login2(profiles, name, password):
     else:
         return 'Не верный логин'
 
-
+# O(1)
 print(check_login(profiles, 'Roman', '123'))
