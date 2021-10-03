@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_rev_num(num, rev_num=''):
+    if num == 0:  # базовый случай
+        return rev_num
+    else:
+        last_num = num % 10  # шаг рекурсии
+        rev_num += str(last_num)
+        return get_rev_num(num // 10, rev_num)
+
+
+print(get_rev_num(1230))
+print(get_rev_num(123))
