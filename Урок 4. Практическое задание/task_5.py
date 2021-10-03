@@ -19,6 +19,9 @@
 """
 
 
+import timeit
+
+
 def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
@@ -39,5 +42,27 @@ def simple(i):
     return n
 
 
+def eratosfen(i):
+    n = 2
+    l = 500
+    sieve = [x for x in range(1)]
+    sieve[1] = 0
+    while n < 1:
+        if sieve[n] != 0:
+            m = n * 2
+            while m < 1:
+                sieve[m] = 0
+                m += n
+        n += 1
+    return [p for p in sieve if p != 0][i -1]
+
+
 i = int(input('Введите порядковый номер искомого простого числа: '))
+print(timeit.timeit("simple(i)", globals=globals(),number=100))
 print(simple(i))
+
+"""
+Введите порядковый номер искомого простого числа: 25
+0.008378700000000183
+97
+"""

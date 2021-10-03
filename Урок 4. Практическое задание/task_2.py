@@ -79,3 +79,8 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация потребуется, если мы будем вызывать функцию более одного раза. 
+В данном случае она не требуется.
+"""
