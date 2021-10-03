@@ -23,3 +23,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from statistics import mean
+from collections import namedtuple
+
+# Вариант 1. Использование именованного кортежа namedtuple
+
+comp_desc = namedtuple('Company', 'comp_name profit_4q profit_y')  # именованный кортеж с данными по компании
+comp_all = []
+
+while True:
+    company = namedtuple('Company', 'comp_name profit_4q profit_y')
+    company.comp_name = input('Введите наименование предприятия или 0 для завершения ввода: ')
+    if company.comp_name == '0':
+        break
+    while True:
+        try:
+            company.profit_4q = list(map(float, input('Прибыль по кварталам через пробел: ').split()))
+            company.profit_y = sum(company.profit_4q)
+            break
+        except ValueError:
+            print('Необходимо ввести значения! Повторите ввод!')
+    # Сохраняем данные в нашу БД (список)
+    comp_all.append(company)
+    print(f'Данные по {company.comp_name} успешно добалены в БД!\n')
+
+# Выводим результаты:
+print('\n---- Результаты ----')
+mean_y = mean(list(map(lambda x: x.profit_y, comp_all)))
+print(f'Средняя годовая прибыль всех предприятий: {mean_y}')
+above_average = list(filter(lambda x: x.profit_y >= mean_y, comp_all))
+name_above = [i.comp_name for i in above_average]
+# Один из вариантов получения прочих компаний с помощью set()
+name_less = set.difference(set([i.comp_name for i in comp_all]), name_above)
+print(f'Предприятия, с прибылью выше среднего значения: {" ".join(name_above)}')
+print(f'Предприятия, с прибылью ниже среднего значения: {" ".join(name_less)}')
