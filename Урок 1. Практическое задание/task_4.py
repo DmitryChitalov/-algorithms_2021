@@ -25,3 +25,43 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+profiles ={
+    'Roman': {'password': '123',
+              'activation': True},
+    'Sergey': {'password': '0000',
+              'activation': False},
+    'Dmitriy': {'password': '1111',
+              'activation': True}
+}
+
+
+def check_login(profiles, name, password):
+    for key, val in profiles.items():
+        if name == key:
+            if val['password'] == password and val['activation'] == True:
+                return 'Доступ разрешён'
+            elif val['password'] == password and val['activation'] == False:
+                return 'Пройдите активацию'
+            else:
+                return 'Не верный пароль'
+    else:
+        return 'Не верный логин'
+
+
+print(check_login(profiles, 'Sergey', '0000'))
+
+
+def check_login2(profiles, name, password):
+    if profiles[name] == name:
+        if profiles[name]['password'] == password and profiles[name]['activations'] == True:
+            return 'Доступ разрешён'
+        elif profiles[name]['password'] == password and profiles[name]['activations'] == False:
+            return 'Пройдите аутентификацию'
+        else:
+            return 'Не верный пароль'
+    else:
+        return 'Не верный логин'
+
+
+print(check_login(profiles, 'Roman', '123'))
