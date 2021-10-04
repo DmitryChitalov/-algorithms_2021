@@ -19,3 +19,22 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+lst = [1, 5, 58, 9, 0, 96, 36, 2, 15, 10]
+
+
+def complexity_quadrotic(lst_min):    # первый алгоритм. Квадратичная сложность n^2
+    ln = lst_min[0]    # O(1) - константная
+    for i in lst_min:    # O(n) - линейная
+        if i < ln:    # O(n) - линейная
+            ln = i    # O(1) - константная
+    return ln
+
+
+def complexity_linear(lst_min):    # второй алгоритм. Линейная сложность n^1
+    lst_min_linear = min(lst_min)  # O(n) - линейная
+    return lst_min_linear
+
+
+print(complexity_linear(lst))
+print(complexity_quadrotic(lst))
