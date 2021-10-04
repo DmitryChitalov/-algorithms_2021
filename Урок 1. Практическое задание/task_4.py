@@ -26,3 +26,48 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+lst = {'login_1': 'Иван', 'password_1': '123', 'account_activation_1': 'n',
+       'login_2': 'Мария', 'password_2': '456', 'account_activation_2': 'y',
+       'login_3': 'Роман', 'password_3': '523', 'account_activation_3': 'y'}
+
+
+def through_the_cycle(dictionary):
+
+    a = 0    # O(1) - константная
+    for i in dictionary:    # O(n) - линейная
+        a = a + 1    # O(len(s)) + O(len(t)) - линейная
+        if dictionary[i] == 'n':    # O(n) - линейная
+            var = dictionary[list(dictionary.keys())[a-3]]    # O(n) - линейная
+            print('Вак аккуант не активирован', ', ', var, '. ',
+                  'Вы не имеете права доступа к ресурсу без активации аккуанта.', sep='')
+
+
+def key_search(dictionary):
+    xx = 0    # O(1) - константная
+    while xx < (len(dictionary)/3):    # O(n) - линейная
+        xx = xx + 1    # O(len(s)) + O(len(t)) - линейная
+        ac_c = 'account_activation_' + str(xx)    # O(len(s)) + O(len(t)) - линейная
+        b = dictionary[ac_c]    # O(1) - константная
+        if b == 'n':    # O(n) - линейная
+            cc = 'login_' + str(xx)    # O(len(s)) + O(len(t)) - линейная
+            print('Ваш аккуант не активирован', ', ', dictionary[cc], '. ',
+                  'Вы не имеете права доступа к ресурсу без активации аккуанта.', sep='')
+
+
+def dictionary_search(dictionary):
+    acb = int(round((len(dictionary)/3)))    # O(n) - линейная - 3n
+    for i in range(1, acb + 1):    # O(n) - линейная
+        ac_c = 'account_activation_' + str(i)    # O(len(s)) + O(len(t)) - линейная
+        if dictionary.get(ac_c, 0) == 'n':    # O(n) - линейная
+            cc = 'login_' + str(i)    # O(len(s)) + O(len(t)) - линейная
+            print('Ваш аккуант не активирован', ', ', dictionary[cc], '. ',
+                  'Вы не имеете права доступа к ресурсу без активации аккуанта.', sep='')
+
+
+through_the_cycle(lst)
+key_search(lst)
+dictionary_search(lst)
+
+"""если всё правильно понял, то первый вариант будет самым быстрым, так как
+линейная сложность и её количество минимальны"""
