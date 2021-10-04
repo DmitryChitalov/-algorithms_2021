@@ -15,3 +15,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# a = int(input('Введите число: '))
+# n = 1
+# total = 0
+#
+# while a != 0:
+#     total += n
+#     n /= -2
+#     a -= 1
+# print(total)
+
+
+def count(repeat, total, n):
+    if repeat == 0:
+        return total
+    else:
+        total += n
+        n /= -2
+        return count(repeat-1, total, n)
+
+
+repeat = int(input('Введите число: '))
+n = 1
+total = 0
+print(f'Количество элементов: {repeat}, их сумма: {count(repeat, total, n)}')
