@@ -16,3 +16,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def left_part(num):
+    if num == 1:
+        return num
+    return left_part(num - 1) + num
+
+
+number = int(input('Введите число для проверки: '))
+lst_num = [i for i in range(1, number + 1)]
+for i in lst_num:
+    if i == number:
+        print(f'{i} = {number} * ({number} + 1) / 2 \n{left_part(number)} = {number * (number + 1) // 2}')
+    else:
+        print(f'{i} +', end=' ')
+
+
+
+#
+# if left_part(number) == number * (number + 1) / 2:
+#     print(f'Я же говорил!')
+# else:
+#     print('False')

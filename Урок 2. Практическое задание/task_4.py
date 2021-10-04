@@ -15,3 +15,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_el(num, one):
+    if num == 1:
+        return one
+    return sum_el(num - 1, one / -2) + one
+
+
+user_number = int(input('Введите число: '))
+print(f'Количество элементов: {user_number}, их сумма: {sum_el(user_number, 1)}')

@@ -22,3 +22,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def convert_num(number):
+    if len(number) == 1:
+        return number
+    return str(convert_num(number[1:])) + str(int(number) // 10 ** (len(number) - 1))
+
+
+user_num = input('Insert number: ')
+print(convert_num(user_num))
