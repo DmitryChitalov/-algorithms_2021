@@ -30,7 +30,7 @@ dct = {'A': 1, 'B': 11, 'C': 26, 'D': 43, 'E': 14, 'F': 29, 'G': 34, 'H': 49}
 
 def search_through_count(lst):    # вариант первый (не знаю как определить сложность в данном варианте)
     count = Counter(lst)
-    return count.most_common(3)    # O(n) + O(1) ?
+    return count.most_common(3)    # O(n) - линейная
 
 
 def search_in_cycles(lst):    # второй вариант. Сложность линейная
