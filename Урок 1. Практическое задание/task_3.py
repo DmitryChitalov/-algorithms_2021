@@ -21,3 +21,33 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+from collections import Counter
+
+# список в формате ("имя компании" : доход), упрощённо
+dct = {'A': 1, 'B': 11, 'C': 26, 'D': 43, 'E': 14, 'F': 29, 'G': 34, 'H': 49}
+
+
+def search_through_count(lst):    # вариант первый (не знаю как определить сложность в данном варианте)
+    count = Counter(lst)
+    return count.most_common(3)    # O(n) + O(1) ?
+
+
+def search_in_cycles(lst):    # второй вариант. Сложность линейная
+    ax = []    # O(1) - константная
+    bx = []    # O(1) - константная
+    xx = 3    # O(1) - константная
+    for a, b in lst.items():    # O(n) - линейная
+        ax.append(a)    # O(1) - константная
+        bx.append(b)    # O(1) - константная
+    while xx > 0:    # O(n) - линейная
+        m = max(bx)    # O(1) - константная
+        xx = xx - 1    # O(len(s)) + O(len(t)) - линейная
+        print(ax.pop(bx.index(m)), bx.pop(bx.index(m)))
+
+
+print(*search_through_count(dct))
+search_in_cycles(dct)
+
+""" первый вариант явно проще
+"""
