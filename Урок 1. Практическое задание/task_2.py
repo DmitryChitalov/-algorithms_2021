@@ -9,7 +9,7 @@
 
 Второй, в виде функции, должен обеспечивать поиск минимального значения для списка.
 Сложность такого алгоритма: O(n) - линейная.
-
+len(lst_obj)
 Не забудьте указать сложность каждого из двух алгоритмов. Для лучшего закрепления темы
 можете определить и указать сложность еще и у каждого выражения этих двух алгоритмов.
 
@@ -19,3 +19,36 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+my_list_1 = [9, 4, 5, 7, 2, 6]  # O(1)
+
+
+def min_1(my_list):  # O(n)
+    minimal = my_list[0]  # O(1)
+    for i in my_list:  # O(n)
+        if i < minimal:  # O(1)
+            minimal = i  # O(1)
+    return minimal  # O(1)
+
+
+print(min_1(my_list_1))
+
+
+def min_2(my_list):  # O(1)
+    return sorted(my_list)[0]  # O(1)
+
+
+print(min_2(my_list_1))
+
+
+def min_3(my_list):  # O(n**2)
+    minimal = 0  # O(1)
+    for i in my_list:  # O(n)
+        minimal = i  # O(1)
+        for j in my_list:  # O(n)
+            if i > j:  # O(1)
+                minimal = j  # O(1)
+    return minimal  # O(1)
+
+
+print(min_2(my_list_1))

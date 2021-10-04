@@ -25,3 +25,47 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+information = [['Juan', 'Julio', 'Carla', 'Polina', 'Igor'], ['qwerty', 'qwe123', 'qw00', '1234', '0000'],
+               [1, 0, 0, 1, 1]]
+
+
+# Done
+def first_function():  # O(n)
+    username = input('Please enter your username:')  # O(1)
+    expected_password = information[1][information[0].index(username)]  # O(n)
+    password = input('Enter the password, please: ')  # O(1)
+    while password != expected_password:  # O(n)
+        password = input('Enter the correct password, please: ')
+    if information[2][information[0].index(username)] == 0:  # O(1)
+        user_says = input('You must authorize your account, please write "yes" to authorize the account: ')  # O(1)
+        if user_says == 'yes':  # O(1)
+            print('Welcome')  # O(1)
+        else:  # O(1)
+            print("You must authorize your account to have access to our site, bye. ")  # O(1)
+    else:  # O(1)
+        print('Welcome')  # O(1)
+
+
+first_function()
+
+
+# Done
+# They are almost the same but I did not think up anything else
+def second_function(username, password):  # O(1) rigth?
+    expected_password = information[1][information[0].index(username)]  # O(1)
+    if password != expected_password:  # O(1)
+        print('Incorrect password!')  # O(1)
+    else:  # O(1)
+        if information[2][information[0].index(username)] == 0:  # O(1)
+            user_says = input('You must authorize your account, please write "yes" to authorize the account: ')  # O(1)
+            if user_says == 'yes':  # O(1)
+                print('Welcome')  # O(1)
+            else:  # O(1)
+                print('You must authorize your account to have access to our site, bye.')
+        else:  # O(1)
+            print('Welcome')
+
+
+second_function('Julio', 'qwe123')
+
+# вторая функция эффективнее, так как сложность меньше
