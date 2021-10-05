@@ -27,7 +27,7 @@
 # print(total)
 
 
-def count(repeat, total, n):
+def count(repeat, total=0, n=1):
     if repeat == 0:
         return total
     else:
@@ -37,6 +37,5 @@ def count(repeat, total, n):
 
 
 repeat = int(input('Введите число: '))
-n = 1
-total = 0
-print(f'Количество элементов: {repeat}, их сумма: {count(repeat, total, n)}')
+
+print(f'Количество элементов: {repeat}, их сумма: {count(repeat)}')
