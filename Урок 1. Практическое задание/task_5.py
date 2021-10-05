@@ -47,9 +47,9 @@ class StackClass:
         print(self.stack)
 
     def show_some_stack(self):
-        number_stack = int(input('Всего 3 стопки. Какую смотрим?'))
+        number_stack = int(input('Всего 3 стопки. Какую смотрим? '))
         for el in self.stack[number_stack - 1]:
-            print(el, sep='/n')
+            print(el, end=' ')
 
     def stack_size(self):
         count = 1
@@ -58,3 +58,10 @@ class StackClass:
             count += 1
 
 
+plate = StackClass()
+for i in range(0, 14):
+    plate.push_in(i)
+
+plate.stack_size()
+plate.show_full_stack()
+plate.show_some_stack()
