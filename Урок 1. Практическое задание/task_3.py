@@ -20,3 +20,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+profit_table = {'Google': 150000,
+                'Yandex': 100000,
+                'Microsoft': 27000,
+                'Apple': 800000,
+                'Huawei': 123456}
+
+
+def top_three(data: dict):
+    """ Функция сортирует прибыль компаний формируя список с названиями
+        и выводит Топ-3 подставляя значения из словоря основываясь
+        на данных сортировки.
+        Сложность в данном случае O(n log n).
+        Как я это считал: (1 + (n log n)) + (3 * 4)
+    """
+    top_list = sorted(data, key=data.get, reverse=True)
+    for i in range(3):
+        print(f'{i+1}. {top_list[i]}: {data[top_list[i]]}')
+
+
+top_three(profit_table)
+
+
+def top_three_dict(data: dict):
+    """ Функция сортирует прибыль и далее создает словарь из
+        3 самых прибыльных компаний.
+        Сложность в данном случае O(n).
+        Как я это считал: (1 + n) + 1 + (1 * n) + 1
+    """
+    sorted_values = sorted(data.values(), reverse=True)  # O(1) O(n)
+    sorted_dict = {}  # O(1)
+
+    for v in sorted_values[:3]:  # O(1)
+        for k in data.keys():  # O(n)
+            if data[k] == v:  # O(1)
+                sorted_dict[k] = data[k]  # O(1)
+
+    print(sorted_dict)  # O(1)
+
+
+top_three_dict(profit_table)
+
+
+"""
+    Согласно классификации второе решение быстрее
+"""
