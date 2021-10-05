@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def even_odd(numbers, even, odd):
+    if numbers == 0:
+        return even, odd
+    else:
+        if numbers % 2 == 0:
+            even = even + 1
+        else:
+            odd = odd + 1
+        return even_odd(numbers // 10, even, odd)
+
+print(even_odd(123, 0, 0))

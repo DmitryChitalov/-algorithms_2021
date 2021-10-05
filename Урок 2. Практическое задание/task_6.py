@@ -11,3 +11,50 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+n = random.randint(0, 100)
+#print(n)
+
+
+def get_guessing(i):
+    ask = int(input('Введите загаданное число от 0 до 100: '))
+    if ask == n or i == 0:
+        return f'Игра окончена, верное число {n}'
+    elif ask < n:
+        print(f'Ваше число меньше загаданного! Осталось попыток {i}')
+        return get_guessing(i - 1)
+    else:
+        print(f'Ваше число больше загаданного! Осталось попыток {i}')
+        return get_guessing(i - 1)
+
+
+print(get_guessing(10))
+
+
+# Это мой старый код для игры угадайка через  цикл!!!
+# import random
+#
+#
+# min_number = 1
+# max_number = 100
+# result = None
+# while result != 'q':
+#     number = random.randint(min_number, max_number)
+#     print(number)
+#     result = int(input('=> Введите загаданное число от 1 до 100 или q для выхода  <: '))
+#     if result < number:
+#         print("Загаданное число больше вашего")
+#     elif result > number:
+#         print('Загаданное число меньше вашего')
+#     elif result == number:
+#         print('Вы выиграли')
+#     elif result == 'q':
+#         print('Вы вышли из игры')
+# n = random.randint(1, 100)
+# print(n)
+
+
+
+
+

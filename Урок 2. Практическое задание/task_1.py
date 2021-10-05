@@ -28,3 +28,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def calculate():
+    action = input('Укажите операцию (" - ", " + ", " * ", " / ")  введите "0" для выхода : ')
+    if action == '0':
+        return 'Выход'
+    else:
+        if action in "+-*/":
+            try:
+                num1 = int(input('Введите первое число: '))
+                num2 = int(input('Введите второе число'))
+                if action == '+':
+                    result = num1 + num2
+                    print(result)
+                    calculate()
+                elif action == '-':
+                    result = num1 - num2
+                    print(result)
+                    calculate()
+                elif action == '*':
+                    result = num1 * num2
+                    print(result)
+                    calculate()
+                elif action == '/':
+                    if action != 0:
+                        result = num1 / num2
+                        print(result)
+                    else:
+                        print('Делить на ноль нельзя!')
+                    return calculate()
+            except ValueError:
+                print('Введите число!')
+                return calculate()
+        else:
+            print('Введен неверный символ.')
+            return calculate()
+
+calculate()
+
