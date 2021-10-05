@@ -11,3 +11,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def is_number(n):  # Функция обработки исключения при неправильном вводе чисел
+    while True:
+        try:
+            s = int(input(n))
+        except ValueError:
+            print("Введите число!")
+        else:
+            break
+    return s
+
+def guess_num(number, guessesTaken):
+
+    guess = is_number('Ваш ответ: ')
+    if guess < number:
+        print('Мое число больше твоего')
+    elif guess > number:
+        print('Мое число меньше твоего')
+    elif guess == number:
+        return f'Вы угадали число: {number}, кол-во попыток: {guessesTaken}'
+    if guessesTaken == 1:
+        return f'Вы не угадали число, \nПравильный ответ: {number}'
+    return guess_num(number, guessesTaken - 1)
+
+print('Добро пожаловать в игру "Угадай число от 1 до 100", \nКомпьютер загадал число от 1 до 100.')
+number = random.randint(1, 100)
+print(guess_num(number, 10))

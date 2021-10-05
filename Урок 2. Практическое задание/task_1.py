@@ -28,3 +28,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def is_number(n):  # Функция обработки исключения при неправильном вводе чисел
+    while True:
+        try:
+            s = float(input(n))
+        except ValueError:
+            print("Введите число!")
+        else:
+            break
+    return s
+
+def calculator():  #  Функция - калькулятор
+
+    print("Введите Ноль для выхода из программы:> 0")
+    s = input("Введите знак (+,-,*,/): ")
+    if s == '0':
+         return
+    if s in ('+', '-', '*', '/'):
+        x = is_number('X = ')
+        y = is_number('Y = ')
+        if s == '+':
+            print("%.2f" % (x + y))
+        elif s == '-':
+            print("%.2f" % (x - y))
+        elif s == '*':
+            print("%.2f" % (x * y))
+        elif s == '/':
+            if y != 0:
+                print("%.2f" % (x / y))
+            else:
+                print("Деление на ноль!")
+    else:
+        print("Неверный знак операции!")
+    calculator()
+
+
+calculator()

@@ -16,3 +16,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def first(n):
+    if n == 1:
+        return n
+    elif n > 0:
+        return n + first(n-1)
+
+
+def second(n):
+    return n * (n + 1) // 2
+
+
+n = 1
+
+for i in range(1, 100): # Проверяем в диапазоне чисел
+    if first(n) == second(n):
+        print(f'Для n={n} - True')
+    else:
+        print(f'Для n={n} - False')
+    n += 1
