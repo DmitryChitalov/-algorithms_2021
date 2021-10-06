@@ -28,3 +28,28 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def math_oper(oper = input('Введите операцию (+, -, *, / или 0 для выхода): '),
+              number_1 = int(input('Введите первое число: ')),
+            number_2 = int(input('Введите второе число: ')) ):
+    if oper == '0':
+        return result
+    if number_2 == 0 and oper == '/':
+        number_2 = int(input('Нельзя делить на ноль, выберете другое число: '))
+    if oper == '+':
+        result = number_1 + number_2
+    if oper == '-':
+        result = number_1 - number_2
+    if oper == '*':
+        result = number_1 * number_2
+    if oper == '/':
+        if number_2 == 0:
+            number_2 = int(input('Нельзя делить на ноль, выберете другое число: '))
+        else:
+            result = number_1 - number_2
+
+    return math_oper(oper = input('Введите операцию (+, -, *, / или 0 для выхода): ',
+                                  number_1 = result,
+                                  number_2 = int(input('Введите первое число: ')))
+
+print(math_oper())
