@@ -1,36 +1,46 @@
-"""
-2. Написать программу сложения и умножения двух шестнадцатиричных чисел.
-При этом каждое число представляется как массив, элементы которого это цифры числа.
-Например, пользователь ввёл A2 и C4F. Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
-Сумма чисел из примера: [‘C’, ‘F’, ‘1’], произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
+from collections import defaultdict
 
-Подсказка:
-Для решения задачи обязательно примените какую-нибудь коллекцию из модуля collections
-Для лучшее освоения материала можете даже сделать несколько решений этого задания,
-применив несколько коллекций из модуля collections
-Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
-(в частности по перегрузке методов)
 
-__mul__
-__add__
+def hex_sum(dic):
+    res = 0
+    for key in dic.keys():
+        res += int(key, 16)
+    return hex(res)[2:]
 
-Пример:
-Например, пользователь ввёл A2 и C4F.
-Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
-Сумма чисел из примера: [‘C’, ‘F’, ‘1’]
-Произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
 
-1. вариант
-defaultdict(list)
-int(, 16)
-reduce
+def hex_mul(dic):
+    res = 1
+    for key in dic.keys():
+        res *= int(key, 16)
+    return hex(res)[2:]
 
-2. вариант
+
+num_1 = input("Введите первое шестнадцатеричное число: ")
+num_2 = input("Введите второе шестнадцатеричное число: ")
+nums = defaultdict(list)
+nums[num_1] = list(num_1)
+nums[num_2] = list(num_2)
+print(f'Сумма чисел: {list(hex_sum(nums).upper())}')
+print(f'Произведение чисел: {list(hex_mul(nums).upper())}')
+
+# OOП
+
+
 class HexNumber:
-    __add__
-    __mul__
+    def __init__(self, val):
+        self.val = val
 
-hx = HexNumber
-hx + hx
-hex()
-"""
+    def __str__(self):
+        return str(self.val)[2:]
+
+    def __add__(self, other):
+        return HexNumber(hex(int(self.val, 16) + int(other.val, 16)))
+
+    def __mul__(self, other):
+        return HexNumber(hex(int(self.val, 16) * int(other.val, 16)))
+
+
+num_1 = HexNumber(input("Введите первое шестнадцатеричное число: "))
+num_2 = HexNumber(input("Введите второе шестнадцатеричное число: "))
+print(f'Сумма чисел : {list(str(num_1 + num_2).upper())}')
+print(f'Произведение чисел: {list(str(num_1 * num_2).upper())}')
