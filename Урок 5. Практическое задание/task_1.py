@@ -41,7 +41,7 @@ for k, v in all_company.items():
     sum_company += sum_c
 
 medium_income = sum_company / len(all_company)
-print(medium_income)
+print(f'Средняя годовая прибыль всех предприятий: {medium_income}')
 
 for k, values in all_company.items():
     if sum([value for key, value in values.items()]) > medium_income:

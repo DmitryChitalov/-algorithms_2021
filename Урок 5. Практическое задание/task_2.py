@@ -34,6 +34,8 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+# Вариант 1
 from collections import deque
 
 
@@ -53,3 +55,27 @@ def calculator():
         print(f'Произведение чисел: {product_num}')
     except:
         print('Не правильный ввод')
+
+
+calculator()
+
+
+# Вариант 2
+class Calculator:
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
+
+    def __add__(self, other):
+        return list(hex(int(''.join(self.num1), 16) + int(''.join(other.num2), 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.num1), 16) * int(''.join(other.num2), 16)))[2:]
+
+
+my_num1 = list(input('Введите первое число в шеснацетиричном формате:'))
+my_num2 = list(input('Введите первое число в шеснацетиричном формате:'))
+total_sum = Calculator(my_num1, my_num2) + Calculator(my_num1, my_num2)
+product_num = Calculator(my_num1, my_num2) * Calculator(my_num1, my_num2)
+
+print(f"Сумма чисел = {total_sum}, произведение чисел {product_num}")

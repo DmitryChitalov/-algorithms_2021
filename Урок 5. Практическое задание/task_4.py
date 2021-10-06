@@ -36,13 +36,12 @@ print(timeit('not_simple_dict.get(99)', globals=globals(), number=10000))  # 0.0
 
 # вставка
 print('вставка')
-print(timeit('simple_dict[9]=2', globals=globals(), number=10000))  # 0.0008157689999999107    +
-print(timeit('not_simple_dict[9]=2', globals=globals(), number=10000))  # 0.0009790820000001865
+print(timeit('simple_dict[50]=2', globals=globals(), number=10000))  # 0.001535405999999906    +
+print(timeit('not_simple_dict[50]=2', globals=globals(), number=10000))  # 0.0014000729999998907
 
 # popitem
 print('popitem')
 print(timeit('simple_dict.popitem()', globals=globals(), number=90))  # 1.5945000000128218e-05   +
 print(timeit('not_simple_dict.popitem()', globals=globals(), number=90))  # 2.264400000018263e-05
 
-'''Вывод: операции вставки и удаления работают быстрее у dict, а вот получение элемента почти одинаковы у обоих но в 
-большей степени выигрует по времени OrderedDict'''
+'''Вывод: при работе с хеш-таблицами лутше использовать dict и его функции.'''

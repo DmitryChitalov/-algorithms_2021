@@ -31,22 +31,24 @@ li = list()
 d = deque()
 
 # заполнение
-print(timeit('fill_l(li)', globals=globals(), number=1))  # 7.06099999999571e-06
-print(timeit('fill_d(d)', globals=globals(), number=1))  # 5.787999999999627e-06             deque
+print(timeit('fill_l(li)', globals=globals(), number=10000))        # 0.015863854000000004     list
+print(timeit('fill_d(d)', globals=globals(), number=10000))         # 0.016802670000000006
 
 # вставка
-print(timeit('li.append("asd")', globals=globals(), number=100))  # 1.3865000000001793e-05
-print(timeit('d.append("asd")', globals=globals(), number=100))  # 1.183100000000381e-05     deque
+print(timeit('li.append("asd")', globals=globals(), number=10000))  # 0.001269783999999996
+print(timeit('d.append("asd")', globals=globals(), number=10000))   # 0.0011314399999999974     deque
 
 # удаление
-print(timeit('li.pop()', globals=globals(), number=100))  # 1.3169000000000375e-052           list
-print(timeit('d.pop()', globals=globals(), number=100))  # 1.7085000000000017e-05
+print(timeit('li.pop()', globals=globals(), number=10000))          # 0.00102100799999999
+print(timeit('d.pop()', globals=globals(), number=10000))           # 0.0010100690000000023    deque
 
 # вставка в начало
-print(timeit('li.insert(0,"a")', globals=globals(), number=100))  # 2.2086999999997026e-05
-print(timeit('d.appendleft("a")', globals=globals(), number=100))  # 1.708599999999949e-05   deque
+print(timeit('li.insert(0,"a")', globals=globals(), number=10000))  # 0.836891959
+print(timeit('d.appendleft("a")', globals=globals(), number=10000)) # 0.0010183980000000314   deque
 
 # удаление с начала
-print(timeit('li.pop(0)', globals=globals(), number=100))  # 1.9499999999998685e-05
-print(timeit('d.popleft()', globals=globals(), number=100))  # 1.120699999999919e-05   deque
-'''Вывод: вообщем операции с deque работают быстрее, только на удалении с конца взял вверх list'''
+print(timeit('li.pop(0)', globals=globals(), number=10000))         # 0.527847933
+print(timeit('d.popleft()', globals=globals(), number=10000))       # 0.0009307079999998358   deque
+
+'''Вывод: вообщем операции с deque работают быстрее, только на заполнении списка операции 
+append немного превосходят deque'''

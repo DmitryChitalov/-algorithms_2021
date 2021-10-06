@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9aa9a8c-2a6f-4efe-b433-81564568c2fd" name="Default Changelist" comment="">
+    <list default="true" id="a9aa9a8c-2a6f-4efe-b433-81564568c2fd" name="Default Changelist" comment="ДЗ Урок 5. Коллекции. Список. Очередь. Словарь.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" afterDir="false" />
@@ -156,8 +156,8 @@
       <list>
         <item itemvalue="Python.task_4" />
         <item itemvalue="Python.task_3" />
-        <item itemvalue="Python.task_1" />
         <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1" />
         <item itemvalue="Python.task_5" />
       </list>
     </recent_temporary>
@@ -171,6 +171,14 @@
       <option name="presentableId" value="Default" />
       <updated>1632492742685</updated>
     </task>
+    <task id="LOCAL-00001" summary="ДЗ Урок 5. Коллекции. Список. Очередь. Словарь.">
+      <created>1633209296052</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1633209296052</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,5 +192,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ДЗ Урок 5. Коллекции. Список. Очередь. Словарь." />
+    <option name="LAST_COMMIT_MESSAGE" value="ДЗ Урок 5. Коллекции. Список. Очередь. Словарь." />
   </component>
 </project>
