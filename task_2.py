@@ -34,3 +34,31 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+import collections
+import functools
+
+
+nums = collections.defaultdict(list)
+
+
+def input_numbers():
+    for idx in range(1, 3):
+        num = input('Введите 16-ое натуральное число: ')
+        nums[f'{idx}-{num}'] = list(num)
+    print(nums)
+
+
+def sum_numbers():
+    return list('%X' % sum(int(''.join(num), 16) for num in nums.values()))
+
+
+def multi_numbers():
+    return list('%X' % functools.reduce(lambda x, y: x * y, [int(''.join(num), 16) for num in nums.values()]))
+
+
+if __name__ == '__main__':
+    input_numbers()
+    print(sum_numbers())
+    print(multi_numbers())
