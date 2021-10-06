@@ -29,9 +29,10 @@ def revers_3(enter_num):
 
 
 def my_reverse(enter_num):
-    if enter_num == 0:
-        return ''
-    return f"{str(enter_num % 10)}{my_reverse(enter_num // 10)}"
+    revers_number = ''
+    for n in str(enter_num):
+        revers_number = n + revers_number
+    return revers_number
 
 
 def launch_all():
@@ -40,14 +41,15 @@ def launch_all():
 
 if __name__ == '__main__':
     run('launch_all()')
-    print(timeit('revers_1(number)', globals=globals(), number=1000))  # 0.0029
-    print(timeit('revers_2(number)', globals=globals(), number=1000))  # 0.0020
+    print(timeit('revers_1(number)', globals=globals(), number=1000))  # 0.0027
+    print(timeit('revers_2(number)', globals=globals(), number=1000))  # 0.0024
     print(timeit('revers_3(number)', globals=globals(), number=1000))  # 0.0006
-    print(timeit('my_reverse(number)', globals=globals(), number=1000))  # 0.0029
+    print(timeit('my_reverse(number)', globals=globals(), number=1000))  # 0.0012
 
     """
-    Профилируя можно заметить что самая быстрая функция reverse_3, за ней по скорости следует reverse_2,
+    Профилируя можно заметить что самая быстрая функция reverse_3, за ней по скорости следует my_reverse, 
+    которая использует цикл и промежуточную переменную, далее  reverse_2,
     так как функция использует цикл и на каждой итерации производит вычисление а также переопределяет 
-    переменные. Функция reverse_1 и my_reverse самые медленные, так как используется рекурсия, через cProfile
+    переменные. Функция reverse_1 самая медленная, так как используется рекурсия, через cProfile
      можно увидеть это. 
     """
