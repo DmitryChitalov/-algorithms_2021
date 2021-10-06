@@ -15,3 +15,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def task_4(summ=0.0, x=1.0, n=0):
+    if n == 0.0:
+        n = int(input("Insert n please: "))
+    summ = summ + x
+    x = x / -2
+    n = n - 1
+    if n == 0:
+        return print(summ)
+    return task_4(summ, x, n)
+
+
+task_4()

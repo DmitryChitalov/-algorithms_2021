@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def counter(number, result_1=0, result_2=0):
+    if number == 0:
+        return print(f'Even numbers: {result_1}. Odd numbers: {result_2}')
+    if (number % 10) % 2 == 0:
+        result_1 = result_1 + 1
+    else:
+        result_2 = result_2 + 1
+    return counter(number // 10, result_1, result_2)
+
+
+counter(7785)
+counter(111)

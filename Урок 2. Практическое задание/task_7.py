@@ -16,3 +16,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def prove(n=0, x=0, left=[]):
+    if n == 0:
+        n = int(input('Please insert the number n: '))
+    left.append(x + 1)
+    # print(left)
+    if x == n - 1:
+        result = sum(left)
+        right = int(n * (n + 1) / 2)
+        return print(f'{result == right}: {result} = {right}')
+        # return print(left[-1])
+    return prove(n, x + 1, left)
+
+
+prove()

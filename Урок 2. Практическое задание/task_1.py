@@ -28,3 +28,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_operation():
+    options = ['0', '+', '-', '*', '/']
+    operation = input('Insert the operation, please: ')
+    if operation not in options:
+        while operation not in options:
+            print("You can insert this options '0','+','-','*','/' ")
+            operation = input('Insert the operation, please: ')
+    if operation == '0':
+        return print('Thanks, bye.')
+    x = int(input('Insert the first number, please: '))
+    y = int(input('Insert the second number, please: '))
+    if operation == '+':
+        result = x + y
+        print(result)
+    if operation == '-':
+        result = x - y
+        print(result)
+    if operation == '*':
+        result = x * y
+        print(result)
+    if operation == '/':
+        if y != 0:
+            result = x / y
+            print(result)
+        else:
+            print('Division by 0 is not posible!')
+    return get_operation()
+
+
+get_operation()

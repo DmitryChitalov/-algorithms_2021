@@ -22,3 +22,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# x = 4514
+# y = x % 10
+# z = x // 10
+# print(y)
+# print(z)
+
+
+def mirror_function(number, result=''):
+    if number == 0:
+        return print(result)
+    x = str(number % 10)
+    result = result + x
+    return mirror_function(number // 10, result)
+
+mirror_function(105701)
+mirror_function(5874)
+mirror_function(1230)
