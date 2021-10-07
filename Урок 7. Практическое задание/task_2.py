@@ -17,37 +17,38 @@ import random
 from timeit import timeit
 
 
-def merge(left, right, merged):
-    left_cursor, right_cursor = 0, 0
-    while left_cursor < len(left) and right_cursor < len(right):
+def merge(left_list: list, right_list: list):
+    sorted_list = []
+    left_list_index = right_list_index = 0
+    left_list_len, right_list_len = len(left_list), len(right_list)
 
-        # Сортируем каждый и помещаем в результат
-        if left[left_cursor] <= right[right_cursor]:
-            merged[left_cursor + right_cursor] = left[left_cursor]
-            left_cursor += 1
-        else:
-            merged[left_cursor + right_cursor] = right[right_cursor]
-            right_cursor += 1
+    for _ in range(left_list_len + right_list_len):
+        if left_list_index < left_list_len and right_list_index < right_list_len:
+            if left_list[left_list_index] <= right_list[right_list_index]:
+                sorted_list.append(left_list[left_list_index])
+                left_list_index += 1
+            else:
+                sorted_list.append(right_list[right_list_index])
+                right_list_index += 1
+        elif left_list_index == left_list_len:
+            sorted_list.append(right_list[right_list_index])
+            right_list_index += 1
+        elif right_list_index == right_list_len:
+            sorted_list.append(left_list[left_list_index])
+            left_list_index += 1
 
-    for left_cursor in range(left_cursor, len(left)):
-        merged[left_cursor + right_cursor] = left[left_cursor]
-
-    for right_cursor in range(right_cursor, len(right)):
-        merged[left_cursor + right_cursor] = right[right_cursor]
-
-    return merged
+    return sorted_list
 
 
-def merge_sort(arr):
-    # Последнее разделение массива
-    if len(arr) <= 1:
-        return arr
-    mid = len(arr) // 2
-    # Выполняем merge_sort рекурсивно с двух сторон
-    left, right = merge_sort(arr[:mid]), merge_sort(arr[mid:])
+def merge_sort(nums: list):
+    if len(nums) <= 1:
+        return nums
 
-    # Объединяем стороны вместе
-    return merge(left, right, arr.copy())
+    mid = len(nums) // 2
+
+    left_list = merge_sort(nums[:mid])
+    right_list = merge_sort(nums[mid:])
+    return merge(left_list, right_list)
 
 
 count = int(input('Введите число элементов: '))
