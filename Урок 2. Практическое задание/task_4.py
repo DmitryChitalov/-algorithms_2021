@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum(n, num, i=0, common_sum=0):
+    if n == i:
+        return print(f'Количество элементов: {n}, их сумма: {common_sum}')
+    else:
+        return get_sum(n, num / 2 * -1, i + 1, common_sum + num)
+
+
+if __name__ == '__main__':
+    while True:
+        try:
+            get_sum(int(input('Введите количество элементов:')), 1)
+            break
+        except ValueError:
+            print('Вы вместо числа ввели строку (((')
