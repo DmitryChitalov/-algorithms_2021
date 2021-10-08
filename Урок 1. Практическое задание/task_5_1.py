@@ -28,28 +28,30 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
+
+def add_elem(store, *args):
+    last_stack = store[-1]
+    for el in args:
+        # если текущий стек еще не полный
+        if len(last_stack) < MAX_HEIGHT:
+            last_stack.append(el)  # добавляем в него эл-т
+            continue               # и идем за следующим
+
+        # если текущий стек уже заполнился
+        store.append([])           # добавляем в конец хранилища новый
+        last_stack = store[-1]     # привязываемся к новому последнему стеку
+        last_stack.append(el)      # добавляем эл-т в него и идем за след. эл.
+
+
 if __name__ == '__main__':
     # инициализация
     MAX_HEIGHT = 3                     # задаем "высоту" стеков в хранилище
-    curr_stack, storage = [], []       # заводим текущий стек и хранилище
+    storage = [[]]                     # заводим хранилище с пустым стеком
     test_set = [i for i in range(10)]  # тестовый набор
 
-    for el in test_set:
-        print(f'el {el}')
-        # если текущий стек еще не полный
-        if len(curr_stack) < MAX_HEIGHT:
-            curr_stack.append(el)             # добавляем в него эл-т
-            print(f'curr_stack {curr_stack}')
-            continue                          # и идем за следующим
+    # Тесты и печать
+    add_elem(storage, *test_set)
+    print(storage)
 
-        # если текущий стек уже заполнился
-        print(f'storage before {storage}')
-        storage.append(curr_stack)  # добавляем его в конец хранилища
-        print(f'storage after {storage}')
-        curr_stack = []             # заводим новый стек
-        print(f'curr_stack {curr_stack}')
-        curr_stack.append(el)       # добавляем эл-т в него и идем за след. эл.
-        print(f'curr_stack {curr_stack}')
-
-    # Печать результата
-    print(curr_stack, storage)
+    add_elem(storage, *test_set)
+    print(storage)
