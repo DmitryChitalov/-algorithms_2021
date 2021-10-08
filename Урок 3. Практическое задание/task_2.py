@@ -20,3 +20,31 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+import hashlib
+
+
+def hash_password(passwd):
+    salt = 'Friday'
+    signature = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+    return signature
+
+
+def check_password():
+    f = open("base.txt", "+w")
+    password = input('Введите пароль: ')
+    signature = hash_password(password)
+    f.write(signature)
+    f.seek(0)
+    print(f'В базу данных помещена следующая строка: {signature}')
+    repeat_passwd = input('Введите пароль еще раз для проверки: ')
+    check_signature = hash_password(repeat_passwd)
+    for line in f.readlines():
+        if line == check_signature:
+            print(f'Пароли совпадают.')
+        else:
+            print('Пароли не совпадают!')
+
+
+check_password()
