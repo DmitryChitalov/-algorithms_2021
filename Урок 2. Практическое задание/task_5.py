@@ -21,3 +21,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def display_table(number_character=32):
+    '''
+    this func outputs a table ASCII from 32 to 128 elements
+
+    param number_character: which element to start with
+
+    return: None
+    '''
+    if number_character == 128:
+        return None
+    print(f'{number_character} - {chr(number_character)}', end='|| ')
+    if number_character % 10 == 0:
+        print('\n')
+        print('='*90)
+    display_table(number_character + 1)
+
+print(display_table())
+
