@@ -21,3 +21,16 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+import hashlib
+
+need_set = set()
+
+input_value = 'papa'
+
+for letter_1 in range(len(input_value)):
+    for letter_2 in range(letter_1 + 1, len(input_value) + 1):
+        if input_value[letter_1:letter_2] != input_value:
+            need_set.add(hashlib.sha256(input_value[letter_1:letter_2].encode()).hexdigest())
+
+print(f'{input_value} - {len(need_set)} уникальных подстрок.')
