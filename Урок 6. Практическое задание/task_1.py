@@ -22,8 +22,9 @@
 С одновременным замером времени (timeit.default_timer())!
 """
 
-from memory_profiler import memory_usage
+from memory_profiler import memory_usage, profile
 from timeit import default_timer
+from gc import collect as gc_collect
 
 
 """
@@ -33,12 +34,13 @@ from timeit import default_timer
 
 def my_profiling_decorator(func):
     def wrapper(*args, **kwargs):
+        gc_collect()
         before = memory_usage()
         start = default_timer()
         result = func(*args, **kwargs)
         stop = default_timer()
         after = memory_usage()
-        print(f"Function {func.__name__} used {(after[0] - before[0]) * 1024} KiBs")
+        print(f"Function {func.__name__} used {(after[0] - before[0])} MiBs")
         print(f"Function {func.__name__} execution took {stop - start} s")
         return result
     return wrapper
@@ -167,41 +169,104 @@ def count_subs_v2(string: str) -> int:
     return len(counter)
 
 
+@my_profiling_decorator
+def count_subs_v3(string: str) -> int:
+    # counter = set()
+
+    def generator(string):
+        l = len(string)
+        for i in range(l):
+            for j in range(i + 1, l + 1):
+                yield hash(string[i:j])
+
+    counter = set(generator(string))
+
+    return len(counter) - 1
+
+
+@profile
+def count_subs_v3_(string: str) -> int:
+    # counter = set()
+
+    def generator(string):
+        l = len(string)
+        for i in range(l):
+            for j in range(i + 1, l + 1):
+                yield hash(string[i:j])
+
+    counter = set(generator(string))
+
+    return len(counter) - 1
+
+
 if __name__ == '__main__':
     # print(hide_recursion_num_counter(4567687))
     #
     # print(num_counter_recursion_optimised(4567687))
     #
     # print(num_counter_recursion_optimised2(4567687))
-    # Function hide_recursion used 8.0 KiBs
-    # Function hide_recursion execution took 3.500000000000725e-05 s
-    # {'odd': 3, 'even': 4}
-    # Function num_counter_recursion_optimised used 0.0 KiBs
-    # Function num_counter_recursion_optimised execution took 1.6200000000021753e-05 s
-    # [3, 4]
-    # Function num_counter_recursion_optimised2 used 0.0 KiBs
-    # Function num_counter_recursion_optimised2 execution took 2.630000000003463e-05 s
-    # (3, 4)
-    # По времени реального прироста или ухудшения не получилось по нескольким проведённым замерам. Хотя и видим,
-    # что второй вариант алгоритма всё же быстрее, почти в 2 раза, первого, порядок этих цифр довольно мал.
-    # По памяти оба улучшения получились одинаковыми (в пределах точности измерения).
-    print('=' * 70)
+    # # Function hide_recursion_num_counter used 0.06640625 MiBs
+    # # Function hide_recursion_num_counter execution took 7.819999999997274e-05 s
+    # # {'odd': 3, 'even': 4}
+    # # Function num_counter_recursion_optimised used 0.0 MiBs
+    # # Function num_counter_recursion_optimised execution took 1.56000000000045e-05 s
+    # # [3, 4]
+    # # Function num_counter_recursion_optimised2 used 0.0 MiBs
+    # # Function num_counter_recursion_optimised2 execution took 2.4700000000099642e-05 s
+    # # (3, 4)
+    # # По времени реального прироста или ухудшения не получилось по нескольким проведённым замерам. Хотя и видим,
+    # # что второй вариант алгоритма всё же быстрее, почти в 2 раза, первого, порядок этих цифр довольно мал.
+    # # По памяти оба улучшения получились одинаковыми (в пределах точности измерения).
+    # print('=' * 70)
     # hide_recursion_range_sum(990)
     #
     # range_sum(990)
     #
     # range_sum2(990)
-    # Function hide_recursion_range_sum used 1412.0 KiBs
-    # Function hide_recursion_range_sum execution took 0.002608100000000002 s
-    # Function range_sum used 0.0 KiBs
-    # Function range_sum execution took 0.0004149999999999432 s
-    # Function range_sum2 used 0.0 KiBs
-    # Function range_sum2 execution took 0.0003309999999999702 s
-    # Получили вполне ожидаемый эффект - встроенная функция оказалась быстрее всех. Генератор вновь позволил сэкономить
-    # память.
-    print('=' * 70)
-
+    # # Function hide_recursion_range_sum used 1.33203125 MiBs
+    # # Function hide_recursion_range_sum execution took 0.00256590000000001 s
+    # # Function range_sum used 0.0 MiBs
+    # # Function range_sum execution took 0.001555799999999996 s
+    # # Function range_sum2 used 0.0 MiBs
+    # # Function range_sum2 execution took 0.0004045999999999772 s
+    # # Function range_sum2 execution took 0.0003309999999999702 s
+    # # Получили вполне ожидаемый эффект - встроенная функция оказалась быстрее всех. Генератор вновь позволил сэкономить
+    # # память.
+    # print('=' * 70)
+    #
     word = 'Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphiokarabomelitokatakechymenokichlepikossyphoph' \
            'attoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon'
-    count_subs_v1(word)
-    count_subs_v2(word)
+    print(count_subs_v1(word))
+    print(count_subs_v2(word))
+    print(count_subs_v3(word))
+    # print(count_subs_v3_(word))
+    # Function count_subs_v1 used 0.078125 MiBs
+    # Function count_subs_v1 execution took 0.01291869999999995 s
+    # 16569
+    # Function count_subs_v2 used 0.1875 MiBs
+    # Function count_subs_v2 execution took 2.6923721999999994 s
+    # 16569
+    # Function count_subs_v3 used -0.18359375 MiBs
+    # Function count_subs_v3 execution took 0.006732200000000077 s
+    # 16569
+    #
+    # Line #    Mem usage    Increment  Occurences   Line Contents
+    # ============================================================
+    #    185     20.9 MiB     20.9 MiB           1   @profile
+    #    186                                         def count_subs_v3_(string: str) -> int:
+    #    187                                             # counter = set()
+    #    188
+    #    189     20.9 MiB      0.0 MiB           2       def generator(string):
+    #    190     20.9 MiB      0.0 MiB           1           l = len(string)
+    #    191     21.8 MiB      0.0 MiB         184           for i in range(l):
+    #    192     21.8 MiB      0.0 MiB       17019               for j in range(i + 1, l + 1):
+    #    193     21.8 MiB      0.9 MiB       33672                   yield hash(string[i:j])
+    #    194
+    #    195     21.8 MiB      0.0 MiB           1       counter = set(generator(string))
+    #    196
+    #    197     21.8 MiB      0.0 MiB           1       return len(counter) - 1
+    #
+    #
+    # 16569
+    # С последней функцией использовал не самодельный декоратор, потому что не смог понять, почему самодельный выдаёт
+    # отрицательный объём использования памяти
