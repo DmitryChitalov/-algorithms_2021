@@ -39,7 +39,7 @@ def check_2(lst_obj):
 
     Сложность: O(N^2) - квадратичная.
     """
-    for j in range(len(lst_obj)):          # O(N) + O(N) + O(N) = O(N) - линейная
+    for j in range(len(lst_obj)):          # O(1) + O(N) + O(N) = O(N) - линейная
         if lst_obj[j] in lst_obj[j+1:]:    # O(N) + O(N) = O(N) - линейная
             return False                   # O(1) - константная
     return True                            # O(1) - константная

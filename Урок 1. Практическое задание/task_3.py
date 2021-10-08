@@ -21,7 +21,6 @@
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
 
-
 companies = {
     'aaa': 1000,
     'bbb': 10000,
@@ -38,36 +37,35 @@ companies = {
 """Самым эффективным решением будет 1е, т.к. оно имеет наименьшую сложность при выполнении и
 не меняет исходное хранилище(словарь)"""
 
+
 # O(N) - линейная сложность
 def max3(var):
-    max3_var = {}
-    dictionary = var
-    for i in range(3):
-        def comp(j):
-            return j[1]
-        max_var = max(dictionary.items(), key=comp)
-        del dictionary[max_var[0]]
-        max3_var[max_var[0]] = max_var[1]
-    return max3_var
+    max3_var = {}           # O(1) - константная
+    dictionary = var        # O(1) - константная
+    for i in range(3):      # O(N) - линейная
+        def comp(j):        # O(1) - константная
+            return j[1]     # O(1) - константная
+
+        max_var = max(dictionary.items(), key=comp)     # O(1) - константная
+        del dictionary[max_var[0]]                      # O(1) - константная
+        max3_var[max_var[0]] = max_var[1]               # O(1) - константная
+    return max3_var                                     # O(1) - константная
+
 
 print(max3(companies))
 
 
-
 # O(N^2) - квадратичная
 def max3_of_comp(var):
-    for i in range(len(var)):
-        min_val = i
-        for j in range(i + 1, len(var)):
-            if var[min_val][1] < var[j][1]:
-                min_val = j
-        var[i], var[min_val] = var[min_val], var[i]
-    return var[0:3]
+    for i in range(len(var)):                           # O(N) - линейная
+        min_val = i                                     # O(1) - константная
+        for j in range(i + 1, len(var)):                # O(N) - линейная
+            if var[min_val][1] < var[j][1]:             # O(N) - линейная
+                min_val = j                             # O(1) - константная
+        var[i], var[min_val] = var[min_val], var[i]     # O(1) - константная
+    return var[0:3]                                     # O(1) - константная
 
-comp_list = list(companies.items())
-for i in max3_of_comp(comp_list):
+
+comp_list = list(companies.items())                     # O(N) - линейная
+for i in max3_of_comp(comp_list):                       # O(N) - линейная
     print(i[0], ':', i[1])
-
-
-
-

@@ -20,13 +20,14 @@
 Подход должен быть максимально алгоритмическим.
 """
 
-list = [1, 5, 10, 3, 7, 9, 5, 2, 99, 14, 10, 100]
+num_array = [1, 5, 10, 3, 7, 9, 5, 2, 99, 14, 10, 100]
+
 
 # O(n^2) - квадратичная
-def min_in_list1(list):
-    for i in list:
+def min_in_list1(num_array):
+    for i in num_array:
         min_check = 0 # также здесь можно использовать булевы функции True и False вместо 0 и 1
-        for j in list:
+        for j in num_array:
             if j < i:
                 min_check = 1
         if min_check == 0:
@@ -34,13 +35,14 @@ def min_in_list1(list):
 
 
 # O(N) - линейная
-def min_in_list2(list):
-    min = list[0]
-    for i in list:
-        if i < min:
-            min = i
-    return min
+def min_in_list2(num_array):
+    min_num = num_array[0]
+    for i in num_array:
+        if i < min_num:
+            min_num = i
+    return min_num
 
-print(list)
-print(min_in_list1(list))
-print(min_in_list2(list))
+
+print(num_array)
+print(min_in_list1(num_array))
+print(min_in_list2(num_array))
