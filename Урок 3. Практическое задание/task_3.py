@@ -16,8 +16,21 @@
 р
 а
 
-
 Экономия на размере хранимых данных (для длинных строк) и
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+some_set = set()
+
+
+def some_func(value):
+    for i in range(len(value)):
+        for z in range(len(value), i, -1):
+            hash_str = hash(value[i:z])
+            some_set.add(hash_str)
+
+
+string = input('Введите строку (маленькие латинские буквы; ')
+some_func(string)
+
+print(f'В строке {string} находится {len(some_set)} уникальных значений.')

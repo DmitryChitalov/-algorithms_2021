@@ -15,3 +15,21 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from uuid import uuid4
+import hashlib
+
+cash_url = {}
+
+
+def url_to_cash(url):
+    salt = url[:10]
+    res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    if url in cash_url:
+        print(url)
+    else:
+        cash_url[url] = res
+
+
+url_to_cash('https://yandex.ru/')
+url_to_cash('https://yandex.ru/')
+print(cash_url)
