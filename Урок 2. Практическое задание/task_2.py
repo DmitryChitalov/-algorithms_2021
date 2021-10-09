@@ -34,6 +34,8 @@ def rec(n=int(input("Введите число:")), even=0, not_even=0):
     else:
         n = n % div
         return rec(n, even, not_even)
+
+
 rec()
 
 
