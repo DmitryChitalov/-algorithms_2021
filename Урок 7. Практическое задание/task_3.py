@@ -37,6 +37,51 @@ for i in
     left == right
     left.clear()
     right.clear()
-
-
 """
+import random
+from statistics import median
+
+m = int(input('Введите натуральное число m, с помощью которого будет построен массив с 2m + 1 элементами: '))
+orig_list = [random.randint(-100, 100) for _ in range(2*m + 1)]
+print(orig_list)
+
+
+# Решение с помощью сортировки методом Шелла
+def mediana_sort(a):
+    def shellsort(a):
+        def new_increment(a):
+            i = int(len(a) / 2)
+            yield i
+            while i != 1:
+                if i == 2:
+                    i = 1
+                else:
+                    i = int(round(i/2.2))
+                yield i
+        for increment in new_increment(a):
+            for i in range(increment, len(a)):
+                for j in range(i, increment-1, -increment):
+                    if a[j - increment] < a[j]:
+                        break
+                    a[j],a[j - increment] = a[j - increment],a[j]
+        return a
+    shellsort(a)
+    return a[m]
+
+
+print(mediana_sort(orig_list[:]))
+
+
+# решение с помощью рекурсии без сортировки
+def mediana_no_sort(myl):
+    if len(myl) == 1:
+        return myl[0]
+    myl.remove(max(myl))
+    myl.remove(min(myl))
+    return mediana_no_sort(myl)
+
+
+print(mediana_no_sort(orig_list[:]))
+
+# Решение с помощью модуля statistics
+print(median(orig_list[:]))
