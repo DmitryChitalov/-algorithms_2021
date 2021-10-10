@@ -12,31 +12,39 @@
 Важно: стройте массив именно по формуле 2m+1
 Потому что параметр m вам пригодится при поиске медианы, когда массив будет отсортирован.
 Этот парамет m вам нужно запрашивать у пользователя.
-
-[5, 3, 4, 3, 3, 3, 3]
-
-[3, 3, 3, 3, 3, 4, 5]
-
-my_lst
-new_lts
-
-arr[m]
-
-
-from statistics import median
-
-[3, 4, 3, 3, 5, 3, 3]
-
-left = []
-right = []
-
-left == right and
-
-for i in
-    for
-    left == right
-    left.clear()
-    right.clear()
-
-
 """
+from random import random
+
+
+def get_median(array):
+    spam = array.copy()
+
+    # Поскольку мы точно знаем из условия задачи, что массив с нечётным количеством элементов, медианой будет элемент,
+    # больше и меньше которого будет одинаковое количество элементов
+    while len(spam) > 1:
+        spam.pop(spam.index(max(spam)))
+        spam.pop(spam.index(min(spam)))
+
+    return spam[0]
+
+
+if __name__ == '__main__':
+    m = -1
+    tries = 3
+    while tries > 0 and m <= 0:
+        tries -= 1
+        try:
+            m = int(input("Введите m (целое положительное число): "))
+            if m <= 0:
+                print(f"m должно быть >= 1, у вас осталось попыток: {tries}")
+        except ValueError as ex:
+            print(ex)
+    size = 2 * m + 1
+
+    a = [random() * 100 for _ in range(size)]
+    print("Исходный массив:")
+    print(a)
+    median = get_median(a)
+    print(f"Медианой является элемент {median}")
+    print(f"Элементы меньше медианы:\n{[x for x in a if x < median]}")
+    print(f"Элементы больше медианы:\n{[x for x in a if x > median]}")
