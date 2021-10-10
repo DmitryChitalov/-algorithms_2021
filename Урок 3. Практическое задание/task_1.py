@@ -20,3 +20,70 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+from time import time
+
+mass_dict = {}
+mass_list = []
+
+n = 100000
+
+def calc_time(foo):
+    def clock(*args, **kwargs):
+        start_val = time()
+        result = foo(*args, **kwargs)
+        end_val = time()
+        print(f'Время выполнения функции {foo.__name__} = {end_val - start_val}')
+        return result
+
+    return clock
+
+
+@calc_time
+def create_list_app(list_var, var):
+
+    for i in range(var):
+        list_var.append(i)  # Сложность O(1)
+
+
+create_list_app(mass_list, n)
+
+
+@calc_time
+def create_list_ins(list_var, var):
+
+    for i in range(var):
+        list_var.insert(0, i)  # Сложность O(n)
+
+@calc_time
+def create_dict(var_dict, var):
+#  Заполнение словаря выполняется быстрее, т.к. это хеш-таблица, операция добавления элемента имеет сложность О(1)
+    for i in range(var):
+        var_dict[i] = i
+
+
+create_dict(mass_dict, n)
+
+# Операция удаления
+@calc_time
+def change_list(list_var):    # Изменение списка
+
+    for i in range(10000):
+        list_var.pop(i) # удаление 10000 эл-тов из списка
+    for j in  range(1000):
+        list_var[j] = list_var[j + 1]  # измение 1000 эл-тов списка
+
+change_list(mass_list)
+
+
+@calc_time
+def change_dict(var_dict):
+
+    for i in range(10000):  #  Изменеие словаря
+        var_dict.pop(i)  # удаление записей из словаря - 10000
+    for j in range(5000, 6001):
+        var_dict[j] = 'some_data'  # измение значений словаря. Сложность операций: О(1)
+
+change_dict(mass_dict)
+
+
+

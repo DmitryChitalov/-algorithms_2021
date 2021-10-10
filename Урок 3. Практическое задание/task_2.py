@@ -20,3 +20,64 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+from hashlib import sha256
+from os.path import join, dirname
+from sqlite3 import connect, OperationalError, IntegrityError
+
+
+class HashClass:
+    def __init__(self):
+        self.db_obj = join(dirname(__file__), "demo.sqlite")
+        self.conn = connect(HashClass.db_obj)
+        self.crs = self.conn.cursor()
+
+    def create_table(self):
+
+        create_stmt = "CREATE TABLE user_info (user_login varchar(255) unique, user_password varchar(255));"
+        try:
+            self.crs.execute(create_stmt)
+        except OperationError:
+            print("Таблица уже есть. Не добавляем")
+        else:
+            self.conn.commit()
+            print("Операция прошла успешно, таблица добавлена в БД")
+
+    @staticmethod
+    def get_hash(self):
+        login = input("Введите логин: ")
+        passwd = input("Введите пароль: ")
+        hash_obj = sha256(login.encode() + passwd.encode()).hexdigest()
+        return login, hash_obj
+
+    def register(self):
+
+        login, reg_hash = self.get_hash()
+
+        insert_stmt = "INSERT INTO user_info (user_loin, user_password) VALUES (?, ?)"
+
+        user_info = (login, reg_hash)
+        try:
+            self.crs.execute(insert_stmt, user_info)
+        except IntegrityError:
+            print("Логин занят другим пользователем,если это Вы, то залогиньтесь.")
+            #  log_in(self)
+        else:
+            self.conn.commit()
+            print("Вы зарегистрированы!")
+
+    def log_in(self):
+
+        login, check_hash = self.get_hash()
+        select_stmt = "SELECT user_password FROM user_info WHERE user_login = ?"
+        self.crs.execute(select_stmt, (login,))
+        out_hash = self.crs.fetchone()
+        if check_hash == out_hash[0]:
+            print('Привет!')
+        else:
+            print("Введен неверный пароль или пользователь не зарегистрирован.")
+
+
+
+network = HashClass()
+network.log_in()
+Users.object.all()
