@@ -16,6 +16,10 @@
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
 
+from timeit import timeit
+
+from numpy import number
+
 
 def func_1(nums):
     new_arr = []
@@ -23,3 +27,60 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+numbers_10 = [i for i in range(10)]
+numbers_100 = [i for i in range(100)]
+numbers_1000 = [i for i in range(1000)]
+
+
+print(
+    timeit(
+        "func_1(numbers_10)",
+        setup="from __main__ import func_1, numbers_10", number=100000))
+
+print(
+    timeit(
+        "func_1(numbers_100)",
+        setup="from __main__ import func_1, numbers_100", number=100000))
+
+print(
+    timeit(
+        "func_1(numbers_1000)",
+        setup="from __main__ import func_1, numbers_1000", number=100000))
+
+
+print(
+    timeit(
+        "func_2(numbers_10)",
+        setup="from __main__ import func_2, numbers_10", number=100000))
+
+print(
+    timeit(
+        "func_2(numbers_100)",
+        setup="from __main__ import func_2, numbers_100", number=100000))
+
+print(
+    timeit(
+        "func_2(numbers_1000)",
+        setup="from __main__ import func_2, numbers_1000", number=100000))
+
+'''
+func_1() оптимизирована через list comprehension.
+Время исполнения на 100 000 вызовах функции: 
+Для списка из 10 элементов:
+func_1 = 0.21413339999999997
+func_2(LC) = 0.16237540000000017
+Для списка из 100 элементов:
+func_1 = 1.1469260000000001
+func_2(LC) = 0.9080590999999991
+Для списка из 1000 элементов:
+func_1 = 14.0637458
+func_2(LC) = 11.5505186
+ВЫВОД: List comprehension позволяет оптимизировать значительно время
+        только при увеличении вводимых элементов.
+        Так же при работе с малым количеством элементов, ЦИКЛ проявляет себя незначительно быстрее LS.
+'''
