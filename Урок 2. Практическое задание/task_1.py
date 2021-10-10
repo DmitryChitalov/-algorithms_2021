@@ -28,39 +28,44 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-def is_number(n):  # Функция обработки исключения при неправильном вводе чисел
-    while True:
-        try:
-            s = float(input(n))
-        except ValueError:
-            print("Введите число!")
-        else:
-            break
-    return s
-
-def calculator():  #  Функция - калькулятор
+def calculator():
 
     print("Введите Ноль для выхода из программы:> 0")
-    s = input("Введите знак (+,-,*,/): ")
-    if s == '0':
-         return
-    if s in ('+', '-', '*', '/'):
-        x = is_number('X = ')
-        y = is_number('Y = ')
-        if s == '+':
-            print("%.2f" % (x + y))
-        elif s == '-':
-            print("%.2f" % (x - y))
-        elif s == '*':
-            print("%.2f" % (x * y))
-        elif s == '/':
-            if y != 0:
-                print("%.2f" % (x / y))
-            else:
-                print("Деление на ноль!")
-    else:
-        print("Неверный знак операции!")
-    calculator()
+    operation = input("Введите знак (+,-,*,/): ")
 
+    if operation == '0':
+        return "Выход"
+    else:
+        if operation in ('+', '-', '*', '/'):
+            try:
+                x = int(input('X = '))
+                y = int(input('Y = '))
+
+                if operation == '+':
+                    print(f"Результат = {x + y}")
+
+                elif operation == '-':
+                    print(f"Результат = {x - y}")
+
+                elif operation == '*':
+                    print(f"Результат = {x * y}")
+
+                elif operation == '/':
+                    try:
+                        result = x / y
+                    except ZeroDivisionError:
+                        print("Деление на ноль!")
+                    else:
+                        print(f"Результат = {result}")
+                    finally:
+                        return calculator()
+
+            except ValueError:
+                print("Введите числа вместо символов:>'0123456789'")
+                return calculator()
+        else:
+            print("Неверный знак операции!")
+            return calculator()
+    calculator()
 
 calculator()

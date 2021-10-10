@@ -16,6 +16,22 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+def row_summa(i, number, iters, result):
+
+    if i == iters:
+        print(f"Колличество элементов - {iters}, их сумма - {result}")
+    elif i < iters:
+        return row_summa(i + 1, number / 2 * -1, iters, result + number)
+
+    try:
+        iters = int(input("Введите кол-во элементов: "))
+        row_summa(0, 1, iters, 0)
+    except ValueError:
+        print("Исправьте ввод на число")
+
+row_summa(0,0,0,0)
+
+'''
 def function(h):
     k = h - 1
     if h == 0:
@@ -26,3 +42,5 @@ def function(h):
 n = int(input("Введите число:"))
 print(function(n))
 print(sum(function(n)))
+
+'''
