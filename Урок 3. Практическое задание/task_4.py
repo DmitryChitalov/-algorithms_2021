@@ -15,3 +15,21 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+cache = {}
+
+
+def url_hash(url):
+    if not (url in cache.keys()):
+        cache[url] = hashlib.sha256('salt'.encode() + url.encode()).hexdigest()
+    return cache[url]
+
+
+print(cache)
+url_hash('http://youtube.com')
+print(cache)
+url_hash('http://gmail.com')
+print(cache)
+url_hash('http://youtube.com')
+print(cache)

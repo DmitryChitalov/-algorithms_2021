@@ -21,3 +21,16 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def unique_str(string):
+    result = []
+    for i in range(len(string)):
+        for j in range(i + 1, len(string) + 1):
+            if string[i:j] != string:
+                result.append(hash(string[i:j]))
+    result =set(result)
+    return print(len(result))
+
+
+unique_str('papa')

@@ -20,3 +20,24 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+
+
+def my_program():
+    password = input("Please enter the password: ")
+    salt = 'max_security'
+    pwd_hash = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+    file = open('pwd_file.txt', 'w')
+    file.write(pwd_hash)
+    file.close()
+    auth_pwd = input('Enter your password again, please: ')
+    auth_pwd_hash = hashlib.sha256(salt.encode() + auth_pwd.encode()).hexdigest()
+    file = open('pwd_file.txt', 'r')
+    if auth_pwd_hash == file.read():
+        print("Correct password.")
+    else:
+        print("Incorrect password.")
+    file.close()
+
+
+my_program()
