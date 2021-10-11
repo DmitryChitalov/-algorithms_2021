@@ -100,18 +100,18 @@ change_list, Операция заняла 0.017672061920166016 сек
 """
 
 
-# O(n)
+# O(n*2)
 @check_time
 def del_list_begin(n):
     for i in range(n):  # O(n)
-        my_list_1.pop(0)  # O(1)
+        my_list_1.pop(0)  # O(n)
 
 
-# O(n*2)
+# O(n)
 @check_time
 def del_list_end(n):
     for i in range(n):  # O(n)
-        my_list_2.pop()  # O(n)
+        my_list_2.pop()  # O(1)
 
 
 # O(n)
