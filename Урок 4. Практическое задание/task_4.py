@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,18 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    numb = max(array, key=array.count)
+    return f"Чаще всего встречается число {numb}, оно появилось в массиве {array.count(numb)} раз(а)"
+
+
 print(func_1())
+print(timeit('func_1()', globals=globals(), number=10000))  # 0.009331100000000002
 print(func_2())
+print(timeit('func_2()', globals=globals(), number=10000))  # 0.012359499999999999
+print(func_3())
+print(timeit('func_3()', globals=globals(), number=10000))  # 0.009382099999999997
+"""
+Третья ф-ция получилась по скорости получилась практически наравне с первой, но гораздо лаконичнее. Первая и третья 
+ф-ции самые простые по сложности, поэтому и самые быстрые
+"""
