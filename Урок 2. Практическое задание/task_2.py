@@ -18,3 +18,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_counter(n,evc = 0,nevc = 0):
+    digit = n % 10
+    new = n // 10
+    if digit % 2:
+        nevc += 1
+    else:
+        evc += 1
+    if new == 0:
+        return evc, nevc
+    return even_counter(new,evc,nevc)
+
+
+print(even_counter(34560))

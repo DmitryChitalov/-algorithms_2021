@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculation():
+    operation = input("Input your operation>>> ")
+    if operation == "0":
+
+        return "--- Stop Calculations ---"
+    try:
+        a = int(input("Input first number>>> "))
+    except ValueError:
+        print("String is not allowed, only numbers are required. Fix it!!!")
+        return calculation()
+    try:
+        b = int(input("Input second number>>> "))
+    except ValueError:
+        print("String is not allowed, only numbers are required. Fix it!!!")
+        return calculation()
+    if b == 0 and operation == "/":
+        print("b == 0 => Operation is impossible, Fix it!!!")
+        return calculation()
+    operations = ['+',"-","*","/"]
+    if operation in operations:
+        do_it = {
+            "+": a + b,
+            "-": a - b,
+            "*": a * b,
+            "/": a / b
+        }
+        print(do_it[operation])
+
+    else:
+        print(f"There is not such operation like {operation}, only {operations} are required")
+
+    return calculation()
+
+print(calculation())
+

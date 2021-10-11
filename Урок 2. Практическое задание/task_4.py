@@ -12,3 +12,10 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+def tiny_sum(n,start = 1):
+    if n == 1:
+        return start
+    return start + tiny_sum(n - 1, start / (-2))
+
+
+print(tiny_sum(6))

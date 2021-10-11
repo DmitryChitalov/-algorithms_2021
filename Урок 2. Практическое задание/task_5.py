@@ -23,3 +23,28 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def pair(x):
+    return f"{x} - {chr(x)} "
+
+
+
+def one_str(start, count=10):
+    if count == 0:
+        return "\n"
+
+    return pair(start) + one_str(start+1,count-1)
+
+
+def ten_strs(beg=32, fin=127):
+    if (beg + 10) > fin:
+        return one_str(beg,count= ((beg + 11) -fin))
+
+    return one_str(beg) + ten_strs(beg = (beg + 10), fin=127)
+
+print(ten_strs())
+
+
+
+print(ord(''))
+print(chr(ord('')))
