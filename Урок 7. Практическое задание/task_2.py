@@ -53,9 +53,15 @@ def merge_sort(A):
 
 print(f'Исходный - {not_sorted_list}')
 print(f'Отсортированный - {merge_sort(not_sorted_list)}')
-
 print(
     timeit("merge_sort(not_sorted_list_10)", globals=globals(), number=10),
     timeit("merge_sort(not_sorted_list_100)", globals=globals(), number=10),
     timeit("merge_sort(not_sorted_list_1000)", globals=globals(), number=10), sep='\n'
 )
+
+"""
+Скорости соответственно:
+0.00045634400157723576
+0.00517852499615401
+0.04191398699185811
+"""

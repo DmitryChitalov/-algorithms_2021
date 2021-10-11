@@ -46,8 +46,9 @@ def bubble_mod(lst: list):
         n += 1
     return lst
 
+not_sorted_2 = not_sorted_list.copy()
 print(bubble(not_sorted_list))
-print(bubble_mod(not_sorted_list))
+print(bubble_mod(not_sorted_2))
 
 print(
     timeit("bubble(not_sorted_list)", globals=globals(), number=1000),
@@ -55,5 +56,12 @@ print(
 )
 
 """
-Не вижу особого смысла в доработке, т.к. скорость выполнение зависит от везения
+Получился небольшой прирост скорости
+Несколько замеров 1 и 2 функции:
+0.41970752298948355 - 1
+0.39952557999640703 - 2
+0.4184046699956525 - 1
+0.4243793750065379 - 2
+0.41019101500569377 - 1
+0.4024849039997207 - 2
 """
