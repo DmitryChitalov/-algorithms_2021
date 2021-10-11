@@ -15,3 +15,30 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+cache = {}
+
+
+def caching(url):
+    if url in cache:
+        print(f'Сайт "{url}" есть в кэше')
+    else:
+        cache[url] = hashing(url)
+
+
+def hashing(url):
+    salt = url.split('.')
+    res = hashlib.sha256(salt[-1].encode() + url.encode()).hexdigest()
+    return res
+
+
+caching('youtube.com')
+caching('google.com')
+caching('yandex.ru')
+caching('youtube.ru')
+caching('google.com')
+caching('yandex.ru')
+caching('https://gb.ru/lessons/165909')
+caching('https://gb.ru/lessons/165900')
+caching('https://gb.ru/lessons/165909')
