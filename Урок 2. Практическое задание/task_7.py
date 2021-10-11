@@ -15,3 +15,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+#
+# def check_equality(sequence, expression=0, result=0):
+#     if not sequence:
+#         expression = expression * (expression + 1) / 2
+#         return result == expression
+#     result += sequence
+#     expression += 1
+#     return check_equality(sequence - 1, expression, result)
+
+
+def check_equality(sequence, expression=0):
+    if not sequence:
+        return 0
+    result = sequence + check_equality(sequence - 1, expression)
+    expression = int(sequence * (sequence + 1) / 2)
+    sequence = result
+    return sequence == expression
+
+
+print(check_equality(4))

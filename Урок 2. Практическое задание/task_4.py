@@ -12,3 +12,16 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+
+def get_series_sum(elements=int(input('Введите количество элементов: ')), result=0, item=1):
+    if not elements:
+        return result
+    result += item
+    item = item/(-2)
+    elements -= 1
+    return get_series_sum(elements, result, item)
+
+
+# print(get_series_sum())
+

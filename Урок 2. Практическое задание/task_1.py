@@ -29,27 +29,35 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
-def math_oper(oper = input('Введите операцию (+, -, *, / или 0 для выхода): '),
-              number_1 = int(input('Введите первое число: ')),
-            number_2 = int(input('Введите второе число: ')) ):
-    if oper == '0':
-        return result
-    if number_2 == 0 and oper == '/':
-        number_2 = int(input('Нельзя делить на ноль, выберете другое число: '))
-    if oper == '+':
-        result = number_1 + number_2
-    if oper == '-':
-        result = number_1 - number_2
-    if oper == '*':
-        result = number_1 * number_2
-    if oper == '/':
-        if number_2 == 0:
-            number_2 = int(input('Нельзя делить на ноль, выберете другое число: '))
-        else:
+
+def calculator():
+    try:
+        oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if oper != '+' and oper != '-' and oper != '0' and oper != '/' and oper != '*':
+            raise ValueError("Несоответствующее значение операции. Введите одну из операций +, -, *, /, 0.")
+    except ValueError as err:
+        print(err)
+        return calculator()
+    else:
+        if oper == '0':
+            return print('Программа завершена')
+        number_1 = int(input('Введите первое число: '))
+        number_2 = int(input('Введите второе число: '))
+        if oper == '+':
+            result = number_1 + number_2
+        elif oper == '-':
             result = number_1 - number_2
+        elif oper == '*':
+            result = number_1 * number_2
+        elif oper == '/':
+            if number_2 == 0:
+                while not number_2:
+                    number_2 = int(input('Нельзя делить на ноль, выберете другое число: '))
+                result = number_1 / number_2
+            else:
+                result = number_1 / number_2
+        print(f'Ваш результат: {result}')
+        return calculator()
 
-    return math_oper(oper = input('Введите операцию (+, -, *, / или 0 для выхода): ',
-                                  number_1 = result,
-                                  number_2 = int(input('Введите первое число: ')))
 
-print(math_oper())
+calculator()

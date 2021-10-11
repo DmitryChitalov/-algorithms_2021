@@ -11,3 +11,21 @@
 Подсказка:
 Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def guess_number(num_of_user=int(input('Введите число от 0 до 100: ')), number=random.randrange(0, 100, 1),
+                 attempts=10):
+    attempts -= 1
+    if num_of_user == number:
+        return 'Вы отгадали!'
+    if not attempts:
+        return f'Вы не отгадали! Загаданное число: {number}.'
+    if num_of_user < number:
+        num_of_user = int(input('Введенное число слишком маленькое. Введите новое число: '))
+    elif num_of_user > number:
+        num_of_user = int(input('Введенное число слишком большое. Введите новое число: '))
+    return guess_number(num_of_user, number, attempts)
+
+
+print(guess_number())

@@ -18,3 +18,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_digit(number, even=0, odd=0):
+    if not number:
+        return even, odd
+    get_num = number % 10
+    if get_num % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return check_digit(number // 10, even, odd)
+
+
