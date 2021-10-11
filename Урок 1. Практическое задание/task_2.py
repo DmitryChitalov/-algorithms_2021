@@ -19,3 +19,20 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+def min_my(ar):
+    m = ar[0]
+    for i in ar:
+        for j in ar[i+1:len(ar)]:
+            if j < i:
+                m = j
+                break
+    return m
+
+
+def min_my(ar):
+    m = ar[0]
+    for i in ar:
+        if m > i:
+            m = i
+    return m
