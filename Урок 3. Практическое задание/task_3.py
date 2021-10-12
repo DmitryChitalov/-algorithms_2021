@@ -21,3 +21,13 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+input_str = 'ipa'
+output_set = set()
+
+for i in range(len(input_str)):
+    for j in range(i + 1, len(input_str) + 1):
+        if input_str[i:j] != input_str:
+            output_set.add(hash(input_str[i:j]))
+            print(input_str[i:j], end=' ')
+
+print(f'\nКоличество уникальных подстрок: {len(output_set)}')
