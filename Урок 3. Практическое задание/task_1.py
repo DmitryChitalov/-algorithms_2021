@@ -42,16 +42,12 @@ def check_speed_2(func):
     return wrapper
 
 
-# A
 @check_speed_1
 def filling_dct(n):
     test_dct = dict()
     for el in range(n):
         test_dct[el] = el
     return test_dct
-
-
-# filling_dct(5*10**6)
 
 
 @check_speed_1
@@ -62,27 +58,16 @@ def filling_lst(n):
     return test_lst
 
 
-# filling_lst(5*10**6)
+dictionary = filling_dct(5 * 10 ** 6)
+list_test = filling_lst(5 * 10 ** 6)
+"""
+filling_dct
+0.8806960582733154
+filling_lst
+0.4499058723449707
+Cловарь заполняется медленнее, так как словарь посторен на хеш-таблицах -> затрачивается время на вычисления хеша.
+"""
 
-# B
-
-
-@check_speed_2
-def dct_pop(test_dct, n):
-    for el in range(n):
-        test_dct.popitem()
-    return test_dct
-
-
-@check_speed_2
-def lst_pop(test_lst, n):
-    for el in range(n):
-        test_lst.pop()
-    return test_lst
-
-
-# dct_pop(filling_dct(5*10**7), 5*10**4)
-# lst_pop(filling_lst(5*10**7), 5*10**4)
 
 @check_speed_1
 def dct_summation(test_dct):
@@ -100,5 +85,38 @@ def lst_summation(test_lst):
     return res
 
 
-dct_summation(filling_dct(5 * 10 ** 7))
-lst_summation(filling_lst(5 * 10 ** 7))
+# dct_summation(dictionary)
+# lst_summation(list_test)
+"""
+dct_summation
+0.24294352531433105
+lst_summation
+0.19750666618347168
+Аналогично работа со словарем медленнее, так как необходимо обращение к значениям.
+"""
+
+
+@check_speed_2
+def dct_pop(test_dct, n):
+    for el in range(n):
+        test_dct.popitem()
+    return test_dct
+
+
+@check_speed_2
+def lst_pop(test_lst, n):
+    for el in range(n):
+        test_lst.pop()
+    return test_lst
+
+
+dct_pop(dictionary, 5 * 10 ** 4)
+lst_pop(list_test, 5 * 10 ** 4)
+"""
+dct_pop
+0.003991365432739258
+lst_pop
+0.003989219665527344
+Отрабатывают с одинаковой скоростью, т.к. требуется только удалить последние элемнты, 
+обращения к значениям в словаре нет.
+"""
