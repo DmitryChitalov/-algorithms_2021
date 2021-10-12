@@ -33,7 +33,7 @@
 def calculator():
     try:
         oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
-        if oper != '+' and oper != '-' and oper != '0' and oper != '/' and oper != '*':
+        if oper not in '+-*/0':
             raise ValueError("Несоответствующее значение операции. Введите одну из операций +, -, *, /, 0.")
     except ValueError as err:
         print(err)

@@ -21,10 +21,8 @@ def guess_number(num_of_user=int(input('Введите число от 0 до 10
         return 'Вы отгадали!'
     if not attempts:
         return f'Вы не отгадали! Загаданное число: {number}.'
-    if num_of_user < number:
-        num_of_user = int(input('Введенное число слишком маленькое. Введите новое число: '))
-    elif num_of_user > number:
-        num_of_user = int(input('Введенное число слишком большое. Введите новое число: '))
+    num_of_user = int(input('Введенное число слишком маленькое. Введите новое число: ')) if num_of_user < number \
+        else int(input('Введенное число слишком большое. Введите новое число: '))
     return guess_number(num_of_user, number, attempts)
 
 
