@@ -10,52 +10,54 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
-    def __init__(self, root_obj):
-        # корень
+    def __init__(self, root_obj: int):
         self.root = root_obj
-        # левый потомок
         self.left_child = None
-        # правый потомок
         self.right_child = None
 
-    # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+    def __str__(self):
+        return f'{self.root}'
 
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
+    def insert_in_tree(self, new_node: int):
+        # Добавляем валидацию данных и автоматическую вставку элементов
+
+        # Если новый элемент меньше корня и нет левого потомка
+        if (new_node < self.root) and (self.left_child is None):
+            self.left_child = BinaryTree(new_node)
+
+        # Если новый элемент меньше корня и есть левый потомок
+        elif (new_node < self.root) and self.left_child:
+            self.left_child.insert_in_tree(new_node)
+
+        # Если новый элемент больше корня и нет правого потомка
+        elif (new_node > self.root) and (self.right_child is None):
             self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
+
+        # Если новый элемент больше корня и есть правый потомок
+        elif (new_node > self.root) and self.right_child:
+            self.right_child.insert_in_tree(new_node)
+
+        # В случае совпадения корня и нового значения
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            print('Такое значение уже есть в дереве')
 
     # метод доступа к правому потомку
+    @property
     def get_right_child(self):
-        return self.right_child
+        if self.right_child:
+            return self.right_child
+        else:
+            return 'Правый потомок отсутствует'
 
     # метод доступа к левому потомку
+    @property
     def get_left_child(self):
-        return self.left_child
+        if self.left_child:
+            return self.left_child
+        else:
+            return 'Левый потомок отсутствует'
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -65,15 +67,30 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # метод печати всех элементов дерева, выводит левого потомка, затем родителя, затем правого потомка
+    def print_tree(self):
+
+        if self.left_child:
+            self.left_child.print_tree()
+        print(self.root)
+        if self.right_child:
+            self.right_child.print_tree()
+
+    # Корень -> Левый потомок -> Правый потомок
+    def tree_in_list(self, root):
+        res = []
+        if root:
+            res.append(root.root)
+            res = res + self.tree_in_list(root.left_child)
+            res = res + self.tree_in_list(root.right_child)
+        return res
+
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r.insert_in_tree(7)
+r.insert_in_tree(10)
+r.insert_in_tree(12)
+
+print(r.tree_in_list(r))
+
+r.print_tree()
