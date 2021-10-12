@@ -21,8 +21,6 @@
 from random import randint
 from timeit import timeit
 
-not_sorted_list = [randint(-100, 100) for i in range(1000)]
-
 def bubble(lst: list):
     n = 1
     while n < len(lst):
@@ -35,7 +33,7 @@ def bubble(lst: list):
 
 def bubble_mod(lst: list):
     flag = True
-    n = 1
+    n = 0
     while flag:
         flag = False
         for i in range(len(lst) - n - 1):
@@ -45,8 +43,7 @@ def bubble_mod(lst: list):
         n += 1
     return lst
 
-not_sorted_1 = not_sorted_list.copy()
-not_sorted_2 = not_sorted_list.copy()
+not_sorted_list = [randint(-100, 100) for i in range(1000)]
 
 print(not_sorted_list)
 print(bubble(not_sorted_list[:]))
@@ -58,7 +55,7 @@ print(
 )
 
 """
-Уменьшая количество итераций, мы получаем небольшой прирост скорости
+Особого смысла нет модифицировать сортировку, т.к. прирост по скорости маленький
 8.545069265994243
 8.231877023994457
 """
