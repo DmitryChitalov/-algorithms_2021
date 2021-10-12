@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,17 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    numb = max(array, key=array.count)
+    return f"Чаще всего встречается число {numb}  оно появилось {array.count(numb)} раза"
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit('func_1()', globals=globals()))
+print(timeit('func_2()', globals=globals()))
+print(timeit('func_3()', globals=globals()))
+
+#func_3 получился локаничнее , но сложнее читать и понимать какие операции там проходят,
+# но быстрее способа с созданием пустого массива!

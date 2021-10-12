@@ -79,3 +79,4 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+# В данном случае мемоизация не эфективна т.к. сохроняет в кеш результат функции
