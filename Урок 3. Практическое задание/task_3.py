@@ -16,4 +16,12 @@
 а
 """
 
-# hash?
+
+def find_sub_str(test_str):
+    substrings = set()
+    for j in range(1, len(test_str)):
+        for i in range(len(test_str)):
+            el = test_str[i:i + j]
+            el = hash(el.encode())
+            substrings.add(el)
+    return len(substrings)
