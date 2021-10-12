@@ -21,7 +21,7 @@
 from random import randint
 from timeit import timeit
 
-not_sorted_list = [randint(-100, 100) for i in range(100)]
+not_sorted_list = [randint(-100, 100) for i in range(1000)]
 
 def bubble(lst: list):
     n = 1
@@ -34,34 +34,31 @@ def bubble(lst: list):
 
 
 def bubble_mod(lst: list):
+    flag = True
     n = 1
-    while n < len(lst):
-        count = False
-        for i in range(len(lst) - n):
+    while flag:
+        flag = False
+        for i in range(len(lst) - n - 1):
             if lst[i] < lst[i+1]:
                 lst[i], lst[i+1] = lst[i+1], lst[i]
-                count = True
-        if count:
-            break
+                flag = True
         n += 1
     return lst
 
+not_sorted_1 = not_sorted_list.copy()
 not_sorted_2 = not_sorted_list.copy()
-print(bubble(not_sorted_list))
-print(bubble_mod(not_sorted_2))
+
+print(not_sorted_list)
+print(bubble(not_sorted_list[:]))
+print(bubble_mod(not_sorted_list[:]))
 
 print(
-    timeit("bubble(not_sorted_list)", globals=globals(), number=1000),
-    timeit("bubble_mod(not_sorted_list)", globals=globals(), number=1000), sep='\n'
+    timeit("bubble(not_sorted_list[:])", globals=globals(), number=100),
+    timeit("bubble_mod(not_sorted_list[:])", globals=globals(), number=100), sep='\n'
 )
 
 """
-Получился небольшой прирост скорости
-Несколько замеров 1 и 2 функции:
-0.41970752298948355 - 1
-0.39952557999640703 - 2
-0.4184046699956525 - 1
-0.4243793750065379 - 2
-0.41019101500569377 - 1
-0.4024849039997207 - 2
+Уменьшая количество итераций, мы получаем небольшой прирост скорости
+8.545069265994243
+8.231877023994457
 """
