@@ -62,9 +62,31 @@ def check_activ_2(dct):
 
 users = {1: ['log1', 'pass1', 1], 2: ['log2', 'pass2', 0], 3: ['log3', 'pass3', 0]}
 
-print(check_activ_1(users, 2))
-print(check_activ_2(users))
+# print(check_activ_1(users, 2))
+# print(check_activ_2(users))
 
 """
 Оба решения имеют одинаковую сложность O(n), поэтому их эффективность будет одинакова.
+"""
+
+users_2 = {'log_1': {'passwd': 'pass_1', 'activation': 1}, 'log_2': {'passwd': 'pass_2', 'activation': 0},
+           'log_3': {'passwd': 'pass_3', 'activation': 0}}
+
+
+# №3 O(1)
+def check_activation_3(dct, user_name, user_passwd):
+    data = dct.get(user_name)
+    if data:
+        if data['passwd'] == user_passwd and data['activation']:
+            return ' Учетная запись активирована! Пользователь может быть допущен к ресурсу!'
+        elif data['passwd'] == user_passwd and not data['activation']:
+            return ' Учетная запись не активирована! Пользователь не может быть допущен к ресурсу!'
+        elif data['passwd'] != user_passwd:
+            return 'Неверный пароль!'
+    else:
+        return 'Пользователь не найден!'
+
+
+"""
+Решение №3 имеет константную сложность. Значит,оно будет самым эффективным.
 """

@@ -28,15 +28,21 @@ import math
 
 class StackClass:
 
-    def __init__(self, name):
-        self.elems = []
-        self.name = name
+    def __init__(self,size):
+        self.elems = [[]]
+        self.size = size
 
     def push_in(self, el):
-        self.elems.append(el)
+        if len(self.elems[len(self.elems)-1]) < self.size:
+            self.elems[len(self.elems)-1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(el)
 
     def pop_out(self):
-        return self.elems.pop()
+        if not len(self.elems[len(self.elems)-1]):
+            self.elems.pop()
+        return self.elems[len(self.elems) - 1].pop()
 
     def get_val(self):
         return self.elems[len(self.elems) - 1]
@@ -44,20 +50,21 @@ class StackClass:
     def stack_size(self):
         return len(self.elems)
 
+    def stack_fulsize(self):
+        ful_size = 0
+        for el in self.elems:
+            ful_size += len(el)
+        return ful_size
+
 
 if __name__ == '__main__':
+    plates = StackClass(10)
+    for i in range(25):
+        plates.push_in(i)
+    print(plates.elems)
+    for i in range(11):
+        plates.pop_out()
+    print(plates.elems)
+    print(plates.stack_size())
+    print(plates.stack_fulsize())
 
-    SC_OB = []
-    count = 0
-    n = int(input('Введите количество тарелок: '))
-    SC_OB.append(StackClass(f'SC_OB_{count}'))
-    for i in range(1, n + 1):
-        if SC_OB[count].stack_size() < 10:
-            SC_OB[count].push_in(i)
-        else:
-            count += 1
-            SC_OB.append(StackClass(f'SC_OB_{count}'))
-            SC_OB[count].push_in(i)
-
-    for el in range(math.ceil(n/10)):
-        print(SC_OB[el].elems)

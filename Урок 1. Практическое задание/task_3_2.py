@@ -24,44 +24,12 @@
 
 company = {'company_3': 3000, 'company_4': 40, 'company_1': 100, 'company_5': 5, 'company_2': 200}
 
-# №1 O(n)
-
-lst = []
-for val in company.values():
-    lst.append(val)
-lst.sort()
-
-for el in company:
-    for idx in (-1, -2, -3):
-        if company[el] == lst[idx]:
-            print(el)
-# №2 O(n)
-
-max1 = 0
-max2 = 0
-max3 = 0
-
-for val in company.values():
-    if val > max1:
-        max3 = max2
-        max2 = max1
-        max1 = val
-    elif val > max2:
-        max3 = max2
-        max2 = val
-    elif val > max3:
-        max3 = val
-
-for el in company:
-    if company[el] == max1 or company[el] == max2 or company[el] == max3:
-        print(el)
-
-# №3 O(N logN)
+# №2 O(N logN)
 new_dict_company = sorted(company.items(), key=lambda x: x[1], reverse=True)
 for i in range(3):
     print(new_dict_company[i][0])
 
 """
-Решения №1 и №2 имеют одиноковую сложность ,и более эффективны, чем решение №3, так как линейная зависимость - функция,
- которая возрастает медленнее, чем функция N*logN. Соответственно, 3 решение будет отрабатывать дольше.
+Решения №1 (task_3_1) более эффективно, чем решение №2 (task_3_2), так как линейная зависимость - функция,
+ которая возрастает медленнее, чем функция N*logN. Соответственно, 2 решение будет отрабатывать дольше.
 """

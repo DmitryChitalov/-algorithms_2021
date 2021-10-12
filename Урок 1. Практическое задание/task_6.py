@@ -16,6 +16,7 @@
 """
 import random
 import re
+
 pattern = r'(^error_)'
 
 
@@ -37,41 +38,37 @@ class QueueClass:
 
 
 if __name__ == '__main__':
-    AllTasks = QueueClass()            # все задачи
-    DecisionQueue = QueueClass()       # очередь на решение
-    ErrorCorrection = QueueClass()     # очередь на иправление ошибок
-    SolvedTasks = QueueClass()         # решеные задачи
-    n = 20                             # количество задач
+    all_tasks = QueueClass()            # все задачи
+    decision_queue = QueueClass()       # очередь на решение
+    error_correction = QueueClass()     # очередь на иправление ошибок
+    solved_tasks = QueueClass()         # решеные задачи
+    n = 20                              # количество задач
 
     for i in range(n):
-        AllTasks.to_queue(random.choice([f'error_{i}', f'task_{i}']))
+        all_tasks.to_queue(random.choice([f'error_{i}', f'task_{i}']))
 
     for i in range(n):
-        result = AllTasks.from_queue()
+        result = all_tasks.from_queue()
         check_err = re.findall(pattern, result, flags=re.IGNORECASE)
         if check_err == ['error_']:
-            ErrorCorrection.to_queue(result)
+            error_correction.to_queue(result)
         else:
-            DecisionQueue.to_queue(result)
+            decision_queue.to_queue(result)
 
-    #test:
-    # print(ErrorCorrection.elems)
-    # print(DecisionQueue.elems)
+    # test:
+    # print(error_correction.elems)
+    # print(decision_queue.elems)
 
-    ErrorCorrection.elems.reverse()
-    for el in ErrorCorrection.elems:
-        ErrorCorrection.elems.remove(el)
+    error_correction.elems.reverse()
+    for el in error_correction.elems:
+        error_correction.elems.remove(el)
         new_el = 'task' + el[5:]
-        ErrorCorrection.to_queue(new_el)
-        DecisionQueue.to_queue(new_el)
+        error_correction.to_queue(new_el)
+        decision_queue.to_queue(new_el)
 
-    for j in range(DecisionQueue.size()):
-        result = 'decision_' + DecisionQueue.from_queue()[5:]
-        SolvedTasks.to_queue(result)
+    for j in range(decision_queue.size()):
+        result = 'decision_' + decision_queue.from_queue()[5:]
+        solved_tasks.to_queue(result)
 
-    #test:
-    # print(SolvedTasks.elems)
-
-
-
-
+    # test:
+    # print(solved_tasks.elems)

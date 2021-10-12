@@ -24,25 +24,25 @@
 # O(n**2)
 
 def find_min_2(my_list):
-    min = my_list[0]                            #O(1)
-    for el in range(len(my_list)):              #O(n)
-        for idx in range(len(my_list) - 1):     #O(n)
-            if my_list[el] < my_list[idx]:      #O(1)
-                if my_list[el] < min:           #O(1)
-                    min = my_list[el]           #O(1)
-            elif my_list[idx] < min:            #O(1)
-                min = my_list[idx]              #O(1)
-    return min                                  #O(1)
+    smallest_value = my_list[0]                            #O(1)
+    for el in range(len(my_list)):                         #O(n)
+        for idx in range(len(my_list) - 1):                #O(n)
+            if my_list[el] < my_list[idx]:                 #O(1)
+                if my_list[el] < smallest_value:           #O(1)
+                    smallest_value = my_list[el]           #O(1)
+            elif my_list[idx] < smallest_value:            #O(1)
+                smallest_value = my_list[idx]              #O(1)
+    return smallest_value                                  #O(1)
 
 
 # O(n)
 def find_min_1(my_list):
-    min = my_list[0]    #O(1)
-    for el in my_list:  #O(n)
-        if el <= min:   #O(1)
-            min = el    #O(1)
+    smallest_value = my_list[0]    #O(1)
+    for el in my_list:             #O(n)
+        if el <= smallest_value:   #O(1)
+            smallest_value = el    #O(1)
 
-    return min          #O(1)
+    return smallest_value          #O(1)
 
 
 #################################################################################################################

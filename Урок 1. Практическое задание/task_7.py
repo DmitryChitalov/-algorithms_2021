@@ -38,8 +38,9 @@ class DequeClass:
 if __name__ == '__main__':
     def pal_checker(string):
         dc_obj = DequeClass()
+        new_string = string.replace(' ','')
 
-        for el in string:
+        for el in new_string:
             dc_obj.add_to_rear(el)
 
         still_equal = True
@@ -47,12 +48,9 @@ if __name__ == '__main__':
         while dc_obj.size() > 1 and still_equal:
             first = dc_obj.remove_from_front()
             last = dc_obj.remove_from_rear()
-            if first != last and last == ' ':
-                last = dc_obj.remove_from_rear()
-            elif first != last and first == ' ':
-                first = dc_obj.remove_from_front()
-            elif first != last:
-                still_equal = False
+            if first != last:
+                if first != last:
+                    still_equal = False
 
         return still_equal
 
