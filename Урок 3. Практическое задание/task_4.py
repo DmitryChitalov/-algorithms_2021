@@ -15,19 +15,3 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
-
-import hashlib
-
-
-def caching(url, cach):
-    salt = url
-    hash_obj = hashlib.sha256(url.encode() + salt.encode()).hexdigest()
-    if not cach.get(url):
-        cach[url] = hash_obj
-
-
-cach = dict()
-caching('https://pythonworld.ru/tipy-dannyx-v-python', cach)
-caching('https://vk.com/im?peers=447085295_393951679_c76', cach)
-caching('https://pythonworld.ru/tipy-dannyx-v-python', cach)
-print(cach)
