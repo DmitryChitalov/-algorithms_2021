@@ -17,3 +17,16 @@
 """
 
 # hash?
+
+st = input("input word>>> ").lower()
+dsd=set()
+import itertools
+import hashlib
+
+items = st
+for i in range(1,len(items)):
+    for combination in itertools.combinations(st, i):
+        if ''.join(list(combination)) in st:
+            dsd.add(hashlib.sha256(''.join(list(combination)).encode()).hexdigest())
+print(len(dsd))
+print(dsd)
