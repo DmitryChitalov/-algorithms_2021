@@ -1,42 +1,76 @@
-"""
-3. Массив размером 2m + 1, где m – натуральное число, заполнен случайным образом.
-Найдите в массиве медиану. Медианой называется элемент ряда, делящий его на
-две равные по длине части: в одной находятся элементы, которые не меньше медианы,
-в другой – не больше медианы.
-
-Задачу можно решить без сортировки исходного массива.
-
-Но если это слишком сложно, то используйте метод сортировки,
-который не рассматривался на уроках: Шелла, Гномья, Кучей...
-
-Важно: стройте массив именно по формуле 2m+1
-Потому что параметр m вам пригодится при поиске медианы, когда массив будет отсортирован.
-Этот парамет m вам нужно запрашивать у пользователя.
-
-[5, 3, 4, 3, 3, 3, 3]
-
-[3, 3, 3, 3, 3, 4, 5]
-
-my_lst
-new_lts
-
-arr[m]
-
-
+from random import randint
 from statistics import median
-
-[3, 4, 3, 3, 5, 3, 3]
-
-left = []
-right = []
-
-left == right and
-
-for i in
-    for
-    left == right
-    left.clear()
-    right.clear()
+from timeit import timeit
 
 
-"""
+def gnome_sort(data, med):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return f'Отсортированный массив: {data}\n' \
+           f'Гномья сортировка: {data[med]}'
+
+
+def opt_gnome_sort(data, med):
+    i, j, size = 1, 2, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i, j = j, j + 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            i -= 1
+            if i == 0:
+                i, j = j, j + 1
+    return f'Оптимизированная гномья сортировка : {data[med]}'
+
+
+def cycle(lst, med):
+    for _ in range(med):
+        lst.remove(max(lst))
+    return f'Цикл без сортировки: {max(lst)}'
+
+
+def median_sort(lst):
+    return f'Встроенная median: {median(lst)}'
+
+
+if __name__ == '__main__':
+    m = int(input('Введите m: '))
+    array = [randint(1, 10) for i in range(2 * m + 1)]
+    print(f'Исходный массив: {array}')
+    print(gnome_sort(array[:], m))
+    print(opt_gnome_sort(array[:], m))
+    print(cycle(array[:], m))
+    print(median_sort(array[:]))
+    print(f"Гномья сортировка: {timeit('gnome_sort(array[:], m)', globals=globals(), number=1000)}")
+    print(f"Опт. гномья сортировка : {timeit('opt_gnome_sort(array[:], m)', globals=globals(), number=1000)}")
+    print(f"Цикл: {timeit('cycle(array[:], m)', globals=globals(), number=1000)}")
+    print(f"Встроенная median: {timeit('median_sort(array[:])', globals=globals(), number=1000)}")
+
+    """
+    Введите m: 6
+    Исходный массив: [8, 2, 6, 10, 5, 10, 2, 6, 5, 2, 3, 8, 4]
+    Отсортированный массив: [2, 2, 2, 3, 4, 5, 5, 6, 6, 8, 8, 10, 10]
+    Гномья сортировка: 5
+    Оптимизированная гномья сортировка : 5
+    Цикл без сортировки: 5
+    Встроенная median: 5
+    Гномья сортировка: 0.072...
+    Опт. гномья сортировка : 0.028...
+    Цикл: 0.005...
+    Встроенная median: 0.001..
+    
+    Введите m: 60
+    
+    Гномья сортировка: 2.852
+    Опт. гномья сортировка : 1.863
+    Цикл: 0.180
+    Встроенная median: 0.005
+    
+    При определении медианы встроенная функция самая быстрая. Увеличив кол-во элементов мы видим значительную разницу.
+    """
