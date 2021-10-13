@@ -22,3 +22,18 @@
 Введите число, которое требуется перевернуть: 1230
 Перевернутое число: 0321
 """
+
+count_numbers = int(input("Введите число "))
+
+
+def flip_number(numbers, line):
+    if numbers == 0:
+        print("Вычисление закончено")
+    else:
+        line = line + str(numbers % 10)
+        return flip_number(numbers // 10, line)
+    print("Итоговое значение - ", line)
+
+
+if __name__ == '__main__':
+    flip_number(count_numbers, '')
