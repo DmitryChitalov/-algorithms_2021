@@ -28,3 +28,52 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    action = input("Введите операцию (+, -, *, / или 0 для выхода) ")
+    if action == '0':    # условие для остановки
+        print("Операция остановлена")
+    else:
+        if action in ('/', '*', '-', '+'):  # проверяем входит ли значение в список
+            first_number = input("Введите первое число ")
+            if first_number.isdigit():    # проверим является ли значение целым числом
+                first_number = int(first_number)
+            else:
+                try:    # проверим является ли значение чсислом с плавающей точкой
+                    first_number = float(first_number)
+                except:
+                    print("Значение не является числом")
+                    return calculator()
+            second_number = input("Введите второе число ")
+            if second_number.isdigit():    # проверим является ли значение целым числом
+                second_number = int(second_number)
+            else:
+                try:    # проверим является ли значение чсислом с плавающей точкой
+                    first_number = float(first_number)
+                except:
+                    print("Введёное значение не является числом")
+                    return calculator()
+            if action == '+':
+                print(first_number + second_number)
+                return calculator()
+            elif action == '-':
+                print(first_number - second_number)
+                return calculator()
+            elif action == '*':
+                print(first_number * second_number)
+                return calculator()
+            elif action == '/':
+                try:    # проверим наличие ошибки деления на ноль
+                    print(first_number / second_number)
+                    return calculator()
+                except ZeroDivisionError:
+                    print("На ноль делить нельзя")
+                    return calculator()
+        else:
+            print('Вы ввели недопустимый математический символ, повторите ввод')
+            return calculator()
+
+
+if __name__ == '__main__':
+    calculator()
