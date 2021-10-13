@@ -23,3 +23,18 @@
 и допускается комб-е - цикл и рекурсия
 """
 
+
+def table_symbols(first_character, last_character, line, cycle_number):
+    if first_character == last_character + 1:
+        print("Символы таблицы ASCII с ", first_character, " по ", last_character, sep='')
+    else:
+        if cycle_number % 10 == 0:
+            line = line + '\n'
+        line = line + str(first_character) + '-' + chr(first_character) + ' '
+        cycle_number = cycle_number + 1
+        return table_symbols(first_character + 1, last_character, line, cycle_number)
+    print(line)
+
+
+if __name__ == '__main__':
+    table_symbols(32, 127, '', 0)
