@@ -24,14 +24,9 @@ from statistics import median
 
 [3, 4, 3, 3, 5, 3, 3]
 
-
 left.clear()
 right.clear()
 
-
-m = 3
-len = 7
-i
 left = []
 right = []
 
@@ -45,3 +40,38 @@ for i in
 
 
 """
+
+from random import randint
+from timeit import timeit
+from statistics import median
+
+
+def median_gnome(data, m):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return f'Медианой массива является число: {data[m]}'
+
+
+def median_func(lst):
+    return f'Медианой массива является число: {median(lst)}'
+
+
+m = int(input('Введите m: '))
+lst = [randint(1, 10) for i in range(2 * m + 1)]
+
+print(median_gnome(lst, m))
+print(median_func(lst))
+print(f"Время выполнения с gnome: {timeit('median_gnome(lst[:], m)', globals=globals(), number=1000)}")
+print(f"Время выполнения с median: {timeit('median_func(lst[:])', globals=globals(), number=1000)}")
+
+# Вывод.
+# Сортировка gnome оказалась медленнее встроенной функции median, что подтверждает гипотезу о том,
+# что в работе при возможности следует пользоваться встроенными функциями.
+# Время выполнения с gnome: 0.005399000000000154
+# Время выполнения с median: 0.001725399999999766
