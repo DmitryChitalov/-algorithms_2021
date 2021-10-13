@@ -12,3 +12,18 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
+
+el_numbers = int(input("Введите число "))
+
+
+def number_elements(number, reference_point, zero_variable):
+    if number == 0:
+        print("Вычисление закончено")
+    else:
+        zero_variable = zero_variable + reference_point
+        return number_elements(number - 1, -(reference_point / 2), zero_variable)
+    print("Итоговое значение - ", zero_variable)
+
+
+if __name__ == '__main__':
+    number_elements(el_numbers, 1, 0)
