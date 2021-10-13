@@ -21,3 +21,36 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_show(start_code, end_code):
+    """Формирует список из пар 'code - value' ASCII в заданном диапазоне"""
+    res_lst = []  # хранилище для накопления результатов
+
+    # базовый случай - дошли до конца диапазона
+    if start_code == end_code:
+        return [f'{end_code:03d} - {chr(end_code)}']
+
+    # шаг рекурсии - пока не дошли до конца
+    res_lst.append(f'{start_code:03d} - {chr(start_code)}')
+    res_lst += ascii_show(start_code + 1, end_code)
+    return res_lst
+
+
+if __name__ == '__main__':
+
+    # задаем начальные и конечные коды ASCII-таблицы
+    START_CODE, END_CODE = 32, 127
+    # разделитель пар код-значение при выводе
+    SEPARATOR = '  '
+
+    result = ascii_show(START_CODE, END_CODE)
+
+    # вывод информации по 10 пар "код - значение"
+    print(f"Вывод кодов и значений символов ASCII-таблицы "
+          f"с кодами от {START_CODE} по {END_CODE}:")
+    for idx, el in enumerate(result):
+        if (idx + 1) % 10 == 0:
+            print(el)
+            continue
+        print(el, end=SEPARATOR)
