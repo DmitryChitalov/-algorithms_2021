@@ -65,7 +65,6 @@ class BinaryTree:
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.left_child = new_root.left_child
             new_root.left_child = tree_obj
-        # print(f'new_node {new_node} get_root_val {new_root.get_left_child().get_root_val()}')
         return new_root.left_child
 
     # добавить правого потомка
@@ -82,7 +81,6 @@ class BinaryTree:
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.right_child = new_root.right_child
             new_root.right_child = tree_obj
-        # print(f'new_node {new_node} get_root_val {new_root.get_right_child().get_root_val()}')
         return new_root.right_child
 
     # метод доступа к правому потомку
@@ -101,20 +99,58 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
-    def get_node_data(self, root):
-        pass
+    # data access method
+    def get_root_data(self):
+        return self.data
+
+    def is_node_inside(self, idx_node, start_root):
+        '''
+        Находим объект корневго узла, по индексу
+        :param idx_node:
+        :param start_root:
+        :return: кортеж (флагпоиска, объект Binarytree), если не нашли, то (False, None)
+        '''
+        if idx_node < start_root.root  and start_root.get_left_child():
+            return self.is_node_inside(idx_node, start_root.get_left_child())
+        elif idx_node > start_root.root and start_root.get_right_child():
+            return self.is_node_inside(idx_node, start_root.get_right_child())
+        else:
+            if idx_node == start_root.get_root_val():
+                return True, start_root
+            else:
+                return False, None
+
+    def is_node_exists(self, node):
+        '''
+        Возвращаем True если узел с таким номером существует. Можно использовать при
+        создании новых узлов, когда не знаем есть ли очередной номер в дереве.
+        :param node:
+        :return:
+        '''
+        return self.is_node_inside(node, self)[0]
+
+    def get_node_data(self, idx_node):
+        '''
+        Получить атрибут data
+        :param idx_node:
+        :return:
+        '''
+        found, obj = self.is_node_inside(idx_node, self)
+        return obj.data if found else None
+
+    def set_node_data(self, idx_node, data=''):
+        '''
+        Меняем атрибут data узла
+        :param idx_node:
+        :param data:
+        :return: Узел куда вставляем, или None если узел не найден
+        '''
+        found, obj = self.is_node_inside(idx_node, self)
+        if found:
+            obj.data = data
+        return obj if found else None
 
 r = BinaryTree(8)
-# print(r.get_root_val())
-# print(r.get_left_child())
-# r.insert_left(40)
-# print(r.get_left_child())
-# print(r.get_left_child().get_root_val())
-# r.insert_right(12)
-# print(r.get_right_child())
-# print(r.get_right_child().get_root_val())
-# r.get_right_child().set_root_val(16)
-# print(r.get_right_child().get_root_val())
 print(r)
 r.insert_element(r, 6)
 print(r)
@@ -130,10 +166,15 @@ print(r)
 r.insert_element(r, 25, 'SEPTEMBER')
 print(r)
 a = r.insert_element(r, 200)
-print(a)
-print(a.get_root_val())
 print(r)
-
+print('*****************************')
+print(r.is_node_exists(8))
+print(r.is_node_exists(1))
+print(r.is_node_exists(100))
+print(r.is_node_exists(40))
+print(r.get_node_data(25))
+r.set_node_data(25, 'OCTOBER')
+print(r.get_node_data(25))
 
 '''
 Выводы:
@@ -141,8 +182,17 @@ print(r)
 например индексы
 2. Оптимимзация выполнена:
 - создан унифицированный метод для вставки в двоичное дерево нового элемента в правильное место.
-- код подготвлен для создания метода вытаскивания из дерева данных заданного элемента
--- метода проверки наличия элемента в бинарном дереве.
+- добавлен атрибут узла data
+- добавлены методы получения значения узла по индексу и изменения атрибута data узла
+- удалить ненужные методы не получилось.
+3. реализация мне кажется корявенькой. видимо надо потренироваться на написании лакончиного кода ООП
+4. метод insert_element сочетает в себе ООП и функциональное программирование в части рекурсии.
+как этого избежать не додумался.
+5. для визуализации дерева переписан метод __str__
+6. вызывает исключение в методе insert_element в случае, дублирования индекса.
+
+В листинге:
+- последовательное создание дерева
 
 
 (R8 L* R*)
@@ -152,6 +202,12 @@ print(r)
 (R8 L(R6 L(R1 L* R*) R(R7 L* R*)) R(R100 L* R*))
 (R8 L(R6 L(R1 L* R*) R(R7 L* R*)) R(R100 L(R50 L* R*) R*))
 (R8 L(R6 L(R1 L* R*) R(R7 L* R*)) R(R100 L(R50 L(R25 L* R*) R*) R*))
-(R200 L* R*)
-200
-(R8 L(R6 L(R1 L* R*) R(R7 L* R*)) R(R100 L(R50 L(R25 L* R*) R*) R(R200 L* R*)))'''
+(R8 L(R6 L(R1 L* R*) R(R7 L* R*)) R(R100 L(R50 L(R25 L* R*) R*) R(R200 L* R*)))
+*****************************
+True
+True
+True
+False
+SEPTEMBER
+OCTOBER
+'''
