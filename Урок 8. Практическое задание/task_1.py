@@ -79,7 +79,7 @@ class HaffUncode(HaffCode):
         uncode = {}
         uncode_str = ''
 
-        for key, value in hc.code.items():
+        for key, value in code_table.items():
             uncode[value] = key
 
         for i in code_string.split():
