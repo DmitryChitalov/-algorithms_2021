@@ -71,13 +71,32 @@ class HaffCode:
             code_str += f'{self.code[i]} '
         return code_str
 
+class HaffUncode(HaffCode):
+    def __init__(self, code):
+        super().__init__(code)
+
+    def uncode_str(code_string):
+        uncode = {}
+        uncode_str = ''
+
+        for key, value in hc.code.items():
+            uncode[value] = key
+
+        for i in code_string.split():
+            uncode_str += uncode[i]
+        return uncode_str
+
+
 hc = HaffCode("beep boop beer!")
 print(hc.haff_tree())   # дерево
 print(hc.code)          # таблица кодировок
 print(hc.str_code())    # сама кодировка
 
+hu = HaffUncode
+print(hu.uncode_str('00 11 11 101 010 00 011 011 101 010 00 11 11 1000 1001'))
+
 """
 Разобрал пример с урока с комментариями для себя
 Реализацию понял
-Позже постараюсь сделать раскодировку
+Реализовал раскодировку через наследование классов
 """
