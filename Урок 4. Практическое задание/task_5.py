@@ -17,6 +17,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -38,29 +39,42 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
-
-
-def sieve(n):
+def simple_re(i, n=10000):
     m = (n - 1) // 2
     b = [True] * m
-    i, p, ps = 0, 3, [2]
+    t, p, ps = 0, 3, [2]
     while p * p < n:
-        if b[i]:
+        if b[t]:
             ps.append(p)
-            j = 2 * i * i + 6 * i + 3
+            j = 2 * t * t + 6 * t + 3
             while j < m:
                 b[j] = False
-                j = j + 2 * i + 3
-        i += 1;
+                j = j + 2 * t + 3
+        t += 1
         p += 2
-    while i < m:
-        if b[i]:
+    while t < m:
+        if b[t]:
             ps.append(p)
-        i += 1;
+        t += 1
         p += 2
-    return ps
+    return ps[i - 1]
 
 
-print(len(sieve(7)))
+num_10 = 10
+num_100 = 100
+num_1000 = 1000
+
+print(simple(num_10))
+print(simple_re(num_10))
+print(f'simple:', timeit("simple(num_10)", globals=globals(), number=10))
+print(f'simple_re:', timeit("simple_re(num_10)", globals=globals(), number=10))
+
+print(simple(num_100))
+print(simple_re(num_100))
+print(f'simple:', timeit("simple(num_100)", globals=globals(), number=10))
+print(f'simple_re:', timeit("simple_re(num_100)", globals=globals(), number=10))
+
+print(simple(num_1000))
+print(simple_re(num_1000))
+print(f'simple:', timeit("simple(num_1000)", globals=globals(), number=10))
+print(f'simple_re:', timeit("simple_re(num_1000)", globals=globals(), number=10))
