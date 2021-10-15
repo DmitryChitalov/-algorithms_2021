@@ -16,3 +16,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint as ran
+
+
+def func(num_x):
+    if num_x == 1:
+        return 1
+    return func(num_x-1) + num_x
+
+
+if __name__ == '__main__':
+    num = ran(1, 1000)
+    print(func(num) == num*(num+1)/2)

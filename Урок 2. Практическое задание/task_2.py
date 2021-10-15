@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from random import randint as ran
+
+
+def func(x, even=0, not_even=0):
+    if not x:
+        print(f'Count even: {even}\nCount not even: {not_even}')
+        return
+    if x % 2:
+        not_even += 1
+    else:
+        even += 1
+    func(x//10, even, not_even)
+
+
+if __name__ == '__main__':
+    num = ran(100, 1000000000000)
+    print(num)
+    func(num)
