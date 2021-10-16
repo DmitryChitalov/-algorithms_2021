@@ -16,3 +16,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def from_one_to_n(num,summ):
+    if num < 1:
+        return summ
+    return from_one_to_n(num-1, summ+num)
+
+
+num = 5
+left = from_one_to_n(num,0)
+if left == num*(num+1)/2:
+    print(True)
+else:
+    print(False)
+
+

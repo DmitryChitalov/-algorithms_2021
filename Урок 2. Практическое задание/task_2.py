@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def numbers(num,even,uneven):
+    if num == 0:
+        return even, uneven
+    if num  % 2 == 0:
+        return numbers(num // 10, even+1, uneven)
+    else:
+        return numbers(num // 10, even, uneven+1)
+
+print(numbers(1000, 0, 0))
+
