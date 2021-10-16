@@ -40,3 +40,45 @@ for i in
 
 
 """
+
+
+from statistics import median
+from random import randint
+
+
+def create_random_list(num):
+    unsorted_list = [randint(-100, 100) for _ in range(2 * num + 1)]
+    print('Неотсортированный список:', unsorted_list)
+    return unsorted_list
+
+
+def find_median(num):
+    data = create_random_list(num)
+    for _ in range(int(len(data) / 2)):
+        data.remove(max(data))
+    print('Ответ: ', end='')
+    return max(data)
+
+
+def find_median_full(num):
+    data = create_random_list(num)
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    print('Ответ: ', end='')
+    return data[num]
+
+
+def check_answer(data):
+    return median(data)
+
+
+if __name__ == '__main__':
+    print(find_median(int(input('Введите число: '))))
+    print(find_median_full(int(input('Введите число: '))))
+
