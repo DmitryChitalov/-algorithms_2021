@@ -27,6 +27,13 @@ class BinaryTree:
         return False
 
     def find(self, item):
+        try:
+            obj = int(item)
+        except ValueError as ex:
+            print("Мне нужен целочисленный аргумент!")
+            print(ex)
+            return
+
         def find_in_tree(tree: BinaryTree, node):
             if node == tree.root:
                 return None, tree
@@ -47,10 +54,18 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        try:
+            obj = int(new_node)
+        except ValueError as ex:
+            print("Мне нужен целочисленный аргумент!")
+            print(ex)
+            return
         if new_node > self.root:
             self.insert_right(new_node)
+            print("Это число не подходит для левой ветки. Ставим его в правую!")
             return
         if new_node == self.root:
+            print("Это число не подходит для левой ветки. Оно равно корню!")
             return
         # если у узла нет левого потомка
         if self.left_child is None:
@@ -73,10 +88,18 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        try:
+            obj = int(new_node)
+        except ValueError as ex:
+            print("Мне нужен целочисленный аргумент!")
+            print(ex)
+            return
         if new_node < self.root:
             self.insert_left(new_node)
+            print("Это число не подходит для правой ветки. Ставим его в левую!")
             return
         if new_node == self.root:
+            print("Это число не подходит для правой ветки. Оно равно корню!")
             return
         # если у узла нет правого потомка
         if self.right_child is None:
@@ -107,7 +130,17 @@ class BinaryTree:
 
     # метод установки корня
     def set_root_val(self, obj):
-        self.root = obj
+        try:
+            obj = int(obj)
+        except ValueError as ex:
+            print("Мне нужен целочисленный аргумент!")
+            print(ex)
+            return
+        if self.left_child is not None and self.right_child is not None\
+                and self.left_child.root < obj < self.right_child.root:
+            self.root = obj
+        else:
+            self.root = obj
 
     # метод доступа к корню
     def get_root_val(self):
