@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_reverse(val):
+    """ Результат выводим в str """
+    if val // 10 == 0:
+        return str(val)
+    return str(val % 10) + my_reverse(val//10)
+
+
+# Проверка:
+print(my_reverse(1230))
+print(my_reverse(3486))
+print(my_reverse(14570000000))
+print(my_reverse(1234567890))

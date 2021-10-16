@@ -34,3 +34,78 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict, deque
+from itertools import zip_longest
+
+
+# Сложение чисел
+def sum_hex(in_a, in_b):
+    a = in_a.copy()
+    a.reverse()
+    b = in_b.copy()
+    b.reverse()
+    input_data = zip_longest(a, b, fillvalue='0')
+    res_sum = deque([])
+    transfer = 0
+    for i in input_data:
+        res_pos = d.get(i[0]) + d.get(i[1]) + transfer
+        num_in_pos = res_pos % 16
+        transfer = res_pos // 16
+        res_sum.appendleft(d.get(num_in_pos))
+    return res_sum  # ''.join(res_sum).upper()
+
+
+# Умножение чисел
+def mul_hex(in_a, in_b):
+    a = in_a.copy()
+    a.reverse()
+    b = in_b.copy()
+    b.reverse()
+    sum_list = []
+    for pos, i in enumerate(a, start=0):
+        transfer = 0
+        res_sum = deque([])
+        for j in b:
+            res_pos = d.get(i) * d.get(j) + transfer
+            num_in_pos = res_pos % 16
+            res_sum.appendleft(d.get(num_in_pos))
+            transfer = res_pos // 16
+        while True:
+            res_pos = transfer
+            num_in_pos = transfer % 16
+            res_sum.appendleft(d.get(num_in_pos))
+            transfer = res_pos // 16
+            if transfer == 0:
+                break
+        for_extend = ['0' for _ in range(pos)]
+        res_sum.extend(for_extend)
+        sum_list.append(res_sum)
+    res_mul = sum_list[0]
+    # складываем результаты перемножения и получаем итог
+    for i in sum_list[1:]:
+        res_mul = sum_hex(res_mul, i)
+    return res_mul
+
+
+# ---- Ввод результатов
+
+a_in = list(input('Введите первое число в шестнадцатеричной системе: ').lower())
+b_in = list(input('Введите второе число в шестнадцатеричной системе: ').lower())
+# a_in = ['a', '2']
+# b_in = ['c', '4', 'f']
+input_data = []
+d = defaultdict(list)
+res_sum = deque([])
+for i in range(16):
+    d[hex(i)[2:3:1]] = i
+    d[i] = hex(i)[2:3:1]
+
+# Выводим результат
+print('Результат сложения - ', *list(sum_hex(a_in, b_in)), sep='')
+print('Результат умножения - ', *list(mul_hex(a_in, b_in)), sep='')
+
+# Проверка:
+# print(int('a2', 16))
+# print(int('c4f', 16))
+# print(int('cf1', 16))
