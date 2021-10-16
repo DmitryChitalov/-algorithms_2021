@@ -23,3 +23,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def income_sum(in_org):
+    return in_org.income_1 + in_org.income_2 + in_org.income_3 + in_org.income_4
+
+
+OrgIncome = namedtuple('Income', 'org_name income_1 income_2 income_3 income_4')
+org_count = int(input("Введите количество предприятий для расчета прибыли: "))
+
+orgs = []
+for _ in range(org_count):
+    org_name = input("Введите название предприятия: ")
+    org_income_str = input("через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ")
+    incomes = org_income_str.split()
+    orgs.append(OrgIncome(
+        org_name=org_name,
+        income_1=int(incomes[0]),
+        income_2=int(incomes[1]),
+        income_3=int(incomes[2]),
+        income_4=int(incomes[3])
+    ))
+
+mean_income = 0
+for org in orgs:
+    mean_income += income_sum(org)
+mean_income /= len(orgs)
+
+print(f'Средняя годовая прибыль всех предприятий: {mean_income}')
+for org in orgs:
+    if income_sum(org) > mean_income:
+        print(f'Предприятия, с прибылью выше среднего значения: {org.org_name}')
+    elif income_sum(org) < mean_income:
+        print(f'Предприятия, с прибылью ниже среднего значения: {org.org_name}')
