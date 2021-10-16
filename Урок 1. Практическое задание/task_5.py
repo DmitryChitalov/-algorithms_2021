@@ -28,3 +28,56 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self, max_len):
+        self.elements = [[]]
+        self.max_len = max_len
+
+    def __str__(self):
+        return str(self.elements)
+
+    def is_empty(self):
+        return self.elements == [[]]
+
+    def push_in(self, el):
+        if len(self.elements[len(self.elements)-1]) < self.max_len:
+            self.elements[len(self.elements)-1].append(el)
+        else:
+            self.elements.append([])
+            self.elements[len(self.elements)-1].append(el)
+
+    def pop_out(self):
+        res = self.elements[len(self.elements)-1].pop()
+        if len(self.elements[len(self.elements)-1]) == 0:
+            self.elements.pop()
+        return res
+
+    def get_val(self):
+        return self.elements[len(self.elements)-1]
+
+    def get_el_val(self):
+        return self.elements[len(self.elements)-1][-1]
+
+    def stack_size(self):
+        return len(self.elements)
+
+
+SC_obj_1 = StackClass(3)
+print(SC_obj_1.is_empty())
+print(SC_obj_1.__str__())
+
+SC_obj_1.push_in(1000)
+SC_obj_1.push_in(7)
+SC_obj_1.push_in(7)
+SC_obj_1.push_in(8)
+print(SC_obj_1.__str__())
+print(SC_obj_1.get_val())
+print(SC_obj_1.get_el_val())
+SC_obj_1.pop_out()
+print(SC_obj_1.__str__())
+print(SC_obj_1.pop_out())
+print(SC_obj_1.__str__())
+print(SC_obj_1.get_val())
+print(SC_obj_1.get_el_val())
