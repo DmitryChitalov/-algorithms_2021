@@ -34,3 +34,43 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+from functools import reduce
+
+some_dict = defaultdict(list)
+first_number = input('Введите первое шестнадцатеричное число: ')
+second_number = input('Введите второе шестнадцатеричное число: ')
+
+some_dict[first_number] = list(first_number)
+some_dict[second_number] = list(second_number)
+
+
+def operations_hex(first, second):
+    res_summ = hex(int(first, 16) + int(second, 16)).replace('0x', '').upper()
+    res_mul = hex(int(first, 16) * int(second, 16)).replace('0x', '').upper()
+    some_dict[res_summ] = list(res_summ)
+    some_dict[res_mul] = list(res_mul)
+    return f'Сумма чисел из примера: {some_dict[res_summ]}, ' \
+           f'Произведение - {some_dict[res_mul]}'
+
+
+print(reduce(operations_hex, [first_number, second_number]))
+
+
+class HexNumber:
+    def __init__(self, value):
+        self.value = int(value, 16)
+
+    def __add__(self, other):
+        return hex(self.value + other.value).replace('0x', '').upper()
+
+    def __mul__(self, other):
+        return hex(self.value * other.value).replace('0x', '').upper()
+
+
+a = HexNumber(first_number)
+b = HexNumber(second_number)
+
+print(f'Сумма чисел из примера: {a + b}')
+print(f'Произведение - {a * b}')
