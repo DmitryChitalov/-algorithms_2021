@@ -34,3 +34,19 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+my_dict = defaultdict(list)
+
+a = input("Введите первое число: ")
+b = input("Введите второе число: ")
+
+my_dict[a].extend(list(a))
+my_dict[b].extend(list(b))
+
+summ = hex(int(a, 16) + int(b, 16)).replace('0x', '').upper()
+my_dict[summ].extend(list(summ))
+mult = hex(int(a, 16) * int(b, 16)).replace('0x', '').upper()
+my_dict[mult].extend(list(mult))
+print("Сумма чисел из примера: ", my_dict[summ])
+print("Произведение: ", my_dict[mult])

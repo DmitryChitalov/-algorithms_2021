@@ -23,3 +23,42 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def year_profit(comp_name, profit_lst):
+    """
+    Возвращает namedtuple с названием компании и годовым доходом
+    :param comp_name: Название компании
+    :param profit_lst: список из четырех сумм доходов за каждый квартал
+    :return: Company(name, average_profit)
+    """
+    Company = namedtuple('Company', 'name year_profit')
+    return Company(name=comp_name, year_profit=sum(profit_lst))
+
+
+QUANTITY = int(input('Введите количество предприятий для расчета прибыли: '))
+all_companies = {}
+total_sum = 0
+
+for _ in range(QUANTITY):
+    company_name = input('Введите название предприятия: ')
+    profits = list(map(int, input('через пробел введите прибыль данного предприятия '
+                                  'за каждый квартал(Всего 4 квартала): ').split(' ')))
+    company = year_profit(company_name, profits)
+    all_companies[company.name] = company.year_profit
+    total_sum += company.year_profit
+
+average_for_all_companies = total_sum / QUANTITY
+lt_average = []
+gt_average = []
+
+for name, avg in all_companies.items():
+    if avg > average_for_all_companies:
+        gt_average.append(name)
+    else:
+        lt_average.append(name)
+
+print(f'Средняя годовая прибыль всех предприятий: {average_for_all_companies}')
+print(f'Предприятия, с прибылью выше среднего значения: {", ".join(gt_average)}')
+print(f'Предприятия, с прибылью ниже среднего значения: {", ".join(lt_average)}')
