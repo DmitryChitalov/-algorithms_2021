@@ -19,4 +19,41 @@
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 
 Задание творческое. Здесь нет жестких требований к выполнению.
+
+Эффективнее решение номер 2 так как используется линейно-логарифмитическая функция(сортировка),
+в первой используется квадратичная(двойной перебор)
 """
+company = {'HP' : 1000000,
+           'Nvidia': 1500000,
+           'Intel': 750000,
+           'apple': 1750000,
+           'Lenovo': 350000}
+
+
+def top_three(dict):                            # O(N^2)
+    sorted_values = sorted(dict.values())       # N log (N)
+    sorted_values = sorted_values[-3:]          # O(N)
+    sorted_dict = {}                            # O(1)
+
+    for i in sorted_values:                     # O(N)
+        for k in dict.keys():                   # O(N)
+            if dict[k] == i:                    # O(1)
+                sorted_dict[k] = dict[k]        # O(1)
+                break                           # O(1)
+    return sorted_dict                          # o(1)
+
+
+print(top_three(company))
+
+
+def top_three2(dict):                           # N log (N)
+    sorted_dict = {}                            # O(1)
+    sorted_keys = sorted(dict, key=dict.get)    # N log (N)
+    sorted_keys = sorted_keys[-3:]              # O(N)
+
+    for i in sorted_keys:                       # O(N)
+        sorted_dict[i] = dict[i]                # O(1)
+    return sorted_dict                          # O(1)
+
+
+print(top_three2(company))

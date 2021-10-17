@@ -28,3 +28,54 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# enter = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+# while enter != '0':
+#     first_number = int(input('Введите первое число: '))
+#     second_number = int(input('Введите второе число: '))
+#     if enter == '+':
+#         result = first_number + second_number
+#     elif enter == '-':
+#         result = first_number - second_number
+#     elif enter == '*':
+#         result = first_number * second_number
+#     elif enter == '/':
+#         result = first_number / second_number
+#     print(result)
+#     enter = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+
+def calculator():
+    enter = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if enter == '0':
+        return 'Exit'
+    elif enter in ['+', '-', '*', '/']:
+        try:
+            first_number = int(input('Введите первое число: '))
+        except ValueError:
+            print('Введено не число. Начнём сначала')
+            return calculator()
+        try:
+            second_number = int(input('Введите второе число: '))
+        except ValueError:
+            print('Введено не число. Начнём сначала')
+            return calculator()
+        if enter == '+':
+            result = first_number + second_number
+        elif enter == '-':
+            result = first_number - second_number
+        elif enter == '*':
+            result = first_number * second_number
+        elif enter == '/':
+            try:
+                result = first_number / second_number
+            except ZeroDivisionError:
+                print('Делить на 0 нельзя. Попробуйте снова.')
+                return calculator()
+        print('Ваш результат: ', result)
+    else:
+        return calculator()
+    return calculator()
+
+
+print(calculator())
