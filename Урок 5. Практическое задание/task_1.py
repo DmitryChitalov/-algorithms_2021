@@ -23,3 +23,39 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+a = int(input('Введите число предприятий: '))
+company = namedtuple('profit_kvart', 'comp_name part_1 part_2 part_3 part_4')
+company_dict = {}  # словарь компаний
+sum_profit = 0  # средняя годовая прибыль предприятий
+for i in range(a):
+    name = input('Введите название предприятия: ')
+    profit = list(map(float, input('введите квартальную прибыль через пробел: ').split()))
+    company_profit = company(comp_name=name,
+                             part_1=profit[0],
+                             part_2=profit[1],
+                             part_3=profit[2],
+                             part_4=profit[3])
+    company_dict[company_profit.comp_name] = (company_profit.part_1 + company_profit.part_2 +
+                                                 company_profit.part_3 + company_profit.part_4)
+
+    sum_profit += (company_profit.part_1 + company_profit.part_2 + company_profit.part_3 + company_profit.part_4) / 4
+
+prof_mid = sum(j for j in company_dict.values()) / a
+list_max = [j for j in company_dict.keys() if company_dict[j] >= prof_mid]
+list_min = [j for j in company_dict.keys() if company_dict[j] < prof_mid]
+print(f'Средняя годовая прибыль всех предприятий:  {sum_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {", ".join(list_max)}')
+print(f'Предприятия, с прибылью ниже среднего значения: {", ".join(list_min)}')
+
+'''
+Введите число предприятий: 2
+Введите название предприятия: Фирма_1
+введите квартальную прибыль через пробел: 1200 13000 299 1234
+Введите название предприятия: Фирма_2
+введите квартальную прибыль через пробел: 333 500 3000 4000
+Средняя годовая прибыль всех предприятий:  5891.5
+Предприятия, с прибылью выше среднего значения: Фирма_1
+Предприятия, с прибылью ниже среднего значения: Фирма_2
+'''
