@@ -34,3 +34,15 @@ hx = HexNumber
 hx + hx
 hex()
 """
+import collections
+import functools
+
+
+numbers = collections.defaultdict(list)
+numbers[1] = list(input('Введите первое число: '))
+numbers[2] = list(input('Введите второе число: '))
+print(numbers)
+summ = sum([int(''.join(num), base=16) for num in numbers.values()])
+mult = functools.reduce(lambda num1, num2: num1 * num2, [int(''.join(num), base=16) for num in numbers.values()])
+print('Сумма чисел:', list(hex(summ)[2:]))
+print('Произведение чисел:', list(hex(mult)[2:]))
