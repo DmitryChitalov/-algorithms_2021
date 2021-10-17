@@ -11,3 +11,68 @@ deque – это обобщение стеков и очередей.
 
 В первую очередь необходимо выполнить замеры для ф-ций appendleft, popleft, extendleft дека и для их аналогов у списков.
 """
+
+
+from timeit import timeit
+from collections import deque
+
+
+list_simple = list(range(99999))
+list_deque = deque(list(range(99999)))
+
+print(f'Заполнение простого списка: '
+      f'{timeit("list_simple = list(range(100))", globals=globals(), number=99000)}')
+
+print(f'Заполнение дека списка: '
+      f'{timeit("list_deque = deque(list(range(100)))", globals=globals(), number=99000)}')
+
+print(f'Добавление в конец простого списка: '
+      f'{timeit("list_simple.append(1)", globals=globals(), number=990000)}')
+
+print(f'Добавление в конец дека списка: '
+      f'{timeit("list_deque.append(1)", globals=globals(), number=99000)}')
+
+print(f'Добавление в начало простого списка: '
+      f'{timeit("list_simple.insert(0, 1)", globals=globals(), number=99000)}')
+
+print(f'Добавление в начало дека списка: '
+      f'{timeit("list_deque.appendleft(1)", globals=globals(), number=99000)}')
+
+print(f'Удаление с конца простого списка: '
+      f'{timeit("list_simple.pop(-1)", globals=globals(), number=99000)}')
+
+print(f'Удаление с конца дека списка: '
+      f'{timeit("list_deque.pop()", globals=globals(), number=99000)}')
+
+print(f'Удаление с начала простого списка: '
+      f'{timeit("list_simple.pop(0)", globals=globals(), number=99000)}')
+
+print(f'Удаление с начала дека списка: '
+      f'{timeit("list_deque.popleft()", globals=globals(), number=99000)}')
+
+print(f'Поиск по индексу простого списка: '
+      f'{timeit("list_simple.index(5000)", globals=globals(), number=99000)}')
+
+print(f'Поиск по индексу дека списка: '
+      f'{timeit("list_deque.index(5000)", globals=globals(), number=99000)}')
+
+"""
+
+Заполнение простого списка: 0.11510112
+Заполнение дека списка: 0.195075946
+Добавление в конец простого списка: 0.09968546500000003
+Добавление в конец дека списка: 0.007988534999999963
+Добавление в начало простого списка: 55.454593265
+Добавление в начало дека списка: 0.008290950000002795
+Удаление с конца простого списка: 0.009816620999998804
+Удаление с конца дека списка: 0.007213428000000022
+Удаление с начала простого списка: 17.27082676500001
+Удаление с начала дека списка: 0.007717456000008838
+Поиск по индексу простого списка: 7.073013598000003
+Поиск по индексу дека списка: 7.1889441910000045
+
+Заполнение простого списка быстрее, чем заполнение дека списка
+Операции добавления и удаления в конец быстрее у дека списка
+Операции добавления и удаления из начала быстрее у дека списка
+Поиск по индексу быстрее в незначительно списке
+"""

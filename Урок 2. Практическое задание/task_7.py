@@ -16,3 +16,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+def sum_num(n, total=0):
+    if n == 0:
+        return total
+    else:
+        return sum_num(n - 1, total + n)
+
+
+def func_num(num):
+    print(f'Верно') if sum_num(num) == num * (num + 1) / 2 else print(f'Не Верно')
+
+
+try:
+    func_num(int(input('Введите число: ')))
+except:
+    print(f'Ввели не правильное число! Попробуйте еще раз!')
+    func_num(int(input('Введите число: ')))

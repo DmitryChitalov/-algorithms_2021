@@ -28,3 +28,34 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def fun_calc():
+    operation = input('Введите операцию: ')
+    if operation == 0:
+        print('Конец рекурсии!')
+    else:
+        try:
+            val_a = int(input('Введите первое число: '))
+            val_b = int(input('Введите второе число: '))
+            if operation == '+':
+                print(f'Результат: {val_a + val_b}')
+            elif operation == '-':
+                print(f'Результат: {val_a - val_b}')
+            elif operation == '*':
+                print(f'Результат: {val_a * val_b}')
+            elif operation == '/':
+                if val_b > 0:
+                    print(f'Результат: {val_a / val_b}')
+                elif val_b == 0:
+                    print('На ноль делить нельзя.')
+            else:
+                print(f'Ошибка: вы ввели некорректное значение операции.Повторите сначала!')
+
+            fun_calc()
+        except Exception as E:
+            print(f'Ошибка: вы ввели некорректное значение. Введите число.')
+            fun_calc()
+
+
+fun_calc()
