@@ -34,3 +34,28 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+
+
+def mult_and_sum():
+    nums_dict = defaultdict(list)
+    calc_sum = 0
+    calc_mult = 1
+    num1 = input('Введите число 1 в шестнадцатиричной системе счисления: ')
+    num2 = input('Введите число 1 в шестнадцатиричной системе счисления: ')
+    nums_dict[num1] = list(num1)
+    nums_dict[num2] = list(num2)
+    print(nums_dict)
+
+    for i in nums_dict.values():
+        calc_sum += (int(''.join(i), 16))
+        calc_mult *= int(''.join(i), 16)
+    result_sum = list(str(hex(calc_sum))[2:])
+    result_mult = list(str(hex(calc_mult))[2:])
+
+    print(f'Сумма чисел: {result_sum}')
+    print(f'Произведение чисел: {result_mult}')
+
+
+mult_and_sum()
