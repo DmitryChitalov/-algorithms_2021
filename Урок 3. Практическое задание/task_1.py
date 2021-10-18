@@ -14,3 +14,41 @@ b) выполните набор операций и со списком, и с�
 то реализуйте ф-цию-декоратор для подсчета времени работы ваших пользовательских функций
 И примените ее к своим функциям!
 """
+
+import time
+
+first_list = []
+first_dictionary = {}
+number_operations = 10000000
+
+
+def time_decorator(function):
+    def time_count(*args):
+        start = time.time()
+        function(*args)
+        end = time.time()
+        time_work = end - start
+        print(time_work)
+    return time_count
+
+
+@time_decorator
+def append_list(lst, x):
+    for i in range(x):
+        lst.append(i)
+    print('время заполнения списка - ')
+    return lst
+
+
+@time_decorator
+def append_dictionary(dictionary, x):
+    for i in range(x):
+        dictionary[i] = i
+    print('время заполнения словаря - ')
+    return dictionary
+
+
+append_list(first_list, number_operations)
+append_dictionary(first_dictionary, number_operations)
+
+"""список работает быстрее словаря из-за расчёта хеша для эллементов"""
