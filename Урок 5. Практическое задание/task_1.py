@@ -23,3 +23,21 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+comps = []
+num_of_comp = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(num_of_comp):
+    comp = namedtuple('report', 'name income1 income2 income3 income4 full_income')
+    name_of_comp = input('Введите название предприятия: ')
+    income_of_comp = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+    Company = comp(name_of_comp, *income_of_comp.split(), sum(map(int, income_of_comp.split())))
+    comps.append(Company)
+
+income_middle = sum(Company.full_income for Company in comps) / len(comps)
+print(f"Средняя годовая прибыль всех предприятий: {income_middle}")
+print("Предприятия, с прибылью выше среднего значения: ")
+print(*(Company.name for Company in comps if Company.full_income >= income_middle))
+print("Предприятия, с прибылью ниже среднего значения: ")
+print(*(Company.name for Company in comps if Company.full_income < income_middle))
