@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum_num(counter, summ_num=0, num=1):
+    if counter == 0:  # базовый случай
+        return summ_num
+    else:
+        return get_sum_num( counter - 1, summ_num + num, num/(-2))  # шаг рекурсии
+
+
+counter = int(input('Введите количество элементов: '))
+print(get_sum_num(counter))
