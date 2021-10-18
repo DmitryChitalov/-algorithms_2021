@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# тут меморайз не нужен так как кэш пустой, получаются лучшие значения так как мы не учитиваем время его работы, а толко
+# учитиваем время когда из кэша, если много раз будем искать, то будет нужен так как может совподать уже ранее полученные значения
