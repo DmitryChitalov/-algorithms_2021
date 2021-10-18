@@ -23,3 +23,33 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def income():
+    info = {}
+    comp_amount = int(input("Введите количество предприятий для расчета прибыли: "))
+    Company = namedtuple('Company', ['comp_name', 'inc_1', 'inc_2', 'inc_3', 'inc_4'])
+    for i in range(comp_amount):
+        name = input("Введите название предприятия: ")
+        inc = input("Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ")
+        inc_1, inc_2, inc_3, inc_4 = inc.split(' ')
+        comp = Company(name, int(inc_1), int(inc_2), int(inc_3), int(inc_4))
+        info[comp.comp_name] = (comp.inc_1 + comp.inc_2 + comp.inc_3 + comp.inc_4)
+
+    common_summ = 0
+    for j in info.values():
+        common_summ += j
+
+    print(f'Средняя годовая прибыль всех предприятий: {common_summ / comp_amount}')
+
+    for comp, inc in info.items():
+        if inc > common_summ / comp_amount:
+            print(f'У компании {comp} прибыль выше средней годовой')
+        if inc < common_summ / comp_amount:
+            print(f'У компании {comp} прибыль ниже средней годовой')
+        else:
+            print(f'У компании {comp} прибыль равна средней годовой')
+
+
+income()
