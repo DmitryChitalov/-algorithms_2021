@@ -34,3 +34,26 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+from functools import reduce
+
+
+x_1 = input('Введите первое шестнадцатеричное число: ').upper()
+x_2 = input('Введите второе шестнадцатеричное число: ').upper()
+xec_dic = defaultdict(list)
+xec_dic[x_1] = list(x_1)
+xec_dic[x_2] = list(x_2)
+
+res_sum = list(hex(sum([int(''.join(el), 16) for el in xec_dic])).split('0x')[1].upper())
+res_mul = list(hex(reduce(lambda v_1, v_2: v_1 * v_2, [int(''.join(el), 16) for el in xec_dic])).split('0x')[1].upper())
+
+print(f'Сумма шестнадцатеричныйх чисел = {res_sum}')
+print(f'Произведение шестнадцатеричныйх чисел = {res_mul}')
+
+
+
+
+
+
+
