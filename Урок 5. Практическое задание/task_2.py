@@ -33,3 +33,26 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+from collections import defaultdict
+from functools import reduce
+
+
+def summ_sixteen():
+    number_1 = input('Введите число: ')
+    number_2 = input('Введите число: ')
+    d = defaultdict(list)
+    for el in number_1:
+        d[number_1].append(el)
+    for el in number_2:
+        d[number_2].append(el)
+    sum_all = reduce(lambda x, y: hex(int(x, 16) + int(y, 16)).upper()[2:], d)
+    mul_all = reduce(lambda x, y: hex(int(x, 16) * int(y, 16)).upper()[2:], d)
+    for el in sum_all:
+        d[sum_all].append(el)
+    for el in mul_all:
+        d[mul_all].append(el)
+    # print(d)
+    print(f'Сумма равна: {d[sum_all]}\n', f'Произведение равно: {d[mul_all]}')
+
+
+summ_sixteen()

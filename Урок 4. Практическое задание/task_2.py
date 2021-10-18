@@ -22,7 +22,7 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-num_100 = randint(10000, 1000000)
+num_100 = 10519851020894589056481020684945610320664891205849813205498416879813879841520248951
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
@@ -53,7 +53,9 @@ def memoize(f):
             return cache[args]
         else:
             cache[args] = f(*args)
+            # print(cache)
             return cache[args]
+
     return decorate
 
 
@@ -80,3 +82,8 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+"""
+Функция при работе декоратора просто достает значения из кэша, поэтому её работа проходит быстро,
+но при замерах времени не учитывается время работы самого декоратора, которое будет велико.
+Поэтому использование кеширования рационально только вслучае многократного вызова функции.
+"""

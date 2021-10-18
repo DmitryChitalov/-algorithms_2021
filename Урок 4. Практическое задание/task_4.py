@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,22 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    max_2 = max(array, key=array.count)
+    return f'Чаще всего встречается число {max_2}, ' \
+           f'оно появилось в массиве {array.count(max_2)} раз(а)'
+
+
+# print(func_1())
+# print(func_2())
+# print(func_3())
+
+
+print(timeit("func_1()", globals=globals()))
+print(timeit("func_2()", globals=globals()))
+print(timeit("func_3()", globals=globals()))
+"""
+2.4093405000000003
+3.1432865000000003
+2.0743805999999996
+"""
