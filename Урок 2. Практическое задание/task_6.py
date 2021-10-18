@@ -11,3 +11,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def guess_num(count, num):
+    try:
+        in_num = int(input(f'У вас осталось {count} попыток(и). Ведите число:'))
+    except ValueError:
+        print('Вы вместо числа ввели строку (((')
+        return guess_num(count, num)
+
+    if in_num < num:
+        print('Загаданное число больше введенного')
+    if in_num > num:
+        print('Загаданное число меньше введенного')
+    if count == 1:
+        return print(f"У вас закончились попытки. Загаданное число: {num}", end=' ')
+    if num == in_num:
+        return print(f'Загаданное число: {num}')
+    else:
+        return guess_num(count - 1, num)
+
+
+if __name__ == '__main__':
+    guess_num(10, random.randint(0, 100))

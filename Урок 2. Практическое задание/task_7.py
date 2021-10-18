@@ -16,3 +16,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum(n):
+    if n == 1:
+        return n
+    else:
+        return get_sum(n - 1) + n
+
+
+def get_str(n, str_='1', i=1):
+    if n == 1:
+        return str_
+    else:
+        return get_str(n - 1, str_ + '+' + str(i + 1), i + 1)
+
+
+if __name__ == '__main__':
+    while True:
+        try:
+            num = int(input('Введите число: '))
+            if get_sum(num) == num * (num + 1) / 2:
+                print(f'для n = {num}\n{get_str(num)} = {num}({num}+1)/2')
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')

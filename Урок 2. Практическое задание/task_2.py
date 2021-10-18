@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc_even_odd(num, even=0, odd=0):
+    if num < 0:
+        num = -num
+
+    if num == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    elif (num % 10) % 2 == 0:
+        calc_even_odd(num // 10, even + 1, odd)
+    else:
+        calc_even_odd(num // 10, even, odd + 1)
+
+
+if __name__ == '__main__':
+    while True:
+        try:
+            calc_even_odd(int(input(f'Введите число:')))
+            break
+        except ValueError:
+            print('Вы вместо числа ввели строку (((')

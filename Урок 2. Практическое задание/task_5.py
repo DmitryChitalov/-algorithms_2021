@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def chr_tbl(ascii_num):
+    if ascii_num == 128:
+        return
+
+    print(f'{ascii_num} - {chr(ascii_num)}', end=' ')
+
+    if (ascii_num - 31) % 10 == 0:
+        print('\n')
+    chr_tbl(ascii_num + 1)
+
+
+if __name__ == '__main__':
+    chr_tbl(32)
