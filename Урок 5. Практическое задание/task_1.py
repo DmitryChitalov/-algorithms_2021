@@ -23,3 +23,32 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+
+def func():
+    n = int(input('Введите количество предприятий для расчета прибыли: '))
+    company = namedtuple('quarterly_profit', 'name_company quarter_1 quarter_2 quarter_3 quarter_4')
+    company_dict = {}
+    for i in range(n):
+        name = input('Введите название предприятия: ')
+        profit = list(map(float, input('Через пробел введите прибыль данного '
+                                       'предприятия за каждый квартал(Всего 4 квартала): ').split()))
+        company_profit = company(name_company=name,
+                                 quarter_1=profit[0],
+                                 quarter_2=profit[1],
+                                 quarter_3=profit[2],
+                                 quarter_4=profit[3])
+        company_dict[company_profit.name_company] = (company_profit.quarter_1 + company_profit.quarter_2 +
+                                                     company_profit.quarter_3 + company_profit.quarter_4)
+
+    average_profit = sum(el for el in company_dict.values()) / n
+    list_max = [el for el in company_dict.keys() if company_dict[el] >= average_profit]
+    list_min = [el for el in company_dict.keys() if company_dict[el] < average_profit]
+    print(f'Предприятия, с прибылью средней и выше среднего значения: {", ".join(list_max)}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {", ".join(list_min)}')
+
+
+if __name__ == '__main__':
+    func()
