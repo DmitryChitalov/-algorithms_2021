@@ -14,7 +14,18 @@
 """
 
 
-def get_series_sum(elements=int(input('Введите количество элементов: ')), result=0, item=1):
+def check_val():
+    try:
+        elements = input('Введите количество элементов: ')
+        if not elements.isdigit():
+            raise ValueError('Введено не число!')
+    except ValueError as err:
+        print(err)
+    else:
+        return get_series_sum(int(elements))
+
+
+def get_series_sum(elements, result=0, item=1):
     if not elements:
         return result
     result += item
@@ -23,5 +34,5 @@ def get_series_sum(elements=int(input('Введите количество эл�
     return get_series_sum(elements, result, item)
 
 
-# print(get_series_sum())
+print(check_val())
 

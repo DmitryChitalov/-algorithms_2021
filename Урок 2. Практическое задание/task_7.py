@@ -15,21 +15,6 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-# Два способа
-
-
-def check_equality_1(sequence, expression=0, result=0):
-    if not sequence:
-        expression = expression * (expression + 1) / 2
-        return result == expression
-    result += sequence
-    expression += 1
-    return check_equality_1(sequence - 1, expression, result)
-
-
-print(check_equality_1(45))
-
-#######################################################################################
 
 
 def check_equality_2(sequence):

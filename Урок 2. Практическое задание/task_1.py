@@ -35,14 +35,15 @@ def calculator():
         oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
         if oper not in '+-*/0':
             raise ValueError("Несоответствующее значение операции. Введите одну из операций +, -, *, /, 0.")
-    except ValueError as err:
-        print(err)
-        return calculator()
-    else:
-        if oper == '0':
+        elif oper == '0':
             return print('Программа завершена')
-        number_1 = int(input('Введите первое число: '))
-        number_2 = int(input('Введите второе число: '))
+        number_1 = input('Введите первое число: ')
+        number_2 = input('Введите второе число: ')
+        if not (number_1.isdigit() and number_2.isdigit()):
+            raise ValueError("Вы ввели не числа!")
+        else:
+            number_1 = int(number_1)
+            number_2 = int(number_2)
         if oper == '+':
             result = number_1 + number_2
         elif oper == '-':
@@ -51,11 +52,13 @@ def calculator():
             result = number_1 * number_2
         elif oper == '/':
             if number_2 == 0:
-                while not number_2:
-                    number_2 = int(input('Нельзя делить на ноль, выберете другое число: '))
-                result = number_1 / number_2
+                raise ValueError("Нельзя делить на 0!")
             else:
                 result = number_1 / number_2
+    except ValueError as err:
+        print(err)
+        return calculator()
+    else:
         print(f'Ваш результат: {result}')
         return calculator()
 

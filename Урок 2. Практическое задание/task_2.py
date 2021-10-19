@@ -31,3 +31,4 @@ def check_digit(number, even=0, odd=0):
     return check_digit(number // 10, even, odd)
 
 
+print(check_digit(123))

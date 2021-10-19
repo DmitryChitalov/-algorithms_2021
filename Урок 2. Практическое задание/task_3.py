@@ -30,3 +30,5 @@ def flip(number, result=''):
     result += str(number % 10)
     return flip(number // 10, result)
 
+
+print(flip(1230))
