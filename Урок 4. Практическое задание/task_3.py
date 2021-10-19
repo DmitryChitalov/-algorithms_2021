@@ -12,6 +12,8 @@
 И можете предложить еще свой вариант решения!
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers_1(enter_num, revers_num=0):
@@ -36,3 +38,25 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    num_list = list(f'{enter_num}')
+    num_list.reverse()
+    revers_num_str = ''
+    for el in num_list:
+        revers_num_str += el
+    return revers_num_str
+
+
+enter_num = 1234567890
+
+print(timeit("revers_1(enter_num, revers_num=0)", setup="from __main__ import revers_1, enter_num", number=10000))
+print(timeit("revers_2(enter_num, revers_num=0)", setup="from __main__ import revers_2, enter_num", number=10000))
+print(timeit("revers_3(enter_num)", setup="from __main__ import revers_3, enter_num", number=10000))
+print(timeit("revers_4(enter_num)", setup="from __main__ import revers_4, enter_num", number=10000))
+
+run('revers_1(enter_num, revers_num=0)')
+run('revers_2(enter_num, revers_num=0)')
+run('revers_3(enter_num)')
+run('revers_4(enter_num)')
