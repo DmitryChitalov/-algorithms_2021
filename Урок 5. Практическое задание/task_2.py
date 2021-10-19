@@ -34,3 +34,36 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import namedtuple
+
+
+class HexOp:
+    def __init__(self, first_num, second_num):
+        self.first_num = first_num
+        self.second_num = second_num
+
+    def __add__(self, other):
+        return list(hex(int(''.join(self.first_num), 16) + int(''.join(other.second_num), 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.first_num), 16) * int(''.join(other.second_num), 16)))[2:]
+
+
+def get_calc(first_num, second_num):
+    nums = namedtuple("nums", "first_num_dec second_num_dec")
+    nums.first_num_dec = int(''.join(first_num), 16)
+    nums.second_num_dec = int(''.join(second_num), 16)
+    print(f'Сумма чисел: {list(hex(nums.first_num_dec + nums.second_num_dec))[2:]}')
+    print(f'Произведение чисел: {list(hex(nums.first_num_dec * nums.second_num_dec))[2:]}')
+
+
+if __name__ == '__main__':
+    first_num_hex = list(input('Введите первое шестнадцатиричное число: '))
+    second_num_hex = list(input('Введите второе шестнадцатиричное число: '))
+
+    get_calc(first_num_hex, second_num_hex)
+
+    print(f'Сумма чисел:{HexOp(first_num_hex, second_num_hex) + HexOp(first_num_hex, second_num_hex)}')
+    print(
+        f'Произведение чисел:{HexOp(first_num_hex, second_num_hex) * HexOp(first_num_hex, second_num_hex)}')
