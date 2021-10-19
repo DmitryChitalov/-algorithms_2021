@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_even_odd(number, even=0, odd=0):
+    whole, remainder = divmod(number, 10)
+    if whole != 0:
+        if remainder % 2 != 0:
+            odd += 1
+        else:
+            even += 1
+        return count_even_odd(whole, even, odd)
+    else:
+        if remainder % 2 != 0:
+            odd += 1
+        else:
+            even += 1
+        return even, odd
+
+
+data = int(input('Введите натуральное число: '))
+print(f'Количество четных и нечетных цифр в числе равно:'
+      f' {count_even_odd(data)}')

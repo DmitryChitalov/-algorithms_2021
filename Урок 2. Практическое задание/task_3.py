@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def changeling(number, revers=[]):
+    answer = ''
+    whole, remainder = divmod(number, 10)
+    if whole == 0 and remainder == 0:
+        return answer.join(revers)
+    else:
+        revers.append(str(remainder))
+        return changeling(whole, revers)
+
+
+data = int(input('Введите число: '))
+print(changeling(data))
