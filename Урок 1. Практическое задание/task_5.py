@@ -23,3 +23,32 @@
 # 1) созд-е экземпляров стека (если стопка - класс)
 # 2) lst = [[], [], [], [],....]
 """
+
+number_plates = 27    # количество тарелок
+stack_height = 4    # вот тут дадим максимальную высоту стопки тарелок
+
+
+class StackClass:
+    def __init__(self, number_elements):
+        self.elem = []    # список для временного заполнения
+        self.number_elements = number_elements    # количество тарелок
+
+    def add_to(self, el):
+        elem_user = []    # в этот список будут вложены другие списки (стопки тарелок)
+        for i in range(1, self.number_elements + 1):
+            if el > 1:    # пока не превышен стэк тарелок
+                el = el - 1
+                self.elem.append(i)    # будем их добавлять
+                if i == self.number_elements:    # это для того случая, когда тарелок не хватит для заполнения стэка
+                    elem_user.append(self.elem)    # добавим к списку
+            elif el == 1:    # от 1, иначе будут потери
+                el = el + len(self.elem)    # восстановим количество элементов (это ж по сути счётчик)
+                self.elem.append(i)    # всё добавим во временный список
+                elem_user.append(self.elem)    # вот сюда опять зальём список (как вложенный)
+                self.elem = []    # обнулим временный список, а в начале фикла вновь его заполним
+        print(elem_user)
+        print('Тарелочки по стопочкам :)')
+
+
+user_punk = StackClass(number_plates)    # передаём количество тарелок в класс
+user_punk.add_to(stack_height)    # запускаем и передаём высоту стопки
