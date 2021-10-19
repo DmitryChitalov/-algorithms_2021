@@ -62,7 +62,6 @@ if __name__ == '__main__':
     first_num_hex = list(input('Введите первое шестнадцатиричное число: '))
     second_num_hex = list(input('Введите второе шестнадцатиричное число: '))
 
-
     get_calc(first_num_hex, second_num_hex)
 
     print(f'Сумма чисел:{HexOp(first_num_hex, second_num_hex) + HexOp(first_num_hex, second_num_hex)}')
