@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# 1.  O(n^2)
+def min_1(lst):
+
+    for i in range(len(lst)):                       # O(n)
+        for j in range(len(lst)):                   # O(n)
+            if lst[i] < lst[j]:                     # O(1)
+                lst[i], lst[j] = lst[j], lst[i]     # O(1)
+
+    return lst[0]
+
+
+# 2. O(n)
+def min_2(lst):
+    low = lst[0]            # O(1)
+    for i in lst:           # O(n)
+        if i < low:         # O(1)
+            low = i         # O(1)
+    return low              # O(1)
+
+
+if __name__ == '__main__':
+    x = [2, 3, 5, 9, 1, 10, 2, 3]
+    print(x)
+    print(min_1(x))
+    print(min_2(x))
