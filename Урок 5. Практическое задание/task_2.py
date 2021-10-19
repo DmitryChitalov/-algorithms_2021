@@ -51,8 +51,6 @@ class HexOp:
 
 
 def get_calc(first_num, second_num):
-    print(f'Первое натуральное шестнадцатиричное число: {first_num}')
-    print(f'Второе натуральное шестнадцатиричное число: {second_num}')
     nums = namedtuple("nums", "first_num_dec second_num_dec")
     nums.first_num_dec = int(''.join(first_num), 16)
     nums.second_num_dec = int(''.join(second_num), 16)
@@ -63,6 +61,7 @@ def get_calc(first_num, second_num):
 if __name__ == '__main__':
     first_num_hex = list(input('Введите первое шестнадцатиричное число: '))
     second_num_hex = list(input('Введите второе шестнадцатиричное число: '))
+
 
     get_calc(first_num_hex, second_num_hex)
 
