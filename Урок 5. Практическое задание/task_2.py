@@ -34,3 +34,20 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+from functools import reduce
+
+nums = defaultdict(list)
+
+for i in [1, 2]:
+    num = input(f'Введите {i}-ое натуральное шестнадцатиричное число: ')
+    nums[f'{num}'] = list(num)
+print(nums)
+
+summa = sum([int(''.join(i), 16) for i in nums.values()])
+print(f'Сумма: ', list('%X' % summa))
+
+multiplication = reduce(lambda a, b: a * b,
+                        [int(''.join(i), 16) for i in nums.values()])
+print('Произведение: ', list('%X' % multiplication))
