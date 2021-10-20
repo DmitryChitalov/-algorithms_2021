@@ -5,3 +5,20 @@
 Придумать как это решить!
 Есть очень простое решение
 """
+from memory_profiler import profile
+
+@profile
+def func():
+    def reversal(n, count=''):
+        if n == 0:
+            print(f'Перевернутое число: {count}')
+        else:
+            count += str(n % 10)
+            return reversal(n // 10, count)
+
+if __name__ == '__main__':
+    func()
+
+"""
+Для замера рекурсии через profile, нужно рекурсию обернуть в другую функцию и не будет многократных вызовов.
+"""
