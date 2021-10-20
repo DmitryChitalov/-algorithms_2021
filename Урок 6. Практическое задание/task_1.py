@@ -23,12 +23,15 @@
 """
 from memory_profiler import profile
 from random import randint
+from numpy import array
 
 # В классическом решении был обычный список, который я искуственно увеличил
 print('*' * 100, 'Задача 1', '*' * 100)
 print('Старое решение через список')
+
+
 @profile
-def a():
+def func_old():
     prices = [randint(1, 100) for i in range(1000000)]
     format_prices = []
     for i in prices:
@@ -40,9 +43,12 @@ def a():
             format_prices.append(f'{i} руб. 00 коп.')
     return ', '.join(format_prices)
 
-a()
+
+func_old()
 
 print('Новое решение через генератор')
+
+
 # Создаем генератор для экономии памяти
 def fill(numb):
     for i in numb:
@@ -50,8 +56,8 @@ def fill(numb):
 
 
 @profile
-def a():
-    my_gen = tuple(fill(range(1000000)))
+def func_new():
+    my_gen = fill(range(1000000))
     format_prices = []
     for i in my_gen:
         i = str(i)
@@ -60,15 +66,16 @@ def a():
             format_prices.append(f'{a[0]} руб. {int(a[1]):02} коп.')
         else:
             format_prices.append(f'{i} руб. 00 коп.')
-    return ', '.join(format_prices)
+    format_prices_numpy = array(format_prices)
+    del format_prices
+    return ', '.join(format_prices_numpy)
 
 
-a()
+func_new()
 
 """
-В данном случае профилирование памяти заключается в замене списка, в котором хранятся данные на генератор.
-Правда результаты работы @profile получаются сомнительные. Не смотря на то, что я заменил список из 1000000 элементов
-генератором, profile показывает одинаковые результаты.
+Для освобождении памяти применил генератор вместо списка, так же из полученного списка сделал numpy-объект 
+и удалил сам список. По замерам получили выгоду около 50 Mib.
 """
 
 print('*' * 100, 'Задача 2', '*' * 100)
@@ -77,16 +84,18 @@ print('Старое решение через рекурсию')
 
 
 @profile
-def sum_el(num, one):
+def sum_el(*args):
+    return recur_sum_el(*args)
+
+
+def recur_sum_el(num, one):
     if num == 1:
         return one
-    return sum_el(num - 1, one / -2) + one
+    return recur_sum_el(num - 1, one / -2) + one
 
 
 user_number = int(input('Введите число: '))
 print(f'Количество элементов: {user_number}, их сумма: {sum_el(user_number, 1)}')
-
-print('Решение через цикл:')
 
 
 @profile
@@ -103,12 +112,7 @@ user_number = int(input('Введите число: '))
 print(f'Количество элементов: {user_number}, их сумма: {sum_el_new(user_number)}')
 
 """
-Заменил рекурсию на цикл, что в теории должно экономить память. К сожалению, не знаю как усложнить данную
-функцию для того, чтобы profile дал видимый результат.
-"""
-"""
-К сожалению, пока понимание того, что и где можно улучшить дается очень туго. Это задание оказалось самым сложным из 
-всего курса для меня. Просидел часов 20 перебирая все свои скрипты, но результата толком не дало.
-В теории все понятно, и с заменой на кортежи и использованием встроенных функций и использование коллекций. На практике
-пока идет туговато.
+Корректировка ДЗ согласно замечаниям. Для замера рекурсивной функции добавил функцию-обертку, в которую вложил 
+рекурсивную функцию.
+Само профилирование памяти заключается в замене рекурсии на цикл.
 """
