@@ -9,3 +9,20 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+
+import hashlib
+from uuid import uuid4
+
+obj_cash = {}
+
+
+def url_get(url_page):
+    if obj_cash.get(url_page):
+        print(f'{"Этот адрес"} {url_page} {"уже есть в кеше"}')
+    else:
+        result = hashlib.sha256(uuid4().hex.encode() + url_page.encode()).hexdigest()
+        print(f'{"имя страницы:"} {url_page}\n{"Хеш URL:"} {result}')
+        obj_cash[url_page] = result  # присвоим в переменную, хотя и негде не сохраним :)
+
+
+url_get('https://yandex.ru')
