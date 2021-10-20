@@ -34,3 +34,48 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+# Вариант 1
+from collections import deque
+
+
+def calculator():
+    try:
+        request1 = input('Введите число в шеснацетиричном формате:')
+        request2 = input('Введите число в шеснацетиричном формате:')
+        dec_request1 = deque([i for i in request1])
+        print(dec_request1)
+        dec_request2 = deque([i for i in request2])
+        print(dec_request2)
+        int_total_sum = format(int(request2, 16) + int(request1, 16), 'x')
+        int_product_num = format(int(request2, 16) * int(request1, 16), 'x')
+        total_sum = deque([i for i in int_total_sum])
+        product_num = deque([i for i in int_product_num])
+        print(f'Сумма чисел: {total_sum}')
+        print(f'Произведение чисел: {product_num}')
+    except:
+        print('Не правильный ввод')
+
+
+calculator()
+
+
+# Вариант 2
+class Calculator:
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
+
+    def __add__(self, other):
+        return list(hex(int(''.join(self.num1), 16) + int(''.join(other.num2), 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.num1), 16) * int(''.join(other.num2), 16)))[2:]
+
+
+my_num1 = list(input('Введите первое число в шеснацетиричном формате:'))
+my_num2 = list(input('Введите первое число в шеснацетиричном формате:'))
+total_sum = Calculator(my_num1, my_num2) + Calculator(my_num1, my_num2)
+product_num = Calculator(my_num1, my_num2) * Calculator(my_num1, my_num2)
+
+print(f"Сумма чисел = {total_sum}, произведение чисел {product_num}")
