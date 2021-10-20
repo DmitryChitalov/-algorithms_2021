@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+"""
+Мемоизация нужна и помогает ускорить работу, но в данном случае она не нужна.
+Так как мало обращений в кэш, а идет только запись.
+"""
