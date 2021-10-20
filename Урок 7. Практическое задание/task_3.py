@@ -12,31 +12,68 @@
 Важно: стройте массив именно по формуле 2m+1
 Потому что параметр m вам пригодится при поиске медианы, когда массив будет отсортирован.
 Этот парамет m вам нужно запрашивать у пользователя.
-
-[5, 3, 4, 3, 3, 3, 3]
-
-[3, 3, 3, 3, 3, 4, 5]
-
-my_lst
-new_lts
-
-arr[m]
-
-
-from statistics import median
-
-[3, 4, 3, 3, 5, 3, 3]
-
-left = []
-right = []
-
-left == right and
-
-for i in
-    for
-    left == right
-    left.clear()
-    right.clear()
-
-
 """
+
+from collections import deque
+from random import randint
+from timeit import timeit
+
+MIN, MAX = 0, 100
+
+
+def count_sort(l: list) -> list:
+    '''https://ru.wikipedia.org/wiki/Сортировка_подсчетом'''
+    tmp = [0] * (max(l) + 1)
+    for i in range(len(l)):
+        tmp[l[i]] += 1
+    posix = 0
+    for num in range(len(tmp)):
+        for idx in range(tmp[num]):
+            l[posix] = num
+            posix += 1
+    return l
+
+
+def mdn(m: int) -> int:
+    l = deque(count_sort([randint(MIN, MAX) for _ in range(m * 2 + 1)]))
+    print(l)
+    while len(l) > 1:
+        l.pop()
+        l.popleft()
+    return l[0]
+
+
+def mdn2(m: int) -> int:
+    l = [randint(MIN, MAX) for _ in range(m * 2 + 1)]
+    print(l)
+    # while len(l) != (m+1):
+    while len(l) - 1 > m:
+        l.remove(max(l))
+    return max(l)
+
+
+if __name__ == '__main__':
+    m = int(input('Введите m: '))
+    while m:
+        median1 = mdn(m)
+        print(f'Медиана1 {median1}')
+        median2 = mdn2(m)
+        print(f'Медиана2 {median2}')
+        m = int(input('Введите m: '))
+
+'''
+Введите m: 5
+deque([3, 7, 11, 26, 40, 53, 76, 76, 76, 97, 100])
+Медиана1 53
+[10, 35, 50, 52, 57, 23, 23, 100, 82, 87, 31]
+Медиана2 50
+Введите m: 0
+
+Выводы:
+1. алгоритмов сортировок МНОГО, некоторые из них шуточные (случайными перестановками), другие весьма 
+эффективны даже на сравнительно больших массивах, например объединением
+2. элемент m теоретически важен, но в алгоритме функции mdn() никак не может быть применим, во втором случае,
+переписал алгоритм для его использования
+3. замеры не производились исходя из условий задачи.
+
+'''
