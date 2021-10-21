@@ -23,3 +23,30 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import defaultdict
+
+n = int(input('Введите количество предприятий для расчета прибыли: '))
+gain = defaultdict(list)
+for i in range(n):
+    key_firm = input(f'Введите название предприятия {i + 1}: ')
+    firm_values = input("через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ").split()
+    gain[key_firm] = firm_values
+
+total_profit = []
+for i in gain:
+    total_profit.append(sum(list(map(int, gain.get(i)))))
+
+mid_profit = sum(total_profit)/n
+
+top_firms = []
+bottom_firms = []
+for key in gain:
+    if sum(list(map(int, gain.get(key)))) > mid_profit:
+        top_firms.append(key)
+    elif sum(list(map(int, gain.get(key)))) < mid_profit:
+        bottom_firms.append(key)
+
+print(f'Средняя годовая прибыль всех предприятий: {mid_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {", ".join(top_firms)}\n'
+      f'Предприятия, с прибылью ниже среднего значения: {", ".join(bottom_firms)}')
