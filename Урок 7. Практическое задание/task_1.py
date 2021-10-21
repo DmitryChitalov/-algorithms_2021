@@ -17,3 +17,48 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+from random import randint
+from timeit import timeit
+
+lst = [randint(-100, 100) for i in range(20)]
+
+
+def bubble_old(l_o):
+    a = 1
+    while a < len(l_o):
+        for i in range(len(l_o) - a):
+            if l_o[i] < l_o[i + 1]:
+                l_o[i], l_o[i + 1] = l_o[i + 1], l_o[i]
+
+        a += 1
+    return l_o
+
+
+def bubble_update(l_o):
+    a = 1
+    while a < len(l_o):
+        check_replace = 0
+        for i in range(len(l_o) - a):
+            if l_o[i] < l_o[i + 1]:
+                l_o[i], l_o[i + 1] = l_o[i + 1], l_o[i]
+                check_replace = 1   # устанавливаем "флаг" на хотя бы одно изменение
+        if check_replace == 0:      # после одного цикла итерации проверяем было ли хотябы одно изменение, если нет, то прерываем функцию
+            return l_o
+
+        a += 1
+    return l_o
+
+
+print(bubble_old(lst))
+print(bubble_update(lst))
+
+print(timeit('bubble_old(lst[:])', globals=globals(), number=1000000))
+print(timeit('bubble_update(lst[:])', globals=globals(), number=1000000))
+
+"""
+Доработал пузырьковую сортировку. Установил "флаг" изменений (check_replace), если в текущем цикле была сделана
+хоть одна замена, то мы продолжаем идти по циклу while. Если же замен не было, то выходим из цикла и возвращаем 
+результат.
+Оптимизация дала хороший результат. На 1млн замеров оптимизированная функция более чем в 10 раз быстрее 
+(17 сек и 1.5 сек).
+"""
