@@ -21,3 +21,25 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
+
+from timeit import default_timer
+from memory_profiler import memory_usage
+
+
+def time_memo_prof(func):
+    def wrapper(*args, **kwargs):
+        used_time = default_timer()
+        used_memory1 = memory_usage()
+
+        result = func(*args, **kwargs)
+
+        used_memory2 = memory_usage()
+        used_memory = used_memory2[0] - used_memory1[0]
+        used_time = default_timer() - used_time
+
+        print(f'Функция {func.__name__}:\n'
+              f'Время выполнения: {used_time} сек.\n'
+              f'Использованная память: {used_memory} Mib.')
+        return result
+
+    return wrapper
