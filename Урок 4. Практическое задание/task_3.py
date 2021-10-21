@@ -13,6 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
+from cProfile import run
+import timeit
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +39,56 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    new_list = list(str(enter_num))
+    new_list.reverse()
+    revers_num = ''.join(new_list)
+    return revers_num
+
+
+
+def main():
+    num = 12345686461314648411
+    res_1 = revers_1(num)
+    res_2 = revers_2(num)
+    res_3 = revers_3(num)
+    res_4 = revers_4(num)
+
+
+num = 12345686461314648411
+
+print(timeit.repeat('revers_1(num)', repeat=3, number=100000, globals=globals()))
+print(timeit.repeat('revers_2(num)', repeat=3, number=100000, globals=globals()))
+print(timeit.repeat('revers_3(num)', repeat=3, number=100000, globals=globals()))
+print(timeit.repeat('revers_4(num)', repeat=3, number=100000, globals=globals()))
+
+run('main()')
+
+"""
+Худший вариант это рекурсия, за ним следует циклы.  
+Лучший вариант через приведение в строку и сделать реверс через срез.
+Был предложен вариант примерно такой же, только через приведения в список и реверс. 
+Думал что встроенные функция реверс будет работать быстрее среза. 
+Ниже сделал проверку по строке кода, доказывающую что был не прав
+Мой способ лучше чем циклы и рекурсия, но уступает третьему варианту(через строку и срез).
+По cProfile проблемных мест в коде нет. В способе с рекурсий функция вызывалась 21 раз.
+"""
+
+
+STR_CODE = '''
+enter_num = 12345686461314648411
+enter_num = str(enter_num)
+revers_num = enter_num[::-1]
+'''
+
+LIST_CODE = '''
+enter_num = 12345686461314648411
+new_list = list(str(enter_num))
+new_list.reverse()
+'''
+print(timeit.repeat(STR_CODE, repeat=3, number=100000))
+print(timeit.repeat(LIST_CODE, repeat=3, number=100000))
+
+
