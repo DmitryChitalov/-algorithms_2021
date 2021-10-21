@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+number = int(input('Количество элементов (n) вводится с клавиатуры.'))
+
+# n = int(input())
+# e = 1
+# s = 0
+# for i in range(n):
+#     s += e
+#     e /= -2
+# print(s)
+
+
+def amount(numbers):
+    if numbers == 1:
+        return 1
+    else:
+        return 1+amount(numbers-1)/-2
+
+
+print(amount(number))

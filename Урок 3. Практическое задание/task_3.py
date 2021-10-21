@@ -21,3 +21,13 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+string = input('Введите набор строчных латинских букв: ')
+hash_set = set()
+
+for i in range(len(string)):
+    for j in range(len(string[i:])):
+        hash_set.add(hash(string[i:j+1]))
+        print(string[i:j+1])
+
+print(f'Всего подстрок: {len(hash_set)-1}')
+
