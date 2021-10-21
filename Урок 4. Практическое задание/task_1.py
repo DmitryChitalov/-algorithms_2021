@@ -32,3 +32,9 @@ def func_2(nums):
 nums = [i for i in range(300)]
 print(timeit("func_1(nums)", globals=globals()))
 print(timeit("func_2(nums)", globals=globals()))
+
+"""
+30.593762100000003
+19.6839205
+Ls отрабатывает быстрее чем цикл
+"""
