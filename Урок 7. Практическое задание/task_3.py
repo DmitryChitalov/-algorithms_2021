@@ -40,3 +40,30 @@ for i in
 
 
 """
+import random
+
+
+def select_med(lst, k, spot=random.choice):
+    spot = spot(lst)
+    low = [i for i in lst if i < spot]
+    high = [i for i in lst if i > spot]
+    equally = [i for i in lst if i == spot]
+
+    if k < len(low):
+        return select_med(low, k, spot=random.choice)
+    elif k < len(low) + len(equally):
+        return equally[0]
+    else:
+        return select_med(high, k - len(low) - len(equally), spot=random.choice)
+
+
+user_number = int(input('Введите число: '))
+
+some_lst = [random.randint(0, 100) for i in range(user_number * 2 + 1)]
+print(some_lst)
+
+print(select_med(some_lst, user_number))
+
+"""
+С помощью интернета решил таким образом без сортировки.
+"""
