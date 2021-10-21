@@ -18,3 +18,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd_count(num, even=0, odd=0):
+    return num == 0 and (even, odd) or even_odd_count(num//10, (num % 10) % 2 == 0 and even+1 or even,
+                                                   (num % 10) % 2 != 0 and odd+1 or odd)
+
+
+print('Кол-во четных и нечетных чисел соответственно: ', even_odd_count(int(input('Введите число: '))))

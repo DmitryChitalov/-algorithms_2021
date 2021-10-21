@@ -22,3 +22,10 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def nums_reverse(num, reverse=''):
+    return num == 0 and reverse or nums_reverse(num//10, num % 10 == 0 and reverse + '0' or reverse + f'{num%10}')
+
+
+print(nums_reverse(1230))
