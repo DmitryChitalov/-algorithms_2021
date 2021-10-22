@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def get_reverse(number, reverse=''):
+    '''
+    param number: positive integer
+    param reverse: empty by default
+
+    return: number in which the digits are in reverse order
+    '''
+    if number == 0:
+        return reverse
+    return get_reverse(number // 10, reverse + str(number % 10)) 
+
+print(get_reverse(1234))
