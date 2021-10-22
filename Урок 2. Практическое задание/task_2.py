@@ -20,16 +20,27 @@
 """
 
 
-# def ff(n, ce = 0, cne = 0):
-#     x = n // 10
-#     y = n % 10
-#     if x == 0: 
-#         if y % 2 == 0:
-#             return ff(x, ce+1)
-        
-#     return ff(x, cne+1)
-    
+def count_even_and_odd_digits(number, odd_counter=0, even_counter=0):
+    '''
+    the function counts the number of odd and even digits
 
-# print(ff(252))
+    param number: positive integer 
+    param odd_counter: odd digit counter
+    param even_counter: even digit counter
 
-# не готово, пока не могу понять.
+    return: a tuple with the first count value of non-even digits,
+    and the second position - even
+    '''
+    if (number % 10) % 2:
+        odd_counter += 1
+    else:
+        even_counter += 1
+    if number // 10 == 0:
+        return odd_counter, even_counter
+    return count_even_and_odd_digits(number // 10, odd_counter, even_counter)
+
+
+number = 112200
+
+print(f'не чётных = {count_even_and_odd_digits(number)[0]}, \
+четных = {count_even_and_odd_digits(number)[1]}')
