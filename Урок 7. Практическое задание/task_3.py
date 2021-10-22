@@ -40,3 +40,36 @@ for i in
 
 
 """
+
+import random
+
+
+def median(lst):
+    for i in range(0, len(lst)):
+        left = 0
+        right = 0
+        for j in range(0, len(lst)):
+            if lst[i] <= lst[j]:
+                left += 1
+            if lst[i] >= lst[j]:
+                right += 1
+        if left == right:
+            print(f'Медиана = {str(lst[i])}')
+            break
+    return f'Получившийся массив: {lst}'
+
+
+try:
+    m = int(input('Введите число М:'))
+    SIZE = 2 * m + 1
+    need_list = [random.randint(-1000, 1000) for a in range(SIZE)]
+    print(median(need_list))
+except ValueError:
+    print('Неккоректный ввод M')
+
+"""
+Пример отработки:
+Введите число М:5
+Медиана = -176
+Получившийся массив: [-568, 674, -74, -578, -384, -618, 88, 382, 743, -176, -945]
+"""
