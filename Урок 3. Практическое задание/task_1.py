@@ -20,3 +20,62 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import time
+
+
+def decor_time(func):
+    def wrapper(*args):
+        begin_time = time.time()
+        result = func(*args)
+        end_time = time.time()
+        print(f'Для {str(func).split(" ")[1]} время выполнения составило: {end_time - begin_time} сек.')
+        return result
+
+    return wrapper
+
+
+@decor_time
+def list_add(list_add): # O(1)
+    list_temp = []
+    for i in list_add:
+        list_temp.append(i) # O(1)
+
+
+@decor_time
+def dict_add(dict_add): # O(1)
+    dict_temp = {}
+    for key, value in dict_add.items():
+        dict_temp[key] = value # O(1)
+
+
+@decor_time
+def list_find(list_find): # O(n)
+    list_find.index(100000) # O(n)
+
+
+@decor_time
+def dict_find(dict_find): # O(n)
+    dict_find.get(100000, 0) # O(n)
+
+
+@decor_time
+def list_clear(list_clear): # O(1)
+    return list_clear.clear()#  O(1)
+
+
+@decor_time
+def dict_clear(dict_clear): # O(1)
+    return dict_clear.clear() # O(1)
+
+
+test_dict = dict((int(n), int(n)) for n in range(10000000))
+test_list = list((int(n)) for n in range(10000000))
+
+print(list_add(test_list))  # 0.04064822196960449
+print(dict_add(test_dict))  # 0.08363580703735352 Словарь заполняется дольше
+print(list_find(test_list))  # 0.004428863525390625
+print(dict_find(test_dict))  # 2.6226043701171875e-06 ~(0,00000262)
+# Поиск по словарю быстрее из-за хеша
+print(list_clear(test_list))  # 0.009126424789428511
+print(dict_clear(test_dict))  # 0.008687973022460938
