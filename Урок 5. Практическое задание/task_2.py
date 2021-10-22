@@ -34,3 +34,26 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+from functools import reduce
+
+DICT_16 = {'0': 0, '1': 1, '2': 2, '3': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'a': 10, 'b': 11, 'c': 12, 'd': 13,
+           'e': 14, 'f': 15}
+
+
+def summa_16(el, prev_el):
+    return hex(int(''.join(prev_el), 16) + int(''.join(el), 16))
+
+
+def mul_16(el, prev_el):
+    return hex(int(''.join(prev_el), 16) * int(''.join(el), 16))
+
+
+num_16 = defaultdict(list)
+nums = input('Введите 2 шестнадцатеричных чисел через пробел: ').split()
+num_16[nums[0]] = list(nums[0])
+num_16[nums[1]] = list(nums[1])
+sum_new = list(reduce(summa_16, num_16))[2:]
+mul_new = list(reduce(mul_16, num_16))[2:]
+print(sum_new)
+print(mul_new)
