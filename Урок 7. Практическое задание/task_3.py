@@ -40,3 +40,48 @@ for i in
 
 
 """
+import random
+from timeit import timeit
+from statistics import median
+
+
+def select_med(lst, user_num):
+    for i in range(user_num):
+        lst.pop(lst.index(max(lst)))
+    return max(lst)
+
+
+def shell_sort(lst):
+    inc = len(lst) // 2
+    while inc:
+        for i, el in enumerate(lst):
+            while i >= inc and lst[i - inc] > el:
+                lst[i] = lst[i - inc]
+                i -= inc
+            lst[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return lst
+
+
+user_number = int(input('Введите число: '))
+
+some_lst = [random.randint(0, 100) for i in range(user_number * 2 + 1)]
+print(some_lst)
+print('-' * 50, 'Поиск встроенной функцией', '-' * 50)
+print(f'Медиана - {median(some_lst)}')
+print(timeit('median(some_lst)', globals=globals(), number=1000000))
+
+print('-' * 50, 'Определение медианы без сортировки', '-' * 50)
+print(f'Медиана - {select_med(some_lst[:], user_number)}')
+print(timeit('select_med(some_lst[:], user_number)', globals=globals(), number=1000000))
+
+print('-' * 50, 'Определение медианы с сортировкой Шелла', '-' * 50)
+print(f'Медиана - {median(shell_sort(some_lst[:]))}')
+print(timeit('median(shell_sort(some_lst[:]))', globals=globals(), number=1000000))
+
+"""
+Добавил сортировку Шелла. Сравнил 3 подхода - функция median(), написанная мной функция select_med() и median совместно 
+с сортировкой Шелла. 
+Шелл проигрывает во много раз, т.к. происходит фактически сортировка вставками. Напиманная функция работает достаточно
+быстро, но самая быстрая встроенная функция - median(). 
+"""
