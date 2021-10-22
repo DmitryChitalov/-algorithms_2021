@@ -28,3 +28,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rec():
+    symbol = input('введите символ')
+    if symbol == "0":
+        return print('end')
+    elif symbol not in ['+', '-', '*', '/']:
+        print('не правильный ввод')
+    else:
+        a = int(input('введите число'))
+        b = int(input('введите число'))
+        if symbol == '+':
+            result = a + b
+        elif symbol == '-':
+            result = a - b
+        elif symbol == '*':
+            result = a * b
+        else:
+            result = a / b
+        print(result)
+    return rec()
+
+
+rec()
