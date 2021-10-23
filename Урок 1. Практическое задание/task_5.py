@@ -28,3 +28,18 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# push_in and Push_out делал с помощью разбора, были сложности с индексами
+from stack_class_file import StackClass
+
+plates = StackClass(2)
+plates.push_in('P_1')
+plates.push_in('P_2')
+plates.push_in('P_3')
+plates.push_in('P_4')
+plates.push_in('P_5')
+plates.push_in('P_6')
+print(plates)
+plates.pop_out()
+plates.pop_out()
+plates.pop_out()
+print(plates)
