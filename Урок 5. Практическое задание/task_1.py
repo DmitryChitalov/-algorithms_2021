@@ -23,3 +23,31 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+def my_program():
+    information = namedtuple('information', 'company_name average_profit')
+    companies = {}
+    profits = 0
+    n = int(input('Please insert the number of companies: '))
+    for i in range(n):
+        company_name_1 = input('Please enter the name of the company: ')
+        profit_1 = input(' Please insert the profit like this "32 66 899 554" :').split()
+        profit = [int(i) for i in profit_1]
+        new_inf = information(
+            company_name=company_name_1,
+            average_profit=sum(profit) / len(profit)
+
+        )
+        companies[company_name_1] = new_inf.average_profit
+        profits = profits + new_inf.average_profit
+    average_profits = profits / n
+    print(f'Minimal average profit for each company is: {average_profits}')
+    result = companies.items()
+    for company, profit in result:
+        if profit < average_profits:
+            print(f'The company "{company}" has the average profit of {profit} ')
+
+
+my_program()
