@@ -40,3 +40,32 @@ for i in
 
 
 """
+import random
+
+
+#Методом оптимизированной гномьей сортировки
+def search_median_with_sort(lst):
+    i, j, size = 1, 2, len(lst)
+    while i < size:
+        if lst[i - 1] <= lst[i]:
+            i, j = j, j + 1
+        else:
+            lst[i - 1], lst[i] = lst[i], lst[i - 1]
+            i -= 1
+            if i == 0:
+                i, j = j, j + 1
+    return lst[len(lst)//2]
+
+def search_median_without_sort(lst):
+    for i in range(len(lst)//2):
+        lst.pop(lst.index(max(lst)))
+    return max(lst)
+
+m = int(input('Введите значение m для построения массива:'))
+lst = [random.randint(0, 100) for _ in range(2 * m + 1)]
+
+print(lst)
+print(f'Медиана массива: {search_median_with_sort(lst)}')
+print(f'Медиана массива: {search_median_without_sort(lst)}')
+
+
