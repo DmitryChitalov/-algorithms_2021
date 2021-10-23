@@ -17,3 +17,53 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+import timeit
+import random
+
+
+# Первый вариант
+def bubble_sorting_1(lst):
+    for i in range(len(lst)-1, -1, -1):
+        for j in range(len(lst)-1, -1, -1):
+            if lst[i] > lst[j]:
+                lst[i], lst[j] = lst[j], lst[i]
+    return lst
+
+
+# Второй вариант
+def bubble_sorting_2(lst):
+    attribute = False
+    for i in range(len(lst)-1, -1, -1):
+        for j in range(len(lst)-1, -1, -1):
+            if lst[i] > lst[j]:
+                lst[i], lst[j] = lst[j], lst[i]
+                attribute = True
+        if attribute is False:
+            return lst
+    return lst
+
+
+my_list = [random.randint(-100, 100) for _ in range(30)]
+
+
+print('ПЕРВЫЙ ВАРИАНТ')
+print(f'Исходный массив:        {my_list}')
+print(f'Отсортированный массив: {bubble_sorting_1(my_list[:])}')
+print(timeit.timeit("bubble_sorting_1(my_list[:])", globals=globals(), number=1000))
+print()
+
+print('ВТОРОЙ ВАРИАНТ')
+my_list = bubble_sorting_1(my_list[:])  # Создаем отсортированный массив для замера выполнения
+print(f'Исходный массив:        {my_list}')
+print(f'Отсортированный массив: {bubble_sorting_2(my_list[:])}')
+print(timeit.timeit("bubble_sorting_2(my_list[:])", globals=globals(), number=1000))
+print()
+
+'''
+    Второй вариант при подаче на вход отсортированного массива выполняется быстрее. Доработка заключается в проверке
+ситуации когда один из элементов не выполнил ни одну перестановку с другими элементами массива (т. е. находится на 
+своем месте). В такой ситуации флаг attribute остаеттся  в значении False и сортировка прерывается...
+    Интересно, что данная ситуация может возникнуть в ходе сортировке на каком-то этапе и тогда время выполнения 
+сортировки также будет уменьшено... 
+'''
