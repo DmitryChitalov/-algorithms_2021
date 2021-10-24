@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def codes(first_num, string_):
+    if first_num > 127:
+        return string_
+    else:
+        if first_num % 10 == 1:
+            return codes(first_num + 1, string_ + f'{first_num} - {chr(first_num)} \n')
+        else:
+            return codes(first_num + 1, string_ + f'{first_num} - {chr(first_num)} ')
+
+
+print(codes(32, ''))

@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def change(val, change_val, str_):
+
+    if val == 0:
+        return f'Перевернутое число: {str_}{change_val}'
+    else:
+        if val % 10 == 0 and change_val == 0:
+            return change(val // 10, change_val * 10 + val % 10, str_ + '0')
+        else:
+            return change(val // 10, change_val * 10 + val % 10, str_)
+
+
+print(change((int(input('Введите число, которое требуется перевернуть: '))), 0, ''))
