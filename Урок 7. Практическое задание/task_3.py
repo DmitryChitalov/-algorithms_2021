@@ -40,3 +40,50 @@ for i in
 
 
 """
+
+
+from statistics import median
+import random
+import timeit
+
+
+def sort_gnome(our_list):
+    k = 1
+    while k < len(our_list):
+        if not k or our_list[k] >= our_list[k - 1]:
+            k += 1
+        else:
+            our_list[k], our_list[k - 1] = our_list[k - 1], our_list[k]
+            k -= 1
+    return our_list
+
+
+def median_gnome(our_list):
+    return sort_gnome(our_list)[len(our_list) // 2]
+
+
+m = int(input('Введите m: '))
+list_sort = [random.randint(0, 100) for _ in range(2 * m + 1)]
+print(f'Исходный массив: {list_sort}')
+
+print(f'Встроенная сортировка - {median(list_sort)}')
+print(f'Гномья сортировка - {median_gnome(list_sort)}')
+
+print(timeit.timeit('median(list_sort[:])',
+                    setup='from __main__ import list_sort, median',
+                    number=1000))
+
+print(timeit.timeit('median_gnome(list_sort[:])',
+                    setup='from __main__ import list_sort, median_gnome',
+                    number=1000))
+
+"""
+Введите m: 3
+Исходный массив: [76, 32, 31, 82, 3, 16, 29]
+Встроенная сортировка - 31
+Гномья сортировка - 31
+0.0005841000000001983
+0.0011999999999998678
+
+Встроенная сортировка работает быстрее.
+"""
