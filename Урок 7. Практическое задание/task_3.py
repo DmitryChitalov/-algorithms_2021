@@ -40,3 +40,21 @@ for i in
 
 
 """
+
+
+import random
+
+
+def median(list_obj, mid):
+    list_temp = list_obj[:]
+    for el in range(mid):
+        list_temp.remove(max(list_temp))
+    return max(list_temp)
+
+
+m = int(input('Введите число: '))
+test_list = [random.randint(0, 100) for _ in range(2 * m + 1)]
+
+print(f'Сгенерированный массив: {test_list}')
+print(f'Медианный элемент: {median(test_list, m)}')
+print(f'Отсортированный массив: {sorted(test_list[:])}')
