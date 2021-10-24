@@ -40,3 +40,43 @@ for i in
 
 
 """
+import random
+from statistics import median
+from timeit import timeit
+
+
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+def find_med(arr):
+    arr = shell(arr)
+    return arr[m]
+
+
+m = int(input('Введите число m: '))
+ln_arr = 2 * m + 1
+print(ln_arr)
+lst = [random.randint(0, 100) for i in range(ln_arr)]
+print(lst)
+print(find_med(lst))
+print(median(lst))
+lst_10 = [random.randint(-100, 100) for _ in range(10)]
+lst_100 = [random.randint(-100, 100) for _ in range(100)]
+lst_1000 = [random.randint(-100, 100) for _ in range(1000)]
+print('Сортировка 10 шелла - ', timeit('shell(lst_10)', globals=globals(), number=1000))
+print('Сортировка 100 шелла - ', timeit('shell(lst_100)', globals=globals(), number=1000))
+print('Сортировка 1000 шелла - ', timeit('shell(lst_1000)', globals=globals(), number=1000))
+
+# Сортировка 10 шелла -  0.004217399999999927
+# Сортировка 100 шелла -  0.07732800000000006
+# Сортировка 1000 шелла -  1.2836762000000004
+# Сортировка Шелла показывает результат лучше сортировки слияния
