@@ -28,3 +28,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+    actions = ('+', '-', '*', '/', '0')
+    operation = input('Введите операцию (+, -, *, /) Для выхода из программы введите 0: ')
+    if operation == '0':
+        print('Работа программы завершена')
+        return None
+    if operation not in actions:
+        print(f'Вы ввели неправильный символ {operation}, введите Введите операцию (+, -, *, /)')
+        return calculator()
+    try:
+        first_num = float(input('Введите первое число: '))
+        second_num = float(input('Введите второе число: '))
+        result = ''
+        if operation == '+':
+            result = first_num + second_num
+        elif operation == '-':
+            result = first_num - second_num
+        elif operation == '*':
+            result = first_num * second_num
+        elif operation == '/':
+            result = first_num / second_num
+    except ValueError:
+        print('Необходимо ввести число, попробуйте еще раз')
+        return calculator()
+    except ZeroDivisionError:
+        print('Делить на ноль нельзя, попробуйте еще раз')
+        return calculator()
+    print(f'Результат: {result}')
+    return calculator()
+
+
+calculator()

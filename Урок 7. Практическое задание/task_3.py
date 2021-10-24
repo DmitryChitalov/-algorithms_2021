@@ -40,3 +40,35 @@ for i in
 
 
 """
+import random
+from timeit import timeit
+from statistics import median
+
+
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+m = int(input('Введите m: '))
+len_lst = 2 * m + 1
+lst = [random.randint(0, 100) for i in range(len_lst)]
+print(f'Исходный массив: \n {lst}')
+print(f'Отсортированный массив: \n {shell(lst)} ')
+print(f'Медиана: \n {median(lst)}')
+
+list_range = [random.randint(-100, 100) for _ in range(len_lst)]
+
+print(f'Сортировка шелла {len_lst}: ', timeit('shell(list_range)', globals=globals(), number=1000))
+
+"""
+Результат по времени лучше чем у сортировки слиянием.
+При 1001 элементов:  1.1414395000000002
+"""
