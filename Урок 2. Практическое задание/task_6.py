@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def what_num(num, cnt):
+    answer = int(input("Введите загаданное число от 0 до 100: "))
+    if answer == num:
+        return f'Поздравляю, вы угадали!'
+    elif cnt == 0:
+        return f'Вы проиграли. Загаданное число - {num}.'
+    elif num < answer:
+        print(f'Слишком много. Попробуйте поменьше.\nОставшиеся попытки - {cnt}')
+        return what_num(num, cnt=cnt - 1)
+    else:
+        print(f'Слишком мало. Попробуйте больше.\nОставшиеся попытки - {cnt}')
+        return what_num(num, cnt=cnt - 1)
+
+
+rand_num = randint(0, 100)
+print(what_num(rand_num, 9))

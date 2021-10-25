@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def asc(end, row):
+    if end == 32:
+        return f'{end} - {chr(end)} '
+    elif row == 10:
+        return asc(end - 1, 1) + f'{end} - {chr(end)}\n'
+    return asc(end - 1, row + 1) + f'{end} - {chr(end)} '
+
+
+print(asc(127, 4))
