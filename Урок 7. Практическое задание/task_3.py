@@ -13,35 +13,39 @@
 [5, 3, 4, 3, 3, 3, 3]
 
 [3, 3, 3, 3, 3, 4, 5]
-
-my_lst
-new_lts
-
-arr[m]
-
-
-from statistics import median
-
-[3, 4, 3, 3, 5, 3, 3]
-
-
-left.clear()
-right.clear()
-
-
-m = 3
-len = 7
-i
-left = []
-right = []
-
-left == right and
-
-for i in
-    for
-    left == right
-    left.clear()
-    right.clear()
-
-
 """
+from statistics import median
+from random import randint
+
+
+def find_med(lst):
+    mid = len(lst) // 2
+    while mid:
+        lst.remove(max(lst))
+        mid -= 1
+    return max(lst)
+
+
+def gnom_sort(lst, m):
+    base = 0
+    memory = 1
+    while base in range(len(lst) - 1):
+        if lst[base] <= lst[base + 1]:
+            base +=1
+            memory +=1
+        else:
+            lst[base], lst[base + 1] = lst[base + 1], lst[base]
+            base -= 1
+            if base < 0:
+                base += 1
+                memory += 1
+    return lst[m]
+
+
+# lst = [5, 3, 4, 3, 3, 3, 3]
+m = int(input('Введите число: '))
+lst = [randint(-10, 10) for _ in range(2 * m + 1)]
+# print(lst)
+print(find_med(lst[:]))
+print(median(lst))
+print(gnom_sort(lst[:], m))

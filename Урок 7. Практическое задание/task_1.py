@@ -19,3 +19,58 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+from random import randint
+from timeit import timeit
+
+
+def bubble_1(lst):
+    n = 1
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        n += 1
+    return lst
+
+
+def bubble_2(lst):
+    n = 1
+    counter = 0
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                counter += 1
+        if not counter:
+            return lst
+        counter = 0
+        n += 1
+    return lst
+
+
+test_lst = [randint(-100, 100) for _ in range(70)]
+# print(test_lst)
+# print(bubble_1(test_lst))
+# print(bubble_2(test_lst))
+print('bubble_1:\n',
+    timeit(
+        "bubble_1(test_lst[:])",
+        setup='from __main__ import bubble_1, test_lst',
+        number=10000))
+print('bubble_2:\n',
+    timeit(
+        "bubble_2(test_lst[:])",
+        setup='from __main__ import bubble_2, test_lst',
+        number=10000))
+
+"""
+bubble_1:
+ 3.1529965
+bubble_2:
+ 3.0039574000000004
+Как видно, доработка не оптимизировала работу кода. Это связано с тем, что доработка базируется на том, что в цикле
+будет большое количество проходов, есть шанс, что на каком-то из проходов массив будет уже отсортирован 
+(перестановки элементов местами нет), тогда делать дальнейшие проходы не имеет смысла. Но учитывая то, 
+что массив состоит из рандомных элементов, вероятность более ранней отсортированности очень мала. 
+Поэтому доработка не имеет смысла.
+"""
