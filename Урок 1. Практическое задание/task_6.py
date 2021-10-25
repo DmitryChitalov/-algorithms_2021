@@ -18,3 +18,48 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Queue:
+    def __init__(self):
+        self.current_tasks = []
+        self.finish_tasks = []
+        self.tasks_on_modify = []
+
+    def push_task(self, task):
+        self.current_tasks.append(task)
+
+    def show_next_task(self):
+        print(f'Задача: {self.current_tasks[0]}')
+        while True:
+            status = input('Укажите статус задачи: \n1 - Задача решена\n'
+                           '2 - Отправить задачу на доработку\n'
+                           'Введите статус: ')
+            if status == '1':
+                self.finish_tasks.append(self.current_tasks.pop(0))
+                break
+            elif status == '2':
+                self.tasks_on_modify.append(self.current_tasks.pop(0))
+                break
+            else:
+                print('Не корректный ввод статуса!')
+
+    def finish(self):
+        return f'Завершенные задачи: {self.finish_tasks}'
+
+    def modify(self):
+        return f'Задачи на дорабоку: {self.tasks_on_modify}'
+
+    def all_current(self):
+        return self.current_tasks
+
+
+task = Queue()
+task.push_task('Task 1')
+task.push_task('Task 2')
+task.push_task('Task 3')
+
+task.all_current()
+task.show_next_task()
+print(task.modify())
+print(task.finish())
