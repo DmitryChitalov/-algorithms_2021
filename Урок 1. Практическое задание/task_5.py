@@ -28,3 +28,33 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.stack = [[], [], []]
+
+    def push_in(self, el):
+        for i in range(len(self.stack)):
+            if len(self.stack[i]) < 5:
+                self.stack[i].append(el)
+                break
+
+    def pop_out(self):
+        self.stack.pop()
+
+    def show_full_stack(self):
+        print(self.stack)
+
+    def show_some_stack(self):
+        number_stack = int(input('Всего 3 стопки. Какую смотрим?'))
+        for el in self.stack[number_stack - 1]:
+            print(el, sep='/n')
+
+    def stack_size(self):
+        count = 1
+        for i in self.stack:
+            print(f'В {count} стопке {len(i)} тарелок')
+            count += 1
+
+
