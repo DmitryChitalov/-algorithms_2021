@@ -54,3 +54,4 @@ huffman_code(huffman_tree(need_str))
 
 for i in need_str:
     print(result_code[i], end=' ')
+
