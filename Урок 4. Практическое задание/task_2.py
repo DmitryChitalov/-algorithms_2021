@@ -21,6 +21,7 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
+
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
@@ -79,3 +80,10 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+Мемоизация не нужна, так как подобная функция с одним и тем же числом запускается один раз, а при однократном исполнении
+мемоизация в данном случае бесполезна. Timeit же замеряет 1000000 исполнений, поэтому и получается в цифрах
+ощутимая разница.
+"""
