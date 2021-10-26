@@ -27,4 +27,78 @@
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 
 Задание творческое. Здесь нет жестких требований к выполнению.
+
+Solution: Доработал функции push_plate и pop_plate (добавление в стек и удаление из него).
+
 """
+
+
+class StackPlates:
+    def __init__(self):
+        self.st = []
+        self.current_st = []
+
+    def is_empty(self):
+        return self.current_st == []
+
+    def push_plate(self):
+        if len(self.current_st) < 10:
+            self.current_st.append('plate')
+        else:
+            self.st.append(self.current_st[:])
+            self.current_st.clear()
+
+    def pop_plate(self):
+        if self.current_st:
+            self.current_st.pop(-1)
+        else:
+            self.st[-1].pop()
+
+    def get_val(self):
+        return self.current_st[len(self.current_st) - 1]
+
+    def cur_stack_size(self):
+        return self.current_st
+
+    def stack_size(self):
+        return self.st
+
+    def stack_count(self):
+        return len(self.st)
+
+
+sp_obj = StackPlates()
+
+# наполняем стек тарелок
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+sp_obj.push_plate()
+
+print(sp_obj.stack_size())
+# удаляем из стека тарелок
+
+sp_obj.pop_plate()
+sp_obj.pop_plate()
+sp_obj.pop_plate()
+
+print(sp_obj.stack_size())

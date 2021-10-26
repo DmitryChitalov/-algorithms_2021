@@ -22,3 +22,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+num = input('введите число')
+# first_num = num
+string = ''
+
+
+def revers_num(num):
+    global string
+    if len(str(num)) == 1:
+        string += str(num)
+        return
+    else:
+        string += str(int(num) % 10)
+        num = int(num) // 10
+        return revers_num(num)
+
+
+revers_num(num)
+
+print(f' {num} число наоборот будет {string}')
