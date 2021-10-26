@@ -17,3 +17,47 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import random
+import timeit
+
+"""Сортировка пузырьковым методом"""
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+'''Доработанный алгоритм'''
+
+def bubble_sort_1(nums):
+    # Установим swapped в True, чтобы цикл запустился хотя бы раз
+    swapped = True
+    while swapped:
+        swapped = False
+        for i in range(len(nums) - 1):
+            if nums[i] > nums[i + 1]:
+                # Меняем элементы
+                nums[i], nums[i + 1] = nums[i + 1], nums[i]
+                # Установим swapped в True для последующей итерации
+                swapped = True
+
+if __name__ == "__main__":
+    orig_list = [random.randint(-100, 100) for _ in range(100)]
+    print(f'Исходный список: \n{orig_list}')
+    print(f'Отсортированный список: \n{bubble_sort(orig_list[:])}')
+    # замеры первоначальной функции
+    print(f'Время выполнения исходной функции: {timeit.timeit("bubble_sort(orig_list[:])", globals=globals(), number=100)}')
+    # замеры доработанной функции
+    print(f'Время выполнения доработанной функции: {timeit.timeit("bubble_sort_1(orig_list[:])", globals=globals(), number=100)}')
+
+"""
+Выводы: Доработка не увеличила, а наоборот уменьшила скорость сортировки. 
+На скорость повлияло дополнительное время на проверку значения
+
+Время выполнения исходной функции: 111.63471030000001
+Время выполнения доработанной функции: 153.9758425
+"""
