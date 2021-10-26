@@ -14,34 +14,44 @@
 from timeit import timeit
 from random import randint
 
+STR_CODE_1 ='''
+from random import randint
+
 
 def recursive_reverse(number):
     if number == 0:
         return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+    
 
+num_100 = 123456
+num_1000 = 1234567890
+
+'''
 
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
-print('Не оптимизированная функция recursive_reverse')
-print(
-    timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+# print('Не оптимизированная функция recursive_reverse')
+# print(
+#     timeit(
+#         "recursive_reverse(num_100)",
+#         setup='from __main__ import recursive_reverse, num_100',
+#         number=10000))
+# print(
+#     timeit(
+#         "recursive_reverse(num_1000)",
+#         setup='from __main__ import recursive_reverse, num_1000',
+#         number=10000))
+# print(
+#     timeit(
+#         "recursive_reverse(num_10000)",
+#         setup='from __main__ import recursive_reverse, num_10000',
+#         number=10000))
 
+STR_CODE_2 = '''
+from random import randint
 
 def memoize(f):
     cache = {}
@@ -63,19 +73,33 @@ def recursive_reverse_mem(number):
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
-print('Оптимизированная функция recursive_reverse_mem')
-print(
-    timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+num_100 = 123456
+num_1000 = 1234567890
+'''
+
+# print('Оптимизированная функция recursive_reverse_mem')
+# print(
+#     timeit(
+#         'recursive_reverse_mem(num_100)',
+#         setup='from __main__ import recursive_reverse_mem, num_100',
+#         number=10000))
+# print(
+#     timeit(
+#         'recursive_reverse_mem(num_1000)',
+#         setup='from __main__ import recursive_reverse_mem, num_1000',
+#         number=10000))
+# print(
+#     timeit(
+#         'recursive_reverse_mem(num_10000)',
+#         setup='from __main__ import recursive_reverse_mem, num_10000',
+#         number=10000))
+
+
+print(timeit(STR_CODE_1, number=10000))
+print(timeit(STR_CODE_2, number=10000))
+
+
+'''
+При расчёте через строковый способ, мемоизация выполняется дольше. 
+Ощущение что замеры изначально считают только декоратор, поэтому разница такая большая.
+'''

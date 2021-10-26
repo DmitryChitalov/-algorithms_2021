@@ -34,24 +34,25 @@ hx = HexNumber
 hx + hx
 hex()
 """
-from collections import defaultdict
-from functools import reduce
 
 
-def amount(obj):
-    sum_res = 0
-    for val in obj.values():
-        sum_res += int(''.join(val), 16)
-    return f'Сумма: {list(hex(sum_res).upper())[2:]}'
+class HexNumber:
+    def __init__(self, hex_num):
+        self.hex_num = hex_num
+
+    def __add__(self, other):
+
+        return list(hex(int(''.join(self.hex_num), 16) + int(''.join(other.hex_num), 16)).upper())[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.hex_num), 16) * int(''.join(other.hex_num), 16)).upper())[2:]
 
 
-def multiplication(obj):
-    mul = reduce(lambda x,y: x * y, [int(''.join(val), 16) for val in obj.values()])
-    return f'Произведение: {list(hex(mul).upper())[2:]}'
-
-
-numbers = defaultdict(list)
-numbers['1'] = list(input('Введите первое число: '))
-numbers['2'] = list(input('Введите второе число: '))
-print(amount(numbers))
-print(multiplication(numbers))
+first_number = list(input('Введите первое число: '))
+second_number = list(input('Введите второе число: '))
+hx_1 = HexNumber(first_number)
+hx_2 = HexNumber(second_number)
+res_sum = hx_1 + hx_2
+res_mul = hx_1 * hx_2
+print(f'Сумма: {res_sum}')
+print(f'Произведение: {res_mul}')

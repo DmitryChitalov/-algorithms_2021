@@ -9,3 +9,58 @@
 2) тема понятна? постарайтесь сделать свою реализацию.
 Вы можете реализовать задачу, например, через ООП или предложить иной подход к решению.
 """
+
+from collections import Counter, deque
+
+ch_table = {}
+
+
+def make_tree(s):
+    # Считаем количество повторов символов
+    count = Counter(s)
+    # Сортируем по возрастанию
+    sorted_el = deque(sorted(count.items(), key=lambda items: items[1]))
+
+    # Цикл пока не соберём всё под один корень
+    while len(sorted_el) > 1:
+        # Считаем вес первого и второго символа
+        weight = sorted_el[0][1] + sorted_el[1][1]
+
+        # Вырезаем первый и второй символ. Собираем их в словарь для дальнейшей вставки
+        concat = {0: sorted_el.popleft()[0],
+                  1: sorted_el.popleft()[0]}
+
+        # Перебираем все оставшиеся символы с их весом и выбираем верное место вставки
+        for i, val in enumerate(sorted_el):
+            if weight > val[1]:
+                # Если вес вставляемого словаря меньше чем у выбранного символа, то сразу переходим к следующему символу
+                continue
+            else:
+                # Если вес словаря больше, то вставляем его после символа с меньшим весом и останавливаем перебор
+                sorted_el.insert(i, (concat, weight))
+                break
+        # Если перебирать нечего, тогда вставляем в пустой список deque собранное дерево и его окончательный вес
+        else:
+            sorted_el.append((concat, weight))
+    # Возвращаем само дерево, а не deque
+    return sorted_el[0][0]
+
+
+# Рекурсивно собираем словарь из дерева на вход
+def encode_haff(tree, path=''):
+    # если на входе данные являются не словарём, то записываем
+    if not isinstance(tree, dict):
+        ch_table[tree] = path
+    else:
+        # Делим деревья и проверяем глубже, доставая элементы и замеряя к ним путь, собирая код
+        encode_haff(tree[0], path=f'{path}0')
+        encode_haff(tree[1], path=f'{path}1')
+
+
+s = 'А роза упала на лапу Азора'
+tree = make_tree(s)
+print(tree)
+encode_haff(tree)
+print(ch_table)
+for i in s:
+    print(f'"{i}": {ch_table[i]}')

@@ -18,3 +18,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# number = int(input('Введите число: '))
+# even = 0
+# odd = 0
+# while number >= 1:
+#     check = number % 10
+#     if check % 2 == 0:
+#         even += 1
+#     elif check % 2 == 1:
+#         odd += 1
+#     number //= 10
+#
+# print(even, odd)
+
+
+def even_odd_count(number, even, odd):
+    if number < 1:
+        return f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})'
+    else:
+        check = number % 10
+        if check % 2 == 0:
+            even += 1
+        elif check % 2 == 1:
+            odd += 1
+        number //= 10
+        return even_odd_count(number, even, odd)
+
+
+number = int(input('Введите число: '))
+even = 0
+odd = 0
+print(even_odd_count(number, even, odd))
