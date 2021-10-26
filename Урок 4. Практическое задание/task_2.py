@@ -79,3 +79,42 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# Аналитика:
+
+print('Замеры реального времени выполнения кода функции memoize от recursive_reverse')
+print(
+    timeit(
+        'memoize(recursive_reverse(num_100))',
+        setup='from __main__ import memoize, recursive_reverse, num_100',
+        number=10000))
+
+print(
+    timeit(
+        'memoize(recursive_reverse(num_1000))',
+        setup='from __main__ import memoize, recursive_reverse, num_1000',
+        number=10000))
+
+print(
+    timeit(
+        'memoize(recursive_reverse(num_10000))',
+        setup='from __main__ import memoize, recursive_reverse, num_10000',
+        number=10000))
+
+# Не оптимизированная функция recursive_reverse
+# 0.030561654
+# 0.034070334
+# 0.06593753399999999
+# Оптимизированная функция recursive_reverse_mem
+# 0.0024293489999999973
+# 0.002381454999999977
+# 0.002706879999999995
+# Замеры реального времени выполнения кода функции memoize от recursive_reverse
+# 0.035258282
+# 0.03818239600000001
+# 0.07080606900000003
+
+# Расходы на мемоизацию не обоснованы ввиду того, что каждый раз аргументом рекурсивной функции является новое число,
+# а "Оптимизированная функция recursive_reverse_mem" просто берет результат из кэша, который вычисляется примерно
+# столко же, сколько и сама функция - "Не оптимизированная функция recursive_reverse".
