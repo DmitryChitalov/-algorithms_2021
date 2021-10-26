@@ -17,3 +17,37 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import timeit
+import random
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    out_bool = True
+    while n < len(lst_obj) and out_bool:
+        check = 0
+        for i in range(len(lst_obj)-1, n-1, -1):
+            if lst_obj[i] > lst_obj[i-1]:
+                lst_obj[i], lst_obj[i-1] = lst_obj[i-1], lst_obj[i]
+                check = 1
+        if check == 0:
+            out_bool = False
+        n += 1
+    return lst_obj
+
+
+if __name__ == '__main__':
+    orig_obj = [random.randint(-100, 100) for _ in range(100)]
+    print(orig_obj)
+    print(timeit.repeat('bubble_sort(orig_obj[:])', globals=globals(), number=(10**3)))
+    orig_obj = [random.randint(-100, 100) for _ in range(1000)]
+    print(timeit.repeat('bubble_sort(orig_obj[:])', globals=globals(), number=(10**3)))
+
+""" Вывод:
+без дороботки - [2.071607934, 1.9956803060000006, 1.8896254370000003, 1.8474485519999995, 1.832658619]
+[201.83499864299998, 200.780209347, 199.54662600799998, 200.57153894199996, 200.61341248999997]
+с дороботкой - [2.023359759, 1.674304436, 1.8506683659999998, 1.9309909530000002, 1.9404656560000006]
+[209.304798418, 199.453330657, 199.14973418100004, 208.15916099000003, 207.37241907400005]
+Как видно из результатов, даработка связанная с тем что если при проходе нет перестановок то цикл завершается
+не эффективна, чтоб это дароботкастла эффективной надо чтобы спискок уже был отсортирован хотябы на половину
+"""
