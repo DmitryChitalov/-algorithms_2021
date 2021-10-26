@@ -40,3 +40,32 @@ for i in
 
 
 """
+
+import random
+
+
+m = int(input('Введите m: '))
+my_list = [random.randint(0, 9) for i in range(2 * m + 1)]
+
+
+def median(some_list):
+    left = []
+    right = []
+    for i in range(len(some_list)):
+        for j in range(len(some_list)):
+            if some_list[i] < some_list[j]:
+                left.append(some_list[j])
+            if some_list[i] > some_list[j]:
+                right.append(some_list[j])
+            if some_list[i] == some_list[j] and i > j:
+                left.append(some_list[j])
+            if some_list[i] == some_list[j] and i < j:
+                right.append(some_list[j])
+        if len(left) == len(right):
+            return some_list[i]
+        left.clear()
+        right.clear()
+
+
+print(my_list)
+print(median(my_list))
