@@ -16,6 +16,7 @@
 """
 from statistics import median
 from random import randint
+from timeit import timeit
 
 
 def find_med(lst):
@@ -44,8 +45,40 @@ def gnom_sort(lst, m):
 
 # lst = [5, 3, 4, 3, 3, 3, 3]
 m = int(input('Введите число: '))
-lst = [randint(-10, 10) for _ in range(2 * m + 1)]
-# print(lst)
+lst = [randint(-100, 100) for _ in range(2 * m + 1)]
 print(find_med(lst[:]))
 print(median(lst))
 print(gnom_sort(lst[:], m))
+
+print('median():\n', timeit(
+        "median(lst)",
+        setup='from __main__ import median, lst',
+        number=10000))
+print('find_med():\n', timeit(
+        "find_med(lst[:])",
+        setup='from __main__ import find_med, lst',
+        number=10000))
+print('gnom_sort():\n', timeit(
+        "gnom_sort(lst[:], m)",
+        setup='from __main__ import gnom_sort, lst, m',
+        number=10000))
+
+
+"""
+Введите число: 50
+-5
+-5
+-5
+median():
+ 0.033038900000000204
+find_med():
+ 0.7090583000000001
+gnom_sort():
+ 22.1635574
+ 
+ Гномья сортировка имеет сложность О(n**2). Это видно и по результатам времени работы кода.
+ Намного быстрее работат функция без сортировки, цикл делает ограниченное количество итераций 
+ с использованием встроенной функции max. 
+ Естественно самой быстрой оказалась встроенная функция, так как она уже является специально оптимизировнной под данную
+ задачу.
+"""
