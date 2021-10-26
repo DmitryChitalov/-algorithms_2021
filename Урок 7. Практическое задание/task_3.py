@@ -40,3 +40,36 @@ for i in
 
 
 """
+import random
+from statistics import median
+
+
+def get_data_from_user() -> list:
+    while True:
+        el_count = input("Список строится по формуле 2m + 1. Введите m: ")
+        print(el_count)
+        if el_count.isdigit():
+            el_count = int(el_count)
+            break
+        else:
+            print("Вы ввели что-то не то. Заходим на новый круг!")
+
+    return [random.randint(0, 50) for _ in range(2 * el_count + 1)]
+
+
+orig_list = get_data_from_user()
+med_index = orig_list
+print("Оригинальный список: ")
+print(*orig_list)
+
+print("Медиана из модуля statistics (для проверки): ", median(orig_list))
+
+"""
+Если я правильно понял задание, и мне не нужно писать руками функцию max.
+Проходим половину списка, удаляя максимальные значения.
+Решение, уверен, тормозное. Сложностью не меньше O(N^2). 
+Дешевле отсортировать список.
+"""
+[orig_list.remove(max(orig_list)) for _ in range(int(len(orig_list) / 2))]
+
+print("Медиана полученная удалением максимальных элементов: ", max(orig_list))

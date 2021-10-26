@@ -17,3 +17,98 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import timeit
+import random
+
+
+def bubble_sort(lst_obj: list, reverse: bool = False) -> list:
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if reverse:
+                if lst_obj[i] < lst_obj[i + 1]:
+                    lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+            else:
+                if lst_obj[i] > lst_obj[i + 1]:
+                    lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_optimisation(lst_obj: list, reverse: bool = False) -> list:
+    n = 1
+    while n < len(lst_obj):
+        reversal_count = 0
+        for i in range(len(lst_obj) - n):
+            if reverse:
+                if lst_obj[i] < lst_obj[i + 1]:
+                    lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                    reversal_count += 1
+            else:
+                if lst_obj[i] > lst_obj[i + 1]:
+                    lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                    reversal_count += 1
+
+        if reversal_count == 0:
+            break
+
+        n += 1
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+# orig_list = [9, 8, 7, 5, 6, 4, 3, 2, 1, 0, -1, -2, -3]
+
+print("Оригинальный список:\n", orig_list)
+print("Отсортированный список:\n", bubble_sort(orig_list[:], True))
+print("Отсортированный список2:\n", bubble_sort_optimisation(orig_list[:], True))
+
+# замеры 100
+print(
+    timeit.timeit(
+        "bubble_sort(orig_list[:], True)",
+        globals=globals(),
+        number=1000))
+
+print(
+    timeit.timeit(
+        "bubble_sort_optimisation(orig_list[:], True)",
+        globals=globals(),
+        number=1000))
+
+"""
+Реализована сортировка по убыванию методом пузырька.
+Произведена оптимизация в функции bubble_sort_optimisation - выходим из цикла если за проход по списку 
+не совершается ни одной сортировки.
+
+Результаты.
+
+Тест 1:
+0.16083749999999997
+0.1776447
+
+Тест 2:
+0.015980800000000017
+0.005051600000000045
+
+Тест 3:
+0.1644034000000001
+0.17724740000000005
+
+Выводы:
+Из тестов видно, что оптимизация работает нестабильно. В некоторых случаях она даёт преимущество,
+в некоторых оптимизированная функция работает хуже оригинальной. Причина в неоднародной перемешанности рандомно 
+сгенерированныйх списков. Чем меньше перемещений элементов мы совершаем при сортировке, тем более выгодна 
+оптимизация. Это особенно заметно, на списке - orig_list = [9, 8, 7, 5, 6, 4, 3, 2, 1, 0, -1, -2, -3]:
+
+Тест 4:
+0.020115899999999964
+0.006713500000000039
+
+Уверен, что математически можно высчитать критическое количество перестановок элементов списка заданной длины, 
+после произведения которых, подобная оптимизация становится бессмысленной или даже во вред.
+
+В случае рандомной генерации списка, я бы не стал применять подобную оптимизацию. Доработка не помогла.
+"""
+
