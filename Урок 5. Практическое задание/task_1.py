@@ -23,3 +23,55 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple    # попробую через "Именованный кортеж"
+
+
+def count_profit():
+    list_companies_year = {}    # создаём пустой словарь для доходов за год
+    list_companies_period = {}    # создаём пустой словарь для доходов за период
+    number_firms = int(input("Введите количество фирм: "))    # задаём переменную с количесвом фирм
+    companies_profit = namedtuple('companies_profit',
+                                  'name_company period_1 period_2 period_3 period_4')    # каркас для словаря
+    for i in range(number_firms):    # самое интересное - заполнение "каркаса" (пример в тырнете взял)
+        companies = companies_profit(
+            name_company=input("Введите название фирмы: "),
+            period_1=int(input("Введите доход за 1-й период: ")),
+            period_2=int(input("Введите доход за 2-й период: ")),
+            period_3=int(input("Введите доход за 3-й период: ")),
+            period_4=int(input("Введите доход за 4-й период: "))
+        )
+        # ниже считаем сразу средний доход по периодам каждому предприятию (4 - количество периодов)
+        # и записываем в заранее созданный пустой словарь
+        list_companies_period[companies.name_company] = (companies.period_1 + companies.period_2 +
+                                                         companies.period_3 + companies.period_4) / 4
+        # ниже считаем сразу средний доход за год каждомой фирме
+        # и записываем в заранее созданный пустой словарь
+        list_companies_year[companies.name_company] = (companies.period_1 + companies.period_2 +
+                                                       companies.period_3 + companies.period_4)
+    print("Средний доход каждой фирмы за 4 периода: ", '\n',
+          list_companies_period)    # выведем, чтобы посмотреть средний доход каждой фирмы за период
+    print("Доход каждой фирмы за год: ", '\n',
+          list_companies_year)  # выведем, чтобы посмотреть средний доход каждой фирмы за год
+    print("Средний годовой доход всех фирм: ",
+          sum(list_companies_year.values())/number_firms)    # средний доход по всем фирмам
+    profit_more = {}    # создадим пустой словарь для фирм, чей доход будет выше среднего
+    profit_less = {}    # создадим пустой словарь для фирм, чей доход будет ниже среднего
+    profit_average = {}    # и такой тоже - вдруг совпадёт значение со средним
+    for key, meaning in list_companies_year.items():    # берём из словаря ключ и его значение
+        if meaning > (sum(list_companies_year.values())/number_firms):    # сравниваем доход (выше) по значению
+            profit_more[key] = meaning    # добавляем в словарь дохода выше среднего
+        elif meaning < (sum(list_companies_year.values())/number_firms):    # сравниваем доход (ниже) по значению
+            profit_less[key] = meaning    # добавляем в словарь дохода ниже среднего
+        elif meaning == (sum(list_companies_year.values())/number_firms):
+            profit_average[key] = meaning
+    if len(profit_more) != 0:    # если не будет значений, то и не выведет ничего
+        print("Годовой доход фирм выше среднего: ", profit_more)
+    if len(profit_less) != 0:    # если не будет значений, то и не выведет ничего
+        print("Годовой доход фирм ниже среднего: ", profit_less)
+    if len(profit_average) != 0:    # если будет совпадение среднего годового дохода по фирмам и
+        # среднего годового фирмы, то выведем
+        print("Фирмы, чей годовой доход совпал со средним годовым: ", profit_average)
+
+
+count_profit()
