@@ -33,3 +33,41 @@ class HexNumber:
 hx = HexNumber
 hx + hx
 """
+
+from collections import defaultdict
+"""модуль collections один(!), но решения два. Пока без ООП"""
+
+number = defaultdict(list)
+number[1] = list(input('Введите первое число: ').upper())
+number[2] = list(input('Введите второе число: ').upper())
+
+
+def default_dict_1():    # первый вариант решения
+    number_one = ''    # создаём новый словарь, с ним у будем работать
+    number_two = ''    # создаём новый словарь, с ним у будем работать
+    for position, numbers in number.items():
+        if position == 1:
+            for num in numbers:
+                number_one = number_one + num
+        if position == 2:
+            for num in numbers:
+                number_two = number_two + num
+    print(f'Сумма чисел {number_one} и {number_two} = '
+          f'{hex(int(number_one, 16) + int(number_two, 16))[2:].upper()}')
+    print(f'Произведение чисел {number_one} и {number_two} = '
+          f'{hex(int(number_one, 16) * int(number_two, 16))[2:].upper()}')
+
+
+def default_dict_2():    # второй вариант решения (покороче, он не очень то и простой)
+    lst_one = list(hex(int("".join(number[1]), 16) + int("".join(number[2]), 16))[2:].upper())
+    lst_two = list(hex(int("".join(number[1]), 16) * int("".join(number[2]), 16))[2:].upper())
+    # выводим почти как в примере (можно ведь совсем без скобок, как в первом карианте)
+    print(f'Сумма чисел {number[1]} и {number[2]} = '
+          f'{lst_one}')
+    print(f'Произведение чисел {number[1]} и {number[2]} = '
+          f'{lst_two}')
+
+
+default_dict_1()
+default_dict_2()
+
