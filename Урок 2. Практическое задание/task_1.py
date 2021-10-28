@@ -28,3 +28,50 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def recurs_calc():
+
+    operand = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    """Рекурсия"""
+    if operand == '0':  # базовый случай
+        print('Завершение работы')
+        return
+    elif operand == '-' or operand == '+' or operand == '*' or operand == '/':
+        try:
+            number_1 = int(input('Введите первое число: '))
+            if not isinstance(number_1, int):
+                print('Вы ввели не число')
+                return recurs_calc()
+            number_2 = int(input('Введите второе число: '))
+            if not isinstance(number_2, int):
+                print('Вы ввели не число')
+                return recurs_calc()
+        except ValueError:
+            print('Вы ввели не число')
+            return recurs_calc()
+        if operand == '/' and number_2 == 0:
+            print('На 0 делить нельзя')
+            return recurs_calc()
+        elif operand == '+':
+            result = number_1 + number_2
+            print(result)
+            return recurs_calc()
+        elif operand == '-':
+            result = number_1 - number_2
+            print(result)
+            return recurs_calc()
+        elif operand == '*':
+            result = number_1 * number_2
+            print(result)
+            return recurs_calc()
+        elif operand == '/':
+            result = number_1 / number_2
+            print(result)
+            return recurs_calc()
+        else:
+            return recurs_calc()
+    else:
+        print('Введен не правильный оператор')
+        return recurs_calc()
+
+
+recurs_calc()
