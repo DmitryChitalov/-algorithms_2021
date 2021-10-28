@@ -12,6 +12,9 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+import collections
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +42,37 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    c_count = collections.Counter()
+    for num in array:
+        c_count[num] += 1
+    return f'Чаще всего встречается число {c_count.most_common(1)[0][0]}, ' \
+           f'оно появилось в массиве {c_count.most_common(1)[0][1]} раз(а) '
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(
+    timeit(
+        "func_1()",
+        setup="from __main__ import func_1", number=10000))
+
+print(
+    timeit(
+        "func_2()",
+        setup="from __main__ import func_2", number=10000))
+
+print(
+    timeit(
+        "func_3()",
+        setup="from __main__ import func_3", number=10000))
+
+'''
+0.015481495000130963
+0.019200768998416606
+0.05630921999909333
+
+Counter немного дольше обрабатывает функции, но более удобен и лаконичен. 
+'''
