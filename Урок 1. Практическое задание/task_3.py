@@ -20,3 +20,37 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import random
+from collections import Counter
+
+companies = {}
+for i in range(1, 10):
+    companies[f'Company {i}'] = random.randint(1000, 1000000)
+
+
+# O(n log n) - Если не ошибаюсь
+def find_best_val(d):
+    k = Counter(d)
+    high = k.most_common(3)
+    return high
+
+
+print(find_best_val(companies))
+
+
+# O(n^2)
+def find_best_val_2(d):
+    sort = sorted(d.values(), reverse=True)
+    top = sort[0:3]
+    sort_dict = {}
+    for i in top:
+        for x in d.keys():
+            if d[x] == i:
+                sort_dict[x] = d[x]
+    return sort_dict
+
+
+print(find_best_val(companies))
+
+
+# Вывод: Очевидно что по скорости работы лучше использовать O(n log n), т. к. он быстрее квадратичной сложность O(n^2)

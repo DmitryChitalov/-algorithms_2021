@@ -25,3 +25,64 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users_list = [
+    {
+        'username': 'user1',
+        'password': 'sadkjf22',
+        'is_active': False
+    },
+    {'username': 'user2',
+     'password': 'Vdks443',
+     'is_active': True
+     },
+    {'username': 'user3',
+     'password': 'Lkasd43',
+     'is_active': True
+     },
+    {
+        'username': 'user4',
+        'password': '432dgjjj',
+        'is_active': False
+    }
+]
+
+user = input('Введите имя пользователя:')
+passwd = input('Введите пароль:')
+
+
+# O(n)
+def user_auht(usr, pswd, usrs):
+    for i in usrs:
+        if i['username'] == usr and i['password'] == pswd:
+            if i['is_active'] == True:
+                print(f'Добро пожаловать {usr}')
+            else:
+                print(f'{usr}, Вам необходимо активировать учетную запись по email')
+                break
+        elif i['username'] == usr and i['password'] != pswd:
+            print('Неверный пароль')
+
+
+user_auht(user, passwd, users_list)
+
+users_dict = {'user1': {'password': 'sadkjf22', 'is_active': False},
+              'user2': {'password': 'Vdks443', 'is_active': True},
+              'user3': {'password': 'Lkasd43', 'is_active': True},
+              'user4': {'password': '432dgjjj', 'is_active': False}
+              }
+
+
+# O(1)
+def user_auht2(usr, pswd, usrs):
+    if usrs.get(usr):
+        if usrs[usr]['password'] == pswd and usrs[usr]['is_active'] == True:
+            print(f'Добро пожаловать {usr}')
+        elif usrs[usr]['password'] == pswd and usrs[usr]['is_active'] == False:
+            print(f'{usr}, Вам необходимо активировать учетную запись по email')
+        elif usrs[usr]['password'] != pswd:
+            print('Неверный пароль')
+
+
+user_auht2(user, passwd, users_dict)
+
+# Вывод: Вариант 2 - O(1) - Константная сложность алгоритма будет быстрее
