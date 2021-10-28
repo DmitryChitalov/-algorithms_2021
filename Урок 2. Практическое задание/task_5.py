@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(x, y, i_columns=1):
+    if x == y:
+        print(f'{x} - {chr(x)} ')
+    else:
+        if i_columns == 10:
+            print(f'{x} - {chr(x)}')
+            return ascii_table(x + 1, y, i_columns=1)
+        else:
+            print(f'{x} - {chr(x)}', end=' ')
+            return ascii_table(x + 1, y, i_columns + 1)
+
+
+ascii_table(x=32, y=127)

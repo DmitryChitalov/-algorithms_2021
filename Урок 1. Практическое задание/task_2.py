@@ -19,3 +19,23 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# O(n^2)
+def find_min_n2(lst):
+    for i in range(len(lst)):                       # O(n)
+        for j in range(len(lst)):                   # O(n)
+            if lst[i] < lst[j]:                     # O(1)
+                lst[i], lst[j] = lst[j], lst[i]     # O(1)
+    return lst[0]                                   # O(1)
+
+
+# O(n)
+def find_min_n(lst):
+    min_val = lst[0]            # O(1)
+    for i in lst:               # O(n)
+        if i < min_val:         # O(1)
+            min_val = i         # O(1)
+    return min_val              # O(1)
+
+lst = [24, 12 ,43, 2, 5]

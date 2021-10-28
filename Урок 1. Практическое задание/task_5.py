@@ -28,3 +28,58 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class PlatesStack:
+    def __init__(self, max_plates):
+        self.max_plates = max_plates
+        self.el_lst = []
+
+    def is_empty(self):
+        return self.el_lst == []
+
+    def push(self, el):
+        if self.is_empty():
+            self.el_lst.append(el)
+        else:
+            self.el_lst[len(self.el_lst) - 1] = self.el_lst[len(self.el_lst) - 1] + el
+        while self.el_lst[len(self.el_lst) - 1] > self.max_plates:
+            self.el_lst.append(self.el_lst[len(self.el_lst) - 1] - self.max_plates)
+            self.el_lst[len(self.el_lst) - 2] = self.max_plates
+
+    def out(self, el):
+        while el > self.el_lst[len(self.el_lst) - 1]:
+            el -= self.el_lst[len(self.el_lst) - 1]
+            self.el_lst.pop()
+        self.el_lst[len(self.el_lst) - 1] -= el
+
+    def number_of_stacks(self):
+        return len(self.el_lst)
+
+    def last_stack_size(self):
+        return self.el_lst[len(self.el_lst) - 1]
+
+    def full_stacks(self):
+        i = 0
+        for i in self.el_lst:
+            if i == self.max_plates:
+                i += 1
+        return i
+
+
+max_size = 8  # Размер стопки
+plates = PlatesStack(max_size)
+
+print(plates.is_empty())
+
+plates.push(52)
+print(plates.el_lst)
+
+plates.out(16)
+print(plates.el_lst)
+
+print(plates.last_stack_size())  # Количество в последней стопке
+
+print(plates.number_of_stacks())  # количество стопок
+
+print(plates.full_stacks())  # Заполненные стопки
