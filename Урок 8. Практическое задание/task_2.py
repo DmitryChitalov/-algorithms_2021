@@ -19,6 +19,13 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    # Определим в какую сторону добавить потомка.
+    def insert_detect(self, new_node):
+        if new_node < self.root:
+            self.insert_left(new_node)
+        else:
+            self.insert_right(new_node)
+
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
@@ -65,6 +72,20 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # Просмотр узла
+    def show_node(self):
+        if self.left_child is None:
+            left = str('None')
+        else:
+            left = str(self.left_child.get_root_val())
+        if self.right_child is None:
+            right = str('None')
+        else:
+            right = str(self.right_child.get_root_val())
+
+        return f'{self.root}\n' \
+               f'{left} - (left) {right} - (right)' \
+
 
 r = BinaryTree(8)
 print(r.get_root_val())
@@ -77,3 +98,9 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+r.insert_detect(14)
+r.insert_detect(6)
+
+
+print(r.show_node())
