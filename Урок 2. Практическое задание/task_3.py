@@ -22,3 +22,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+number = 1230
+# number_out = str()
+# while number != 0:
+#     last_number = number % 10
+#     number_out += str(last_number)
+#     number //= 10
+#     print(number_out)
+
+
+def reverse_number(number, number_out=str()):
+    if number == 0:
+        return number_out
+    else:
+        last_number = str(number % 10)
+        number //= 10
+        number_out += last_number
+        return number_out + reverse_number(number)
+
+
+print(reverse_number(number))
