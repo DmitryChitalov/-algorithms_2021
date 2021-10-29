@@ -40,3 +40,88 @@ for i in
 
 
 """
+import random
+import statistics
+from timeit import timeit
+
+m = int(input('Введите любое натуральное число: '))
+length = 2 * m + 1  # длина массива по формуле 2m+1
+test_massive = [random.randint(-100, 100) for _ in range(length)]  # Строим массив по формуле
+
+
+# 1-е решение (с сортировкой Шелла)
+
+def shell_sort(a):
+    def new_increment(a):
+        i = len(a) // 2
+        yield i
+        while i != 1:
+            if i == 2:
+                i = 1
+            else:
+                i = int(round(i / 2.2))
+            yield i
+
+    for increment in new_increment(a):
+        for i in range(increment, len(a)):
+            for j in range(i, increment - 1, -increment):
+                if a[j - increment] < a[j]:
+                    break
+                a[j], a[j - increment] = a[j - increment], a[j]
+    return a, a[len(a) // 2]  # возвращаем список и медиану
+
+
+print(f'Медиана с помощью сортировки - {shell_sort(test_massive.copy())[1]}',  # ищем медиану
+      end='\n-------------------------------------------------------------------------------------------------------\n')
+
+
+# 2-е решение (без сортировки)
+
+def my_median(lst_obj: list):
+    while len(lst_obj) != 1:
+        del lst_obj[lst_obj.index(max(lst_obj))], lst_obj[lst_obj.index(min(lst_obj))]
+    return lst_obj[0]
+
+
+print(f'Медиана через свою функцию - {my_median(test_massive.copy())}',
+      end='\n-------------------------------------------------------------------------------------------------------\n')
+
+# 3-е решение (Используя модуль statistics)
+
+print(f'Медиана через модуль statistics - {statistics.median(test_massive.copy())}',
+      end='\n-------------------------------------------------------------------------------------------------------\n')
+
+# Замеры
+
+print('Делаем замеры')
+print('Медиана с помощью сортировки',
+      round(timeit('shell_sort(test_massive.copy())[1]', number=100000, globals=globals()), 2),
+      'сек')
+
+print('Медиана через свою функцию',
+      round(timeit('my_median(test_massive.copy())', number=100000, globals=globals()), 2),
+      'сек')
+
+print('Медиана через модуль statistics',
+      round(timeit('statistics.median(test_massive.copy())', number=100000, globals=globals()), 2),
+      'сек')
+
+'''
+Результат:
+Введите любое натуральное число: 10
+Медиана с помощью сортировки - 26
+-------------------------------------------------------------------------------------------------------
+Медиана через свою функцию - 26
+-------------------------------------------------------------------------------------------------------
+Медиана через модуль statistics - 26
+-------------------------------------------------------------------------------------------------------
+Делаем замеры
+Медиана с помощью сортировки 4.42 сек
+Медиана через свою функцию 1.41 сек
+Медиана через модуль statistics 0.12 сек
+
+Аналитика:
+Согласно замерам, медиана с помощью сортировки ищется дольше всего
+Своя функция, где удаляется максимальный и минимальный элемент чуть быстрее
+И самая быстрая оказалась функция median из модуля statistics, т.к это встроенное решение, лучше использовать его
+'''
