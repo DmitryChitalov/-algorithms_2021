@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -65,15 +66,54 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # Мой метод, чтобы программа сама определила куда нужно вставить новое значение и также проверила тип
+    def insert(self, new_node):
+        try:
+            if type(new_node) is not int and type(new_node) is not float:
+                raise ValueError(f"{new_node} - you must enter a number")
+        except ValueError as err:
+            print(err)
+        else:
 
+            if new_node > self.root or new_node == self.root:
+                self.insert_right(new_node)
+            else:
+                self.insert_left(new_node)
+
+    # Метод для работы принт
+    def __str__(self):
+        return str(self.root)
+
+    # мой метод чтобы притновать дерево
+    def Print_Tree(self):
+        if self.left_child:
+            self.left_child.Print_Tree()
+        print(self.root, end=' ')
+        if self.right_child:
+            self.right_child.Print_Tree()
+
+
+# r = BinaryTree(8)
+# print(r.get_root_val())
+# print(r.get_left_child())
+# r.insert_left(40)
+# print(r.get_left_child())
+# print(r.get_left_child().get_root_val())
+# r.insert_right(12)
+# print(r.get_right_child())
+# print(r.get_right_child().get_root_val())
+# r.get_right_child().set_root_val(16)
+# print(r.get_right_child().get_root_val())
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r.insert('im not a number')
+r.insert(5)
+r.insert(6)
+r.insert(10)
+r.insert(2)
+r.insert(9)
+r.Print_Tree()
+# r.insert(20)
+# r.insert(1)
+# r.insert(0)
+# r.insert(40)
+# r.Print_Tree()
