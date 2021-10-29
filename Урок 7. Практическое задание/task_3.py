@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+from array import array
+from random import randint
+
 """
 3. Массив размером 2m + 1, где m – натуральное число, заполнен случайным образом.
 Найдите в массиве медиану. Медианой называется элемент ряда, делящий его на
@@ -38,5 +43,45 @@ for i in
     left.clear()
     right.clear()
 
-
 """
+
+
+def median(array: list):
+    middle = len(array) // 2
+    while True:
+        maximum = array[0]
+        for i in array:
+            if i > maximum:
+                maximum = i
+        array.remove(maximum)
+        if middle == 0:
+            return maximum
+        middle -= 1
+
+
+def gnome_sort(array: list):
+    i, size = 1, len(array)
+    while i < size:
+        if array[i - 1] <= array[i]:
+            i += 1
+        else:
+            array[i - 1], array[i] = array[i], array[i - 1]
+            if i > 1:
+                i -= 1
+
+
+def main():
+    m = int(input("Введите m: "))
+
+    array = [randint(0, 10) for i in range(2 * m + 1)]
+    print(array)
+
+    print(f'Медиана (без сортировки): {median(array[:])}')
+
+    gnome_sort(array)
+    print(array)
+    print(f"Медиана (гномья сортировка): {array[m]}")
+
+
+if __name__ == '__main__':
+    main()
