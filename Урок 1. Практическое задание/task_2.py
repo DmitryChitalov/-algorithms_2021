@@ -19,3 +19,25 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def min_from_lst1(lst):         #O(n^2)
+    min_a = None                #O(1)
+    for i in range(len(lst)):   #O(n)
+        for j in lst:           #O(n)
+            if lst[i] > j:      #O(1)
+                min_a = j       #O(1)
+    return min_a                #O(1)
+
+
+def min_from_lst2(lst):         # O(n)
+    min_a = lst[0]              # O(1)
+    for i in lst:               # O(n)
+        if i < min_a:           # O(1)
+            min_a = i           # O(1)
+    return min_a
+
+
+lst1 = (12, 10, 5, 13, 3, 20)
+print(min_from_lst1(lst1))      # O(1)
+print(min_from_lst2(lst1))      # O(1)
