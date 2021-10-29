@@ -16,3 +16,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_func(n) -> int:
+    return int(n * (n + 1) / 2)
+
+
+def recur_func(n) -> int:
+    return 1 if n == 1 else n + recur_func(n - 1)
+
+
+if __name__ == '__main__':
+    print('RECURSION  FORMULA')
+    print('-' * 10, '-' * 10)
+    for i in range(1, 6):
+        print(f'{recur_func(i):^10d} {check_func(i):^10d}')
+
+'''
+RECURSION  FORMULA
+---------- ----------
+    1          1     
+    3          3     
+    6          6     
+    10         10    
+    15         15 
+'''

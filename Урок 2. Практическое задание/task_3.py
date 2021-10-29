@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+BASIC = 10
+
+def permut(val) -> str:
+    while val > BASIC:
+        return str(val % BASIC) + permut(val // BASIC)
+    return str(val)
+
+if __name__ == '__main__':
+
+    testlist = [123456789, 9876543210, 1122334455]
+    for v in testlist:
+        print(f'original {v} result of permutation {permut(v)}')

@@ -17,3 +17,70 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+from timeit import default_timer
+from random import randint
+
+ASCENDING, DESCENDING = True, False
+MAX_LEN = 10000
+
+
+def measure(func):
+    def wrapper(*args, **kwargs):
+        start = default_timer()
+        result = func(*args, **kwargs)
+        print(f'Время работы функции {default_timer() - start}')
+        return result
+
+    return wrapper
+
+
+@measure
+def bubble_sort(l: list, mode=ASCENDING, optimize=False) -> list:
+    len_l = len(l)
+    for x in range(len_l):
+        noswaps = True
+        for y in range(x + 1, len_l):
+            if l[x] > l[y]:
+                l[x], l[y] = l[y], l[x]
+                noswaps = False
+        if optimize and noswaps:
+            break
+    return l if mode else l[::-1]
+
+
+if __name__ == '__main__':
+    SRC_LIST = [randint(-100, 100) for i in range(MAX_LEN)]
+    print(bubble_sort(SRC_LIST[:], DESCENDING))
+    print(bubble_sort(SRC_LIST[:], DESCENDING, optimize=True))
+
+    SRC_LIST = [randint(-5, 5) for i in range(MAX_LEN)]
+    print(bubble_sort(SRC_LIST[:], DESCENDING))
+    print(bubble_sort(SRC_LIST[:], DESCENDING, optimize=True))
+    exit(0)
+
+'''
+Протестировали функицю на выборке в 10000 элементов:
+1. на интервале случайных чисел -100..100 
+не оптимизированный вариант - Время работы функции 10.130266400003165
+оптимизация - Время работы функции 10.37552258699725
+2. на интервале случайных числе -5..5 соответственно:
+Время работы функции 10.22603062500275
+Время работы функции 9.4037357000052
+
+Выводы:
+- сложность О(н**2)
+- оптимизация на большом количестве однородных данных даёт незначительный результат,
+на данных МАЛОповторяющихся результат оптимизации отсутствует.
+- алгоритм довольно лаконичен. в сочетании со срезами питона результат легко переворачивается.
+- при нескольких последовательных вызовах данные меняются. оптимизация зависит от РАСКЛАДА
+
+Время работы функции 10.130266400003165
+[100, 100, 100,...-100, -100, -100, -100]
+Время работы функции 10.37552258699725
+[100, 100, 100,...-100, -100, -100, -100]
+Время работы функции 10.22603062500275
+[5, 5, 5, 5, 5,...-5, -5, -5, -5, -5, -5]
+Время работы функции 9.4037357000052
+[5, 5, 5, 5, 5,...-5, -5, -5, -5, -5, -5]
+
+'''
