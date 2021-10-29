@@ -19,3 +19,21 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+def min_num(lst: list):                                 # O(N^2)
+    for i in range(len(lst)-1):                         # O(N)
+        for j in range(len(lst)-i-1):                   # O(N)
+            if lst[j] > lst[j+1]:                       # O(1)
+                lst[j], lst[j+1] = lst[j+1], lst[j]     # O(1)
+    return lst[0]                                       # O(1)
+
+
+def min_find(lst: list):            # O(N)
+    min_i = 0                       # O(1)
+    for i in range(1, len(lst)):    # O(N)
+        if lst[i] < lst[min_i]:     # O(1)
+            min_i = i               # O(1)
+    return lst[min_i]               # O(1)
+
+print(min_num([9, 2, 3, 3, 6, 7]))
+print(min_find([9, 2, 3, 3, 6, 7]))
