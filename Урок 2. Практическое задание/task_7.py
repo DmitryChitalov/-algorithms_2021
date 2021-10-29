@@ -16,3 +16,38 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+# Вариант 1. Передаются параметры повторно в функцию
+
+def checking_set(n, all_sum=0, memory_n=None):
+    # сохраним исходный параметр n
+    if not memory_n:
+        memory_n = n
+    if all_sum == memory_n*(memory_n+1)/2:
+        return f'Равенство выполняется - {all_sum}'
+    all_sum += n
+    n = n - 1
+    return checking_set(n, all_sum, memory_n)
+
+
+# Проверка результата
+print('\nВариант 1. Вывод делается в самой функции')
+print(checking_set(5))
+print(checking_set(0))
+print(checking_set(101))
+
+
+# Вариант 2. Подсчитываем сумму множества и сравниваем результат
+
+
+def check2(n):
+    if n == 1:
+        return 1
+    return n + check2(n-1)
+
+
+# Проверка
+print('\nВариант 2. Подсчитываем сумму множества и сравниваем результат')
+n = 5
+print(check2(n) == n*(n+1)/2)
