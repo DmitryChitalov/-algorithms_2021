@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def analize(num, even = 0, odd = 0 ):
+    if num == 0:
+        return print(f'Четных: {even}, нечетных: {odd}')
+    elif num % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    num = num // 10
+    return analize(num,even, odd)
+
+analize(123321156)

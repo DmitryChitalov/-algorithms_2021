@@ -28,3 +28,41 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def my_func():
+    symbols = ['+', '-', '*', '/', '0']
+    symbol = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if symbol in symbols:
+        if symbol == '0':
+            return print('Выход осуществлен!')
+
+
+        try:
+            first_int = int(input('Введите первое число: '))
+        except Exception:
+            print('Вы ввели строку вместо числа! Исправьтесь.')
+            my_func()
+
+        try:
+            second_int = int(input('Введите второе число: '))
+        except Exception:
+            print('Вы ввели строку вместо числа! Исправьтесь.')
+            my_func()
+
+        if symbol == '+':
+            print(f'Результат равен: {first_int + second_int}')
+        elif symbol == '-':
+            print(f'Результат равен: {first_int - second_int}')
+        elif symbol == '*':
+            print(f'Результат равен: {first_int * second_int}')
+        elif symbol == '/':
+            try:
+                print(f'Результат равен: {first_int / second_int}')
+            except ZeroDivisionError:
+                print('На ноль делить нельзя!')
+        return my_func()
+    else:
+        print('Такая операция не допустима, выберите из предложенных!')
+        return my_func()
+
+if __name__ == '__main__':
+    my_func()

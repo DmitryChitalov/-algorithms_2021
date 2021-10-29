@@ -20,3 +20,28 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+companies = {'firm1': 30000, 'firm2': 40000, 'firm3': 15000, 'firm4': 100000, 'firm5': 60000}
+
+
+# Решение 1 O(N log N)
+def top3_1():
+    top_companies = {}
+    sorted_companies = sorted(companies, key=companies.get, reverse=True) # O(N log N)
+    for i in sorted_companies[:3]:
+        top_companies[i] = companies.get(i)
+    print(top_companies)
+
+# Решение 2 # O(N log N)
+
+def top3_2():
+    top_companies = {}
+    temp = list(sorted(companies.values(), reverse=True)[:3]) # O(N log N)
+    for i in temp:
+        for key, value in companies.items():
+            if value == i:
+                top_companies[key] = value
+    print(top_companies)
+
+top3_1()
+top3_2()
+

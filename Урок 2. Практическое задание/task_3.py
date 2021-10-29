@@ -22,3 +22,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def reverse(num,reverse_list =[]):
+    if num == 0:
+        return ''.join(reverse_list)
+    temp = str(num % 10)
+    reverse_list.append(temp)
+    num = num // 10
+    return reverse(num)
+
+if __name__ == '__main__':
+    try:
+        num = int(input('Введите положительное число, которое требуется перевернуть: '))
+    except Exception:
+        print('Вы ввели строку!')
+        reverse()
+    if num < 0:
+        print('Вы ввели отрицательное число!')
+        reverse()
+    else:
+        print(reverse(num))
+
