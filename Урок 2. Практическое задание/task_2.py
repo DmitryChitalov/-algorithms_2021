@@ -18,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+EVENS = [0, 2, 4, 6, 8]
+ODDS = [1, 3, 5, 7, 9]
+BASIC = 10
+
+
+def evenodd(val, sumevens=0, sumodds=0) -> tuple:
+    if val > BASIC:
+        return evenodd(val // BASIC, sumevens + 1 if val % BASIC in EVENS else sumevens,
+                       sumodds + 1 if val % BASIC in ODDS else sumodds)
+    return sumevens + 1 if val % BASIC in EVENS else sumevens, \
+           sumodds + 1 if val % BASIC in ODDS else sumodds
+
+
+if __name__ == '__main__':
+
+    # randlist = {random.randint(10000000, 99999999) for x in range(3)}
+    randlist = [1234567890, 1111111111, 2222222223]
+    for v in randlist:
+        print(f'for digit {v} result as', 'even {}, odd {}'.format(*evenodd(v)))
