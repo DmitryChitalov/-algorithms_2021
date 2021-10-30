@@ -2,6 +2,9 @@
 Задание 5.
 Задание на закрепление навыков работы со стеком
 
+Примечание: в этом задании вспомните ваши знания по работе с ООП
+и опирайтесь на пример урока
+
 Реализуйте структуру "стопка тарелок".
 
 Мы можем складывать тарелки в стопку и при превышении некоторого значения
@@ -17,14 +20,50 @@
 
 Подсказка:
 Отдельне стопки можно реализовать через:
-1) созд-е экземпляров стека (если стопка - класс)
-или
-2) lst = [[], [], [], [],....]
-
-Примечание: в этом задании вспомните ваши знания по работе с ООП
-и опирайтесь на пример урока
-
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
+# 1) созд-е экземпляров стека (если стопка - класс)
+# 2) lst = [[], [], [], [],....]
 """
+import math
+
+
+class StackClass:
+
+    def __init__(self, size):
+        self.elems = [[]]
+        self.size = size
+
+    def push_in(self, el):
+        if len(self.elems[len(self.elems) - 1]) < self.size:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(el)
+
+    def pop_out(self):
+        if not len(self.elems[len(self.elems) - 1]):
+            self.elems.pop()
+        return self.elems[len(self.elems) - 1].pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+    def stack_fulsize(self):
+        ful_size = 0
+        for el in self.elems:
+            ful_size += len(el)
+        return ful_size
+
+
+if __name__ == '__main__':
+    plates = StackClass(10)
+    for i in range(25):
+        plates.push_in(i)
+    print(plates.elems)
+    for i in range(11):
+        plates.pop_out()
+    print(plates.elems)
+    print(plates.stack_size())
+    print(plates.stack_fulsize())
