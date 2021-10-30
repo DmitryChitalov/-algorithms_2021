@@ -29,7 +29,7 @@ def unique_str(string):
         for j in range(i + 1, len(string) + 1):
             if string[i:j] != string:
                 result.append(hash(string[i:j]))
-    result =set(result)
+    result = set(result)
     return print(len(result))
 
 

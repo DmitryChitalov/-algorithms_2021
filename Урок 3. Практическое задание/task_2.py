@@ -23,10 +23,14 @@
 import hashlib
 
 
-def my_program():
+def duplicate(salt):
     password = input("Please enter the password: ")
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+
+def my_program():
     salt = 'max_security'
-    pwd_hash = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+    pwd_hash = duplicate(salt)
     file = open('pwd_file.txt', 'w')
     file.write(pwd_hash)
     file.close()
