@@ -15,3 +15,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def magic(num):
+    if num == 1:
+        return 1, 1
+    else:
+        prenum, presum = magic(num-1)
+        actnum = prenum/(-2)
+        actsum = presum + actnum
+        return actnum, actsum
+
+
+def result(num):
+    return magic(num)[1]
+
+
+print(result(int(input('Сколько элементов суммировать? :'))))
