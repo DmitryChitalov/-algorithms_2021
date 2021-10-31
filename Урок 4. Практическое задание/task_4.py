@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,36 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def my_func():
+    count_2 = 0
+    number = 0
+    for el in array:
+        count = 0
+        for el_2 in array:
+            if el == el_2:
+                count += 1
+        if count > count_2:
+            count_2 = count
+            number = el
+    return f'Number {number} was {count_2} times '
+
+
+def my_func_2():
+    max_2 = max(array, key=array.count)
+    return f'Number {max_2} was {array.count(max_2)} times '
+
+
 print(func_1())
 print(func_2())
+print(my_func())
+print(my_func_2())
+
+print("func_1 time: ", timeit.timeit("func_1()", globals=globals()), "secs")
+print("func_2 time: ", timeit.timeit("func_2()", globals=globals()), "secs")
+print("my_func time: ", timeit.timeit("my_func()", globals=globals()), "secs")
+print("my_func_2 time: ", timeit.timeit("my_func_2()", globals=globals()), "secs")
+
+"""
+Функция my_func_2() написана без ипользования циклов, только с примененеием встроенной функции,
+поэтому она самая быстрая
+"""
