@@ -17,9 +17,123 @@
 """
 
 
+from timeit import timeit
+
+
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [ind for ind, el in enumerate(nums) if el % 2 == 0]
+
+
+def func_3(nums):
+    try: 
+        count = 0
+        ar = []
+        ll = (ind for ind, el in enumerate(nums) if el % 2 == 0)
+        while len(nums) > count:
+            ar.append(next(ll))
+            count += 1
+    except:
+        return ar
+
+
+def func_4(nums):
+    try: 
+        ar = []
+        ll = (ind for ind, el in enumerate(nums) if el % 2 == 0)
+        for i in range(len(nums)):
+            ar.append(next(ll))
+    except:
+        return ar   
+
+
+def func_5(nums):
+    yield from [ind for ind, el in enumerate(nums) if el % 2 == 0]
+    
+
+
+arr = [el for el in range(10000)]
+
+
+gen = [i for i in func_5(arr)]
+    
+
+
+print(f'''Время выполнения func_1(arr)
+==>>{timeit(
+        'func_1(arr)',
+        globals=globals(),
+        number=10000
+    )}
+# ''', end='\n')
+
+print(f'''Время выполнения func_2(arr)
+==>>{timeit(
+        'func_2(arr)',
+        globals=globals(),
+        number=10000
+    )}
+# ''', end='\n')
+
+print(f'''Время выполнения func_3(arr)
+==>>{timeit(
+        'func_3(arr)',
+        globals=globals(),
+        number=10000
+    )}
+# ''', end='\n')
+
+print(f'''Время выполнения func_4(arr)
+==>>{timeit(
+        'func_4(arr)',
+        globals=globals(),
+        number=10000
+    )}
+# ''', end='\n')
+
+print(f'''Время выполнения func_5(arr)
+==>>{timeit(
+        'gen = [i for i in func_5(arr)]',
+        globals=globals(),
+        number=10000
+    )}
+# ''', end='\n')
+
+
+# ============10000             ============1000        ============100
+# ========================Время выполнения func_1(arr)      
+# ==>>8.478071869999894         0.8056534019997343      0.06895115600036661
+# # 
+# ========================Время выполнения func_2(arr)
+# ==>>6.035569554000176         0.5773798670006727      0.05676783799935947
+# # 
+# ========================Время выполнения func_3(arr)
+# ==>>14.517618396000216        1.390286789000129       0.12615353900037007
+# # 
+# ========================Время выполнения func_4(arr)
+# ==>>11.276846983999803        1.067242979999719       0.10943231100009143
+# # 
+# ========================Время выполнения func_5(arr)
+# ==>>7.285246369999641         0.7768694559999858      0.07695709600011469
+# # 
+# 
+#   АНАЛИТИКА:
+#   Поставленные эксперементы показали, что списковое включение догнать не так просто.
+#   При длине списка в 100, 1000, 10000 - первое место за LC (List Comprehension).
+#   Второе место отдам созданию генератора и потом через LC создание нового списка с нужными
+#   индексами  -  это сочетание скорости LC и меньшому колличеству данных, так как в генераторе уже 
+#   отсеяны лишние значения.
+#   Цикл - 3 место в решении этой задачи.
+# 
+# 
+# 
+# 
+# 
+# 
