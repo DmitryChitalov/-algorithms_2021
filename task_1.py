@@ -72,23 +72,6 @@ print()
 
 #===========================================
 
-from collections import deque
-
-def create_deque_1():
-    """Не освобождаем"""
-    dq = deque(a for a in range(100000))
-    return dq
-
-
-def create_deque_2():
-    """Освобождаем"""
-    dq = deque(a for a in range(100000))
-    cop = deepcopy(dq)
-    del dq
-    cop = None
-    return cop
-
-#===========================================
 
 from random import random
 array = [int(random()*5) for i in range(10000)]
