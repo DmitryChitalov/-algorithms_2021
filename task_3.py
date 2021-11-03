@@ -6,7 +6,6 @@
 Есть очень простое решение
 """
 
-
 def nums(user_number):
 
     if user_number != 0:
@@ -14,9 +13,6 @@ def nums(user_number):
         user_number = user_number // 10
         print(numbers, end = '')
         return nums(user_number)
-
-
-
 
 
 def revers_optimaze(n):     # оптимизирванный метод "переворота" числа
