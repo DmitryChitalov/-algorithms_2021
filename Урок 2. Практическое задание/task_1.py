@@ -28,3 +28,71 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_input(input_string, is_operation=False):
+    """
+    Проверка введенных параметров.
+    :param input_string:
+    :param is_operation:
+    :return:
+    """
+    if input_string == "0" and is_operation:
+        exit()
+    elif input_string == "+" or input_string == "-" or input_string == "*" or input_string == "/":
+        return True if is_operation else False
+    elif input_string.isdigit():
+        return True if is_operation is False else False
+    else:
+        print("Вы ввели что-то не то!\n")
+        return False
+
+
+def calc(operation, first_number, second_number):
+    """
+    Функция - калькулятор.
+    :param operation:
+    :param first_number:
+    :param second_number:
+    :return:
+    """
+    if operation == "+":
+        return first_number + second_number
+    elif operation == "-":
+        return first_number - second_number
+    elif operation == "*":
+        return first_number * second_number
+    elif operation == "/":
+        #  Skip ZeroDivisionError.
+        if second_number != 0:
+            return first_number / second_number
+        else:
+            return 0
+
+
+def main_calc():
+    """
+    Основная рекурсивная функция.
+    :return:
+    """
+    operation = (input("Введите операцию (+, -, *, / или 0 для выхода): \n")).lower()
+    if check_input(operation, True):
+        first_number = input("Введите первое число: \n")
+        if check_input(first_number):
+            first_number = int(first_number)
+            second_number = input("Введите второе число: \n")
+            if check_input(second_number):
+                second_number = int(second_number)
+
+                print(f"{first_number} {operation} {second_number} = {calc(operation, first_number, second_number)};\n")
+                return main_calc()
+
+            else:
+                return main_calc()
+        else:
+            return main_calc()
+    else:
+        return main_calc()
+
+
+main_calc()

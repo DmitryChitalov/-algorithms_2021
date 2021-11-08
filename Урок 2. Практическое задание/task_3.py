@@ -22,3 +22,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_revers_number(input_number, revers_number=[]):
+    """
+    Получение перевёрнутого числа.
+    :param input_number:
+    :param revers_number:
+    :return:
+    """
+    if input_number == 0:
+        return "".join(str(e) for e in revers_number)
+    else:
+        remainder = input_number % 10
+        revers_number.append(remainder)
+        input_number = input_number // 10
+        return get_revers_number(input_number, revers_number)
+
+
+number = int(input("Введите число, которое требуется перевернуть: \n"))
+print(f"Вы ввели: {number}\n")
+revs_number = get_revers_number(number)
+print(f"Перевернутое число: {revs_number}")
+
+""" 
+Точно, вы говорили о ведущим нуле. Забыл, жара. Исправлено.
+"""
+
+
