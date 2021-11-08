@@ -16,3 +16,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recur_method(numb):
+    if numb == 1:
+        return numb
+    else:
+        return recur_method(numb - 1) + numb
+
+
+print(recur_method(10))
