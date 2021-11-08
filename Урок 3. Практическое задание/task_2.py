@@ -20,3 +20,49 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+
+import hashlib
+import sqlite3
+
+
+def create_base():
+    conn = sqlite3.connect('db.db')
+    cursor = conn.cursor()
+    cursor.execute("""CREATE TABLE users(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        password TEXT);""")
+    conn.commit()
+
+
+def login_in():
+    conn = sqlite3.connect('db.db')
+    cursor = conn.cursor()
+    name_input = input('Введите логин: ')
+    pass_input = input('Введите пароль: ')
+    password_to_hash = hashlib.sha256(pass_input.encode('utf-8') + name_input.encode('utf-8')).hexdigest()
+    print(f'Хеш пароля: {password_to_hash}')
+    sql_insert = 'INSERT INTO users (name, password) VALUES (?, ?)'
+    cursor.execute(sql_insert, ([name_input, password_to_hash]))
+    conn.commit()
+
+
+def login():
+    conn = sqlite3.connect('db.db')
+    cursor = conn.cursor()
+    name_input = input('Введите логин: ')
+    pass_input = input('Введите пароль: ')
+    password_to_hash = hashlib.sha256(pass_input.encode('utf-8') + name_input.encode('utf-8')).hexdigest()
+    cursor.execute('SELECT password FROM users WHERE name=?', (name_input,))
+    result = cursor.fetchone()
+    if result is None:
+        return f'Такой пользователь уже существует'
+    if password_to_hash == result[0]:
+        return f'Вы ввели правильный пароль'
+    else:
+        return f'Неверный пароль '
+
+# create_base()
+# login_in()
+print(login())
