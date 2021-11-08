@@ -15,3 +15,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def find_sum(n, number=1.0, common=0):
+    if n == 0:
+        return common
+    else:
+        common += number
+        number = number / 2 * -1
+        return find_sum(n - 1, number, common)
+
+
+num = int(input('Введите количество элементов: '))
+print(f'Количество элементов: {num}, их сумма: {find_sum(num)}')
