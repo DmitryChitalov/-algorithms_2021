@@ -28,3 +28,78 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+""" Оставила в файле решение с циклом для себя. """
+
+
+def calculator():
+    while True:
+        action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        action_list = ['+', '-', '*', '/']
+        if action not in action_list:
+            print('Введена некорректная операция')
+            continue
+        else:
+            try:
+                operand_1 = int(input('Введите первое число: '))
+                operand_2 = int(input('Введите второе число: '))
+            except ValueError:
+                print('Операнды должны быть числами')
+            else:
+                if action == '0':
+                    print('Работа с калькулятором завершена!')
+                    break
+                elif action == '+':
+                    print('Ваш результат: ', operand_1 + operand_2)
+                elif action == '-':
+                    print('Ваш результат: ', operand_1 - operand_2)
+                elif action == '*':
+                    print('Ваш результат: ', operand_1 * operand_2)
+                elif action == '/':
+                    try:
+                        result = operand_1 / operand_2
+                    except ZeroDivisionError:
+                        print('Деление на ноль недопустимо!')
+                    else:
+                        print('Ваш результат: ', result)
+
+
+def calculator_recurs():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if action == '0':
+        print('Работа с калькулятором завершена!')
+    else:
+        action_list = ['+', '-', '*', '/']
+        if action not in action_list:
+            print('Введена некорректная операция')
+            return calculator_recurs()
+        else:
+            try:
+                operand_1 = int(input('Введите первое число: '))
+                operand_2 = int(input('Введите второе число: '))
+            except ValueError:
+                print('Операнды должны быть числами')
+                return calculator_recurs()
+            else:
+                if action == '+':
+                    print('Ваш результат: ', operand_1 + operand_2)
+                    return calculator_recurs()
+                elif action == '-':
+                    print('Ваш результат: ', operand_1 - operand_2)
+                    return calculator_recurs()
+                elif action == '*':
+                    print('Ваш результат: ', operand_1 * operand_2)
+                    return calculator_recurs()
+                elif action == '/':
+                    try:
+                        result = operand_1 / operand_2
+                    except ZeroDivisionError:
+                        print('Деление на ноль недопустимо!')
+                        return calculator_recurs()
+                    else:
+                        print('Ваш результат: ', result)
+                        return calculator_recurs()
+
+
+# calculator()
+calculator_recurs()
