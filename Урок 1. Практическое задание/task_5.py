@@ -28,3 +28,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = [[], [], [], [], [], [], []]
+
+    def push_in(self, el):
+        """Предполагается, что верхний элемент стека находится в конце списка"""
+        for i in range(0, len(self.elems) - 1, 1):
+            if len(self.elems[i]) < 7:
+                self.elems[i].append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def size_stack(self):
+        return len(self.elems)
+
+
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.max = None
+
+    def push(self, item):
+        self.stack.append(item)
+        if len(self.stack) == 1 or item > self.max:
+            self.max = item
+
+
+if __name__ == '__main__':
+    stack_1 = StackClass()
+    i = 0
+    while i < 10:
+        stack_1.push_in(i + 1)
+        i += 1
+
+print(stack_1.elems)
