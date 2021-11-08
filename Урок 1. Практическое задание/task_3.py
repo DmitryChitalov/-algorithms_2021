@@ -20,3 +20,36 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {'apple': 234000,
+             'samsung': 120000,
+             'inditex': 28000,
+             'lenta': 9060,
+             'amazon': 560000,
+             'google': 89000,
+             'facebook': 74000,
+             'microsoft': 450000,
+             'tesla': 810000,
+             'IBM': 4000}
+
+# сложность O(n log n)
+sorted_companies = dict(sorted(companies.items(), key=lambda item: item[1], reverse=True)[:3])
+print(sorted_companies)
+
+# сложность O(n)
+max_value = 0
+company_name = ''
+top_three = {}
+
+companies_copy = dict(companies)
+for i in range(3):
+    for key, value in companies_copy.items():
+        if value > max_value:
+            max_value = value
+            company_name = key
+    top_three[company_name] = max_value
+    del companies_copy[company_name]
+    max_value = 0
+print(top_three)
+
+# эффективнее решение со сложностью O(n), так как имеет минимальное количество операций
