@@ -19,3 +19,34 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+
+def find_min1(lst):
+    """
+    Алгоритмическая сложность - O(N^2)
+    """
+    for i in lst:   # O(N)
+        min = i # O(1)
+        for j in lst:   # O(N)
+            if j < min: # O(1)
+                min = j # O(1)
+        if min == i:    # O(1)
+            return i    # O(1)
+
+
+def find_min2(lst):
+    """
+    Алгоритмическая сложность - O(N)
+    """
+    min = lst[0]  # O(1)
+    for i in lst:  # O(N)
+        if i < min:  # O(1)
+            min = i  # O(1)
+    return min  # O(1)
+
+
+random_smpl = random.sample(range(-10000, 10000), 30)
+print(min(random_smpl))
+print(find_min1(random_smpl))
+print(find_min2(random_smpl))

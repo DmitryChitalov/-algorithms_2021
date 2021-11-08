@@ -28,3 +28,62 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    """
+    Создадим переменную класса и будем складывать в неё стопки тарелок, к методам которых сможем обращаться.
+    """
+    stacks_op_plates = []
+
+    def __init__(self, lst=None):
+        """
+        Добавим условие в конструктор, чтобы при наполнении стека, добавлять его экземпляр в список стопок,
+        сохраняя значения.
+        """
+        if lst is None:
+            self.elems = []
+        else:
+            self.elems = lst
+
+    @property
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Если стопка набрала 5 тарелок, вызываем конструктор и передаем в него список тарелок в стопке.
+        После чего очищаем список и кладем наверх 6 тарелку."""
+        if self.stack_size >= 5:
+            StackClass.stacks_op_plates.append(StackClass(self.elems))
+            self.elems = []
+            self.elems.append(el)
+        else:
+            self.elems.append(el)
+
+    @property
+    def pop_out(self):
+        return self.elems.pop( )
+
+    @property
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    @property
+    def stack_size(self):
+        return len(self.elems)
+
+    @property
+    def check_stack(self):
+        tmp_stack = StackClass.stacks_op_plates[:]
+        tmp_stack.append(self)
+        return tmp_stack
+
+
+plates = StackClass( )
+for i in range(16):
+    plates.push_in('Тарелка' + f'{i}')
+
+for i in plates.check_stack:
+    print(i.elems)
+    print(i.stack_size)
+    print(i.get_val)
