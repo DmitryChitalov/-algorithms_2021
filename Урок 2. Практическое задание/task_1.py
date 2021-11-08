@@ -28,3 +28,109 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import re
+
+# re для целого числа
+# RE_INT = re.compile(r'^[0-9]+$|^[-][0-9]+$')
+RE_INT = re.compile(r'^-?\d+$')
+
+# re для вещественного числа (через точку и через запятую)
+# RE_FLOAT = re.compile(r'^\d+[.,][0-9]+$|^\d+[.,]$|^[.,][0-9]+$|^[-]\d+[.,][0-9]+$|^[-]\d+[.,]$|^[-][.,][0-9]+$')
+RE_FLOAT = re.compile(r'^-?\d+[.,]\d+$|^-?[.,]\d+$|^-?\d+[.,]$')
+
+# re для вещественного числа (только через запятую)
+# RE_FLOAT_COMMA = re.compile(r'^\d+[,][0-9]+$|^\d+[,]$|^[,][0-9]+$|^[-]\d+[,][0-9]+$|^[-]\d+[,]$|^[-][,][0-9]+$')
+RE_FLOAT_COMMA = re.compile(r'^-?\d+[,]\d+$|^-?[,]\d+$|^-?\d+[,]$')
+
+# re для символа оператора или символа окончания работы, "0"
+RE_OPERATOR = re.compile(r'^[0+\-*/]$')
+
+
+def get_add(a, b):
+    c = a + b
+    return c
+
+
+def get_sub(a, b):
+    return a - b
+
+
+def get_mult(a, b):
+    return round(a * b, 3)
+
+
+def get_div(a, b):
+    if b == 0:
+        return 'Ошибка!\n' \
+               'Попытка операции деления на НОЛЬ.'
+    else:
+        return round(a / b, 3)
+
+# def input_arg(flag):
+#     a = input(f'Введите {flag} число: ')
+#
+#     if RE_INT.fullmatch(a):
+#         return int(a)
+#
+#     elif RE_FLOAT.fullmatch(a):
+#         if RE_FLOAT_COMMA.fullmatch(a):
+#             a = a.replace(',', '.')
+#         return float(a)
+#
+#     else:
+#         print(f'Вы ввели строку вместо числа, ещё раз введите {flag} число: ')
+#         input_arg(flag)
+#
+
+
+def str_to_num(arg):
+    if RE_INT.fullmatch(arg):
+        return int(arg), True
+
+    elif RE_FLOAT.fullmatch(arg):
+        if RE_FLOAT_COMMA.fullmatch(arg):
+            arg = arg.replace(',', '.')
+        return float(arg), True
+
+    else:
+        return None, False
+
+
+def calc_action(a, b, op_sign):
+    if op_sign == "+":
+        print(f'\nВаш результат: {get_add(a, b)}')
+    elif op_sign == "-":
+        print(f'\nВаш результат: {get_sub(a, b)}')
+    elif op_sign == "*":
+        print(f'\nВаш результат: {get_mult(a, b)}')
+    elif op_sign == "/":
+        print(f'\nВаш результат: {get_div(a, b)}')
+
+
+def calculator():
+
+    op_sign = input('\nВведите операцию\n'
+                    '(+, -, *, / или 0 для выхода): ')
+
+    if RE_OPERATOR.fullmatch(op_sign):
+        if op_sign == "0":
+            print('\nВыход')
+            return
+
+        x = str_to_num(input('Введите первое число: '))
+        y = str_to_num(input('Введите второе число: '))
+
+        if x[1] and y[1]:
+            calc_action(x[0], y[0], op_sign)
+
+        else:
+            print('\nВы ввели строку вместо числа, повторите')
+    else:
+        print('\nВы ввели неправильный символ операции, повторите!')
+
+    calculator()
+
+
+if __name__ == '__main__':
+    calculator()
+

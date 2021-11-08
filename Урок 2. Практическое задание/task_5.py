@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_char(code=32):
+    if code >= 127:
+        print(code, '-', chr(code))
+    else:
+        if (code - 32) % 10 == 0:
+            print()
+        print(f'{code} - {chr(code)}', end=' ')
+
+        print_char(code+1)
+
+print_char()

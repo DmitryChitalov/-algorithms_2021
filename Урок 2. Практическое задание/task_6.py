@@ -11,3 +11,32 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+import re
+RE_Nat_number = re.compile(r'^\d+$')
+
+num = random.randint(0, 100)
+
+def guess_number(num, attempt=10):
+    if attempt == 0:
+        print(f'\n\nВсё, количество попыток закончилось'
+              f'\n Ты проиграл!'
+              f'\n\n Загаданное число: {num}')
+        return
+    else:
+        answer = int(input(f"\nпопытка {11 - attempt}, твой вариант ответа:  "))
+        if answer == num:
+            print('\n\nУРА! Ты угадал!!!'
+                 f'\n\n Загаданное число: {answer}')
+            return
+        else:
+            _ = 'больше'.upper() if answer > num else 'меньше'.upper()
+            print(f'УВЫ, неверно! твоё число {_} задуманного ')
+            return guess_number(num, attempt - 1)
+
+
+if __name__ == '__main__':
+    print('\nЯ загадаю число, от 0 до 100, а ты его отгадаешь.\n'
+          'У тебя 10 попыток.\nИтак, какое это число?')
+    guess_number(num)
+

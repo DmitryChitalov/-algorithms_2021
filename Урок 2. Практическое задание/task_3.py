@@ -22,3 +22,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import re
+RE_Nat_number = re.compile(r'^\d+$')
+
+
+def get_revers_number(num, result = ''):
+    if num // 10 != 0:
+        return get_revers_number(num // 10, f'{result}{num % 10}')
+    else:
+        return f'{result}{num % 10}'
+
+
+def input_number():
+    number = input('(Для выхода - символ "X")\n'
+                   'Введите натуральное число\n')
+
+    if RE_Nat_number.fullmatch(number):
+        print(f'\nПеревёрнутое число:\t\t\t{get_revers_number(int(number))}')
+
+    elif number.lower() == 'x' or number.lower() == 'х':
+        exit()
+
+    else:
+        print(f'"{number}" - не натуральное число, исправьтесь.\n')
+        input_number()
+
+
+if __name__ == '__main__':
+    input_number()
