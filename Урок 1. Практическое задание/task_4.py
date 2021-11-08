@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Задание 4.
 
@@ -25,3 +27,60 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {
+    'user1' : ['password1', True],
+    'user2' : ['password2', False],
+    'user3' : ['password3', True],
+    'user4' : ['password4', False],
+    'user5' : ['password5', True],
+    'user6' : ['password6', False],
+    'user7' : ['password7', True]
+}
+
+
+def check_user_1(user: str, password: str) -> None:
+    ''' O(1) '''
+    user_data = users.get(user)
+    if user_data is None or user_data[0] != password:
+        print('Неверные имя пользователя или пароль')
+    else:
+        if user_data[1]:
+            print('Регистрация пройдена')
+        else:
+            if (input('Вы не активированы, желаете пройти активацию (Y/N): ').upper() == 'Y'):
+                print('Регистрация пройдена')
+
+
+def check_user_2(user: str, password: str) -> None:
+    ''' O(n) '''
+    if user in users.keys():
+        user_data = users[user]
+        if user_data[0] != password:
+            print('Неверные имя пользователя или пароль')
+        else:
+            if user_data[1]:
+                print('Регистрация пройдена')
+            else:
+                if (input('Вы не активированы, желаете пройти активацию (Y/N): ').upper() == 'Y'):
+                    print('Регистрация пройдена')
+    else:
+        print('Неверные имя пользователя или пароль')
+
+
+
+def main():
+    ''' Вариант 1 лучше т.к. имеет меньшую алгоритмическую сложность '''
+
+    var  = int(input('Введите вариант решения (1 или 2): '))
+    user = input('Введите имя пользователя: ')
+    pwd  = input('Введите пароль: ')
+
+    if var == 1:
+        check_user_1(user, pwd)
+    elif var == 2:
+        check_user_2(user, pwd)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Задание 7.
 Задание на закрепление навыков работы с деком
@@ -13,3 +15,80 @@
 Примечание:
 Вам не нужно писать код с нуля. Вам нужно доработать пример с урока.
 """
+
+
+class DequeClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def add_to_front(self, elem):
+        self.elems.append(elem)
+
+    def add_to_rear(self, elem):
+        self.elems.insert(0, elem)
+
+    def remove_from_front(self):
+        return self.elems.pop()
+
+    def remove_from_rear(self):
+        return self.elems.pop(0)
+
+    def size(self):
+        return len(self.elems)
+
+
+def pal_checker_v1(string: str) -> bool:
+    dc_obj = DequeClass()
+
+    for el in string:
+        dc_obj.add_to_rear(el)
+
+    first = ' '
+    last  = ' '
+    still_equal = True
+
+    while dc_obj.size() > 1 and still_equal:
+        first = dc_obj.remove_from_front()
+        while first.isspace():
+            first = dc_obj.remove_from_front()
+
+        last = dc_obj.remove_from_rear()
+        while last.isspace():
+            last = dc_obj.remove_from_rear()
+
+        if first != last:
+            still_equal = False
+
+    return still_equal
+
+
+def pal_checker_v2(string: str) -> bool:
+    dc_obj = DequeClass()
+
+    string = ''.join(string.split())
+    for el in string:
+        dc_obj.add_to_rear(el)
+
+    first = ' '
+    last  = ' '
+    still_equal = True
+
+    while dc_obj.size() > 1 and still_equal:
+        first = dc_obj.remove_from_front()
+        last = dc_obj.remove_from_rear()
+        if first != last:
+            still_equal = False
+
+    return still_equal
+
+
+def main():
+    print(pal_checker_v1("молоко делили ледоколом"))
+    print(pal_checker_v2("молоко делили ледоколом"))
+
+
+if __name__ == '__main__':
+    main()
