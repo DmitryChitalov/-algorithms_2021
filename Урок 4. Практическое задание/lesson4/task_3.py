@@ -1,0 +1,52 @@
+from timeit import timeit
+from cProfile import run
+
+
+def revers_1(enter_num, revers_num=0):
+    if enter_num == 0:
+        return revers_num
+    else:
+        num = enter_num % 10
+        revers_num = (revers_num + num / 10) * 10
+        enter_num //= 10
+        return revers_1(enter_num, revers_num)
+
+
+def revers_2(enter_num, revers_num=0):
+    while enter_num != 0:
+        num = enter_num % 10
+        revers_num = (revers_num + num / 10) * 10
+        enter_num //= 10
+    return revers_num
+
+
+def revers_3(enter_num):
+    enter_num = str(enter_num)
+    revers_num = enter_num[::-1]
+    return revers_num
+
+
+def revers_4(enter_num):
+    return str(enter_num) if enter_num < 10 else str(enter_num % 10) + revers_4(enter_num // 10)
+
+
+def all_func(enter_num):
+    for i in range(1000000):
+        revers_1(enter_num)
+        revers_2(enter_num)
+        revers_3(enter_num)
+        revers_4(enter_num)
+
+
+print(f'Использование рекурсии: {timeit("revers_1(12345)", globals=globals())}')
+print(f'Использование цикла: {timeit("revers_2(12345)", globals=globals())}')
+print(f'Использование среза: {timeit("revers_3(12345)", globals=globals())}')
+print(f'Использование тернарного оператора + рекурсии {timeit("revers_4(12345)", globals=globals())}')
+run('all_func(12345)')
+
+'''
+ВЫВОД:
+Замеры timeit и cProfile показывают, что эффективнее всего использовать реализацию со срезами.
+Решение в одну строку с тернарным оператором оказалось самым медленным
+Измерения timeit и cProfile в целом совпадают, хотя небольшая разница в измерениях прослеживается.
+'''
