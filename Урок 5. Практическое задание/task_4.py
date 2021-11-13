@@ -44,5 +44,17 @@ def get_elm_ord_dict(experemental_ord_dict):
 print(f"{get_elm_ord_dict.__name__} \
     {timeit('get_elm_ord_dict(experemental_ord_dict)', globals=globals(), number=10000)}")
 
+ 
      
+# Python 3.8.10
 
+# fill_dict           0.007075538000208326
+# fill_ord_dict       0.019693026999448193
+
+# get_elm_dict        0.0010672850003174972
+# get_elm_ord_dict    0.0011290509974060114
+
+# И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях?
+# -нет
+
+# Версия по умолчанию оказась более быстродейственной.
