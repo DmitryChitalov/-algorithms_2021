@@ -20,3 +20,35 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def max_profit_1(companies_dict):
+    """
+    В плане сложности неплохое решение: O(Nlog(N))
+    """
+
+    sort_list = []
+    for profit in sorted(companies_dict.items(), key=lambda x: x[1], reverse=True):  # O(Nlog(N))
+        sort_list.append(profit)  # O(1)
+    return sort_list[:3]  # O(1)
+
+
+from collections import Counter
+
+
+def max_profit_2(companies_dict):
+    """
+    Более простое решение как мне кажется. Могу ошибаться в плане сложности, но мне кажется O(Log(N))
+    """
+    sort_dict = dict(Counter(companies_dict).most_common(3))
+    return sort_dict
+
+
+companies = {'Intel': 345000,
+             'AMD': 400000,
+             'NVIDIA': 500000,
+             'ATI': 120000,
+             'Telbel': 13000,
+             'Gideon': 43200}
+print(max_profit_1(companies))
+print(max_profit_2(companies))
