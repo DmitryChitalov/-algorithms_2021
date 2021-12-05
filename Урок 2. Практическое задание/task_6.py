@@ -11,3 +11,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+number = random.randint(0, 100)
+
+
+def func(n, count):
+    user_n = int(input("Угадайте целое число от 0 до 100: "))
+    if n == user_n:
+        print(f"Вы угадали, это число - {user_n} - за {count} попыток")
+        return user_n
+    elif count == 10:
+        print(f"Вам не удалось отгадать за 10 попыток. Это было число {number}")
+        return user_n
+    else:
+        if user_n < n:
+            print("Введенное число меньше загаданного")
+        elif user_n > n:
+            print("Введенное число больше загаданного")
+        func(n, count+1)
+
+
+func(number, 1)
+
+
+
