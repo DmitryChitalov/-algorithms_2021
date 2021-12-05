@@ -21,3 +21,17 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+s = input("Введите строку: ")  # d, f, g, df, fg
+n = len(s)
+hsh_unic = set()
+
+for i in range(n):
+    for k in range(i+1, n+1):
+        if s[i:k] != s:
+            hsh_unic.add(hash(s[i:k]))
+
+print(f'{s} - число уникальных подстрок = {len(hsh_unic)}')
+
+# print(hsh_unic)
+
