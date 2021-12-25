@@ -30,17 +30,17 @@ print(
     timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+        number=100000))
 
 
 def memoize(f):
@@ -68,14 +68,24 @@ print(
     timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
+        number=100000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+        number=100000))
+
+
+# Целесообразность мемоизации зависит от условий задачи
+# Если входные параметры часто повторяются - мемоизация ускорит выполнение программы
+# Если все входные параметры будут уникальными - потратится дополнительное время на кэширование, но ускорения
+# не произойдет
+# Также, в случае с различными входными параметрами, польза мемоизации будет расти с увеличением числа выполений
+# программы, т.к. начнут повторяться подстроки
+
+
