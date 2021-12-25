@@ -15,7 +15,7 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
-
+import timeit
 
 def func_1(nums):
     new_arr = []
@@ -23,3 +23,23 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+list1 = [1,2,3,4,5,6,7,8,9,10]
+
+print(timeit.repeat("func_1(list1)", globals=globals(), repeat=3))
+
+#сменили всю функцию на списковое включение. Быстрее потчи в два раза, так как не требуется вызовы метода append
+def func2(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+    return new_arr
+
+print(timeit.repeat("func2(list1)", globals=globals(), repeat=3))
+
+#сменили списковое включение на генераторное выражение,
+#выражение оказалось быстрее, так как оно не строит весь список сразу и не хранит его в памяти
+
+def func3(nums):
+    new_arr =(i for i in nums if i % 2 == 0)
+    return new_arr
+
+print(timeit.repeat("func3(list1)", globals=globals(), repeat=3))

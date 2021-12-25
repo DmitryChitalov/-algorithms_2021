@@ -11,9 +11,17 @@
 
 Без аналитики задание считается не принятым!
 """
+import timeit
+import collections
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
+#Данный метод быстрее .т.к. здесь нет проверок, вместо этого выводится словарь с количеством каждого элемента
+def func_3():
+    dict1 = {}
+    for i in array:
+        dict1[i] = dict1.get(i, 0) + 1
+    return dict1
 
 def func_1():
     m = 0
@@ -39,5 +47,12 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+#print(func_1())
+#print(func_2())
+print(func_3())
+
+print(timeit.repeat("func_1()", globals=globals(), repeat=3))
+
+print(timeit.repeat("func_2()", globals=globals(), repeat=3))
+
+print(timeit.repeat("func_3()", globals=globals(), repeat=3))
