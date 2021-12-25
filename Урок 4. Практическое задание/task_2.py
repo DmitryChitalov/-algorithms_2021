@@ -79,3 +79,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+@memoize
+def reverse(number):
+    number = str(number)
+    rev_num = number[::-1]
+    return rev_num
+
+
+print('Оптимизированная функция reverse')
+print(
+    timeit(
+        'reverse(num_100)',
+        setup='from __main__ import reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse(num_1000)',
+        setup='from __main__ import reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse(num_10000)',
+        setup='from __main__ import reverse, num_10000',
+        number=10000))
+print(reverse(num_100))
+print(num_100)
+# Мемоизация в функциях нужна т.к. она кеширует значения, в результате чего результат при последующем вызове
+# функции берется не из рекурсии, а из кеша, что ускоряет её работу. Но первый вызов в любом случае будет
+# медленным, да и при добавлении каких то данных скорость вызова функции с новыми данными будет медленнее т.к. их нужно
+# будет кешировать.

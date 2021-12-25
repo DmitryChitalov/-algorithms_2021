@@ -13,6 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
+from cProfile import run
+import timeit
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +39,17 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+run('revers_1(363636)')
+print('revers_1', timeit.timeit('revers_1(363636)', globals=globals()))
+
+run('revers_2(363636)')
+print('revers_2', timeit.timeit('revers_2(363636)', globals=globals()))
+
+run('revers_3(363636)')
+print('revers_3', timeit.timeit('revers_3(363636)', globals=globals()))
+
+# 1) Первая функция самая медленная, т.к. она рекурсивная
+# 2) Вторая функция быстрее первой, но медленнее второй, т.к. в ней есть цикл и математические операции
+# 3) Третья функция самая быстрая, в ней просто срезается строка, нету циклов и математических операций
