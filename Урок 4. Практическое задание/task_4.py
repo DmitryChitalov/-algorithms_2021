@@ -38,6 +38,17 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    return max(set(array), key=array.count)
+
 
 print(func_1())
 print(func_2())
+print(func_3())
+print('func_1', timeit.timeit('func_1()', globals=globals()))
+print('func_2', timeit.timeit('func_2()', globals=globals()))
+print('func_3', timeit.timeit('func_3()', globals=globals()))
+
+"""Функция func_3 работает значительно быстрее остальных при помощи приведения  списка ко множеству(имеющее уникальные числа),
+ что значительно повышает скорость 
+"""

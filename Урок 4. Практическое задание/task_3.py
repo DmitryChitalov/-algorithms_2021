@@ -37,3 +37,19 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+def revers_3(enter_num):
+    enter_num = str(enter_num)
+    revers_num = enter_num[::-1]
+    return revers_num
+
+
+run('revers_1(10000000)')
+run('revers_2(10000000)')
+run('revers_3(10000000)')
+print('revers_1', timeit.timeit('revers_1(10000000)', globals=globals()))
+print('revers_2', timeit.timeit('revers_2(10000000)', globals=globals()))
+print('revers_3', timeit.timeit('revers_3(10000000)', globals=globals()))
+
+'''revers_1-- самая медленная скорость у рекурсии из-за затрат времени на стеки'''
+'''revers_2-- средний показатель у циклов, в отличии от рекурсии затрат меньше'''
+'''revers_3-- срезы оказываются быстрее с большим отрывом (потому что нет дополнительнх действий с перебором значений и вызовов стека'''
