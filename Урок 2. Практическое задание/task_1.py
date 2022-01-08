@@ -28,3 +28,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class WrongOperation(Exception):
+    def __init__(self, message=f'Неверно выбрана операция!'):
+        self.message = message
+        super().__init__(self.message)
+
+
+def calculate(result=None):
+    try:
+        operation = input(f'Введите операцию (+, -, *, / или 0 для выхода):')
+        if operation not in ['+', '-', '*', '/', '0']:
+            raise WrongOperation
+        elif operation == '0':
+            return result
+        else:
+            result = float(input(f'Введите первое число:')) if result is None else result
+            second_number = float(input(f'Введите следующее число:'))
+            if operation == '+':
+                result += second_number
+            elif operation == '-':
+                result -= second_number
+            elif operation == '*':
+                result *= second_number
+            elif operation == '/':
+                result /= second_number
+            return calculate(result)
+    except ZeroDivisionError:
+        print('Деление на ноль! Повторите ввод')
+        return calculate(result)
+    except WrongOperation:
+        print('Неверно выбрана операция! Попробуйте снова')
+        return calculate(result)
+    except ValueError:
+        print('Введено неверное значение! Необходимо ввести число (положительное, отрицательное или 0)')
+        return calculate(result)
+    

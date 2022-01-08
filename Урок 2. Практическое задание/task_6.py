@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import random
+
+
+def guess_game(need_number=None, iter_game=1):
+    if iter_game <= 10:
+        print(f'Загадано число от 0 до 100. Попробуйте угадать. У вас осталось попыток: {11 - iter_game}.')
+        need_number = round(random() * 100) if need_number is None else need_number
+        answer = int(input('Введите ответ: '))
+        if answer > need_number:
+            print('Ваше число больше загаданного.')
+            return guess_game(need_number, iter_game + 1)
+        elif answer < need_number:
+            print('Ваше число меньше загаданного.')
+            return guess_game(need_number, iter_game + 1)
+        else:
+            return f'Вы угадали! Загаданное число: {need_number}'
+    else:
+        return f'Вы не угадали за отведенное количество попыток. Загаданное число {need_number}'
+
