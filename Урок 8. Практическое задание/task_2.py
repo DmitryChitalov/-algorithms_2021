@@ -10,70 +10,75 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
-class BinaryTree:
-    def __init__(self, root_obj):
-        # корень
-        self.root = root_obj
-        # левый потомок
-        self.left_child = None
-        # правый потомок
-        self.right_child = None
 
-    # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+class BinarySearchTree:
+    def __init__(self, root):
+        self.root = TreeNode(root)
+
+    def insert(self, value):
+        self._insert(value, self.root)
+
+    def _insert(self, value, curr_node):
+        if curr_node.node <= value:
+            if curr_node.get_right_child( ):
+                self._insert(value, curr_node.right_child)
+            else:
+                curr_node.right_child = TreeNode(value)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            if curr_node.get_left_child( ):
+                self._insert(value, curr_node.left_child)
+            else:
+                curr_node.left_child = TreeNode(value)
 
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
+    def find(self, value):
+        return self._find_val(value, self.root)
+
+    def _find_val(self, value, curr_node):
+        if curr_node is None:
+            return None
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            if curr_node.node < value:
+                return self._find_val(value, curr_node.right_child)
+            elif curr_node.node > value:
+                return self._find_val(value, curr_node.left_child)
+            else:
+                return curr_node
 
-    # метод доступа к правому потомку
-    def get_right_child(self):
-        return self.right_child
-
-    # метод доступа к левому потомку
-    def get_left_child(self):
-        return self.left_child
-
-    # метод установки корня
-    def set_root_val(self, obj):
-        self.root = obj
-
-    # метод доступа к корню
-    def get_root_val(self):
+    @property
+    def get_root(self):
         return self.root
 
 
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+class TreeNode:
+    def __init__(self, val, left_child=None, right_child=None):
+        self.node = val
+        self.left_child = left_child
+        self.right_child = right_child
+
+    def has_both_children(self):
+        return self.left_child and self.right_child
+
+    def get_right_child(self):
+        return self.right_child
+
+    def get_left_child(self):
+        return self.left_child
+
+    def __str__(self):
+        return f'{self.node}'
+
+
+tree = BinarySearchTree(8)
+tree.insert(10)
+tree.insert(12)
+tree.insert(6)
+tree.insert(7)
+
+print(tree.get_root)
+print(tree.get_root.right_child.node)
+print(tree.get_root.left_child.node)
+print(tree.find(12))
+print(tree.find(100))
+
+tree.insert(100)
+print(tree.find(100))
