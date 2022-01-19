@@ -34,3 +34,22 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+
+
+def hex_calculator():
+    hex_dic = defaultdict(list)
+    num1 = input('Введите первое шестнадцатеричное число: ')
+    hex_dic[num1] = list(num1)
+    num2 = input('Введите второе шестнадцатеричное число: ')
+    hex_dic[num2] = list(num2)
+
+    hex_sum = list(hex(int(num1, 16) + int(num2, 16)))
+    hex_mul = list(hex(int(num1, 16) * int(num2, 16)))
+    print(f'Введенные числа: {hex_dic[num1]} и {hex_dic[num2]}')
+    print(f'Сумма чисел: {hex_sum[2:]}')
+    print(f'Произведение чисел: {hex_mul[2:]}')
+
+
+if __name__ == '__main__':
+    hex_calculator()

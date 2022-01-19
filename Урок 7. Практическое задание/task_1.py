@@ -17,3 +17,55 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+import timeit
+import random
+
+
+def bubble_sort_1(lst1):
+    x = 1
+    while x < len(lst1):
+        for y in range(len(lst1) - x):
+            if lst1[y] < lst1[y+1]:
+                lst1[y], lst1[y+1] = lst1[y+1], lst1[y]
+
+        x += 1
+    return lst1
+
+
+def bubble_sort_2(lst2):
+    n = 1
+    while n < len(lst2):
+        count = 0
+        for j in range(len(lst2) - n):
+            if lst2[j] < lst2[j+1]:
+                count += 1
+                lst2[j], lst2[j+1] = lst2[j+1], lst2[j]
+        if count == 0:
+            break
+
+        n += 1
+
+    return lst2
+
+
+if __name__ == '__main__':
+
+    test_list = [random.randrange(-100, 100) for _ in range(10)]
+    print(f'Test list: {test_list}')
+    print(f'Sorted by bs_1: {bubble_sort_1(test_list)}')
+    print(timeit.timeit("bubble_sort_1(test_list[:])", globals=globals(), number=1000))
+    print(f'Sorted by bs_2: {bubble_sort_2(test_list)}')
+    print(timeit.timeit("bubble_sort_2(test_list[:])", globals=globals(), number=1000))
+
+"""
+Доработка заключалась в установке счетчика, который считал количество сортировок сортивок
+за один проход по массиву. Если этот счетчик показывад "0", то цикл прерывался  и 
+тем самым не производились лишние проходы и экономилось время. Данная доработка работает в случае, 
+если исходный список частично отсортирован (как в примере):
+ 
+Test list: [66, 14, -13, 42, -64, -41, -24, 73, -88, 90]
+Sorted by bs_1: [90, 73, 66, 42, 14, -13, -24, -41, -64, -88]
+0.0052829999999999995
+Sorted by bs_2: [90, 73, 66, 42, 14, -13, -24, -41, -64, -88]
+0.0010968999999999979
+"""

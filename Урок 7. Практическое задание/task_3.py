@@ -40,3 +40,28 @@ for i in
 
 
 """
+import random
+
+
+def quick_sort(lst):
+    """Быстрая сортировка Хоара"""
+    if len(lst) > 1:
+        x = lst[random.randint(0, len(lst) - 1)]
+        low = [el for el in lst if el < x]
+        equal = [el for el in lst if el == x]
+        hi = [el for el in lst if el > x]
+        lst = quick_sort(low) + equal + quick_sort(hi)
+
+    return lst
+
+
+if __name__ == '__main__':
+    m = int(input('Введите число "m": '))
+    test_list = [random.randint(-100, 100) for _ in range(2 * m + 1)]
+    result = quick_sort(test_list)
+    print(f'Sorted list: {result}, median: {result[m]}')
+
+"""
+Введите число "m": 5
+Sorted list: [-82, -45, -37, -35, -35, -25, 6, 8, 15, 71, 74], median: -25
+"""

@@ -16,3 +16,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recur(num):
+    """ Рекурсивная функция "Сумма чисел диапазона". """
+    if num == 1:
+        return 1
+    else:
+        return num + recur(num - 1)
+
+
+def equal_func(num):
+    a = recur(num)
+    b = num(num+1)/2
+    return a, b
+
+
+if __name__ == '__main__':
+
+    NUM = int(input('Введите целое число: '))
+    if recur(NUM) == NUM * (NUM+1) / 2:
+        print('Равно!')
+    else:
+        print('Не Равно!')
