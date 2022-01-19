@@ -19,3 +19,33 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# O(n)
+
+
+def min_value(list_1):
+    min_val = list_1[0]  # O(1)
+
+    for el in range(len(list_1) - 1):  # O(n)
+        if list_1[el] < min_val:  # O(n)
+            min_val = list_1[el]  # O(1)
+    return min_val  # O(1)
+
+
+# O(n ^ 2)
+
+
+def min_value_2(list_2):
+
+    minimal = list_2[0]
+
+    for el in list_2:
+        if el < minimal:
+            minimal = el
+    return minimal
+
+
+my_list = [78, 85, 64, 55, 5, 2, 7]
+print(min_value(my_list))
+print(min_value_2(my_list))

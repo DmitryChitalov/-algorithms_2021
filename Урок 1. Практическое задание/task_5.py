@@ -28,3 +28,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+STACK_LEN = 5
+
+
+class StackOfPlates:
+    def __init__(self):
+        self.stack = {}
+        self.stack_key = 0
+
+    def append(self, value):
+        if len(self.stack) == 0:
+            self.stack_key = 0
+            self.stack[self.stack_key] = [value]
+        else:
+            use_stack = self.stack[self.stack_key]
+            if len(use_stack) < STACK_LEN:
+                use_stack.append(value)
+            else:
+                self.stack_key = len(self.stack)
+                self.stack[len(self.stack)] = [value]
+
+    def pop(self):
+        if len(self.stack) == 0:
+            print('Stack of plates empty')
+            return
+        use_stack = self.stack[self.stack_key]
+        if len(use_stack) != 0:
+            return use_stack.pop()
+        else:
+            del self.stack[self.stack_key]
+            self.stack_key = len(self.stack) - 1
+            if len(self.stack) == 0:
+                print('Stack of plates empty')
+                return
+            use_stack = self.stack[self.stack_key]
+            return use_stack.pop()
