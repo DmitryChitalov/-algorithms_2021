@@ -19,3 +19,33 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+# Сложность O(n^2)
+random_nums = [24, 56, 12, 3, 11]
+
+
+def selection_min_of_nums(nums):
+    for i in range(len(nums)):  # O(n)
+        lowest_value = i  # O(1)
+        for j in range(i + 1, len(nums)):  # O(n)
+            if nums[j] > nums[lowest_value]:  # O(1)
+                lowest_value = j  # O(1)
+        return lowest_value
+
+
+print(selection_min_of_nums(random_nums))
+
+# Сложность O(n)
+
+list_of_nums = [2, 4, 1, 6]  # лучше не использовать переменные в один символ, они могут запутать
+
+
+def my_min_num(nums):
+    low = nums[0]  # O(1)
+    for i in nums:  # O(n)
+        if i < low:  # O(1)
+            low = i  # O(1)
+    return low  # O(1)
+
+
+print(my_min_num(list_of_nums))

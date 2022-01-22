@@ -25,3 +25,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+"""
+Первое решение эффективнее, т.к. алгоритм имеет константную сложность.
+"""
+
+# 1 O(1)
+
+
+users = {'Apple45': ['password', 'YES'], 'Pineapple': ['password2', 'NO']}
+
+
+def check_profile(user_name):
+    if users[user_name][1] == 'YES':                   #O(1)
+        print('Приветствую тебя!')
+    elif users[user_name][1] == 'NO':                  #O(1)
+        print('Неверный пароль или имя пользователя!')
+
+
+check_profile('Pineapple')                             #O(1)
+
+# 2 O(n)
+
+
+users = {'Apple45': ['password', 'YES'], 'Pineapple': ['password2', 'NO']}
+
+
+def check_profile(user_name):
+    for key, value in users.items():                           #O(n)
+        if key == user_name:                                   #O(1)
+            if value[1] == 'YES':  # O(1)                      #O(1)
+                print('Приветствую тебя!')
+            elif value[1] == 'NO':  # O(1)                     #O(1)
+                print('Неверный пароль или имя пользователя!')
+
+
+check_profile('Apple45')                                       #O(1)
+

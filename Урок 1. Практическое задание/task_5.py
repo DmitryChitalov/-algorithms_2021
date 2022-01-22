@@ -28,3 +28,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self, max_size):
+        self.elems = [[]]
+        self.max_size = max_size
+
+    def push_in(self, el):
+        if len(self.elems[len(self.elems) - 1]) <= self.max_size:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(el)
+
+    def pop_out(self):
+        if len(self.elems) == 0:
+            result = False
+        else:
+            result = self.elems[len(self.elems) - 1].pop()
+            if len(self.elems[len(self.elems) - 1]) == 0:
+                self.elems.pop()
+        return result
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        elem_sum = 0
+        for stack in self.elems:
+            elem_sum += len(stack)
+        return elem_sum
+
+    def __int__(self):
+        return len(self.elems)
+
+    def __str__(self):
+        return str(self.elems)
+
+
+if __name__ == '__main__':
+
+    stack_1 = StackClass(4)
+    i = 0
+    while i < 11:
+        stack_1.push_in(i)
+        i += 1
+
+    print(stack_1.elems)
+

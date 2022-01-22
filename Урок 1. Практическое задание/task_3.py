@@ -20,3 +20,32 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+"""Первое решение эффективнее, т.к. алгорит имеет линейную сложность """
+
+
+# 1 О(n)
+
+company = {'A': 3.75, 'B': 44.2, 'C': 12.4, 'D': 44.5, 'E': 10.1}
+
+income_company = {}
+
+while len(income_company) < 3:
+    max_value = 0
+    for key, value in company.items():
+        if max_value < value:
+            max_value = value
+            key_max_value = key
+    max_value = company.pop(key_max_value)
+    income_company.setdefault(key_max_value, max_value)
+
+print(income_company)
+
+
+# 2 O(n*log(n))
+
+company = {'A': 3.75, 'B': 44.2, 'C': 12.4, 'D': 44.5, 'E': 10.1}
+income = sorted(list(company.items()), key=lambda tup: tup[1], reverse=True)[:3]
+print(income)
+
+
