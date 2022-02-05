@@ -1,6 +1,5 @@
 """
 Задание 2.
-
 Реализуйте два алгоритма.
 
 Первый, в виде функции, должен обеспечивать поиск минимального значения для списка.
@@ -19,3 +18,32 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+
+def minimum_1(lst):
+    # Сложность: O(n^2).
+    for i in range(len(lst)):               # O(n)
+        for j in range(len(lst)):           # O(n)
+            if lst[i] < lst[j]:             # O(1)
+                tmp_val = lst[i]            # O(1)
+                lst[i] = lst[j]             # O(1)
+                lst[j] = tmp_val            # O(1)
+    return lst[0]                           # O(1)
+
+
+def minimum_2(lst):
+    # Сложность: O(n).
+    min_val = lst[0]                    # O(1)
+    for val in lst:                     # O(n)
+        if val < min_val:               # O(1)
+            min_val = val               # O(1)
+    return min_val                      # O(1)
+
+
+for n in (10, 100, 1000):
+    test_lst = random.sample(range(-100000, 100000), n)
+
+print(test_lst)
+print(minimum_1(test_lst), '\n', minimum_2(test_lst))
