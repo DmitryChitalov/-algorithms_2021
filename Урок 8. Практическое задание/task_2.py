@@ -25,7 +25,10 @@ class BinaryTree:
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
+            if new_node > self.root:
+                raise ValueError('Значение превышено')
+            else:
+                self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
         else:
             # тогда вставляем новый узел
@@ -40,7 +43,10 @@ class BinaryTree:
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
+            if new_node > self.root:
+                raise ValueError('Значение превышено')
+            else:
+                self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
         else:
             # тогда вставляем новый узел
@@ -72,7 +78,7 @@ print(r.get_left_child())
 r.insert_left(40)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
-r.insert_right(12)
+r.insert_right(7)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
