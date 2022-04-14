@@ -40,3 +40,66 @@ for i in
 
 
 """
+from random import randint
+from statistics import median
+from timeit import timeit
+
+
+# Поиск медианы без сортировки
+def my_median(input_lst: list):
+    for _ in range(len(input_lst) // 2):
+        input_lst.remove(max(input_lst))
+    return max(input_lst)
+
+
+# Поиск медианы с Гномьей сортировкой
+def gnome_med(input_lst):
+    i, l = 1, len(input_lst)
+    while i < l:
+        if input_lst[i - 1] <= input_lst[i]:
+            i += 1
+        else:
+            input_lst[i - 1], input_lst[i] = input_lst[i], input_lst[i - 1]
+            if i > 1:
+                i -= 1
+    return input_lst[len(input_lst)//2]
+
+
+m = int(input('Введите m: '))
+lst = [randint(1, 1000) for i in range(2 * m + 1)]
+
+print(f'Длина массива: {len(lst)}')
+print(f'Полученный массив: {lst}')
+print(f'Медиана с мпомощью функции median: {median(lst[:])}\n'
+      f'Скорость выполнения: ',
+      timeit(
+          "median(lst[:])",
+          globals=globals(),
+          number=1000))
+
+print(f'Медиана с помощью функции my_median: {my_median(lst[:])}\n'
+      f'Скорость выполнения: ',
+      timeit(
+          "my_median(lst[:])",
+          globals=globals(),
+          number=1000))
+
+print(f'Медиана с помощью Гномьей сортировки : {gnome_med(lst[:])}\n'
+      f'Скорость выполнения: ',
+      timeit(
+          "gnome_med(lst[:])",
+          globals=globals(),
+          number=1000))
+
+# Результаты
+# Введите m: 11
+# Длина массива: 23
+# Полученный массив: [429, 723, 385, 448, 723, 64, 351, 968, 333, 965, 648, 801, 387, 318, 300, 689, 194, 244, 258, 814, 868, 386, 937]
+# Медиана с мпомощью функции median: 429
+# Скорость выполнения:  0.0006677999999999962
+# Медиана с помощью функции my_median: 429
+# Скорость выполнения:  0.005134500000000042
+# Медиана с помощью Гномьей сортировки : 429
+# Скорость выполнения:  0.02896719999999986
+# Выводы: как видно из результатов, самым быстрым, ожидаемо, оказалось встроенная функция median,
+# реализования функция my_median (находящая медиану без сортировки массива) оказалось совсем немного быстрее Гномьей сортировки

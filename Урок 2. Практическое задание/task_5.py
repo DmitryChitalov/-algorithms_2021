@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def asci_printer(o=32):
+    if o % 10 == 1:
+        print('+')
+        return f"{o} - {chr(o)}" + "\n" + asci_printer(o+1)
+    elif o == 127:
+        return f"{o} - {chr(o)} "
+    return f"{o} - {chr(o)} " + asci_printer(o+1)
+
+
+print(asci_printer())

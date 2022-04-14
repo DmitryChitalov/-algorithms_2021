@@ -19,3 +19,33 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def sort_v1(input_l: list):
+    """
+        Сложность: O(n^2).
+    """
+    for i in range(len(input_l)-1):  # O(n)
+        for j in range(1,len(input_l)):  # O(n)
+            if input_l[j] < input_l[i]:  # O(1)
+                tmp = input_l[i]  # O(1)
+                input_l[i] = input_l[j]  # O(1)
+                input_l[j] = tmp  # O(1)
+    return input_l[0]  # O(1)
+
+
+print(f"Результат первой функции:{sort_v1([1, 3, -2, 10, -3, 0])}")
+
+
+def sort_v2(input_l: list):
+    """
+        Сложность: O(n).
+    """
+    min_num = input_l[0]  # O(1)
+    for i in range(len(input_l)):  # O(n)
+        if input_l[i] <= min_num:  # O(1)
+            min_num = input_l[i]  # O(1)
+    return min_num  # O(1)
+
+
+print(f"Результат второй функции:{sort_v2([1, 3, -2, 10, -3, 0])}")
