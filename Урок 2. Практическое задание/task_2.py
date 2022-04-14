@@ -18,3 +18,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def even_odd(num: int=-1, evens=0, odds=0):
+    if num == -1:
+        try:
+            num = int(input('Введите положительное натуральное число: '))
+            if num < 0:
+                return even_odd(-1)
+        except:
+            return even_odd(-1)
+
+    if num == 0:
+        return print(f'Четных: {evens}, нечетных: {odds}')
+    else:
+        if num % 2 == 0:
+            return even_odd(num // 10, evens + 1, odds)
+        else:
+            return even_odd(num // 10, evens, odds + 1)
+
+
+even_odd(0)
+even_odd(235)
+even_odd(12345678)
+even_odd(123456789)
+even_odd(1111)
+even_odd(2222)
+even_odd()

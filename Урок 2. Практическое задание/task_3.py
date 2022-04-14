@@ -22,3 +22,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def reciprocate(num_in='', num_out=''):
+    if num_in == '':
+        try:
+            num_in = int(input('Введите число для зеркалирования: '))
+        except:
+            return reciprocate(num_in='', num_out='')
+    if num_in == 0:
+        return print(num_out)
+    else:
+        return reciprocate(num_in // 10, num_out + str(num_in % 10))
+
+
+reciprocate()
+reciprocate(12340)
+reciprocate(212)
+reciprocate(1234567890)

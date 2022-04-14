@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def charset(num=32, pos=1):
+    if num <= 127:
+        if pos < 10:
+            print(num, '-', chr(num), ' ', end='')
+        else:
+            print(num, '-', chr(num), ' ', end='\n')
+            pos = 0
+        return charset(num + 1, pos + 1)
+
+
+charset()

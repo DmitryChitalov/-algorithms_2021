@@ -28,3 +28,49 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc(operation='', first='', second=''):
+    if operation == '':
+        oper = input('Ведите операцию (+, -, *, /, или 0 для выхода): ')
+    else:
+        oper = operation
+        print('Операция: ', oper)
+
+    if oper == '0':
+        return
+
+    if oper not in ('+', '-', '*', '/'):
+        print('Неверная операция!')
+        return calc()
+
+    try:
+        if first == '':
+            first_dig = int(input('Введите первое число: '))
+        else:
+            first_dig = int(first)
+            print('первое число = ', first_dig)
+    except:
+        print('Неверно, введите число')
+        return calc(oper)
+
+    try:
+        if second == '':
+            second_dig = int(input('Введите второе число: '))
+        else:
+            second_dig = int(second)
+            print('второе число = ', second_dig)
+    except:
+        print('Неверно, введите число')
+        return calc(oper, first_dig)
+
+    if oper == '/' and second_dig == 0:
+        print('На ноль делить нельзя!')
+        return calc(oper, first_dig)
+
+    print('Результат: ', eval(str(first_dig) + oper + str(second_dig)))
+    return calc()
+
+
+
+calc()
