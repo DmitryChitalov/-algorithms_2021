@@ -21,3 +21,19 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def string_unique(string_in):
+    for i in range(len(string_in)):
+        for j in range(i, len(string_in)):
+            if not string_in[i:j + 1] == string_in:
+                string_uni.add(hash(string_in[i:j + 1]))
+    return f'{string_in} - {len(string_uni)} уникальных подстрок'
+
+
+string_uni = ''
+string_uni = set(string_uni)
+
+
+string_in = 'papa'
+print(string_unique(string_in))
