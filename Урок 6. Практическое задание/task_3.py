@@ -5,3 +5,19 @@
 Придумать как это решить!
 Есть очень простое решение
 """
+
+from memory_profiler import memory_usage, profile
+
+
+@profile
+def revers_base(m):
+    def reverse(n):
+        return f'{n%10}' if n < 10 else f'{n%10}' + reverse(n//10)
+    return reverse(m)
+
+
+if __name__ == '__main__':
+    a = 111111222222333333444444555555666666777777888888999999000000
+    print(revers_base(a))
+
+# для профилирования обернул в функцию, "подводных камней" не обнаружил
