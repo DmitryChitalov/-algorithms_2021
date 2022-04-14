@@ -25,3 +25,78 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+datab = {  # словарь для первых двух решений
+    'Ivan': ['qwerty', 0],
+    'Vasiliy': ['ytrewq', 1],
+    'Petr': ['12345', 0],
+    'Andrey': ['54321', 1]
+}
+
+datab1 = {  # словарь для третьего решения
+    'name': ['Ivan', 'Vasiliy', 'Petr', 'Andrey'],
+    'password': ['qwerty', 'ytrewq', '12345', '54321'],
+    'activation': [0, 1, 0, 1]
+}
+
+
+# первый вариант
+# O(N)
+def user_check_1(uname):
+    if uname in datab:   # O(N)
+        print('Аккаунт существует')  # O(1)
+        if datab[uname][1] == 0:  # O(1)
+            check = input('Аккаунт не активирован, желаете активировать? ')  # O(1)
+            if check.lower() == 'y':  # O(1)
+                datab[uname][1] = 1  # O(1)
+                print('Поздравляем, аккаунт активирован')  # O(1)
+            else:  # O(1)
+                print('Как желаете')  # O(1)
+    else:  # O(1)
+        print('Аккаунт не существует')  # O(1)
+
+
+# второй вариант (почти то же самое, что и в первом)
+# O(N)
+def user_check_2(uname):
+    for key in datab:  # O(N)
+        if key == uname:  # O(1)
+            check = input('Аккаунт не активирован, желаете активировать? ')  # O(1)
+            if check.lower() == 'y':  # O(1)
+                datab[uname][1] = 1  # O(1)
+                print('Поздравляем, аккаунт активирован')  # O(1)
+                break  # O(1)
+            else:  # O(1)
+                print('Как пожелаете')  # O(1)
+        else:  # O(1)
+            print('Аккаунт не существует')  # O(1)
+            break  # O(1)
+
+
+# третий вариант
+# O(N)
+def user_check_3(uname):
+    uname_table = datab1['name']  # O(1)
+    if uname not in uname_table:  # O(N)
+        return print('Аккаунт не существует')  # O(1)
+    acc_index = uname_table.index(uname)  # O((N)
+    if datab1['activation'][acc_index] == 0:  # O(1)
+        check = input('Аккаунт не активирован, желаете активировать? ')  # O(1)
+        if check.lower() == 'y':  # O(1)
+            datab1['activation'][acc_index] = 1  # O(1)
+        else:  # O(1)
+            print('Как пожелаете')  # O(1)
+    else:
+        print('Аккаунт активирован')  # O(1)
+
+#user_check_1('Petr')
+# user_check_1('Vasiiy')
+# user_check_1('Vasiliy')
+# user_check_2('Petr')
+# user_check_2('Vasiiy')
+# user_check_2('Vasiliy')
+# user_check_3('Petr')
+# user_check_3('Vasiliy')
+# user_check_3('Vasiliy')
+
+# все решения одинаково эффективны, всё зависит от выбраной структуры словаря

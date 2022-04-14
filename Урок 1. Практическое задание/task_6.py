@@ -18,3 +18,42 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+    def print_queue(self):  # обращение к данным элемента класса
+        return self.elems
+
+
+def tasks_queue(tasks_lst):
+    queue_main = QueueClass()  # основная очередь
+    queue_resolved = QueueClass()  # список решенных
+    queue_adjustment = QueueClass()  # список на доработку
+    for name in tasks_lst:  # заполняем очередь заданий
+        queue_main.to_queue(name)
+    for name in reversed(queue_main.print_queue()):
+        a = input(f'Задание "{name}" решено? ')
+        if a.lower() == 'y':
+            queue_resolved.to_queue(name)
+        else:
+            queue_adjustment.to_queue(name)
+        queue_main.from_queue()
+    return f'Осталось сделать: {queue_adjustment.print_queue()}'
+
+
+print(tasks_queue(["Вымыть посуду", "Вынести мусор", "Протереть пыль", "Пропылесосить", "Отдохнуть"]))
