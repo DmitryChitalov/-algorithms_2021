@@ -12,6 +12,9 @@
 Без аналитики задание считается не принятым!
 """
 
+from collections import Counter
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +42,23 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    obj = Counter(array)
+    return f'Чаще всего встречается число {obj.most_common()[0][0]}, ' \
+           f'оно появилось в массиве {obj.most_common()[0][1]} раз(а)'
+
+
+def func_4():
+    x = max(array, key=array.count)
+    return f'Чаще всего встречается число {x}, ' \
+           f'оно появилось в массиве {array.count(x)} раз(а)'
+
+
+print(timeit('func_1()', globals=globals()))    # 1.950646299
+print(timeit('func_2()', globals=globals()))    # 2.8698456900000004
+print(timeit('func_3()', globals=globals()))    # 6.386250193
+print(timeit('func_4()', globals=globals()))    # 2.093302523
+
+# Самым быстрым решением оказалось перебор со встроенной функцией count,
+# самым медленным - с Counter, который много времени тратит на создание словаря.
+# Ускорить задачу не удалось: лаконичные решения через Counter и функцию max не дали ускорения работы.
