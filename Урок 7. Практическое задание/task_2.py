@@ -13,3 +13,61 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import random
+import timeit
+
+num = int(input('Введите количество элементов '))
+orig_list = [random.uniform(0, 50) for i in range(num)]
+
+
+def merge_sort(lst_obj):
+    if len(lst_obj) > 1:
+        center = len(lst_obj) // 2
+        left = lst_obj[:center]
+        right = lst_obj[center:]
+
+        merge_sort(left)
+        merge_sort(right)
+
+        # перестали делить
+        # выполняем слияние
+        i, j, k = 0, 0, 0
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                lst_obj[k] = left[i]
+                i += 1
+            else:
+                lst_obj[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len(left):
+            lst_obj[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len(right):
+            lst_obj[k] = right[j]
+            j += 1
+            k += 1
+        return lst_obj
+
+
+print(f'Исходный массив из {num} элементов: ', orig_list[:])
+print(f'Отсортированный массив из {num} элементов', merge_sort(orig_list)[:])
+print('Время выполнения составило: ',
+      timeit.timeit(
+          "merge_sort(orig_list[:])",
+          globals=globals(),
+          number=1000))
+'''
+РЕЗУЛЬТАТ:
+1. Изучил сортировку слиянием на примере массива вещественных чисел.
+2. Более понятный вариант, чеи предоставленный на уроке я не нашел.
+2. Время выполнения сортировки составило: 
+    для 10 элементов -> 0.013317100000000082,
+    для 100 элементов -> 0.11625020000000008,
+    для 1000 элементов ->  1.5251497.
+ВЫВОД: сортировка слиянием очень быстраый и эффективный вариант сортировки.
+'''
