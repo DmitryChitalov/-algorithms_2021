@@ -34,3 +34,38 @@ hx = HexNumber
 hx + hx
 hex()
 """
+# 1 вариант
+from collections import defaultdict
+from functools import reduce
+
+x = input('Введите первое шестнадцатеричное число: ')
+y = input('Введите второе шестнадцатеричное число: ')
+numbers = defaultdict(list)
+numbers[x] = list(x)
+numbers[y] = list(y)
+add_number = sum([int(''.join(value), 16) for value in numbers.values()])
+add_result = list('{:x}'.format(int(add_number)).upper())
+mul_number = reduce(lambda a, b: a * b, [int(''.join(value), 16) for value in numbers.values()])
+mul_result = list('{:x}'.format(int(mul_number)).upper())
+print(f'Сумма чисел - {add_result}, произведение - {mul_result}')
+
+
+# 2 вариант
+class HexNumber:
+    def __init__(self, first_num, second_num):
+        self.first_num = first_num
+        self.second_num = second_num
+
+    def __add__(self, other):
+        res = list(hex(int(''.join(self.first_num), 16) + int(''.join(other.second_num), 16)))[2:]
+        return f'Сумма чисел - {[i.upper() for i in res]}'
+
+    def __mul__(self, other):
+        res = list(hex(int(''.join(self.first_num), 16) * int(''.join(other.second_num), 16)))[2:]
+        return f'Произведение чисел - {[i.upper() for i in res]}'
+
+
+first_number = list(input('Введите первое шестнадцатеричное число: '))
+second_number = list(input('Введите второе шестнадцатеричное число: '))
+print(HexNumber(first_number, second_number) + HexNumber(first_number, second_number))
+print(HexNumber(first_number, second_number) * HexNumber(first_number, second_number))
