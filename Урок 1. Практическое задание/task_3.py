@@ -20,3 +20,68 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+accuracy = {
+    'Tasty coffee': 1250,
+    'Own monkeys': 10430,
+    'Oliver': 150000,
+    'Indian rush': 1300,
+    'Green cucumber': 400
+}
+
+# ==========================================================
+# Сложность O(n^2) - квадратичная
+
+sorted_values_1 = sorted(accuracy.values(), reverse=True)   # O(n*logn) - линейно-логарифмическая
+sorted_accuracy_1 = {}                                      # O(1) - константная
+
+count = 0                                                   # O(1) - константная
+for i in sorted_values_1:                                   # O(n) - линейная
+    if count > 2:                                           # O(1) - константная
+        break                                               # O(1) - константная
+    count += 1                                              # O(1) - константная
+    for j in accuracy.keys():                               # O(n) - линейная
+        if accuracy[j] == i:                                # O(1) - константная
+            sorted_accuracy_1[j] = accuracy[j]              # O(1) - константная
+            break                                           # O(1) - константная
+
+print(sorted_accuracy_1)                                    # O(n) - линейная
+
+# ==========================================================
+# Сложность O(n*logn) - линейно-логарифмическая
+
+sorted_keys_2 = sorted(accuracy, key=accuracy.get, reverse=True)    # O(n*logn) - линейно-логарифмическая
+sorted_accuracy_2 = {}                                              # O(1) - константная
+count = 0                                                           # O(1) - константная
+for i in sorted_keys_2:                                             # O(n) - линейная
+    if count > 2:                                                   # O(1) - константная
+        break                                                       # O(1) - константная
+    count += 1                                                      # O(1) - константная
+    sorted_accuracy_2[i] = accuracy[i]                              # O(1) - константная
+
+print(sorted_accuracy_2)                                            # O(n) - линейная
+
+# ==========================================================
+# Сложность O(n^3) - кубическая
+
+sorted_list_values = []                                     # O(1) - константная
+for i in range(len(accuracy.values())):                     # O(n) - линейная
+    temp_max = 0                                            # O(1) - константная
+    for j in accuracy.values():                             # O(n) - линейная
+        if j > temp_max and j not in sorted_list_values:    # O(n) - линейная
+            temp_max = j                                    # O(1) - константная
+    sorted_list_values.append(temp_max)                     # O(1) - константная
+
+sorted_accuracy_3 = {}                                      # O(1) - константная
+for i in sorted_list_values[:3]:                            # O(n) - линейная
+    for j in accuracy.keys():                               # O(n) - линейная
+        if accuracy[j] == i:                                # O(1) - константная
+            sorted_accuracy_3[j] = accuracy[j]              # O(1) - константная
+
+print(sorted_accuracy_3)                                    # O(n) - линейная
+
+# Вывод: Самым эффективным решением является второе, потому как его сложность
+# линейно-логарифмическая. Если смотреть на график роста О-большое, то видно,
+# что линейно-логарифмическая функция занимает меньше времени чем квадратичная и
+# кубическая при одинаковом количестве элементов.
+
