@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+#1. Сложность O(n^2)
+
+
+def get_min_el_list(num_list):          #O(n^2)
+    min_el = num_list[0]                #O(1)
+    current_min = num_list[0]           #O(1)
+    for i in num_list:                #O(n)
+        for j in num_list:              #O(n)
+            if i < j:                   #O(1)
+                current_min = i         #O(1)
+            if current_min < min_el:    #O(1)
+                min_el = current_min    #O(1)
+    return min_el                       #O(1)
+
+#2. Сложность O(n)
+
+
+def get_min_el_list_2(num_list):        #O(n)
+    min_el = num_list[0]                #O(1)
+    for i in range(len(num_list)):      #O(n)
+        if min_el > num_list[i]:        #O(1)
+            min_el = num_list[i]        #O(1)
+    return min_el                       #O(1)

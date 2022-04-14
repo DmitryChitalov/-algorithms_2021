@@ -20,3 +20,35 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+value = {'amazon': 100,
+             'apple': 90,
+             'netflix': 200,
+             'google': 150,
+             'ali-ba-ba': 300,
+             'tencent': 600,
+             'blizzard': 10,
+             'steam': 80,
+             'huawei': 120}
+
+"""Вариант 2 более эффективный, т.к сложность ниже, следовательно
+    кол-во итерраций меньше и соответственно время выполнение меньше"""
+
+#1 Вариант - сложность O(n^2)
+
+sorted_value = sorted(value.values(), reverse=True)     #O(nlogn)
+for i in sorted_value[:3]:                              #O(n)
+    for key in value.keys():                            #O(n)
+        if value[key] == i:                             #O(1)
+            print(key)                                  #O(1)
+
+#2.Вариант - сложность O(nlogn)
+"""Этот вариант более эффективный, т.к сложность ниже, следовательно
+    кол-во итерраций меньше и соответственно время выполнение меньше"""
+
+top_company = []                            #O(1)
+company_list = list(value.items())          #O(n)
+company_list.sort(key=lambda x: x[1])       #O(nlogn)
+for i in range(3):                          #O(n)
+    max_company = company_list.pop()        #O(1)
+    top_company.append(max_company[0])      #O(1)
+print(top_company)                          #O(1)
