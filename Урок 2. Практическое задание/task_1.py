@@ -28,3 +28,34 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+    signs = "+-*/"
+    sign = input("Введите оператор (+, -, *, / или 0 для выхода): ")
+    if sign == '0':
+        return print("Как жаль, что Вы наконец-то уходите!")
+
+    if sign not in signs:
+        return print("Введён неверный оператор!"), calculator()
+    else:
+        digit_1 = input("Введите первое целое число: ")
+        if not digit_1.isdigit():
+            return print("Вместо первого числа Вы ввели строку! Введите целое число!"), calculator()
+        digit_2 = input("Введите второе целое число: ")
+        if not digit_2.isdigit():
+            return print("Вместо второго числа Вы ввели строку! Введите целое число!"), calculator()
+        elif sign == '/' and digit_2 == '0':
+            return print("Вы собрались делить на 0! Одумайтесь!"), calculator()
+
+        if sign == '+':
+            return print(int(digit_1) + int(digit_2)), calculator()
+        elif sign == '-':
+            return print(int(digit_1) - int(digit_2)), calculator()
+        elif sign == '*':
+            return print(int(digit_1) * int(digit_2)), calculator()
+        elif sign == '/':
+            return print(int(int(digit_1) / int(digit_2))), calculator()
+
+
+calculator()

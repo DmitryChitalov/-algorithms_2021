@@ -16,3 +16,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_n(n, total=0):
+    total += n
+    if n <= 0:
+        return total
+    else:
+        return sum_n(n - 1, total)
+
+
+def equality_check(n):
+    if sum_n(n) == n * (n + 1) / 2:
+        return print(f"Для n = {n},\nСумма {n} чисел равна n(n+1)/2 - {int(n * (n + 1) / 2)}")
+    else:
+        return print(f"Сумма {n} чисел не равна n(n+1)/2")
+
+
+equality_check(5)
