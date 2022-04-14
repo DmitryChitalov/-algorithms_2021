@@ -20,3 +20,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+annual_profit = {
+    'Hyundai': 80000000,
+    'BMW': 356700000,
+    'Nissan': 56000000,
+    'Honda': 128000000,
+    'Chrysler': 40000000,
+    'Ford': 78000000,
+    'Daimler': 56000000,
+    'VW': 77000000,
+    'Toyota': 112000000
+}
+
+
+"""
+Вариант решения 1. Сложность: O(n^2), квадратичная.
+Не элегантна на вид и более затратна по времени, 
+чем Вариант2.
+"""
+srt_values = sorted(annual_profit.values(), reverse=True)
+srt_profit = []
+for v in srt_values:
+    for k in annual_profit.keys():
+        if annual_profit[k] == v:
+            srt_profit.append((k, v))
+
+print(srt_profit[:3])
+
+"""
+Вариант решения 2. Сложность: O(n log n), линейно-логарифмическая (sorted).
+менее затратен по времени, более элегантен, соответственно,
+более предпочтителен.
+"""
+a = sorted(annual_profit.items(), key=lambda item: item[1], reverse=True)
+
+print(a[:3])
+

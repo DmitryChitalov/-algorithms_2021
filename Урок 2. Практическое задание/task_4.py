@@ -15,3 +15,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_el(seq_num, seq_digit=1.0, count=1, seq_sum=1):
+
+    """ Рекурсивная функция """
+
+    if count == seq_num:
+        return seq_sum
+    else:
+        seq_digit = seq_digit / 2 * (-1)
+        SEQ.append(seq_digit)
+        seq_sum += seq_digit
+        return sum_el(seq_num, seq_digit, count + 1, seq_sum)
+
+
+if __name__ == '__main__':
+    # По умолчанию в последовательности уже имеется "1"
+    SEQ = [1]
+    try:
+        NUM = int(input('Введите количество элементов: '))
+        print(f'Количество элементов: {NUM}, их сумма: {sum_el(NUM)} ')
+    except ValueError:
+        print('Вы ввели не число')
+
+    print(SEQ)
