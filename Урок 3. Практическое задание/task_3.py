@@ -21,3 +21,17 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def uniq_substring(usr_str):
+    substring_set = set()
+    for i in range(1, len(usr_str)):
+        for j in range(len(usr_str)):
+            temp_str = usr_str[j:j + i]
+            substring_set.add(hash(temp_str))
+
+    return len(substring_set)
+
+
+user_answer = input('Введите строку: ')
+print(f'Число уникальных подстрок: {uniq_substring(user_answer)}')
