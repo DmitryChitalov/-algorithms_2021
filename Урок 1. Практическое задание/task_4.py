@@ -25,3 +25,54 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users_date = {'Nik': [1, 'active'],
+              'Alex': [2, 'inactive'],
+              'Kate': [3, 'active']}
+
+#Вариант 1. Сложность O(n)
+def authentication_1(login, password):
+    for key, value in users_date.items(): #O(n)
+# Пользователь есть в системе, id активна, пароль верный.
+        if login == key: #O(1)
+            if value[1] == 'active': #O(1)
+                if password == value[0]: #O(1)
+                    return 'Доступ разрешен' #O(1)
+# Пользователь есть в системе, id активна, пароль неверный.
+                else: #O(1)
+                    return 'Пароль неверный. Повторите попытку' #O(1)
+#Пользователь есть в системе, id не активна
+            elif value[1] == 'inactive': #O(1)
+                return 'Учетная запись не активирована' #O(1)
+#Пользователя нет в системе
+    return 'Пользователь с таким логином не зарегистрирован' #O(1)
+
+
+print(authentication_1('Nik', 1))
+print(authentication_1('Alex', 2))
+print(authentication_1('Kat', 3))
+print(authentication_1('Kate', 33))
+print(authentication_1('Kate', 3))
+
+#Вариант 2. Сложность O(n)
+def authentication_2(login, password):
+ #Пользователь есть в системе, id активна, пароль верный.
+    if login in users_date.keys() and 'active' in users_date.get(login): #O(n)
+        if password in users_date.get(login): #O(n)
+            return 'Доступ разрешен' #O(1)
+# Пользователь есть в системе, id активна, пароль неверный.
+        else: #O(1)
+            return 'Пароль неверный. Повторите попытку' #O(1)
+#Пользователь есть в системе, id не активна
+    elif login in users_date.keys() and 'inactive' in users_date.get(login): #O(n)
+        return 'Учетная запись не активирована' #O(1)
+#Пользователя нет в системе
+    else: #O(1)
+        return 'Пользователь с таким логином не зарегистрирован'   #O(1)
+
+print(authentication_2('Nik', 1))
+print(authentication_2('Alex', 1))
+print(authentication_2('Kat', 3))
+print(authentication_2('Kate', 33))
+print(authentication_2('Kate', 3))
+
+#Вывод: эффективнее решение 1, меньшая алгоритимическая сложность и более читаемое решение

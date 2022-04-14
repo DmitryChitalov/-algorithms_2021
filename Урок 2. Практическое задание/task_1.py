@@ -28,3 +28,46 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def arithm_operations():
+
+    arithm_sign = input('Введите арифметический знак(+,-,*,/ или 0 для выхода): ')
+
+    if arithm_sign == '0':
+        return 'Выполнение программы завершено'
+
+    elif arithm_sign in ['0', '+', '-', '*', '/']:
+        try:
+            num_1 = float(input('Введите первое число: '))
+            num_2 = float(input('Введите еще одно число: '))
+
+            if arithm_sign == '+':
+                res = num_1 + num_2
+                print(f'Результат: {res}')
+                return arithm_operations()
+
+            elif arithm_sign == '-':
+                res = num_1 - num_2
+                print(f'Результат: {res}')
+                return arithm_operations()
+
+            elif arithm_sign == '*':
+                res = num_1 * num_2
+                print(f'Результат: {res}')
+                return arithm_operations()
+
+            elif arithm_sign == '/':
+                try:
+                    res = num_1 / num_2
+                except ZeroDivisionError:
+                    print('На 0 делить нельзя')
+                else:
+                    print(f'Результат: {res}')
+                    return arithm_operations()
+        except ValueError:
+            print('Вы ввели не числовое значение')
+            return arithm_operations()
+    elif arithm_sign not in ['0', '+', '-', '*', '/']:
+        print('Неверный арифметический знак. Повторите попытку')
+        return arithm_operations()
+print(arithm_operations())
