@@ -1,0 +1,62 @@
+from timeit import timeit
+from random import randint
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def b_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        c = True
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                c = False
+        if c:
+            break
+        n += 1
+    return lst_obj
+
+
+orig_list_10 = [randint(-100, 100) for _ in range(10)]
+
+# замеры 10
+print(f'Пузырек: {timeit("bubble_sort(orig_list_10[:])", globals=globals(), number=1000)}')
+print(f'Доработка: {timeit("b_sort(orig_list_10[:])", globals=globals(), number=1000)}')
+
+orig_list_100 = [randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(f'Пузырек: {timeit("bubble_sort(orig_list_100[:])", globals=globals(), number=1000)}')
+print(f'Доработка: {timeit("b_sort(orig_list_100[:])", globals=globals(), number=1000)}')
+
+orig_list_1000 = [randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(f'Пузырек: {timeit("bubble_sort(orig_list_1000[:])", globals=globals(), number=1000)}')
+print(f'Доработка: {timeit("b_sort(orig_list_1000[:])", globals=globals(), number=1000)}')
+
+"""
+замеры 10
+Пузырек: 0.005912999999999998
+Доработка: 0.012084599999999997
+
+замеры 100
+Пузырек: 0.43437749999999997
+Доработка: 0.41204759999999996
+
+замеры 1000
+Пузырек: 51.9816421
+Доработка: 52.95092439999999
+
+Исходя из показателей в доработке смысла нет.
+
+"""

@@ -1,0 +1,72 @@
+from statistics import median
+from random import randint
+from timeit import timeit
+
+
+def gnome_sort(ls):
+    i, size = 1, len(ls)
+    m = size // 2
+
+    while i < size:
+        if ls[i - 1] <= ls[i]:
+            i += 1
+        else:
+            ls[i - 1], ls[i] = ls[i], ls[i - 1]
+            if i > 1:
+                i -= 1
+    return ls[m]
+
+
+def median_sort(ls):
+    ls.sort()
+    n = len(ls)
+    assert n % 2 == 1
+    return ls[n // 2]
+
+
+def max_median(ls):
+    l = ls
+    for i in range(0, len(ls) // 2):
+        l.remove(max(l))
+    return max(l)
+
+
+l = [randint(1, 100) for _ in range(11)]
+
+print('Список', l)
+print('Встроенная функция: ', median(l))
+print(timeit("median(l[:])", globals=globals(), number=1000))
+print('Гномья сортировка: ', gnome_sort(l))
+print(timeit("gnome_sort(l[:])", globals=globals(), number=1000))
+print('Функция c использованием сортировки: ', median_sort(l))
+print(timeit("median_sort(l[:])", globals=globals(), number=1000))
+print('Функция max: ', max_median(l))
+print(timeit("max_median(l[:])", globals=globals(), number=1000))
+
+"""
+Список [80, 56, 22, 9, 96, 98, 49]
+Встроенная функция:  56
+0.00038329999999999614
+Гномья сортировка:  56
+0.0005818000000000004
+Функция c использованием сортировки:  56
+0.00031869999999999815
+Функция max:  56
+0.0007218999999999975
+
+
+Список [20, 64, 70, 82, 63, 87, 33, 65, 53, 48, 3, 44, 4, 79, 1]
+Встроенная функция:  53
+0.0004849999999999993
+Гномья сортировка:  53
+0.0011194999999999955
+Функция c использованием сортировки:  53
+0.00029160000000000297
+Функция max:  53
+0.0013734999999999997
+
+
+Из приведенных данных мы видим, что встроенная функция медиана работате быстрее всего, потом следует гномья 
+сортировка далее max. Так же привел пример с использованием стандартной функции sort что показывает превосходства ее 
+использования для сортировки. 
+"""
