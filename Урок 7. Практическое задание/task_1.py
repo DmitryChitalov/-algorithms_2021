@@ -17,3 +17,75 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+from random import randint
+from timeit import timeit
+
+arr = [randint(-100, 100) for _ in range(1000)]
+print(arr[-10:])
+
+
+def bubble_sort(lst_obj):
+    lst_obj_copy = lst_obj.copy()
+    n = 1
+    while n < len(lst_obj_copy):
+        for i in range(len(lst_obj_copy)-n):
+            if lst_obj_copy[i] < lst_obj_copy[i+1]:
+                lst_obj_copy[i], lst_obj_copy[i+1] = lst_obj_copy[i+1], lst_obj_copy[i]
+        n += 1
+    return lst_obj_copy
+
+
+print(bubble_sort(arr)[-10:])
+arr_s = bubble_sort(arr)
+
+"""более умная реализация"""
+
+
+def bubble_sort_imp(lst_obj):
+    lst_obj_copy = lst_obj.copy()
+    n = 1
+    smart = True
+    while n < len(lst_obj_copy):
+        for i in range(len(lst_obj_copy)-n):
+            if lst_obj_copy[i] < lst_obj_copy[i+1]:
+                lst_obj_copy[i], lst_obj_copy[i+1] = lst_obj_copy[i+1], lst_obj_copy[i]
+                smart = False
+        n += 1
+        if smart:
+            break
+    return lst_obj_copy
+
+print(bubble_sort_imp(arr)[-10:])
+
+print('Обычная обратная сортировка, не сортированный массив', end=": ")
+print(timeit('bubble_sort(arr)', globals=globals(), number=100))
+print('Улучшенная обратная сортировка, не сортированный массив', end=": ")
+print(timeit('bubble_sort_imp(arr)', globals=globals(), number=100))
+print('Обычная обратная сортировка, сортированный массив', end=": ")
+print(timeit('bubble_sort(arr_s)', globals=globals(), number=100))
+print('Улучшенная обратная сортировка, сортированный массив', end=": ")
+print(timeit('bubble_sort_imp(arr_s)', globals=globals(), number=100))
+
+
+"""
+Аналитика:
+
+Можно сказать что в зависимости от того сортированный массив или нет
+циклы с операциями сравнения орабатываю всеравно и на времени выполнения это почти не сказывается.
+
+Улучшенная обратная сортировка выглядит немного медленнее на 1000 элементах массива, однако
+если массив предварительно отсортировать.(для наглядности вывода массива,
+выведем последние 10 элементов)
+
+[-97, 44, -23, 72, -28, -73, 95, -81, -98, 76]
+[-98, -98, -98, -98, -98, -99, -99, -100, -100, -100]
+[-98, -98, -98, -98, -98, -99, -99, -100, -100, -100]
+Обычная обратная сортировка, не сортированный массив: 9.7434776
+Улучшенная обратная сортировка, не сортированный массив: 10.172105000000002
+Обычная обратная сортировка, сортированный массив: 4.053457299999998
+Улучшенная обратная сортировка, сортированный массив: 0.009968299999997043
+
+Вывод: Доработка однозначно помогла, скрипт заработал быстрее. Она(доработка) отсекла значительную
+часть ненужных проходов.
+"""
