@@ -28,3 +28,44 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def calculator():
+
+    print("Введите Ноль для выхода из программы:> 0")
+    operation = input("Введите знак (+,-,*,/): ")
+
+    if operation == '0':
+        return "Выход"
+    else:
+        if operation in ('+', '-', '*', '/'):
+            try:
+                x = int(input('X = '))
+                y = int(input('Y = '))
+
+                if operation == '+':
+                    print(f"Результат = {x + y}")
+
+                elif operation == '-':
+                    print(f"Результат = {x - y}")
+
+                elif operation == '*':
+                    print(f"Результат = {x * y}")
+
+                elif operation == '/':
+                    try:
+                        result = x / y
+                    except ZeroDivisionError:
+                        print("Деление на ноль!")
+                    else:
+                        print(f"Результат = {result}")
+                    finally:
+                        return calculator()
+
+            except ValueError:
+                print("Введите числа вместо символов:>'0123456789'")
+                return calculator()
+        else:
+            print("Неверный знак операции!")
+            return calculator()
+    calculator()
+
+calculator()

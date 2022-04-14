@@ -20,3 +20,36 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+'''---------------1. Сложность О(n)------------------------------------------------'''
+
+import operator
+
+my_dict = {'Adidas': 4000, 'Reebok': 5000, 'Nike': 2000, 'Puma': 7000, 'Asics': 3000, 'Jordan':9000}
+
+
+d = dict(sorted(my_dict.items(), key=operator.itemgetter(1), reverse=True)[:3])  #  O(n)
+
+print(d)  # O(1)
+
+'''---------------2. Сложность О(n^2)------------------------------------------------'''
+
+import collections
+
+sorted_values = sorted(my_dict.values())  # сортировка элементов словаря
+sorted_dict = {}
+
+for i in sorted_values:  # O(n)
+    for k in my_dict.keys():  # O(n)
+        if my_dict[k] == i:  # O(1)
+            sorted_dict[k] = my_dict[k]  # O(1)
+            break  # O(1)
+
+print(collections.Counter(sorted_dict).most_common(3))  # O(1)
+
+'''
+Вывод: решение 1 более эффективно, т.к. используются встроенные функции без циклов перебора
+'''
+
+
+

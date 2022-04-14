@@ -22,3 +22,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def reverse(x):
+
+    s = x // 10  # Данное число делим без остатка на 10
+    if s == 0:
+        return x
+    return f"{x % 10}{reverse(s)}"
+
+zero_begin = ""
+number = input("Введите натуральное число: ")
+if number.startswith("0"):  # Проверка на наличие нуля
+    zero_begin = "0"
+print(f"{reverse(int(number))}{zero_begin}")
