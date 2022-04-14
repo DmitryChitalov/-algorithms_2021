@@ -16,3 +16,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def theory_rec(n):
+    return n + theory_rec(n - 1) if n > 1 else 1
+
+
+user_number = int(input('Введите число для проверки: '))
+print(theory_rec(user_number) == user_number * (user_number + 1) / 2)
