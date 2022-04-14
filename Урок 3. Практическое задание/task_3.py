@@ -21,3 +21,21 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def str_sub_count(str_text):
+    str_hash = {}
+    for i in range(len(str_text) + 1):
+        for j in range(i + 1, len(str_text) + 1):
+            str_hash[hash(str_text[i:j])] = str_text[i:j]
+    str_hash.pop(hash(str_text))
+    return str_hash
+
+
+def str_sub(user_text):
+    for i in str_sub_count(user_text).values():
+        print(i)
+    return f''
+
+
+print(str_sub('papa'))

@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_number(num, count_div=0, count_mod=0):
+    if num > 0:
+        if num % 10 % 2 == 0:
+            count_div += 1
+        else:
+            count_mod += 1
+        count_number(num // 10, count_div, count_mod)
+    else:
+        print(f'Количество четных и нечетных цифр в числе равно: ({count_div}, {count_mod})')
+
+
+try:
+    count_number(int(input('Введите число: ')))
+except:
+    print(f'Ввели не правильное число! Попробуйте еще раз!')
+    count_number(int(input('Введите число: ')))
