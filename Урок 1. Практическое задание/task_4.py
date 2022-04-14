@@ -25,3 +25,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {('user', 'password'): 'activated', ('user2', 'password2'): 'deactivated'}
+
+
+def check_auth_1(dict_obj):
+    """Сложность функции O(N)"""
+    login = input('Введите логин')  # 0(1)
+    password = input('Введите пароль')  # 0(1)
+    data = (login, password)
+    for user_data in dict_obj.keys():  # O(N)
+        if user_data == data:  # O(1)
+            if dict_obj[user_data] == 'activated':  # 0(1)
+                print('Успешно')  # 0(1)
+            else:
+                print('Активируйте учетную запись')  # 0(1)
+
+
+
+check_auth_1(users)
+
+
+def check_auth_2(dict_obj):
+    """Сложность функции 0(1), функция линейная,
+    следовательно она более предпочтительна"""
+    login = input('Введите логин')  # 0(1)
+    password = input('Введите пароль')  # 0(1)
+    user_data = (login, password)  # O(1)
+    try:
+        if dict_obj[user_data] == 'activated':  # O(1)
+            print('Успешно')  # O(1)
+        else:
+            print('Активируйте учетную запись')  # O(1)
+    except Exception:
+        print('Неверный логин или пароль')  # O(1)
+
+
+check_auth_2(users)

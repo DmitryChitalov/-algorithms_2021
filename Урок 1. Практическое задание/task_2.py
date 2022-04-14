@@ -19,3 +19,28 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def check_min_1(list_obj):
+    """Сложность функции O(N**2)"""
+    min_number = list_obj[0]  # O(1)
+    for i in range(len(list_obj)):  # O(N)
+        for j in list_obj:  # O(N)
+            if list_obj[i] < j and list_obj[i] < min_number:  # O(1)
+                min_number = list_obj[i]  # O(1)
+    return min_number  # O(1)
+
+
+def check_min_2(list_obj):
+    """Сложность функции O(N)"""
+    min_number = list_obj[0]  # O(1)
+    for i in range(len(list_obj)):  # O(N)
+        if list_obj[i] < min_number:  # O(1)
+            min_number = list_obj[i]  # O(1)
+    return min_number  # O(1)
+
+
+test_list = [5, 6, 99, 126, 9, 2, 8, 9]
+
+print(check_min_1(test_list))
+print(check_min_2(test_list))
