@@ -17,6 +17,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -39,5 +40,36 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def eratosfen_sieve(searching_num):
+    n = 2
+    len_of_lst = 8000
+    sieve = [x for x in range(len_of_lst)]
+    sieve[1] = 0
+    while n < len_of_lst:
+        if sieve[n] != 0:
+            m = n * 2
+            while m < len_of_lst:
+                sieve[m] = 0
+                m += n
+        n += 1
+    return [p for p in sieve if p != 0][searching_num - 1]
+
+
+num = int(input('Введите порядковый номер искомого простого числа: '))
+print(timeit("simple(num)", globals=globals(), number=100))
+print(timeit("eratosfen_sieve(num)", globals=globals(), number=100))
+
+"""
+Введите порядковый номер искомого простого числа: 10
+0.0014347999999992922
+0.2700125
+Введите порядковый номер искомого простого числа: 100
+0.15789330000000001
+0.2687521999999998
+Введите порядковый номер искомого простого числа: 1000
+26.308290900000003
+0.27517620000000065
+
+Решето Эратосфена эффективно на больших значениях порядкового номера простого числа. 
+Наивная функция имеет квадратичную сложность, а решето - О(n*log(log N).
+"""
