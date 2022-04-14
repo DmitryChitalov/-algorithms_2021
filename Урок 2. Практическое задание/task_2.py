@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_and_odd_numbers(number, even=0, odd=0):
+    if number == 0:
+        return f"Четных: {even}, цифр: {odd}"
+    elif (number % 10) % 2 == 0:
+        even += 1
+    elif (number % 10) % 2 == 1:
+        odd += 1
+    return even_and_odd_numbers(number // 10, even, odd)
+
+
+print(even_and_odd_numbers(34560))
