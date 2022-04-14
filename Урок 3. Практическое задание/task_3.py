@@ -21,3 +21,15 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+def str_num(string: str):
+    uniq = set()
+    for i in range(1, len(string)):
+        for j in range(len(string)):
+            sub_str = string[j:j+i]
+            uniq.add(sub_str)
+    return len(uniq)
+
+
+set_str = 'papa'
+print(str_num(set_str))

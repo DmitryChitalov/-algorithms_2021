@@ -28,3 +28,47 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return self.items == []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
+    def print_stack(self):
+        for item in self.items:
+            print(item)
+
+class Plates:
+    def __init__(self):
+        self.plates = []
+        self.num_stacks = 0
+        self.plates_in_stack = 0
+
+    def app(self):
+        self.plates.append(Stack())
+
+    def push(self, item):
+        if self.plates_in_stack > 2:
+            self.app()
+        else:
+            self.plates_in_stack += 1
+            self.plates[self.num_stacks].push(item)
+
+    def pop(self, stack):
+        return self.plates[self.num_stacks].pop()
+
+    def size(self):
+        return len(self.plates)
+
+  # Can't find a way
