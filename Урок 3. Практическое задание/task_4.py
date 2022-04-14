@@ -15,3 +15,23 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+import hashlib
+
+urls_table = {
+    'https://gb.ru': '538289f6da301fd8776479dd08f6115211c5e2e8a00c80ec23f9b33b2d60f226',
+    'https://ya.ru': 'b1c93c1d4fa61287302c4fccba251e445c77542340e8e15ac0a899f2e087f567'}
+
+
+def check_url(url):
+    salt = 'Friday'
+    url_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+    if url_hash in urls_table.values():
+        print('Такой URL уже закеширован.')
+    else:
+        urls_table[url] = url_hash
+
+
+input_url = input('Введите URL для проверки: ')
+check_url(input_url)
