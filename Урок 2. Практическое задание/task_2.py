@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def counter(num, even=0, odd=0):
+    if num == 0:
+        return f'Количество четных: {even}, Количество нечетных: {odd}'
+    else:
+        if num % 2 == 0:
+            even += 1
+            return counter(num // 10, even, odd)
+        else:
+            odd += 1
+            return counter(num // 10, even, odd)
+
+
+print(counter(212341241241423))

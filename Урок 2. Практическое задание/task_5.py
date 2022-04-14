@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_func(n=32, i=1):
+    if n == 127:
+        print(f'{n} - {chr(n)}', end=' ')
+    else:
+        if i == 10:
+            print(f'{n} - {chr(n)}')
+            return table_func(n + 1, i - 9)
+        else:
+            print(f'{n} - {chr(n)}', end=' ')
+            return table_func(n + 1, i + 1)
+
+
+table_func()
