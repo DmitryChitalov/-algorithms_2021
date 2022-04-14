@@ -16,3 +16,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_range_number(count, summ_number = 0):
+    if count == 0:
+        return summ_number
+    else:
+        return get_range_number(count - 1, summ_number + count)
+
+count = 5
+print(get_range_number(count) == count * (count + 1 ) / 2)

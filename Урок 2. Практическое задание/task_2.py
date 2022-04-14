@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+
+def get_ev_od(numbers, even = 0, odd = 0):
+    """Простая рекурсия"""
+    # базовый случай!!!
+    if numbers == 0:
+        return even, odd
+    else:
+        # шаг рекурсии
+        if numbers % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return get_ev_od(numbers // 10, even, odd)
+
+
+print(get_ev_od(34560))
