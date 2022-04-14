@@ -25,3 +25,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = [
+    {'login': 'Tritium', 'password': '12345678', 'is_active': False},
+    {'login': 'Harry_Potter', 'password': 'Expelliarmus', 'is_active': False},
+    {'login': 'Ivanov', 'password': 'Ivanov1', 'is_active': False}
+]
+
+
+def login(log, passwd):
+    """
+    Алгоритм 1.
+    Сложность O(N^2)
+    """
+    user_list = [user['login'] for user in users]
+
+    while log not in user_list:
+        log = input('Ошибка в имени пользователя. Попробуйте еще раз: ')
+    for user in users:
+        if user['login'] == log:
+            while user['password'] != passwd:
+                passwd = input('Пароль неверен. Попробуйте еще раз: ')
+            user['is_active'] = True
+            return 'Аутентификация пройдена'
+
+
+def login_second(log, passwd):
+    """
+    Алгоритм 2.
+    Сложность O(N)
+    """
+    user_list = {user['login']: user['password'] for user in users}
+    while log not in user_list or passwd != user_list[log]:
+        if log not in user_list:
+            log = input('Ошибка в имени пользователя. Попробуйте еще раз: ')
+        else:
+            passwd = input('Пароль неверен. Попробуйте еще раз: ')
+    return 'Аутентификация пройдена'
+
+
+print(login('Tritiumь', '12345678'))
+print(login_second("Tritiumm", '123456789'))
+
+"""
+Эффективнее решение номер 2: 
+- меньшая алгоритмическая сложность;
+- понятнее;
+- компактнее.
+"""

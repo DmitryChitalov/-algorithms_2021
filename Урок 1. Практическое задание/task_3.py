@@ -20,3 +20,47 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {
+             'IP Nekrasov': 1000000, 'OOO Neva': 51716203,
+             'OOO RusGold': 98819390, 'OOO Ceramics': 12345670,
+             'Universal Inc': 109283645, 'Apple Inc': 948563728394
+             }
+
+
+def find_three(comp):
+    """
+    Алгоритм 1.
+    Сложность O(N logN)
+    """
+    return [sorted(comp.items(), key=lambda x: x[1], reverse=True)[i][0] for i in range(3)]
+
+
+def find_three_long(comp):
+    """
+    Алгоритм 2.
+    Сложность O(N^2)
+    """
+    comp_three = []                              # O(1)
+    comp_three_val = list(comp.values())         # O(n)
+
+    for i in range(3):                           # O(1)
+        max_val = max(comp_three_val)            # O(n)
+        for k, v in comp.items():                # O(n)
+            if v == max_val:                     # O(1)
+                comp_three.append(k)             # O(1)
+                comp_three_val.remove(max_val)   # O(n)
+                break                            # O(1)
+
+    return comp_three                            # O(1)
+
+
+print(*find_three(companies), sep=', ')
+print(*find_three_long(companies), sep=', ')
+
+"""
+Эффективнее решение номер 1: 
+- меньшая алгоритмическая сложность;
+- требует меньше дополнительной памяти;
+- компактнее.
+"""

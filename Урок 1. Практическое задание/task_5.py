@@ -28,3 +28,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class PlatesStack:
+    def __init__(self, limit):
+        self.plate_list = []
+        self.all_plate_list = []
+        self.max_length = limit
+
+    def is_empty(self):
+        return len(self.plate_list) == 0
+
+    def size(self):
+        return len(self.plate_list)
+
+    def push(self, count):
+        self.plate_list.append(count)
+        if self.size() > self.max_length:
+            self.all_plate_list.append(self.plate_list[:self.max_length])
+            self.plate_list = self.plate_list[self.max_length:]
+
+    def pop_out(self):
+        return self.plate_list.pop()
+
+    def peek(self):
+        if self.plate_list:
+            return self.plate_list[-1]
+        else:
+            print("Empty Stack")
+        return None
+
+    def stack_size(self):
+        return self.all_plate_list + self.plate_list
+
+
+if __name__ == '__main__':
+    folding = PlatesStack(5)
+    for i in range(1, 16):
+        folding.push(i)
+        if i % 5 == 0:
+            folding.pop_out()
+        print(folding.stack_size())
