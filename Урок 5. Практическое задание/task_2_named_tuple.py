@@ -34,3 +34,18 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import namedtuple
+
+name_tup = namedtuple('Numbers', 'number1 number2')
+numbers = name_tup(list(input('Введите первое число:')),
+                   list(input('Введите второе число:')))
+
+def calculate_sum():
+    return list(f'{(int("".join(numbers.number1), 16) + int("".join(numbers.number2), 16)):x}')
+
+def calculate_mul():
+    return list(f'{(int("".join(numbers.number1), 16) * int("".join(numbers.number2), 16)):x}')
+
+print(calculate_sum())
+print(calculate_mul())
