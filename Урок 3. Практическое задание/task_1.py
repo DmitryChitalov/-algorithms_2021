@@ -20,3 +20,37 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+import time
+
+
+def what_time(func):
+    def wrapper(*args):
+        time_start = time.time()
+        func(*args)
+        time_stop = time.time()
+        print(f'Время работы функции {func.__name__} {time_stop - time_start}')
+
+    return wrapper
+
+
+@what_time
+def update_list(lst, element):  # O(N)
+    """
+    Операция вставки в начало списка имеет линейную сложность и выполняется медленнее
+    """
+    lst.insert(0, element)
+
+
+@what_time
+def update_dict(dct, key, val):  # O(1)
+    """
+    Операция вставки в словарь имеет сложность O(1) и выполняется быстрее
+    """
+    dct[key] = val
+
+
+new_list = [1, 2, 3, 4]
+update_list(new_list, 5)
+
+new_dict = {1: 'name 1', 2: 'name 2', 3: 'name 3', 4: 'name 4'}
+update_dict(new_dict, 5, 'name 5')
