@@ -16,3 +16,9 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def factorial(numbers):
+    return numbers if numbers == 1 else numbers + factorial(numbers - 1)
+
+
+print(factorial(5))

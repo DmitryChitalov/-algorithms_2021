@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_the_number(count, number):
+    print(f'{count} попытка! Какое число я загадал?')
+    user_answer = int(input('Введите число от 0 до 100 и нажмите ENTER _'))
+    if count == 3 or user_answer == number:
+        if user_answer == number:
+            print(f'Вы угадали с {count} попытки')
+        print(f'Я загадал число {number}')
+    else:
+        if user_answer < number:
+            print('Загаданное число больше!')
+        else:
+            print('Загаданное число меньше!')
+        return guess_the_number(count + 1, number)
+
+
+guess_the_number(0, random.randint(0, 101))
