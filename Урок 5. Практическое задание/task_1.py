@@ -23,3 +23,47 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+from collections import deque
+
+
+def average_profit():
+    try:
+        n = int(input('Введите количество предприятий для расчета прибыли: '))
+        i = 1
+        firms = namedtuple('firm', 'name profit')
+        base_firms = {}
+        summa = 0
+        above_average = deque()
+        below_average = deque()
+        while i <= n:
+            firma = input('Введите название предприятия: ')
+            profit = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+            # sumprofit = sum(list(map(int, profit.split())))
+            sumprofit = sum([int(n) for n in profit.split()])
+            base_firm = firms(
+                name=firma,
+                profit=sumprofit
+            )
+            base_firms[firma] = base_firm
+            i += 1
+        for el in base_firms.values():
+            summa += el.profit
+        average = summa/n
+        print(f'Средняя годовая прибыль всех предприятий: {average}')
+        for el in base_firms.values():
+            if average > el.profit:
+                below_average.append(el.name)
+            else:
+                above_average.append(el.name)
+        above_average = ', '.join(above_average)
+        below_average = ', '.join(below_average)
+        print(f'Предприятия, с прибылью выше среднего значения: {above_average}')
+        print(f'Предприятия, с прибылью ниже среднего значения: {below_average}')
+    except ValueError:
+        print('Формат ввода прибыли 123 123 123 123')
+        return average_profit()
+    return base_firms
+
+
+print(average_profit())

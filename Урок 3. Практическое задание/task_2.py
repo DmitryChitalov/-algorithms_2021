@@ -20,3 +20,39 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+import uuid
+import hashlib
+import redis
+
+
+# openserver redis
+r = redis.StrictRedis(
+    host='127.0.0.1',
+    port=6379,
+    password=''
+)
+
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()+salt.encode()).hexdigest()
+
+
+def check_password(login):
+    old_pass = hash_password(input('Введите пароль еще раз для проверки: '))
+    password = r.get(login).decode('UTF-8')
+    if password == old_pass:
+        return 'Вы ввели верный пароль'
+    else:
+        return 'Пароль неверный'
+
+
+salt = uuid.uuid4().hex
+login = input('Введите логин: ')
+new_pass = input('Введите пароль: ')
+hashed_password = hash_password(new_pass)
+print(hashed_password)
+r.set(login, hashed_password)
+print(check_password(login))
+
+

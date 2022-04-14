@@ -28,3 +28,55 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator(n=''):
+    try:
+        z = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if z == '0':
+            return ''
+        if n == '':
+            if z != 0:
+                x = float(input('Введите первое число: '))
+                a = float(input('Введите второе число: '))
+                if z == '+':
+                    fin = x+a
+                    print(f'Результат: {fin}')
+                elif z == '-':
+                    fin = x-a
+                    print(f'Результат: {fin}')
+                elif z == '*':
+                    fin = x*a
+                    print(f'Результат: {fin}')
+                elif z == '/':
+                    fin = x/a
+                    print(f'Результат: {fin}')
+                return f"{calculator(fin)}"
+
+        else:
+            x = float(input('Введите ещё число: '))
+            if z == '+':
+                fin = n + x
+                print(f'Результат: {fin}')
+            elif z == '-':
+                fin = n - x
+                print(f'Результат: {fin}')
+            elif z == '*':
+                fin = n * x
+                print(f'Результат: {fin}')
+            elif z == '/':
+                fin = n / x
+                print(f'Результат: {fin}')
+            return calculator(fin)
+    except ZeroDivisionError:
+        print('Вы делите на 0')
+        return calculator()
+    except ValueError:
+        print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        return calculator()
+    except UnboundLocalError:
+        print('Доступно только +,-,*,/')
+        return calculator()
+
+
+print(calculator())

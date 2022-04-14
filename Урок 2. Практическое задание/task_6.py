@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+numbers = random.randint(0, 100)
+# mid = (low + high) / 2
+# guess = list[mid]
+def binary_search(number, item=0, attempts=10):
+    item = int(input('Угадай 0 до 100: '))
+    if number == item:
+        return f'Вы угадали {number}, осталось попыток {attempts}'
+    elif attempts == 0:
+        return f'Попытки закончились! Число было: {number}'
+    else:
+        if number < item:
+            print(f'Много, попробуйте число меньше! Попробуйте целится в середину')
+        elif number > item:
+            print(f'Мало, попробуйте число побольше! Попробуйте целится в середину')
+        return binary_search(number, item, attempts - 1)
+
+
+print(binary_search(numbers))
