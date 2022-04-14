@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+
+
+def guess_num(num, count=9):
+    user_answer = int(input('Попробуйте угадать число (диапазон от 0 до 100): '))
+    if user_answer == num:
+        print('Вы угадали. Игра окончена.')
+        return 0
+    elif count <= 0:
+        print('Попытки закончились... Вы проиграли...')
+        return 0
+    elif user_answer > num:
+        print(f'Слишком большое число. Попробуйте еше раз. осталось {count} попыток.')
+        guess_num(num, count - 1)
+    elif user_answer < num:
+        print(f'Слишком маленькое число. Попробуйте еше раз. осталось {count} попыток.')
+        guess_num(num, count - 1)
+
+
+guess_num(random.randint(0, 100))
