@@ -18,3 +18,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def counter(number, even=0, uneven=0):
+    if number == 0:
+        return even, uneven
+    else:
+        digit = number % 10
+        number = number // 10
+        if digit % 2 == 0:
+            even += 1
+        else:
+            uneven += 1
+        return counter(number, even, uneven)
+
+
+if __name__ == "__main__":
+    my_number = int(input("Введите число:\n"))
+    try:
+        print(f"Число содержит четных и нечетных цифр соответственно: {counter(my_number)}")
+    except ValueError:
+        print("Нужно ввести число")
+
+

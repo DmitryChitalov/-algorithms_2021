@@ -15,3 +15,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_sum(n):
+    if n == 1:
+        return 1
+    else:
+        return my_sum(n-1) * -0.5
+
+
+if __name__ == "__main__":
+    my_number = int(input("Введите число:\n"))
+    try:
+        print(my_sum(my_number))
+    except ValueError:
+        print("Нужно ввести число")
+
