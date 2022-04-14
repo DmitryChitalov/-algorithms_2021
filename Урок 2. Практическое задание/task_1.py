@@ -28,3 +28,47 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def is_float(number):
+    try:
+        float(number)
+        return True
+    except ValueError:
+        print('Вы должны были ввести число. Попробуйте еще раз)')
+        return False
+
+
+def calc():
+    action = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if action == '0':
+        return print('Вы ввели "0". Выходим из функции.')
+    if action not in ('+', '-', '*', '/'):
+        print('Вы должны были ввести знак операции. Попробуйте еще раз)')
+        return calc()
+
+    first_number = input("Введите первое число: ")
+    if not is_float(first_number):
+        return calc()
+    first_number = float(first_number)
+
+    second_number = input("Введите второе число: ")
+    if not is_float(second_number):
+        return calc()
+    second_number = float(second_number)
+
+    if action == '+':
+        print('Ваш результат:', first_number + second_number)
+    elif action == '-':
+        print('Ваш результат:', first_number - second_number)
+    elif action == '*':
+        print('Ваш результат:', first_number * second_number)
+    elif action == '/' and second_number:
+        print('Ваш результат:', first_number / second_number)
+    else:
+        print('Делитель должен быть отличным от нуля. Попробуйте еще раз)')
+
+    return calc()
+
+
+calc()

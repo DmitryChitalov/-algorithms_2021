@@ -11,3 +11,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+answer = randint(0, 100)
+
+
+def guessing(ans, attempt=0):
+    attempt += 1
+    if attempt > 10:
+        return print(f'К сожалению, вы не угадали. Правильный ответ: {ans}')
+    user_answer = int(input(f'Угадайте число от 1 до 100. Попытка № {attempt}.\n'))
+    if user_answer == ans:
+        return print(f'Поздравляю, ваш ответ верный. Загаданное значение - {ans}')
+    print('Загаданное число больше введенного вами.') if user_answer < ans else print(
+        'Загаданное число меньше введенного вами.')
+    return guessing(ans, attempt)
+
+
+guessing(answer)
