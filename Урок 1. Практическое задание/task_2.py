@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+# Сложность O(n)
+
+def min1(x: list) -> int:
+    minimal = x[0]
+    for i in range(1, len(x)):
+        minimal = minimal if minimal < x[i] else x[i]
+    return minimal
+
+# ****
+
+# Сложность O(n^2)
+
+def min2(lst: list):
+    for i in range(len(lst)-1):
+        for x in range(len(lst)-i-1):
+            if lst[x] > lst[x+1]:
+                lst[x], lst[x+1] = lst[x+1], lst[x]
+    return lst[0]
+
+
+randomnum = [random.randint(0, 100) for i in range(10)]
+print(randomnum)
+print(min1(randomnum))
+print(min2(randomnum))
