@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,28 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    counts = dict()
+    for elem in array:
+        if elem in counts:
+            counts[elem] += 1
+        else:
+            counts[elem] = 1
+    max_count = 0
+    max_elem = None
+    for elem in counts:
+        if counts[elem] > max_count:
+            max_elem = elem
+            max_count = counts[elem]
+    return f'Чаще всего встречается число {max_elem}, ' \
+           f'оно появилось в массиве {max_count} раз(а)'
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit.timeit(lambda: func_1(), number=10000))
+print(timeit.timeit(lambda: func_2(), number=10000))
+print(timeit.timeit(lambda: func_3(), number=10000))
+
+"""" в  связи  с  отсутствием   квадратичной   сложности   удалось  минимизировать   время"""
