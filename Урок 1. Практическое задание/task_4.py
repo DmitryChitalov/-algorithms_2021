@@ -25,3 +25,59 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def check_authorization_dict(login_d, password_d):
+    """Функция проверки авторизации с использованием словаря.
+
+    Сложность: O(1)
+    """
+    if login_d in users_dict:                                    # O(1)
+        if users_dict[login_d][0] == password_d:                 # O(1)
+            if users_dict[login_d][1]:                           # O(1)
+                return True, 'Вы авторизованы'                   # O(1)
+            else:                                                # O(1)
+                return False, 'Вам необходимо авторизоваться'    # O(1)
+        else:                                                    # O(1)
+            return False, 'Неверный пароль'                      # O(1)
+    else:                                                        # O(1)
+        return False, 'Пользователь не найден'                   # O(1)
+
+
+def check_authorization_list(login_l, password_l):
+    """Функция проверки авторизации с использованием списка.
+
+    Сложность: O(n)
+    """
+    for user in users_list:                                        # O(n)
+        if user[0] == login_l:                                     # O(1)
+            if user[1] == password_l:                              # O(1)
+                if user[2]:                                        # O(1)
+                    return True, 'Вы авторизованы'                 # O(1)
+                else:                                              # O(1)
+                    return False, 'Вам необходимо авторизоваться'  # O(1)
+            else:
+                return False, 'Неверный пароль'
+    return False, 'Пользователь не найден'
+
+
+users_dict = {
+    'Иванов': ['123456', True],
+    'Петров': ['111111', False],
+    'Сидоров': ['sid12345', True]
+}
+
+users_list = [
+    ['Иванов', '123456', True],
+    ['Петров', '111111', False],
+    ['Сидоров', 'sid12345', True]
+]
+
+login = input('Логин: ')
+password = input('Пароль: ')
+auth, log_str = check_authorization_dict(login, password)
+print(log_str)
+auth, log_str = check_authorization_list(login, password)
+print(log_str)
+
+# Решение со словарем эффективнее. Поиск в словаре, как в Hash таблице очень быстрый

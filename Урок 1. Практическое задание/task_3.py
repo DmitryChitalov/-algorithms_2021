@@ -20,3 +20,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def search_f(dic):
+    """Функция поиска в словаре с использованием сортировки по списку.
+
+    Сложность: O(nlogn)
+    """
+    dic_new = {}                                                            # O(1)
+    k = list(dic.values())                                                  # O(n)
+    k.sort(reverse=True)                                                    # O(nlogn)
+    for i in range(3):                                                      # O(3)
+        dic_new.update({m: v for m, v in dic.items() if v == k[i]})         # O(n)
+    return dic_new                                                          # O(1)
+
+
+def search_s(dic):
+    """Функция поиска в словаре с использованием сортировки по списку.
+
+    Сложность: O(n)
+    """
+    dic_loc = dict(dic)                                                           # O(n)
+    max_element = {}                                                              # O(1)
+    for i in range(3):                                                            # O(3)
+        max_value = max(dic_loc.values())                                         # O(n)
+        max_element.update({k: v for k, v in dic_loc.items() if v == max_value})  # O(n)
+        for key in dic_loc.keys():                                                # O(n)
+            if dic_loc[key] == max_value:                                         # O(1)
+                dic_loc.pop(key)                                                  # O(1)
+                break                                                             # O(1)
+    return max_element                                                            # O(1)
+
+
+hub = {
+    'ИП Малая': 1000000,
+    'ООО Рога и Копыта': 2560000,
+    'ООО Березка': 6000000,
+    'ИП Жарков': 3500000,
+    'АО НПО маш': 15000000,
+    'ООО Инагент': 8640000
+}
+
+print(hub)
+print(search_f(hub))
+print(search_s(hub))
+print(hub)
+
+# Решение с поиском в словаре эффективнее. Если работаем со списками, то функция О(nlog) сложнее.
