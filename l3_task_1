@@ -1,0 +1,97 @@
+import time
+
+
+def time_function(function):
+    def wrapped(*args):
+        start_time = time.perf_counter()
+        r = function(*args)
+        print(time.perf_counter() - start_time)
+        return r
+
+    return wrapped
+
+
+@time_function
+def l_function(n):
+    r = [i for i in range(n)]
+    return r
+
+
+@time_function
+def d_function(n):
+    r = {i: f"d{i}" for i in range(n)}
+    return r
+
+
+@time_function
+def l_index(l):
+    for cnt, v in enumerate(l):
+        if v == 7654321:
+            return cnt
+
+
+@time_function
+def d_key(d):
+    for k, v in d.items():
+        if v == 'd7654321':
+            return k
+
+
+@time_function
+def l_values(l):
+    return l.index(7654321)
+
+
+@time_function
+def d_values(d):
+    return d.get(7654321)
+
+
+@time_function
+def l_pop(l):
+    return l.pop(123456)
+
+
+@time_function
+def d_pop(d):
+    return d.pop(123456)
+
+
+print("Замеры заполнения списка и словаря составляют: ")
+list_1 = l_function(10000000)
+dict_1 = d_function(10000000)
+
+print("Замеры получения индекса по элементу в списке и ключа по значению в словаре составляют: ")
+l_index(list_1)
+d_key(dict_1)
+
+print("Замеры получения элемента по индексу в списке и значения по ключу в словаре составляют: ")
+l_values(list_1)
+d_values(dict_1)
+
+print("Замеры на удаление в списке и в словаре составляют: ")
+l_pop(list_1)
+d_pop(dict_1)
+
+"""
+Замеры заполнения списка и словаря составляют: 
+0.41148389999999996
+1.6110017
+
+Замеры получения индекса по элементу в списке и ключа по значению в словаре составляют: 
+0.3287911000000001
+0.29093329999999984
+
+Замеры получения элемента по индексу в списке и значения по ключу в словаре составляют: 
+0.08015039999999996
+1.100000000020529e-05
+
+Замеры на удаление в списке и в словаре составляют: 
+0.007276200000000177
+5.999999999950489e-06
+
+Из приведенных данных мы видим что операции связанные с ключами выполняются быстрее за счет того что происходит 
+хэширование. В заполнениями данными ситуация выглядит обратно здесь привалирует список опять из-за того же хэшироваани.
+В замерах на получения индекса или ключа по значениям скорость выполнения приблизительно равна. 
+
+"""

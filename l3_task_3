@@ -1,0 +1,11 @@
+def func(s):
+    sh = []
+    for i in range(2, len(s) + 1):
+        sh.append(hash(s[1:i]))
+        sh.append(hash(s[:i - 1]))
+
+    return f'Количество различных подстрок: {len(set(sh))}'
+
+
+s = 'papa'
+print(func(s))
