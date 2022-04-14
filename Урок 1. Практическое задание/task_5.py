@@ -28,3 +28,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Данный класс вмещает в себя 10 тарелок. Если тарелок больше 10, то создается новая стопка.
+# Вымытые тарелки удаляются, начиная с последней стопки. Когда стопка опустевает (кроме первой стопки), она удаляется.
+
+class PlateStack:
+    total_stacks = []
+
+    def __init__(self):
+        PlateStack.total_stacks.append(self)
+        self.plates = []
+
+    def is_full(self):
+        return len(self.plates) == 10
+
+    def stacks_number(self):
+        return len(PlateStack.total_stacks)
+
+    def push_in(self, el):
+        currents_stack = PlateStack.total_stacks[-1]
+        if not currents_stack.is_full():
+            currents_stack.plates.append(el)
+        else:
+            print('добавляем стопку')
+            new_stack = PlateStack()
+            new_stack.push_in(el)
+
+    def wash(self):
+        current_stack = PlateStack.total_stacks[-1]
+        if not current_stack.plates:
+            print('Вся посуда вымыта')
+        else:
+            washed_plate = current_stack.plates.pop()
+            if not current_stack.plates and len(PlateStack.total_stacks) > 1:
+                print('одна стопка вымыта')
+                PlateStack.total_stacks.pop()
+            return washed_plate
+
+
+# Добавим 23 тарелки, создастся 3 стопки, потом попытаемся вымыть 30:
+plate_stack = PlateStack()
+for plate in [f'тарелка_{m}' for m in range (1, 24)]:
+    plate_stack.push_in(plate)
+print(len(PlateStack.total_stacks))
+
+for i in range(30):
+    print(plate_stack.wash())
+print(len(PlateStack.total_stacks))
