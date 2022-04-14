@@ -25,3 +25,48 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+my_users = {
+    'login_1': ['password_1', True],
+    'login_2': ['password_2', True],
+    'login_3': ['password_3', False],
+    'login_4': ['password_4', True]
+}
+
+
+def authorization(login, password, users):  # O(1)
+    if users.get(login, False):
+        if users[login][0] == password and users[login][1] is True:
+            return 'Доступ разрешен'
+        elif users[login][0] == password and users[login][1] is False:
+            return 'Пройдите авторизацию'
+        else:
+            return 'Неверный пароль'
+    else:
+        return 'Неверный логин'
+
+
+print(authorization('login_1', 'password_1', my_users))
+print(authorization('login_3', 'password_3', my_users))
+print(authorization('login_4', 'password_3', my_users))
+
+
+def authorization_2(login, password, users):  # O(n)
+    for key, value in users.items():
+        if key == login:
+            if value[0] == password and value[1] is True:
+                return 'Доступ разрешен'
+            elif value[0] == password and value[1] is False:
+                return 'Пройдите авторизацию'
+            else:
+                return 'Неверный пароль'
+    return 'Неверный логин'
+
+
+print(authorization_2('login_1', 'password_1', my_users))
+print(authorization_2('login_3', 'password_3', my_users))
+print(authorization_2('login_4', 'password_3', my_users))
+
+"""
+Вывод: Решение через цикл менее эффективно, так как имеет сложность O(n).
+"""
