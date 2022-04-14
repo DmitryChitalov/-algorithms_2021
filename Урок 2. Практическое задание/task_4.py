@@ -15,3 +15,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def range_sum(num: int, cur_num: float = 1.0) -> float:
+    if num == 1:
+        return cur_num
+    else:
+        return cur_num + range_sum(num-1, cur_num/(-2))
+
+
+if __name__ == '__main__':
+    print(range_sum(3))
+    print(range_sum(10))
+    print(range_sum(50))
+    print(range_sum(500))
