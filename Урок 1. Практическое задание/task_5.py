@@ -28,3 +28,85 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackPlates:
+    def __init__(self, st_limit):    # st_limit - максимальное число тарелок в стопке
+        self.elems = [[]]
+        self.st_limit = int(st_limit)
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        if len(self.elems[len(self.elems) - 1]) < self.st_limit:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+            print(f'Максимальное число тарелок в стопке: {self.st_limit}. '
+                  f'Складываем в стопку {len(self.elems)}.')
+            self.elems[len(self.elems) - 1].append(el)
+
+    def pop_out(self):
+        if self.elems != [[]] and self.elems[len(self.elems) - 1] == []:
+            self.elems.pop()
+        return self.elems[len(self.elems) - 1].pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1][len(self.elems[len(self.elems) - 1]) - 1]
+
+    def stacks_num(self):
+        return len(self.elems)
+
+    def last_stack_size(self):
+        return len(self.elems[len(self.elems) - 1])
+
+
+if __name__ == '__main__':
+
+    pl_st = StackPlates(3)
+
+    print(pl_st.is_empty())  # -> стопок тарелок нет
+
+    # складываем тарелки
+    pl_st.push_in('a')
+    pl_st.push_in('b')
+    pl_st.push_in('c')
+    pl_st.push_in('d')
+    pl_st.push_in('e')
+    pl_st.push_in('f')
+
+    # проверим имеющиеся стопки тарелок
+    print(pl_st.elems)
+
+    # получаем обозначение первой тарелки с вершины стопки, но не удаляем
+    print(pl_st.get_val())  # -> f
+
+    # узнаем число стопок тарелок
+    print(pl_st.stacks_num())  # -> 2
+
+    # узнаем размер последней стопки
+    print(pl_st.last_stack_size())  # -> 3
+
+    print(pl_st.is_empty())  # -> стопки уже не без тарелок, если можно так сказать), стек не пустой
+
+    # кладем еще одну тарелку в стопку
+    pl_st.push_in('g')
+
+    # проверим имеющиеся стопки тарелок
+    print(pl_st.elems)
+
+    # убираем тарелку с вершины последней стопки и возвращаем её обозначение
+    print(pl_st.pop_out())  # -> g
+
+    # снова убираем тарелку с вершины стопки и возвращаем её обозначение
+    print(pl_st.pop_out())  # -> f
+
+    # вновь узнаем число стопок тарелок
+    print(pl_st.stacks_num())  # -> 2
+
+    # узнаем размер последней стопки
+    print(pl_st.last_stack_size())  # -> 2
+
+    # проверим имеющиеся стопки тарелок
+    print(pl_st.elems)

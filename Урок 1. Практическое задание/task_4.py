@@ -25,3 +25,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def check_1(login):
+    # Сложность: O(n^2).
+    if login in login_password:
+        if login in login_activated:
+            print("Введите пароль: ")
+        else:
+            print("Пройдите по ссылке для активации учетной записи.")
+    else:
+        print("Логин отсутствует. Зарегистрируйтесь.")
+
+
+def check_2(login):
+    # Сложность: O(n).
+    if login_password.get(login):
+        if login in login_activated:
+            print("Введите пароль: ")
+        else:
+            print("Пройдите по ссылке для активации учетной записи.")
+    else:
+        print("Логин отсутствует. Зарегистрируйтесь.")
+
+
+'''Второе решение эффективнее, ввиду использования метода get().'''
+
+login_password = {"Ivan": "qwerty",
+                  "Oleg": "12345",
+                  "Olga": "olga",
+                  "tapok": "00000",
+                  "orel": "lero",
+                  "iskra": "1986"
+                  }
+
+login_activated = ["Ivan", "Olga", "tapok", "iskra"]
+
+check_1("Ivan")
+check_1("orel")
+check_1("ALEX")
+print('#########')
+check_2("Ivan")
+check_2("orel")
+check_2("ALEX")
