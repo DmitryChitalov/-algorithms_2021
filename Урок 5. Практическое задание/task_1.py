@@ -23,3 +23,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import defaultdict
+from statistics import mean
+
+
+def my_func():
+    num_enterprises = int(input('\nВведите кол-во предприятий: '))
+    dict_avg_profit = defaultdict(int)
+
+    for i in range(num_enterprises):
+        company_name = input("\nВведите название предприятия: ")
+        input_profit = input(" Через пробел введите прибыль данного предприятия"
+                                 "\n за каждый квартал (всего 4 квартала): ")
+        dict_avg_profit[company_name] = mean([int(el) for el in input_profit.split(" ")])
+
+    avg_profit = round(mean(dict_avg_profit.values()), 2)
+
+    return f'\nСредняя годовая прибыль всех предприятий: {avg_profit}' \
+           f'\nПредприятия, с прибылью выше среднего значения: ' \
+           f'{", ".join([el for el in dict_avg_profit.keys() if dict_avg_profit[el] > avg_profit])}.' \
+           f'\nПредприятия, с прибылью ниже среднего значения: ' \
+           f'{", ".join([el for el in dict_avg_profit.keys() if dict_avg_profit[el] < avg_profit])}.'
+
+print(my_func())
