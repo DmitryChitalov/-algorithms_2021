@@ -15,6 +15,7 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
+from timeit import timeit
 
 
 def func_1(nums):
@@ -23,3 +24,24 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [idx for idx, el in enumerate(nums) if el % 2 == 0]
+
+
+def func_3(nums):
+    return [idx for idx in range(len(nums)) if nums[idx] % 2 == 0]
+
+
+nums = [1, 2, 3, 4, 5, 6, 7]
+print(timeit('func_1(nums)', globals=globals()))
+print(timeit('func_2(nums)', globals=globals()))
+print(timeit('func_3(nums)', globals=globals()))
+
+
+"""Я создала 2 аналогичные функции. Первая работает именно с элементами массива
+и через lc, это значительно ускоряет работу, нежели добавление в цикле
+Во всех случаях 2 функция работает быстрее 1. В 3 пусть и юзаются lc, 
+она сама медленная из всех. Скорее всего это связано с тем, что я 
+работаю с индексами, а не элементами"""

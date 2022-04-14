@@ -20,3 +20,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+"""Решение 1. Алгоритм: создать словарь и отсортировать по значениям
+    Самая трудоемкая операция: сортировка
+    Сложность алгоритма: n log n"""
+
+companies_income = dict({'Apple': 1000000, 'Samsung': 90, 'Huawei': 90999,
+                         'PayPal': 0, 'MAC': 100000000, 'Tesla': 99999,
+                         'Yandex': 10, 'Uber': 99, 'Google': 1000})
+
+sorted_tuples = sorted(companies_income.items(), key=lambda item: item[1], reverse=True)
+for i in range(3):
+    print(sorted_tuples[i][0])
+print()
+"""Решение 1. Алгоритм: отсортировать словарь по значениям
+    Самая трудоемкая операция: сортировка
+    Сложность алгоритма: О(n ^ 2)"""
+
+
+def bubble_sort(lst: list) -> list:
+    for i in range(len(lst) - 1):
+        for j in range(len(lst) - 1 - i):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+
+sorted_values = bubble_sort(list(companies_income.values()))[:]
+sorted_dict = dict()
+for i in sorted_values:
+    for k in companies_income.keys():
+        if companies_income[k] == i:
+            sorted_dict[k] = companies_income[k]
+            break
+for key in sorted_dict:
+    print(key)
+
+"""
+1 Решение будет лучше, потому что во-первых, используется быстрая сортировка
+nlogn, а во вторых не пересоздается словарь заново
+Во втором решении помимо квадратичного пузырька присутствует квадратичное
+создание нового словаря"""
