@@ -34,3 +34,59 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+# Первое решение
+from collections import defaultdict
+from functools import reduce
+
+test_dict = defaultdict(list)
+
+test_dict.update({'first_num': list('A2')})
+test_dict.update({'second_num': list('C4F')})
+
+hex_add = list(hex(sum([int(''.join(i), 16) for i in test_dict.values()])).upper()[2:])
+hex_mul = list(hex(reduce((lambda first_num, second_num: first_num * second_num),
+                          [int(''.join(i), 16) for i in test_dict.values()])).upper()[2:])
+print('Первое решение')
+print(hex_add)
+print(hex_mul)
+print(test_dict)
+
+
+# Второе решение
+class Hexadecimal:
+    def __init__(self, number):
+        self.number = list(number)
+
+    def __add__(self, other):
+        result = self.decfunc() + other.decfunc()
+        return Hexadecimal(self.hexfunc(result))
+
+    def __mul__(self, other):
+        result = self.decfunc() * other.decfunc()
+        return Hexadecimal(self.hexfunc(result))
+
+    def __str__(self):
+        return f'{self.number}'
+
+    def decfunc(self):
+        list_to_string = ''.join(self.number)
+        result = int(list_to_string, 16)
+        return result
+
+    @staticmethod
+    def hexfunc(in_number):
+        result = hex(in_number)
+        return result.upper()[2:]
+
+
+a = Hexadecimal('A2')
+b = Hexadecimal('C4F')
+c = a + b
+d = a * b
+print('Второе решение')
+print(a)
+print(b)
+print(c)
+print(d)

@@ -23,3 +23,55 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+import re
+
+
+def annual_profit():
+    list_of_companies = {}
+    sum_of_profit = 0
+    above_profit = []
+    below_profit = []
+    equal_profit = []
+    while True:
+        try:
+            n = int(input('Введите количество предприятий: '))
+        except ValueError:
+            print('Введите число')
+        else:
+            break
+    COMPANY = namedtuple('Company', 'name profit')
+    while n >= 1:
+        company = input('Введите название предприятия: ')
+        while True:
+            profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+            if re.match('[0-9 ]+$', profit):
+                break
+            else:
+                print('Неправильный ввод, необходимо вводить суммы цифрами через пробел')
+        profit = sum(list(map(int, profit.split())))
+        company_parts = COMPANY(
+            name=company,
+            profit=profit
+        )
+        list_of_companies[company] = company_parts
+        n -= 1
+    for part in list_of_companies.values():
+        sum_of_profit += part.profit
+    average_profit = sum_of_profit/len(list_of_companies)
+    for part in list_of_companies.values():
+        if part.profit > average_profit:
+            above_profit.append(part.name)
+        elif part.profit == average_profit:
+            equal_profit.append(part.name)
+        else:
+            below_profit.append(part.name)
+    print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+    print(f'Предприятия, с прибылью выше среднего значения: {above_profit}')
+    print(f'Предприятия, с прибылью равной среднему значению: {equal_profit}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {below_profit}')
+    return list_of_companies
+
+
+print(annual_profit())
