@@ -20,3 +20,40 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+from uuid import uuid4
+import hashlib
+from pymongo import MongoClient
+
+CLIENT = MongoClient('127.0.0.1', 27017)
+DB = CLIENT['passwords']
+PASSWORDS = DB.passwords
+
+
+def create_hash(passw, salt):
+    """
+    Генерирует хеш к паролю
+    """
+    return hashlib.sha256(salt.encode() + passw.encode()).hexdigest()
+
+
+def add_to_db(passw_hash, salt):
+    """
+    Добавляет хеш в базу данных
+    :param passw_hash: хеш пароля
+    :param salt: соль пароля
+    """
+    PASSWORDS.insert_one({'hash': passw_hash, 'salt': salt})
+
+
+SALT = uuid4().hex
+PASSWORD = input('Введите пароль: ')
+PASSWORD_HASH = create_hash(PASSWORD, SALT)
+add_to_db(PASSWORD_HASH, SALT)
+print(f'В базе данных хранится строка: {PASSWORD_HASH}')
+CHECK_PASS = input('Введите пароль еще раз для проверки: ')
+CHECK_HASH = create_hash(CHECK_PASS, SALT)
+
+if PASSWORDS.count_documents({'hash': CHECK_HASH}):
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели неверный пароль')

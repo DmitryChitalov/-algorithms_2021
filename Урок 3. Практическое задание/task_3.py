@@ -21,3 +21,19 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def substrings(word):
+    """
+    Возвращает количетво подстрок в строке
+    """
+    substr = set()
+    sub_length = 1
+    for _ in range(len(word) - 1):
+        for _ in range(len(word)):
+            substr.add(hash(word[_:_ + sub_length]))
+        sub_length += 1
+    return len(substr)
+
+
+print(substrings('рара'))
