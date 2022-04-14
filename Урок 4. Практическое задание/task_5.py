@@ -17,10 +17,11 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
-    """Без использования «Решета Эратосфена»"""
+    """Без использования «Решета Эратосфена», квадратичная сложность"""
     count = 1
     n = 2
     while count <= i:
@@ -39,5 +40,37 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def eratosthenes(b):
+    """Сложность O(n log(log n))"""
+    a, i = list(range(b+1)), 2
+    a[1] = 0
+    while i ** 2 <= b:
+        if a[i] != 0:
+            j = i * 2
+            while j <= b:
+                a[j] = 0
+                j += i
+        i += 1
+    a = list(set(a))
+    a.remove(0)
+    return a
+
+
+# for i in [10, 100, 1000]:
+#     print(f"simple({i}): {timeit('simple(i)', globals=globals(), number=1000)}")
+
+for i in [10, 100, 1000]:
+    print(f"eratosthenes({i}): {timeit('eratosthenes(i)', globals=globals(), number=1000)}")
+
+"""
+simple(10): 0.015522000000000001
+simple(100): 1.6937566
+simple(1000): 363.6404689
+Обычная функция, время на 1000 операций больше пяти минут
+
+eratosthenes(10): 0.0020175000000000054
+eratosthenes(100): 0.0162418
+eratosthenes(1000): 0.1273657
+Решето Эратосфена, время на 1000 операций меньше секунды
+Разница алгоритмов начинает быть существенной со 100+ элементов. На тысяче она становится колосальной
+"""
