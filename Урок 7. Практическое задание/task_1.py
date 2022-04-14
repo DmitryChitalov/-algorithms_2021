@@ -17,3 +17,67 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+
+import timeit
+import random
+
+#  сортировка по убыванию:
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+my_list = [random.randint(-100, 100) for _ in range(10)]
+print('bubble_sort:')
+print(my_list)
+print(bubble_sort(my_list))
+
+
+# улучшенная сортировка по убыванию, подазумевающая ранний выход из икла при отсутствии замен:
+
+def better_bubble_sort(lst_obj):
+    n = 1
+    finished = True
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                finished = False
+        if finished:
+            break
+        n += 1
+
+    return lst_obj
+
+my_list = [random.randint(-100, 100) for _ in range(10)]
+
+print('better_bubble_sort:')
+print(my_list)
+print(better_bubble_sort(my_list))
+
+# Замеры показали при малой длине списке (пять элементов):
+# 2.0380067
+# 1.8778858999999999
+# Однако эти результаты нестабильные, а при увеличении числа элементов в списке, эффект отсутствует,
+# так как очень низка вероятность, что список сгенерируется с числами по порядку.
+
+
+my_list = [random.randint(-100, 100) for _ in range(5)]
+print(
+    timeit.timeit(
+        "bubble_sort(my_list[:])",
+        globals=globals(),
+        number=1000_000))
+
+
+my_list = [random.randint(-100, 100) for _ in range(5)]
+print(
+    timeit.timeit(
+        "better_bubble_sort(my_list[:])",
+        globals=globals(),
+        number=1000_000))

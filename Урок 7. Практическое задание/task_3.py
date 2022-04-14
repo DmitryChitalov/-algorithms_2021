@@ -40,3 +40,17 @@ for i in
 
 
 """
+
+import random
+from statistics import median
+
+m = int(input('Введите n:\n'))
+my_list = [random.randint(-5, 5) for _ in range(2 * m + 1)]
+print(my_list)
+print(f'median рассчитанная при помощи statistics: {median(my_list)}')
+
+for i in range(m):
+    my_list.remove(max(my_list))
+
+print(f'median: {max(my_list)}')
+
