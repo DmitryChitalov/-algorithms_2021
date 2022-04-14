@@ -28,3 +28,42 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class OperatorError(Exception): pass
+
+
+def calc():
+    operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    try:
+        if operator not in ('+', '-', '*', '/', '0'):
+            raise OperatorError
+    except OperatorError:
+        print('Нет введенного вами оператора')
+        return calc()
+    if operator == '0':
+        exit('Сеанс завершен')
+    try:
+        operand_1 = float(input('Введите первое число:'))
+        operand_2 = float(input('Введите второе число: '))
+    except ValueError:
+        print(f'Вы ввели не число ')
+        return calc()
+    if operator == '+':
+        print(f'Ваш результат: {operand_1 + operand_2}')
+        return calc()
+    elif operator == '-':
+        print(f'Ваш результат: {operand_1 - operand_2}')
+        return calc()
+    elif operator == '*':
+        print(f'Ваш результат: {operand_1 * operand_2}')
+        return calc()
+    elif operator == '/':
+        try:
+            print(f'Ваш результат: {operand_1 / operand_2}')
+        except ZeroDivisionError:
+            print('Деление на 0 ')
+            return calc()
+
+
+a = calc()

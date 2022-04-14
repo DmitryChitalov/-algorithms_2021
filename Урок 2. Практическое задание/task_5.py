@@ -21,3 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def symbol(num, str_symbol='', count=0):
+    if num == 128:
+        return str_symbol
+    else:
+        if num % 10 == 2:
+            return f'{str_symbol} \n  {str(num)} - {chr(num)}  {symbol(num + 1, str_symbol, count + 1)}'
+        else:
+            return f'{str_symbol}  {str(num)} - {chr(num)}  {symbol(num + 1, str_symbol, count + 1)}'
+
+
+
+a = symbol(32)
+print(a)
+

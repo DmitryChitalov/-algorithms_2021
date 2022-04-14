@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def number_revers(num):
+    num = str(num)
+    l = len(num) - 1
+    return num[l] if len(num) == 1 else num[l] + number_revers(num[0:l])
+
+
+num = 1230
+f = number_revers(num)
+print(f)
+num = 123
+f = number_revers(num)
+print(f)
