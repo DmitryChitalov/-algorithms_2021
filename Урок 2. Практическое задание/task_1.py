@@ -28,3 +28,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def add(number1, number2):
+    return number1 + number2
+
+
+def sub(number1, number2):
+    return number1 - number2
+
+
+def mul(number1, number2):
+    return number1 * number2
+
+
+def div(number1, number2):
+    return number1 / number2
+
+
+def func1():
+    available_operations = {"+": add, "-": sub, "*": mul, "/": div}
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation == "0":
+        return "Завершаем программу"
+    if operation in available_operations:
+        while True:
+            try:
+                number1 = int(input("Введите первое число: "))
+                number2 = int(input("Введите второе число: "))
+                break
+            except ValueError:
+                print("Вы ввели не число")
+        result = available_operations[operation](number1, number2)
+        print(f"Ваш результат: {result}")
+        return print(func1())
+    else:
+        print("Вы ввели неверную операцию (((. Исправьтесь")
+        return print(func1())
+
+
+print(func1())
