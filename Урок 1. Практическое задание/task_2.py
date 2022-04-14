@@ -19,3 +19,23 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+# Сложность:O(n^2)
+
+def min_list(lst):
+    for i in range(0, len(lst) - 1):            # O(n)
+        for j in range(i + 1, len(lst)):        # O(n)
+            if lst[j] < lst[i]:                 # O(1)
+                lst[i], lst[j] = lst[j], lst[i] # O(1)
+    return print(lst[0])                        # O(1) + O(1)
+
+min_list([8,8,5,3,9,5,885,1])
+
+# Сложность:O(n)
+def min_list2(lst):
+    n = float('+inf')       # O(1)
+    for i in lst:           # O(n)
+        if i < n:           # O(1)
+            n = i           # O(1)
+    return print(n)         # O(1) + O(1)
+
+min_list2([8,8,5,3,9,5,885,1])

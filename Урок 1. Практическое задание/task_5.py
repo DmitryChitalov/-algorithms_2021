@@ -28,3 +28,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+class PlateStacks:
+    def __init__(self):
+        self.elems = [[]]
+        self.max_plate = 3
+        self.cur_stack = 0
+
+    def empty(self):
+        return self.elems == [[]]
+
+    def put_plate(self, el):
+        if len(self.elems[self.cur_stack]) == self.max_plate:
+            self.elems.append([])
+            self.cur_stack += 1
+            self.elems[self.cur_stack].append(el)
+        else:
+            self.elems[self.cur_stack].append(el)
+
+    def del_plate(self):
+        rem_plates = self.elems[self.cur_stack].pop()
+        if len(self.elems[self.cur_stack]) == 0:
+            self.elems.pop()
+            self.cur_stack -= 1
+        return rem_plates
+
+    def all_plates(self):
+        plates = self.max_plate * (len(self.elems) - 1) + len(self.elems[self.cur_stack])
+        return plates
+
+    def stack_size(self):
+        return len(self.elems[self.cur_stack])
+
+if __name__ == '__main__':
+    stacks = PlateStacks()
+    print(stacks.empty())
+    stacks.put_plate(1)
+    stacks.put_plate(2)
+    stacks.put_plate(3)
+    print(stacks.empty())
+    print(stacks.stack_size())
+    stacks.put_plate(4)
+    print(stacks.stack_size())
+    stacks.del_plate()
+    print(stacks.stack_size())
