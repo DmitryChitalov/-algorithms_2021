@@ -18,3 +18,41 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class TaskBoard:
+    def __init__(self):
+        self.task = []
+        self.task_done = []
+        self.task_refine = []
+
+    def is_empty(self):
+        return self.task == [] and self.task_refine == []
+
+    def add_task(self, item):
+        self.task.insert(0, item)
+
+    def refine(self):
+        self.task_refine.insert(0, self.task.pop())
+
+    def done(self):
+        self.task_done.insert(0, self.task.pop())
+
+    def size(self):
+        return len(self.task) + len(self.task_refine)
+
+
+tb = TaskBoard()
+
+for i in range(1, 20):
+    tb.add_task(f'Task_{i}')
+
+for i in range(5):
+    tb.done()
+
+for i in range(5):
+    tb.refine()
+
+print(f'All task after Tb_1.done and Tb_1.refine: {", ".join(tb.task)}')
+print(f'All refine task: {", ".join(tb.task_refine)}')
+print(f'All done task: {", ".join(tb.task_done)}')
