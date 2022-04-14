@@ -22,3 +22,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse(number, result):
+    if len(str(number)) == 1:
+        return print(f'Перевернутое число: {result + str(number)}')
+    else:
+        result = result + str(number % 10)
+        reverse(number // 10, result)
+
+
+try:
+    number = int(input('Введите число'))
+    reverse(number, '')
+except:
+    print('Вы ввели не число!!!')

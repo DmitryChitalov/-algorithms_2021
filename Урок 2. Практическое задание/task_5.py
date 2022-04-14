@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii(element, len_str, result):
+    if element == 127:
+        result = result + f'{element} - {chr(element)} '
+        print(result)
+    else:
+        if len_str == 0:
+            result = result + f'\n'
+            len_str = 10
+        result = result + f'{element} - {chr(element)} '
+        ascii(element + 1, len_str - 1, result)
+
+
+ascii(32, 10, '')
