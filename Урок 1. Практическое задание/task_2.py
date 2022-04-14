@@ -19,3 +19,34 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def min_n2(lst: list):
+    """
+    Поиск минимального элемента списка со сложностью O(n^2)
+    :param lst: Список, в котором нужно найти минимальный элемент
+    :return: Минимальный элемент списка
+    """
+    for i in range(len(lst)-1):                     # O(n)
+        for j in range(i+1, len(lst)):              # O(n-i)
+            if lst[i] > lst[j]:                     # O(1)
+                lst[i], lst[j] = lst[j], lst[i]     # O(2)
+    return lst[0]                                   # O(1)
+
+
+def min_n(lst: list):
+    """
+    Поиск минимального элемента списка со сложностью O(n)
+    :param lst: Список, в котором нужно найти минимальный элемент
+    :return: Минимальный элемент списка
+    """
+    minimal = lst[0]                # O(1)
+    for i in range(1, len(lst)):    # O(n)
+        if lst[i] < minimal:        # O(1)
+            minimal = lst[i]        # O(1)
+    return minimal                  # O(1)
+
+
+if __name__ == '__main__':
+    print(min_n2([-1, 5, 3, -6, 2, 1, 7, 8]))  # -6
+    print(min_n([-23, 10, -5, 12, 43, -223]))  # -223
