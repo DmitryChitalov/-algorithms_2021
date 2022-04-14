@@ -19,3 +19,29 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+# Сложность O(n^2)
+
+def list_min_n(lst):
+    for i in lst:
+        is_min = True
+        for j in lst:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
+
+
+# Сложность O(n)
+
+
+def mins(n):
+    mins = n[0]
+    for i in n:
+        if i < mins:
+            mins = i
+
+    print(mins)
+
+#mins(n)
+
+
