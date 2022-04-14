@@ -19,3 +19,22 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+# Первый вариант с O(n^2)
+def search(lst):
+    for i in lst:
+        min_idx = True
+        for j in lst:
+            if i > j:
+                min_idx = False
+        if min_idx:
+            return i
+
+
+# Второй вариант с O(n)
+def search(lst):
+    min_idx = lst[0]
+    for i in lst:
+        if i < min:
+            min_idx = i
+    return min_idx
