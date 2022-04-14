@@ -21,3 +21,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_ascii(counter=32, s_tr=0):
+    if counter == 128:
+        return
+    else:
+        s_tr += 1
+        if s_tr < 10:
+            print(f'{counter} - {chr(counter)}', end=' ')
+        else:
+            print(f'{counter} - {chr(counter)}')
+            s_tr = 0
+        counter += 1
+        return table_ascii(counter, s_tr)
+
+
+table_ascii()

@@ -22,3 +22,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+test = int(input("Введите число, которое требуется перевернуть: "))
+
+
+def func1(test_int, rev_int=""):
+    if len(str(test_int)) == 1:
+        rem = test_int % 10
+        rev_int += str(rem)
+        return rev_int
+    rem = test_int % 10
+    rev_int += str(rem)
+    return func1(test_int // 10, rev_int)
+
+
+print(func1(test))

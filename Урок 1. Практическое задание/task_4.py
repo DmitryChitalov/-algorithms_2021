@@ -25,3 +25,18 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# сложность линейная
+def password_web(users: {},
+                 user_password: {},
+                 user_name: {}):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_password and value['active']:
+                return "Entrance allowed"
+            elif value['password'] != user_password:
+                return "Try again"
+            elif value['password'] == user_password and not value['activation']:
+                return "please register"
+    return "wrong user"
