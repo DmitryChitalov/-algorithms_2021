@@ -19,3 +19,27 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# со сложностью O(n^2) - квадратичная
+
+
+def min_n2(array):
+    for i in array:
+        is_min = True
+        for j in array:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
+
+
+# со сложностью O(n) - линейная
+
+
+def min_n(array):
+    min_el = array[0]
+    for el in array:
+        if el < min_el:
+            min_el = el
+    return min_el

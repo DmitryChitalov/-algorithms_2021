@@ -20,3 +20,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {
+    'Mercedes': 2000000,
+    'BMW': 2500000,
+    'Audi': 1800000,
+    'Bentley': 3000000,
+    'Ferrari': 2400000,
+    'Aston martin': 1900000
+}
+
+
+# квадратичная сложность
+
+
+def max_revenue_n2(companies):
+    for i in range(len(companies)):
+        index = i
+        for j in range(i + 1, len(companies)):
+            if companies[i][j] > companies[index]:
+                index = j
+            companies[i], companies[index] = companies[index], companies[i]
+    return companies[0:3]
+
+
+# линейная сложность
+
+
+def max_revenue_n(companies):
+    answer = {}
+    for i in range(3):
+        maximum = max(companies.items(), key=lambda k_v: k_v[1])
+        del companies[maximum[0]]
+        answer[maximum[0]] = maximum[1]
+    return answer
+
+
