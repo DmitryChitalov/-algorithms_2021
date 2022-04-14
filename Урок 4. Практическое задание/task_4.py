@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -41,3 +42,32 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+def func_3():
+    freq_el = array[([array.count(el) for el in array]).index(max([array.count(el) for el in array]))]
+    return f'Чаще всего встречается число {freq_el}, оно появилось в массиве {array.count(freq_el)} раз(а)'
+
+print(func_3())
+
+def func_4():
+    m = max(list(map((lambda el: array.count(el)), array)))
+    for el in array:
+        if array.count(el) == m:
+            return f'Чаще всего встречается число {el}, оно появилось в массиве {m} раз(а)'
+
+
+print(func_4())
+
+print(timeit("func_1()", setup="from __main__ import func_1", number=1000000))
+print(timeit("func_2()", setup="from __main__ import func_2", number=1000000))
+print(timeit("func_3()", setup="from __main__ import func_3", number=1000000))
+print(timeit("func_4()", setup="from __main__ import func_4", number=1000000))
+
+# вариант 3 получился "провальным" - он дольше остальных значительно, поочти вдвое
+# дольше первого варианта,  из-за использования затратного метода index, 2-х кратного
+# использования list comprehension, max, count - все в одной строке.
+# вариант 4 чуть лучше, но также далек от идеала из-за использования таих встроенных функций и методов,
+# как max, list, map, lambda.
+# Таким образом, оптимизация мне не удалась: желание написать сложный код в минимальное колчнство строк
+# дал противоположные результаты для времени выполнения кода из-за использования вложенных
+# одни в другие методов и функций, что привело к худшим вариантам доминирующей сложности
