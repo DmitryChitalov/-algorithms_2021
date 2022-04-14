@@ -15,3 +15,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def progression_sum(n, iter_counter=0, number=1.0, total_sum=0.0):
+    if n == 0 or n == iter_counter:
+        return f"Количество элементов: {n}, их сумма: {total_sum}"
+    elif iter_counter < n:
+        return progression_sum(n=n, iter_counter=iter_counter+1, number=number/2*(-1), total_sum=total_sum + number)
+
+
+def number_request():   # Добавил функцию для запроса ввода и простейшей проверки вводимого числа
+    try:
+        n = int(input("Введите количество элементов: "))
+        return n
+    except ValueError:
+        print("Вы должны ввести натрульное число")
+        return number_request()
+
+
+if __name__ == '__main__':
+    print(progression_sum(number_request()))
