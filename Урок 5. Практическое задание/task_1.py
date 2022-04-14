@@ -23,3 +23,26 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+company = namedtuple('Company', 'name q1 q2 q3 q4')
+companies = []
+
+while True:
+    name = input('Введите название предприятия:\n')
+    q1, q2, q3, q4 = input('через пробел введите прибыль данного предприятия '
+                           'за каждый квартал(Всего 4 квартала):\n').split(' ')
+    decision = input('Введите пробел чтобы продолжить, любую кнопку чтобы выйти:\n')
+    com = company(name, int(q1), int(q2), int(q3), int(q4))
+    companies.append(com)
+    if decision != ' ':
+        break
+
+
+mean_income = sum([q for company in companies for q in company if isinstance(q, int)]) / len(companies)
+print(f'Средняя годовая прибыль всех предприятий: {mean_income}\n'
+      f'Предприятия с прибылью ниже среднего:'
+      f' {[c.name for c in companies if sum([c.q1 + c.q2 + c.q3 + c.q4]) < mean_income]}\n'
+      f'Предприятия с прибылью выше среднего:'
+      f' {[c.name for c in companies if sum([c.q1 + c.q2 + c.q3 + c.q4]) > mean_income]}\n')
