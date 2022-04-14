@@ -19,3 +19,31 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+# 1.
+
+
+def min_ver1(lst):      # O(n**2)
+    for i in lst:
+        min_val = True
+        for j in lst:
+            if j < i:
+                min_val = False
+        if min_val:
+            return i
+
+
+# 2.
+
+def min_ver2(lst):      # O(n)
+    min_val = lst[0]
+    for i in lst:
+        if i < min_val:
+            min_val = i
+    return min_val
+
+
+if __name__ == '__main__':
+
+    my_list = [5, 8, 12, 86, 93, 7, 24, 4, 75, 2]
+    print(min_ver1(my_list))
+    print(min_ver2(my_list))

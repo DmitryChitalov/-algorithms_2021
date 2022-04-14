@@ -23,8 +23,63 @@
 
 Примечание: в этом задании вспомните ваши знания по работе с ООП
 и опирайтесь на пример урока
-
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackOfPlates:
+    def __init__(self, stack_size):
+        self.plates = [[]]
+        self.max = stack_size
+
+    def is_empty(self):
+        return self.plates == [[]]
+
+    def put_in(self, plate):
+        if len(self.plates[len(self.plates) - 1]) == self.max:
+            self.plates.append([])
+        self.plates[len(self.plates) - 1].append(plate)
+
+    def pop_out(self):
+        value = self.plates[len(self.plates) - 1].pop()
+        if self.plates[len(self.plates) - 1] == []:
+            del self.plates[len(self.plates) - 1]
+        return value
+
+    def get_val(self):
+        return self.plates[len(self.plates) - 1]
+
+    def stack_size(self):
+        return len(self.plates)
+
+
+if __name__ == '__main__':
+
+    pl = StackOfPlates(3)
+    print(pl.plates)
+    pl.put_in(1)
+    print(pl.plates)
+    pl.put_in(2)
+    print(pl.plates)
+    pl.put_in(3)
+    print(pl.plates)
+    pl.put_in(4)
+    print(pl.plates)
+    pl.put_in(5)
+    print(pl.plates)
+    pl.put_in(6)
+    print(pl.plates)
+    pl.put_in(7)
+    print(pl.plates)
+    pl.put_in(8)
+    print(pl.plates)
+    print(pl.stack_size())
+    pl.pop_out()
+    print(pl.plates)
+    pl.pop_out()
+    print(pl.plates)
+    pl.pop_out()
+    print(pl.plates)
+    pl.pop_out()
+    print(pl.plates)
+    print(pl.stack_size())
+    print(pl.get_val())

@@ -17,6 +17,34 @@
 Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
 через строки документации в самом коде.
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
 """
+companies = {'company_1': 500000,
+             'company_2': 350000,
+             'company_3': 1500000,
+             'company_4': 550000,
+             'company_5': 675000,
+             }
+"""вариант №1. Сложность алгоритма - O(n log n) т.к применяется .sort() 
+остальные функции имеют сложность ниже."""
+
+
+def the_richest1(lst):
+    new_lst = []
+    for i in lst.items():
+        new_lst.append(i)
+    new_lst.sort()
+    new_lst.reverse()
+    return new_lst[0:3]
+
+
+print(the_richest1(companies))
+"""вариант №2. O(n) т.к применяется .items
+остальные функции имеют сложность ниже или такуюже"""
+tmp_dict = companies
+riches_comp2 = {}
+for i in range(3):
+    k_max, val_max = max(tmp_dict.items(), key=lambda el: el[1])
+    riches_comp2[k_max] = val_max
+    del tmp_dict[k_max]
+
+print(riches_comp2)

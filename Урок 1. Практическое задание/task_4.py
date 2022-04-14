@@ -17,11 +17,57 @@
 Приложение должно давать ответы на эти вопросы и быть реализовано в виде функции.
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
-
-Примечание:
-Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
-через строки документации в самом коде.
-Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Задание творческое. Здесь нет жестких требований к выполнению.
 """
+users_lst = {'user_1': ['ZeXwD2Hs', True], 'user_2': ['Y#%m@5Ec', False], 'user_3': ['iCTB6nxu', True],
+         'user_4': ['tr0jVEW8', True], 'user_5': ['J)jzYq=G', False], 'user_6': ['$gl+)c_W', True],
+         'user_7': ['NkdcYxB0', True], 'user_8': ['W%GE0(Ps', True], 'user_9': ['nzT97CkO', False],
+         'user_10': ['=eK4@1X8', True]
+}
+"""вариант №1. O(1) дважды сравнение по 1 элементу
+этот метод предпочтительнее так как быстрее"""
+
+
+def aut1(users_list, u_name, u_password):
+    try:
+        if users_list[u_name][0] == u_password:
+            if users_list[u_name][1]:   # т.к значение булево и в данном случае 'True' писать не обязательно
+                print(f'Приветствуем Вас {u_name}! Приятного время провождения')
+            else:
+                print(f'Уважаемый {u_name}, активация не выполнена. Давайте завершим активацию?')
+        else:
+            print(f'{u_name}, Пароль не верный')
+    except:
+        print('Такой пользователь не зарегестрирован, пройдите процедуру регистрации.')
+
+
+"""вариант №2. O(n) так как присутствует цикл"""
+
+
+def aut2(users_list, u_name, u_password):
+    for key, value in users_list.items():
+        if key == u_name:
+            if value[0] == u_password:
+                if value[1]:
+                    print(f'Приветствуем Вас {u_name}! Приятного время провождения')
+                    return
+                else:
+                    print(f'Уважаемый {u_name}, активация не выполнена. Давайте завершим активацию?')
+                    return
+            else:
+                print(f'{u_name}, Пароль не верный')
+                return
+    print('Такой пользователь не зарегестрирован, пройдите процедуру регистрации.')
+
+
+print('Вариант №1')
+aut1(users_lst,'user_1', 'Y#%m@5Ec')
+aut1(users_lst,'user_2', 'Y#%m@5Ec')
+aut1(users_lst,'user_1', 'ZeXwD2Hs')
+aut1(users_lst,'user_11', 'ZeXwD2Hs')
+print('/\\'*25)
+print()
+print('Вариант №2')
+aut2(users_lst,'user_1', 'Y#%m@5Ec')
+aut2(users_lst,'user_2', 'Y#%m@5Ec')
+aut2(users_lst,'user_1', 'ZeXwD2Hs')
+aut2(users_lst,'user_11', 'ZeXwD2Hs')
