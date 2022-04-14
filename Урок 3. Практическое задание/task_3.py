@@ -21,3 +21,34 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+s = input('Введите строку, состоящую из строчных латинских букв: ')
+# s = 'spaces'
+
+
+# st_hash = set()
+# st = set()
+#
+# for i in range(len(s)):
+#     for j in range(i + 1, len(s) + 1):
+#         if s[i:j] != s:
+#             st.add(s[i:j])
+#             st_hash.add(hash(s[i:j]))
+#
+#
+# print(f'Число уникальных подстрок: {len(st_hash)}\nУникальные подстроки: {st}')
+
+
+def unique_substrings(string):
+    lst_st_f = [string[i:j] for i in range(len(string)) for j in range(i + 1, len(string) + 1) if string[i:j] != string]
+    st_hash_f = {hash(i) for i in lst_st_f}
+    return lst_st_f, st_hash_f
+
+
+lst_st, st_hash = (unique_substrings(s.lower()))
+
+print(f'Число уникальных подстрок: {len(st_hash)}\nУникальные подстроки: {set(lst_st)}')
+
+'''Проверку на валидность введенных данных не делаю. Возможно я не совсем понял условие задачи, 
+для чего именно вычисление хешей и делать из них множество.'''
