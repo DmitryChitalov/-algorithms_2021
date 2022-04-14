@@ -16,3 +16,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check(n):
+    if n == 1:
+        return n
+    else:
+        return check(n - 1) + n
+
+
+try:
+    check_answer = int(input("Введите целое число"))
+    if check(check_answer) == check_answer * (check_answer + 1) / 2:
+        print("Результаты равны")
+except ValueError:
+    print("Ошибка, нужно было ввести число")

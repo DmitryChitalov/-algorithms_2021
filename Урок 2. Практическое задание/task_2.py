@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def numbers_count(num, even=0, odd=0):
+    if num == 0:
+        return even, odd
+    else:
+        whole_numb = num % 10
+        num = num // 10
+        if whole_numb % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return numbers_count(num, even, odd)
+
+
+try:
+    result = int(input("Введите число:"))
+    print(f"кол-во четных и нечетных чисел: {numbers_count(result)}")
+except ValueError:
+    print("Нужно было ввести число")
