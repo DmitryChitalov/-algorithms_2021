@@ -12,6 +12,12 @@
 Без аналитики задание считается не принятым!
 """
 
+# Решение из библиотеки нумпай самое быстрое, т.к. функция встроенная
+# Первая функция долгая ибо идёт сравнение каждого элемента с следующим
+# Вторая долгая из-за создания нового списка и аппенда
+from timeit import timeit
+from collections import Counter
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +45,12 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    return f'Чаще всего встречается число {Counter(array).most_common(1)[0][0]},' \
+           f' оно появилось в массиве {Counter(array).most_common(1)[0][1]} раз(а)'
+
+
+print(timeit('func_1', globals=globals()))
+print(timeit('func_2', globals=globals()))
+print(timeit('func_3', globals=globals()))
+print(func_3())
