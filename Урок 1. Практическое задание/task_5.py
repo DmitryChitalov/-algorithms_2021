@@ -28,3 +28,31 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class Plates:
+    def __init__(self):
+        self.stack = []
+        self.plates = []
+        self.limit = 4
+
+    def push_in(self):
+        if len(self.plates) < self.limit:
+            self.plates.append("\_/")
+        else:
+            self.stack.append(self.plates)
+            self.plates = ["\_/"]
+
+    def stacks_quantity(self):
+        return len(self.stack)
+
+    def last_stack_size(self):
+        return len(self.plates)
+
+
+plates = Plates()
+for _ in range(5):
+    plates.push_in()
+
+print(plates.stacks_quantity())
+print(plates.last_stack_size())
