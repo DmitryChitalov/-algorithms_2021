@@ -25,3 +25,38 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Структура юзер:[пароль, активация]
+users = {'user1': ['pass_u1', True],
+         'user2': ['pass_u2', True],
+         'user3': ['pass_u3', True],
+         'user4': ['pass_u4', False],
+         'user5': ['pass_u5', False]}
+
+
+# Сложность check1_user O(2) или O(3) - Константная
+def check1_user(login, password):
+    if users[login][1]:                     # O(1) - Константная
+        if users[login][0] == password:     # O(1) - Константная
+            print('Велком')                 # O(1) - Константная
+        else: print('Неверный пароль')      # O(1) - Константная
+    else: print('Пройдите активацию')       # O(1) - Константная
+
+
+# Сложность check2_user O(n) + O(n) = O(2n) или O(n) + O(2n) = O(3n) или O(n) + O(3n) = O(4n) - Линейная
+def check2_user(login, password):
+    if login in users:                              # O(n) - Линейная
+        for user in users:                          # O(n) - Линейная
+            if user == login:                       # O(1) - Константная
+                if users[user][1]:                  # O(1) - Константная
+                    if users[user][0] == password:  # O(1) - Константная
+                        print('Велком')             # O(1) - Константная
+                    else: print('Неверный пароль')  # O(1) - Константная
+                else: print('Пройдите активацию')   # O(1) - Константная
+
+
+check1_user('user3', 'pass_u3')
+check2_user('user4', 'pass_u4')
+"""
+первое решение эффективней, потому что константная сложность
+"""
