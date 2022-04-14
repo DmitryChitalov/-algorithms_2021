@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import sys
+
+sys.setrecursionlimit(100000)
+
+
+def numbers(val, count_even, count_odd):
+    z = len(str(val)) - 1
+    div = 10 ** z
+    if val == 0:
+        return f'Кол-во четных {count_even}, кол-во нечетных {count_odd}'
+    x = val // div
+    if x % 2 == 0:
+        count_even += 1
+        return numbers(val - (div * x), count_even, count_odd)
+    else:
+        count_odd += 1
+        return numbers(val - (div * x), count_even, count_odd)
+
+
+print(numbers(int(input('Число: ')), 0, 0))

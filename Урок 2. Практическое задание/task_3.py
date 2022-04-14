@@ -22,3 +22,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def numbers(val, mirror_number, div):
+    if val == 0:
+        return f'Зеракльное число: {mirror_number}'
+    x = val % div
+    mirror_number += str(x)
+    return numbers(((val - x) // div), mirror_number, div)
+
+
+print(numbers(int(input('Число: ')), '', 10))
