@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+number = int(input('Введите число: '))
+
+
+def natural_number_count(num, even_count=0, uneven_count=0):
+
+    if num == 0:
+        print(f'Четные: {even_count} не четные:{uneven_count}')
+        return
+    if num % 2 == 0:
+        even_count += 1
+    else:
+        uneven_count += 1
+    return natural_number_count(num // 10, even_count, uneven_count)
+
+
+natural_number_count(number,)
+
+
+
+
