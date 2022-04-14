@@ -11,8 +11,10 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
+from collections import Counter
 
-array = [1, 3, 1, 3, 4, 5, 1]
+array = [1, 3, 1, 3, 4, 5, 1, 5, 9, 9, 9, 10, 5, 3, 9]
 
 
 def func_1():
@@ -39,5 +41,26 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_el = Counter(array).most_common(1)[0]
+    return f'Чаще всего встречается число {max_el[0]}, ' \
+           f'оно появилось в массиве {max_el[1]} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+#
+print(f'Время функции func_1: {timeit("func_1()", globals=globals(), number=1000000)}')
+print(f'Время функции func_2: {timeit("func_2()", globals=globals(), number=1000000)}')
+print(f'Время функции func_3: {timeit("func_3()", globals=globals(), number=1000000)}')
+
+'''
+Итог: 
+Время функции func_1: 5.1389386
+Время функции func_2: 6.6094931
+Время функции func_3: 5.037279300000002
+
+Задачу удалось ускорить, так как класс Counter() основан классе словаря dict(), большинство функций которого имеют
+константную сложность. 
+'''
