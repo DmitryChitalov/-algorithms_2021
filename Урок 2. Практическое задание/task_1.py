@@ -28,3 +28,45 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calculate():
+    action = input('Укажите операцию (" - ", " + ", " * ", " / ") или введите "0" для выхода из программы: ')
+    first_number = int(input('Введите первое число: '))
+    second_number = int(input('Введите второе число: '))
+    while action != "0":
+        try:
+            if action == "+":
+                print(first_number + second_number)
+            elif action == "-":
+                print(first_number - second_number)
+            elif action == "*":
+                print(first_number * second_number)
+            elif action == "/":
+                print(first_number / second_number)
+            elif action == "0":
+                break
+            else:
+                raise ValueError("Выберите команду из списка.")
+        except:
+            ValueError("Выберите команду из списка.")
+            print("Выберите команду из списка.")
+        finally:
+            calculate()
+    return
+
+
+calculate()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
