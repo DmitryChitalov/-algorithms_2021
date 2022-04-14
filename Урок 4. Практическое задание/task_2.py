@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,6 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Вывод: Использовать мемоизацию нет необходимости, так как мемоизация использует кэш (словарь)
+# для хранения значений, а в нашем случае в кэш будут попадать только уникальные занчения.

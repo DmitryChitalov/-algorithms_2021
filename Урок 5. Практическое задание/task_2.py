@@ -34,3 +34,20 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+
+class HexNumber:
+    def __init__(self, count_cell):
+        self.count_cell = int(count_cell, base=16)
+
+    def __add__(self, other):
+        return f'Сумма чисел: {hex(self.count_cell + other.count_cell)}'
+
+    def __mul__(self, other):
+        return f'Произведение чисел: {hex(self.count_cell * other.count_cell)}'
+
+
+x = HexNumber(input('Введите первое число: '))
+y = HexNumber(input('Введите второе число: '))
+print(x + y)
+print(x * y)
