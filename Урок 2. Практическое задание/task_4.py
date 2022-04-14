@@ -15,3 +15,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def row_sum(n, num_start=1.0, total=0):
+    if n > 0:
+        return row_sum(n - 1, num_start / 2 * -1,  total + num_start)
+    else:
+        return total
+
+
+try:
+    n_el = int(input('Введите количество элементов: '))
+    n_sum = row_sum(n_el)
+    print(f'Количество элементов: {n_el}, их сумма: {n_sum}')
+except:
+    print(f'Ввели не правильное число! Попробуйте еще раз!')
+    n_sum = row_sum(n_el)
+    print(f'Количество элементов: {n_el}, их сумма: {n_sum}')

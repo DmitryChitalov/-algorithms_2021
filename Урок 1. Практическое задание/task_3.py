@@ -20,3 +20,30 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+list_info = {'Циско':843,
+          'Гуугл':5874,
+          'Яндекс':1260,
+          'АМД':5420,
+          'Румба': 321}
+
+
+# Вариант 1. O(n log n)
+
+val_list = sorted(list_info, key=list_info.get, reverse=True)[:3]  # O(n log n)
+for e in val_list:  # O(n) - линейная
+    print(e, ":", list_info[e])
+
+
+# Вариант 2. Сложность O(n^2)
+
+s_val = sorted(list_info.values(), reverse=True)  # O(n log n)
+s_list_info = {}
+j = 0
+for i in s_val:  # O(n)
+    for k in list_info.keys():  # O(n)
+        if list_info[k] == i and j < 3:
+            s_list_info[k] = list_info[k]
+            j += 1
+            break
