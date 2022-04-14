@@ -19,3 +19,39 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+# 1. Алгоритм поиска миниимального элемента, Сложность O(n^2)
+# задаем список
+
+list = [13, 15, 98, -60, 36, 45, 99, 1]
+
+def bubble_sort(array):
+    n = len(array)  # O(1)
+    for i in range(n):  # O(n)
+        for j in range(n - i - 1):  # O(n)
+            already_sorted = True  # O(1)
+            if array[j] > array[j + 1]:  # O(1)
+                array[j], array[j + 1] = array[j + 1], array[j]  # O(1)
+                already_sorted = False  # O(1)
+        if already_sorted:  # O(1)
+            break  # O(1)
+    return array[0]  # O(1)
+
+print('Минимальный элемент равен:', bubble_sort(list))
+
+
+
+# 2. функция возвращает минимальный элемент из списка, сложность O(n)
+# предположим, что минимальный элемент равен list[0]
+
+def my_min1(n):
+
+    minimum = list[0]  # O(1)
+    for i in range(1, len(list)):  # O(n)
+        if list[i] < minimum:  # O(1)
+            minimum = list[i]  # O(1)
+    return minimum  # O(1)
+
+print('Минимальный элемент равен:', my_min1(list))  # O(1)
+
+

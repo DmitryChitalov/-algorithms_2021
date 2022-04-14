@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def number_check(n, even=0, odd=0):
+    if n == 0:
+        print(f"Количество четных: {even}, нечетных цифр: {odd}")
+    else:
+        cur_n = n % 10
+        n = n // 10
+        if cur_n % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return number_check(n, even, odd)
+
+number_check(int(input("Введите число: ")))
+

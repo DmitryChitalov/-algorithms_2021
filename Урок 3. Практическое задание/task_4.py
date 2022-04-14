@@ -15,3 +15,19 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+var_str = {}
+salt = '123'
+def do_hash(url):
+    if var_str.get(url):
+        print(f'Данный адрес: {url} присутствует в кеше')
+    else:
+        res_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        var_str[url] = res_hash
+        print(var_str)
+
+do_hash('http://mail.ru/')
+do_hash('http://yandex.ru/')
+do_hash('http://mail.ru/')
+do_hash('http://gb.ru/')
