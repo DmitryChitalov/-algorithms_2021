@@ -10,6 +10,12 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
+class TreeValueError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,13 +27,21 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
+
+        if int(new_node) >= int(self.root):
+            raise TreeValueError('Значение левого узла больше корня')
+
         if self.left_child == None:
+            # если у узла нет левого потомка
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
         else:
+
+            if int(new_node) >= self.get_left_child().get_root_val():
+                raise TreeValueError('Значение больше родительского узла')
+
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
             # и спускаем имеющегося потомка на один уровень ниже
@@ -36,6 +50,10 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+
+        if int(new_node) <= int(self.root):
+            raise TreeValueError(f'Значение правого узла меньше корня')
+
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -43,6 +61,10 @@ class BinaryTree:
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
         else:
+
+            if int(new_node) <= self.get_right_child().get_root_val():
+                raise TreeValueError(f'Значение меньше родительского узла')
+
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
             # и спускаем имеющегося потомка на один уровень ниже
@@ -77,3 +99,15 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+'''
+вывод
+    Traceback (most recent call last):
+      File "D:\-algorithms_2021\Урок 8. Практическое задание\task_2.py", line 94, in <module>
+        r.insert_left(40)
+      File "D:\-algorithms_2021\Урок 8. Практическое задание\task_2.py", line 32, in insert_left
+        raise TreeValueError('Значение левого узла больше корня')
+    __main__.TreeValueError: Значение левого узла больше корня
+    8
+    None
+'''
