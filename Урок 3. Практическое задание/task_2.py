@@ -20,3 +20,36 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+import json
+from uuid import uuid4
+
+
+def auth():
+    username = input('Введите логин')
+    salt = uuid4().hex
+    password = input('Введите пароль')
+    psswrd = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+    pass_check = input('Введите пароль еще раз')
+    check = hashlib.sha256(salt.encode() + pass_check.encode()).hexdigest()
+    if psswrd == check:
+        print(psswrd)
+        try:
+            userdata = {username: psswrd}
+            with open('data.json') as file:
+                data = json.load(file)
+                data['users'].append(userdata)
+                with open('data.json', 'w') as f:
+                    json.dump(data, f, indent=4)
+                    f.close()
+        except FileNotFoundError:
+            with open('data.json', 'w') as file:
+                userdata = {'users': [{username: psswrd}]}
+                json.dump(userdata, file, indent=4)
+        print('Данные добавлены')
+    else:
+        print('Пароли не совпадают')
+
+
+auth()
+
