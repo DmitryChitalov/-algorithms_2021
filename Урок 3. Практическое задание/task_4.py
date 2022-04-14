@@ -15,3 +15,15 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import hashlib
+
+url_dict = {}
+salt = 'login'
+def add_url(dct: dict, ur: str):
+    if dct.get(ur) is None:
+        dct.setdefault(ur, hashlib.sha256(ur.encode() + salt.encode()).hexdigest())
+        return f'Хеш url {ur} занесен'
+    else:
+        return dct.get(ur)
+
+print(add_url(url_dict, r'https://yandex.ru/'))

@@ -28,3 +28,45 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackPlates:
+    n = 0  # счетчик
+
+    def __init__(self, max_elements: int):
+        self.elems = [[]]
+        self.max_elements = max_elements - 1
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        if len(self.elems[self.n]) <= self.max_elements and len(self.elems) == (self.n + 1):
+            self.elems[self.n].append(el)
+        else:
+            self.elems.append([])
+            self.elems[self.n + 1].append(el)
+            self.n += 1
+
+    def pop_out(self):
+        self.n -= 1
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+Plt_1 = StackPlates(10)
+
+for i in range(30):
+    Plt_1.push_in(i)
+
+print(Plt_1.pop_out())
+print(Plt_1.n)
+print(Plt_1.elems)
+for i in range(30):
+    Plt_1.push_in(i)
+print(Plt_1.elems)
