@@ -19,3 +19,33 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def find_the_minimum_1(lst_obj):
+    """ поиск минимального значения для списка с O(n^2) """
+    cond_min = lst_obj[1]                       # O(1)
+    for j in range(len(lst_obj)):               # O(n)
+        for i in range(len(lst_obj)):           # O(n)
+            if lst_obj[j] < lst_obj[i]:         # O(1)
+                if lst_obj[j] < cond_min:       # O(1)
+                    cond_min = lst_obj[j]       # O(1)
+    return cond_min                             # O(1)
+
+# Сложность: O(1) + O(n) * O(n) * O(1) + O(1) + O(1) + O(1) = O(n^2)
+
+
+def find_the_minimum_2(lst_obj):
+    """ поиск минимального значения для списка с O(n) """
+    cond_min = lst_obj[1]                 # O(1)
+    for j in range(len(lst_obj)):         # O(n)
+        if lst_obj[j] < cond_min:         # O(1)
+            cond_min = lst_obj[j]         # O(1)
+    return cond_min                       # O(1)
+
+# Сложность: O(1) + O(n) * O(1) + O(1) + O(1) = O(n)
+
+
+list_01 = [10, 6, 4, 3, 6]
+list_02 = [11, 1, 0, 3, 6]
+print(find_the_minimum_1(list_01))
+print(find_the_minimum_2(list_02))

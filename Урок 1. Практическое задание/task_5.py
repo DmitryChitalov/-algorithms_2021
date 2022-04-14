@@ -28,3 +28,63 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# UPD уже после 2 вебинара поняла, что в ТЗ требовалось автоматическое создание
+# стопок. Переделывать не стала, иначе либо получится плагиат, либо отнимет
+# времени от задач ко 2 уроку, а времени и так жесткий дефицит.
+
+class StackPlates:
+
+    def __init__(self):
+        self.plates = []
+
+    def is_empty(self):
+        return self.plates == []
+
+    def pop_out(self):
+        return self.plates.pop()
+
+    def get_val(self):
+        return self.plates[len(self.plates) - 1]
+
+    def stack_size(self):
+        return len(self.plates)
+
+    @staticmethod
+    def checkout(elem):
+        if elem != 1:
+            msg = "В стопку можно класть только по 1 тарелке"
+            raise ValueError(msg)
+
+    def push_in(self, el):
+        self.checkout(el)
+        if self.stack_size() < 5:
+            self.plates.append(el)
+        else:
+            print('Нужна новая стопка')
+
+    def __str__(self):
+        content = ''
+        for i in self.plates:
+            content += "\___/\n"
+        return content
+
+
+if __name__ == '__main__':
+
+    stack_01 = StackPlates()
+
+    stack_01.push_in(1)
+    stack_01.push_in(1)
+    stack_01.push_in(1)
+    stack_01.push_in(1)
+    stack_01.push_in(1)
+    # stack_01.push_in(5.5)
+    stack_01.push_in(1)
+
+    stack_02 = StackPlates()
+    stack_02.push_in(1)
+    stack_02.push_in(1)
+    stack_02.push_in(1)
+    stack_02.push_in(1)
+    print(stack_02)
