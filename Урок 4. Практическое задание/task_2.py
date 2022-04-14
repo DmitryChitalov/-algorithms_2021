@@ -79,3 +79,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация не нужна, поскольку вызов функции происходит один раз. Функция с рекурсией  не будет использовать хэш 
+"""
