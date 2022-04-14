@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse_number(el, result=''):
+    param = el % 10
+    result += str(param)
+    el //= 10
+    if el == 0:
+        return result
+    return reverse_number(el, result)
+
+
+if __name__ == '__main__':
+    print(reverse_number(12030))

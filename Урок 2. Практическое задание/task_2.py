@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_number(el, count_even=0, count_old=0):
+    check = el % 10
+    if check % 2 == 0:
+        count_even += 1
+    else:
+        count_old += 1
+    el //= 10
+    if el == 0:
+        return f'{count_even} - even {count_old} - old'
+    return count_number(el, count_even, count_old)
+
+
+if __name__ == '__main__':
+    print(count_number(0))
