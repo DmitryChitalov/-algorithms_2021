@@ -34,3 +34,58 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+# Решение 1
+from collections import defaultdict
+from functools import reduce
+
+numbers = defaultdict(list)
+numbers[1] = list(input("Введите 1 значение: "))
+numbers[2] = list(input("Введите 2 значение: "))
+
+sum_nums = reduce(lambda x, y: int("".join(x), 16) + int("".join(y), 16), numbers.values())
+multiplication_nums = reduce(lambda x, y: int("".join(x), 16) * int("".join(y), 16), numbers.values())
+
+print(f'Сумма чисел из примера: {list(hex(sum_nums)[2:].upper())}')
+print(f'Сумма чисел из примера: {list(hex(multiplication_nums)[2:].upper())}')
+
+""" не понимаю чем здесь defaultdict хоть как то полезен
+    как и другие коллекции...
+"""
+
+# Решение 2
+
+class HexNumber:
+    def __init__(self, str_num):
+        self.num = list(str_num)
+
+    def __iter__(self):
+        self.a = 0
+        return self
+
+    def __next__(self):
+        if self.a < len(self.num):
+            x = self.a
+            self.a += 1
+            return self.num[x]
+        else:
+            raise StopIteration
+
+    def __add__(self, other):
+        sum_nums = int("".join(self.num), 16) + int("".join(other), 16)
+        return list(f"{sum_nums:X}")
+
+    def __mul__(self, other):
+        multi_nums = int("".join(self.num), 16) * int("".join(other), 16)
+        return list(f"{multi_nums:X}")
+
+    def __str__(self):
+        return f"{self.num}"
+
+
+a = HexNumber("A2")
+b = HexNumber("C4F")
+print(a + b)
+print(a * b)
+
+""" а вот ООП идеально подходит"""
