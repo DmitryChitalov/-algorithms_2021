@@ -21,3 +21,14 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+result = []
+word = 'papa'
+for i in range(len(word)):
+    for j in range(i + 1, len(word) + 1):
+        if word[i:j] != word:
+            result.append(hash(word[i:j]))
+print(result)
+res_set = set(result)
+print(res_set)
+print(f'Количество различных уникальных подстрок в слове: "{word}" - {len(res_set)}')
