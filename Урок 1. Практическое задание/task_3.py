@@ -20,3 +20,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company = {
+    1100000: 'comp_1',
+    2000000: 'comp_2',
+    1000000: 'comp_3',
+    1900000: 'comp_4',
+    1800000: 'comp_5',
+    2100000: 'comp_6',
+    1300000: 'comp_7',
+    1400000: 'comp_8',
+    2300000: 'comp_9',
+    2800000: 'comp_10'
+}
+
+# 1 решение
+def top_comp(company: dict):                            # O(N^2)
+    lst = list(company.keys())                          # O(1)
+    for i in range(len(lst)-1):                         # O(N)
+        for j in range(len(lst)-i-1):                   # O(N^2)
+            if lst[j] < lst[j+1]:                       # O(1)
+                lst[j], lst[j+1] = lst[j+1], lst[j]     # O(1)
+
+    return [company[i] for i in lst[0:3]]               # O(N)
+
+print(top_comp(company))
+
+# 2 решение
+def top_3(company: dict):
+    return [company[i] for i in sorted(company.keys(), reverse=True)[0:3]] # O(N log N)
+
+print(top_3(company))
+
+# 3 решение
+
+def top_top_3(company: dict):               # O(N^2)
+    lst = list(company.keys())              # O(N)
+    for i in range(len(lst)-3):             # O(N)
+        lst.remove(min(lst))                # O(N)
+
+    return [company[i] for i in lst[::-1]]  # O(N)
+
+print(top_top_3(company))
+
+"""
+Самое оптимальное решение №3, т.к. оно имеет линейную сложность,
+затем идет решение №2, т.к. имеет линейно-логарифмическую сложность,
+самое неоптимальное решение № 1, т.к. имеет квадратичную сложность
+"""
