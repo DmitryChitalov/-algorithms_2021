@@ -6,15 +6,12 @@
 в качестве знака операции. Если пользователь вводит неверный знак
 (не '0', '+', '-', '*', '/'), то программа должна сообщать ему об ошибке и
 снова запрашивать знак операции.
-
 Также сообщать пользователю о невозможности деления на ноль,
 если он ввел 0 в качестве делителя.
-
 Подсказка:
 Вариант исполнения:
 - условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
 - условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
-
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
 Введите первое число: 214
@@ -24,7 +21,47 @@
 Введите первое число: вп
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
-
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculate(operation, first_int, second_int):
+    try:
+        return eval(f'{first_int}{operation}{second_int}')
+    except ZeroDivisionError:
+        return 'ОШИБКА. Деление на 0 невозможно'
+
+
+def get_operation_list():
+    return ['+', '-', '*', '/']
+
+
+def print_value_error():
+    print('Вы ввели строку, а не число')
+
+
+def input_value(description):
+    value = input(f'Введите {description} число:\n')
+    if not value.isdigit():
+        print_value_error()
+        input_value(description)
+    else:
+        return int(value)
+
+
+while True:
+    operation_list = get_operation_list()
+
+    operation = input(f'Введите символ операции {operation_list}, или введите 0 для выхода:\n')
+
+    if operation == '0':
+        break
+    elif operation_list.count(operation) == 0:
+        print(f'Значение {operation} не является разрешенной операцией.')
+        continue
+    else:
+        first_value = input_value('первое')
+        second_value = input_value('второе')
+
+        print(f'Результат выполнения: {calculate(operation, first_value, second_value)}')
