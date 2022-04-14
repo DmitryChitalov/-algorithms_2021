@@ -23,3 +23,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+avg_prof = {}
+
+
+def func():
+    try:
+        n = int(input('Введите кол-во предприятий: '))
+        for i in range(n):
+            company = namedtuple('firm', 'name q_1 q_2 q_3 q_4')
+            data = company(
+                name=input('Введите название: '),
+                q_1=int(input('Введите прибыль за 1 квартал: ')),
+                q_2=int(input('Введите прибыль за 2 квартал: ')),
+                q_3=int(input('Введите прибыль за 3 квартал: ')),
+                q_4=int(input('Введите прибыль за 4 квартал: ')),
+            )
+
+            avg_prof[data.name] = (data.q_1 + data.q_2 + data.q_3 + data.q_4)/4
+
+        t = 0
+
+        for el in avg_prof.values():
+            t += el
+        t = t / n
+        print(f'Средняя годовая прибыль всех предприятий: {t}')
+
+        for k, v in avg_prof.items():
+            if v > t:
+                print(f'Предприятия, с прибылью выше среднего значения: {k}')
+            else:
+                print(f'Предприятия, с прибылью ниже среднего значения: {k}')
+
+    except ValueError:
+        print('Введено неправильное значение!')
+        func()
+
+
+func()
