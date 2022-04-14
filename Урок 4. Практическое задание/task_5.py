@@ -18,12 +18,13 @@
 и сделайте обоснование результатам.
 """
 
+"""Без использования «Решета Эратосфена»"""
 
-def simple(i):
-    """Без использования «Решета Эратосфена»"""
+
+def simple(r):
     count = 1
     n = 2
-    while count <= i:
+    while count <= r:
         t = 1
         is_simple = True
         while t <= n:
@@ -32,7 +33,7 @@ def simple(i):
                 break
             t += 1
         if is_simple:
-            if count == i:
+            if count == r:
                 break
             count += 1
         n += 1
@@ -41,3 +42,23 @@ def simple(i):
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+# """ С использованием «Решета Эратосфена»"""
+#
+# n = int(input('Введите порядковый номер искомого простого числа:'))
+# a = []
+# for i in range(226):
+#     a.append(i)
+# a[1] = 0
+#
+# i = 2
+# while i <= n:
+#     if a[i] != 0:
+#         j = i + i
+#         while j <= n:
+#             a[j] = 0
+#             j = j + i
+#     i += 1
+# a = set(a)
+# a.remove(0)
+# print(a)
