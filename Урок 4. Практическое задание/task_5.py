@@ -17,9 +17,10 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
-def simple(i):
+def simple(i):  # O(n^2)
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
@@ -41,3 +42,39 @@ def simple(i):
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+
+def sieve(n):  # O(n log(log n))
+    nums = [el for el in range(10000)]
+    nums[1] = 0
+
+    for j in range(2, len(nums)):
+        if nums[j] != 0:
+            for k in range(2, len(nums) // j):
+                nums[j * k] = 0
+
+    return [num for num in nums if num != 0][n - 1]
+
+
+number = int(input('Введите порядковый номер искомого простого числа: '))
+print(sieve(number))
+
+print(f'Время выполнения simple на 10: {timeit("simple(10)", globals=globals(), number=100)}')
+print(f'Время выполнения sieve на 10: {timeit("sieve(10)", globals=globals(), number=100)}')
+print(f'Время выполнения simple на 100: {timeit("simple(100)", globals=globals(), number=100)}')
+print(f'Время выполнения sieve на 100: {timeit("sieve(100)", globals=globals(), number=100)}')
+print(f'Время выполнения simple на 1000: {timeit("simple(1000)", globals=globals(), number=100)}')
+print(f'Время выполнения sieve на 1000: {timeit("sieve(1000)", globals=globals(), number=100)}')
+'''
+Время выполнения simple на 10: 0.002513657000000613
+Время выполнения sieve на 10: 0.31018216799999987
+Время выполнения simple на 100: 0.21252371000000014
+Время выполнения sieve на 100: 0.32141195399999933
+Время выполнения simple на 1000: 35.515289701
+Время выполнения sieve на 1000: 0.30477975500000554
+Выводы:
+1) сложность первой функции - O (n^2), функции с решетом - O(n log(log n)), следовательно, первая функция сложнее;
+2) время выполнения первой функции увеличвается с увеличением входного числа, проверяется каждое число 
+на делимость, этот алгоритм эффективен только при поиске небольших порядковых номеров;
+3) при увеличении входных чисел быстрее будет вариант с использованием решета Эратосфена.
+'''
