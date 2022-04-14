@@ -15,3 +15,22 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+import uuid
+import hashlib
+
+salt = uuid.uuid4().hex
+
+password = input()
+pass_hash = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+
+cache = dict()
+
+
+def check_url(url):
+    url_salt = url.encode() + salt.encode()
+    if url_salt in cache:
+        print('Есть в кэше')
+    else:
+        # скачиваешь содержимое страницы в content
+        cache[url_salt] = content

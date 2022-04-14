@@ -21,3 +21,17 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+s = input()
+subs_set = set()
+hash_set = set()
+for start in range(0, len(s)):
+    for finish in range(start + 1, len(s) + 1):
+        subs = s[start:finish]
+        subs_hash = hash(subs)
+        if subs_hash not in hash_set:
+            hash_set.add(subs_hash)
+            subs_set.add(subs)
+
+subs_set.remove(s)
+print(subs_set)

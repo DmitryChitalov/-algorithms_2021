@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def n_plus_sum(n):
+    if n == 0:
+        return 0
+    else:
+        return n_plus_sum(n - 1) + n
+
+
+print('Задание 7')
+
+n = int(input())
+
+recur_sum = n_plus_sum(n)
+progr_sum = n * (n + 1) / 2
+
+print(recur_sum == progr_sum)
