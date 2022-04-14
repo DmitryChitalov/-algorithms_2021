@@ -21,3 +21,19 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def unique_checker(*args):
+    s = set()
+    count = 0
+    for string in args:
+        h = hash(string)
+        if h in s:
+            count -= 1
+        else:
+            s.add(h)
+            count += 1
+    print(f'В списке строк {count} уникальных строк')
+
+
+unique_checker('papa')
