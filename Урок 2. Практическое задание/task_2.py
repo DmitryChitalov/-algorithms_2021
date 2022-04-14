@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def digiter(number=None, even_odd=[0, 0]):
+
+    if number == 0:
+        print(even_odd)
+        return even_odd
+    elif number is None:
+        number = int(input('Введите число:'))
+    if number % 2 == 0:
+        even_odd[0] += 1
+    else:
+        even_odd[1] += 1
+    return digiter(number//10, even_odd)
+
+
+if __name__ == "__main__":
+    digiter()

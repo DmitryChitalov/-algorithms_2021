@@ -15,3 +15,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def prog_sum(n=int(input('Введите количество элементов:')), num=1, total=0):
+    if n:
+        total += num
+        num = -num/2
+        return prog_sum(n-1, num, total)
+    else:
+        return sum
+
+
+if __name__ == "__main__":
+    print(prog_sum())

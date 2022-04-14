@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def charade(rand=random.choice(range(100)), ntry=10):
+    if ntry:
+        answ = int(input(f'Осталось попыток {ntry}. Введите число:'))
+        if answ < rand:
+            print('Введенное число меньше загаданного')
+            charade(rand, ntry-1)
+        elif answ > rand:
+            print('Введенное число больше загаданного')
+            charade(rand, ntry-1)
+        else:
+            print('Да! Именно это число и было загадано')
+    else:
+        return rand
+
+
+if __name__ == "__main__":
+    charade()
