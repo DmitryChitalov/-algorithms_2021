@@ -17,6 +17,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -39,5 +40,21 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def eratosthen(n, sd=0):
+    sieve = set(range(2, n**2 + 1))
+    for i in range(n):
+        sd = min(sieve)
+        sieve -= set(range(sd, n**2 + 1, sd))
+    return sd
+
+
+n = int(input('Введите порядковый номер искомого простого числа: '))
+
+print(simple(n))
+print(timeit("simple(n)", globals=globals(), number=1000))
+
+print(eratosthen(n))
+print(timeit("eratosthen(n)", globals=globals(), number=1000))
+
+# применил алгоритм Эратосфена на основе вычитаний множеств,
+# при увеличении порядкового номера время растет экспоненциально O(len(...))
