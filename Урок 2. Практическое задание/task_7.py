@@ -16,3 +16,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def alg_progression(n: int):
+    if n == 0:
+        return n
+    return n + alg_progression(n - 1)
+
+
+n = int(input('Введите натуральное число: '))
+res = alg_progression(n)
+another_res = n * (n+1) // 2
+print(res == another_res)
