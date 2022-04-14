@@ -34,3 +34,41 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+from functools import reduce
+
+
+# 1
+def counting(n):
+    listed = defaultdict(dict)
+    for i in range(n):
+        number = input("Введите чило: ")
+        listed[number] = list(number)
+    arr = [int(''.join(x), 16) for x in listed.values()]
+    summa = list(hex(sum(arr)))[2:]
+    multi = list(hex(reduce(lambda x, y: x * y, arr)))[2:]
+    return f"""Сохраняю: {[x for x in listed.values()]}
+Сумма из примера: {summa}
+Произведение: {multi}
+"""
+
+
+print(counting(2))
+
+
+# 2
+class HexNumber:
+    def __init__(self, a):
+        self.a = list(a)
+
+    def __add__(self, other):
+        return list(hex(int(''.join(self.a), 16) + int(''.join(other.a), 16)))[2:]
+
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.a), 16) * int(''.join(other.a), 16)))[2:]
+
+
+hx = HexNumber("A")
+hy = HexNumber("A")
+print(hx + hy)
+print(hx * hy)
