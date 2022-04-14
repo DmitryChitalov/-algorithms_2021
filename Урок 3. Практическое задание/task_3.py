@@ -21,3 +21,16 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+user_str = str(input("Введите вашу строку:"))
+
+print(f"Строка {user_str} имеет длину {len(user_str)} символов.")
+
+subs_set = set()
+
+for i in range(len(user_str)):
+    for j in range(len(user_str) - 1 if i == 0 else len(user_str), i, -1):
+        subs_set.add(hash(user_str[i:j]))
+
+print(f"Количество уникальных подстрок в этой строке: {len(subs_set)}")
