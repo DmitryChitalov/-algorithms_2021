@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_number():
+    result_dict = {'num_1': 0, 'num_2': 0}
+    num_list = list(input('Введите целое число: \n'))
+
+    def check_number():
+        if (len(num_list)) != 0:
+            num = int(num_list.pop())
+            if num % 2 != 0:
+                result_dict['num_2'] += 1
+                check_number()
+            else:
+                result_dict['num_1'] += 1
+                check_number()
+    check_number()
+    print(f'Четных: {result_dict["num_1"]}; нечетных: {result_dict["num_2"]}')
+
+
+get_number()
+

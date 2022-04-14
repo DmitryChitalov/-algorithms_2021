@@ -25,3 +25,57 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+USERS_LST = ({'name': 'Василий', 'passwd': '111', 'activate': 0},
+             {'name': 'root', 'passwd': '54321', 'activate': 0},
+             {'name': 'admin', 'passwd': '9852665ffd_vnn_22JJ', 'activate': 0})
+
+
+"""
+Нужно реализовать проверку, может ли пользователь быть допущен к ресурсу.
+При этом его учетка должна быть активирована.
+А если нет, то польз-лю нужно предложить ее пройти.
+"""
+
+
+def autorization(tup):                              # O(n)
+    name = (input('Введите имя пользователя:\n'))   # O(1)
+    password = (input('Введите пароль:\n'))         # O(1)
+    activate_index = 0                              # O(1)
+
+    for i in range(len(tup)):                       # O(n)
+        if name == tup[i]['name'] and password == tup[i]['passwd']:     # O(1) 4 действия
+            tup[i]['activate'] = 1                  # O(1) 2 действия
+            activate_index = i                      # O(1)
+            break                                   # O(1)
+
+    if tup[activate_index]['activate'] == 1:        # O(1)
+        print(f'Прошла авторизация пользователя: '
+              f'{tup[activate_index]["name"]}. Приветствуем Вас!')     # O(1)
+    else:                                                              # O(1)
+        print(f'Неверно введены данные (имя пользователя или пароль).\n'
+              f'Введите верные данные или пройдите авторизацию.')      # O(1)
+
+
+USERS_LST_2 = {'Василий': {'passwd': '111', 'activate': 0},
+               'root': {'passwd': '54321', 'activate': 0},
+               'admin': {'passwd': '9852665ffd_vnn_22JJ', 'activate': 0}}
+
+
+# Второе решение алгоритмически более совершенно. Причем существенно! - О(1)
+# Вывод: словари нужно использовать везде где возможно.
+def autorization_2(dict):                                                           # O(1)
+    name = (input('Введите имя пользователя:\n'))                                   # O(1)
+    password = (input('Введите пароль:\n'))                                         # O(1)
+    status = 0                                                                      # O(1)
+    if dict.get(name, 'error') != 'error':                                          # O(1)
+        if dict[name]['passwd'] == password:                                        # O(1)
+            dict[name]['activate'] = 1                                              # O(1)
+            status = 1
+    if status == 1:                                                                 # O(1)
+        print(f'Прошла авторизация пользователя: {name}. Приветствуем Вас!')        # O(1)
+    else:
+        print(f'Неверно введены данные (имя пользователя или пароль).\n'            # O(1)
+              f'Введите верные данные или пройдите авторизацию.')
+
+autorization_2(USERS_LST_2)
