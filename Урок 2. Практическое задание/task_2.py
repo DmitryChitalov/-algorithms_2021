@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def even_odd_num(num, even, odd):
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even, odd}'
+    remains = num % 10
+    num = num // 10
+    if (remains % 2) == 1:
+        return even_odd_num(num, even, odd + 1)
+    if (remains % 2) == 0:
+        return even_odd_num(num, even + 1, odd)
+
+inp_num = int(input('Введите число: '))
+print(even_odd_num(inp_num, 0, 0))
