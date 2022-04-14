@@ -25,3 +25,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {'user_1': {'password': '12345', 'authentication': True},
+         'user_2': {'password': '11111', 'authentication': False},
+         'user_3': {'password': '54321', 'authentication': True}
+         }
+
+# Сложность: # O(n) - линейная
+def check_user_1(login, password, users):
+    if login in users.keys():                                                           # O(n) - линейная
+        if password == users[login]['password']:                                        # O(1) - константная
+            if users[login]['authentication']:                                          # O(1) - константная
+                print('Вход выполнен')                                                  # O(1) - константная
+            else:
+                print('Учетная запись не активированна. Подтвердите свои данные')       # O(1) - константная
+        else:
+            print('Неверный пароль')                                                    # O(1) - константная
+    else:
+        print("Пользователь с данным логином не существует")                            # O(1) - константная
+
+check_user_1('user_1', '12345', users)
+
+
+# Сложность: # O(n) - линейная
+def check_user_2(login, password, users):
+    for el in users:                                                                    # O(n) - линейная
+        if el == login:                                                                 # O(1) - константная
+            if password == users[login]['password']:                                    # O(1) - константная
+                if users[login]['authentication']:                                      # O(1) - константная
+                    return 'Вход выполнен'                                              # O(1) - константная
+                else:
+                    return 'Учетная запись не активированна. Подтвердите свои данные'   # O(1) - константная
+            else:
+                return 'Неверный пароль'                                                # O(1) - константная
+    return 'Пользователь с данным логином не существует'                                # O(1) - константная
+
+print(check_user_2('user_2', '11111', users))
+
+"""Оба варианта решения с линейной сложностью"""
+
+
+
+
+
