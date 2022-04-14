@@ -10,62 +10,59 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+class IncorrectValueError(Exception):
+    pass
+
+
 class BinaryTree:
     def __init__(self, root_obj):
-        # корень
         self.root = root_obj
-        # левый потомок
         self.left_child = None
-        # правый потомок
         self.right_child = None
 
-    # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+        if new_node <= self.root:
+            if self.left_child == None:
+                self.left_child = BinaryTree(new_node)
+            else:
+                tree_obj = BinaryTree(new_node)
+                tree_obj.left_child = self.left_child
+                self.left_child = tree_obj
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            raise IncorrectValueError("Невозможно ввести значение!"
+                                       " Значение левого потомка должно быть меньше или равно значению предка!")
 
-    # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
+        if new_node >= self.root:
+            if self.right_child == None:
+                self.right_child = BinaryTree(new_node)
+            else:
+                tree_obj = BinaryTree(new_node)
+                tree_obj.right_child = self.right_child
+                self.right_child = tree_obj
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            raise IncorrectValueError("Невозможно ввести значение!"
+                                       " Значение правого потомка должно быть больше или рано значению предка!")
 
-    # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        if self.right_child != None:
+            return self.right_child
+        else:
+            raise IncorrectValueError("Невозможно получить значение! Значения правого потомка не существует!")
 
-    # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        if self.left_child != None:
+            return self.left_child
+        else:
+            raise IncorrectValueError("Невозможно получить значение! Значения левого потомка не существует!")
 
-    # метод установки корня
     def set_root_val(self, obj):
         self.root = obj
 
-    # метод доступа к корню
     def get_root_val(self):
         return self.root
 
-
+# Не знаю, на сколько эффективны эти изменения, но повторять как в примере не особо хотелось
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
