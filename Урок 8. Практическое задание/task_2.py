@@ -77,3 +77,69 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+
+import random
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+
+
+class BinaryTree:
+    def __init__(self, root_obj):
+        # корень
+        self.root = root_obj
+        # левый потомок
+        self.left_child = None
+        # правый потомок
+        self.right_child = None
+
+    def common_insert(self, new_node):
+        if self.root:
+            if new_node < self.root:
+                if self.left_child is None:
+                    self.left_child = BinaryTree(new_node)
+                else:
+                    self.left_child.common_insert(new_node)
+            elif new_node > self.root:
+                if self.right_child is None:
+                    self.right_child = BinaryTree(new_node)
+                else:
+                    self.right_child.common_insert(new_node)
+        else:
+            self.root = new_node
+
+    def view_tree(self):
+        if self.left_child:
+            self.left_child.view_tree()
+        print(self.root)
+        if self.right_child:
+            self.right_child.view_tree()
+
+    # метод доступа к правому потомку
+    def get_right_child(self):
+        try:
+            return self.right_child
+        except AttributeError:
+            print('Ошибка доступа к атрибуту класса.')
+
+    # метод доступа к левому потомку
+    def get_left_child(self):
+        try:
+            return self.left_child
+        except AttributeError:
+            print('Ошибка доступа к атрибуту класса.')
+
+    # метод установки корня
+    def set_root_val(self, obj):
+        self.root = obj
+
+    # метод доступа к корню
+    def get_root_val(self):
+        try:
+            return self.root
+        except AttributeError:
+            print('Ошибка доступа к атрибуту класса.')
+
+
+obj = BinaryTree(10)
+r = [obj.common_insert(i) for i in orig_list]
+obj.view_tree()
