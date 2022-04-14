@@ -28,3 +28,38 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+VALID_SIGNS = '+-*/0'
+ADD, SUB, MUL, DIV, ZERO = VALID_SIGNS
+COMMAND_LEN = 1
+
+
+def get_input():
+    ch, one, two = '', '', 0
+    print("NOTE: при операции деления второе число не должно быть == 0")
+    while not (ch in VALID_SIGNS and len(ch) == COMMAND_LEN):
+        ch = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if ch == ZERO:
+        return ch, 0, 0
+    while not (one.isnumeric() and two.isnumeric() and
+               (not (ch == DIV and int(two) == 0))):
+        one = input("Введите первое число: ")
+        two = input("Введите второе число: ")
+    return ch, int(one), int(two)
+
+
+def command_recursion():
+    cmd, one, two = get_input()
+    if cmd == ZERO:
+        print('Good Bye!')
+        return
+    print('Ваш результат:',
+          one + two if cmd == ADD else
+          one - two if cmd == SUB else
+          one * two if cmd == MUL else one / two)
+    command_recursion()
+
+
+if __name__ == '__main__':
+    command_recursion()
+    exit(0)
