@@ -23,3 +23,51 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+companies_ls = []
+companies = namedtuple('company', ['name', 'revenue'])
+
+
+def add_to_companies_list(*args):
+    company = companies(*args)
+    companies_ls.append(company)
+    return None
+
+
+def read_companies_info():
+    company_name = input('Введите название предприятия: ')
+    revenue = sum(list(map(int, input(
+        'через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split())))
+    return company_name, revenue
+
+
+def get_avg_profit():
+    return round(sum([company.revenue for company in companies_ls]) / len(companies_ls), 2)
+
+
+def systematize_companies(ls, av_pr):
+    height, low = [], []
+    for company in ls:
+        if company.revenue >= av_pr:
+            height.append(company.name)
+        else:
+            low.append(company.name)
+    return height, low
+
+
+def main():
+    count_of_companies = int(input('Введите количество предприятий для расчета прибыли: '))
+    for i in range(count_of_companies):
+        company_name, revenue = read_companies_info()
+        add_to_companies_list(company_name, revenue)
+    avg_profit = get_avg_profit()
+    height, low = systematize_companies(companies_ls, avg_profit)
+    print(
+        f"Средняя годовая прибыль всех предприятий: {avg_profit}\nПредприятия, "
+        f"с прибылью выше среднего значения: {', '.join(height)}\nПредприятия, "
+        f"с прибылью ниже среднего значения: {', '.join(low)}")
+
+
+if __name__ == '__main__':
+    main()
