@@ -1,0 +1,5 @@
+User_1, {'Orders': ['iPhone 11', 'Laptop Lenovo', 'Mouse 4tech', 'Monitor loc']}
+User_2, {'Orders': ['Samsung', 'test']}
+User_3, {'Orders': ['Xiaomi', 'check_123', 'kyocera']}
+User_4, {'Orders': ['Dell', 'deck_pro']}
+User_5, {'Orders': ['HDMI HUB', 'recorder', 'micro']}
