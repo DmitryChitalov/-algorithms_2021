@@ -19,3 +19,28 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+# Алгоритм №1
+
+def min_list(lst):
+    for i in lst:
+        min_num = True
+            for n in lst:
+                if i > n:
+                    min_num = False
+            if min_num:
+                return i
+ # Сложность O(n^2)
+
+
+
+# Алгоритм №2
+
+def min_list(lst):
+    min_num = lst[0]
+    for i in lst:
+        if i < min_num:
+            min_num = i
+    return min_num
+
+# Сложность O(n)

@@ -34,3 +34,22 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+from functools import reduce
+
+def sum_func():
+    def multiply(a, b):
+        return a * b
+
+    n_dict = defaultdict(list)
+    for i in range(1, 3):
+        n_dict[i] = input(f'Введите шестнадцатеричное число {i}: ').split()
+    total_sum = sum([int(''.join(num), 16) for num in n_dict.values()])
+
+    total_multip = reduce(multiply, [int(''.join(num), 16) for num in n_dict.values()])
+
+    return f'Сумма чисел: {list(str(hex(total_sum)[2:]))}\n' \
+           f'Произведение чисел: {list(str(hex(total_multip)[2:]))}'
+
+
+print(sum_func())

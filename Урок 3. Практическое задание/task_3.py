@@ -21,3 +21,12 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+def unique_string(letter, substring_hash=[]):
+
+    for i in range(2, len(letter) + 1):
+        substring_hash.append(hash(letter[1:i]))
+        substring_hash.append(hash(letter[:i - 1]))
+    return f'{set(substring_hash)}\n {len(set(substring_hash))} уникальных подстрок'
+
+print(unique_string('geek'))

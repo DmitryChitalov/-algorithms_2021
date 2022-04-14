@@ -11,3 +11,39 @@ deque – это обобщение стеков и очередей.
 
 В первую очередь необходимо выполнить замеры для ф-ций appendleft, popleft, extendleft дека и для их аналогов у списков.
 """
+
+import cProfile
+from collections import deque
+
+def list_app_func(num):
+    lst = []
+    for i in num:
+        lst.append(i)
+
+def deque_app_func(num):
+    lst = deque()
+    for i in num:
+        lst.append(i)
+
+def list_ins_func(num):
+    lst = []
+    for i in num:
+        lst.insert(0, i)
+
+def deque_ins_func(num):
+    lst = deque()
+    for i in num:
+        lst.appendleft(i)
+
+
+def main():
+    my_nums = [i for i in range(50000)]
+
+    list_app_func(my_nums)
+    deque_app_func(my_nums)
+    list_ins_func(my_nums)
+    deque_ins_func(my_nums)
+
+cProfile.run('main()')
+
+# судя по сделанным замерам, наиболее эффектиным будет использование deque

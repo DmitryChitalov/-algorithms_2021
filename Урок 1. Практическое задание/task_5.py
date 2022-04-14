@@ -28,3 +28,39 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+class Stack:
+    def __init__(self):
+        self.elements = []
+
+    def is_empty(self):
+        return self.elements == []
+
+    def push_in(self):
+        self.elements.append(el)
+
+    def pop_out(self):
+        return self.elements.pop()
+
+    def get_val(self):
+        return self.elements[len(self.elements) - 1]
+
+    def stack_size(self):
+        return len(self.elements)
+
+
+def plates_stack(plates_qty):
+    stack_obj = Stack()
+
+    while plates_qty > 0:
+        stacks_num = plates_qty / 10        # количество тарелок в одном стеке: 10
+        stack_obj.push_in(stacks_num)
+
+    plates = ""
+    while not stack_obj.is_empty():
+        plates = plates + str(stack_obj.pop_out())
+
+    return plates
+
+
+print(plates_stack(19))

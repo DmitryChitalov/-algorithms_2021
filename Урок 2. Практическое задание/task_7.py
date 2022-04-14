@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def number_check(num):
+
+    if num == 1:
+        return num
+
+    else:
+        return number_check(num - 1) + num
+
+try:
+    num = int(input('Введите число: '))
+
+    if number_check(num) == num * (num + 1) / 2:
+        print('Равенство верное')
+
+except ValueError:
+    print('Неверный формат данных. Введите число.')
