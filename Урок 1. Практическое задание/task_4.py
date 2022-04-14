@@ -25,3 +25,57 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# 1) Линейная сложность O(N)
+def authentication(name, pwd, data):
+    if name in data:  # O(n)
+        if pwd == data[name]['password'] and data[name]['activated'] == 'yes':  # O(1)
+            return 'Доступ разрешен'
+        elif pwd == data[name]['password'] and data[name]['activated'] == 'no':  # O(1)
+            return 'Необходимо активировать учетную запись'
+        else:
+            return 'Неверный пароль'
+    else:
+        return 'Такого пользователя не существует'
+
+
+# 2) Константная сложность O(N)
+def authentication1(name, pwd, data):
+    if data.get(name):  # O(1)
+        if pwd == data[name]['password'] and data[name]['activated'] == 'yes':  # O(1)
+            return 'Доступ разрешен'
+        elif pwd == data[name]['password'] and data[name]['activated'] == 'no':  # O(1)
+            return 'Необходимо активировать учетную запись'
+        else:
+            return 'Неверный пароль'
+    else:
+        return 'Такого пользователя не существует'
+
+
+# 3) Квадратичная сложность O(N^2)
+def authentication2(name, pwd, data):
+    if data.get(name):  # O(1)
+        for _,val in data.items():  # O(N)
+            if pwd not in val.values():  # O(N)
+                return 'Неверный пароль'
+            elif pwd in val.values() and val['activated'] == 'yes':  # O(N)
+                return 'Доступ разрешен'
+            elif pwd in val.values() and val['activated'] == 'no':  # O(N)
+                return 'Необходимо активировать учетную запись'
+    else:
+        return 'Такого пользователя не существует'
+
+
+if __name__ == '__main__':
+    data_users = {'Jhon': {'password': '123', 'activated': 'yes'},
+                  'Ben': {'password': '321', 'activated': 'no'}
+                  }
+
+    names = ['Ben', 'Jhon', 'Ted']
+    passwd = ['321', '123', '231']
+
+    print(authentication(names[0], passwd[0], data_users))
+    print(authentication1(names[1], passwd[1], data_users))
+    print(authentication2(names[0], passwd[1], data_users))
+    print(authentication2(names[2], passwd[2], data_users))
