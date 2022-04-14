@@ -23,3 +23,40 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+
+firms = {}
+count = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(count):
+    name = input('Введите название предприятия: ')
+    Res = namedtuple('Прибыль', ['quarter1', 'quarter2', 'quarter3', 'quarter4'])
+    money = input('Введите прибыль за 4 квартала через пробел: ')
+    quarters = []
+    for j in money.split(' '):
+        quarters.append(int(j))
+    firms[name] = Res(
+        quarter1=quarters[0],
+        quarter2=quarters[1],
+        quarter3=quarters[2],
+        quarter4=quarters[3]
+    )
+
+total_money = ()
+for k in firms:
+    total_money += firms.get(k)
+
+average = sum(total_money) / len(firms)
+print(f'Средняя годовая прибыль всех предприятий: {average}')
+
+
+less_than_avg = []
+more_than_avg = []
+for m in firms:
+    if sum(firms.get(m)) > average:
+        more_than_avg.append(m)
+    else:
+        less_than_avg.append(m)
+print(f'Предприятия, с прибылью выше среднего значения: {more_than_avg}')
+print(f'Предприятия, с прибылью выше среднего значения: {less_than_avg}')

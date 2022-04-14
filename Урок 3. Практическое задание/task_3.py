@@ -21,3 +21,13 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+hashed_str = []
+my_str = 'papa'
+for i in range(len(my_str)):
+    for j in range(i, len(my_str)):
+        if my_str[i:j] != my_str:
+            hashed_str.append(hash(my_str[i:j]))
+print(set(hashed_str))
+print(len(set(hashed_str)))

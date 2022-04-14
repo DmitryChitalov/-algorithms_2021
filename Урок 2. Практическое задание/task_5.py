@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_ascii(char=32, i=1):
+    while char != 128:
+        print(f'{char}: {chr(char)}', end='  ')
+        if i % 10 == 0:
+            print('')
+        return my_ascii(char + 1, i + 1)
+
+
+print(my_ascii())

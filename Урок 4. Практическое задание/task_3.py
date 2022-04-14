@@ -37,3 +37,49 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    a = []
+    for i in str(enter_num):
+        a.append(i)
+    a.reverse()
+    my_str = ''
+    for i in a:
+        my_str += i
+    return my_str
+
+
+print(timeit.timeit(
+    'revers_1(num_10000)',
+    globals=globals(),
+    number=10000
+))
+
+print(timeit.timeit(
+    'revers_2(num_10000)',
+    globals=globals(),
+    number=10000
+))
+
+print(timeit.timeit(
+    'revers_3(num_10000)',
+    globals=globals(),
+    number=10000
+))
+
+print(timeit.timeit(
+    'revers_4(num_10000)',
+    globals=globals(),
+    number=10000
+))
+
+run('revers_1(num_10000)')
+run('revers_2(num_10000)')
+run('revers_3(num_10000)')
+run('revers_4(num_10000)')
+
+# Т.к мы используем рекурсию в 1 функции, то она будет самой медленной
+# Во 2 функции используем цикл, следовательно она быстрее первой
+# Моя 4 функция быстрее чем 2 функция с циклом while, так как используется for, который в таких задач в принципе быстрее, чем while
+# 3 функция самая быстрая из-за использующихся в ней встроенных функций
