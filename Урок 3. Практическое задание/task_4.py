@@ -15,3 +15,37 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+from uuid import uuid4
+import hashlib
+
+
+class My_hash_url:
+    def __init__(self):
+        self.dict_hash = {}
+        self.__salt = uuid4().hex
+
+    def pull_hash(self, url):
+        url_hash = hashlib.sha3_256(self.__salt.encode() + url.encode()).hexdigest()
+        if url not in self.dict_hash:
+            self.dict_hash[url] = url_hash
+            print('Url добавлен в хеш')
+        else:
+            print('Данный url уже присутствует.')
+
+
+obj = My_hash_url()
+obj.pull_hash('https://gb.ru/')
+obj.pull_hash('https://gb.ru/')
+obj.pull_hash('https://www.google.ru/')
+print(obj.dict_hash)
+
+
+
+
+
+
+
+
+
+

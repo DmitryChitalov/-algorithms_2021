@@ -21,3 +21,16 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def count_substring(s):
+    res = set()
+    for i in range(len(s)):
+        for k in range(i, len(s)):
+            if len(s) != len(s[i:k+1]):
+                res.add(hash(s[i:k+1]))
+    return res
+
+
+hash_set = count_substring('papa')
+print(f'{hash_set}, количество подстрок {len(hash_set)}')
