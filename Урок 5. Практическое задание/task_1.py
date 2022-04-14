@@ -23,3 +23,40 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+
+def avg_year_profit(profits_tup):
+    return sum(profits_tup)/4
+
+
+def total_avg_year(p_dict):
+    return sum(map(avg_year_profit, list(p_dict.values())))/len(p_dict)
+
+
+def more_profitable(p_dict, avg_profit):
+    return [c[0] for c in p_dict.items() if avg_year_profit(c[1]) > avg_profit]
+
+
+def less_profitable(p_dict, avg_profit):
+    return [c[0] for c in p_dict.items() if avg_year_profit(c[1]) < avg_profit]
+
+
+profits = namedtuple('Profits', 'quarter1 quarter2 quarter3 quarter4')
+corps = {}
+
+while True:
+    name = input("Введите название компании: ")
+    q1, q2, q3, q4 = map(int, input("Введите через пробел прибыль данного предприятия\n"
+                                    "за каждый квартал(Всего 4 квартала): ").split())
+    corp = profits(q1, q2, q3, q4)
+    corps[name] = corp
+    if input("Хотите ли вы ввести данные о прибыли для другой компании? Y/N\n") == 'N':
+        break
+
+total = total_avg_year(corps)
+print("\nСредняя годовая прибыль всех предприятий: ", '%.2f' % total)
+print("Предприятия, с прибылью выше среднего значения: ", ", ".join(more_profitable(corps, total)))
+print("Предприятия, с прибылью ниже среднего значения: ", ", ".join(less_profitable(corps, total)))
+
