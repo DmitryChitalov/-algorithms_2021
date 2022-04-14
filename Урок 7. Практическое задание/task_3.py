@@ -37,6 +37,38 @@ for i in
     left == right
     left.clear()
     right.clear()
-
-
 """
+import timeit
+import random
+
+
+def gnome(data):
+    j = (len(data)-1) // 2  # я знаю что j = m но мне показалось это слишком просто
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data[j]
+
+
+if __name__ == '__main__':
+    natural_number = int(input('Please enter number natural: '))
+    orig_lst = [random.randint(0, 50) for _ in range(2*natural_number + 1)]
+    print(orig_lst[:])
+    print(gnome(orig_lst))
+    orig_list = [random.randint(-100, 100) for _ in range(100)]
+    print(timeit.repeat('gnome(orig_list[:])', globals=globals(), number=(10**3)))
+    orig_list = [random.randint(0, 100) for _ in range(1000)]
+    print(timeit.repeat('gnome(orig_list[:])', globals=globals(), number=(10**3)))
+    """ Результаты: 
+    [2.572095439, 2.2244473240000002, 2.249986316, 2.2133835249999994, 2.248025462000001]
+    [237.623175705, 235.61256120900003, 235.81549159900004, 236.03719692000004, 236.46828936399993]
+    Это медленее чем сортировка методом пузырьком, его результаты в задании 1, а пузырек медленнее чем сортировка слиянием,
+    слинием медленнее встроенных функий sort, sorted поэтому с уверенностью контсатирую факт
+    что гномья сортировка медленнее всех методов что выше приведены
+    Сложность- O(n!)
+    """

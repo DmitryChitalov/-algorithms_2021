@@ -42,15 +42,16 @@ print(
         setup='from __main__ import recursive_reverse, num_10000',
         number=10000))
 
-
+# print(num_100)
 def memoize(f):
     cache = {}
-
+    # print(cache)
     def decorate(*args):
-
         if args in cache:
+            # print(args)
             return cache[args]
         else:
+            # print(args)
             cache[args] = f(*args)
             return cache[args]
     return decorate
@@ -79,3 +80,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+""" Мемоизация не нужна, так как она создает словарь еще до вызова функции, далее выдает
+готовый результат
+"""
