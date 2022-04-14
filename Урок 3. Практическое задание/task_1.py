@@ -20,3 +20,45 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import time
+
+
+def time_init(callback):
+    def wrapper(*args):
+        start = time.perf_counter()
+        back = callback(*args)
+        end = time.perf_counter() - start
+        print(f'{end:.15f}')
+        return back
+    return wrapper
+
+@time_init
+def write_in_list(main_list, n):  # Общая сложность: O(n)
+    for i in range(n):       # O(n)
+        main_list.append(i)    # O(1)
+    return main_list
+
+@time_init
+def write_in_dict(main_dict, n):  # Общая сложность: O(n)
+    for i in range(n):       # O(n)
+        main_dict[i] = i       # O(1)
+    return main_dict
+
+@time_init
+def insert_el_list(main_list, x):
+    main_list.insert(0, x)          # O(n)
+    return main_list
+
+@time_init
+def add_el_dict(main_dict, x):
+    main_dict[x] = x            # O(1)
+    return main_dict
+
+
+list_1 = write_in_list([],100)           # Одинаковая сложность O(n). По сути разница на уровне погрешности, иногда словарь
+dict_1 = write_in_dict({},100)           # заполняется быстрее иногда список.
+print('-#' * 15)
+print(insert_el_list(list_1,1001))   # Добавление в начало списка занимает больше времени, чем добавление элемента
+print(add_el_dict(dict_1, 1001))     # в словарь
+
