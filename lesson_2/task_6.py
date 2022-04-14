@@ -12,3 +12,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+import random
+
+
+def guess_number(number, attempt, attempt_cnt):
+    if attempt >= attempt_cnt:
+        print(f'Вы не угадали! Это число {number}')
+        return
+
+    user_number = int(input(f'Отгадайте число от 0 до 100 (попытка {attempt}): '))
+
+    if user_number == number:
+        print(f'Вы угадали! Это число {number}! Количество попыток {attempt}')
+        return
+    elif user_number < number:
+        print(f'Число больше {user_number}')
+    else:
+        print(f'Число меньше {user_number}')
+
+    guess_number(number, attempt + 1, attempt_cnt)
+
+
+guess_number(random.randint(0, 100), 0, 10)
