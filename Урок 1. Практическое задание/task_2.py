@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+list = [2, 5, -4, 6, 8, 9, 4, 2, 3, -3]
+
+def min_1(list): # линейная
+    min_num = list[0]
+    for i in list[1:]:
+        if i < min_num:
+            min_num = i
+    return min_num
+
+def min_2(list):  # квадратичная
+    for i in list:
+        flag = True
+        for j in list:
+            if i > j:
+                flag = False
+        if flag:
+            min_num = i
+    return min_num
+
+print(min_1(list))
+print(min_2(list))
+
+
