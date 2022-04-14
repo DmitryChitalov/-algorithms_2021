@@ -19,3 +19,31 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+
+# O(n^2) - квадратичная
+def search_min_n2(lst):
+    for i in range(len(lst)):
+        for j in range(len(lst)):
+            if lst[i] < lst[j]:
+                lst[j], lst[i] = lst[i], lst[j]
+    return lst[0]
+
+
+# O(n) - линейная.
+def search_min_n(lst):
+    min_val = lst[0]
+    for i in range(len(lst)):
+        if min_val > lst[i]:
+            min_val = lst[i]
+    return min_val
+
+
+lst = [el for el in random.sample(range(-120, 120), 20)]
+
+print(search_min_n(lst))
+print(search_min_n2(lst))
+
+
+
