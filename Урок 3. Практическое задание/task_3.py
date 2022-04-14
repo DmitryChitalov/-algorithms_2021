@@ -21,3 +21,15 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def count_of_substrings(st):
+    substrings = set()
+    for i in range(1, len(st)):
+        for j in range(len(st)):
+            sub_st = st[j:j+i]
+            substrings.add(hash(sub_st))
+    return len(substrings)
+
+
+print(count_of_substrings('papa'))
