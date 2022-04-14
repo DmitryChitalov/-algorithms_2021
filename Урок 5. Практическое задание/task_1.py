@@ -23,3 +23,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+# 1. Пользователь вводит данные о количестве предприятий,
+# их наименования и прибыль за 4 квартала
+# (т.е. 4 отдельных числа) для каждого предприятия..
+#  Программа должна определить среднюю прибыль
+#   (за год для всех предприятий) и
+#  вывести наименования предприятий,
+#  чья прибыль выше среднего и отдельно вывести наименования предприятий,
+#  чья прибыль ниже среднего.
+import collections
+
+plants = dict()
+n = int(input('Введите кол-во предприятий: '))
+for _ in range(n):
+    name = input('Введите название предприятия: ')
+    income = input('Введите его прибыль за 4 квартала через пробел: ').split()
+    plants[name] = list(map(int, income))
+overall_income = [sum(el) for el in plants.values()]
+# plants_with_profit = {name: summa for name, summa in zip(plants.keys(),overall_income)}
+plants_with_profit = collections.Counter({name: summa for name, summa in zip(plants.keys(), overall_income)})
+average = sum(plants_with_profit.values()) / n
+less_than_average = []
+more_than_average = []
+for key, val in plants_with_profit.items():
+    if val < average:
+        less_than_average.append(key)
+    else:
+        more_than_average.append(key)
+print('Средний заработок:', average)
+print(f'Предприятия с заработком больше среднего: {more_than_average}\n'
+      f'Предприятия с заработком меньше среднего: {less_than_average}')
+

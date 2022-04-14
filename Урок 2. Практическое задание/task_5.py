@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(num=32):
+    if num == 128:
+        return
+    elif num % 10 == 2:
+        print()
+    print(num, ":", chr(num), end=' ')
+    ascii_table(num + 1)
+
+
+ascii_table()
