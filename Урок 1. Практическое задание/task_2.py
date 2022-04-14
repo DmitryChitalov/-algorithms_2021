@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+# O(n^2)
+def list_min2(lst):
+    for i in lst:
+        l_min = True
+        for k in list:
+            if i > k:
+                l_min = False
+    if l_min:
+        return i
+
+
+# O(n)
+def list_min(lst):
+    l_min = list[0]
+    for i in lst:
+        if i < min:
+            l_min = i
+        return min
+
+list1 = [1, 4, 34]
+
+print(list_min2(list1))
+print(list_min(list1))

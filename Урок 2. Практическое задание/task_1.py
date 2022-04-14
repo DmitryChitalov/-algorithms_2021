@@ -28,3 +28,50 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc():
+    type_of_operation = input('Введите +, -, *, / или 0 для выхода')
+
+    if type_of_operation == "0":
+        return  'Выход'
+
+    else:
+
+        if type_of_operation == "+" or type_of_operation == "-" or type_of_operation == "*" \
+        or type_of_operation == "/":
+
+            try:
+                first_num = int(input('Введите число:'))
+                second_num = int(input('Введите число:'))
+
+                if type_of_operation == '+':
+                    print(first_num + second_num)
+                    return calc()
+
+                elif type_of_operation == '-':
+                    print(first_num - second_num)
+                    return calc()
+
+                elif type_of_operation == '*':
+                    print(first_num * second_num)
+                    return calc()
+
+                elif type_of_operation == '/':
+                    try:
+                        res = first_num / second_num
+                    except ZeroDivisionError:
+                        print ('Деление на ноль не предусмотренно')
+                    else:
+                        print(res)
+                    finally:
+                        return calc()
+
+            except ValueError:
+                print('Вы ввели строку. Введите дургие значения')
+                return calc()
+
+        print('Такого знака нет. Повторите')
+        return calc()
+
+
+calc()

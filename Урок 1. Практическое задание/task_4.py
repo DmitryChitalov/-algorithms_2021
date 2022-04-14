@@ -25,3 +25,42 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+list_users = {
+    'pol1' : ( 'qwerty', True),
+    'pol2' : ('1234asd', True),
+    'pol3' : ('zxcv', False)
+}
+
+#O(n)
+def authentication1(user_name, user_passwd, lst):
+        for key, val in lst.items():
+            if key == user_name:
+                if val[1] == True:
+                    if val[0] == user_passwd:
+                        return "Добро пожаловать"
+                    else:
+                        return "Пароль не верен"
+                else:
+                    return "Пользователь не активен. Пройдите активацию"
+
+        return "Пользователь не найден"
+
+
+#O(1)
+def authentication2(user_name, user_passwd, lst):
+    if lst.get(user_name):
+        if lst[user_name][0] == user_passwd and lst[user_name][1] == True:
+            return "Добро пожаловать"
+        elif lst[user_name][0] == user_passwd and lst[user_name][1] != True:
+            return "Пользователь не активен. Пройдите активацию"
+        elif lst[user_name][0] != user_passwd:
+            return "Пароль не верный"
+        else:
+            "Пользователя не существует"
+
+
+
+
+
+print(authentication1('pol2', '1234asd', list_users))
+print(authentication2('pol3', 'zxcv', list_users))
