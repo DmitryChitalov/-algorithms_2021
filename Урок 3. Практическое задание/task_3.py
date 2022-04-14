@@ -21,3 +21,15 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+string = 'pap'
+uni_str = set()
+for i in range(len(string)):
+    for j in range(i, len(string)):
+        if not string[i:j+1] == string:
+            uni_str.add(hash(string[i:j+1]))
+print(f'{string} - {len(uni_str)} уникальных подстрок')
+
+
+
+
+

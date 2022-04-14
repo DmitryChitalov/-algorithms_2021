@@ -11,6 +11,8 @@
 
 Без аналитики задание считается не принятым!
 """
+from collections import Counter
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +41,20 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    return f'Чаще всего встречается число {Counter(array).most_common(1)[0][0]}, ' \
+           f'оно появилось в массиве {Counter(array).most_common(1)[0][1]} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit('func_1()', globals=globals(), number=10000))
+print(timeit('func_2()', globals=globals(), number=10000))
+print(timeit('func_3()', globals=globals(), number=10000))
+
+# Сделал через Counter  не самое быстрое но лаконичное
+# 0.017684900000000003
+# 0.017757300000000004
+# 0.0576179

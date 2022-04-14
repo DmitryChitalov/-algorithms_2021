@@ -19,3 +19,27 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+
+# 1) сложность O(n^2)
+def lst_min_1(lst):
+    min_value = lst[0]  # O(1)
+    for i in lst:  # O(n)
+        for j in lst:  # O(n)
+            if min_value > i < j:  # O(1)
+                min_value = i  # O(1)
+    return min_value  # O(1)
+
+
+# 2) Сложность O(n)
+def lst_min_2(lst):
+    min_value = lst[0]  # O(1)
+    for i in lst:  # O(n)
+        if i < min_value:  # O(1)
+            min_value = i  # O(1)
+    return min_value  # O(1)
+
+
+lis = [random.randint(0, 1000) for i in range(10)]
+print(f'Сложность O(n^2): {lst_min_1(lis)}\nСложность O(n): {lst_min_2(lis)}')

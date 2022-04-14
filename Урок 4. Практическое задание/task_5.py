@@ -17,6 +17,7 @@
 Укажите формулу сложности О-нотация каждого алгоритма
 и сделайте обоснование результатам.
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -39,5 +40,41 @@ def simple(i):
     return n
 
 
+def erat(i):
+    l = 2000
+    a = [n for n in range(l + 1)]
+    a[1] = 0
+    n = 2
+    while n <= l:
+        if a[n] != 0:
+            m = n + n
+            while m <= l:
+                a[m] = 0
+                m = m + n
+        n = n + 1
+
+    return [p for p in a if p != 0][i - 1]
+
+
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+print(erat(i))
+
+print(timeit('simple(i)', globals=globals(),number=1000))
+print(timeit('erat(i)', globals=globals(),number=1000))
+'''
+i - 10
+number = 100
+0.0023405000000003007
+0.012223300000000048
+
+i - 100
+number = 1000
+1.8785500000000002
+0.6202927999999996
+
+Решето Эратосфена лучше  для поиска числа с большим порядковым номером
+Простой поиск = O(n*2)
+Решето = O(n log(log n))
+
+'''

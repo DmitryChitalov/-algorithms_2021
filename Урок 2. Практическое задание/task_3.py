@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def turn_over(numbers, lst=None):
+    if lst is None:
+        lst = []
+    if numbers == 0:
+        return ''.join(map(str, lst))
+    else:
+        lst.append(numbers % 10)
+        return turn_over(numbers // 10, lst)
+
+
+print(turn_over(1234))

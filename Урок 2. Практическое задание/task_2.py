@@ -18,3 +18,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count_ev_un(numbers, even=0, uneven=0):
+    if numbers == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even, uneven}'
+    else:
+        point = numbers % 10
+        if point % 2 != 0:
+            uneven += 1
+        else:
+            even += 1
+        return count_ev_un(numbers // 10, even, uneven)
+
+
+def valid():
+    try:
+        return int(input('Введите число'))
+    except ValueError:
+        print('Это не число')
+        return valid()
+
+
+print(count_ev_un(valid()))

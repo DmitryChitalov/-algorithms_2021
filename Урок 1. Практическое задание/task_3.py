@@ -20,3 +20,31 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company = {
+    'globalink': 12580,
+    'philips': 531580,
+    'hp': 271343,
+    'lg': 1301111,
+    'sony': 74800593,
+    'samsung': 18702,
+    'apple': 4583197,
+    'midea': 8723491,
+    'bosh': 5246158,
+    'gorenje': 595231
+}
+# 1) Сложность O(n log n)
+list_d = sorted(company.items(), key=lambda x: x[1], reverse=True)
+for i in range(3):
+    print(f'{list(list_d[i])[0]} : {list(list_d[i])[1]}')
+
+# 2) Сложность O(n)
+cp_dict = company.copy()
+for i in range(3):
+    maxim = max(cp_dict.items(), key=lambda it: it[1])
+    print(list(maxim))
+    del cp_dict[maxim[0]]
+
+# 3) Лучший вариант линейной сложности. Потому что ее сложность зависит
+#    только от размера входных данных.  И нет сортировки.
+#
