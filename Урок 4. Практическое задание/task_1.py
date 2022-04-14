@@ -15,6 +15,7 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
+import timeit
 
 
 def func_1(nums):
@@ -23,3 +24,28 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+def fill_list(number_of_items):
+    test_list = list(range(number_of_items))
+    return test_list
+
+
+numbers = fill_list(100000)
+print(func_1(numbers))
+print(func_2(numbers))
+
+print(timeit.timeit("func_1(numbers)", globals=globals(), number=1000))  # 19.684575000000002
+print(timeit.timeit("func_2(numbers)", globals=globals(), number=1000))  # 15.374730999999997
+
+"""
+Снизил время выполнения функции за счет использования list comprehension.
+list comprehension работают эффективней простого цикла в связи с отсутсвием цикла и постоянных вызовов append.
+list comprehension изначально создана для построения списков из итерируемых объектов.
+"""
+
