@@ -10,7 +10,6 @@
 Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
 Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
-
 from timeit import timeit
 from random import randint
 
@@ -78,4 +77,57 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+"""
+В данном случае мемоизация не нужна.
+Хорошие результаты функции recursive_reverse_mem обеспечены многократным ее выполнением при замере с помощью timeit
+ - в результате данные предыдущих вызовов уже находятся в кэше и извлекаются от туда.
+При однократном проходе функция recursive_reverse отрабатывает быстрее, т.к. не требуется дополнительных операций,
+связанных с записью данных в кэш.
+для оптимизации можно отказаться от рекурсии и использовать срез или функции join() и reversed()
+"""
+
+
+def recursive_reverse_slice(number):
+    return str(number)[::-1]
+
+
+print('Функция recursive_reverse_slice')
+print(
+    timeit(
+        'recursive_reverse_slice(num_100)',
+        setup='from __main__ import recursive_reverse_slice, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_slice(num_1000)',
+        setup='from __main__ import recursive_reverse_slice, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_slice(num_10000)',
+        setup='from __main__ import recursive_reverse_slice, num_10000',
+        number=10000))
+
+
+def recursive_reverse_join(number):
+    return ''.join(reversed(str(number)))
+
+
+print('Функция recursive_reverse_join')
+print(
+    timeit(
+        'recursive_reverse_join(num_100)',
+        setup='from __main__ import recursive_reverse_join, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_join(num_1000)',
+        setup='from __main__ import recursive_reverse_join, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_join(num_10000)',
+        setup='from __main__ import recursive_reverse_join, num_10000',
         number=10000))
