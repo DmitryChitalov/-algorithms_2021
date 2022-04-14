@@ -15,3 +15,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursion(n, el=1, length=1):
+    return el if length == n else el + recursion(n, el / -2, length + 1)
+
+
+number = int(input('Введите количество элементов: '))
+print(f'Количество элементов: {number}, их сумма: {recursion(number)}')
