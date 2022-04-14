@@ -18,3 +18,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+""" Оставила в файле решение с циклом для себя. """
+
+
+def even_odd():
+    number = input('Введите натуральное число: ')
+    count_even = 0
+    count_odd = 0
+    while number:
+        result = int(number) % 10
+        number = int(number) // 10
+        if result % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+    print(f'Количество чётных цифр: {count_even}\nКоличество нечётных цифр: {count_odd}')
+
+
+def even_odd_recurs(number, count_even=0, count_odd=0):
+    if not number:
+        return f'Количество чётных цифр: {count_even}\nКоличество нечётных цифр: {count_odd}'
+    else:
+        result = int(number) % 10
+        number = int(number) // 10
+        if result % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+        return even_odd_recurs(number, count_even, count_odd)
+
+
+# even_odd()
+
+print(even_odd_recurs(input('Введите натуральное число: ')))
+

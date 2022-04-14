@@ -15,3 +15,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def elem_sum():
+    n = int(input('Введите количество элементов: '))
+    sum_elms = 0
+    el = 1
+    count = 0
+    while count != n - 1:
+        el = -(el / 2)
+        sum_elms = sum_elms + el
+        count += 1
+    print(sum_elms + 1)
+
+
+def elem_sum_recurs(n, sum_elms=0.0, count=0, el=1.0):
+    if count == n - 1:
+        print(sum_elms + 1)
+    else:
+        el = -(el / 2)
+        sum_elms = sum_elms + el
+        count += 1
+        return elem_sum_recurs(n, sum_elms, count, el)
+
+
+# elem_sum()
+elem_sum_recurs(int(input('Введите количество элементов: ')))
+

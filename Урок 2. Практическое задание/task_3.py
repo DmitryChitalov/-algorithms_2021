@@ -22,3 +22,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+""" Оставила в файле решение с циклом для себя. """
+
+
+def reversed_num():
+    number = input('Введите целое число: ')
+    result = ''
+    while number:
+        result += str(int(number) % 10)
+        number = int(number) // 10
+    print(f'Число наоборот: {result}')
+
+
+def reversed_num_recurs(number, result=''):
+    if not number:
+        print(f'Число наоборот: {result}')
+    else:
+        result += str(int(number) % 10)
+        number = int(number) // 10
+        return reversed_num_recurs(number, result)
+
+
+# reversed_num()
+reversed_num_recurs(input('Введите целое число: '))
