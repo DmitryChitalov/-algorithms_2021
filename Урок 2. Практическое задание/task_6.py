@@ -11,3 +11,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def guess(n, count=1):
+    try:
+        user_count = int(input(f'{11 - count} попыток осталось\nВведите целое число от 0 до 100: '))
+    except ValueError:
+        print('Вы ввели строку')
+        return guess(n, count)
+    if count == 10:
+        print('Вы проиграли')
+    elif user_count == n:
+        print('Вы выиграли')
+    elif user_count > n:
+        print('Загаданное число меньше')
+        return guess(n, count + 1)
+    else:
+        print('Загаданное число больше')
+        return guess(n, count + 1)
+
+guess(random.randint(0, 100))
