@@ -15,3 +15,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+list1 = [1]
+def func1(n, base=1.00):
+    if n > 0:
+        new_base = -base/2
+        list1.append(new_base)
+        n -=1
+        return func1(n-1, new_base)
+    else:
+        return sum(list1)
+
+print(func1(3))

@@ -11,3 +11,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randrange
+
+
+def func1(rand, n=10):
+    rand = rand
+    while True:
+        try:
+            guess = int(input(f"Отгадайте число, у вас осталось {n} попыток: "))
+            break
+        except ValueError:
+            print("Вы ввели не число")
+    if guess != rand:
+        print(rand)
+        n -= 1
+        return func1(rand, n)
+    else:
+        return "Вы отгадали число"
+
+print(func1(randrange(0, 100)))
