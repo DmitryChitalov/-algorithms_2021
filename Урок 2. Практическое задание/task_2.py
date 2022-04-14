@@ -18,3 +18,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_not_even(num, even=0, not_even=0):
+    """ Рекурсивная функция, считающая количество четных и нечетных цифр натурального числа """
+    # Базовый случай
+    if num == 0:
+        return even, not_even
+    else:
+        num_digit = num % 10
+        if num_digit % 2 == 0:
+            even += 1
+        else:
+            not_even += 1
+        return even_not_even(num // 10, even, not_even)
+
+
+if __name__ == '__main__':
+
+    try:
+        NUM1 = int(input('Введите число: '))
+        print(f'Количество четных и нечетных цифр в числе равно:{even_not_even(NUM1)}')
+    except ValueError:
+        print('Вы ввели не число')
+
+
+
+
