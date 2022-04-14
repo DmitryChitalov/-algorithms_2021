@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,22 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""Функция с мемоизатором показывает хорошее время только
+при многократном повторении выполнения данной функции за счет чтения из кэша.
+При однократном выполнении кода функция без мемоизатора показывает лучшее время работы"""
+
+test_num = randint(10 ** 40, 10 ** 50)
+
+print("Неоптимизированная функция")
+print(
+    timeit(
+        'recursive_reverse(test_num)',
+        setup='from __main__ import recursive_reverse, test_num',
+        number=1))
+print("Оптимизированная функция")
+print(
+    timeit(
+        "recursive_reverse_mem(test_num)",
+        setup='from __main__ import recursive_reverse_mem, test_num',
+        number=1))
