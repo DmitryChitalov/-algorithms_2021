@@ -1,4 +1,4 @@
-"""
+﻿"""
 Задание 4.
 
 Для этой задачи:
@@ -25,3 +25,49 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+#   Сложность первого решения - O(1)
+#   Сложность второго решения - O(n), так как при поиске имени пользователя в списке осуществляется перебор циклом по всем элементам списка
+#   Первое решение эффективнее, т.е. его сложность O(1) против O(n)
+
+
+def check_user1(user_list, user):                                           # O(1)
+    status = False                                                          # (1)
+    if user_list.get(user) == None:                                         # (1)
+        print("Пользователь с таким именем отсутствует!!!")                 # (1)
+    else:
+        if not user_list.get(user)[1]:                                      # (1)
+            print("Необходимо дополнительно активировать учетную запись!")  # (1)
+        else:
+            psw = input("Введите пароль: ")                                 # (1)
+            if user_list.get(user)[0] == psw:                               # (1)
+                status = True                                               # (1)
+    return status                                                           # (1)
+
+def check_user2(user_list, user):
+    status = False                                                          # (1)
+    name_found = False                                                      # (1)
+    user_names = user_list.keys()                                           # (n)
+    for i in user_names:                                                    # (n)
+        if i == user:                                                       # (1)
+            name_found = True                                               # (1)
+    if not name_found:                                                      # (1)
+        print("Пользователь с таким именем отсутствует!!!")                 # (1)
+    else:
+        if not user_list.get(user)[1]:                                      # (1)
+            print("Необходимо дополнительно активировать учетную запись!")  # (1)
+        else:
+            psw = input("Введите пароль: ")                                 # (1)
+            if user_list.get(user)[0] == psw:                               # (1)
+                status = True                                               # (1)
+    return status                                                           # (1)
+
+my_users = {"Alex": ["qedfjk23", True], "Max": ["qaz1", True], "Dan": ["qaz2", False]}
+
+a = input("Введите имя пользователя: ")
+if check_user2(my_users, a):
+    print("Добро пожаловать!!!")
+else:
+    print("В доступе отказано!!!")
+
+
