@@ -19,3 +19,36 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+my_list = random.sample(range(100), 10)
+print(my_list)
+
+
+def my_func1(lst):  # O(n) - линейная сложность
+    min_el = lst[0]  # O(1) - константная сложность
+    for i in lst:  # O(n) - линейная сложность
+        if i < min_el:  # O(1) - константная сложность
+            min_el = i  # O(1) - константная сложность
+    return min_el
+
+
+result1 = my_func1(my_list)
+print(result1)
+
+new_list = random.sample(range(100), 10)
+print(new_list)
+
+
+def my_func2(lst):  # O(n**2) - квадратичная сложность
+    for el1 in lst:  # O(n) - линейная сложность
+        x = False  # O(1) - константная сложность
+        for el2 in lst:  # O(n) - линейная сложность
+            x = True if el2 < el1 else x  #
+        if not x:  # O(1) - константная сложность
+            return el1  # O(1) - константная сложность
+
+
+result2 = my_func2(new_list)
+print(result2)
