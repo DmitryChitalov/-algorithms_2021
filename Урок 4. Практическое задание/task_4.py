@@ -12,6 +12,11 @@
 Без аналитики задание считается не принятым!
 """
 
+# Третья версия func_3 является быстрой по сравнению с другими. Однако не сильно, по сравнению со второй.
+# Это связано с тем, что список преобразуется во множество.
+
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +44,21 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    array_set = set(array)
+    most_common = None
+    qty_most_common = 0
+
+    for item in array_set:
+        qty = array.count(item)
+        if qty > qty_most_common:
+            qty_most_common = qty
+            most_common = item
+
+    return f'Чаще всего встречается число {most_common}, ' \
+           f'оно появилось в массиве {qty_most_common} раз(а)'
+
+
+print(timeit("func_1", globals=globals()))
+print(timeit("func_2", globals=globals()))
+print(timeit("func_3", globals=globals()))

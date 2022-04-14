@@ -22,3 +22,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def inverted_number(n, my_list=[]):
+    if n == 0:
+        return my_list
+    else:
+        c = n % 10
+        my_list.append(c)
+        n = n // 10
+        return inverted_number(n)
+
+
+number = int(input('Введите число: '))
+
+my_list = inverted_number(number)
+
+my_list = ''.join(str(x) for x in my_list)
+
+print('Перевернутое число:', my_list)
+
+
+
+

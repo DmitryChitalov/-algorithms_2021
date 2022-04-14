@@ -25,3 +25,53 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Последнее решение более эффективное, так как поиск в словаре по ключу позволяет моментально обратиться к значению.
+
+
+data = {'Ivan Sergeev': ['ivan.sergeev@gmail.com', 'erkf2010', 1],
+        'Sergey Petrov': ['petrov@yandex.ru', '1234df', 0],
+        'Alina Ivanova': ['alinchik77@mail.ru', 'krasotka', 0]}
+
+
+# Ищем пользователей с не активной учеткой (применяется для двух реализаций)
+
+# 0(n log n)
+
+for k, v in data.items():
+    if v[-1] == 0:
+        print(f'Пользователь {k} не активирован. Пожалуйста, введите логин и пароль.')
+
+
+# Сложность 0(log n)
+
+def access(login, password):
+    a = data.get('Sergey Petrov')
+    if a[0] == login and a[1] == password:
+        print(f'Доступ разрешен. Ваш логин {login}, пароль {password}.')
+    else:
+        print(f'У вас ошибка. Попробуйте еще раз')
+
+
+access('petrov@yandex.ru', '1234df')
+
+# Сложность О(1)
+
+def access(data, login, password):
+    if data.get(login):
+        if data[login]['password'] == password and data[login]['activation']:
+            return 'Вы в системе'
+        elif data[login]['password'] == password and not data[login]['activation']:
+            return 'Учетная запись не активна'
+        elif data[login]['password'] != password:
+            return 'Пароль не верный'
+    else:
+        return 'Пользователя нет в системе'
+
+
+users = {'ivan.sergeev@gmail.com': {'password': 'erkf2010', 'activation': True},
+             'petrov@yandex.ru': {'password': '1234df', 'activation': False},
+             'alinchik77@mail.ru': {'password': 'krasotka', 'activation': False}}
+
+
+print(access(users, 'petrov@yandex.ru', '1234df'))
