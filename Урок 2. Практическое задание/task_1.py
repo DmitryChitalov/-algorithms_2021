@@ -28,3 +28,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc():
+    op_tuple = ('0', '+', '-', '*', '/')
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода):")
+    if op_tuple.count(operation) == 0:
+        print("Вы не ввели операцию из предложенного списка")
+        return calc()
+    if operation == '0':
+        exit()
+    else:
+        try:
+            first_number = int(input("Введите первое число:"))
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            return calc()
+
+        try:
+            second_number = int(input("Введите первое число:"))
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            return calc()
+
+        if operation == '+':
+            result = first_number + second_number
+        elif operation == '-':
+            result = first_number - second_number
+        elif operation == '*':
+            result = first_number * second_number
+        elif operation == '/':
+            try:
+                result = first_number / second_number
+            except ZeroDivisionError:
+                print('На ноль делить нельзя (((. Исправьтесь')
+                return calc()
+        print("Ваш результат ", result)
+        return calc()
+
+calc()
+
