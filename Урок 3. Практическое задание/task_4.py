@@ -15,3 +15,23 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib
+from uuid import uuid4
+
+
+def find_url(url):
+    salt = uuid4().hex
+    hash_url = hashlib.sha256(url.encode() + salt.encode()).hexdigest()
+    if url in some_dict.values():
+        print('This URL exists')
+    else:
+        some_dict[hash_url] = url
+        print(some_dict)
+
+
+some_dict = {}
+for i in range(5):
+    url = input('Enter URL-address: ')
+    find_url(url)
+
