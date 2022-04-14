@@ -11,6 +11,8 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
+
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +41,17 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    my_array = [array.count(el) for el in array]
+    max_2 = max(my_array)
+    elem = array[my_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+print(timeit('func_1()', globals=globals(), number=10000))      # 0.026181492
+print(timeit('func_2()', globals=globals(), number=10000))      # 0.041615111999999996
+print(timeit('func_3()', globals=globals(), number=10000))      # 0.038371742999999986
+
+'''Вывод: написал свою функцию func_3(), которая по времени опережает func_2(), суть у меня такаяже но я использовал 
+list comprehension. Ну а самой результативной получилась func_1(), потомучто там сложность O(n), а у func_2() - O(3n)'''
