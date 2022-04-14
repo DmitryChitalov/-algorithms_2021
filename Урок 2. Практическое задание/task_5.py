@@ -21,3 +21,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def ascii(i_begin,i_end,idx):
+    str_couple = str(i_begin) + ' - ' + chr(i_begin) + ' '
+    if i_begin == i_end:
+        return str_couple
+    if idx > 1:
+        idx = idx - 1
+    else:
+        str_couple = str_couple + '\n'
+        idx = 10
+    return str_couple + ascii(i_begin + 1, i_end, idx)
+
+if __name__ == '__main__':
+    print(ascii(32,127,10))

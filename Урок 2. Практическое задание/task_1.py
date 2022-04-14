@@ -28,3 +28,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def calc(f_mode = False, x = False):
+    if not f_mode:
+        f_mode = input("Введите знак операции (+,-,*,/) 0-выход: ")
+    if f_mode == '0':
+        print("Завершение работы.")
+    elif f_mode not in ('+','-','*','/'):
+        print("Неверный знак операции")
+        return calc()
+    else:
+        if not x:
+            x = input("Введите число x = ")
+            if not x.isdigit():
+                print('Вы ввели не число.')
+                return calc(f_mode)
+        y = input("Введите число y = ")
+        if not y.isdigit():
+            print('Вы ввели не число.')
+            return calc(f_mode,x)
+        x = float(x)
+        y = float(y)
+        if f_mode == '+':
+            print("%.2f" % (x + y))
+        elif f_mode == '-':
+            print("%.2f" % (x - y))
+        elif f_mode == '*':
+            print("%.2f" % (x * y))
+        elif f_mode == '/' and y != 0:
+                print("%.2f" % (x / y))
+        else:
+            print("Деление на ноль!")
+        return calc()
+
+if __name__ == '__main__':
+    calc()

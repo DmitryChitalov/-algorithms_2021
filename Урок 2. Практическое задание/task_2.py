@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def even_odd (num, even = 0, odd = 0):
+
+    if num % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    if num // 10 == 0:
+        return f' Чётных цифр: {even}, Нечётных: {odd}'
+    return even_odd (num // 10, even, odd)
+
+if __name__ == '__main__':
+    x = int(input('Введите натуральное число: '))
+    print(even_odd(x))
