@@ -20,3 +20,27 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# 1. Применяем встроенную функцию sorted(), которая имеет сложность O(nlogn) - линейно-логарифмическую, следовательно,
+# весь код имеет линейно-логарифмическую сложность.
+
+companies = [['Yandex', 30000000], ['Mail.ru', 20000000], ['GeakBrains', 10000000], ['Gazprom', 50000000],
+             ['Rosneft', 40000000]]
+
+# companies_sort = sorted(companies, key=lambda x: x[1], reverse=True)[:3]
+#
+# print(companies_sort)
+
+# 2. Применяем цикл for in, который имеет сложность O(n) - линейная, следовательно,
+# весь код имеет линейную сложность.
+
+res = []
+for comp in companies:
+    res.append(str(comp[1]) + comp[0])
+
+total = []
+for ind in range(3):
+    temp_ = max(res)
+    total.append(temp_)
+    res.remove(temp_)
+
+print(total)
