@@ -20,3 +20,32 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+from hashlib import sha256
+
+
+def password_hash(password, salt='соль'):
+    """
+    Функция получения хэша
+    """
+    return sha256(salt.encode() + password.encode()).hexdigest()
+
+
+def getting_password():
+    """
+    Функция запроса пароля
+    """
+
+    password = input("Введиде пароль")
+    return password
+
+
+with open('passwords.txt', 'w') as f:
+    f.write(password_hash(getting_password()))
+
+with open('passwords.txt', 'r') as f:
+    password_in_file = f.read()
+
+if password_hash(getting_password()) == password_in_file:
+    print("Вы ввели правильный пароль")
+else:
+    print("Вы ввели не правильный пароль")
