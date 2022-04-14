@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def get_from_ascii(start, end, k = 10):
+    if k > 1:
+        print(f'{start} - {chr(start)} ', end='')
+        k -= 1
+    elif k == 1:
+        print(f'{start} - {chr(start)} ', end='\n')
+        k = 10
+    if end == start:
+        return ''
+    else:
+        return get_from_ascii(start + 1, end, k)
+
+if __name__ == "__main__":
+    print(get_from_ascii(32, 127))
+

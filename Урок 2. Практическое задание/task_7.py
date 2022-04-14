@@ -16,3 +16,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def get_sum_(n):
+    return n if n == 1 else get_sum_(n - 1) + n
+
+def get_proof(n):
+    return True if (n * (n + 1) / 2 == get_sum_(n)) else False
+
+if __name__ == "__main__":
+    print(get_proof(5))
+    print(get_proof(int(input('enter some natural number: '))))
