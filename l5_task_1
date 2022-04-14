@@ -1,0 +1,31 @@
+from collections import namedtuple
+
+
+def total():
+    companies = []
+    cnt = int(input('Введите количество предприятий: '))
+    company = namedtuple('company', ['name', 'period1', 'period2', 'period3', 'period4'])
+
+    for i in range(cnt):
+        name = input('Введите название предприятия ')
+        profit = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала) ')
+        companies.append(company(name, *map(int, profit.split())))
+    a = []
+    b = []
+    a_profit = sum(map(res, companies)) / len(companies)
+    for j in companies:
+        print(j)
+        if res(j) < a_profit:
+            a.append(j.name)
+        elif res(j) > a_profit:
+            b.append(j.name)
+    return f'Средняя годовая прибыль всех предприятий {a_profit}\n'f'Предприятия, с прибылью выше среднего ' \
+           f'значения: {", ".join(b)}\nПредприятия, с прибылью ниже среднего значения: {", ".join(a)} '
+
+
+def res(tup):
+    result = (tup.period1 + tup.period2 + tup.period3 + tup.period4) / 4
+    return result
+
+
+print(total())
