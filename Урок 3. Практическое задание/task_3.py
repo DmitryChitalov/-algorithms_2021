@@ -21,3 +21,12 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def check_str(str_value):
+    result = set(hash(str_value[i:j]) for i in range(len(str_value)) for j in range(len(str_value)))
+    return result
+
+
+if __name__ == '__main__':
+    print(f"{check_str('papa')}\nCount of elements: {len(check_str('papa'))}")
