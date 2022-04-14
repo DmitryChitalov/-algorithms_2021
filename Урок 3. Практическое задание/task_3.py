@@ -21,3 +21,19 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def unique_substrings_hash(string):
+    unique_substring = set( )
+    for i in range(len(string)):
+        for q in range(1, len(string) + 1):
+            if i == q or q < i:
+                continue
+            if string[i:q] == string:
+                continue
+            unique_substring.add(string[i:q].__hash__( ))
+    return f'{string} - {len(unique_substring)} уникальных подстрок'
+
+print(unique_substrings_hash('papa'))
+print(unique_substrings_hash('apapa'))
+print(unique_substrings_hash('ab'))

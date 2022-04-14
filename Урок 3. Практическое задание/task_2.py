@@ -20,3 +20,49 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import sqlite3
+from hashlib import sha256
+
+
+class HashedPasses:
+    def __init__(self, db):
+        self.connection = sqlite3.connect(db)
+        self.cursor = self.connection.cursor( )
+
+    def register(self, login, password):
+        try:
+            self.cursor.execute('insert into pass_hash values (:login, :pass_hash)',
+                                {'login': login,
+                                 'pass_hash': HashedPasses.hash_pass(login, password)})
+            self.connection.commit( )
+            print('Успешная регистрация.')
+        except sqlite3.IntegrityError:
+            print('Данный логин уже занят.')
+
+    def login(self, login, password):
+        self.cursor.execute('select hash from pass_hash where login = :login', {'login': login})
+        result = self.cursor.fetchall( )
+        try:
+            if HashedPasses.hash_pass(login, password) == result[0][0]:
+                print('Успешная авторизация.')
+            else:
+                print('Был введён неверный пароль.')
+        except IndexError:
+            print('Такого пользователя не существует.')
+
+    @staticmethod
+    def hash_pass(login, password):
+        return sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest( )
+
+
+if __name__ == '__main__':
+    AUTHORIZATION_BASE = HashedPasses('LOGIN_PASS.db')
+    action = input('У вас уже имеется аккаунт?(Да/Нет) ')
+    if action.lower( ) == 'да':
+        login = input('Введите имя пользователя: ')
+        password = input('Введите пароль: ')
+        AUTHORIZATION_BASE.login(login, password)
+    if action.lower( ) == 'нет':
+        login = input('Введите имя пользователя: ')
+        password = input('Введите пароль: ')
+        AUTHORIZATION_BASE.register(login, password)
