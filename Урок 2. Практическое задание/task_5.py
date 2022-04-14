@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_print(start, end, str_len):
+    if start == end:
+        return f'{start} - {chr(end)}'
+    elif start % str_len == end % str_len:
+        return ascii_print(start, end - 1, str_len) + f'\n{end} - {chr(end)} '
+    else:
+        return ascii_print(start, end - 1, str_len) + f'{end} - {chr(end)} '
+
+
+print(ascii_print(32, 127, 10))

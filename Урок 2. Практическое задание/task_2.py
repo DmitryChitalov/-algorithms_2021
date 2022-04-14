@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursion_odd(num, odd=0, even=0):
+    if num == 0:
+        return f'Четных: {odd} Нечетных: {even}'
+    if (num % 10) % 2 == 0:
+        return recursion_odd(num // 10, odd + 1, even)
+    else:
+        return recursion_odd(num // 10, odd, even + 1)
+
+
+print(recursion_odd(126574347663))
