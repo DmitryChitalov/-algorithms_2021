@@ -18,3 +18,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+num = int(input('введите число'))
+count_even = 0
+count_odd = 0
+
+
+def even_and_odd(num):
+    global count_even
+    global count_odd
+
+    if len(str(num)) == 1:
+        if num % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+        return
+    else:
+        var_ = num % 10
+        if var_ % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+        num = int(str(num)[:-1])
+        return even_and_odd(num)
+
+
+even_and_odd(num)
+
+print(f'в числе {num} {count_even} четных и {count_odd} нечетных числа')
