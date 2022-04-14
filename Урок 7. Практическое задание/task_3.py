@@ -40,3 +40,54 @@ for i in
 
 
 """
+import random
+from statistics import median
+
+
+# 1
+def shell(data):
+    inc = len(data) // 2
+    while inc:
+        for i, el in enumerate(data):
+            while i >= inc and data[i - inc] > el:
+                data[i] = data[i - inc]
+                i -= inc
+            data[i] = el
+        inc = 1 if inc == 2 else int(inc * 5.0 / 11)
+    return data
+
+
+n = (random.randint(0, 100) * 2) + 1
+lst_1 = [random.randint(0, 100) for _ in range(n)]
+lst_1_new = shell(lst_1[:])
+print("Old:", lst_1, "New:", lst_1_new, sep="\n")
+m = (len(lst_1_new) - 1) // 2
+print("Элемент медианы:", lst_1_new[m], "медиана на позиции(по индекусу):",m)
+# 2
+lst_2 = lst_1[:]
+for i in range((len(lst_2[:]) - 1) // 2):
+    del lst_2[lst_2.index(max(lst_2))]
+print("Медиана:", max(lst_2))
+
+
+# 3
+def median_1(lst):
+    left = []
+    right = []
+    for i in range(len(lst)):
+        for j in range(len(lst)):
+            if lst[j] <= lst[i]:
+                left.append(lst[j])
+            if lst[j] >= lst[i]:
+                right.append(lst[j])
+        if len(left) == len(right):
+            return f"индекс(списка без сартировки) : {i} медиана: {lst[i]}"
+        if len(lst) - 1 == i:
+            return left, right, i, lst[i] # иногда выскакивает не находя медиану
+        left.clear()
+        right.clear()
+"""Ошибку не удалось мне найти"""
+
+print(median_1(lst_1))
+
+print("Проверка:", median(lst_1))
