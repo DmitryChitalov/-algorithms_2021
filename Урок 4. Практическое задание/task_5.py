@@ -19,6 +19,9 @@
 """
 
 
+from timeit import timeit
+
+
 def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
@@ -39,5 +42,38 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def isprime(n):
+    if n == 1:
+        return False
+    for x in range(2, n):
+        if n % x == 0:
+            return False
+    return True
+
+
+def primes(n=1):
+    while True:
+        if isprime(n):
+            yield n
+        n += 1
+
+
+def simple_2(i):
+    nums = []
+    for n in primes():
+        if i == len(nums):
+            break
+        nums.append(n)
+    return nums[-1]
+
+
+# i = int(input('Введите порядковый номер искомого простого числа: '))
+i = 1000
+
+print(simple(i), timeit('simple(i)', globals=globals(), number=10))
+print(simple_2(i), timeit('simple(i)', globals=globals(), number=10))
+
+'''
+Не успел выполнить 5-е задание...
+'''
+
