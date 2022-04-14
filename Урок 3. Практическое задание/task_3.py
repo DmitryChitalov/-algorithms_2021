@@ -21,3 +21,23 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def num_substr(line):
+    substr_set = set()
+    print('Все подстроки и их хеши: ')
+    for a in range(len(line)):
+        for b in range(a+1, len(line)+1):
+            h = hash(line[a:b])
+            substr_set.add(h)
+            print(line[a:b], h, end=', ')
+    substr_set.remove(hash(line))
+    print("\nХеши уникальных подстрок, не включая исходную строку: \n", substr_set)
+    print("Всего уникальных подстрок: ", len(substr_set))
+
+
+word = 'papa'
+num_substr(word)
+
+your_word = (input("Введите слово, у которого хотите узнать количество уникальных подстрок: "))
+num_substr(your_word)
