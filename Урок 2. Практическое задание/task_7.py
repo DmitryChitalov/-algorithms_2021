@@ -16,3 +16,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum(num):
+
+    if num == 1:
+        return num
+    else:
+        return get_sum(num - 1) + num
+
+
+try:
+    user_num = int(input("Введите число: "))
+    if get_sum(user_num) == user_num * (user_num + 1) / 2:
+        print(f"Равенство 1+2+...+n = n(n+1)/2 для числа {user_num} верно")
+except ValueError:
+    print("Это не число. Попробуйте еще раз")

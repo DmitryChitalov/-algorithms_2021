@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_and_odd_amount(user_number, even_amount=0, odd_amount=0):
+
+    if user_number == 0:
+        return even_amount, odd_amount
+    else:
+        rem_of_div = user_number % 10
+        user_number = user_number // 10
+        if rem_of_div % 2 == 0:
+            even_amount += 1
+        else:
+            odd_amount += 1
+        return even_and_odd_amount(user_number, even_amount, odd_amount)
+
+
+try:
+    number = int(input("Введите натуральное число: "))
+    print(f"Количество четных и нечетных цифр в числе: {even_and_odd_amount(number)}")
+except ValueError:
+    print("Это не число. Попробуйте еще раз")
