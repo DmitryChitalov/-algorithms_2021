@@ -19,3 +19,32 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+# Сложность функции: O(n^2)
+
+
+def min_val_check(lst):
+    for i in range(len(lst)):     # O(n)
+        min_val = lst[i]          # O(1)
+        check_lst = lst[i + 1:]   # O(n)
+        for val in check_lst:     # O(n)
+            if val < min_val:     # O(1)
+                min_val = val     # O(1)
+        return min_val            # O(1)
+
+
+print(min_val_check([234, 754, 146, 954, 432]))
+
+
+# Сложность функции: O(n)
+
+
+def lst_min_val(lst):
+    min_val = lst[0]         # O(1)
+    for val in lst:          # O(n)
+        if val < min_val:    # O(1)
+            min_val = val    # O(1)
+    return min_val           # O(1)
+
+
+print(lst_min_val([82, 164, 37, 56, 23, 65]))
