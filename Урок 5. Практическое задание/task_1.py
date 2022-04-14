@@ -23,3 +23,24 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+from statistics import mean
+
+firms = namedtuple('firms', 'name earning')
+average_earning = {}
+
+firms_num = int(input('Enter the num of firms'))
+for el in range(firms_num):
+    firm_name = input('Enter the name of the firm: ')
+    firm_earning = list(map(int, input('Enter the firm`s earning by quarter: ').split()))
+    firm = firms(firm_name, firm_earning)
+    average_earning[firm.name] = round(mean(firm.earning))
+
+total_average = sum(average_earning.values()) / firms_num
+
+for key, val in average_earning.items():
+    if val < total_average:
+        print(f'{key} Less than average')
+    else:
+        print(f'{key} More than average')
