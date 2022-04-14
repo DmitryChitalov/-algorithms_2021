@@ -15,3 +15,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+el = 1
+summ = 1
+
+def sequence_sum(n, el, summ, count=1):
+    if count == n:
+        return summ
+    else:
+        el = el / 2 * (-1)
+        summ = summ + el
+    return sequence_sum(n, el, summ, count+1)
+
+
+print(sequence_sum(int(input('Input the number of elements: ')), el, summ))

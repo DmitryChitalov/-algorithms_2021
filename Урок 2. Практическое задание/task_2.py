@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+odd_count = 0
+even_count = 0
+
+def odd_even_char_calculator(odd_count, even_count, number):
+    if number == 0:
+        return print((odd_count, even_count))
+    else:
+        if number % 10 % 2 == 0:
+            odd_count += 1
+        else:
+            even_count += 1
+    odd_even_char_calculator(odd_count, even_count, number // 10)
+
+
+odd_even_char_calculator(odd_count, even_count, 34560)

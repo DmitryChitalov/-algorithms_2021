@@ -22,3 +22,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+num = []
+def reverser(num, number):
+    if number == 0:
+        return None
+    else:
+        num.append(str(number % 10))
+        number = number // 10
+        reverser(num, number)
+    return ''.join(num)
+
+
+print(reverser(num, 34560))

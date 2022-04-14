@@ -28,3 +28,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calculator():
+    operation = input('Input the operation or "0" for exit: ')
+    if operation not in ('0', '+', '-', '*', '/'):
+        print('Input error happens. You should input the sign of operation "+ - * /" or 0 for exit')
+        return calculator()
+    else:
+        if operation == '0':
+            return "quit"
+        else:
+            try:
+                try:
+                    a = int(input('Input the first number part: '))
+                    b = int(input('Input the second number part: '))
+                    return eval(f'{a}{operation}{b}')
+                except ValueError:
+                    print('Input error happens. You should input a number')
+                    return calculator()
+            except ZeroDivisionError:
+                print("The division by zero happens. You can't divide so, try again.")
+                return calculator()
+
+print(calculator())
