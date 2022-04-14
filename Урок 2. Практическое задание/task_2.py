@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rec(n=int(input("Введите число:")), even=0, not_even=0):
+    d = len(str(n))
+    div = ['0' for i in range(d - 1)]
+    div = int(f'1{"".join(div)}')
+    num = n // div
+    if num % 2 == 0:
+        even += 1
+    else:
+        not_even += 1
+    if len(str(n)) == 1:
+        print(f'Количество четных цифр: {even}, нечетных: {not_even}.')
+    else:
+        n = n % div
+        return rec(n, even, not_even)
+
+
+rec()
