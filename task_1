@@ -1,0 +1,56 @@
+"""
+Структура через цикл
+while True:
+    s = input("Введите математический символ (+,-,*,/): ")
+    if s == '0':
+        break
+    if s in ('+', '-', '*', '/'):
+        a = float(input("Первое число: "))
+        b = float(input("Второе число: "))
+        if s == '+':
+            print(a + b)
+        elif s == '-':
+            print(a - b)
+        elif s == '*':
+            print(a * b)
+        elif s == '/':
+            if b != 0:
+                print(a / b)
+            else:
+                print("Делитель не может быть равен о")
+    else:
+        print("Данный знак операции отсутсвует")"""
+
+
+def calculate():
+    s = input("Для выхода из приложения введите 0, для расчета выберите математический символ (+,-,*,/): ")
+    if s == '0':
+        return "Exit"
+    if s in ('+', '-', '*', '/'):
+        try:
+            a = float(input("Первое число: "))
+            b = float(input("Второе число: "))
+            if s == "+":
+                print(a + b)
+                return calculate()
+            elif s == "-":
+                print(a - b)
+                return calculate()
+            elif s == "*":
+                print(a * b)
+                return calculate()
+            elif s == "/":
+                if b != 0:
+                    print(a / b)
+                else:
+                    print("Делитель не может быть равен о")
+                return calculate()
+        except ValueError:
+            print("Вы ввели не числовое значение!")
+            return calculate()
+    else:
+        print("Данный знак операции отсутсвует")
+        return calculate()
+
+
+calculate()
