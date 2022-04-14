@@ -28,3 +28,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calculator():
+    operator = input("Enter an operation sign (+, -, /, *) or 0 to exit: ")
+    if operator == '0':
+        return f"Exiting"
+    else:
+        if operator in '+-/*':
+            try:
+                _f_num = float(input("Enter first number: "))
+                _s_num = float(input("Enter second number: "))
+            except ValueError:
+                print("Please, enter the numbers!")
+                return calculator()
+            try:
+                _f_num / _s_num
+            except ZeroDivisionError:
+                print("Fatal error! Division by 0 is prohibited")
+                return calculator()
+            else:
+                if operator == '+':
+                    print(f"Result: ", _f_num + _s_num)
+                elif operator == '-':
+                    print(f"Result: ", _f_num - _s_num)
+                elif operator == '*':
+                    print(f"Result: ", _f_num * _s_num)
+                else:
+                    print(f"Result: ", _f_num / _s_num)
+        else:
+            print("The sign was entered incorrectly. Try again")
+
+    return calculator()
+
+
+if __name__ == '__main__':
+    calculator()
