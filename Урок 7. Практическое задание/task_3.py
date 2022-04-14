@@ -40,3 +40,35 @@ for i in
 
 
 """
+
+import timeit
+from random import randint
+from statistics import median
+
+
+def gnome_sort(sort_list):
+    i = 1
+    while i < len(sort_list):
+        if not i or sort_list[i - 1] <= sort_list[i]:
+            i += 1
+        else:
+            sort_list[i], sort_list[i - 1] = sort_list[i - 1], sort_list[i]
+            i -= 1
+    return sort_list
+
+m = int(input('Введите m: '))
+orig_list = [randint(0, 100) for i in range(2 * m + 1)]
+print(f'Исходный массив:\n{orig_list}')
+print(f'Медиана (через встроенную функцию) - {median(orig_list)}')
+print(f'Медиана (метод сортировки Гномья) - {gnome_sort(orig_list)[m]}')
+
+
+print(f'Время (median): {timeit.timeit("median(orig_list[:])", globals=globals(), number=10000)}')
+
+print(f'Время (gnome_median): {timeit.timeit("gnome_sort(orig_list[:])", globals=globals(), number=10000)}')
+
+
+"""
+Как и ожидалось если сравнивать метод сортировки Гномья и встроенную функцию, быстрее оказалось встроенная функция
+нахождения медианы.
+"""

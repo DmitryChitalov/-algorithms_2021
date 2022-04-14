@@ -20,3 +20,32 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Вариант №1. Cложность: O(N*logN)
+def max_3_company_1(dict):
+    for company in (sorted(dict.items(), key=lambda i: i[1], reverse=True)[:3]):               #O(N*logN)
+            print(f'{company[0]} : {company[1]}')
+
+# Вариант №2. Cложность: O(n)
+def max_3_company_2(in_dict):
+    top_company = {}                                                                           # O(1)
+    temp_dict = dict(in_dict)                                                                  # O(1)
+    for i in range(3):                                                                         # O(n)
+        top = max(temp_dict.items(), key=lambda val: val[1])                                   # O(n)
+        top_company[top[0]] = top[1]                                                           # O(1)
+        del temp_dict[top[0]]                                                                  # O(1)
+    for company, profit in top_company.items():                                                # O(n)
+        print(f'{company} : {profit}')
+
+enterprises = {
+    'Asus': 22000000000,
+    'LG': 305000000000,
+    'HP': 208000000000,
+    'Acer': 156000000000,
+    'Lenovo': 365000000000
+}
+
+max_3_company_1(enterprises)
+max_3_company_2(enterprises)
+
+# Второй вариант более оптимальный, поскольку при линейной сложности время выполнения меньше зависит от количества данных чем у линейно-логарифмической

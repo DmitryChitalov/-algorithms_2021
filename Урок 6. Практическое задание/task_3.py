@@ -5,3 +5,26 @@
 Придумать как это решить!
 Есть очень простое решение
 """
+
+from memory_profiler import profile
+
+@profile
+def wrapper():
+    def asc_func(n=32):
+        if n == 128:
+            return None
+        print(f"{n:5} - {chr(n)}", end=" ")
+        if (n - 31) % 10 == 0:
+            print(f'{n:5} - {chr(n)}')
+        asc_func(n + 1)
+
+    return asc_func()
+
+
+wrapper()
+
+
+"""
+Пример со 2 урока, которое решали через рекурсию.
+Для замера потребляемой памяти рекурсией нужно сделать функцию-обертку.
+"""
