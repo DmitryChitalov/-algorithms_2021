@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,17 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    elem = max(array, key=lambda x: array.count(x))
+    arr = len(list(filter(lambda x: elem == x, array)))
+
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {arr} раз(а)'
+
+
+print(func_1(), timeit("func_1()", globals=globals(), number=10000))
+print(func_2(), timeit("func_2()", globals=globals(), number=10000))
+print(func_3(), timeit("func_3()", globals=globals(), number=10000))
+"""Не получилась сделать функцию быстрее, чем нынешнии, напротив моя функция самая медленная из всех.
+Идеи кончились.
+"""

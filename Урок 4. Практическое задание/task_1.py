@@ -15,6 +15,9 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
+from timeit import timeit
+
+arr = [x for x in range(1000)]
 
 
 def func_1(nums):
@@ -23,3 +26,22 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+print(timeit("func_1(arr)", globals=globals(), number=10000))
+
+
+def func_2(nums): return [x for x in nums if x % 2 == 0]
+
+
+"""
+Я сделал list comprehension создающий новый список и дал ему условие, чтобы он брал четные элементы
+(т.е. выдавал True при вызове x % 2 == 0) из получаймого списка.
+Тем самым сделал создания списка с четными индексами чуть быстрее, чем в первом, ведь быстрее создовать список
+с помощью list comprehension с условием, чем проверять каждый элемент по одному на четность и добавлять по одному 
+в новый список.
+"""
+
+print(timeit("func_2(arr)", globals=globals(), number=10000))
+print(func_1(arr))
+print(func_2(arr))
