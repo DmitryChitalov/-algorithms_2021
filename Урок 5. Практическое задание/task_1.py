@@ -23,3 +23,42 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+import collections
+
+
+def company(valued):
+    dic = {}
+    while valued != 0:
+        plus = ''
+        if len(dic) != 0:
+            plus = 'другого '
+        named = input(f'Введите название {plus}предприятия: ')
+        four_income = input('Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+        lst_income = four_income.split(' ')
+        for i in range(len(lst_income)):
+            lst_income[i] = int(lst_income[i])
+        Income_company = collections.namedtuple(f'{named}', ['income_for_1_year'])
+        all_info = Income_company(income_for_1_year=sum(lst_income))
+        dic.update({named: all_info.income_for_1_year})
+        valued -= 1
+
+    str_max = ''
+    str_min = ''
+    for key, value in dic.items():
+        if value > round(sum(dic.values())/2):
+            if len(str_max) != 0:
+                str_max = str_max + f', {key}'
+            else:
+                str_max = str_max + key
+        else:
+            if len(str_min) != 0:
+                str_min = str_min + f', {key}'
+            else:
+                str_min = str_min + key
+
+    return f'Средняя годовая прибыль всех предприятий: {round(sum(dic.values()) / 2)}\n' \
+           f'Предприятия, с прибылью выше среднего значения: {str_max}\n' \
+           f'Предприятия, с прибылью ниже среднего значения: {str_min}'
+
+
+print(company(int(input('Введите количество предприятий для расчета прибыли: '))))
