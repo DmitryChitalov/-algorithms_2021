@@ -34,3 +34,32 @@ hx = HexNumber
 hx + hx
 hex()
 """
+
+from collections import defaultdict
+
+first_d = defaultdict(list)
+second_d = defaultdict(list)
+
+
+def numbers_input():
+    for i in range(2):
+        number = enumerate(input(f'Input the {i + 1} hex number: ').upper())
+        for ind, j in number:
+            if i == 0:
+                first_d[ind] = j
+            else:
+                second_d[ind] = j
+
+
+def numbers_add():
+    return list(str(hex(int(''.join(first_d.values()), 16) + int(''.join(second_d.values()), 16)))[2:].upper())
+
+
+def numbers_mult():
+    return list(str(hex(int(''.join(first_d.values()), 16) * int(''.join(second_d.values()), 16)))[2:].upper())
+
+
+numbers_input()
+print(first_d.values(), second_d.values())
+print(numbers_add())
+print(numbers_mult())
