@@ -25,3 +25,80 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {
+    'login_1': {'password': 'password_1', 'activated': True},
+    'login_2': {'password': 'password_2', 'activated': False}
+}
+
+
+def user_login_1(login, password):
+    """Функция должна вернуть результат аутентификации пользователя
+
+    Алгоритм 1:
+    Последовательно проверяется:
+    наличие учетной записи пользователя,
+    активация учетной записи
+    и корректность пароля.
+    При отрицательном результате проверки любого условия -
+    выводится соответствующее сообщение и проверки прекращаются.
+    При успешном прохождении всех этапов проверки - вход считается успешным.
+
+    Сложность: O(1)
+
+    Данное решение эффективнее, т.к. выполняется без прохода по всему списку
+    пользователей, а сразу выдает нужный результат.
+    """
+    if not users.get(login):  # O(1)
+        return 'User not found'  # O(1)
+    if not users.get(login).get('activated'):  # O(1)
+        return 'Please, activate Your profile'  # O(1)
+    if not users.get(login).get('password') == password:  # O(1)
+        return 'Incorrect password'  # O(1)
+    return 'Access successful'  # O(1)
+
+
+def user_login_2(login, password):
+    """Функция должна вернуть результат аутентификации пользователя
+
+    Алгоритм 2:
+    Последовательно проходим по списку пользователей и проверяем:
+    совпадает ли пользователь из списка введенной учетной записи.
+    Если совпадает, то проверяется активация учетной записи.
+    Если активирована, то проверяется корректность пароля.
+    Если совпадает, то проверка пройдена, функция завершается.
+    При отрицательном результате проверки пароля или активации -
+    выводится соответствующее сообщение и проверки прекращаются.
+    В случае невыполнения ни одного из условий внутри функции -
+    выводится сообщение об отсутствии такой учетной записи.
+
+    Сложность: O(n)
+
+    Данное решение менее эффиктивно, т.к. выполняется обход по всему списку
+    пользователей, а только потом выдается результат.
+    """
+    for user in users:  # O(n)
+        if user == login:  # O(1)
+            if users.get(user).get('activated'):  # O(1)
+                if users.get(user).get('password') == password:  # O(1)
+                    return 'Access successful'  # O(1)
+                else:   # этот else можно не писать, но без него след. return выглядит не так ясно
+                    return 'Incorrect password'  # O(1)
+            else:
+                return 'Please, activate Your profile'  # O(1)
+    return 'User not found'  # O(1)
+
+
+print(user_login_1('login_1', 'password_1'))
+print(user_login_1('login_2', 'password_2'))
+print(user_login_1('login_3', 'password_3'))
+print(user_login_1('login_1', 'password_n'))
+print(user_login_1('login_2', 'password_n'))
+
+print('=' * 15)
+
+print(user_login_2('login_1', 'password_1'))
+print(user_login_2('login_2', 'password_2'))
+print(user_login_2('login_3', 'password_3'))
+print(user_login_2('login_1', 'password_n'))
+print(user_login_2('login_2', 'password_n'))

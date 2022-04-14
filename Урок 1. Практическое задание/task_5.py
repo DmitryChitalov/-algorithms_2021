@@ -28,3 +28,47 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    """Стопка тарелок. Максимальная высота стопки задается при создании экземпляра."""
+
+    def __init__(self, max_elems):
+        self.max_elems = max_elems
+        self.elems = []
+
+    def is_full(self):
+        """Полна ли уже стопка тарелок?"""
+        return len(self.elems) == self.max_elems
+
+    def push_in(self, plate_name):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        self.elems.append(plate_name)
+
+    def stack_size(self):
+        """Сколько тарелок в стопке?"""
+        return len(self.elems)
+
+    def stack_show(self):
+        """Содержимое стопки"""
+        return self.elems
+
+
+if __name__ == '__main__':
+
+    MAX_PLATES_PER_STACK = 10
+    PLATES_CNT = 35
+    STACKS = [StackClass(MAX_PLATES_PER_STACK)]
+
+    # Раскладываем тарелки
+    for plate in range(PLATES_CNT):
+        if STACKS[-1].is_full():
+            STACKS.append(StackClass(MAX_PLATES_PER_STACK))
+        STACKS[-1].push_in(f'Plate_{plate}')
+
+    # Выводим все стопки тарелок на экран
+    for stack in STACKS:
+        print(stack.stack_show())
+
+    # узнаем количество тарелок
+    print(f'Всего тарелок: {(len(STACKS) - 1) * STACKS[0].stack_size() + STACKS[-1].stack_size()}')
