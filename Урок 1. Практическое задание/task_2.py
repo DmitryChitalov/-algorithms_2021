@@ -15,7 +15,25 @@
 
 Примечание:
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
-
-Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
-Подход должен быть максимально алгоритмическим.
 """
+
+# квадратичная сложность
+def min_list1(lst):
+    min_lst = lst[0]
+    for i in lst:
+        for j in lst:
+            if i < min_lst:
+                min_lst = i
+    return min_lst
+
+# линейная сложность
+def min_list2(lst):
+    min_lst = lst[0]        # O(1) - константная
+    for i in lst:           # O(n) - линейная
+        if i < min_lst:
+            min_lst = i     # O(1) - константная
+    return min_lst          # O(1) - константная
+
+my_list = [35,18,2,23,105,-8,21]
+print(min_list1(my_list))
+print(min_list2(my_list))
