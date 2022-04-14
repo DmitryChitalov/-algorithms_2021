@@ -28,3 +28,55 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class PlatesStack:
+    def __init__(self):
+        self.elems = []
+        self.stack_size = 10
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push(self, el):
+        self.elems.append(el)
+
+    def pop(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def get_stack_size(self):
+        return len(self.elems)
+
+    def is_full(self):
+        if len(self.elems) >= self.stack_size:
+            return True
+
+    def get_all_elems(self):
+        return self.elems
+
+    def get_max_size(self):
+        return self.stack_size
+
+
+if __name__ == '__main__':
+    plates_count = 45
+
+
+    def add_plates():
+        plates = []
+        plates_stack = PlatesStack()
+        for i in range(1, plates_count + 1):
+            plates_stack.push(i)
+            if plates_stack.is_full():
+                plates.append(plates_stack.get_all_elems())
+                plates_stack = PlatesStack()
+
+        plates.append(plates_stack.get_all_elems())
+
+        return plates
+
+
+    print(add_plates())
