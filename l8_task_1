@@ -1,0 +1,55 @@
+from collections import Counter, namedtuple
+from heapq import heapify, heappop, heappush
+
+
+class Node(namedtuple('Node', ['left', 'right'])):
+    def walk(self, code, acc):
+        self.left.walk(code, acc + '0')
+        self.right.walk(code, acc + '1')
+
+
+class Leaf(namedtuple('Leaf', ['symbol'])):
+    def walk(self, code, acc):
+        code[self.symbol] = acc or '0'
+
+
+def huffman_encode(s):
+    pq = []
+    for sym, f in Counter(s).items():
+        pq.append((f, len(pq), Leaf(sym)))
+    heapify(pq)
+    cnt = len(pq)
+    while len(pq) > 1:
+        f1, _cnt1, left = heappop(pq)
+        f2, _cnt2, right = heappop(pq)
+        heappush(pq, (f1 + f2, cnt, Node(left, right)))
+        cnt += 1
+    code = {}
+    if pq:
+        [(_f, _cnt, root)] = pq
+        root.walk(code, '')
+    return code
+
+
+s = input('Введите текст: ')
+code = huffman_encode(s)
+encoded = ''.join(code[sym] for sym in s)
+print(f'Код Хаффмана: {encoded}\n')
+for sym in sorted(code):
+    print(f'{sym} : {code[sym]}')
+
+
+def decode(encoded, code):
+    arr = []
+    encoded_char = ""
+    for i in encoded:
+        encoded_char += i
+        for j in code:
+            if code.get(j) == encoded_char:
+                arr.append(j)
+                encoded_char = ""
+                break
+    return "".join(arr)
+
+
+print(f'\nДекодирование: {decode(encoded, code)}')
