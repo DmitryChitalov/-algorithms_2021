@@ -16,3 +16,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def num_sum(n):
+    return n + num_sum(n - 1) if n != 1 else 1
+
+
+for i in range(10):
+    num_to_check = random.randrange(0, 499)
+    print(num_sum(num_to_check) == num_to_check * (num_to_check + 1) / 2)

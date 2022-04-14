@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_printer(code=32, count=0):
+    if code == 127:
+        print('127 - ', chr(127))
+        return 1
+    if count == 10:
+        print(end='\n')
+        return ascii_printer(code, count=0)
+    print(code, '-', chr(code), end=' ')
+    return ascii_printer(code+1, count+1)
+
+
+ascii_printer()

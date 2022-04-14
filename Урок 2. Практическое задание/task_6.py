@@ -11,3 +11,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+num = random.randrange(0, 100)
+
+
+def guess_num(num, cnt=0):
+    if cnt == 10:
+        print('Вы проиграли. Попытки кончились.')
+        return 1
+    try:
+        users_take = int(input('Угадайте число: '))
+    except ValueError:
+        print('Неверный формат данных. Введите число.')
+        guess_num(num, cnt)
+        return 1
+    if users_take == num:
+        print('Поздравляю, вы угадали.')
+        return 1
+    if cnt < 9:
+        if users_take > num:
+            print(f'Загаданное число меньше.Попробуйте еще раз. Осталось {9 - cnt} попыток.')
+        if users_take < num:
+            print(f'Загаданное число больше.Попробуйте еще раз. Осталось {9 - cnt} попыток.')
+    guess_num(num, cnt + 1)
+
+
+guess_num(num)

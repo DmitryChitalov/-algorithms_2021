@@ -28,3 +28,34 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+def rec_calc():
+    operation = str(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+    if operation == '0':
+        return 'Конец'
+    try:
+        if operation not in ['+', '-', '*', '/']:
+            raise ValueError
+    except ValueError as a:
+        print(f'Вы ввели некорректную операцию. Повторите попытку.')
+        rec_calc()
+        return 1
+    try:
+        first_num = int(input('Введите первое число: '))
+        second_num = int(input('Введите второе число: '))
+    except ValueError as e:
+        print(f'Вы ввели некорректные данные, повторите попытку. {e.args}')
+        rec_calc()
+        return 1
+    try:
+        result = eval(str(first_num) + operation + str(second_num))
+    except ZeroDivisionError as f:
+        print('Деление на 0.')
+        rec_calc()
+        return 1
+    print(f'Ваш результат {result}')
+    return rec_calc()
+
+rec_calc()
