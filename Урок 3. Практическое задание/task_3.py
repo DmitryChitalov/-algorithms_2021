@@ -21,3 +21,15 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def unique(word):
+    arr = set()
+    for i in range(0, len(word) + 1):
+        for j in range(i + 1, len(word) + 1):
+            arr.add(hash(word[i:j]))
+    arr.remove(hash(word))
+    return len(arr)
+
+
+print(unique('papa'))
