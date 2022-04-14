@@ -11,3 +11,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+def try_guess(num_to_guess, cur_step, max_step):
+    try:
+        user_num = int(input(f'Пробуем угадать число. Попытка {cur_step} из {max_step}: '))
+        if user_num == num_to_guess:
+            print('Ура! Угадали!')
+        else:
+            if cur_step == max_step:
+                print('Так и не угадали. Попытки закончились. Было загадано число:', num_to_guess)
+            else:
+                print('Не угадали. Попробуйте еще раз')
+                cur_step += 1
+                try_guess(num_to_guess, cur_step, max_step)
+    except ValueError:
+        if cur_step == max_step:
+            print('Так и не угадали. Попытки закончились. Было загадано число:', num_to_guess)
+        else:
+            print('На число не похоже. Попытка сгорела')
+            cur_step += 1
+            try_guess(num_to_guess, cur_step, max_step)
+
+num = random.randint(0, 100)
+print(num)
+
+try_guess(num, 1, 10)
