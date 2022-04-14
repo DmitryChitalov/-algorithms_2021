@@ -22,3 +22,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+# 1 вариант
+def func3(a):
+    if a != 0:
+        c = a % 10
+        b = a//10
+        print(c, end='')
+        func3(b)
+        return(c)
+
+func3(1230)
+
+# 2 вариант
+def recursion(a):
+    if a != 0:
+        return str(a % 10) + str(recursion(a // 10))
+    else:
+        return('')
+
+print(recursion(1234))

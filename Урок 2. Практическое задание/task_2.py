@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def func1(num: int, even_count: int = 0, odd_count: int = 0):
+    if num != 0:
+        if (num % 10) % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        return func1(num // 10, even_count, odd_count)
+    else:
+        print(f'Четных : {even_count}, нечетных {odd_count})')
+        return
+
+func1(123456)
