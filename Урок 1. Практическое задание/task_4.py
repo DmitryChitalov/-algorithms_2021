@@ -25,3 +25,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+da = {"log": "abcd1"}
+no = {"log": "sasdz"}
+unknown = {"log": 'net'}
+
+
+def raund1(user):  # T(n) = 4N + 9  O(N)
+    mass = {"abcd1": '123321', "sasdz": '321123'}  # 1
+    passe = None  # 1
+    for i in mass.items():  # N(
+        if i[0] == user['log']:  # 1+1
+            passe = i[1]  # 1
+            break  # 1)
+    while True:  # 1(
+        if passe:  # 1
+            if passe == input("pass: "):  # 1+1
+                print("да")  # 1
+            else:  # 1
+                print("Нет")  # 1
+        break  # 1)
+
+
+raund1(da)
+raund1(no)
+raund1(unknown)
+
+
+def raund2(user):  # T(n) = 3N+16 O(N)
+    active = ["abcd1 123321", "sasdz 321123"]  # 1
+    while True:  # 1(
+        log = [x.split()[0] for x in active]  # 1 + N
+        if user["log"] not in log:  # 1 + N + 1
+            print("тебя нет")  # 1
+            break  # 1
+        passe = [x.split()[1] for x in active]  # 1 + N
+        log = log.index(user["log"])  # 1 + 1
+        passe = passe[log]  # 1
+        if input("пароль: ") == passe:  # 1 + 1
+            print("прохотд")  # 1
+            break  # 1
+        print("ноу")  # 1
+        break  # 1)
+
+
+raund2(da)
+raund2(no)
+raund2(unknown)
+
+# Вывод: Быстрее получилась первая программа если n меньше 7; равны по действиям когда n = 7 и быстрее вторая когда n больше 7. Она обходит список один раз, а дальше использует полученные данные
