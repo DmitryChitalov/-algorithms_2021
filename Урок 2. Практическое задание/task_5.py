@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def chr_mod(num, line=0, table=''):
+    if num == 127:
+        return table
+    if line == 10:
+        table += '\n'
+        line = 0
+    return chr_mod(num+1, line+1, table + str(f'{num} - {chr(num)}  '))
+
+
+print(chr_mod(32))
