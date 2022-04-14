@@ -79,3 +79,32 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+# мемоизация при таких входных данных выигрывает по замерам времени
+# потому что благодаря ей функция выполняется один раз и 9999 раз
+# возвращаются результаты из кэша, отюда такая разница в скорости,
+# но если при каждом вызове использовать рандомные значения
+# (как это сделано ниже) то оптимизированная функция работает медленнее,
+# поэтому я делаю вывод что мемоизация здесь не нужна.
+
+
+def ten_thousand(func):
+    for _ in range(10000):
+        func(randint(100000000, 10000000000000))
+
+
+print('-' * 100)
+print('Замеры с рандомными значениями при каждом вызове.')
+print('Не оптимизированная')
+print(
+    timeit(
+        'ten_thousand(recursive_reverse)',
+        globals=globals(),
+        number=1))
+print('Оптимизированная')
+print(
+    timeit(
+        'ten_thousand(recursive_reverse_mem)',
+        globals=globals(),
+        number=1))
