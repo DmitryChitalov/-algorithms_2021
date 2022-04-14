@@ -79,3 +79,8 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+Мемоизация не уместна. Кэш при вызове функции не будет использован - каждый вызов функции в рекурсии == новое значение.
+"""
