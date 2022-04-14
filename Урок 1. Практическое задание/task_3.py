@@ -20,3 +20,45 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+list_of_companies = {"Компания1": 5000,
+                     "Компания2": 6000,
+                     "Компания3": 3000,
+                     "Компания4": 75000,
+                     "Компания5": 8000,
+                     "Компания6": 35000,
+                     "Компания7": 90000,
+                     "Компания8": 22000
+                     }
+
+# 1
+result = sorted(list_of_companies.items(), key=lambda x: x[1], reverse=True)  # O(n log n)
+print(result[0:3])  # ответ списком
+for i in result[0:3]:   # O(n)
+    print(i)  # ответ столбцом
+
+# 2
+
+
+def top_3(dictionary):                          # O(n^3)
+
+    result = []                                 # O(1)
+    company = dictionary                        # O(1)
+    while len(result) != 3:                     # O(n)
+        for k in company:                       # O(n)
+            t = True                            # O(1)
+            for a in company:                   # O(n)
+                if company[k] < company[a]:     # O(len(company(k)))
+                    t = False                   # O(1)
+            if t == True:                       # O(n)
+                result.append(k)                # O(1)
+                company.pop(k)                  # O(1)
+                break                           # O(1)
+    return result                               # O(1)
+
+
+print(top_3(list_of_companies))
+
+
+# Первый вариант на мой взгляд правильный. Так как второй имеет 2 цикла,
+# что повышает его алгоритмическую сложность.
