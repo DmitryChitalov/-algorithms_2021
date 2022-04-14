@@ -28,3 +28,41 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def calc():
+    operation_type = input('Введите операцию между числами: +, -, /, *, или введите 0 для выхода')
+    if operation_type == 0:
+        return 'Выход'
+    else:
+        if operation_type in '+-/*':
+            try:
+                num1 = int(input('Введите первое трехзначное число: '))
+                num2 = int(input('Введите второе трехзначное число: '))
+
+                if operation_type == '+':
+                    result = num1 + num2
+                    print(f"Результат {result}")
+                    return calc()
+
+                elif operation_type == '-':
+                    result = num1 - num2
+                    print(f"Результат {result}")
+                    return calc()
+                elif operation_type == '/':
+                    try:
+                        result = num1 / num2
+                    except ZeroDivisionError:
+                        print('Делить на 0 нельзя!')
+                    else:
+                        print(f"Результат: {result}")
+                    finally:
+                        return calc()
+
+            except ValueError:
+                print('Вы ввели строку, ай я яй!')
+                return calc()
+        else:
+            print('Введите правильный символ! +, -, /, *, еще раз!')
+            return calc()
+
+
+calc()
