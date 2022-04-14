@@ -20,37 +20,52 @@ __add__
 Сумма чисел из примера: [‘C’, ‘F’, ‘1’]
 Произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
 
-1. вариант
-defaultdict(list)
-int(, 16)
-reduce
+2. вариант
+class HexNumber:
+    __add__
+    __mul__
+
+hx = HexNumber
+hx + hx
+hex()
 """
 from collections import defaultdict
-from functools import reduce
 
-def get_hex_dict(*args):
-    hex_dict = defaultdict(list)
-    for i in args:
-        hex_dict[i] = list(i)
-    return hex_dict
+class HexNumber:
+    def __init__(self, x, y):
+        self.x = int(f'0x{x}', 16)
+        self.y = int(f'0x{y}', 16)
 
+    def __add__(self):
+        return self.x + self.y
 
-def sum(x, y, hex_dict):
-    return reduce(lambda x, y: int(f'0x{x}', 16) + int(f'0x{y}', 16), hex_dict.keys())
+    def __mul__(self):
+        return self.x * self.y
 
+    def get_hex_numb(self, numb):
+        self.numb = numb
+        return hex(self.numb).split('x')[1].upper()
 
-def mul(x, y, hex_dict):
-    return reduce(lambda x, y: int(f'0x{x}', 16) * int(f'0x{y}', 16), hex_dict.keys())
+    def get_dec_numb(self, hex_numb):
+        self.hex_numb = int(f'0x{hex_numb}', 16)
+        return self.hex_numb
 
+    def get_hex_dict(self, *args):
+        self.dict = args
+        dct = defaultdict(list)
+        for item in self.dict:
+            dct[item] = list(item)
+        return dct
 
-def computation():
-    x = input('Введите 1-ое шестнадцати-ое число: ')
-    y = input('Введите 2-ое шестнадцати-ое число: ')
-    hex_dict = get_hex_dict(x, y)
-    res1 = sum(x, y, hex_dict)
-    res2 = mul(x, y, hex_dict)
-    return f'Введены два числа {get_hex_dict(x)} и {get_hex_dict(y)}\n' \
-           f'Их сумма равна - {get_hex_dict(hex(res1).split("x")[1])}\n' \
-           f'Произведение - {get_hex_dict(hex(res2).split("x")[1])}'
+x, y = 'A2', 'C4F'
 
-print(computation())
+hx = HexNumber(x, y)
+
+res1 = hx.get_hex_numb(hx.x * hx.y)
+res2 = hx.get_hex_numb(hx.x + hx.y)
+
+print(f"Введены два числа: \n{hx.get_hex_dict(x)} - ({hx.get_dec_numb(x)}) "
+      f"и {hx.get_hex_dict(y)} - ({hx.get_dec_numb(y)})\n"
+      f"Их произведение: {hx.get_hex_dict(res1)} - {hx.get_dec_numb(res1)}\n"
+      f"Их сумма: {hx.get_hex_dict(res2)} - {hx.get_dec_numb(res2)}")
+
