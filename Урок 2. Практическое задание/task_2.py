@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def odd_even_num(num, even=0, odd=0):
+    if num > 0:
+        if num % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        num = num // 10
+        return odd_even_num(num, even, odd)
+    else:
+        return print(f"В вашем числе: четных цифр {even}, нечетных {odd}")
+
+
+odd_even_num(765987)

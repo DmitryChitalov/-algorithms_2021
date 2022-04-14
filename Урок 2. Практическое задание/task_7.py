@@ -16,3 +16,34 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def input_num():
+    try:
+        num = int(input("Введите натуральное число,для которого хотите\n"
+                        "проверить равенство 1+2+...+n = n(n+1)/2: "))
+        if num <= 0:
+            print("Ошибка! Число должно быть натуральным.")
+            return input_num()
+    except ValueError:
+        print("Вы ввели не число.")
+        return input_num()
+    return proof(num)
+
+
+def my_sum(num):
+    if num == 1:
+        return num
+    return num + my_sum(num - 1)
+
+
+def proof(num):
+    print(f"Наш расчет: {my_sum(num)}; Расчет по формуле: {num * (num + 1) / 2}")
+    if my_sum(num) != num * (num + 1) / 2:
+        print("Для данного числа равенство не выполняется")
+    else:
+        print("Для данного числа выполняется равенство")
+    exit()
+
+
+input_num()
