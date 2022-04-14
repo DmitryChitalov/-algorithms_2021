@@ -1,4 +1,4 @@
-"""
+﻿"""
 Задание 2.
 
 Приведен код, который формирует из введенного числа
@@ -29,17 +29,17 @@ print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
         "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
+        globals=globals(),
         number=10000))
 print(
     timeit(
         "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
+        globals=globals(),
         number=10000))
 print(
     timeit(
         "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
+        globals=globals(),
         number=10000))
 
 
@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -63,19 +64,38 @@ def recursive_reverse_mem(number):
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
-print('Оптимизированная функция recursive_reverse_mem')
+print('\nОптимизированная функция recursive_reverse_mem')
 print(
     timeit(
         'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
+        globals=globals(),
         number=10000))
 print(
     timeit(
         'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
+        globals=globals(),
         number=10000))
 print(
     timeit(
         'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
+        globals=globals(),
         number=10000))
+
+"""
+Результаты замеров (ниже) демонстрируют, что мемоизация позволяет ускорить выполнение функции на порядок за счет 
+сохранения значений в кэше.
+Вместе с тем, абсолютное время выполнения неоптимизированной функции при 10000 повторов составляет менее 0,1 сек
+и в этой ситуации оптимизация не является критичной для общего времени выполнения, если предусматривается однократный
+вызов функции. При многократных вызовах использование мемоизации оправдано за счет (данные уже находятся в кэше).
+
+Не оптимизированная функция recursive_reverse
+0.03582467
+0.04252163599999999
+0.082934968
+
+Оптимизированная функция recursive_reverse_mem
+0.0027335130000000207
+0.0028296560000000137
+0.0027750420000000053
+
+"""
