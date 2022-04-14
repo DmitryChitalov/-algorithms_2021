@@ -23,3 +23,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import Counter
+
+
+all_company = {}
+for i in range(int(input('Введите количество компаний:'))):
+    name_company = input('Введите название компании:')
+    one_company = Counter(a=int(input('первый квартал:')),
+                          b=int(input('второй квартал:')),
+                          c=int(input('третий квартал:')),
+                          f=int(input('четвертый квартал')))
+    all_company[name_company] = one_company
+sum_company = 0
+for k, v in all_company.items():
+    sum_c = sum([value for key, value in v.items()])
+    sum_company += sum_c
+
+medium_income = sum_company / len(all_company)
+print(f'Средняя годовая прибыль всех предприятий: {medium_income}')
+
+for k, values in all_company.items():
+    if sum([value for key, value in values.items()]) > medium_income:
+        print(f'Предприятия, с прибылью выше среднего значения:{k}')
+    else:
+        print(f'Предприятия, с прибылью ниже среднего значения: {k}')

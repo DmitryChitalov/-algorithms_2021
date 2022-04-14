@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rec(num, enumerator=0):
+    if num == 128:
+        return 'все'
+    else:
+        if num % 10 == 0:
+            print(f'{num} - {chr(num)}')
+        else:
+            print(f'{num} - {chr(num)}', end=' ')
+        return rec(num + 1, enumerator + 1)
+
+
+rec(32)
