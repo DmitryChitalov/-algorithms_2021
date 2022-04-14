@@ -19,3 +19,38 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+ls = [2, 3, 45, 21, 1, 100]
+
+""" Алгоритм 1. Сложность O(n^2) """
+
+
+def min_in_list_1(list_obj, min_ls=None):
+    for x in list_obj:
+        min_ls = x
+        for y in list_obj:
+            if x < y:
+                min_ls = x
+            elif x > y:
+                min_ls = y
+    return min_ls
+
+
+""" Проверка """
+m = min_in_list_1(ls)
+print(m)
+
+
+""" Алгоритм 2. Сложность O(n) """
+
+
+def min_in_list_2(list_obj):
+    min_list = list_obj[0]
+    for i in list_obj[1:]:
+        if i < min_list:
+            min_list = i
+    return min_list
+
+
+""" Проверка """
+m = min_in_list_2(ls)
+print(m)

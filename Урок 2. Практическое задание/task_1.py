@@ -28,3 +28,56 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class WrongSign(Exception):
+    def __init__(self, text):
+        self.text = text
+
+
+def calculator():
+    """ Рекурсивный калькулятор """
+    # Ввод знака
+    try:
+        operator = input('Введите знак операции("+", "-", "*", "/" или "0" для выхода): ')
+        if operator == '0':  # Базовый случай
+            print("Базовый случай. Выходим.")
+            return
+        elif operator not in ["+", "-", "*", "/"]:
+            raise WrongSign('Необходимо ввести знак из списка')
+    except WrongSign as ws:
+        print(ws)
+        return calculator()
+
+    # Ввод первого числа
+    try:
+        num1 = float(input('Введите первое число: '))
+    except ValueError:
+        print('Вы ввели не число')
+        return calculator()
+
+    # Ввод второго числа
+    try:
+        num2 = float(input('Введите второе число: '))
+    except ValueError:
+        print('Вы ввели не число')
+        return calculator()
+
+    # Блок калькуляции
+    if operator == '+':
+        print(f'Ваш результат: {num1 + num2}')
+    elif operator == '-':
+        print(f'Ваш результат: {num1 - num2}')
+    elif operator == '*':
+        print(f'Ваш результат: {num1 * num2}')
+    elif operator == '/':
+        try:
+            print(f'Ваш результат: {num1 / num2}')
+        except ZeroDivisionError:
+            print('Делить на 0 нельзя')
+
+    return calculator()
+
+
+# Проверка
+calculator()

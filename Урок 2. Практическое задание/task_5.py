@@ -21,3 +21,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(start=32, count=1):
+    """ Функция выводящая символы таблицы ASCII из диапазона"""
+    if start > 127:
+        return True
+    else:
+        if count % 10 == 0:
+            print(f'{start} - {chr(start)}', end='\n')
+        else:
+            print(f'{start} - {chr(start)}', end=', ')
+        start += 1
+        count += 1
+        ascii_table(start, count)
+
+
+ascii_table()
