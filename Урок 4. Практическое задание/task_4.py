@@ -12,6 +12,14 @@
 Без аналитики задание считается не принятым!
 """
 
+"""
+func_1  время 0.0009258000000000009
+func_2  время 0.001255000000000001
+func_3  время 0.0006925000000000021   самая быстрое время выполнение + краткость кода
+"""
+
+import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +47,14 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    return max(array, key=array.count)
+
+
+print(timeit.timeit('func_1()', globals=globals(), number=1000))
+print(timeit.timeit('func_2()', globals=globals(), number=1000))
+print(timeit.timeit('func_3()', globals=globals(), number=1000))
+
+# print(func_1())
+# print(func_2())
+# print(func_3())
