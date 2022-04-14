@@ -23,3 +23,29 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import defaultdict
+
+
+dict_of_comp_income = defaultdict(list)
+amount_company = int(input('Enter amount of companies: '))
+
+for i in range(amount_company):
+    company_name = input('Enter company name: ')
+    income_4q = map(int, input('Enter income for every quater separated by space: ').split())
+    dict_of_comp_income[company_name] = sum(income_4q)
+
+avrg_inc = sum(dict_of_comp_income.values()) / amount_company
+more_avrg = []
+less_avrg = []
+
+for name, inc in dict_of_comp_income.items():
+    if inc > avrg_inc:
+        more_avrg.append(name)
+    else:
+        less_avrg.append(name)
+
+
+print(f'Average income of all companies: {avrg_inc}.\nCompanies that have income more average: {more_avrg}\n'
+      f'Companies that have income less average: {less_avrg} ')
+

@@ -40,3 +40,27 @@ for i in
 
 
 """
+
+import random
+
+
+def gnome_sort(lst_obj):
+    i, j, size = 1, 2, len(lst_obj)
+    while i < size:
+        if lst_obj[i - 1] <= lst_obj[i]:
+            i, j = j, j + 1
+        else:
+            lst_obj[i - 1], lst_obj[i] = lst_obj[i], lst_obj[i - 1]
+            i -= 1
+            if i == 0:
+                i, j = j, j + 1
+    return lst_obj
+
+
+m = int(input('Enter "m" number in size of array 2m+1: '))
+orig_list = [random.randint(-100, 100) for _ in range(2*m+1)]
+gnome_sorted_list = gnome_sort(orig_list[:])
+print(f'Original list: {orig_list}\n'
+      f'Gnome sorted list: {gnome_sorted_list}\n'
+      f'Median is: {gnome_sorted_list[m]}')
+
