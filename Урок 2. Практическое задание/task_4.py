@@ -15,3 +15,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc(n, step_num, elem):
+    """Фунция возвращает результат (elem + elem/-2 + elem/4 + elem/-8 ...)"""
+    if step_num == n:
+        return elem
+    step_num += 1
+    return elem + calc(n, step_num, elem / -2)
+
+
+n = int(input('Enter n: '))
+print(calc(n, 1, 1))
