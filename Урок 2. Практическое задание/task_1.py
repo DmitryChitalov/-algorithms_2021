@@ -28,3 +28,49 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc():
+    var = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if var == '0':  # проверка условия выхода
+        return
+
+    else:
+        if var in '+-*/':   # проверяем допустимые операции
+            try:
+                fst_num = int(input('Введите первое число: '))
+                snd_num = int(input('Введите второе число: '))
+
+                if var == '+':
+                    val = fst_num + snd_num
+                    print('Ваш результат: ' + str(val))
+                    return calc()
+
+                elif var == '-':
+                    val = fst_num - snd_num
+                    print('Ваш результат: ' + str(val))
+                    return calc()
+
+                elif var == '*':
+                    val = fst_num * snd_num
+                    print('Ваш результат: ' + str(val))
+                    return calc()
+
+                elif var == '/':
+                    try:
+                        val = fst_num / snd_num
+                    except ZeroDivisionError:
+                        print('Деление на 0 невозможно!')
+                    else:
+                        print('Ваш результат: ' + str(val))
+                    finally:
+                        return calc()
+            except ValueError:
+                print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+                return calc()
+        else:
+            print('Введена неверная команда, пожалуйста, повторите ввод.')
+            return calc()
+
+
+calc()

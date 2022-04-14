@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd_counter(var, odd_counter=0, even_counter=0):
+    if var == 0:  # проверяем,есть ли цифры в заданном числе
+        return even_counter, odd_counter
+    else:
+        var_num = var % 10  # достаём единицы из числа
+        var = var // 10  # убираем последнюю цифру из числа
+        if var_num % 2 != 0:
+            odd_counter += 1
+        else:
+            even_counter += 1
+        return even_odd_counter(var, odd_counter, even_counter)
+
+
+user_number = int(input('Введите число: '))
+print('Количество четных и нечетных цифр в числе равно: ' + str(even_odd_counter(user_number)))

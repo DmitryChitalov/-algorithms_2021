@@ -20,3 +20,54 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+companies = {
+    'aaa': 1000,
+    'bbb': 10000,
+    'ccc': 3000,
+    'ddd': 8000,
+    'eee': 5000,
+    'fff': 3000,
+    'ggg': 7000,
+    'hhh': 2500,
+    'iii': 4000,
+    'jjj': 1000
+}
+
+"""Самым эффективным решением будет 1е, т.к. оно имеет наименьшую сложность при выполнении и
+не меняет исходное хранилище(словарь)"""
+
+# O(N) - линейная сложность
+def max3(var):
+    max3_var = {}
+    dictionary = var
+    for i in range(3):
+        def comp(j):
+            return j[1]
+        max_var = max(dictionary.items(), key=comp)
+        del dictionary[max_var[0]]
+        max3_var[max_var[0]] = max_var[1]
+    return max3_var
+
+print(max3(companies))
+
+
+
+# O(N^2) - квадратичная
+def max3_of_comp(var):
+    for i in range(len(var)):
+        min_val = i
+        for j in range(i + 1, len(var)):
+            if var[min_val][1] < var[j][1]:
+                min_val = j
+        var[i], var[min_val] = var[min_val], var[i]
+    return var[0:3]
+
+comp_list = list(companies.items())
+for i in max3_of_comp(comp_list):
+    print(i[0], ':', i[1])
+
+
+
+

@@ -16,3 +16,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def array_check(i, num, num_sum):
+    if i > num:     # если счётчик больше введёного числа - возвращаем результат суммы чисел
+        return num_sum
+    else:
+        num_sum = num_sum + i
+        return array_check(i + 1, num, num_sum)
+
+
+user_num = int(input("Введите число: "))
+if array_check(1, user_num, 0) == user_num * (user_num + 1) / 2:
+    print('Равенство верно')

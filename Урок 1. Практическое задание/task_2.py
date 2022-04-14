@@ -19,3 +19,28 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+list = [1, 5, 10, 3, 7, 9, 5, 2, 99, 14, 10, 100]
+
+# O(n^2) - квадратичная
+def min_in_list1(list):
+    for i in list:
+        min_check = 0 # также здесь можно использовать булевы функции True и False вместо 0 и 1
+        for j in list:
+            if j < i:
+                min_check = 1
+        if min_check == 0:
+            return i
+
+
+# O(N) - линейная
+def min_in_list2(list):
+    min = list[0]
+    for i in list:
+        if i < min:
+            min = i
+    return min
+
+print(list)
+print(min_in_list1(list))
+print(min_in_list2(list))
