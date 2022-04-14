@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+# Также задаем начало и конец при желании
+
+def table_of_ascii(n=32, v=127, k=1, table=''):
+    if n == v:
+        print(table + f'{n} - {chr(n)} \n' if not k % 10 else table + f'{n} - {chr(n)} ')
+        return
+    else:
+        table_of_ascii(n=n + 1, k=k + 1,
+                       table=table + f'{n} - {chr(n)} \n' if not k % 10 else table + f'{n} - {chr(n)} ')
+
+
+if __name__ == '__main__':
+    table_of_ascii()

@@ -21,3 +21,17 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def get_numbs_substrings(s):
+    n = len(s)
+    hashes = set()
+    for i in [s[i:j + 1] for i in range(n) for j in range(i, n)]:
+        hashes.add(hash(i))
+    return len(hashes)
+
+
+if __name__ == '__main__':
+    print(get_numbs_substrings('papa'))
+
+# Отличие в результате связано с тем, что у меня в коде еще сама строка papa учитывается как подстрока(что верно)
