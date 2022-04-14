@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 1.	Написать программу, которая будет складывать, вычитать, умножать или делить
 два числа. Числа и знак операции вводятся пользователем. После выполнения
@@ -28,3 +30,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+operators = {
+    '+': lambda x, y: x + y,
+    '-': lambda x, y: x - y,
+    '*': lambda x, y: x * y,
+    '/': lambda x, y: x / y,
+}
+
+
+def process() -> None:
+    try:
+        operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if operator not in list(operators.keys()) + ['0']:
+            print('Введен неверный символ операции')
+        else:
+            if operator != '0':
+                value1 = int(input('Введите первое число: '))
+                value2 = int(input('Введите второе число: '))
+                print(f'{value1} {operator} {value2} = {operators[operator](value1, value2)}')
+            else:
+                return
+
+    except ValueError:
+        print('Введены неверные данные')
+    except ZeroDivisionError:
+        print('Деление на 0 невозможно!')
+
+    process()
+
+
+def main():
+    process()
+
+
+if __name__ == '__main__':
+    main()
