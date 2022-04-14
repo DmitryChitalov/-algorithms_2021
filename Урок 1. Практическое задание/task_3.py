@@ -20,3 +20,16 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+data_c = {
+    'company_1': 5000,
+    'company_2': 15000,
+    'company_3': 1000,
+    'company_4': 8000,
+}
+#O(7)
+
+for i in range(3): #O(3)
+    a = max(data_c.values()) #O(1)
+    b = (list(data_c.keys())[list(data_c.values()).index(a)])# O(2)
+    print(i + 1, b) #O(1)
+    data_c.pop(b) #O(1)
