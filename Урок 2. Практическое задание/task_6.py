@@ -11,3 +11,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+def ugad(counter):
+    chislo = random.randint(1,100)
+    print("Для проверки: " + chislo)
+    if counter==0:
+        print("Вы проиграли")
+    else:
+        popitka = int(input("Введите число"))
+        if popitka==chislo:
+            print("Вы победили!")
+        elif popitka>chislo:
+            return counter-1
+            print("Загаданное число меньше")
+        elif popitka<chislo:
+            return counter-1
+            print("Загаданное число больше")
+
+ugad(10)

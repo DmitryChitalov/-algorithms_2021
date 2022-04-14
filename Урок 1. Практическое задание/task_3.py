@@ -1,4 +1,4 @@
-"""
+""" Домашняя работа Дармограй Полины
 Задание 3.
 
 Для этой задачи:
@@ -20,3 +20,28 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+list = [['1st', 100000], ['2nd', 150000], ['3rd', 30000], ['4th', 140000], ['5th', 1000000], ['6th', 200500]]
+
+def func1(main_list): # O(n)
+    max = 0 # O(1)
+    med = 0 # O(1)
+    min = 0 # O(1)
+    for i in main_list: # O(n)
+        if i[1] > max: # O(1)
+            max = i[1] # O(1)
+        elif i[1] > med: # O(1)
+            min = med # O(1)
+            med = i[1] # O(1)
+    return(max, med, min) # O(1)
+
+def func2(main_list): # O(N log N)
+    list_n = [] # O(1)
+    for i in main_list: # O(n)
+        list_n.append(i[1]) # O(1)
+    list_n.sort # O(N log N)
+    return(list_n[0:3]) # O(3)
+
+print(func1(list))
+print(func2(list))
+
+# Первое решение будет лучше т.к. его общая сложность меньше второго.
