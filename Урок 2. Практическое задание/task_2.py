@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def digit_cnt(num, digit_1=0, digit_2=0):
+    if num == 0:
+        return print(f'({digit_1}, {digit_2})')
+    else:
+        a_num = num % 10
+        num = num // 10
+        if a_num % 2 == 0:
+            digit_1 += 1
+        else:
+            digit_2 += 1
+        return digit_cnt(num, digit_1, digit_2)
+
+
+user_num = int(input('Введите число: '))
+digit_cnt(user_num)

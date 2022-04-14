@@ -28,3 +28,38 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc():
+    sign = input('Please choose an action: +, -, *, / or enter 0 for exit): ')
+    if sign == '0':
+        return print('Exit')
+    elif sign in '+-*/':
+        try:
+            num_1 = int(input('Enter the first number: '))
+            num_2 = int(input('Enter the second number: '))
+            if sign == '+':
+                print(f'Your result is {num_1 + num_2}')
+                return calc()
+            if sign == '-':
+                print(f'Your result is {num_1 - num_2}')
+                return calc()
+            if sign == '*':
+                print(f'Your result is {num_1 * num_2}')
+                return calc()
+            if sign == '/':
+                if num_2 == 0:
+                    print('Zero division is impossible!')
+                    return calc()
+                else:
+                    print(f'Your result is {num_1 / num_2}')
+                    return calc()
+        except ValueError:
+            print('You entered str-class, but you need int-class. Please adjust it!')
+            return calc()
+    else:
+        print('The sign is incorrect!')
+        return calc()
+
+
+calc()
