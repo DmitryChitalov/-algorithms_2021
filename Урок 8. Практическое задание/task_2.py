@@ -9,8 +9,12 @@
 
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
+class BTInsertException(Exception):
+    """My BynaryTree Insert Exeption"""
+    pass
 
 class BinaryTree:
+    __slots__ = ['root', 'left_child', 'right_child']
     def __init__(self, root_obj):
         # корень
         self.root = root_obj
@@ -22,6 +26,8 @@ class BinaryTree:
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
+        if new_node >= self.root:
+            raise BTInsertException("Tree, isert as left child big from root")
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -34,8 +40,11 @@ class BinaryTree:
             tree_obj.left_child = self.left_child
             self.left_child = tree_obj
 
+
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node < self.root:
+            raise BTInsertException("Tree, isert as right child less from root")
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -65,15 +74,21 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
-
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+try:
+    r = BinaryTree(8)
+    print(r.get_root_val())
+    print(r.get_left_child())
+    r.insert_left(40)
+    print(r.get_left_child())
+    print(r.get_left_child().get_root_val())
+    r.insert_right(12)
+    print(r.get_right_child())
+    print(r.get_right_child().get_root_val())
+    r.get_right_child().set_root_val(16)
+    print(r.get_right_child().get_root_val())
+except(BTInsertException) as E:
+    print('Error on binary tree insert! ', E)
+"""
+В качестве оптимизации использованы слоты.
+К качестве доработки добавлена валидация при вставке узла и генерация исключения, если данные ошибочны.
+"""
