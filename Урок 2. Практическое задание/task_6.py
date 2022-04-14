@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+print('\t\t\t\t\tДобро пожаловать в игру "Угадай число"!')
+print('\nЯ загадала число от 0 до 100. Нужно отгадать его за минимальное число попыток.')
+
+the_number = random.randint(0, 100)
+
+
+def guess(i):
+    get_guess = int(input("Ваше предположение: "))
+    if get_guess == the_number or i == 0:
+        return f'Вы угадали, верное число: {the_number}'
+    elif get_guess < the_number:
+        print('Больше!')
+        return guess(i - 1)
+    else:
+        print('Меньше!')
+        return guess(i - 1)
+
+
+print(guess(10))
