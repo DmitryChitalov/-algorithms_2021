@@ -28,3 +28,55 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackOfPlates:
+    def __init__(self):
+        self.plates = [[]]
+        self.idx_stack = 0
+
+    # Очистка стека
+    def clear_stack(self):
+        self.plates = [[]]
+        return self.plates
+
+    # Макс.кол-во тарелок в стопке = 3, после чего создается новая стопка
+    def push_in(self, el):
+        if len(self.plates[self.idx_stack]) < 3:
+            self.plates[self.idx_stack].append(el)
+        elif len(self.plates[self.idx_stack]) >= 3:
+            self.idx_stack += 1
+            self.plates.append([])
+            self.plates[self.idx_stack].append(el)
+
+    # Удаление тарелок из стопки. Когда стопка остается пустя, она также удаляется
+    def pop_out(self):
+        self.plates[self.idx_stack].pop()
+        if not self.plates[self.idx_stack]:
+            self.plates.pop()
+            self.idx_stack -= 1
+
+    # Размер стэка
+    def stack_size(self):
+        return len(self.plates)
+
+    # Вывод на экран содержимого стека
+    def show_stack(self):
+        return self.plates
+
+
+# Наполнение стека
+stack = StackOfPlates()
+stack.push_in(5)
+stack.push_in(2)
+stack.push_in(1)
+stack.push_in(6)
+stack.push_in(23)
+stack.push_in(54)
+stack.push_in(11)
+print(stack.show_stack())
+print(stack.stack_size())
+# убираем элемент с вершины
+stack.pop_out()
+print(stack.show_stack())
+print(stack.stack_size())
