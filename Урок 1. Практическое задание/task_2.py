@@ -19,3 +19,20 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+#сложность O(N)
+def min_func_1(lst_obj):
+    min_num = lst_obj[0]
+    for j in range(len(lst_obj)):
+        if lst_obj[j] < min_num:
+            min_num = lst_obj[j]
+    return min_num
+
+#сложность O(N^2)
+def min_func_2(lst_obj):
+    min_num = lst_obj[0]
+    for j in range(len(lst_obj)):
+        lst_copy = lst_obj[:]
+        if lst_copy[j] < min_num:
+            min_num = lst_copy[j]
+    return min_num
