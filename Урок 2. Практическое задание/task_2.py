@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+entry = int(input('Введите число: '))
+
+
+def beads(number, even=0, odd=0):
+    if number == 0:
+        print(f'({even}, {odd})')
+        return
+    elif number % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return beads(number // 10, even, odd)
+
+beads(entry)
+
+
+
+
+
+
+

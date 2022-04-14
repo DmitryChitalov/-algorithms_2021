@@ -13,6 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
+from cProfile import run
+import timeit
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +39,29 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    lst = list(str(enter_num))
+    lst.reverse()
+    number = "".join(lst)
+    return number
+
+
+num = 123456789
+
+print(f'cProfile')
+run('revers_1(num)')
+run('revers_2(num)')
+run('revers_3(num)')
+run('revers_4(num)')
+
+print('"timeit"')
+print(f'{timeit.timeit("revers_1(num)", number=10000, globals=globals())}')
+print(f'{timeit.timeit("revers_2(num)", number=10000, globals=globals())}')
+print(f'{timeit.timeit("revers_3(num)", number=10000, globals=globals())}')
+print(f'{timeit.timeit("revers_4(num)", number=10000, globals=globals())}')
+
+
+# Самая быстрая функция revers_3 так, как она не использует рекурсию, циклы и дополнительные преобразования,
+# а использует срез (внутреннюю функцию), которая использует наименьшее количество операций
