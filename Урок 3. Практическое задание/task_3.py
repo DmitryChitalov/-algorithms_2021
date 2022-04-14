@@ -21,3 +21,25 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+hash # в рамках одного запуска дает одинаковый хеш
+# hash(value)
+
+# Хеш-таблица - Ассоциативный массив - в питоне это Словарь.
+
+# set() множество
+
+def podstr_number(str):
+    N = len(str)
+    set_exit = set()
+    for idx in range(1, N):
+        for idx2 in range(N):
+            set_exit.add(hash(str[idx2 : N-idx]))
+            # set_exit.add(str[idx2 : N-idx])
+    return len(set_exit)
+
+
+# Дана строка S длиной N, состоящая только из строчных латинских букв.
+# input_str = 'mnbfdsfnb'
+input_str = 'papa'
+print(podstr_number(input_str))
+print(input_str[0:len(input_str)])
