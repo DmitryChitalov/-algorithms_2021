@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def tab_symbols(fst, lst, n):
+    result = f'({fst} - {chr(fst)}) '
+    if fst > lst:
+        pass
+    else:
+        if (fst - 32) % n == 0:
+            print()
+        print(result, end='')
+        tab_symbols(fst + 1, lst, n)
+
+
+tab_symbols(32, 127, 10)

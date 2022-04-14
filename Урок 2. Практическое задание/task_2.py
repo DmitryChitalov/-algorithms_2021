@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def num_even_odd(n, even=0, odd=0):
+    if n == 0:
+        return f'Количество четных {even},  нечетных {odd} цифр'
+    else:
+        if n % 10 % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return num_even_odd(n // 10, even, odd)
+
+
+try:
+    numb = int(input('Введите число: '))
+    print(num_even_odd(numb))
+except ValueError:
+    print('Тут должно быть число!')

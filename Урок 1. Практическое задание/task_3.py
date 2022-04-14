@@ -20,3 +20,44 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies = {'Microsoft': 79900,
+             'Tesla': 1000,
+             'United_Airlines': -2000,
+             'AT&T': 23500,
+             'Apple': 88000,
+             'Netflix': 39000
+             }
+list_val = list(companies.values())
+list_keys = list(companies.keys())
+list_items = list(companies.items())
+
+'''
+Первое решение:
+O(n log n) общая сложность
+'''
+list_items.sort(key=lambda x: x[1], reverse=True)   # O(n log n)
+for el in range(3):                                 # O(1)
+    print(list_items[el][0], list_items[el][1])
+
+'''
+второе решение
+Общая сложность O(n)
+'''
+
+
+def most_earning(dict_in):
+    three_of_max = dict()
+    for _ in range(3):                                              # O(1)
+        max_earning = max(dict_in.items(), key=lambda x: x[1])      # O(n)
+        three_of_max[max_earning[0]] = max_earning[1]               # O(1)
+        del dict_in[max_earning[0]]                                 # O(1)
+    return three_of_max
+
+
+print(most_earning(companies))
+
+'''
+Более эффективнее 2 решение. С возрастанием числа итерируемых объектов кол-во операций возрастает медленнее.
+И используем встроенную функцию max() со сложностью O(n).
+'''
