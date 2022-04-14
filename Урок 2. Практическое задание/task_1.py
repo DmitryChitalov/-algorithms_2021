@@ -28,3 +28,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+def calc_func():
+    operators = ['+', '/', '-', '*']
+    operation = input('Enter operation (+, -, *, / or 0 for exit): ')
+    if operation == '0': return
+    elif operation not in operators:
+        print('it is not number')
+        return calc_func()
+    operand_1 = input('Enter first operand: ')
+    operand_2 = input('enter second operation: ')
+    if not operand_1.isdigit() or not operand_2.isdigit():
+        print('Неверный ввод, попробуйте ещё раз')
+        return calc_func()
+    operand_1 = float(operand_1)
+    operand_2 = float(operand_2)
+    if operation == '+': print(operand_1 + operand_2)
+    elif operation == '-': print(operand_1 - operand_2)
+    elif operation == '/': print(operand_1 / operand_2)
+    elif operation == '*': print(operand_1 * operand_2)
+    return calc_func()
+
+
+calc_func()

@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_odd_number(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        bef = number % 10
+        af = number // 10
+        if bef % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd_number(af, even, odd)
+
+
+print('even - %s, odd - %s' % (even_odd_number(123)))

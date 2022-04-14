@@ -11,3 +11,28 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+
+
+def guess_num(attempt_counter, number):
+    print(number)
+    print('attempt num - %s' % attempt_counter)
+    answer = int(input('enter num'))
+    if answer == number or attempt_counter == 10:
+        if answer == number:
+            print('You guessed right - %s' % answer)
+        else:
+            print('There are no more attempts. The number was - %s' % number)
+        return
+
+    if number > answer:
+        print('more')
+    else:
+        print('less')
+
+    return guess_num(attempt_counter + 1, number)
+
+
+guess_num(1, random.randint(1, 100))
