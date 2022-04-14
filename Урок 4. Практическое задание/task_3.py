@@ -14,6 +14,8 @@
 Без аналитики задание считается не принятым
 """
 
+from cProfile import run
+from timeit import timeit
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -32,8 +34,36 @@ def revers_2(enter_num, revers_num=0):
         enter_num //= 10
     return revers_num
 
-
 def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def revers_4(enter_num):
+    enter_num = str(enter_num)
+    revers_num = ''.join(reversed(enter_num))
+    return revers_num
+
+
+def main():
+    num = 15 ** 15
+    for _ in range(100000):
+        revers_1(num)
+        revers_2(num)
+        revers_3(num)
+        revers_4(num)
+
+run('main()')
+
+print(timeit('revers_1(15 ** 15)', globals = globals(), number =100000))
+print(timeit('revers_2(15 ** 15)', globals = globals(), number =100000))
+print(timeit('revers_3(15 ** 15)', globals = globals(), number =100000))
+print(timeit('revers_4(15 ** 15)', globals = globals(), number =100000))
+
+print(revers_1(1234))
+print(revers_2(1234))
+print(revers_3(1234))
+print(revers_4(1234))
+
+""" Встроенные функции и методы самые быстрые при одинаковой сложности. 
+Рекурсия самая медленная, т.к. имеет сложности O(2**n)"""
