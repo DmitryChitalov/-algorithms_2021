@@ -12,7 +12,30 @@
 который вы придумаете, например, реализовать словарь.
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
+"""
+# Алгоритмическая сложность: (O(n) * O(1)) + O(1) + O(1) + (O(n) * (O(n)*(O(1)) + O(1))) + O(1) + O(n) = O(n^2)
+companies = ['Microsoft', 25444], ['Google', 21236], ['Apple', 43214], ['Sony', 12341], ['Samsung', 86436]
+my_companies = {}
 
+for el in companies:  # O(n)
+    my_companies[el[0]] = el[1]  # O(1)
+
+my_companies = list(my_companies.items())  # O(1)
+
+n = 1  # O(1)
+while n < len(my_companies):  # O(n)
+    for i in range(len(my_companies) - 1):  # O(n)
+        if my_companies[i][1] > my_companies[i + 1][1]:  # O(1)
+            my_companies[i], my_companies[i + 1] = my_companies[i + 1], my_companies[i]  # O(1)
+    n += 1  # O(1)
+print(my_companies[:-4:-1])  # O(n)
+
+# Алгоритмическая сложность: O(1) + O(n) + O(N Log N) + # O(n) = O(N Log N)
+companies = {'Microsoft': 25444, 'Google': 21236, 'Apple': 43214, 'Sony': 12341, 'Samsung': 86436}  # O(1)
+companies_copy = list(companies.items())  # O(n)
+companies_copy.sort(key=lambda x: x[1], reverse=True)  # O(N Log N)
+print(companies_copy[:3])  # O(n)
+"""
 Примечание:
 Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
 через строки документации в самом коде.
@@ -20,3 +43,5 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# Вывод: Готовые методы решения куда менее затратны, чем свои. И по возможности лучше пользоваться ими.
