@@ -28,3 +28,38 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class PlatesStack:
+    def __init__(self, max_size):
+        self.items = [[]]
+        self.max_size = max_size
+
+    def is_empty(self):
+        return self.items == []
+
+    def push(self, item):
+        if len(self.items[-1]) >= self.max_size:
+            self.items.append([])
+        self.items[-1].append(item)
+        return self.items
+
+    def pop(self):
+        if not self.is_empty():
+            self.items[-1].pop()
+
+    def count_elements(self):
+        summ = 0
+        for item in self.items:
+            summ += len(item)
+        return f'Total amount: {summ}\n' \
+               f'Num of stacks: {len(self.items)}'
+
+
+if __name__ == '__main__':
+    plates = PlatesStack(5)
+    for el in range(0, 30):
+        plates.push(el)
+    print(plates.count_elements(), '\n', plates.items)
+    plates.pop()
+    print(plates.count_elements(), '\n', plates.items)

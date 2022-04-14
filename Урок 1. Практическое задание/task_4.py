@@ -25,3 +25,50 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+users_data = {'user_1': 'we3432dfwe4', 'user_2': '3ewqww3', 'user_3': '12ewqdasd34', 'user_4': '12ewqd34',
+              'user_5': '12ewqdaasd34', 'user_6': 'ds234efsf', 'user_7': '12ewqd34', 'user_8': '12ewqd34',
+              'user_9': 'we3432ddsfwe4', 'user_10': '3ewqwxzzcw3', 'user_11': '12ewsd34', 'user_12': '12edswqd34'}
+
+users_activity = {'user_1': True, 'user_2': True, 'user_3': False, 'user_4': False, 'user_5': True, 'user_6': True,
+                  'user_7': False, 'user_8': False, 'user_9': True, 'user_10': True, 'user_11': True, 'user_12': False}
+
+
+def check_access_1(user, passwd):
+    """
+    return O(1) Constant time
+    """
+    if users_activity.get(user) is not False:  # O(n) Linear Time
+        if users_data.get(user) == passwd:
+            print(f"{user}, Welcome to aboard!")
+        else:
+            print(f"Please, {user}, check the password")
+    else:
+        print(f"{user}, Access denied. Do you want activate your account?")
+
+
+def check_access_2(user, passwd):
+    """
+    return O(1) Constant time
+    """
+    for key_activity in users_activity.keys():  # O(n) Linear time
+        if key_activity == user:
+            _active = users_activity.get(user)  # O(1) Constant time
+            if _active is False:
+                return f'{user}, Access denied. Do you want activate your account?'
+            else:
+                for key_passwd in users_data.keys():
+                    if key_passwd == user:
+                        _key_passwd = users_data.get(user)
+                        if _key_passwd == passwd:
+                            return f'{user}, Welcome to aboard'
+                        else:
+                            return f'Please, {user}, check your password'
+
+
+check_access_1('user_1', '23442w')
+check_access_1('user_7', 'r22wer')
+
+print(check_access_2('user_1', 'we3432dfwe4'))
+print(check_access_2('user_7', 'fdee21'))
