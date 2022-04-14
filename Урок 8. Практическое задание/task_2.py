@@ -10,6 +10,12 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
+class TreeError(Exception):
+    def __init__(self, message):
+        self.msg = message
+
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,38 +27,49 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+        try:
+            # если у узла нет левого потомка
+            if self.root >= new_node:
+                if self.left_child == None:
+                    # тогда узел просто вставляется в дерево
+                    # формируется новое поддерево
+                    self.left_child = BinaryTree(new_node)
+                # если у узла есть левый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    tree_obj.left_child = self.left_child
+                    self.left_child = tree_obj
+            else:
+                raise TreeError(f'Потомок слева {new_node} не может быть больше узла {self.root}')
+        except TreeError as err:
+            print(err)
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+        try:
+            if self.root <= new_node:
+                # если у узла нет правого потомка
+                if self.right_child == None:
+                    # тогда узел просто вставляется в дерево
+                    # формируется новое поддерево
+                    self.right_child = BinaryTree(new_node)
+                # если у узла есть правый потомок
+                else:
+                    # тогда вставляем новый узел
+                    tree_obj = BinaryTree(new_node)
+                    # и спускаем имеющегося потомка на один уровень ниже
+                    tree_obj.right_child = self.right_child
+                    self.right_child = tree_obj
+            else:
+                raise TreeError(f'Потомок справа {new_node} не может быть меньше узла {self.root}')
+        except TreeError as err:
+            print(err)
 
     # метод доступа к правому потомку
     def get_right_child(self):
         return self.right_child
-
     # метод доступа к левому потомку
     def get_left_child(self):
         return self.left_child
@@ -66,10 +83,15 @@ class BinaryTree:
         return self.root
 
 
-r = BinaryTree(8)
+
+r = BinaryTree(20)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(40)
+r.insert_left(13)
+r.insert_right(25)
+r.insert_right(24)
+r.insert_right(26)
+print(r.get_right_child().get_root_val())
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
