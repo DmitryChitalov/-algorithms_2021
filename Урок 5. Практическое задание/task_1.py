@@ -23,3 +23,29 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import namedtuple
+
+
+annual_prof = {}
+com_num = int(input('Введите количество предприятий: '))
+for i in range(com_num):
+    prof = namedtuple('companies', 'company quarter_1 quarter_2 quarter_3 quarter_4')
+    company_data = prof(
+        company=input('Введите название предприятия: '),
+        quarter_1=int(input('Прибыль за первый квартал: ')),
+        quarter_2=int(input('Прибыль за второй квартал: ')),
+        quarter_3=int(input('Прибыль за третий квартал: ')),
+        quarter_4=int(input('Прибыль за четвертый квартал: '))
+    )
+    annual_prof[company_data.company] =\
+        company_data.quarter_1+company_data.quarter_2+company_data.quarter_3+company_data.quarter_4
+
+
+average_prof = sum(annual_prof.values()) / len(annual_prof)
+print(f'Средняя годовая прибыль всех предприятий: {average_prof}')
+upper_prof = [key for key,value in annual_prof.items() if value > average_prof]
+print(f'Предприятия с прибылью выше среднего: {" ".join(upper_prof)}')
+lower_prof = [key for key,value in annual_prof.items() if value < average_prof]
+print(f'Предприятия с прибылью ниже среднего: {" ".join(lower_prof)}')
