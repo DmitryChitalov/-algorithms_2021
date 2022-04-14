@@ -13,6 +13,9 @@
 
 Без аналитики задание считается не принятым
 """
+import timeit
+import cProfile
+
 
 
 def revers_1(enter_num, revers_num=0):
@@ -23,6 +26,7 @@ def revers_1(enter_num, revers_num=0):
         revers_num = (revers_num + num / 10) * 10
         enter_num //= 10
         return revers_1(enter_num, revers_num)
+
 
 
 def revers_2(enter_num, revers_num=0):
@@ -37,3 +41,19 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+print(timeit.timeit(lambda: revers_1(100000, 0), number=10000))
+print(timeit.timeit(lambda: revers_2(10000, 0), number=10000))
+print(timeit.timeit(lambda: revers_3(100000), number=10000))
+
+cProfile.run('revers_1(10000, 0)')
+cProfile.run('revers_2(10000, 0)')
+cProfile.run('revers_3(100000)')
+
+##
+# ( приминение cProfile в данном   случае  нецелесообразна, слишком простая функция и  выполняется  слишком быстро
+
+##
+print( reversed( input() ), sep = '\n' )
+print(timeit.timeit(lambda: reversed(input()), number=10000))
