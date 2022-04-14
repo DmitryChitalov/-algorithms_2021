@@ -12,6 +12,8 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +41,21 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    number = max(array, key=array.count)
+    return f'Чаще всего встречается число {number}, ' \
+           f'оно появилось в массиве {array.count(number)} раз(а)'
+
+
+print(timeit('func_1()', globals=globals(), number=1000000))
+print(timeit('func_1()', globals=globals(), number=1000000))
+print(timeit('func_3()', globals=globals(), number=1000000))
+
+# Профилирование показало:
+# 2.1475694
+# 2.1318308
+# 2.0282256
+# Если переписать третью функцию как
+# return max(array, key=array.count) то есть без вывода частоты элемента в списке
+# то выигрыш по времени будет еще больше (1.3933682000000003)
+#

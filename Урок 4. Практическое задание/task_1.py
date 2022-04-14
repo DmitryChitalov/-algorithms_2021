@@ -16,6 +16,8 @@
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
 
+from timeit import timeit
+
 
 def func_1(nums):
     new_arr = []
@@ -23,3 +25,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+# print(timeit('func_1(list(range(100)))', globals=globals()))
+# измерение при помощи timeit на данных list(range(100)): 18.9614641
+
+
+# изменяем функцию, добавляя list comprehension, ускоряет функцию с теми же данными до 14.775152299999998
+# поскольку списковое включение всегда быстрее обычных циклов
+
+def func_2(nums):
+    return [i for i, x in enumerate(nums) if x % 2 == 0]
+
+print(timeit('func_2(list(range(100)))', globals=globals()))
