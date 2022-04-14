@@ -25,3 +25,72 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users = {1: ['admin', True],
+         2: ['megadeath', False],
+         3: ['dio', True],
+         4: ['judas_priest', False]}
+
+passwords = {1: 'OIJ^#13ji',
+             2: 'SymphonyOfDestruction',
+             3: 'HolyDiver',
+             4: 'NoSurrender'}
+
+
+def authorization():
+    """Сложность O(n^2).
+    """
+    user = input('Введите имя пользователя: ')  # O(1)
+    password = input('Введите пароль: ')  # O(1)
+    accept = 0  # O(1)
+    valid = 0  # O(1)
+    for key, value in users.items():  # O(2n)
+        if user in value and password == passwords.get(key):  # O(8n)
+            accept = 1
+            if not value[1]:
+                print('Учетная запись не активирована!')
+                usr_answer = input('Активировать? д/н ')
+                if usr_answer != 'д':
+                    value[1] = True
+                    valid = 1
+    if accept != 1:  # O(1)
+        print('Неправильное имя пользователя или пароль!')  # O(1)
+    elif valid != 1:  # O(1)
+        print(f'Добро пожаловать в систему!')  # O(1)
+
+
+authorization()
+
+
+accounts = {1: ['admin', 'OIJ^#13ji', True],
+            2: ['megadeath', 'SymphonyOfDestruction', False],
+            3: ['dio', 'HolyDiver', True],
+            4: ['judas_priest', 'NoSurrender', False]}
+
+
+def login_to_site():
+    """Сложность O(n)
+    """
+    user = input('Введите имя пользователя: ')  # O(1)
+    password = input('Введите пароль: ')  # O(1)
+    account = []  # O(1)
+
+    for detail in accounts.values():  # O(10n)
+        if detail[0] == user and detail[1] == password:
+            account = detail
+            if not account[2]:
+                valid = input('Требуется активация аккаунта!\n '
+                              'Активировать сейчас? д/н ')
+                if valid == 'д':
+                    print('Аккаунт активирован!')
+                else:
+                    print('Без активации доступ невозможен!')
+            print(f'Добро пожаловать {account[0]}')
+    if not account:  # O(1)
+        print('Неправильное имя пользователя или пароль!')  # O(1)
+
+
+login_to_site()
+
+
+"""Второй алгоритм (O(n)) получается быстрее. Потому что проверок меньше."""
