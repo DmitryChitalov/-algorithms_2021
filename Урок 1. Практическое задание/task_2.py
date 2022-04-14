@@ -19,3 +19,36 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+
+def find_max_1(lst):
+    """
+    Сложность: O(N^2).
+    """
+    min_item = None
+    for item1 in range(len(lst)):
+        min_item = lst[item1]
+        for item2 in range(len(lst)):
+            if lst[item2] < min_item:
+                min_item = lst[item2]
+    return min_item
+
+
+def find_max_2(lst, my_max):
+    """
+    Сложность: O(N).
+    """
+    min_item = my_max
+    for item in lst:
+        if item < min_item:
+            min_item = item
+    return min_item
+
+
+MAX_VALUE = 100000
+random_lst = random.sample(range(-MAX_VALUE, MAX_VALUE), 10)
+print(random_lst)
+print(find_max_1(random_lst))
+print(find_max_2(random_lst, MAX_VALUE))

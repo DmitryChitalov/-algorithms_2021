@@ -25,3 +25,34 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def auth1(user_login, user_password):
+    """
+    Сложность: O(1).
+    Эффективно, так как используется get для словаря со сложностью O(1)
+    """
+    return bool(passwords.get(user_login) == user_password and profiles.get(user_login))
+
+
+def auth2(user_login, user_password):
+    """
+    Сложность: O(N).
+    Неэффективно, так как используется перебор списка сложностью O(N)
+    """
+    result = False
+    for user in users:
+        if user_login == user[0] and user_password == user[1] and user[2]:
+            result = True
+    return result
+
+
+passwords = {'login1': 'pass1', 'login2': 'pass2',
+             'login3': 'pass3', 'login4': 'pass4', 'login5': 'pass5'}
+profiles = {'login1': True, 'login2': True, 'login3': False, 'login4': False, 'login5': False}
+print(auth1('login2', 'pass2'))
+print(auth1('login2', 'pass3'))
+users = [['login1', 'pass1', True], ['login2', 'pass2', True], ['login3', 'pass3', False],
+         ['login4', 'pass4', False], ['login5', 'pass5', False]]
+print(auth2('login2', 'pass2'))
+print(auth2('login2', 'pass3'))

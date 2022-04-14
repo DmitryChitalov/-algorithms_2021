@@ -28,3 +28,57 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class InvalidOperation(Exception):
+    """Вызывается, когда операция неверная"""
+
+
+class InvalidNumber(Exception):
+    """Вызывается, когда введенная строка не число"""
+
+
+class ZeroDiv(Exception):
+    """Вызывается, когда частное равно 0"""
+
+
+def calculate():
+    """Имитация калькулятора"""
+    try:
+        operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+        if operation not in ('+', '-', '*', '/', '0'):
+            raise InvalidOperation
+        if operation == '0':
+            return
+
+        try:
+            operand1 = input("Введите первое число: ")
+            operand2 = input("Введите второе число: ")
+            if not operand1.isdigit() or not operand2.isdigit():
+                raise InvalidNumber
+            if operation == '/' and int(operand2) == 0:
+                raise ZeroDiv
+
+            if operation == '+':
+                result = int(operand1) + int(operand2)
+            elif operation == '-':
+                result = int(operand1) - int(operand2)
+            elif operation == '*':
+                result = int(operand1) * int(operand2)
+            else:
+                result = int(operand1) / int(operand2)
+            print(f'Ваш результат: {result}')
+            calculate()
+        except InvalidNumber:
+            print("Необходимо ввести число")
+            calculate()
+        except ZeroDiv:
+            print("Нельзя делить на 0")
+            calculate()
+
+    except InvalidOperation:
+        print("Введите корреткную операцию")
+        calculate()
+
+
+calculate()

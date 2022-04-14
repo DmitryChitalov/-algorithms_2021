@@ -16,3 +16,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_natural(number):
+    return 1 if number == 1 else check_natural(number - 1) + number
+
+
+N = 5
+print(check_natural(N) == N * (N + 1) / 2)

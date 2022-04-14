@@ -15,3 +15,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_elements(count_of_elements, sum_value=1, all_sum=1):
+    if count_of_elements == 1:
+        return all_sum
+    count_of_elements -= 1
+    sum_value = sum_value / -2
+    all_sum += sum_value
+    return sum_of_elements(count_of_elements, sum_value, all_sum)
+
+
+cnt = input("Введите количество элементов: ")
+if cnt.isdigit():
+    print(sum_of_elements(int(cnt)))
