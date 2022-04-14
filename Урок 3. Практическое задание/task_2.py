@@ -20,3 +20,37 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from uuid import uuid4
+import sqlite3
+import hashlib
+
+
+def pass_in_db():
+	conn = sqlite3.connect(":memory:")
+	cur = conn.cursor()
+	cur.execute("""CREATE TABLE passwords (
+		id INT PRIMARY KEY,
+		password TEXT);
+	""")
+	conn.commit()
+	
+	salt = uuid4().hex
+	cur.execute("INSERT INTO passwords VALUES(?, ?)", (1, hashlib.sha256(salt.encode() + input("Введите пароль: ").encode()).hexdigest()))
+	conn.commit()
+	
+	cur.execute("SELECT password FROM passwords")
+	print("В базе данных хранится строка:", cur.fetchone()[0], sep='\n')
+	
+	pass_check = hashlib.sha256(salt.encode() + input("ВВведите пароль еще раз для проверки: ").encode()).hexdigest()
+	cur.execute("SELECT password FROM passwords")
+	
+	if pass_check == cur.fetchone()[0]:
+		print("Вы ввели правильный пароль")
+	else:
+		print("Вы ввели неправильный пароль")
+		
+	conn.close
+
+
+pass_in_db()
