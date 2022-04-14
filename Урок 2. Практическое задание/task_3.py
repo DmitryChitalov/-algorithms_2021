@@ -22,3 +22,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse_f(base_num=int(input('Введите число: '))):
+    return f'{base_num}' if base_num in range(10) else f'{base_num % 10}{reverse_f(base_num // 10)}'
+
+
+print(reverse_f())
+
