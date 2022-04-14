@@ -20,3 +20,41 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+if __name__ == '__main__':
+
+    companies = {
+        'БД «ОТКРЫТИЕ»': 20458731,
+        '«Уником Партнер»': 220052,
+        'ИК «ВЕЛЕС Капитал»': 4494025,
+        'ИК «ЦЕРИХ Кэпитал Менеджмент»': 2058841,
+        'ЗАО «ВТБ Капитал»': 14921887,
+        'ФК «Мегатрастойл»': 41729,
+        'ИК «БФА»': 185662,
+        'Компания «Брокеркредитсервис»': 8934064
+    }
+
+    big_3_c = sorted(companies, key=companies.__getitem__, reverse=True)[:3]  # 1 О(nlogn) - линейно-логарифмическая
+
+    # 2 По сути, копия второго решения, та же сложность, не годится
+    m_v = sorted(companies.values(), reverse=True)
+    big_3_c_2 = [v for v in companies.keys() if companies[v] in m_v[:3]]
+
+    # 3 Так как используется sort() - нотация та же
+    first = list(companies.values())[:3]
+    first.sort(reverse=True)
+    for _ in list(companies.values())[3:]:
+        if _ > first[-1]:
+            first.pop()
+            first.append(_)
+            first.sort(reverse=True)
+    print([v for v in companies.keys() if companies[v] in first])
+
+    # 4 мы не используем сортировку, решение построено на max и min + один цикл, отсюда O(n) - линейная сложность. С
+    # точки зрения сложности - самое эффективное решение
+    big_3_c_3 = list(companies.values())[:3]
+    for i in list(companies.values())[3:]:
+        if i == max(big_3_c_3 + [i]):
+            big_3_c_3.remove(min(big_3_c_3))
+            big_3_c_3.insert(0, i)
+    print([v for v in companies.keys() if companies[v] in big_3_c_3])
