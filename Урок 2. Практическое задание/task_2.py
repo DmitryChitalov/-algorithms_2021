@@ -18,3 +18,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def odd_even_quantity(n, odd=0, even=0):
+    if n == 0:
+        return f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})"
+    else:
+        number = n % 10
+        n = n // 10
+        if number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return odd_even_quantity(n, odd=odd, even=even)
+
+
+def number_request():   # Добавил функцию для запроса ввода и простейшей проверки вводимого числа
+    try:
+        n = int(input("Введите число: "))
+        return n
+    except ValueError:
+        print("Вы должны ввести натрульное число")
+        return number_request()
+
+
+if __name__ == '__main__':
+    print(odd_even_quantity(number_request()))
