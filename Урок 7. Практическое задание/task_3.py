@@ -40,3 +40,62 @@ for i in
 
 
 """
+import random
+from statistics import median
+from timeit import timeit
+
+
+def gnome_sort(array):
+    i, j, size = 1, 2, len(array)
+    while i < size:
+        if array[i - 1] <= array[i]:
+            i, j = j, j + 1
+        else:
+            array[i - 1], array[i] = array[i], array[i - 1]
+            i -= 1
+            if i == 0:
+                i, j = j, j + 1
+    return f'Отсортированный массив - {array}\nМедианное значение с сортировкой массива: {array[m]}'
+
+
+def find_median(array):
+    n = len(array) // 2
+    for i in range(n):
+        array.remove(max(array[:]))
+    return max(array)
+
+
+m = int(input('Введите m для построения массива: '))
+user_array = [random.randint(0, 100) for i in range((2 * m) + 1)]
+print(f'Исходный массив - {user_array}')
+
+print(gnome_sort(user_array[:]))
+print(f'Медианное значение без сортировки: {find_median(user_array[:])}')
+print(f'Медианное значение через функцию median: {median(user_array[:])}')
+
+print('-' * 100)
+print('Замер поиска сортировкой')
+print(timeit('gnome_sort(user_array[:])', globals=globals(), number=1000))
+
+print('-' * 100)
+print('Замер поиска через ф-ию find_median')
+print(timeit('find_median(user_array[:])', globals=globals(), number=1000))
+
+print('-' * 100)
+print('Замер поиска через ф-ию median')
+print(timeit('median(user_array[:])', globals=globals(), number=1000))
+
+
+"""
+Замер поиска сортировкой
+0.014257799999999987
+----------------------------------------------------------------------------------------------------
+Замер поиска через ф-ию find_median
+0.003452099999999847
+----------------------------------------------------------------------------------------------------
+Замер поиска через ф-ию median
+0.0006059000000000481
+
+Исходя из полученных результатов видно, что 1-й результат с сортировкой самый медленный, т.к трятится время на
+сортировку массива. Самый быстрый оказался с помощью ф-ии median
+"""
