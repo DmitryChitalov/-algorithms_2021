@@ -15,3 +15,24 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib
+
+url_cash = {}
+
+
+def url_hash(url):
+    salt = url.replace('.', '')
+    get_hash = hashlib.sha256(salt.encode() + url.encode('utf-8')).hexdigest()
+    if url_cash.get(get_hash):
+        print(url_cash[get_hash])
+    else:
+        url_cash[get_hash] = url
+
+
+url_hash('google.ru')
+print(url_cash)
+url_hash('yandex.ru')
+print(url_cash)
+url_hash('google.ru')
+print(url_cash)
