@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+
+# 0(n)
+def min_value(lst):
+    min_el = lst[0] if lst else None
+    for i in lst:
+        if i < min_el:
+            min_el = i
+    return min_el
+
+
+# O(n^2)
+def min_value_v2(lst):
+    for i in lst:
+        min_el = True
+        for j in lst:
+            if j < i:
+                min_el = False
+        if min_el:
+            return i
+
+
+my_list = random.sample(range(0, 500), 10)
+print(my_list)
+print(min_value(my_list))
+print(min_value_v2(my_list))
