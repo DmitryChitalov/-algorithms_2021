@@ -15,3 +15,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_line(n, result=0, count=0):
+    if n == count:
+        return print(result)
+    else:
+        result = (result + 1 / 2 ** count) if count % 2 == 0 else (result - 1 / 2 ** count)
+        count += 1
+    return sum_line(n, result, count)
+
+
+sum_line(int(input('Введите натуральное число: ')))

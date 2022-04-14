@@ -11,3 +11,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_number(random_num, count=0):
+    user_number = int(input('Угадайте случайное целое число от 0 до 100: '))
+    if (random_num == user_number) or (count == 10):
+        if random_num == user_number:
+            return print('Вы угадали!')
+        else:
+            return print('У вас закончились попытки!')
+    else:
+        count += 1
+        if user_number > random_num:
+            print(f'Вы ввели число больше загаданного. Попробуйте снова, у вас осталось {10 - count} попыток')
+        else:
+            print(f'Вы ввели число меньше загаданного. Попробуйте снова, у вас осталось {10 - count} попыток')
+    return guess_number(random_num, count)
+
+
+guess_number(random.randint(0, 100))

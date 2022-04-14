@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def determination_num(number, count_even=0, count_odd=0):
+    if (number % 10 == 0) & (number // 10 == 0):
+        return print(f'В введенном натуральном числе {count_even} четных и {count_odd} нечетных цифр.')
+    else:
+        if (number % 10) % 2 == 0:
+            count_even += 1
+        else:
+            count_odd += 1
+
+    return determination_num(number // 10, count_even, count_odd)
+
+
+determination_num(int(input('Введите натуральное число: ')))

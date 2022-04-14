@@ -21,3 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_symbol(n=32, symbol_row='', count=0):
+    if n == 128:
+        return print(symbol_row)
+    else:
+        if (count % 10 == 0) & (count // 10 != 0):
+            symbol_row = symbol_row + f'\n' + f'{n} - {chr(n)}'
+        else:
+            symbol_row = symbol_row + f'{n} - {chr(n)}' if count == 0 else symbol_row + f' {n} - {chr(n)}'
+        n += 1
+        count += 1
+    return print_symbol(n, symbol_row, count)
+
+
+print_symbol()
