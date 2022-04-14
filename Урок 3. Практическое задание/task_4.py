@@ -15,3 +15,23 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# hash: url
+import hashlib
+
+cache_dict = {}
+
+
+def cache_func(url):
+    """Функция проверяет наличие url в кэше"""
+    url_hash = hashlib.sha256(url.encode()).hexdigest()
+    url1 = cache_dict.get(url_hash)
+    if url1 is None:
+        cache_dict[url_hash] = url
+    return url
+
+
+print(cache_dict)
+
+cache_func('https://gb.ru')
+
+print(cache_dict)
