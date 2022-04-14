@@ -10,7 +10,12 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
+class MyZeroBinaryTree(Exception): pass
+
+
 class BinaryTree:
+
     def __init__(self, root_obj):
         # корень
         self.root = root_obj
@@ -22,6 +27,13 @@ class BinaryTree:
     # добавить левого потомка
     def insert_left(self, new_node):
         # если у узла нет левого потомка
+        try:
+            if (
+                    self.get_right_child() != None and new_node > self.get_right_child().right_child) or new_node > self.root:
+                raise MyZeroBinaryTree
+        except MyZeroBinaryTree:
+            print(
+                f"Вы пытаетесь вставить командой insert_left элемент {new_node},элемент больше корня или больше правого элемента")
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -37,6 +49,13 @@ class BinaryTree:
     # добавить правого потомка
     def insert_right(self, new_node):
         # если у узла нет правого потомка
+        try:
+            if (
+                    self.get_left_child().left_child != None and new_node < self.get_left_child().left_child) or new_node > self.root:
+                raise MyZeroBinaryTree
+        except MyZeroBinaryTree:
+            print(
+                f"Вы пытаетесь вставить командой insert_right элемент {new_node},элемент больше корня или меньше левого элемента")
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
@@ -77,3 +96,5 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+# Вывод: сделала валидацию значений узлов в соответствии с требованиями для бинарного дерева
