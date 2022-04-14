@@ -28,3 +28,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+class StackClass:
+    def __init__(self):
+        self.elems = [[]]
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """ Кладем в каждцю стопку по три элемента"""
+        if len(self.elems[len(self.elems) - 1]) < 3:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([el])
+
+    def pop_out(self):
+        """ Удаляем последний элемент из последней стопки"""
+        last_el = self.elems[len(self.elems) - 1]
+        return last_el.pop()
+
+    def get_val(self):
+        """Выводим на экран последний элемент"""
+        lst = self.elems[len(self.elems) - 1]
+        return print(lst[len(lst) - 1])
+
+    def stack_size(self):
+        """ Выводим кол-во элементов в стеке"""
+        n = 0
+        for lst in self.elems:
+            n = n + len(lst)
+        print(n)
+
+    def print_all(self):
+        """ Выводим на экран все элементы """
+        print(self.elems)
+
+ST_OBJ = StackClass()
+ST_OBJ.push_in(12)
+ST_OBJ.push_in(34)
+ST_OBJ.push_in(5)
+ST_OBJ.push_in(123)
+ST_OBJ.push_in(98)
+ST_OBJ.push_in(15)
+ST_OBJ.push_in(344)
+ST_OBJ.push_in(52)
+ST_OBJ.push_in(1)
+ST_OBJ.push_in(8)
+
+ST_OBJ.print_all()
+ST_OBJ.stack_size()

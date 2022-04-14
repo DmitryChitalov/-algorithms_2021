@@ -20,3 +20,51 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+company_income = {
+    'A': 45800,
+    'B': 159300,
+    'C': 112000,
+    'D': 99000,
+    'E': 138000,
+    'F': 24890
+}
+
+def example_1(company_list):
+    """
+    O(n^2) или O(n^3)? Я так понимаю кубическая
+    Считается ли вложенный if, где есть in, который в свою очередь вложен во ынутренний for
+    и этот внутренний for вложен во внешний for, т.е. O(n) * O(n) * O(n) = O(n^3)
+    """
+    lst = []
+    for i in range(3):                          # O(n)
+        income = 0                              # O(1)
+        for item in company_list.values():      # O(n)
+            if item in lst:                     # O(n)
+                continue
+            if item > income:
+                income = item                   # O(1)
+        lst.append(income)                      # O(1)
+    return lst                                  # O(1)
+
+print(example_1(company_income))
+
+def example_2(lst):
+    """
+    O(nlog n) линейно-логарифмическая сложность
+    """
+    new_lst = []
+    for item in lst.values():   # O(n)
+        new_lst.append(item)    # O(1)
+    new_lst.sort()              # O(nlog n)
+    new_lst.reverse()           # O(n)
+
+    return new_lst[:3]         # O(1) + O(n) = O(n) надеюсь правильно трактую
+
+print(example_2(company_income))
+
+"""
+Вывод: Лин-лог сложность время менее зависит от увеличениея объема данных, а
+у кубической сложности зависимость О(n) будет расти гораздо быстрее с увеличением 
+объема данных, что видно из таблицы и графиков
+
+"""
