@@ -1,3 +1,5 @@
+from typing import Any
+
 """
 Задание 2.
 
@@ -19,3 +21,37 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+def find_min_1(lst_obj: list) -> Any:
+    """
+    Функция должна вернуть наименьшее число в списке
+    Алгоритм: сравнение каждого числа со всеми другими элементами списка.
+    Сложность алгоритма: O(n^2) - квадратичная.
+    """
+    minimum = lst_obj[0]
+    for i in range(len(lst_obj)):
+        for j in range(i + 1, len(lst_obj)):
+            if lst_obj[i] < lst_obj[j] and lst_obj[i] < minimum:
+                minimum = lst_obj[i]
+            elif lst_obj[j] < minimum:
+                minimum = lst_obj[j]
+    return minimum
+
+
+# первоначально я не использовала индексы, а просто гуляла по списку.
+# но я подумала, что так оптимизрованнее
+def find_min_2(lst_obj: list) -> Any:
+    """
+    Функция должна обеспечивать поиск минимального значения для списка
+    Алгоритм:
+    Сложность алгоритма: O(n) - линейная.
+    """
+    i, j = 0, len(lst_obj) - 1
+    while i != j:
+        if lst_obj[i] >= lst_obj[j]:
+            i += 1
+        else:
+            j -= 1
+    return lst_obj[j]
+

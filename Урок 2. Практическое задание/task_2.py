@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def counter(num: int, even=0, odd=0):
+    if num == 0:
+        return even, odd
+    last_num = num % 10
+    if last_num % 2 == 1:
+        return counter(num // 10, even, odd + 1)
+    else:
+        return counter(num // 10, even + 1, odd)
+
+
+number = int(input('Введите натуральное число: '))
+res = counter(number)
+print('Четных и нечетных цифр в числе:', res)
