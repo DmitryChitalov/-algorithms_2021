@@ -19,3 +19,35 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# 1. Алгоритм с O(n^2) по первому условию
+
+
+def first_min_alg(my_list):                         # O(n^2)
+    temp_min = my_list[0]                           # O(1)
+    for i in my_list:                               # O(n)
+        min_res = i if i < temp_min else temp_min   # O(1)
+        for j in my_list:                           # O(n)
+            temp_min = i if i < j else j            # O(1)
+    return min_res                                  # O(1)
+
+
+# Проверка результата (вернет 5)
+test_list = [100, 200, 300, 400, 50, 420, 180, 200, 10, 5]
+print(f'Результат по 1-му алгоритму: {first_min_alg(test_list)}')
+
+
+# 2. Алгоритм с O(n) по второму условию
+
+
+def second_min_alg(my_list):    # O(n)
+    min_res = my_list[0]        # O(1)
+    for i in my_list:           # O(n)
+        if i < min_res:         # O(1)
+            min_res = i         # O(1)
+    return min_res              # O(1)
+
+
+# Проверка результата (вернет 5)
+print(f'Результат по 2-му алгоритму: {second_min_alg(test_list)}')
