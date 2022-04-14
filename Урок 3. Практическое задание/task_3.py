@@ -21,3 +21,16 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def get_number_of_different_substring(string: str):
+    substring_set = set()
+    for i in range(1, len(string)):
+        for j in range(len(string)):
+            substring = string[j:j+i]
+            substring_set.add(substring)
+    return len(substring_set)
+
+
+user_str = "papa"
+print(get_number_of_different_substring(user_str))
