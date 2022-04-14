@@ -12,7 +12,14 @@
 Без аналитики задание считается не принятым!
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from collections import Counter
+from timeit import timeit
+
+# array = [1, 3, 1, 3, 4, 5, 1]
+array = [1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5,
+         1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4,
+         5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 1, 3, 4,
+         3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1]
 
 
 def func_1():
@@ -39,5 +46,44 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3(array_in):
+    most_common = max(array_in, key=array_in.count)
+    return f'Чаще всего встречается число {most_common}, ' \
+           f'оно появилось в массиве {array_in.count(most_common)} раз(а)'
+
+
+def func_4(array_in):
+    most_common, num_most_common = Counter(array_in).most_common(1)[0]
+    return f'Чаще всего встречается число {most_common}, '\
+           f'оно появилось в массиве {num_most_common} раз(а)'
+
+
+# print(func_1())
+# print(func_2())
+# print(func_3(array))
+# print(func_4(array))
+
+print(
+    timeit(
+        "func_1()",
+        globals=globals(),
+        number=1000))
+print(
+    timeit(
+        "func_2()",
+        globals=globals(),
+        number=1000))
+print(
+    timeit(
+        "func_3(array)",
+        globals=globals(),
+        number=1000))
+print(
+    timeit(
+        "func_4(array)",
+        globals=globals(),
+        number=1000))
+
+# max(array, key=array.count) быстрее при работе с маленькими словарями.
+# Counter гораздо быстрее при работе с большими словарями, но при работе
+# с маленьким словарём справляется хуже других (правда значения в пределах погрешности).
