@@ -22,3 +22,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_reversed_str_from_int(num: int):
+    if num < 10:
+        return str(num)
+
+    last = num % 10
+    num = num // 10
+
+    return str(last) + get_reversed_str_from_int(num)
+
+
+if __name__ == '__main__':
+    is_complete = False
+
+    while not is_complete:
+        try:
+            user_num = int(input('Ведите строку чисел для реверса: '))
+            print(get_reversed_str_from_int(user_num))
+            is_complete = True
+
+        except ValueError:
+            print('Вы ввели строку (((. Исправьтесь')
