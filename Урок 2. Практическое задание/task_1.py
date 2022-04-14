@@ -28,3 +28,51 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count ():
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if operation == '0':
+        return "операция закончена"
+
+    else:
+        if operation in '+-*/':
+            try:
+                num_1 = int(input('Введите первое число: '))
+                num_2 = int(input('Введите второе число: '))
+
+                if operation == '+':
+                    res = num_1 + num_2
+                    print(f'Результат = {res}')
+                    return count()
+
+                elif operation == '-':
+                    res = num_1 - num_2
+                    print(f'Результат = {res}')
+                    return count()
+
+                elif operation == '*':
+                    res = num_1 * num_2
+                    print(f'Результат = {res}')
+                    return count()
+
+                elif operation == '/':
+                    try:
+                        res = num_1 / num_2
+                    except ZeroDivisionError:
+                        print('Делить на 0 нельзя')
+                    else:
+                        print(f'Результат = {res}')
+                    finally:
+                        return count()
+
+            except ValueError:
+                print('Введите число вместо строки')
+                return count()
+
+        else:
+            print('Введен неверный символ, попробуйте еще раз')
+            return count()
+
+
+count()
