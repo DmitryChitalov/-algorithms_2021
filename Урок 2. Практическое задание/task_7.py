@@ -16,3 +16,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def recur_method(numb):
+    if numb == 1:
+        return numb
+    else:
+        return recur_method(numb - 1) + numb
+
+
+try:
+    NUMB = int(input("Введите число: "))
+    if recur_method(NUMB) == NUMB * (NUMB + 1) / 2:
+        print('Равенство верно')
+except ValueError:
+    print("Вы вместо числа ввели строку (((. Исправьтесь")
+
+
+"""
+def get_sum_of_set(base):
+    return base if base == 1 else base + get_sum_of_set(base - 1)
+
+
+n = 3
+print(f'Is 1+2+...+{n} = {n}({n}+1)/2? \nAnswer: '
+      f'{get_sum_of_set(n) == n * (n + 1) / 2} (Sum = {get_sum_of_set(n)})')
+"""
