@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def parity(n, even=0, uneven=0):
+    if n == 0:
+        return f'{even, uneven}'
+    elif str(n % 10) in '13579':
+        uneven += 1
+    else:
+        even += 1
+    return parity(n // 10, even, uneven)
+
+
+print(parity(int(input('Введите число: '))))

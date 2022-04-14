@@ -20,3 +20,45 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+companies_info = {
+    'Металлотехника': 200000,
+    'Сыргазнефть': 400000,
+    'Мясомолоковода': 450000,
+    'Крайстальсевер': 900000,
+    'Мясоволокно': 670000,
+    'БалаковоЭнерго': 999999,
+    'Севастопольгаз': 100000
+}
+# Сложность - линейно - логарифмическая : n log n + 1
+top_orgz = sorted(companies_info.items(), key=lambda value: value[1], reverse=True)  # O(n log n)
+print(top_orgz[:3])  # O(1)
+
+
+companies_info = {
+    'Металлотехника': 200000,
+    'Сыргазнефть': 400000,
+    'Мясомолоковода': 450000,
+    'Крайстальсевер': 900000,
+    'Мясоволокно': 670000
+}
+
+#  Квадратичная сложность: n + n ** 2 + 1
+sorted_values = sorted(companies_info.values(), reverse=True)  # O(n)
+first_three_orgz = []
+
+
+def get_keys(dictionary):
+    for i in sorted_values:  # O(n)
+        for k in dictionary.keys():  # O(n)
+            if dictionary[k] == i:  # O(1)
+                first_three_orgz.append(k)  # O(1)
+                break
+    return first_three_orgz[:3]  # O(1)
+
+
+#  [print(i) for i in get_keys(companies_info)]
+print(f"Топ 3 организаций: {get_keys(companies_info)}")
+
+
+#  Первое решение является наиболее эффективнм, так как имеет линейно-логарифмическую сложность. 
