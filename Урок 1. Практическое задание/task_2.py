@@ -19,3 +19,34 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+import random
+
+
+def min1(l: list) -> int:
+    '''
+    Сложность функции O(n)
+    '''
+    mindigit = l[0]                 # O(1)
+    for x in range(1, len(l)):      # O(n)
+        mindigit = mindigit if mindigit < l[x] else l[x]  # O(1)
+    return mindigit                 # O(1)
+
+
+def min2(l: list) -> int:           # O(1)
+    '''
+    Сложность функции O(1)
+    '''
+    id, lenl = 0, len(l) - 1        # O(1)
+    mindigit = l[id]                # O(1)
+    while id < lenl:
+        id += 1               # O(1)
+        mindigit = mindigit if mindigit < l[id] else l[id]  # O(1)
+    return mindigit           # O(1)
+
+
+if __name__ == '__main__':
+    mylist = [random.randint(0, 100) for i in range(10)]    # O(n)
+    print(mylist)           # O(1)
+    print(min1(mylist))     # O(1)
+    print(min2(mylist))     # O(1)
