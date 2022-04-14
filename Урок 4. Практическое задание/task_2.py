@@ -11,8 +11,31 @@
 Будьте внимательны, задание хитрое. Не все так просто, как кажется.
 """
 
+"""
+Memoization is not needed in this solution - there are few repetitions and calls to the cache; in fact,
+only writes to the cache are performed.
+Memoization is effective when executing a function instance with a large number of repetitions.
+Memoization had a positive impact on measurements. they ran for the samevalues num_100, num_1000 and num_10000, 
+then in fact we simply retrieved values from the dictionary by key.
+
+Мемоизация в данном решении не нужна - повторов и обращений в кэш мало.Фактически идет только запись в кэш.
+Мемоизация эффективна при выполнении экземпляра функции с большим количествам повторений.
+Мемоизация повлияла положительно на замеры. они выполнялись для одного и того же 
+значения num_100, num_1000 и num_10000, то по сути мы просто извлекали из словаря значения по ключу.
+"""
+"""
+Не оптимизированная функция recursive_reverse
+0.020440799999999995
+0.022920800000000005
+0.04161140000000001
+----------------------------------------------------------------------------------------------------
+Оптимизированная функция recursive_reverse_mem
+0.0014510000000000078
+0.0014514000000000193
+0.0016419999999999768
 from timeit import timeit
 from random import randint
+"""
 
 
 def recursive_reverse(number):

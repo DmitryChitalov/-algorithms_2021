@@ -25,3 +25,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+users_database = {"Marusia": {"password": "marusia111", "activated": True},
+             "Renata": {"password": "renata111", "activated": False},
+             "Solara": {"password": "solara111", "activated": True},
+             "Kolbasa": {"password": "kolbasa111", "activated": False},
+             "WSAW": {"password": "wsaw111", "activated": True},
+             "YesYes": {"password": "yesyes111", "activated": False}}
+
+
+# Variant 1
+def authentication_app(user_db, login, password): #O(1)
+    if user_db.get(login):
+        if user_db[login]["password"] == password \
+                and user_db[login]["activated"]:
+            return "You are successfully logged in"
+        elif not user_db[login]["activated"]:
+            return "Activate your account to log in"
+        elif user_db[login]["password"] != password:
+            return "The password was entered incorrectly. Try again"
+    else:
+        return "User is not found. Register now"
+
+
+# Variant 2
+def authentication_app_two(user_db, login, password):
+    for key, value in user_db.items(): #O(n)
+        if key == login:
+            if value["password"] == password and value["activated"]:
+                return "You are logged in"
+            elif not value["activated"]:
+                return "Activate your account"
+            elif value["password"] != password:
+                return "The password was entered incorrectly. Try again"
+
+    return "User is not found. Register now"
+
+
+print(authentication_app(users_database, "Marusia", "marusia111"))
+print(authentication_app_two(users_database, "Marusia", "marusia111"))
+print(authentication_app(users_database,"Renata", "renata111"))
+print(authentication_app_two(users_database, "Kolbasa", "qw874584"))
+print(authentication_app(users_database, "WSAW", "000000"))
+print(authentication_app_two(users_database, "YesYes", "yesyes111"))
+print(authentication_app(users_database, "lalalala", "hjjjj52"))
+print(authentication_app_two(users_database, "roma", "gfgfgfg"))
+
+"""
+Variant 1 will be more efficient, since it has a constant complexity of O (1) due to the lack of complex algorithms, 
+while as option 2 has linear complexity O (n), since it contains a cycle"""

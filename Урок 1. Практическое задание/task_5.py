@@ -28,3 +28,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+stack_len = 10
+class SideboardWithPlates:
+
+    def __init__(self):
+        self.stack = {}
+        self.stack_key = 0
+
+    def append(self, value):
+
+        if len(self.stack) == 0:
+            self.stack_key = 0
+            self.stack[self.stack_key] = [value]
+        else:
+            app_stack = self.stack[self.stack_key]
+            if len(app_stack) < stack_len:
+                app_stack.append(value)
+            else:
+                self.stack_key = len(self.stack)
+                self.stack[len(self.stack)] = [value]
+                print("Do not add more plates to the stack")
+
+    def pop(self):
+
+        if len(self.stack) == 0:
+            print("No plates in the stack")
+            return
+        app_stack = self.stack[self.stack_key]
+        if len(app_stack) != 0:
+            return app_stack.pop()
+        else:
+            del self.stack[self.stack_key]
+            self.stack_key = len(self.stack) - 1
+            if len(self.stack) == 0:
+                print("No plates in the stack")
+                return
+            app_stack = self.stack[self.stack_key]
+            return app_stack.pop()

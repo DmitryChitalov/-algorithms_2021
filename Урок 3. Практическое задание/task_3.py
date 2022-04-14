@@ -21,3 +21,13 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+my_string = input('Enter the string: ')
+my_set = set()
+
+for i in range(len(my_string)):
+    for j in range(len(my_string) - 1 if i == 0 else len(my_string), i, -1):
+        my_set.add(hash(my_string[i:j]))
+
+substrings_count = len(my_set)
+print(f"In the line: '{my_string}' {substrings_count} substrings. \n"
+      f"Hash {my_set}")
