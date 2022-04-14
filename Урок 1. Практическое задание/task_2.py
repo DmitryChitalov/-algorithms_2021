@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+def find_min_1(list): # O(n^2)
+    min = list[0]
+    localmin = list[0]
+    for i in range(len(list)):
+        for j in range(len(list)):
+            if list[i] <= list[j]:
+                localmin = list[i]
+            if localmin < min:
+                min = localmin
+    return min
+
+def find_min_2(list): # O(n)
+    min = list[0]
+    for i in range(len(list)):
+        if list[i] <= min:
+            min = list[i]
+    return min
+
+
+lst = [1, 2, 3, 4, 5, 6, 0, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2]
+print(find_min_1(lst))
+print(find_min_2(lst))
