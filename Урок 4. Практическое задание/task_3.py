@@ -15,6 +15,11 @@
 """
 
 
+from cProfile import run
+from timeit import timeit
+from random import randint
+
+
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
         return revers_num
@@ -37,3 +42,42 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    enter_num = str(enter_num)
+    return ''.join([enter_num[i] for i in range(len(enter_num)-1, 0, -1)])
+
+
+def revers_sum(enter_num, n=100000):
+    for i in range(n):
+        revers_1(enter_num)
+        revers_2(enter_num)
+        revers_3(enter_num)
+        revers_4(enter_num)
+
+
+num_10000 = randint(100000000, 10000000000000)
+
+print(f'{timeit("revers_1(num_10000)", globals=globals(), number=100000)}')
+print(f'{timeit("revers_2(num_10000)", globals=globals(), number=100000)}')
+print(f'{timeit("revers_3(num_10000)", globals=globals(), number=100000)}')
+print(f'{timeit("revers_4(num_10000)", globals=globals(), number=100000)}\n')
+
+print(f'{run("revers_sum(num_10000)")}')
+
+
+"""
+Аналитика: 
+Функция          timeit                cProfile
+revers_1         1.0618809             2.615
+revers_2         0.3865133999999999    0.958
+revers_3         0.14666420000000002   0.225 
+revers_4         0.591035              0.983
+
+revers_1 самая медленная из-за рекурсивного алгоритма работы
+revers_2 уже быстрее, но из-за линейной сложности проигрывает revers_3
+revers_3 быстрее всего, т.к. использует срез со сложностью O(b-a)
+revers_4 сложность О(n) , поэтому схожа с revers_2, но немного опережает благодоря списковому включению
+"""
+
