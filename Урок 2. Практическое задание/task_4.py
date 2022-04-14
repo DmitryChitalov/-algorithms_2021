@@ -15,3 +15,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def another_summ(num, one, sum=0):
+    if num == 0:
+        return sum
+    return another_summ(num-1, one/-2, sum+one)
+
+
+num = int(input())
+one = 1
+print(another_summ(num, one))
