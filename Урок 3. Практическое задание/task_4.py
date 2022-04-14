@@ -15,3 +15,24 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+import hashlib
+from uuid import uuid4
+
+
+salt = uuid4().hex
+dict_cash_urls = {}
+
+
+def get_url(url):
+    if dict_cash_urls.get(url):
+        print(f'{url} присутствует в кэше')
+    else:
+        url_hash = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
+        dict_cash_urls[url] = url_hash
+        print(f'{url} добавлен в кэш')
+
+
+get_url('https://gb.ru')
+get_url('https://www.youtube.com')
+get_url('https://gb.ru')
