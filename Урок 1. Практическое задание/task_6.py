@@ -18,3 +18,62 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class TaskQueue:
+    def __init__(self):
+        self.tasks = []
+
+    def is_empty(self):
+        return self.tasks == []
+
+    def add_task(self, item):
+        self.tasks.insert(0, item)
+
+    def remove_task(self):
+        return self.tasks.pop()
+
+    def get_size(self):
+        return len(self.tasks)
+
+    def get_all_tasks(self):
+        return self.tasks
+
+
+if __name__ == '__main__':
+    all_tasks = TaskQueue()
+    completed_tasks = TaskQueue()
+    tasks_for_completion = TaskQueue()
+
+
+    def set_task_status(is_completed=True):
+        completed_tasks.add_task(all_tasks.remove_task()) if is_completed else tasks_for_completion.add_task(
+            all_tasks.remove_task())
+
+
+    for i in range(50):
+        all_tasks.add_task(i)
+
+    print(f'Было: {all_tasks.get_all_tasks()}')
+
+    set_task_status()
+    set_task_status()
+    set_task_status(False)
+    set_task_status()
+    set_task_status(False)
+    set_task_status()
+    set_task_status()
+    set_task_status()
+    set_task_status(False)
+    set_task_status(False)
+    set_task_status(False)
+    set_task_status(False)
+    set_task_status()
+    set_task_status()
+    set_task_status()
+    set_task_status(False)
+    set_task_status()
+
+    print(f'Стало: {all_tasks.get_all_tasks()}')
+    print(f'Выполненные: {completed_tasks.get_all_tasks()}')
+    print(f'На доработку: {tasks_for_completion.get_all_tasks()}')
