@@ -25,3 +25,40 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# Тяжелее вторая функция, так как они обе линейные, но у второй доминанта в два раза больше.
+
+
+def autent_func1(login, password):              # Сложность функции: O(n) линейная
+    if not login in users.keys():               # O(n)
+        return 'Пользователь не найден'         # O(1)
+    elif password != users.get(login)[0]:       # O(1)
+        return 'Неверный пароль'                # O(1)
+    elif not users.get(login)[1]:               # O(1)
+        return 'Сначала активируйте аккаунт'    # O(1)
+    else:
+        return 'Вы допущены к ресурсу'          # O(1)
+
+
+def autent_func2(login, password):              # Сложность функции: O(n)линейная
+    counter = 0                                 # O(1)
+    for i in users.keys():                      # O(n)
+        if login == i:                          # O(1)
+            counter += 1                        # O(1)
+    if counter == 0:                            # O(1)
+        return 'Пользователь не найден'         # O(1)
+    if password != users.get(login)[0]:         # O(1)
+        return 'Неверный пароль'                # O(1)
+    elif not users.get(login)[1]:               # O(1)
+        return 'Сначала активируйте аккаунт'    # O(1)
+    else:
+        return 'Вы допущены к ресурсу'          # O(1)
+
+
+users = {'Katya': ['12345qwerty', True], 'duke': ['qwerty12345', False]}
+
+print(autent_func1(input('Введите login '), input('Введите пароль ')))
+print(autent_func2(input('Введите login '), input('Введите пароль ')))
+
+print(type(users.keys()))
+
+
