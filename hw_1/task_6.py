@@ -1,0 +1,82 @@
+"""
+Задание 6.
+Задание на закрепление навыков работы с очередью
+
+Примечание: в этом задании вспомните ваши знания по работе с ООП
+и опирайтесь на пример урока
+
+Реализуйте структуру "доска задач".
+
+Структура должна предусматривать наличие несольких очередей задач, например
+1) базовой, откуда задачи берутся, решаются и отправляются в список решенных
+2) очередь на доработку, когда нерешенные задачи из первой очереди отправляются
+на корректировку решения
+
+После реализации структуры, проверьте ее работу на различных сценариях
+"""
+
+class Queue:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+
+class TaskBoard:
+    def __init__(self):
+        self.cur_queue = Queue()    # Базоваяя очередь
+        self.revision_queue = Queue()   # очередь на доработку
+        self.log = []  # Список решенных задач
+
+    def resolve_task(self):
+        """Закрываем текущую задачу и добавляем в лог"""
+        task = self.cur_queue.from_queue()
+        self.log.append(task)
+
+    def to_revision_task(self):
+        """Отправка задачи на доработку"""
+        task = self.cur_queue.from_queue()
+        self.revision_queue.to_queue(task)
+
+    def to_current_queue(self, item):
+        """Добавление задачи в текущие"""
+        self.cur_queue.to_queue(item)
+
+    def from_revision(self):
+        """Возвращение задачи из доработки в текущую очередь"""
+        task = self.revision_queue.from_queue()
+        self.cur_queue.to_queue(task)
+
+    def current_task(self):
+        """Текущая задача"""
+        return self.cur_queue.elems[len(self.cur_queue.elems) - 1]
+
+    def current_revision(self):
+        """Задача в доработке"""
+        return self.revision_queue.elems[len(self.revision_queue.elems) - 1]
+
+
+if __name__ == '__main__':
+    task_board = TaskBoard()
+    task_board.to_current_queue("Task_1")
+    task_board.to_current_queue("Task_2")
+    task_board.to_current_queue("Task_3")
+    task_board.to_current_queue("Task_3")
+    print(f'список текущих задач: {task_board.cur_queue.elems}')
+    print(f'текущая задача: {task_board.current_task()}')
+    print(f'отправляем на доработку: {task_board.to_revision_task()}')
+    task_board.resolve_task()
+    task_board.from_revision()
+    print(f'список текущих задач: {task_board.cur_queue.elems}')
+    print(f'текущая задача: {task_board.current_task()}')
+    print(f'Cписок решенных: {task_board.log}')
