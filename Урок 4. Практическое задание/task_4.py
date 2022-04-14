@@ -11,11 +11,15 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
 def func_1():
+    """
+    Сложность - O(n^2)
+    """
     m = 0
     num = 0
     for i in array:
@@ -28,6 +32,9 @@ def func_1():
 
 
 def func_2():
+    """
+    Сложность - O(n^2)
+    """
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -39,5 +46,47 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def memoize(f):
+    cache = {}
+
+    def decorate(*args):
+
+        if args in cache:
+            return cache[args]
+        else:
+            cache[args] = f(*args)
+            return cache[args]
+    return decorate
+
+
+@memoize
+def func_1_mem():
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(timeit("func_1()", globals=globals(), number=10000))
+print(timeit("func_2()", globals=globals(), number=10000))
+print(timeit("func_1_mem()", globals=globals(), number=10000))
+
+"""
+Сделав профилировку, видим, что первая функция срабатывает быстрее.
+Проанализиров задачу, видим, что мы много кратно выполняем одну и ту же процедуру: поиск количества того, сколько раз 
+элемент входит в массив. Думаю, тут лучше использовать мемоизацию.
+
+Результаты:
+0.042884900000000004
+0.06206789999999998
+0.004093199999999991
+
+Получилось оптимизировать функцию
+"""
