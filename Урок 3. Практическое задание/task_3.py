@@ -21,3 +21,14 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+string = 'hobbit'
+
+substrings = set()
+for i in range(0, len(string) + 1):
+    for j in range(i + 1, len(string) + 1):
+        substring = string[i:j]
+        substrings.add(hash(substring))
+
+print(substrings)

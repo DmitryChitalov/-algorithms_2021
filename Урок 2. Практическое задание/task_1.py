@@ -28,3 +28,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursive_calc():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if action == "0":
+        quit()
+    elif action not in '+-*/0':
+        print('Неверная команда!')
+        recursive_calc()
+    else:
+        try:
+            first_num = int(input('Введите первое число: '))
+            second_num = int(input('Введите второе число: '))
+        except ValueError:
+            print("Необходимо ввести число!")
+            recursive_calc()
+        if action == '+':
+            print(f'Результат {first_num + second_num}')
+            recursive_calc()
+        elif action == '-':
+            print(f'Результат {first_num - second_num}')
+            recursive_calc()
+        elif action == '*':
+            print(f'Результат {first_num * second_num}')
+            recursive_calc()
+        elif action == '/':
+            try:
+                print(f'Результат {first_num / second_num}')
+            except ZeroDivisionError:
+                print('Делить на 0 НЕЛЬЗЯ!')
+            recursive_calc()
+
+
+recursive_calc()

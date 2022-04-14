@@ -14,6 +14,9 @@
 Без аналитики задание считается не принятым
 """
 
+from cProfile import run
+from timeit import timeit
+
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -37,3 +40,42 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def revers_4(enter_num):
+    list_num = list(str(enter_num))
+    list_num.reverse()
+    revers = "".join(list_num)
+    return revers
+
+
+run('revers_1(1000000)')
+run('revers_2(1000000)')
+run('revers_3(1000000)')
+run('revers_4(1000000)')
+
+print(
+    timeit(
+        'revers_1(1000000)',
+        globals=globals(),
+        number=10000))
+print(
+    timeit(
+        'revers_2(1000000)',
+        globals=globals(),
+        number=10000))
+print(
+    timeit(
+        'revers_3(1000000)',
+        globals=globals(),
+        number=10000))
+print(
+    timeit(
+        'revers_4(1000000)',
+        globals=globals(),
+        number=10000))
+
+""" В итоге срез луще всех, т.к. по сути он является встроенной функцией.
+ Предложенное мною решение с .revers хуже, т.к. тратится время на формирование
+ перевернутой строки.
+ """
