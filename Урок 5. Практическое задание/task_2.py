@@ -34,3 +34,39 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+
+my_dct = defaultdict(int)
+
+hex_1 = 'A2'
+hex_2 = 'C4F'
+my_dct['num_1'] = list(hex_1)
+my_dct['num_2'] = list(hex_2)
+my_dct['sum'] = list(hex(int(hex_1, 16) + int(hex_2, 16)).strip('0x').upper())
+my_dct['mul'] = list(hex(int(hex_1, 16) * int(hex_2, 16)).strip('0x').upper())
+print('Решение через defaultdict')
+print(f'Сложение: {my_dct["sum"]}')
+print(f'Умножение: {my_dct["mul"]}')
+
+"""
+Решение с ООП
+"""
+
+
+class HexNum:
+    def __init__(self, number):
+        self.number = ''.join(number)
+
+    def __add__(self, other):
+        return list(f'{(int(self.number, 16) + int(other.number, 16)):X}')
+
+    def __mul__(self, other):
+        return list(f'{(int(self.number, 16) * int(other.number, 16)):X}')
+
+
+hex_1 = HexNum(list(hex_1))
+hex_2 = HexNum(list(hex_2))
+print('Решение через ООП')
+print(f'Сложение: {hex_1 + hex_2}')
+print(f'Умножение: {hex_1 * hex_2}')
+
