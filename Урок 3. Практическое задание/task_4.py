@@ -15,3 +15,18 @@ url : хеш-url
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from hashlib import sha256
+
+cache = {}
+salt = 'some salt'
+
+
+def cache_url(url):
+    if url in cache.keys():
+        print(f'Адрес {url} уже есть в кэше!')
+    else:
+        cache[url] = sha256(salt.encode() + url.encode()).hexdigest()
+
+
+cache_url('https://www.gb.ru')
+cache_url('https://www.gb.ru')

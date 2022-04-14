@@ -21,3 +21,21 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+import hashlib
+
+word = input('Введите слово: ')
+set_of_hash = set()
+
+
+for i in range(len(word)):
+    for j in range(i + 1, len(word) + 1):
+        if word[i:j] != word:
+            set_of_hash.add(hashlib.sha256(word[i:j].encode()).hexdigest())
+
+print(f'Уникальных подстрок: {len(set_of_hash)}')
+
+
+
+
