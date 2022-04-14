@@ -22,3 +22,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def reverse_number(int_number):
+    """
+    Функция возввращает число в обратном порядке
+    :param int_number: целое число
+    :return: целое число задом наперед
+    """
+    if int_number // 10 == 0:
+        return int_number
+    return f'{int_number % 10}' + f'{reverse_number(int_number // 10)}'
+
+
+NUMBER = int((input("Введите целое число: ")))
+print(f'Перевернутое число: {reverse_number(NUMBER)}')

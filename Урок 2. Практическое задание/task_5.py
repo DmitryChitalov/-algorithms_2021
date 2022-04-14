@@ -13,7 +13,7 @@
 92 - \ 93 - ] 94 - ^ 95 - _ 96 - ` 97 - a 98 - b 99 - c 100 - d 101 - e
 102 - f 103 - g 104 - h 105 - i 106 - j 107 - k 108 - l 109 - m 110 - n 111 - o
 112 - p 113 - q 114 - r 115 - s 116 - t 117 - u 118 - v 119 - w 120 - x 121 - y
-122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - 
+122 - z 123 - { 124 - | 125 - } 126 - ~ 127 - z
 
 Подсказка:
 Допускается исп-е встроенных ф-ций, в частности, chr()
@@ -21,3 +21,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def create_ascii_table(row_length=10, start_ch=32, end_ch=127):
+    """
+        Выводит на экран коды и символы таблицы ASCII, начиная с символа
+        под номером 32 и заканчивая 127-м включительно.
+    :param row_length: Количетво символов в строке
+    :param start_ch: Начальный символ
+    :param end_ch: Конечный символ
+    """
+    if start_ch == end_ch:
+        return f'{start_ch} - {chr(start_ch)}'
+    elif row_length == 1:
+        return f'{start_ch} - {chr(start_ch)} ' + '\n' + str(create_ascii_table(10, start_ch+1))
+    return f'{start_ch} - {chr(start_ch)} ' + str(create_ascii_table(row_length-1, start_ch+1))
+
+
+print(create_ascii_table())
