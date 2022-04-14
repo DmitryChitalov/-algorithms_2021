@@ -20,3 +20,29 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+
+
+def hash_pwd(pwd):
+    pwd_hash = hashlib.sha256(pwd.encode() + 's7gd7g8sf9773nfsdfj4jsdfkklkdcvnllaiu3i4234'.encode()).hexdigest()
+    return pwd_hash
+
+
+file = open('pwdbase.txt', 'w')
+pwd = input('Введите пароль: ')
+pwd_hash = hash_pwd(pwd)
+print('Хеш:', pwd_hash)
+file.write(pwd_hash)
+file.close()
+
+file = open('pwdbase.txt', 'r')
+rpt_pwd = input('Введите пароль повторно: ')
+rpt_hash = hash_pwd(rpt_pwd)
+pwd_hash = file.read()
+file.close()
+print('Хеш:', rpt_hash)
+if rpt_hash == pwd_hash:
+    print('Пароль верный!')
+else:
+    print('Пароль неверный!')
+
