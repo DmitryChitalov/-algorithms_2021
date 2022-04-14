@@ -18,3 +18,58 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+# Вариант 1. Рекурсивная функция
+
+
+def count_even_odd(my_number):
+    """ Функция выводит результат в список """
+    cnt_res = []  # тут храним количество
+    if my_number == 0:
+        return [0, 0]
+    if my_number % 10 % 2 == 0:
+        cnt_res = [1, 0]
+    else:
+        cnt_res = [0, 1]
+    my_number = my_number // 10
+    return list(map(sum, zip(cnt_res, count_even_odd(my_number))))
+
+
+""" Можно так было сделать: 
+    return [cnt_res[0] + count_even_odd(my_number)[0],
+    cnt_res[1] + count_even_odd(my_number)[1]] """
+
+
+# Проверка результата count_even_odd()
+print('1. Функция с рекурсией')
+test_number = [34560, 5555, 4444, 2020, 2209, 1153, 123]
+for i in test_number:
+    test_result = count_even_odd(i)
+    print(f'Рекурсией для {i}:', test_result, end=' - ')
+    print('четных {0}, а нечетных {1}!'.format(*test_result))
+
+
+# --------------------------------------------------------------
+# Вариант 2. Решение с циклом
+print('\n2. Функция с циклом')
+
+
+def count_even_odd_cycle(number):
+    cnt_res = [0, 0]
+    while True:
+        if number % 10 % 2 == 0:
+            cnt_res[0] += 1
+        else:
+            cnt_res[1] += 1
+        number = number // 10
+        if number == 0:
+            break
+    return cnt_res
+
+
+# Проверка результата count_even_odd_cycle()
+for i in test_number:
+    test_result = count_even_odd_cycle(i)
+    print(f'Циклом для {i}:', test_result, end=' - ')
+    print('четных {0}, а нечетных {1}!'.format(*test_result))
