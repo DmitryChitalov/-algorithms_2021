@@ -19,3 +19,32 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+# O(1) + O(n) * O(n) + O(1) = O(n**2)
+def min_val(lst_val):
+    m = lst_val[0]                          # O(1)
+    for j in range(len(lst_val)):           # O(n)
+        if m > lst_val[j] in lst_val[j:]:   # O(n)
+            m = lst_val[j]                  # O(1)
+
+    return m                                # O(1)
+
+
+lst = [2, 4, 7, 3, 1]
+print(min_val(lst))
+
+
+# O(1) + O(n) * O(1) + O(1) = O(n)
+def min_val(lst_val_2):
+    m = lst_val_2[0]                        # O(1)
+    for j in range(len(lst_val_2)-1):       # O(n)
+        if m > lst_val_2[j + 1]:            # O(1)
+            m = lst_val_2[j + 1]            # O(1)
+
+    return m                                # O(1)
+
+
+lst_2 = [1, 2, 0, 3, 4]
+print(min_val(lst_2))
+
