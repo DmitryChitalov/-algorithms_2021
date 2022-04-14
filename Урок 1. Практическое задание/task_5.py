@@ -28,3 +28,60 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+# Данная реализация создаёт список внутри списка объекта при достижении лимита 100.
+class StackClass:
+    def __init__(self):
+        self.elem = [[]]
+        self.num = 0
+        self.i = 0
+
+    def is_empty(self):
+        return self.elem == [[]]
+
+    def push_in(self, el):
+        if self.num < 100:
+            self.elem[self.i].append(el)
+            self.num += 1
+        elif self.num == 100:
+            self.elem.append([])
+            self.i += 1
+            self.num = 1
+            self.elem[self.i].append(el)
+
+    def pop_out(self):
+        if self.num > 0:
+            self.num -= 1
+            return self.elem[self.i].pop()
+        elif self.num == 0 and self.i > 0:
+            self.i -= 1
+            self.elem.pop()
+            return self.elem[self.i].pop()
+
+    def get_val(self):
+        return self.elem[self.i][len(self.elem[self.i]) - 1]
+
+    def stack_size(self):
+        return (len(self.elem) - 1) * 100 + len(self.elem[self.i])
+
+    def stack_size_list(self):
+        return self.i + 1
+
+
+if __name__ == '__main__':
+    obj = StackClass()
+    x = 102789
+    y = 90
+    while x > 0:
+        obj.push_in(10)
+        x -= 1
+    print(obj.stack_size())
+    while y > 0:
+        obj.pop_out()
+        y -= 1
+    print(obj.stack_size())
+    print(obj.get_val())
+    obj.push_in('Hello')
+    print(obj.get_val())
+    print(obj.stack_size_list())

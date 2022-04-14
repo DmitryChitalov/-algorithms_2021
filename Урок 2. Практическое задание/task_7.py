@@ -16,3 +16,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+
+
+def func_sum(n):
+    if n == 1:
+        return 1
+    else:
+        return func_sum(n-1) + n
+
+
+def func(n):
+    if func_sum(n) == n * (n + 1)/2:
+        print('True')
+    else:
+        print('False')
+
+
+if __name__ == '__main__':
+    num = random.randint(1, 1000)
+    func(num)

@@ -15,3 +15,31 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def func_num(n):
+    if n == 1:
+        return 1
+    else:
+        return func_num(n-1) / 2
+
+
+def func_sum(n):
+    if n == 1:
+        return 1
+    else:
+        if n % 2 == 0:
+            return func_sum(n - 1) - func_num(n)
+        else:
+            return func_sum(n - 1) + func_num(n)
+
+
+if __name__ == '__main__':
+    try:
+        x = int(input('enter number'))
+        print(func_sum(x))
+    except ValueError:
+        print('You entered not an integer.')
+
+
+
