@@ -28,3 +28,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+# 1 способ
+
+n = int(input())
+plates = []
+shelf = []
+max = 6
+count = 0
+
+while count != n:
+    plates.append('_')
+    count += 1
+    if count % max == 0:
+        shelf.append(plates.copy())
+        plates.clear()
+shelf.append(plates)
+
+print(shelf)
+
+# 2 способ через классы
+class Stack:
+    def __init__(self):
+        self.stack = []
+        self.max = None
+        self.shelf = []
+
+    def get_max(self, m):
+        self.max = m
+
+    def push(self, item):
+        self.stack.append('_')
+        if len(self.stack) == self.max:
+            self.shelf.append(self.stack.copy())
+            self.stack.clear()
+
+    def __str__(self):
+        return f'{self.shelf + self.stack}'
+
+plate = Stack()
+plate.get_max(6)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+plate.push(1)
+
+print(plate)

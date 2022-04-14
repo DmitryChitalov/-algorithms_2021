@@ -28,3 +28,41 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign == '0':
+        print('Вы вышли')
+    elif sign not in ('+', '-', '*', '/'):
+        print('Некорректный знак')
+        return calc()
+    else:
+        try:
+            a = float(input('Введите первое число: '))
+        except ValueError:
+            print('Вы ввели строку')
+            return calc()
+        try:
+            b = float(input('Введите первое число: '))
+        except ValueError:
+            print('Вы ввели строку')
+            return calc()
+        if sign == '+':
+            print(f'{a} + {b} = {a + b}')
+            return calc()
+        elif sign == '*':
+            print(f'{a} * {b} = {a * b}')
+            return calc()
+        elif sign == '-':
+            print(f'{a} - {b} = {a - b}')
+            return calc()
+        elif sign == '/':
+            if b != 0:
+                print(f'{a} / {b} = {a / b}')
+                return calc()
+            else:
+                print('Делить на 0 нельзя')
+                # raise Exception('Делить на 0 нельзя')
+                return calc()
+
+calc()
