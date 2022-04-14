@@ -16,3 +16,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def sum_integers(number):
+    if number <= 0:
+        return 0
+    return number + sum_integers(number - 1)
+
+number = int(input("Введите натуральное число: "))
+print(sum_integers(number) == (number + 1) * number / 2)
