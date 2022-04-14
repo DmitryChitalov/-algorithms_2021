@@ -28,3 +28,61 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackOfPlates:
+    def __init__(self, max):
+        self.plates = [[]]
+        self.max = max
+
+    def is_empty(self):
+        return self.plates == [[]]
+
+    def push_in(self, plate):
+        if len(self.plates[len(self.plates) - 1]) == self.max:
+            self.plates.append([])
+        self.plates[len(self.plates) - 1].append(plate)
+
+    def pop_uot(self):
+        value = self.plates[len(self.plates) - 1].pop()
+        if self.plates[len(self.plates) - 1] == []:
+            del self.plates[len(self.plates) - 1]
+        return value
+
+    def get_val(self):
+        return self.plates[len(self.plates) - 1]
+
+    def stack_size(self):
+        return len(self.plates)
+
+if __name__ == '__main__':
+
+    pl = StackOfPlates(3)
+    print(pl.plates)
+    pl.push_in(1)
+    print(pl.plates)
+    pl.push_in(2)
+    print(pl.plates)
+    pl.push_in(3)
+    print(pl.plates)
+    pl.push_in(4)
+    print(pl.plates)
+    pl.push_in(5)
+    print(pl.plates)
+    pl.push_in(6)
+    print(pl.plates)
+    pl.push_in(7)
+    print(pl.plates)
+    pl.push_in(8)
+    print(pl.plates)
+    print(pl.stack_size())
+    pl.pop_uot()
+    print(pl.plates)
+    pl.pop_uot()
+    print(pl.plates)
+    pl.pop_uot()
+    print(pl.plates)
+    pl.pop_uot()
+    print(pl.plates)
+    print(pl.stack_size())
+    print(pl.get_val())

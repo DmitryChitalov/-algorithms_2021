@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+lst_obj = [8, 41, 9, 11, 74, 31, 8, 99, 45, 24]
+
+
+def quadratic_search(lst_obj):  # квадратичная
+    min_value = lst_obj[0]  # константная
+    for i in lst_obj:  # линейная
+        for j in lst_obj:  # линейная
+            if i < j and i < min_value:  # константная
+                min_value = i  # константная
+    return min_value  # константная
+
+
+def linear_search(lst_obj):  # линейная
+    min_value = lst_obj[0]  # константная
+    for i in lst_obj:  # линейная
+        if min_value > i:  # константная
+            min_value = i  # константная
+    return min_value  # константная
+
+
+print(linear_search(lst_obj))
+print(quadratic_search(lst_obj))

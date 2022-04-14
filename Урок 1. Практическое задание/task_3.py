@@ -20,3 +20,25 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company_dict = {
+    'Samsung': 20000,
+    'Geekbrains': 3000,
+    'Google': 53000,
+    'Amazon': 95000,
+    'Tesla': 13000,
+    'Apple': 41000
+}
+# способ 1 - O(n log n) - линейная-логарифмическая из за функции sorted()
+# способ красивый и короткий, легко читается, но работает дольше
+print(sorted(company_dict.items(), reverse=True, key=lambda element: element[1])[:3])
+
+# способ 2 - O(n) линейный из за функции max() - этот спобоб предпочтительнее так как он быстрее
+temp_dict = company_dict
+max_dict = {}
+for i in range(3):
+    key_max, value_max = max(temp_dict.items(), key=lambda element: element[1])
+    max_dict[key_max] = value_max
+    del temp_dict[key_max]
+
+print(max_dict)
