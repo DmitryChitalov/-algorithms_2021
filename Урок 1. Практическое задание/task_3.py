@@ -20,3 +20,30 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company_dict = {'company_1': 100, 'company_2': 50, 'company_3': 300, 'company_4': 150, 'company_5': 250}
+top_company = {'top_1': ('', 0), 'top_2': ('', 0), 'top_3': ('', 0)}
+
+
+# Вариан 1. O(n log n)
+tmp = sorted(company_dict.items(), key=lambda x: x[1], reverse=True)[:3]  # O(n log n)
+top_company['top_1'], top_company['top_2'], top_company['top_3'] = tmp    # O(n)
+
+print(top_company)
+
+# Вариант 2. O(n)
+for key, val in company_dict.items():                                     # O(n)
+    if val > top_company['top_1'][1]:                                     # O(1)
+        top_company['top_1'] = (key, val)                                 # O(1)
+    else:
+        top_company['top_3'] = top_company['top_2']                       # O(1)
+        top_company['top_2'] = (key, val)                                 # O(1)
+
+print(top_company)
+
+"""
+С точки зрения сложности алгоритма, более выгодным выглядит вариант 2, 
+так как с увеличением данных сложность будет возрастать линейно.
+Но вариант 1 более лаконичным с точи зрения оформления. Так же можно было оформить в виде генератора словаря,
+но тогда не очень понятно как оценивать сложность.
+"""
