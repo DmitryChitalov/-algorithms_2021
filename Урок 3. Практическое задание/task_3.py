@@ -21,3 +21,14 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+import hashlib
+
+string = input('Введите строку: ')
+a = set()
+for i in range(len(string)):
+    for j in range(i + 1, len(string) + 1):
+        if string[i:j] != string:
+            a.add(hashlib.sha256(string[i:j].encode()).hexdigest())
+
+print(f'Количество уникальных подстрок: {len(a)}')
+print(a)
