@@ -20,3 +20,48 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+profit_company = {'Audi': 1500, 'Mercedes': 4000, 'Volvo': 2000, 'BMW': 1000, 'Renault': 3000}
+print(len(profit_company))
+
+# Первый способ:
+# сложность O(n log n)
+
+
+def by_value(item):
+    return item[1]                                                          # O(1)
+
+
+max_profit = {}                                                             # O(1)
+i = 0                                                                       # O(1)
+for k, v in sorted(profit_company.items(), key=by_value, reverse=True):     # O(n + n log n)
+    if i < 3:                                                               # O(1)
+        max_profit.setdefault(k, v)                                         # O(1)
+    i = i + 1                                                               # O(1)
+print(max_profit)                                                           # O(1)
+
+
+# Второй способ:
+# Сложность O(n^2)
+
+m_dict = dict(Audi=1500, Mercedes=4000, Volvo=2000, BMW=1000, Renault=3000)
+
+val_list = []
+
+for v in m_dict.values():              # O(n)
+    val_list.append(v)                  # O(n)
+
+val_list.sort()                         # NlogN
+val_list = val_list[-3:]                # O(n)
+
+new_dict = {}                           # O(1)
+
+for i in range(3):                      # O(1)
+    for k, v in m_dict.items():        # O(n)
+        if v in val_list:               # O(n)
+            new_dict[k] = v             # O(1)
+
+for key, val in new_dict.items():
+    print(f'{key}: {val}')
+
+# Вывод: Первый способ выполняется быстрее так как самым "тяжелым" алгоритмом,
+# является функция SORT() = O (n log n)

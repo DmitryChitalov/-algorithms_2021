@@ -20,3 +20,72 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+import time
+
+
+def time_measure(func):
+    def start_measure(obj, desc):
+        start = time.time()
+        func(obj, desc)
+        stop = time.time()
+        print(f'{desc}\n{stop - start}')
+        return obj
+
+    return start_measure
+
+
+@time_measure
+def dict_add_values(obj, desc):  # Сложность функции: O(1)
+    for index in range(100000):  # O(1)
+        obj[index] = str(index)  # O(1)
+    return obj  # O(1)
+
+
+@time_measure
+def dict_change_values(obj, desc):  # Сложность функции: O(1)
+    for index in range(100000):  # O(1)
+        obj[index] = str(index + index)  # O(1)
+    return obj  # O(1)
+
+
+@time_measure
+def dict_delete_values(obj, desc):  # Сложность функции: O(1)
+    for index in range(100000):  # O(1)
+        obj.pop(index)  # O(1)
+    return obj  # O(1)
+
+
+@time_measure
+def list_add_values(obj, desc):  # Сложность функции: O(1)
+    for index in range(100000):  # O(1)
+        obj.append(str(index))
+    return obj
+
+
+@time_measure
+def list_change_values(obj, desc):  # Сложность функции: O(1)
+    for index in range(100000):  # O(1)
+        obj.insert(index - 1, str(index))  # O(1)
+    return obj  # O(1)
+
+
+@time_measure
+def list_delete_values(obj, desc):  # Сложность функции: O(1)
+    for index in range(100000):  # O(1)
+        obj.pop(index)  # O(1)
+    return obj  # O(1)
+
+
+new_dict = {}
+dict_add_values(new_dict, 'Время выполнения добавления в словарь:')
+dict_change_values(new_dict, 'Время выполнения замены значений словаря:')
+dict_delete_values(new_dict, 'Время выполнения очистки словаря:')
+
+new_list = []
+list_add_values(new_list, 'Время выполнения добавления в список:')
+list_change_values(new_list, 'Время выполнения замены значений списка:')
+list_delete_values(new_list, 'Время выполнения очистки списка:')
+
+# Вывод: Выполнение добавления в словарь происходит медленнее, чем добавление в список,
+# операции замены значений, удаление значений происходят быстрее на словаре
