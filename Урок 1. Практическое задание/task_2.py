@@ -19,3 +19,37 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+
+lst = [2, 4, 2, 7, 100, -3, 0]
+
+# O(N**2)
+
+
+def min_num_1(lst):  # O(N**2)
+    for i in lst:  # O(N)
+        res = i  # O(1)
+        for j in lst:  # O(N)
+            if i > j:  # O(1)
+                res = j  # O(1)
+
+    return res  # O(1)
+
+
+print(f'Minimal value {min_num_1(lst)}')
+
+######################################################################################
+
+# O(N**2) --> O(N) Спешка
+
+
+def min_num_2(lst):  # O(N)
+    res = lst[0]  # O(1)
+    for i in lst:  # O(N)
+        if i < res:  # O(1)
+            res = i  # O(1)
+
+    return res  # O(1)
+
+
+print(f'Minimal value {min_num_2(lst)}')
