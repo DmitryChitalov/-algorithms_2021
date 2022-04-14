@@ -11,3 +11,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+
+
+def guessing_game():
+    print("Попробуйте угадать загаданное число. У вас будет 10 попыток.")
+    magic_number = random.randint(0, 100)
+
+    def game_attempts(game_num, attempts=10):
+        us_num = int(input("Введите число: "))
+        if us_num == game_num or attempts == 1:
+            return game_num
+        print(f"Осталось попыток: {attempts-1}")
+        print('Загаданное число больше') if us_num < game_num else print('Загаданное число меньше')
+        return game_attempts(game_num, attempts-1)
+    result = game_attempts(magic_number)
+    print(f"Загаданное число:{result}")
+
+
+guessing_game()
