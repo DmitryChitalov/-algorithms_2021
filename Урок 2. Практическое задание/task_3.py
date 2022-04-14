@@ -22,3 +22,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def num_inversion(num: int) -> str:
+    if num != 0:
+        return str(num % 10) + num_inversion(num // 10)
+    else:
+        return ''
+
+
+while True:
+    try:
+        user_num = int(input(f'Введите число, которое требуется перевернуть: '))
+    except ValueError:
+        continue
+    print(f'Перевернутое число: {num_inversion(user_num)}')
+    break
