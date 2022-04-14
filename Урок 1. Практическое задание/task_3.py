@@ -13,10 +13,39 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 
+
 Примечание:
 Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
 через строки документации в самом коде.
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 
 Задание творческое. Здесь нет жестких требований к выполнению.
+"""
+
+companies = [['company', 100000],
+             ['mompany', 10000],
+             ['pompany', 1000000000],
+             ['bompany', 10000000],
+             ['shmompany', 1000000]]
+
+
+# Сложность O(3n log n) - Линейно-логарифмическая
+def top_profit1(lst):
+    lst.sort(key=lambda x: x[1], reverse=True)  # O(n log n) - Линейно-логарифмическая
+    return lst[:3]                              # O(b-a) = O(3n) - Линейная
+
+
+# Сложность O(9n) + O(2) - Линейная
+def top_profit2(lst):
+    result = []                                                      # O(1) - Константная
+    result.append(lst.pop(lst.index(max(lst, key=lambda x: x[1]))))  # O(3n) - Линейная
+    result.append(lst.pop(lst.index(max(lst, key=lambda x: x[1]))))  # O(3n) - Линейная
+    result.append(lst.pop(lst.index(max(lst, key=lambda x: x[1]))))  # O(3n) - Линейная
+    return result                                                    # O(1) - Константная
+
+
+print(top_profit1(companies))
+print(top_profit2(companies))
+"""
+первое решение эффективней, потому что быстрей работает и лаконичней выглядит
 """
