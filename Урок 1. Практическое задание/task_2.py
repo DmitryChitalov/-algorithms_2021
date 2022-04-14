@@ -19,3 +19,26 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+my_list = [0, 10, 67, 44, 97, 1, -30, 101]
+
+
+# O(N^2)
+def min_search(lst):
+    min_num = lst[0]  # O(1)
+    for f_num in range(len(lst)):  # O(N)
+        for s_num in range(len(lst)):  # O(N)
+            if lst[f_num] > lst[s_num]:  # O(1)
+                min_num = lst[s_num]  # O(1)
+    return min_num  # O(1)
+
+# O(N)
+def min_search_easy(lst):
+    min_num = lst[0]  # O(1)
+    for el in lst:  # O(n)
+        if el < min_num:  # O(1)
+            min_num = el  # O(1)
+    return min_num  # O(1)
+
+
+print(min_search(my_list))
+print(min_search_easy(my_list))
