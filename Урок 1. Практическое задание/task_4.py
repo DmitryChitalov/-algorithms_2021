@@ -25,3 +25,32 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+# 1 вариант O(n)
+
+def autotization_1(users, login, password):
+    for key, value in users.items():
+        if key == login:
+            if value['password'] == password and value['activation']:
+                return 'Выполнен вход'
+            elif value['password'] == password and  not value['activation']:
+                return 'Учетная язапись не активна. Пройдите активацию!'
+            elif value['password'] != password:
+                return 'Пароль не верный'
+
+    return 'Пользователя не существует'
+
+# 2 вариант O(n)
+
+def autotization_2(users, login, password):
+    if users.get(login):
+        if users[login]['password'] == password and users[login]['activation']:
+            return 'Выполнен вход'
+        elif users[login]['password'] == password and not users[login]['activation']:
+            return 'Учетная язапись не активна. Пройдите активацию!'
+        elif users[login]['password'] != password:
+            return 'Пароль не верный'
+    else:
+        return 'Пользователя не существует'
+
+# лучший второй вариант

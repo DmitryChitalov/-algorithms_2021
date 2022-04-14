@@ -11,3 +11,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def recursion(i, num):
+    print(f'Попытка №{i}')
+    user_answer = int(input('Ввидите число от 0 до 100: '))
+    if i ==10 or user_answer == num:
+        if user_answer == num:
+            print('Вы угадали!')
+        print(f'Задуманное число: {num}')
+    else:
+        if user_answer > num:
+            print('Задуманное число меньше вашего')
+        else:
+            print('Задуманное число больше вашего')
+        recursion(i + 1, num)
+
+recursion(1, random.randint(0, 100))

@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recursion(num, even=0, odd=0):
+    if num == 0:
+        return even, odd
+    else:
+        cur_num = num % 10
+        num = num // 10
+
+        if cur_num % 2 ==0:
+            even += 1
+        else:
+            odd += 1
+        return recursion(num, even, odd)
+print(recursion(num=int(input('Ввидите натуральное число: '))))

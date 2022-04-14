@@ -21,3 +21,13 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def unique(word, sting_hash=[]):
+    for k in range(2, len(word) + 1):
+        sting_hash.append(hash(word[1: k]))
+        sting_hash.append(hash(word[:k - 1]))
+
+    return f'{set(sting_hash)}\nКоличество элементов: {len(set(sting_hash))}'
+
+print(unique('papa'))

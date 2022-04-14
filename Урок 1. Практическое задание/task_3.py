@@ -20,3 +20,31 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+company = {
+    'adidas' : 20000,
+    'reebok' : 11250,
+    'puma' : 10000,
+    'mike' : 22000,
+    'colombia' : 9000
+}
+# 1 вариант O(N * logN)
+
+list_company = list(company.items())
+list_company.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+    print(list_company[i][0], ':', list_company[i],[1])
+
+
+# 2 вариант O(n)
+
+def func_max(list_input):
+    input_max = {}
+    list_dict = dict(list_input)
+    for i in range(3):
+        maximum = max(list_dict.items(), key=lambda k: k[1])
+        del list_dict[maximum[0]]
+        input_max[maximum[0]] = maximum[1]
+    return input_max
+
+print(func_max(company))

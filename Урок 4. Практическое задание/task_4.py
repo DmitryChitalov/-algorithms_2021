@@ -12,6 +12,8 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +41,22 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    return max(set(array), key=array.count)
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print('func_1', timeit('func_1()', globals=globals(), number=10000))
+print('func_2', timeit('func_2()', globals=globals(), number=10000))
+print('func_3', timeit('func_3()', globals=globals(), number=10000))
+
+"""Функция func_3 работает значительно быстрее остальных при помощи приведения
+ списка ко множеству(имеющее уникальные числа),
+ что значительно повышает скорость 
+ 
+func_1 0.018123900000000005
+func_2 0.020257599999999987
+func_3 0.011252600000000001
+"""
