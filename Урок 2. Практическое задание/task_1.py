@@ -28,3 +28,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def calc_recurs():
+    val = str(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+
+    if val == '0':
+        return f'Заканчиваем работу.'
+    elif val != '+' and val != '-' and val != '*' and val != '/' and val != 0:
+        print('Введено неправильное значение! Используйте +, -, *, / или 0 для выхода')
+        return calc_recurs()
+    try:
+        first_n = int(input('Введите первое число: '))
+    except ValueError:
+        print('Необходимо ввести число')
+    try:
+        sec_n = int(input('Введите второе число: '))
+    except ValueError:
+        print('Необходимо ввести число')
+
+    if val == '+':
+        print(first_n + sec_n)
+        return calc_recurs()
+    elif val == '-':
+        print(first_n - sec_n)
+        return calc_recurs()
+    elif val == '*':
+        print(first_n * sec_n)
+        return calc_recurs()
+    elif val == '/':
+        try:
+            print(first_n / sec_n)
+        except ZeroDivisionError:
+            print('Ошибка! Деление на ноль невозможно!')
+        return calc_recurs()
+
+
+calc_recurs()
