@@ -12,6 +12,10 @@
 Без аналитики задание считается не принятым!
 """
 
+from timeit import timeit
+from collections import Counter
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,5 +43,30 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    res = max(Counter(array).items(), key=lambda i: i[1])
+    return f'Чаще всего встречается число {res[0]}, ' \
+           f'оно появилось в массиве {res[1]} раз(а)'
+
+
+def func_4():
+    res = max(array, key=array.count)
+    return f'Чаще всего встречается число {res}, ' \
+           f'оно появилось в массиве {array.count(res)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+
+n = 1000000
+print(timeit('func_1()', number=n, globals=globals()))
+print(timeit('func_2()', number=n, globals=globals()))
+print(timeit('func_3()', number=n, globals=globals()))
+print(timeit('func_4()', number=n, globals=globals()))
+
+'''
+Функции 1 и 4 сопостовимы по скорости (разница незначительна), но функция 4 более лаконична. Функция 3 лаконична, 
+но время выполнения самое долгое, за счет выполнения кеширования, так как результат храниться в словаре.
+'''
