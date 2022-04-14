@@ -20,3 +20,40 @@ b) выполните набор операций и со списком, и с�
 
 Прошу вас внимательно читать ТЗ и не забыть выполнить все пункты.
 """
+
+
+from time import time
+
+my_list = []
+my_dictionary = {}
+n = 10 ** 5
+
+
+def time_decorator(function):
+    def timer(*args, **kwargs):
+        start = time()
+        result = function(*args, **kwargs)
+        end = time()
+        print(f'Time of {function.__name__} performance equals to {end - start}')
+        return result
+
+    return timer
+
+
+@time_decorator
+def fill_list_append(lst, num):
+    for i in range(num):
+        lst.append(i)
+
+
+fill_list_append(my_list, n)
+print("#" * 20)
+
+@time_decorator
+def fill_list_insert(lst, num):
+    for i in range(num):
+        lst.insert(0, i)
+
+
+fill_list_insert(my_list, n)
+
