@@ -21,3 +21,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_row(start_num, end_num):
+    for i in range(10):
+        if start_num > end_num:
+            break
+        print(f'{start_num} - {chr(start_num)}', end=' ')
+        start_num += 1
+    else:
+        print('')
+    if start_num < end_num:
+        ascii_row(start_num, end_num)
+
+
+ascii_row(32, 127)
