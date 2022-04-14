@@ -16,10 +16,33 @@
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
 
+from timeit import timeit
 
+# Общая сложность O(n^2)
 def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+    new_arr = []                # O(1)
+    for i in range(len(nums)):  # O(n)
+        if nums[i] % 2 == 0:    # O(n)
+            new_arr.append(i)   # O(1)
+    return new_arr              # O(1)
+
+# Общая сложность O(n)
+def func_2(nums):
+    new_arr = [i for i in range(0, len(nums), 2)]   # O(n)
+    return new_arr                                  # O(1)
+
+arr = [i for i in range(10)]
+print(f'Исходный массив array = {arr}')
+print('Подождите! Выполняются вычисления ...')
+time_1 = timeit("func_1(arr)", globals=globals())
+time_2 = timeit("func_2(arr)", globals=globals())
+print(f'array_1 = {func_1(arr)} => time_1 = {time_1}')
+print(f'array_2 = {func_2(arr)} => time_2 = {time_2}')
+print(f'number_of_times = {time_1 / time_2}')
+
+"""
+    Для оптимизации предложенной функции я воспользовался "списковым включениеем" нового массива данных
+и убрал проверку условия деления без остатка, заменив его на четный шаг перебора массива. Повторные
+замеры времени выполнения кода показывают его уменьшение в 2,3 раза. Внесенные изменения позволили изменить
+сложность фунции с O(n^2) на O(n)   
+"""
