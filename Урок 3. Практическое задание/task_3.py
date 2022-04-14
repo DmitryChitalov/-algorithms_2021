@@ -21,3 +21,15 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def search_unique():
+    result_set = set()
+    user_string = input("Введите строку -  ")
+    for i in range(len(user_string)):
+        for j in range(i + 1, len(user_string) + i):
+            result_set.add(hash(user_string[i:j]))
+    return f"Количество уникальных подстрок - {len(result_set)}"
+
+
+print(search_unique())
