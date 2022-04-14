@@ -9,7 +9,7 @@
 Вам нужно проверить, совпадает ли пароль с исходным
 Для проверки необходимо сравнить хеши паролей.
 
-Самый просто вариант хранения хешей - просто в оперативной памяти (в переменных).
+Самый простой вариант хранения хешей - просто в оперативной памяти (в переменных).
 
 ПРИМЕР:
 Введите пароль: 123
@@ -20,3 +20,68 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from hashlib import sha256
+from pymongo import MongoClient
+import config as cfg
+
+
+class UserAuthenticator:
+
+    def __init__(self):
+        # Подключение к БД
+        #  - Чтение настроек
+        self.__db_host = cfg.get_config['MongoDB']['host']
+        self.__db_port = int(cfg.get_config['MongoDB']['port'])
+        self.__db_tz_aware = bool(cfg.get_config['MongoDB']['tz_aware'])
+        self.__db_username = cfg.get_config['MongoDB']['username']
+        self.__db_password = cfg.get_config['MongoDB']['password']
+
+    def create_password(self):
+        pwd_hash = self.__create_hash(input('Введите пароль: '))
+        print(f"Полученный хеш: {pwd_hash}")
+        if self.__find_hash(pwd_hash):
+            print("Пароль уже есть в БД.")
+        else:
+            self.__save_to_db(pwd_hash)
+        repwd_hash = self.__create_hash(input('Введите пароль повторно: '))
+        if pwd_hash == repwd_hash:
+            print("Введённые пароли совпадают")
+        else:
+            print("Введённые пароли не совпадают!")
+            print(f"pwd_hash: {pwd_hash}")
+            print(f"repwd_hash: {repwd_hash}")
+
+    def __create_hash(self, string: str, solt: str = 'lesson03task_2') -> str:
+        return sha256(f"{solt}@{string}".encode('utf-8')).hexdigest()
+
+    def __save_to_db(self, password):
+        with MongoClient(host=self.__db_host,
+                         port=self.__db_port,
+                         tz_aware=self.__db_tz_aware,
+                         username=self.__db_username,
+                         password=self.__db_password) as client:
+
+            collection = client['Lesson03']['passwords']
+            filter_query = {
+                'pwd': password,
+            }
+            collection.update_one(filter_query, {'$set': {'pwd': password}}, upsert=True)
+
+    def __find_hash(self, pwd_hash):
+        with MongoClient(host=self.__db_host,
+                         port=self.__db_port,
+                         tz_aware=self.__db_tz_aware,
+                         username=self.__db_username,
+                         password=self.__db_password) as client:
+
+            collection = client['Lesson03']['passwords']
+            if collection.count_documents({"pwd": pwd_hash}) > 0:
+                return True
+            else:
+                return False
+
+
+if __name__ == '__main__':
+    ua = UserAuthenticator()
+    ua.create_password()
