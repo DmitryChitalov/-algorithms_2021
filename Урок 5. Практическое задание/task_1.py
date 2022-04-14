@@ -23,3 +23,23 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+import collections
+year_aver = 0
+profit_dict = collections.defaultdict(list)
+firms_num = int(input('Введите количество предприятий для расчета прибыли:'))
+for i in range(firms_num):
+    key = input('Введите название предприятия:')
+    q_profits = (input("через пробел введите прибыль данного предприятия\n"
+    "за каждый квартал(Всего 4 квартала):")).split()
+    all_profit = sum(( float(i) for i in q_profits))
+    profit_dict[key].append(q_profits)
+    profit_dict[key].append(all_profit)
+    year_aver += all_profit
+year_aver = year_aver / firms_num
+for key, profit in profit_dict.items():
+    if profit[1] < year_aver:
+        print(f'Прибыль фирмы {key} меньше средней.')
+    elif profit[1] > year_aver:
+        print(f'Прибыль фирмы {key} больше средней.')
+    else:
+        print(f'Прибыль фирмы {key} равна средней.')

@@ -34,3 +34,10 @@ hx = HexNumber
 hx + hx
 hex()
 """
+import collections
+operands = collections.defaultdict(list)
+for i in range(2):
+    operands[i+1] = input(f"Ведите число номер {i+1}:").upper()
+print(f'Вы ввели числа {operands[1]} и {operands[2]}')
+print(f"""Их сумма {list(hex(int(operands[1],16)+int(operands[2],16)).upper()[2:])},
+произведение {list(hex(int(operands[1],16)*int(operands[2],16)).upper()[2:])}""")
