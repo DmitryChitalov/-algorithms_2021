@@ -28,3 +28,44 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_calc(operation=False, first_num=False):
+    valid_operations = ('+', '-', '*', '/')
+    if not operation:
+        operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        print('Работа калькулятора завершена')
+    elif operation not in valid_operations:
+        print('Вы ввели некорректную операцию, попробуйте заново')
+        return my_calc()
+    else:
+        if not first_num:
+            first_num = input('Введите первое число: ')
+            if not first_num.isdigit():
+                print('Вы ввели не число, повторите ввод первого числа!')
+                return my_calc(operation)
+        second_num = input('Введите второе число: ')
+        if not second_num.isdigit():
+            print('Вы ввели не число, повторите ввод второго числа!')
+            return my_calc(operation, first_num)
+        elif operation == '/' and second_num == '0':
+            print('Вы пытаетесь делить на 0, введите другое число!')
+            return my_calc(operation, first_num)
+        else:
+            if operation == '+':
+                print(f'Ваш результат {int(first_num) + int(second_num)}')
+                return my_calc()
+            elif operation == '-':
+                print(f'Ваш результат {int(first_num) - int(second_num)}')
+                return my_calc()
+            elif operation == '*':
+                print(f'Ваш результат {int(first_num) * int(second_num)}')
+                return my_calc()
+            else:
+                print(f'Ваш результат {int(first_num) / int(second_num)}')
+                return my_calc()
+
+print()
+if __name__ == '__main__':
+    my_calc()

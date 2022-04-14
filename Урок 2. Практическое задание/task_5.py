@@ -21,3 +21,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def unicod_table(start=32, end=127, size=10):
+    if start == end:
+        return f'{start} - {chr(start)}'
+    else:
+        if size > 1:
+            return f'{start} - {chr(start)} ' + unicod_table(start+1, end, size-1)
+        else:
+            return f'{start} - {chr(start)} \n' + unicod_table(start+1, end, 10)
+
+
+if __name__ == '__main__':
+    print(unicod_table())
