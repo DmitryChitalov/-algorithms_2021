@@ -21,3 +21,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_ascii(start=32, stop=128, count=10):
+    if start == stop:
+        return
+    el = f'{start} - {chr(start)}'
+    print(el, end=' ')
+    count -= 1
+    start += 1
+    if count == 0:
+        print('\n')
+        count = 10
+    return table_ascii(start, stop, count)
+
+
+table_ascii()
