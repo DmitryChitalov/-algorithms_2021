@@ -21,3 +21,15 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+def calc_substrings(el: str):
+    substrings = set()
+    for i in range(len(el)):
+        for z in range(i, len(el)):
+            substrings.add(hash(el[i:z + 1]))
+    substrings.remove(hash(el))
+    return len(substrings)
+
+
+print(calc_substrings('papa'))
