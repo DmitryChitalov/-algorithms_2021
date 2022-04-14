@@ -15,6 +15,8 @@
 И прошу вас обратить внимание, что то, что часто ошибочно называют генераторами списков,
 на самом деле к генераторам отношения не имеет. Это называется "списковое включение" - list comprehension.
 """
+from timeit import timeit
+numbers = [i for i in range(10000)]
 
 
 def func_1(nums):
@@ -23,3 +25,23 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+time_func_1 = timeit('func_1(numbers)', globals=globals(), number=1000)
+print(f'Время выполнения функции {func_1.__name__} - {time_func_1} сек.')
+
+
+# Оптимизация
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+time_func_2 = timeit('func_2(numbers)', globals=globals(), number=1000)
+print(f'Время выполнения функции {func_2.__name__} - {time_func_2} сек.')
+
+"""
+Вывод: скорость функции для поиска четного числа с использованием list comprehension выполняется быстрее, чем
+функция, реализованная, через итерацию и добавление нужного элемента в пустой список, поскольку
+list comprehension - это встроенный в Python механизм генерации списков,
+ и у него только одна задача — это построить список, а значит, выполнять свою функцию он будет быстрее.
+"""

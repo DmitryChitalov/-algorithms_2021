@@ -13,6 +13,9 @@
 
 Без аналитики задание считается не принятым
 """
+from timeit import timeit
+from cProfile import run
+num = 741757224127
 
 
 def revers_1(enter_num, revers_num=0):
@@ -37,3 +40,33 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+# Моя функция:
+def revers_4(numb, rev_num=''):
+    return rev_num if numb == 0 else revers_4(numb // 10, rev_num + str(numb % 10))
+
+
+print(revers_1(num))
+print(revers_2(num))
+print(revers_3(num))
+print(revers_4(num))
+print('-' * 100)
+run('revers_1(num)')
+run('revers_2(num)')
+run('revers_3(num)')
+run('revers_4(num)')
+print('-' * 100)
+print(timeit('revers_1(num)', globals=globals(), number=1000))
+print(timeit('revers_2(num)', globals=globals(), number=1000))
+print(timeit('revers_3(num)', globals=globals(), number=1000))
+print(timeit('revers_4(num)', globals=globals(), number=1000))
+"""
+Выводы:
+1. Использование профилировки через cProfile целесообразно только на "тяжелых" алгоритмах с большим объемом данных,
+так как в ином случае, мы получаем бесполезную статистику с одними нулями,
+следовательно, для простых функций необходимо использовать модуль timeit для замеров времени выполнения.
+2. Быстрее всех у нас отработает функция revers_3, потому как в данной функции, в отличии от остальных, нет
+ни циклов (как в revers_2), ни рекурсивных вызовов (как в revers_1 и revers_4). Реализация данной функции
+выполнена через встроенные функции, которые заточены на быстрое выполенние.
+"""
