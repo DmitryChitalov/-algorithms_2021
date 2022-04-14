@@ -28,3 +28,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    def __init__(self, max_size):
+        self.stack = []
+        self.max_size = max_size
+
+    def stack_count(self):
+        return len(self.stack)
+
+    def stack_size(self):
+        sum = 0
+        for stack in self.stack:
+            sum += len(stack)
+        return sum
+
+    def push(self, item):
+        if len(self.stack[len(self.stack) - 1]) < self.max_size:
+            self.stack[len(self.stack) - 1].append(item)
+        else:
+            self.stack.append([])
+            self.stack[len(self.stack) - 1].append(item)
+
+    def pop(self):
+        result = self.stack[len(self.stack) - 1].pop()
+        if len(self.stack[len(self.stack) - 1]) == 0:
+            return result
+
+    def get_value(self):
+        return self.stack[len(self.stack) - 1]
+
+    def __str__(self):
+        return str(self.stack)
+
+
+if __name__ == '__main__':
+    plates = StackClass(3)
+    plates.push('Тарелка_1')
+    plates.push('Тарелка_2')
+    plates.push('Тарелка_3')
+    plates.push('Тарелка_4')
+    plates.push('Тарелка_5')
+    plates.push('Тарелка_6')
+    print(plates)
+    print(plates.pop())
+    print(plates.get_value())
+    print(plates.stack_size())
+    print(plates.stack_count())
+    print(plates)

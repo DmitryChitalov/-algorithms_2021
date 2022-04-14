@@ -25,3 +25,84 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+manager_auth_data = ['manager1', 12345, True]
+# manager_auth_data = ['manager1', 12345, False]
+
+
+# Вариант_1  O(1)
+def login_user(login, pswd):
+    if login == manager_auth_data[0]:  # O(1)
+        if pswd == manager_auth_data[1]:  # O(1)
+            if manager_auth_data[2]:  # O(1)
+                print('Доступ разрешен')  # O(1)
+            else:
+                print('Учетная запись не активирована')  # O(1)
+        else:
+            print('Пароль не верный')  # O(1)
+    else:
+        print('Пользователь не найден!')  # O(1)
+
+
+# login_user('manager1', 12345)  # Данные совпали
+# login_user('manager1', 1254)   # Пароль не совпал
+# login_user('manager_10', 12345)   # Логин не совпал
+
+# Вариант_2
+def login_user_1():
+    trycount = 0
+    while trycount < 3:  # O (1)
+        login = input('Введите Ваш логин: ').lower()  # O(1)
+        if login == manager_auth_data[0]:  # O(1)
+            pswrd = int(input('Введите ваш пароль: '))  # O(1)
+            if pswrd == manager_auth_data[1]:  # O(1)
+                if manager_auth_data[2]:  # O(1)
+                    print('Доступ разрешен')  # O(1)
+                    break  # O(1)
+                else:
+                    print('Учетная запись не активирована')  # O(1)
+                    break  # O(1)
+            else:
+                print('Пароль не верный')  # O(1)
+                break  # O(1)
+        else:
+            print('Пользователь не найден!')  # O(1)
+
+        trycount += 1
+    return f'access accept'  # O(1)
+
+
+login_user_1()
+
+
+# Вариант 3 O(n)
+users_base = {
+    'manager_1': {'pass': '12345', 'active': True},
+    'manager_2': {'pass': '123456', 'active': True},
+    'manager_3': {'pass': '1234567', 'active': True},
+    'manager_5': {'pass': '1234577', 'active': False}
+
+}
+
+
+def login_user_3():
+    login = input('Логин')
+    passwd = input('Пароль')
+    for key, value in users_base.items():
+        if key == login:
+            if value['pass'] == passwd and value['activation']:
+                print('Доступ разрешен')
+            elif value['pass'] == passwd and not value['active']:
+                print('Ваша учетная запись не активирована! Обратитесь к администратору')
+            elif value['pass'] != passwd:
+                print('введите правильный пароль')
+        print('Пользователь не зарегистрирован')
+
+
+login_user_3()
+
+'''
+Первый способ выполнен со сложностью линейной функции, во втором варианте при добавлении цикла сложность увеличивается
+до O (log (n)). С точки зрения краткости кода лучше первый вариант (код меньше), чем второй. 
+С точки зрения удобства для пользователя второй вариант лучше.
+'''

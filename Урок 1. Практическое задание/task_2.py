@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+
+# Какая фигня с интерпретатором, в новом проекте работает тут не хочет
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+def func_1():  # Вариант О(n)
+    for x in range(len(numbers) - 1):  # O(n)
+        if numbers[x] < numbers[x + 1]:  # O(1)
+            print(f'Минимальное число ' + f'{numbers[x]}')
+            break
+        else:
+            print(f'Минимальное число ' + f'{numbers[x + 1]}')
+
+
+def func_2():  # Вариант O(n2)
+    for item in numbers:  # O(n)
+        minimal = False
+        for i in numbers:  # O(n)
+            if item < i:
+                minimal = True
+        if minimal:
+            return item
+
+
+func_1()
+func_2()
