@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def random_numb(ran=random.randint(0, 100), n=10):
+    if n == 0:
+        return "Вы проиграли"
+    try:
+        answ = int(input(f'Какое число я загадал у вас {n} попыток: '))
+    except ValueError:
+        print('я сказал число')
+        return random_numb(ran, n)
+    if answ == ran:
+        return "Вы выиграли"
+    elif answ < ran:
+        print("Больше")
+    elif answ > ran:
+        print("Меньше")
+
+    return random_numb(ran, n - 1)
+
+
+print(random_numb())

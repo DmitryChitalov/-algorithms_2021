@@ -28,3 +28,38 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def acti():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign == '0':
+        return
+    elif sign not in ('*', '/', '-', '+'):
+        print("Пиши нормально")
+        return acti()
+
+    try:
+        num1 = int(input('Введите первое число: '))
+        num2 = int(input('Введите второе число: '))
+    except ValueError:
+        print("Желательно цифрами. Спасибо")
+        return acti()
+    if sign == '+':
+        number = num1 + num2
+    elif sign == '-':
+        number = num1 - num2
+    elif sign == '*':
+        number = num1 * num2
+    elif sign == '/':
+        try:
+            number = num1 / num2
+        except ZeroDivisionError:
+            print("Это число близится к бесконечности.")
+            return acti()
+
+    print(f'Ваш результат: {number}')
+
+    return acti()
+
+
+acti()

@@ -22,3 +22,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def backward(numb, new_numb=''):
+    if not numb:
+        return new_numb
+    return backward(numb // 10, new_numb + str(numb % 10))
+
+
+print(backward(1230546000))
