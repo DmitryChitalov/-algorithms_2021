@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def rec_count(number, even=0, odd=0):
+    if number == 0:
+        return even, odd
+    else:
+        n = number % 10
+        number //= 10
+        if n % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return rec_count(number, even, odd)
+
+number = int(input('Введите натуральное число: '))
+print(f'{rec_count(number)}')
