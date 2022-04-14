@@ -1,0 +1,26 @@
+"""
+Задача 4.
+Поработайте с обычным словарем и OrderedDict.
+Выполните операции с каждым их них (заполнение, получение элемента) и сделайте замеры.
+Опишите полученные результаты, сделайте выводы.
+И есть ли смысл исп-ть OrderedDict в Python 3.6 и более поздних версиях?
+"""
+from timeit import timeit
+import collections
+
+new_dict = {a: a ** 2 for a in range(100)}
+new_ordered_dict = collections.OrderedDict({a: a ** 2 for a in range(10)})
+print(new_ordered_dict)
+print(new_dict)
+
+print(f'Время заполнения словаря {timeit("new_dict", globals=globals())}.')  
+print(f'Время заполнения OrderedDict {timeit("new_dict", globals=globals())}.')  
+print(f'Время получения элемента из словаря {timeit("new_dict.items()", globals=globals())}.')  
+print(f'Время получения элемента из OrderedDict {timeit("new_dict.items()", globals=globals())}.')  
+'''
+Время заполнения словаря 0.028705300000000003.
+Время заполнения OrderedDict 0.030880900000000003.
+Время получения элемента из словаря 0.1095459.
+Время получения элемента из OrderedDict 0.11841169999999998.
+время заполнения и время получения элементов примерно одинаковое для обоих вариантов, из-за одинаковых методов.
+Использовать OrderedDict с версии Python 3.6 и позднее нет смысла'''
