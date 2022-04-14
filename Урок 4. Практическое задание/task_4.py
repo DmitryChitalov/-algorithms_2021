@@ -11,6 +11,8 @@
 
 Без аналитики задание считается не принятым!
 """
+from collections import Counter
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +41,24 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_my():
+    c = Counter()
+    for i in array:
+        c[i] += 1
+    return f'The most common number {tuple(c.keys())[0]}, ' \
+           f'it has appeared in the array {tuple(c.values())[0]}'
+
+
+
+print(func_my())
 print(func_1())
 print(func_2())
+
+print(min(timeit.repeat('func_1', globals=globals(), repeat=10, number=(10**6))))
+print(min(timeit.repeat('func_2', globals=globals(), repeat=10, number=(10**6))))
+print(min(timeit.repeat('func_my', globals=globals(), repeat=10, number=(10**6))))
+
+
+""" В ходе профилирование было установленно, самый быстрый алгоритм func_my.
+func_1 медленнее func_2 но разница не существена
+"""

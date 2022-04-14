@@ -23,3 +23,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import Counter
+
+
+def profit_average():
+    count_company = int(input('Please enter number of companies: '))
+    company = Counter()
+    counter = 0
+    for _ in range(count_company):
+        count_profit = 0
+        com = input('Please enter name company: ')
+        val = input('Please enter the profit this enterprise after space for each quarter: ')
+        for el in val.split():
+            count_profit += int(el)
+        company[com] = count_profit
+        counter += count_profit
+    counter /= count_company
+    companies_profit = []
+    companies_unprofit = []
+    for el in company.keys():
+        if company[el] >= counter:
+            companies_profit.append(el)
+        else:
+            companies_unprofit.append(el)
+    return "Average annual profit of all enterprises: %d \nEnterprises with above average profit: %s \n" \
+           "Enterprises with below average profit %s "\
+           % (counter, ', '.join(companies_profit), ', '.join(companies_unprofit))
+
+
+if __name__ == '__main__':
+    print(profit_average())
