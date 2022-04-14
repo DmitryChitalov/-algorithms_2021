@@ -23,3 +23,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+from collections import namedtuple
+
+def lst_int(cmp):
+    return int(cmp.quarterly_profit.split(' ')[0]) + int(cmp.quarterly_profit.split(' ')[1]) + int(cmp.quarterly_profit.split(' ')[2]) + int(cmp.quarterly_profit.split(' ')[3])
+
+def more_profit(profit, cmp):
+    if lst_int(cmp) >= profit:
+        return cmp.name
+    return ''
+
+def less_profit(profit, cmp):
+    if lst_int(cmp) < profit:
+        return cmp.name
+    return ''
+
+
+quantity = int(input('Введите количество предприятий для расчета прибыли: '))
+
+REZ = namedtuple('Company', 'name quarterly_profit')
+
+company = []
+all_profit = 0
+for i in range(1, quantity+1):
+    company.append(REZ(name=input(f'Введите название {i} предприятия: '), quarterly_profit=input(f'Введите прибыль данного предприятия за каждый квартал через пробел: ')))
+    all_profit += lst_int(company[i-1])
+
+print(f'Средняя годовая прибыль всех предприятий: {all_profit/4}')
+
+print('Предприятия, с прибылью выше среднего значения: ', end=' ')
+for el in company:
+    print(more_profit(all_profit / 4, el), end=' ')
+
+print()
+
+print('Предприятия, с прибылью ниже среднего значения: ', end=' ')
+for el in company:
+    print(less_profit(all_profit / 4, el), end=' ')

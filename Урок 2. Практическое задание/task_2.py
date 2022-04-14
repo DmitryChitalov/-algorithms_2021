@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def counting_number(number, ch, nch):
+    if len(number) != 0:
+        if int(number[0:1:1]) % 2 == 0:
+            return counting_number(number[1:], ch + 1, nch)
+        else:
+            return counting_number(number[1:], ch, nch + 1)
+
+    print(f'Количество четных и нечетных цифр в числе равно: ({ch}, {nch})')
+
+counting_number(input('Введите число: '), 0, 0)
