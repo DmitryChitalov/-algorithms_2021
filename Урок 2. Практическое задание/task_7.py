@@ -16,3 +16,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def task_7(number):
+    """
+    1+2+...+n
+    """
+    if number == 1:
+        return number
+    return number + task_7(number - 1)
+
+
+number = int(input('Введите число:'))
+if task_7(number) == (number * (number + 1) / 2):
+    print('Равенсво верно')
+else:
+    print('Равенство не верно')
