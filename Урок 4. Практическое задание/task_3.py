@@ -13,7 +13,8 @@
 
 Без аналитики задание считается не принятым
 """
-
+from cProfile import run
+from timeit import timeit
 
 def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
@@ -37,3 +38,20 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+def revers_4(num):
+    return str(num) if num < 10 else str(num % 10) + revers_4(num // 10)
+
+run('revers_1(1000000000)')
+run('revers_2(1000000000)')
+run('revers_3(1000000000)')
+run('revers_4(1000000000)')
+
+
+print(timeit('revers_1(1000000000)', globals=globals(), number=1000))
+print(timeit('revers_2(1000000000)', globals=globals(), number=1000))
+print(timeit('revers_3(1000000000)', globals=globals(), number=1000))
+print(timeit('revers_4(1000000000)', globals=globals(), number=1000))
+
+# Из представленных быстрее сработала функция 3, потому что работает со срезами строк, далее по скорости убывания:
+# функция 2 в которой есть цикл while, замыкают функции 3 и 4 использующие рекурсию
