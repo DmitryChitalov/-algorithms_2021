@@ -21,3 +21,18 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+import hashlib
+
+my_str = 'papa'
+my_set = set()
+
+for i in range(len(my_str)):
+    for j in range(i + 1, len(my_str) + 1):
+        if my_str[i:j] != my_str:
+            my_set.add(hash(my_str[i:j]))
+            print(my_str[i:j], end='|')
+
+print(f'\nКоличество уникальных подстрок: {len(my_set)}')
+
+
+
