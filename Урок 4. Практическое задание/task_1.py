@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+
+from timeit import timeit
+
+
 """
 Задание 1.
 
@@ -23,3 +29,15 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+
+array = list(range(1000))
+
+print (timeit("func_1(array)", globals=globals(), number=10000))
+print (timeit("func_2(array)", globals=globals(), number=10000))
+
+'''Заменил цикл на list comprehension тем самым увеличив скорость выполнение т.к lc исполняется быстрее'''
