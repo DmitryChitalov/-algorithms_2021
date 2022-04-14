@@ -20,3 +20,56 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def profit_max1(dicts_company):
+    """
+    O(n)
+    """
+    top_profit1 = 0
+    top_profit2 = 0
+    top_profit3 = 0
+    top_key2 = ''
+    top_key1 = ''
+    for key, value in dicts_company.items():
+        if top_profit1 < value:
+            top_key3, top_profit3 = top_key2, top_profit2
+            top_key2, top_profit2 = top_key1, top_profit1
+            top_key1, top_profit1 = key, value
+        elif top_profit2 < value:
+            top_key3, top_profit3 = top_key2, top_profit2
+            top_key2, top_profit2 = key, value
+        elif top_profit3 < value:
+            top_key3, top_profit3 = key, value
+    print(f'Лидирующие компании по дохода: \n#1 {top_key1} : {top_profit1}'
+          f'\n#2 {top_key2} : {top_profit2}'
+          f'\n#3 {top_key3} : {top_profit3}')
+
+
+
+
+
+
+dict_company = {
+    'x5': 4343434,
+    'ford': 8235982,
+    'apple': 121451251544,
+    'microsoft': 2382058,
+    'dns': 328,
+}
+
+
+profit_max1(dict_company)
+
+print("\n-----------------------------------\n")
+
+
+
+
+
+
+
+
+
+
+
