@@ -13,3 +13,77 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import operator
+import timeit
+from random import random
+
+
+number_of_el = input('Введите количество элементов: ')
+while not number_of_el.isdigit() or not int(number_of_el):
+    number_of_el = input('Ошибка! Должно быть введено натуральное число.\n Повторите ввод количества элементов: ')
+my_list = [random() * 50 for _ in range(int(number_of_el))]
+copy_list = my_list[:]
+print('Исходный массив:', my_list)
+
+
+def merge_sort(lst, compare=operator.lt):
+    if len(lst) < 2:
+        return lst[:]
+    else:
+        middle = int(len(lst) / 2)
+        left = merge_sort(lst[:middle], compare)
+        right = merge_sort(lst[middle:], compare)
+        return merge(left, right, compare)
+
+
+def merge(left, right, compare):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if compare(left[i], right[j]):
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    return result
+
+
+print(f"Отсортированный массив: {merge_sort(copy_list)}")
+print("---------------------------------------------------------------------")
+
+my_list_10 = [random() * 50 for _ in range(10)]
+print("Замер для 10 элементов:")
+print(timeit.timeit("merge_sort(my_list_10[:])", globals=globals(), number=1000))
+print("---------------------------------------------------------------------")
+
+my_list_100 = [random() * 50 for _ in range(100)]
+print("Замер для 100 элементов:")
+print(timeit.timeit("merge_sort(my_list_100[:])", globals=globals(), number=1000))
+print("---------------------------------------------------------------------")
+
+my_list_1000 = [random() * 50 for _ in range(1000)]
+print("Замер для 1000 элементов:")
+print(timeit.timeit("merge_sort(my_list_1000[:])", globals=globals(), number=1000))
+
+
+"""
+Введите количество элементов: 5
+Исходный массив: [43.900435322662325, 44.70735067035837, 6.077828719864958, 17.242734740604465, 11.483155927049637]
+Отсортированный массив: [6.077828719864958, 11.483155927049637, 17.242734740604465, 43.900435322662325, 44.70735067035837]
+---------------------------------------------------------------------
+Замер для 10 элементов:
+0.01737610000000034
+---------------------------------------------------------------------
+Замер для 100 элементов:
+0.2638906999999997
+---------------------------------------------------------------------
+Замер для 1000 элементов:
+3.5731225
+"""
