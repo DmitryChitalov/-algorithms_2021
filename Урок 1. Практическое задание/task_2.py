@@ -19,3 +19,30 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+# O(n^2)
+def find_min_in_list(list_of_numbers, minimum):
+    for j in range(len(list_of_numbers)): # O(n)
+        if list_of_numbers[j] < minimum:  # O(1)
+            minimum = list_of_numbers[j]  # O(1)
+    return minimum # O(1)
+
+
+list_num = [4, 7, 3, 8, 9, 10, 3, 11]
+min_num = list_num[0]  # O(1)
+for i in range(len(list_num[1:])): # O(n)
+     min_num = find_min_in_list(list_num,i,min_num)  # O(1)
+print(min_num)
+
+####################################################################################################
+
+# O(n)
+def find_min_in_list(num1, minimum):
+    if num1 < minimum: # O(1)
+        minimum = num1  # O(1)
+    return minimum # 0(1)
+
+list_num = [4, 7, 3, 8, 9, 10, 3, 11]
+min_num = list_num[0] # O(1)
+for i in range(len(list_num[1:])): # O(n)
+     min_num = find_min_in_list(list_num, min_num) # O(1)
+print(min_num)

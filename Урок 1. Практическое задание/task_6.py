@@ -18,3 +18,46 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+
+    def to_queue(self, item):
+        self.elems.insert(0,item)
+
+    def from_queue(self,):
+        self.elems.pop()
+
+
+class TaskBoard:
+    def __init__(self):
+        self.main_que = QueueClass()
+        self.reserv_que = QueueClass()
+        self.resolved = []
+
+    def resolve_main_task(self):
+        """Решаем задачи из главного списка"""
+        resolve = self.main_que.from_queue()
+        self.resolved.append(resolve)
+
+    def resolve_reserv_task(self):
+        """Решаем задачи из резервного списка"""
+        resolve = self.reserv_que_que.from_queue()
+        self.resolved.append(resolve)
+
+    def to_reserv(self):
+        """Отправляем задачи из главного списка на доработку"""
+        task = self.main_que.from_queue()
+        self.reserv_que.to_queue(task)
+
+    def from_reserv(self):
+        """Отправляем из резевного списка в главный"""
+        task = self.reserv_que.from_queue()
+        self.main_que.to_queue(task)
+
+    def to_main(self, task):
+        """Отправляем задачу в главный список"""
+        self.main_que.to_queue(task)
+

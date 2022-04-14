@@ -28,3 +28,27 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+class StackPlate:
+
+    def __init__(self):
+        self.stack = [[]]
+
+    def push_in(self, plate):
+        if len(self.stack[-1]) < 10:
+            self.stack[-1].append(plate)
+            print(f'{len(self.stack[-1])} высота стопки')
+        else:
+            print(f'достигнута максимальная высота стопки {len(self.stack[-1])}  \n '
+                  f'Начинаем складывать тарелки в новую стопку')
+            self.stack.append([])
+            self.stack[-1].append(plate)
+            print(f'{len(self.stack[-1])} высота стопки')
+
+    def push_out(self):
+        if len(self.stack[-1]) > 0:
+            self.stack[-1].pop()
+        else:
+            self.stack.pop()
+            self.stack[-1].pop()
+
