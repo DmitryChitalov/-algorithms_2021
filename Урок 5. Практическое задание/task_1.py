@@ -23,3 +23,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import namedtuple
+
+
+firm_inc = namedtuple('Income', 'name quarter_1 quarter_2 quarter_3 quarter_4')
+n = int(input('Введите количество предприятий: '))
+
+
+def count_up_down(aver, firms):
+    if not firms:
+        return
+    f_inc = firms.popitem()
+    if f_inc[1] < aver:
+        print(f'Предприятия, с прибылью ниже среднего значения: {f_inc[0]}')
+    if f_inc[1] > aver:
+        print(f'Предприятия, с прибылью выше среднего значения: {f_inc[0]}')
+    return count_up_down(aver, firms)
+
+
+def count_profit(n, m=1, sum_all=0, aver_inc=0, firms=None):
+    if firms is None:
+        firms = {}
+    c = firm_inc(input('Введите название предприятия: '),
+                 *[int(i) for i in input('Через пробел введите прибыль '
+                                         'данного предприятия за каждый '
+                                         'квартал(Всего 4 квартала): ').split(' ')])
+    sum_1 = sum([c.quarter_1, c.quarter_2, c.quarter_3, c.quarter_4])
+    sum_all = sum_all + sum_1
+    firms[c.name] = sum_1   # в словарь сохраняю пару название компании: прибыль за горд
+    if m == n:
+        aver_inc = round(sum_all/n, 1)
+        print(f'Средняя годовая прибыль всех предприятий: '
+              f'{aver_inc}')
+        count_up_down(aver_inc, firms)
+        return
+    count_profit(n, m+1, sum_all, aver_inc, firms)
+
+
+count_profit(n)
