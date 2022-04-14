@@ -34,3 +34,19 @@ hx = HexNumber
 hx + hx
 hex()
 """
+from collections import defaultdict
+from functools import reduce
+
+
+def var_1():
+    numbers = defaultdict(list)
+
+    for i in range(2):
+        number = input(f'Введите {i + 1} число в шестнадцатиричном формате: ')
+        numbers[f'{i + 1}-{number}'] = list(number)
+
+    resul = hex(sum([int(''.join(number), 16) for number in numbers.values()]))[2:].upper()
+    mul = hex(reduce(lambda a, b: a * b, [int(''.join(number), 16) for number in numbers.values()]))[2:].upper()
+
+    print(f'Сумма чисел составляет: {list(resul)}')
+    print(f'Произведение чисел: {list(mul)}')
