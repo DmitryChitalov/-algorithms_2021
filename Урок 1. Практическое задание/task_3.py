@@ -20,3 +20,102 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+def get_val_in_dict(key_val):
+    '''
+    извлекает из словаря значение
+    :param key_val:
+    :return:
+    '''
+    return list(key_val.values())[0] # O(N)
+                                     # O(1)
+    # при условии, что в функцию передаются словари,
+    # состоящие из одной пары ключ-значение
+
+
+def get_max_n_line_in_list_1(some_list, max_count): # O(N)
+    '''Общая алгоритмическая сложность:
+        - при поиске одного максимального значения - O(N)
+        - при поиске m максимальних значений - O(N*m), в пределе O(N**2)
+
+    :param some_list:
+    :param max_count:
+    :return:
+    '''
+    for j in range(max_count):                                                      # O(N)
+        for i in range(-1, -len(some_list), -1):                                    # O(N)
+            if get_val_in_dict(some_list[i - 1]) < get_val_in_dict(some_list[i]):   # O(1)
+                some_list[i], some_list[i - 1] = some_list[i - 1], some_list[i]     # O(1)
+
+    return some_list[:max_count]  # O(1)
+
+
+def get_max_n_line_in_list_2(some_list, max_count): # O(N)
+    '''Общая алгоритмическая сложность:
+        - O(N) - при известном кол-ве необходимых максимальных элементов
+        - O(N*m) - при поиске m максимальних значений, в пределе O(N**2)
+    Считаю это решение более эффективным, т.к.:
+        - код "чище" (нет нагромождения индексов, сравнений, здесь труднее ошибиться)
+    Недостаток - изменяет исходный список, этот факт иллюстрируют повторные вызовы функций
+
+    :param some_list:
+    :param max_count:
+    :return:
+    '''
+    res_list = []                                                           # O(1)
+    for n in range(max_count):                                              # O(N)
+                                                                            # O(1), в случае "конечного" max_count
+        max_el = max(some_list, key=lambda el: list(el.values())[0])        # O(N)
+        res_list.append(max_el)                                             # O(1)
+        some_list.remove(max_el)                                            # O(1)
+
+    return res_list
+
+
+if __name__ == '__main__':
+    TOP_PRINT = 3
+    company_profit = [
+        {"Компания_1": 30},
+        {"Компания_2": 40},
+        {"Компания_3": 110},
+        {"Компания_4": 100},
+        {"Компания_6": 35},
+        {"Компания_7": 199},
+        {"Компания_8": 90},
+        {"Компания_9": 60},
+        {"Компания_10": 70}
+    ]
+    # print(company_profit[0], *get_value(company_profit[0]))
+    print(*get_max_n_line_in_list_1(company_profit, TOP_PRINT), sep='\n')
+    print()
+    print(*get_max_n_line_in_list_1(company_profit, TOP_PRINT), sep='\n')
+    print()
+    print(*get_max_n_line_in_list_2(company_profit, TOP_PRINT), sep='\n')
+    print()
+    print(*get_max_n_line_in_list_2(company_profit, TOP_PRINT), sep='\n')
+    print()
+    print(*get_max_n_line_in_list_2(company_profit, TOP_PRINT), sep='\n')
+    #
+    # {'Компания_7': 199}
+    # {'Компания_3': 110}
+    # {'Компания_4': 100}
+    #
+    # {'Компания_7': 199}
+    # {'Компания_3': 110}
+    # {'Компания_4': 100}
+    #
+    # {'Компания_7': 199}
+    # {'Компания_3': 110}
+    # {'Компания_4': 100}
+    #
+    # {'Компания_8': 90}
+    # {'Компания_10': 70}
+    # {'Компания_9': 60}
+    #
+    # {'Компания_2': 40}
+    # {'Компания_6': 35}
+    # {'Компания_1': 30}
+    #
+    # Process finished with exit code 0
+

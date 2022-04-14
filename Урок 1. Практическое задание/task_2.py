@@ -19,3 +19,53 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+import random
+
+'''
+искренне не понимаю, как сюда "для дела" применить второй цикл
+ведь для решения этой задачи достаточно одного прохода по списку...
+измудрил вот такую конструкцию:
+'''
+
+
+def searchmin_n_quadratic(list_for_min):
+    min_el = list_for_min[0]                        # T(n) = 1 + 1
+
+    for i in range(len(list_for_min)):              # T(n) = 1 + 1 + n
+
+        for j in range(len(list_for_min)):          # T(n) = 1 + 1 + n
+
+            if list_for_min[j] < list_for_min[i] \
+                    and \
+                    list_for_min[j] < min_el:       # T(n) = 1 + 1 + 1 + 1 + 1 + 1
+                min_el = list_for_min[j]            # T(n) = 1 + 1
+
+    return min_el                                   # T(n) = 1
+
+# T(n) = 1+1+1+1+n*(1+1+n*(1+1+1+1+1+1+1+1))+1 = 5 + n*(2 + n*(8)) = 8n**2 + 2n + 5
+# O(n**2)
+
+
+def searchmin_n_linear(list_for_min):
+    min_el = list_for_min[0]        # T(n) = 1 + 1
+
+    for el in list_for_min:         # T(n) = n
+
+        if min_el > el:             # T(n) = 1
+            min_el = el             # T(n) = 1
+
+    return min_el                   # T(n) = 1
+# T(n) = 1 + 1 + n( 1 + 1) + 1= 2n + 3
+# O(n)
+
+
+if __name__ == '__main__':
+    number_lst = []
+    for num in range(20):
+        number_lst.append(random.randint(1, 100))
+
+    print(number_lst)
+
+    print(searchmin_n_linear(number_lst), '\n')
+
+    print(searchmin_n_quadratic(number_lst), '\n')
