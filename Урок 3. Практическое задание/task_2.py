@@ -20,3 +20,41 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+
+
+def pass_hash():
+    passw = input('Введите пароль: ')
+    gen_hash = hashlib.sha256(salt.encode() + passw.encode('utf-8')).hexdigest()
+    return passw, gen_hash
+
+
+def pass_save():
+    hash_to_save = pass_hash()
+    hash_log = open("hash_log.txt", "w", encoding="utf-8")
+    hash_log.write(hash_to_save[1])
+    hash_log.close()
+
+
+def password_validator():
+    pass_save()
+    try_count = 3
+    while try_count != 0:
+        passw, hash_check = pass_hash()
+        read = open("hash_log.txt", "r", encoding="utf-8")
+        if read.readline() == hash_check:
+            print('Вы ввели правильный пароль!')
+            read.close()
+            break
+        else:
+            try_count -= 1
+            if try_count == 0:
+                print('Пароли не сопадают. Попытки закончились')
+            else:
+                print(f'Попробуйте еще раз. Осталось {try_count} попыток')
+
+
+password_validator()
