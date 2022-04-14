@@ -19,3 +19,39 @@
 Постарайтесь не использовать ф-ции min() и sort() и другие ф-ции!
 Подход должен быть максимально алгоритмическим.
 """
+lst_1 = [[9, 3, 7, 5, 6, 3, 7, 2, 9, 2, 7, 4, 9], [2, 5, 3, 6, 4, 8, 5, 2, 9, 4],
+         [8, 7, 7, 3, 5, 2, 7, 4, 9, 4, 2, 9]]
+
+
+def min_func_1(lst):  # O(n^2) - квадратичная
+
+    first_num = lst[0][0]  # O(1) - константная
+    for el in lst:  # O(n^2) - квадратичная
+        for num in el:
+            if num <= first_num:  # O(1) - константная
+                first_num = num
+                result = []  # O(1) - константная
+                result.append(num)  # O(n) - линейная
+
+    return result  # O(1) - константная
+
+
+print(min_func_1(lst_1))
+#
+lst_2 = [9, 3, 7, 5, 6, 3, 7, 1, 9, 2, 7, 4, 9]
+
+
+def min_func_2(lst):  # O(n) - линейная
+
+    first_num = lst[0]  # O(1) - константная
+    for el in lst:  # O(n) - линейная
+        if el <= first_num:  # O(1) - константная
+            first_num = el
+            result = []  # O(1) - константная
+            result.append(el)  # O(n) - линейная
+
+    return result  # O(1) - константная
+
+
+print(min_func_2(lst_2))
+
