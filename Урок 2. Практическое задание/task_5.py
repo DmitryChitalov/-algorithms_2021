@@ -21,3 +21,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def code_symbol(start, final, counter=1):
+    if start == final:
+        return f'{start} - {chr(start)}'
+    print(f'{start} - {chr(start)}', end=' ')
+    if counter % 10 == 0:
+        print()
+    return code_symbol(start+1, final, counter+1)
+
+
+print(code_symbol(32, 127))
