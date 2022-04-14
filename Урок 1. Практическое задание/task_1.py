@@ -22,10 +22,10 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(1)
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set  # !!!
+    lst_to_set = set(lst_obj)  # O(1)
+    return lst_to_set  # O(1)
 
 
 #############################################################################################
@@ -37,39 +37,29 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: T = O(n**2) + O(1) +O(1) = n**2 + 2 = n**2.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # T=O(n) + O(1) = O(n)
+        if lst_obj[j] in lst_obj[j+1:]:         # T = O(1) + O(1) + O(n) = O(n)
+            return False                        # O(1)
+    return True                            # O(1)
 
 
 #############################################################################################
 def check_3(lst_obj):
-    """Функция должная вернуть True, если все элементы списка различаются.
+    """Функцияz должная вернуть True, если все элементы списка различаются.
 
     Алгоритм 2:
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: T = n + nLog(n) + 2n + 3 = nLog(n)
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
-
-#############################################################################################
+    lst_copy = list(lst_obj)                 # n
+    lst_copy.sort()                          # nLog(n)
+    for i in range(len(lst_obj) - 1):        # T = n + n + 1 = 2n
+        if lst_copy[i] == lst_copy[i+1]:        # T = 1 + (1 + 1) = 1
+            return False                            # 1
+    return True                              # 1
 
 
-for j in (50, 500, 1000, 5000, 10000):
-    # Из 100000 чисел возьмем 'j' случайно выбранных
-    # Всего 10 тыс. чисел
-    lst = random.sample(range(-100000, 100000), j)
-
-print(check_1(lst))
-print(check_2(lst))
-print(check_3(lst))
