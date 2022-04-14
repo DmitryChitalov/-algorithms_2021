@@ -23,3 +23,43 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+from collections import defaultdict
+from statistics import mean
+
+
+def annual_profit():
+    """
+    Функция  принимающая вводимые данные о названии компании и
+    поквартальных прибылях и вычисляющая средние значения прибылей.
+    !!! Без проверки вводимых данных!!!
+    """
+    info_list = []
+    #  Цикл заполнения данных о компаниях и прибыли
+    while True:
+        company_name = input('Введите название предприятия: ')
+        if company_name == 'stop':
+            break
+        else:
+            company_income = input('введите прибыль данного предприятия\n \
+            за каждый квартал через пробел (Всего 4 квартала): ')
+
+            # введенные данные заносятся в кортеж (название компании, список прибылей поквартально)
+            el = (company_name, [int(i) for i in company_income.split()])
+            info_list.append(el)
+    # с помощью defaultdict преобоазуем список кортежей в dict объект
+    info_dict = defaultdict(list, info_list)
+    # формируем список средних значений прибылей компаний
+    avg_profit_list = [mean(v) for v in info_dict.values()]
+    # Вычисляем среднее значение из списка средних значений
+    av_profit = mean(avg_profit_list)
+    # Формируем списки компаний со средними значениями выше и ниже среднего
+    comp_above_mean = [key for key, val in info_dict.items() if mean(val) >= av_profit]
+    comp_below_mean = [key for key, val in info_dict.items() if mean(val) < av_profit]
+
+    print(f'Средняя годовая прибыль всех предприятий: {av_profit}')
+    print(f'Предприятия, с прибылью выше среднего значения: {comp_above_mean}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {comp_below_mean}')
+
+
+if __name__ == '__main__':
+    annual_profit()

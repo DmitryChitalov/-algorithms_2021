@@ -11,3 +11,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def guess_num(user_ans, count=1):
+    """ Рекурсивный скрипт "Угадай число" """
+    # Не хватает валидации вводимых данных. Без "while" никуда.
+    if count == 10:
+        print('Вы исчерпали свои попытки')
+        return
+    elif user_ans == GUESS_NUMBER:
+        print('!!! Вы выиграли !!!')
+        return
+    else:
+        if user_ans > GUESS_NUMBER:
+            print('Ваш ответ больше загаданного числа')
+        else:
+            print('Ваш ответ меньше загаданного числа')
+        user_ans = int(input(f'Угадате число от 1 до 100. Попытка {count + 1} из 10: '))
+        guess_num(user_ans, count + 1)
+
+
+if __name__ == '__main__':
+    import random
+    GUESS_NUMBER = random.randint(1, 100)
+    print(GUESS_NUMBER)  # Чтобы самому знать
+    UA = int(input('Угадате число от 1 до 100. Попытка 1 из 10: '))
+    guess_num(UA)
