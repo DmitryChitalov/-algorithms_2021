@@ -11,6 +11,7 @@
 
 Без аналитики задание считается не принятым!
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,5 +40,20 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_num = max(array, key=array.count)
+    return f'Чаще всего встречается число {max_num}, ' \
+           f'оно появилось в массиве {array.count(max_num)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1()", globals=globals()))
+print(timeit("func_2()", globals=globals()))
+print(timeit("func_3()", globals=globals()))
+
+# Первая и третья функции работают практически одинаково
+# Обе функции имеет сложность O(n)
+# Ускорить задачу не получилось, но получилось сократить код и сделать его более лаконичным
