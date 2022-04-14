@@ -47,11 +47,15 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
+        print(args)
         if args in cache:
             return cache[args]
         else:
             cache[args] = f(*args)
+
+            for x in cache:
+                print(x, cache[x])
+
             return cache[args]
     return decorate
 
@@ -79,3 +83,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Вариант с мемоизацией работает быстрее. Но не из-за того, что здесь понижается сложность алгоритма.
+# За первый запуск рекурсии она заполняет словарь cache,
+# то есть первый запуск timeit отработает честно, что с мемоизацией, что без, за примерно одинаковое время.
+# А вот потом, каждый следующая итерация timeit сразу на входе в декоратор, считывает из cache уже вычисленноe
+# для входящего args значение и рекурсия просто не запускается
