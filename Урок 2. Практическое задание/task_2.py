@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+num = int(input('Введите число: '))
+even = 0
+odd = 0
+
+def num_even_odd(num, even=0, odd=0):
+    if num == 0:
+        return f'Результат: четные числа - {even}, нечетные числа - {odd}'
+    else:
+        retreat = num % 10
+        num = num // 10
+
+        if retreat % 2 == 0:
+            even = even + 1
+        else:
+            odd = odd + 1
+    return num_even_odd(num, even, odd)
+
+print(num_even_odd(num, 0, 0))

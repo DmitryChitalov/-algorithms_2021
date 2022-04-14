@@ -22,3 +22,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+num = int(input('Введите число: '))
+
+def upend(num):
+    retreat = num % 10
+    num = num // 10
+    if num == 0:
+        return str(retreat)
+    else:
+        return str(retreat) + str(upend(num))
+print(upend(num))

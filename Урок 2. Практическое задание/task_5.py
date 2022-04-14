@@ -21,3 +21,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+num_start = 33
+num_end = 127
+
+
+
+def table_ascii(num, num_end):
+    table = str(num) + ' - ' + str(chr(num) + ' ')
+    if num == num_end:
+        return table
+
+    else:
+        num = num + 1
+        if num % 10 == 0:
+            return table + '\n' + table_ascii(num, num_end)
+        else:
+            return table + table_ascii(num, num_end)
+
+print(table_ascii(32, 127))
