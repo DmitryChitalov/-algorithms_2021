@@ -35,18 +35,23 @@ hx + hx
 hex()
 """
 
-import collections
-import functools
+class HexCalculate:
+    def __init__(self, n_1, n_2):
+        self.n_1 = n_1
+        self.n_2 = n_2
 
-my_numbers = collections.defaultdict(list)
-n = input("Введите первое натуральное шестнадцатеричное число: ")
-my_numbers[1] = list(n)
-n = input("Введите второе натуральное шестнадцатеричное число: ")
-my_numbers[2] = list(n)
+    def __add__(self, other):
+        return list(hex(int(''.join(self.n_1), 16) + int(''.join(self.n_2), 16)))[2:]
 
-my_sum = sum([int(''.join(i), 16) for i in my_numbers.values()])
-print("Сумма: %X" % my_sum)
+    def __mul__(self, other):
+        return list(hex(int(''.join(self.n_1), 16) * int(''.join(self.n_2), 16)))[2:]
 
-my_mult = functools.reduce(lambda a, b: a * b, [int(''.join(i), 16) for i in my_numbers.values()])
-print("Произведение: %X" % my_mult)
 
+n1 = list(input("Введите первое натуральное шестнадцатеричное число: "))
+n2 = list(input("Введите второе натуральное шестнадцатеричное число: "))
+
+my_sum = HexCalculate(n1, n2) + HexCalculate(n1, n2)
+print("Сумма:", my_sum)
+
+my_mul = HexCalculate(n1, n2) * HexCalculate(n1, n2)
+print("Произведение:", my_mul)
