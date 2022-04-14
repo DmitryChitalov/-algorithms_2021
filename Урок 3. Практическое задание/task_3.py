@@ -21,3 +21,14 @@
 скорость доступа вместе с уникальностью элементов,
 которые даёт множество, сделают решение коротким и эффективным.
 """
+
+
+my_set = set()
+user_str = 'mama'
+for i in range(len(user_str)):
+    for j in range(i + 1, len(user_str) + 1):
+        if user_str[i:j] != user_str:
+            my_set.add(hash(user_str[i:j]))
+            print(user_str[i:j])
+
+print(my_set)
