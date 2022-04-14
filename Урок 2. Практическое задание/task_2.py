@@ -18,3 +18,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def even_n_odd(user_number, evens=0, odds=0):
+    digit = user_number % 10
+    new_number = user_number // 10
+
+    if digit % 2 == 0:
+        evens += 1
+    else:
+        odds += 1
+
+    if new_number == 0:
+        print(f'Количество четных и нечетных цифр в числе равно: ({evens}, {odds})')
+        return
+    even_n_odd(new_number, evens, odds)
+
+
+while True:
+    user_number = input("Введите число\n>>>")
+    if user_number.isdigit():
+        user_number = int(user_number)
+        break
+    else:
+        print("Вы ввели не число, пожалуйста введите число")
+
+even_n_odd(user_number)
