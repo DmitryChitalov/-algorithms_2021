@@ -1,0 +1,50 @@
+"""
+3. Массив размером 2m + 1, где m – натуральное число, заполнен случайным образом.
+Найдите в массиве медиану. Медианой называется элемент ряда, делящий его на
+две равные по длине части: в одной находятся элементы, которые не меньше медианы,
+в другой – не больше медианы.
+Задачу можно решить без сортировки исходного массива.
+Но если это слишком сложно, то используйте метод сортировки,
+который не рассматривался на уроках: Шелла, Гномья, Кучей...
+[5, 3, 4, 3, 3, 3, 3]
+[3, 3, 3, 3, 3, 4, 5]
+my_lst
+new_lts
+arr[m]
+from statistics import median
+[3, 4, 3, 3, 5, 3, 3]
+left = []
+right = []
+left == right and
+for i in
+    for
+    left == right
+    left.clear()
+    right.clear()
+"""
+import random
+import timeit
+my_list = [random.randint(0, 50) for _ in range(10)]
+
+
+def find_median(list_obj):
+    n = len(list_obj) // 2
+    while n != 0:
+        list_obj.pop(list_obj.index(max(list_obj)))
+        n -= 1
+    return max(list_obj)
+
+
+sorted_list = sorted(my_list)
+median = len(sorted_list) // 2
+print(sorted_list)
+
+print(f'Медиана, найденная c использованием find_median: {find_median(my_list)}.')
+print(f'Медиана, найденная в отсортированном списке : {sorted_list[median]}.')
+print(f'Время поиска: {timeit.timeit("find_median(my_list[:])",globals=globals(),number=1000)}')
+
+'''Результаты 3 задачи:
+[2, 6, 14, 19, 24, 29, 36, 43, 43, 45]
+Медиана, найденная c использованием find_median: 24.
+Медиана, найденная в отсортированном списке : 29.
+0.002313699999999995'''
