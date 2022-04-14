@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_natural(n):
+    if n == 1:
+        return '1'
+    else:
+        return sum_natural(n-1) + f'+{n}'
+
+
+try:
+    number = int(input('Введите число: '))
+    if number < 1:
+        raise ValueError('Ошибка ввода! Требуется ввести натуральное число.')
+    else:
+        print(sum_natural(number), '=', f'{number}({number}+1)/2')
+except ValueError:
+    print('Ошибка ввода! Требуется ввести натуральное число.')

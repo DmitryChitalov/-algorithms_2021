@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_digits(number):
+    if number == 0:
+        return 0, 0
+    else:
+        even, odd = sum_digits(number // 10)
+        if number % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even, odd
+
+
+print('Количество четных и нечетных цифр в числе равно: ', sum_digits(int(input('Введите число: '))))
+

@@ -11,3 +11,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def guessing(guess, number, attempt):
+    try:
+        if guess == number:
+            print("Вы угадали! Поздравляю!")
+            return
+        elif guess < number:
+            print("Загаданное число больше")
+        else:
+            print("Загаданное число меньше")
+        if attempt == 10:
+            print("Попытки закончились! Было загадано число ", number)
+            return
+        guessing(int(input("Следующая попытка: ")), number, attempt + 1)
+    except ValueError:
+        print('Ошибка ввода! Можно вводить только целые числа.')
+
+
+guessing(int(input("Попробуйте угадать загаданное число: ")), randint(0, 25), 1)
+
