@@ -15,3 +15,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def geometric_progress(el, start=1, prog_sum=0):
+    prog_sum += start
+    start /= -2
+    el -= 1
+    if el == 0:
+        return prog_sum
+    else:
+        return geometric_progress(el, start, prog_sum)
+
+
+if __name__ == '__main__':
+    print(geometric_progress(3))

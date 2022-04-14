@@ -16,3 +16,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def arithmetic_progression(count, res_sum=0, term=0):
+    term += 1
+    res_sum += term
+    if term == count:
+        return res_sum
+    else:
+        return arithmetic_progression(count, res_sum, term)
+
+
+if __name__ == '__main__':
+    n = 5
+    if arithmetic_progression(n) == n*(n+1)/2:
+        print('The formula is correctly')
+    else:
+        print('The formula is wrong')
