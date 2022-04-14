@@ -11,3 +11,39 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from random import randint
+
+
+# Функция для сравнения ответов
+def check_answer(number, answer):
+    if number == answer:
+        return True
+    elif answer > number:
+        print('Загаданное число меньше')
+    elif answer < number:
+        print('Загаданное число больше')
+
+
+#  рекурсивная функция для подстчета попыток
+def recursion_func(random_number, n=10):
+    if n == 0:
+        print(f'Попытки закончились, вы проиграли')
+        return 0
+    num = int(input(f'осталось попыток - {n}\nПопробуйте угадать число от 0 до 100: '))
+
+    if check_answer(random_number, num):
+        print(f'Поздравляем вы угадали')
+        return 0
+    else:
+        recursion_func(random_number, n-1)
+
+
+def the_game():
+    conceived_num = randint(0, 100)
+    recursion_func(conceived_num)
+
+
+if __name__ =='__main__':
+    the_game()
