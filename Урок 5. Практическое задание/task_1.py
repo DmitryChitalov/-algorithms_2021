@@ -23,3 +23,49 @@
 
 Предприятия, с прибылью ниже среднего значения: Фирма_2
 """
+
+
+from collections import namedtuple
+
+
+def get_user_data():
+    company_count = input('Введите количество компаний:\n')
+    company_list = []
+    profit_sum = 0
+
+    if company_count.isdigit() and int(company_count) != 0:
+        company_structure = namedtuple('Company', 'name, profit_1, profit_2, profit_3, profit_4, profit_sum')
+        while_range = int(company_count)
+
+        while len(company_list) != while_range:
+            company_data = input(f'Введите данные {len(company_list)+1} компании: (Наименование: Прибыль1кв, Прибыль2кв, Прибыль3кв, Прибыль4кв):\n')
+
+            try:
+                c_name, c_profit = company_data.split(':')
+                profit_1, profit_2, profit_3, profit_4 = map(int, c_profit.split(','))
+                company = company_structure(c_name, profit_1, profit_2, profit_3, profit_4,
+                                            profit_1 + profit_2 + profit_3 + profit_4)
+                company_list.append(company)
+                profit_sum += company.profit_sum
+            except ValueError:
+                print('Введены некорректные данные. Попробуйте еще раз')
+
+    else:
+        get_user_data()
+
+    return company_list, profit_sum, profit_sum / while_range
+
+
+"""
+Данные для ввода:
+test1: 211, 3421, 231, 143
+test2: 2121, 3421, 231, 143
+test3: 211, 3421, 231, 1432
+"""
+
+company_array, profits, avg_profit = get_user_data()
+print(f'Среднегодовая прибыль всех предприятий: {round(avg_profit, 2)}')
+print(f'Предприятия, с прибылью выше среднего значения: '
+      f'{", ".join([comp.name for comp in company_array if comp.profit_sum > avg_profit])}')
+print(f'Предприятия, с прибылью ниже среднего значения: '
+      f'{", ".join([comp.name for comp in company_array if comp.profit_sum < avg_profit])}')
