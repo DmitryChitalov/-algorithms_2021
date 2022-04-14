@@ -21,3 +21,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def print_symbols(char):
+
+    if char == 128:
+        return ''
+
+    result = f'{str(char)} - {chr(char)} ' + '\n' if char % 10 == 2 and char != 32 else f'{str(char)} - {chr(char)} '
+    return result + print_symbols(char + 1)
+
+if __name__ == '__main__':
+    print(print_symbols(32))
