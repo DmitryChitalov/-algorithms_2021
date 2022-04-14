@@ -17,3 +17,60 @@
 Сделайте выводы!!!
 Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort(unsorted_lst):
+    lst = unsorted_lst.copy()  # избегаем стандартной ошибки замеров времени при многократном повторении
+    for i in range(len(lst)):
+        for j in range(len(lst) - 1):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+
+def bubble_sort_opt1(unsorted_lst):
+    lst = unsorted_lst.copy()  # избегаем стандартной ошибки замеров времени при многократном повторении
+    changes = True
+    while changes:
+        changes = False
+        for j in range(len(lst) - 1):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+                changes = True
+    return lst
+
+
+def bubble_sort_opt2(unsorted_lst):
+    lst = unsorted_lst.copy()  # избегаем стандартной ошибки замеров времени при многократном повторении
+    changes = True
+    n = 1
+    while changes:
+        changes = False
+        for j in range(len(lst) - n):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+                changes = True
+        n += 1
+    return lst
+
+
+my_lst = [randint(-100, 100) for i in range(1000)]
+without_opt = timeit("bubble_sort(my_lst)", globals=globals(), number=100)
+with_opt1 = timeit("bubble_sort_opt1(my_lst)", globals=globals(), number=100)
+with_opt2 = timeit("bubble_sort_opt2(my_lst)", globals=globals(), number=100)
+print(f"Пузырек без оптимизации: {without_opt} сек.")
+print(f"Пузырек с оптимизацией 1: {with_opt1} сек.")
+print(f"Пузырек с оптимизацией 2: {with_opt2} сек.")
+
+"""
+Пузырек без оптимизации: 11.4916833 сек.
+Пузырек с оптимизацией 1: 11.3767051 сек.
+Пузырек с оптимизацией 2: 7.897753999999999 сек.
+
+Суть 1 доработки в том, чтобы прервать сортировку, если вдруг за очередной проход не было изменений.
+Такой вид оптимизации бесполезен и сработает, только если в правой части список уже отсортирован.
+2 оптимизация добавляет счетчик отсортированных элементов и по сути за проход в правой части оказывается +1 наименьший 
+элемент списка, что позволяет в дальнейших проходах исключить его из сравнения, что экономит нам примерно 30% времени.
+"""
