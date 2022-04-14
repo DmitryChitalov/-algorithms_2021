@@ -21,3 +21,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_ascii(result='', char=32, char_count=1):
+    if char == 127:
+        return result
+    result = f'{char:7} - {chr(char)}' if char_count % 10 != 0 else result + '\n'
+    return result + get_ascii(result, char + 1, char_count + 1)
+
+
+print(get_ascii())
